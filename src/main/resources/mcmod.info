@@ -1,0 +1,16 @@
+[
+{
+  "modid": "minestuckuniverse",
+  "name": "Minestuck Universe",
+  "description": "Example placeholder mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Cibernet"],
+  "credits": "The Minestuck Dev Team, for being really cool. :D",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
