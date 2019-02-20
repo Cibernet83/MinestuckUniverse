@@ -27,5 +27,6 @@ public class MinestuckUniverse
     {
         // some example code
         logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+
     }
 }

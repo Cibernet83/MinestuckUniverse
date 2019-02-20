@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "0.1.0"
+version = "${mod_version}"
 group = "com.cibernet.minestuckuniverse" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "MinestuckUniverse"
 
@@ -21,17 +21,44 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2768"
+    version = "${mc_version}-${forge_version}"
     runDir = "run"
-    mappings = "snapshot_20171003"
+    mappings = "${mappings_version}"
 
     replace"@VERSION@", project.version
     replaceIn "MinestuckUniverse.java"
 
 }
 
+repositories {
+    maven {
+        name = "chickenbones"
+        url = "http://chickenbones.net/maven/"
+    }
+    maven {
+        name = "Progwml6 maven"
+        url = "http://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        url = "http://maven.blamejared.com"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "modmaven.k-4u.nl"
+    }
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
-	
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile name: "Minestuck-${mc_version}-${minestuck_version}.jar"
+    deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}:api"
+    
+    runtime "mezz.jei:jei_${mc_version}:${jei_version}"
+    runtime name: "Minestuck-${mc_version}-${minestuck_version}.jar"
 }
 
 processResources {
