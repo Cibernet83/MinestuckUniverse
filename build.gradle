@@ -53,12 +53,12 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile name: "Minestuck-${mc_version}-${minestuck_version}.jar"
+    //compile fileTree(dir: 'libs', include: ['*.jar'])
+    deobfCompile name: "Minestuck-${mc_version}-${minestuck_version}-deobf"
     deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}:api"
     
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
-    runtime name: "Minestuck-${mc_version}-${minestuck_version}.jar"
+    runtime name: "Minestuck-${mc_version}-${minestuck_version}"
 }
 
 processResources {
