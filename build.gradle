@@ -60,7 +60,8 @@ dependencies {
     //deobfCompile fileTree(dir: 'libs' , include: '*.jar')
     deobfCompile name: "Minestuck-${mc_version}-${minestuck_version}-deobf"
     deobfCompile name: "Thaumcraft-${mc_version}-${thaumcraft_version}-deobf"
-    deobfCompile name: "Baubles-${mc_version}-${baubles_version}-deobf"
+    //deobfCompile name: "Baubles-${mc_version}-${baubles_version}-deobf"
+    compile files("libs/Baubles-${mc_version}-${baubles_version}-api.jar")
     //deobfCompile name: "Botania-${mc_version}-${botania_version}-deobf"
     deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}:api"
     
@@ -85,5 +86,9 @@ processResources {
     // copy everything else except the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+
+    sourceSets {
+        main { output.resourcesDir = output.classesDir }
     }
 }

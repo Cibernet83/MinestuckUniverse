@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
         modid = MinestuckUniverse.MODID,
         name = MinestuckUniverse.NAME,
         version = MinestuckUniverse.VERSION,
-        dependencies = "reqired-after:minestuck@[1.2.283,);reqired-after:baubles@[1.5.2,);"
+        dependencies = "required-after:minestuck@[1.2.283,);required-after:baubles@[1.5.2,);"
 )
 public class MinestuckUniverse
 {
@@ -28,19 +28,21 @@ public class MinestuckUniverse
     @Mod.Instance("minestuckuniverse")
     public static MinestuckUniverse instance;
     @SidedProxy(
-            clientSide = "com.mraof.minestuck.proxy.ClientProxy",
-            serverSide = "com.mraof.minestuck.proxy.CommonProxy"
+            clientSide = "com.cibernet.minestuckuniverse.proxy.ClientProxy",
+            serverSide = "com.cibernet.minestuckuniverse.proxy.CommonProxy"
     )
     public static CommonProxy proxy;
 
     public static boolean isThaumLoaded;
     public static boolean isBotaniaLoaded;
+    public static boolean isArsenalLoaded;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
         isThaumLoaded = Loader.isModLoaded("thaumcraft");
         isBotaniaLoaded = Loader.isModLoaded("botania");
+        isArsenalLoaded = Loader.isModLoaded("minestucarsenal");
 
         proxy.preInit();
     }

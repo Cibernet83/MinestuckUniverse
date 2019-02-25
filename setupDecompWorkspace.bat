@@ -1,1 +1,1 @@
-gradlew setupDecompWorkspace
+gradlew setupDecompWorkspace idea 
