@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -7,7 +8,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.magicBlock;
+import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
 
 public class MinestuckUniverseItems
 {
@@ -19,6 +20,13 @@ public class MinestuckUniverseItems
 
         //ItemBlocks
         registerItemBlock(registry, magicBlock);
+
+        if(MinestuckUniverse.isThaumLoaded)
+        {
+            registerItemBlock(registry, thaumChasis);
+            registerItemBlock(registry, gristDecomposer);
+
+        }
     }
 
     private static Item registerItemBlock(IForgeRegistry<Item> registry, Block block)

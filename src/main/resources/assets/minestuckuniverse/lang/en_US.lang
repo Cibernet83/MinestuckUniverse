@@ -1,4 +1,8 @@
 tile.magicBlock.name=Perfectly Magical Object
+tile.thaumChasis.name=Thaumosburban Machine Frame
+tile.gristDecomposer.name=Grist Decomposer
 
 grist.vis=Vis
 grist.mana=Mana
+
+research.SBURBOMANCY.title=Sburbomancy

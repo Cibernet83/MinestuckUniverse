@@ -1,0 +1,43 @@
+{
+  "entries": [
+    {
+      "key": "SBURBOMANCY",
+      "name": "research.SBURBOMANCY.title",
+      "icons": [
+        "minestuck:generic_object"
+      ],
+      "category": "BASICS",
+      "location": [
+        -5,
+        -5
+      ],
+      "parents": [
+        "BASEAUROMANCY"
+      ],
+      "stages": [
+        {
+          "text": "research.SBURBOMANCY.0",
+          "required_knowledge": [
+            "OBSERVATION;AUROMANCY;1",
+            "OBSERVATION;ARTIFICE;1"
+          ],
+          "recipes": [
+            "minestuckuniverse:magicBlock"
+          ]
+        },
+        {
+          "text": "research.SBURBOMANCY.1",
+          "required_knowledge": [
+            "OBSERVATION;AUROMANCY;1",
+            "OBSERVATION;ARTIFICE;1"
+          ],
+          "recipes": [
+
+            "minestuckuniverse:magicBlock",
+            "minestuckuniverse:gristDecomposer"
+          ]
+        }
+      ]
+    }
+  ]
+}

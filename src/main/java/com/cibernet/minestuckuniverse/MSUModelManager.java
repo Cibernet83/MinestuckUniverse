@@ -27,6 +27,12 @@ public class MSUModelManager
     private static void ItemBlockModels()
     {
         register(magicBlock);
+
+        if(MinestuckUniverse.isThaumLoaded)
+        {
+            register(thaumChasis);
+            register(gristDecomposer);
+        }
     }
 
     private static void register(Item item)
