@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -11,6 +12,7 @@ public class MSUBlockBase extends Block
         super(blockMaterialIn, blockMapColorIn);
         setRegistryName(registryName);
         setUnlocalizedName(unlocalizedName);
+        setCreativeTab(MinestuckUniverse.tab);
     }
 
     public MSUBlockBase(Material blockMaterialIn, String registryName, String unlocalizedName)

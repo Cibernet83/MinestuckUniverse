@@ -4,6 +4,8 @@ import com.cibernet.minestuckuniverse.proxy.CommonProxy;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.alchemy.GristRegistry;
 import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.item.TabMinestuck;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -36,6 +38,7 @@ public class MinestuckUniverse
     public static boolean isThaumLoaded;
     public static boolean isBotaniaLoaded;
     public static boolean isArsenalLoaded;
+    public static CreativeTabs tab = TabMinestuckUniverse.instance;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
