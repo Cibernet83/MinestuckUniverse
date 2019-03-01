@@ -3,7 +3,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "minestuckuniverse:blocks/thaum_chasis",
-		"1": "blocks/thaum_chasis_back",
+		"1": "minestuckuniverse:blocks/thaum_chasis_back",
 		"2": "minestuckuniverse:blocks/thaum_chasis_inner",
 		"particle": "minestuckuniverse:blocks/thaum_chasis"
 	},
