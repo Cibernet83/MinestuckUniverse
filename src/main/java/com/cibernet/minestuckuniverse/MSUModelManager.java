@@ -1,6 +1,5 @@
 package com.cibernet.minestuckuniverse;
 
-import com.mraof.minestuck.Minestuck;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -9,6 +8,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
+import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
 
 public class MSUModelManager
 {
@@ -21,7 +21,10 @@ public class MSUModelManager
 
     private static void ItemModels()
     {
-
+        if(MinestuckUniverse.isThaumLoaded)
+        {
+            register(spaceSalt);
+        }
     }
 
     private static void ItemBlockModels()

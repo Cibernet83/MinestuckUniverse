@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.mraof.minestuck.item.block.ItemAlchemiter;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -13,16 +14,19 @@ import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
 public class MinestuckUniverseItems
 {
 
+    public static Item spaceSalt = new ItemSpaceSalt();
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         IForgeRegistry<Item> registry = event.getRegistry();
 
-        //ItemBlocks
         registerItemBlock(registry, magicBlock);
 
         if(MinestuckUniverse.isThaumLoaded)
         {
+            registry.register(spaceSalt);
+
             registerItemBlock(registry, thaumChasis);
             registerItemBlock(registry, gristDecomposer);
 
