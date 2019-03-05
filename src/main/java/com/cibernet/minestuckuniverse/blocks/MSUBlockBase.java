@@ -10,9 +10,9 @@ public class MSUBlockBase extends Block
     public MSUBlockBase(Material blockMaterialIn, MapColor blockMapColorIn, String registryName, String unlocalizedName)
     {
         super(blockMaterialIn, blockMapColorIn);
-        setRegistryName(registryName);
-        setUnlocalizedName(unlocalizedName);
-        setCreativeTab(MinestuckUniverse.tab);
+        this.setRegistryName(registryName);
+        this.setUnlocalizedName(unlocalizedName);
+        this.setCreativeTab(MinestuckUniverse.tab);
     }
 
     public MSUBlockBase(Material blockMaterialIn, String registryName, String unlocalizedName)

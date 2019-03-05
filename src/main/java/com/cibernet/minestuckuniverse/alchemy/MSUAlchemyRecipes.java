@@ -1,35 +1,32 @@
 package com.cibernet.minestuckuniverse.alchemy;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
-import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.*;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.MinestuckItems;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import thaumcraft.Thaumcraft;
 import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.ThaumcraftInvHelper;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectHelper;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.blocks.BlocksTC;
+import thaumcraft.api.casters.FocusMod;
 import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.items.ItemsTC;
 import thaumcraft.common.config.ConfigItems;
 
+import javax.swing.*;
+
 import static com.mraof.minestuck.alchemy.CombinationRegistry.Mode.*;
 import static com.mraof.minestuck.alchemy.GristType.*;
 import static com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist.*;
 import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
+import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
 
 public class MSUAlchemyRecipes
 {
@@ -82,7 +79,6 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.crystalEssence), new GristSet(new GristType[] {Vis, Quartz}, new int[] {8, 1}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.phial, 1, 1), new GristSet(new GristType[] {Build, Shale, Vis}, new int[] {1, 1, 8}));
 
-
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.nuggets, 1, 0), new GristSet(new GristType[] {iron}, new int[] {1}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.nuggets, 1, 10), new GristSet(new GristType[] {Vis, Rust, Gold}, new int[] {2, 2, 1}));
 
@@ -124,6 +120,11 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.leafSilverwood), new GristSet(new GristType[] {Build, Mercury}, new int[] {1, 1}));
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.leafGreatwood), new GristSet(new GristType[] {Build, Vis}, new int[] {1, 1}));
 
+        //Aspect Conversion
+        ThaumcraftApi.registerObjectTag(new ItemStack(MinestuckItems.rawUranium), (new AspectList()).add(Aspect.METAL, 10).add(Aspect.DEATH, 5).add(Aspect.ENERGY, 10));
+        ThaumcraftApi.registerObjectTag(new ItemStack(MinestuckBlocks.oreUranium), (new AspectList()).add(Aspect.METAL, 10).add(Aspect.DEATH, 5).add(Aspect.ENERGY, 10));
+        ThaumcraftApi.registerObjectTag(new ItemStack(MinestuckItems.rawCruxite), (new AspectList()).add(Aspect.METAL, 5).add(Aspect.ALCHEMY, 15).add(Aspect.MECHANISM, 4));
+        ThaumcraftApi.registerObjectTag(new ItemStack(MinestuckBlocks.oreCruxite), (new AspectList()).add(Aspect.METAL, 5).add(Aspect.ALCHEMY, 15).add(Aspect.MECHANISM, 4));
 
 
         //Alchemy
@@ -139,9 +140,12 @@ public class MSUAlchemyRecipes
 
         //Crucible Recipes
         ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("minestuckuniverse","magicBlock"), new CrucibleRecipe("SBURBOMANCY@0", new ItemStack(magicBlock), new ItemStack(MinestuckBlocks.genericObject), (new AspectList()).merge(Aspect.MAGIC, 10).merge(Aspect.ALCHEMY, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("minestuckuniverse", "salisSpatius"), new CrucibleRecipe("SBURBOMANCY@0", new ItemStack(spaceSalt), new ItemStack(ItemsTC.salisMundus), new AspectList().merge(Aspect.EXCHANGE, 50).merge(Aspect.AURA, 20)));
 
         //Infusion
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("minestuckuniverse","gristDecomposer"), new InfusionRecipe("SBURBOMANCY@1", new ItemStack(gristDecomposer), 1, (new AspectList()).add(Aspect.ALCHEMY, 30).add(Aspect.MECHANISM, 40).add(Aspect.MAGIC, 30), new ItemStack(thaumChasis), new Object[]{new ItemStack(MinestuckBlocks.sburbMachine, 1, 3), new ItemStack(MinestuckItems.energyCore), ConfigItems.ENTROPY_CRYSTAL, ConfigItems.ORDER_CRYSTAL}));
+
+
 
     }
 
