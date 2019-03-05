@@ -1,12 +1,12 @@
 {
   "entries": [
     {
-      "key": "SBURBOMANCY",
-      "name": "research.SBURBOMANCY.title",
+      "key": "BASESBURBOMANCY",
+      "name": "research.BASESBURBOMANCY.title",
       "icons": [
         "minestuck:generic_object"
       ],
-      "category": "BASICS",
+      "category": "SBURBOMANCY",
       "location": [
         -5,
         -5
@@ -16,7 +16,7 @@
       ],
       "stages": [
         {
-          "text": "research.SBURBOMANCY.0",
+          "text": "research.BASESBURBOMANCY.0",
           "required_knowledge": [
             "OBSERVATION;AUROMANCY;1",
             "OBSERVATION;ARTIFICE;1"
@@ -26,7 +26,7 @@
           ]
         },
         {
-          "text": "research.SBURBOMANCY.1",
+          "text": "research.BASESBURBOMANCY.1",
           "required_knowledge": [
             "OBSERVATION;AUROMANCY;1",
             "OBSERVATION;ARTIFICE;1"
