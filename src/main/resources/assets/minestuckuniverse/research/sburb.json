@@ -8,8 +8,8 @@
       ],
       "category": "SBURBOMANCY",
       "location": [
-        -5,
-        -5
+        0,
+        0
       ],
       "parents": [
         "BASEAUROMANCY"
@@ -34,7 +34,42 @@
           "recipes": [
 
             "minestuckuniverse:magicBlock",
-            "minestuckuniverse:gristDecomposer"
+            "minestuckuniverse:thaumChasis"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ASPECTMANIPULATION",
+      "name": "research.ASPECTMANIPULATION.title",
+      "icons": [
+        "minestuckuniverse:salis_spatius"
+      ],
+      "category": "SBURBOMANCY",
+      "location": [
+        0,
+        -5
+      ],
+      "parents": [
+        "BASESBURBOMANCY"
+      ],
+      "stages": [
+        {
+          "text": "research.ASPECTMANIPULATION.0",
+          "required_knowledge": [
+            "OBSERVATION;AUROMANCY;1",
+            "OBSERVATION;ARTIFICE;1"
+          ]
+        },
+        {
+          "text": "research.ASPECTMANIPULATION.1",
+          "required_knowledge": [
+            "OBSERVATION;AUROMANCY;1",
+            "OBSERVATION;ARTIFICE;1"
+          ],
+          "recipes": [
+
+            "minestuckuniverse:salisSpatius"
           ]
         }
       ]
