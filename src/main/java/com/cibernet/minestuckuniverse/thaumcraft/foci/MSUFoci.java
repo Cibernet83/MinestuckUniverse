@@ -1,6 +1,4 @@
-package com.cibernet.minestuckuniverse.foci;
-
-import thaumcraft.api.casters.FocusEngine;
+package com.cibernet.minestuckuniverse.thaumcraft.foci;
 
 public class MSUFoci
 {

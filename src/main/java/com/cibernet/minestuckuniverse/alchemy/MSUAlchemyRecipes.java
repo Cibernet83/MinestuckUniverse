@@ -120,7 +120,6 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.leafSilverwood), new GristSet(new GristType[] {Build, Mercury}, new int[] {1, 1}));
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.leafGreatwood), new GristSet(new GristType[] {Build, Vis}, new int[] {1, 1}));
 
-        ThaumcraftApi.registerObjectTag(new ItemStack(MinestuckItems.rawCruxite), (new AspectList()).add(Aspect.METAL, 5).add(Aspect.ALCHEMY, 15).add(Aspect.MECHANISM, 4));
         //Alchemy
         CombinationRegistry.addCombination(new ItemStack(Items.WHEAT_SEEDS), new ItemStack(ItemsTC.quicksilver), MODE_AND, new ItemStack(BlocksTC.shimmerleaf));
         CombinationRegistry.addCombination(new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.BLAZE_POWDER), MODE_AND, new ItemStack(BlocksTC.cinderpearl));
