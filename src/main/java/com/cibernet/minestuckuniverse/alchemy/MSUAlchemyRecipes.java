@@ -120,13 +120,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.leafSilverwood), new GristSet(new GristType[] {Build, Mercury}, new int[] {1, 1}));
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.leafGreatwood), new GristSet(new GristType[] {Build, Vis}, new int[] {1, 1}));
 
-        //Aspect Conversion
-        ThaumcraftApi.registerObjectTag(new ItemStack(MinestuckItems.rawUranium), (new AspectList()).add(Aspect.METAL, 10).add(Aspect.DEATH, 5).add(Aspect.ENERGY, 10));
-        ThaumcraftApi.registerObjectTag(new ItemStack(MinestuckBlocks.oreUranium), (new AspectList()).add(Aspect.METAL, 10).add(Aspect.DEATH, 5).add(Aspect.ENERGY, 10));
         ThaumcraftApi.registerObjectTag(new ItemStack(MinestuckItems.rawCruxite), (new AspectList()).add(Aspect.METAL, 5).add(Aspect.ALCHEMY, 15).add(Aspect.MECHANISM, 4));
-        ThaumcraftApi.registerObjectTag(new ItemStack(MinestuckBlocks.oreCruxite), (new AspectList()).add(Aspect.METAL, 5).add(Aspect.ALCHEMY, 15).add(Aspect.MECHANISM, 4));
-
-
         //Alchemy
         CombinationRegistry.addCombination(new ItemStack(Items.WHEAT_SEEDS), new ItemStack(ItemsTC.quicksilver), MODE_AND, new ItemStack(BlocksTC.shimmerleaf));
         CombinationRegistry.addCombination(new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.BLAZE_POWDER), MODE_AND, new ItemStack(BlocksTC.cinderpearl));
@@ -144,8 +138,6 @@ public class MSUAlchemyRecipes
 
         //Infusion
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("minestuckuniverse","gristDecomposer"), new InfusionRecipe("SBURBOMANCY@1", new ItemStack(gristDecomposer), 1, (new AspectList()).add(Aspect.ALCHEMY, 30).add(Aspect.MECHANISM, 40).add(Aspect.MAGIC, 30), new ItemStack(thaumChasis), new Object[]{new ItemStack(MinestuckBlocks.sburbMachine, 1, 3), new ItemStack(MinestuckItems.energyCore), ConfigItems.ENTROPY_CRYSTAL, ConfigItems.ORDER_CRYSTAL}));
-
-
 
     }
 
