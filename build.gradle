@@ -60,7 +60,7 @@ dependencies {
     //deobfCompile fileTree(dir: 'libs' , include: '*-deobf.jar')
     deobfCompile name: "Minestuck-${mc_version}-${minestuck_version}-deobf"
     deobfCompile name: "Thaumcraft-${mc_version}-${thaumcraft_version}-deobf"
-    //deobfCompile name: "Baubles-${mc_version}-${baubles_version}-deobf"
+    deobfCompile name: "Baubles-${mc_version}-${baubles_version}-deobf"
     compile files("libs/Baubles-${mc_version}-${baubles_version}-api.jar")
     //deobfCompile name: "Botania-${mc_version}-${botania_version}-deobf"
     deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}:api"
@@ -68,6 +68,7 @@ dependencies {
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
     runtime name: "Minestuck-${mc_version}-${minestuck_version}"
     runtime name: "Thaumcraft-${mc_version}-${thaumcraft_version}"
+    runtime name: "Baubles-${mc_version}-${baubles_version}"
     //runtime fileTree(dir: 'runtimeMods', include: '*.jar')
 }
 

@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.alchemy.MSUAlchemyRecipes;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
 import com.mraof.minestuck.client.gui.playerStats.GuiGristCache;
 import com.mraof.minestuck.util.KindAbstratusList;
 import com.mraof.minestuck.util.KindAbstratusType;
@@ -40,7 +41,7 @@ public class CommonProxy
 
         }
 
-
+        MSULandAspectRegistry.registerLands();
 
         MSUAlchemyRecipes.registerRecipes();
     }
