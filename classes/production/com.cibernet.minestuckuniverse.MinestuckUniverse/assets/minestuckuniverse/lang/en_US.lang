@@ -1,0 +1,12 @@
+tile.magicBlock.name=Perfectly Magical Object
+tile.thaumChasis.name=Thaumosburban Machine Frame
+tile.gristDecomposer.name=Grist Decomposer
+
+item.spaceSalt.name=Salis Spatius
+
+grist.vis=Vis
+grist.mana=Mana
+
+research.SBURBOMANCY.title=Sburbomancy
+
+research.ASPECTMANIPULATION.title=Aspect Manipulation
