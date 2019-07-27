@@ -7,5 +7,6 @@ public class MSULandAspectRegistry
     public static void registerLands()
     {
         LandAspectRegistry.registerLandAspect(new LandAspectThaum());
+        LandAspectRegistry.registerLandAspect(new LandAspectBlobs());
     }
 }
