@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MSUAlchemyRecipes;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
+import com.cibernet.minestuckuniverse.entity.MSUEntities;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
 import com.mraof.minestuck.client.gui.playerStats.GuiGristCache;
@@ -29,6 +30,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
         MSUBannerPatterns.init();
+        MSUEntities.registerEntities();
     }
 
     public void init()
@@ -36,8 +38,8 @@ public class CommonProxy
         List<KindAbstratusType> abstrata = KindAbstratusList.getTypeList();
         if(MinestuckUniverse.isThaumLoaded)
         {
-            ResearchCategories.registerCategory("SBURBOMANCY", "FIRSTSTEPS", new AspectList(), new ResourceLocation("minestuckuniverse", "textures/gui/tab.png"), new ResourceLocation("minestuckuniverse", "textures/gui/gui_research_bg.jpg"));
-            ThaumcraftApi.registerResearchLocation(new ResourceLocation("minestuckuniverse", "research/sburb.json"));
+           // ResearchCategories.registerCategory("SBURBOMANCY", "FIRSTSTEPS", new AspectList(), new ResourceLocation("minestuckuniverse", "textures/gui/tab.png"), new ResourceLocation("minestuckuniverse", "textures/gui/gui_research_bg.jpg"));
+           // ThaumcraftApi.registerResearchLocation(new ResourceLocation("minestuckuniverse", "research/sburb.json"));
 
 
         }
