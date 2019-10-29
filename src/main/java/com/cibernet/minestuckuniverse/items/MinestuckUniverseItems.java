@@ -21,12 +21,11 @@ public class MinestuckUniverseItems
     {
         IForgeRegistry<Item> registry = event.getRegistry();
 
-        registerItemBlock(registry, magicBlock);
-
+    
+        registry.register(spaceSalt);
         if(MinestuckUniverse.isThaumLoaded)
         {
-            registry.register(spaceSalt);
-
+            registerItemBlock(registry, magicBlock);
             registerItemBlock(registry, thaumChasis);
             registerItemBlock(registry, gristDecomposer);
 

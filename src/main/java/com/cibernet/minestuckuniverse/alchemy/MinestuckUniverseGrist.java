@@ -7,7 +7,6 @@ import static com.mraof.minestuck.alchemy.GristHelper.secondaryGristMap;
 
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
-import com.sun.jna.platform.unix.X11;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -44,7 +43,7 @@ public class MinestuckUniverseGrist
 
         if(!MinestuckUniverse.isArsenalLoaded)
         {
-            //registry.register(Flourite);
+            //registry.register(Fluorite);
         }
     }
 
