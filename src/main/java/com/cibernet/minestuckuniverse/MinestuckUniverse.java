@@ -25,6 +25,7 @@ public class MinestuckUniverse
 {
     public static final String MODID = "minestuckuniverse";
     public static final String NAME = "Minestuck Universe";
+    public static final String SHORT = "MSU";
     public static final String VERSION = "@VERSION@";
 
     @Mod.Instance("minestuckuniverse")

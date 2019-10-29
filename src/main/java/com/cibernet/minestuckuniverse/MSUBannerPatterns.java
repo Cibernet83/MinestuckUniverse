@@ -1,0 +1,37 @@
+package com.cibernet.minestuckuniverse;
+
+import com.mraof.minestuck.block.MinestuckBlocks;
+import com.mraof.minestuck.item.MinestuckItems;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.BannerPattern;
+import net.minecraftforge.common.util.EnumHelper;
+
+public class MSUBannerPatterns
+{
+
+    public static void init()
+    {
+        registerPattern("light", new ItemStack(Items.GLOWSTONE_DUST));
+        registerPattern("void", new ItemStack(Items.COAL));
+        registerPattern("space", new ItemStack(Items.COMPASS));
+        registerPattern("time", new ItemStack(Items.CLOCK));
+        registerPattern("mind", new ItemStack(Items.BOOK));
+        registerPattern("heart", new ItemStack(Items.ENDER_PEARL));
+        registerPattern("doom", new ItemStack(Items.FLINT_AND_STEEL));
+        registerPattern("life", new ItemStack(Items.WHEAT));
+        registerPattern("breath", new ItemStack(Blocks.ICE));
+        registerPattern("blood", new ItemStack(MinestuckBlocks.coagulatedBlood));
+        registerPattern("rage", new ItemStack(Items.ROTTEN_FLESH));
+        registerPattern("hope", new ItemStack(Items.GHAST_TEAR));
+        registerPattern("moon", new ItemStack(Blocks.END_STONE));
+    }
+
+    public static BannerPattern registerPattern(String id, ItemStack ingredient)
+    {
+        Class<?>[] paramTypes = new Class[] {String.class, String.class, ItemStack.class};
+        Object[] paramVals = new Object[] {MinestuckUniverse.SHORT + "_" + id, MinestuckUniverse.SHORT.toLowerCase() + "." + id, ingredient};
+        return EnumHelper.addEnum(BannerPattern.class, id.toUpperCase(), paramTypes, paramVals);
+    }
+}

@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.MSUBannerPatterns;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MSUAlchemyRecipes;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
@@ -27,7 +28,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(new MinestuckUniverseGrist());
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
-
+        MSUBannerPatterns.init();
     }
 
     public void init()
