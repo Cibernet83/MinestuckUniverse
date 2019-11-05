@@ -75,25 +75,6 @@ public class EntityAcheron extends EntityUnderling
 		return 0.55;
 	}
 
-	@Nullable
-	@Override
-	protected Item getDropItem()
-	{
-		/* TODO loot tables
-		int chance = rand.nextInt(100);
-		int value = 2000;
-		if(chance < 1)
-			value = 6000;
-		else if(chance < 15)
-			value = 5000;
-		else if(chance < 40)
-			value = 4000;
-		else if(chance < 80)
-			value = 300;
-		*/
-		return super.getDropItem();
-	}
-
 	@Override
 	protected float getMaximumHealth()
 	{

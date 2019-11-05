@@ -22,8 +22,8 @@ public class ModelAcheron extends ModelBase {
 	float scale = 4;
 
 	public ModelAcheron() {
-		textureWidth = 16;
-		textureHeight = 16;
+		textureWidth = 128;
+		textureHeight = 128;
 		float YOff = -24 + 24/scale;
 
 		Body = new ModelRenderer(this);
