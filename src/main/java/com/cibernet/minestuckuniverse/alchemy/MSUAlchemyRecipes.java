@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.alchemy;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.*;
 import com.mraof.minestuck.block.MinestuckBlocks;
@@ -66,8 +67,14 @@ public class MSUAlchemyRecipes
 
         //Grist Conversions
         GristRegistry.addGristConversion(new ItemStack(magicBlock), new GristSet(new GristType[] {Vis}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium}, new int[] {5, 4, 3, 2}));
 
+        GristRegistry.addGristConversion(new ItemStack(spaceSalt), new GristSet(new GristType[] {Uranium, Tar, Zillium}, new int[] {20, 64, 1}));
         //Alchemy
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.rawCruxite), new ItemStack(Blocks.END_STONE), MODE_OR, new ItemStack(moonstone));
+        CombinationRegistry.addCombination(new ItemStack(Blocks.BEDROCK), new ItemStack(MinestuckItems.sbahjPoster), MODE_AND, new ItemStack(sbahjBedrock));
+        //TODO everything else!
+
     }
     public static void registerThaumcraft()
     {

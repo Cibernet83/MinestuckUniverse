@@ -15,14 +15,19 @@ public class MinestuckUniverseItems
 {
 
     public static Item spaceSalt = new ItemSpaceSalt();
+    public static Item moonstone = new MSUItemBase("moonstone");
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         IForgeRegistry<Item> registry = event.getRegistry();
 
-    
         registry.register(spaceSalt);
+        registry.register(moonstone);
+
+        registerItemBlock(registry, sbahjBedrock);
+        registerItemBlock(registry, zillyStone);
+
         if(MinestuckUniverse.isThaumLoaded)
         {
             registerItemBlock(registry, magicBlock);

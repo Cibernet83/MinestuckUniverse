@@ -11,4 +11,9 @@ public class MSUItemBase extends Item
         this.setUnlocalizedName(unlocName);
         this.setCreativeTab(MinestuckUniverse.tab);
     }
+
+    public MSUItemBase(String name)
+    {
+        this(name, name);
+    }
 }
