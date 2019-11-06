@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.items;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.mraof.minestuck.item.block.ItemAlchemiter;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
@@ -16,6 +17,8 @@ public class MinestuckUniverseItems
 
     public static Item spaceSalt = new ItemSpaceSalt();
     public static Item moonstone = new MSUItemBase("moonstone");
+    public static Item moonstoneChisel = new ItemChisel("moonstone");
+    public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -24,6 +27,8 @@ public class MinestuckUniverseItems
 
         registry.register(spaceSalt);
         registry.register(moonstone);
+        registry.register(moonstoneChisel);
+        registry.register(zillystoneShard);
 
         registerItemBlock(registry, sbahjBedrock);
         registerItemBlock(registry, zillyStone);

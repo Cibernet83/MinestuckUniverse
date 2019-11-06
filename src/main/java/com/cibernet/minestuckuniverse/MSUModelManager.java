@@ -21,15 +21,17 @@ public class MSUModelManager
 
     private static void ItemModels()
     {
-        if(MinestuckUniverse.isThaumLoaded)
-        {
-            register(spaceSalt);
-        }
+        register(spaceSalt);
+        register(moonstone);
+        register(moonstoneChisel);
+        register(zillystoneShard);
     }
 
     private static void ItemBlockModels()
     {
         register(magicBlock);
+        register(sbahjBedrock);
+        register(zillyStone);
 
         if(MinestuckUniverse.isThaumLoaded)
         {

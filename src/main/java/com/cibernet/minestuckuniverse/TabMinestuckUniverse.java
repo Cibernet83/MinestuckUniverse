@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse;
 
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -17,6 +18,6 @@ public class TabMinestuckUniverse extends CreativeTabs
 
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(MinestuckUniverseBlocks.magicBlock);
+        return new ItemStack(MinestuckUniverseItems.moonstone);
     }
 }

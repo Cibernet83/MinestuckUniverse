@@ -13,8 +13,8 @@ public class MinestuckUniverseBlocks
     //Base
     public static Block magicBlock = new MSUBlockBase(Material.CLAY, "magic_block", "magicBlock");
 
-    public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "badrok").setResistance(0F).setHardness(-1F);
-    public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5F);
+    public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "sbahjBedrock").setResistance(0F).setHardness(-1F);
+    public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
 
     //Thaumcraft
     public static Block thaumChasis = new MSUBlockBase(Material.IRON, "thaumic_machine_frame", "thaumChasis");
