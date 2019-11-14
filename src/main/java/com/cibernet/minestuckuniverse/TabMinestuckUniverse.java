@@ -7,8 +7,9 @@ import net.minecraft.item.ItemStack;
 
 public class TabMinestuckUniverse extends CreativeTabs
 {
-    private ItemStack iconItem = new ItemStack(MinestuckUniverseBlocks.magicBlock);
-    public static final TabMinestuckUniverse instance = new TabMinestuckUniverse("tabMinestuckUniverse", new ItemStack(MinestuckUniverseBlocks.magicBlock));
+    private ItemStack iconItem;
+    public static final TabMinestuckUniverse instance = new TabMinestuckUniverse("tabMinestuckUniverse", new ItemStack(MinestuckUniverseItems.moonstone));
+    public static final TabMinestuckUniverse GTArmor = new TabMinestuckUniverse("tabMSUGTArmor", new ItemStack(MinestuckUniverseItems.spaceSalt));
 
     private TabMinestuckUniverse(String label, ItemStack iconItem)
     {
@@ -18,6 +19,6 @@ public class TabMinestuckUniverse extends CreativeTabs
 
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(MinestuckUniverseItems.moonstone);
+        return iconItem;
     }
 }
