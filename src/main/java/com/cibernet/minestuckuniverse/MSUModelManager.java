@@ -7,11 +7,17 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
 import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
 
 public class MSUModelManager
 {
+    public static List<Item> items = new ArrayList<>();
+    public static List<Block> blocks = new ArrayList<>();
+
     @SubscribeEvent
     public static void handleModelRegistry(ModelRegistryEvent event)
     {
@@ -21,23 +27,14 @@ public class MSUModelManager
 
     private static void ItemModels()
     {
-        register(spaceSalt);
-        register(moonstone);
-        register(moonstoneChisel);
-        register(zillystoneShard);
+        for(Item item : items)
+            register(item);
     }
 
     private static void ItemBlockModels()
     {
-        register(magicBlock);
-        register(sbahjBedrock);
-        register(zillyStone);
-
-        if(MinestuckUniverse.isThaumLoaded)
-        {
-            register(thaumChasis);
-            register(gristDecomposer);
-        }
+        for(Block block : blocks)
+            register(block);
     }
 
     private static void register(Item item)

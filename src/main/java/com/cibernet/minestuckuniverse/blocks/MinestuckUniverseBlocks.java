@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
+import com.cibernet.minestuckuniverse.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -25,16 +26,22 @@ public class MinestuckUniverseBlocks
     {
         IForgeRegistry<Block> registry = event.getRegistry();
 
-        registry.register(magicBlock);
-        registry.register(sbahjBedrock);
-        registry.register(zillyStone);
+        registerBlock(registry, magicBlock);
+        registerBlock(registry, sbahjBedrock);
+        registerBlock(registry, zillyStone);
 
         if(MinestuckUniverse.isThaumLoaded)
         {
-            registry.register(thaumChasis);
-            registry.register(gristDecomposer);
+            registerBlock(registry, thaumChasis);
+            registerBlock(registry, gristDecomposer);
         }
     }
-
+    
+    private static Block registerBlock(IForgeRegistry<Block> registry, Block block)
+    {
+        registry.register(block);
+        MSUModelManager.blocks.add(block);
+        return block;
+    }
 
 }
