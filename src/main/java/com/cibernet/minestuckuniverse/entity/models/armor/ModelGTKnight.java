@@ -10,39 +10,44 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelGTKnight extends ModelBiped {
-	private final ModelRenderer leftLeg;
-	private final ModelRenderer rightLeg;
+	//private final ModelRenderer leftLeg;
+	//private final ModelRenderer rightLeg;
 	private final ModelRenderer leftArm;
 	private final ModelRenderer rightArm;
 	private final ModelRenderer body;
 	private final ModelRenderer head;
+	private final ModelRenderer cape;
 
 	public ModelGTKnight() {
 		textureWidth = 128;
 		textureHeight = 128;
 
-		leftLeg = new ModelRenderer(this);
-		leftLeg.setRotationPoint(5F, 2.0F, 0.0F);
-		leftLeg.cubeList.add(new ModelBox(leftLeg, 0, 43, -0.1F, -11.9F, -2.1F, 4, 12, 4, 0.0F, false));
+		this.bipedLeftLeg = new ModelRenderer(this, 0, 43);
+		this.bipedLeftLeg.mirror = true;
+		this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4);
+		this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
 
-		rightLeg = new ModelRenderer(this);
-		rightLeg.setRotationPoint(5.0F, 2.0F, 0.0F);
-		rightLeg.cubeList.add(new ModelBox(rightLeg, 18, 36, -4.1F, -11.9F, -2.1F, 4, 12, 4, 0.0F, false));
+		this.bipedRightLeg = new ModelRenderer(this, 18, 36);
+		this.bipedRightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4);
+		this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F, 0.0F);
 
 		leftArm = new ModelRenderer(this);
 		leftArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
-		leftArm.cubeList.add(new ModelBox(leftArm, 48, 48, 4F, -4F, -2F, 4, 12, 4, 0.0F, false));
+		leftArm.cubeList.add(new ModelBox(leftArm, 48, 48, 3.95F, -4.1F, -2F, 4, 12, 4, 0.0F, false));
 
 		rightArm = new ModelRenderer(this);
 		rightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
-		rightArm.cubeList.add(new ModelBox(rightArm, 44, 19, 2F, -4F, -2F, 4, 12, 4, 0.0F, false));
+		rightArm.cubeList.add(new ModelBox(rightArm, 44, 19, 2.05F, -4.1F, -2F, 4, 12, 4, 0.0F, false));
 
 		body = new ModelRenderer(this);
 		body.setRotationPoint(0.0F, 0.0F, 0.0F);
-		body.cubeList.add(new ModelBox(body, 18, 20, -4F, 0F, -2F, 8, 12, 4, 0.0F, false));
-		body.cubeList.add(new ModelBox(body, 44, 35, -4F, 0F, -3F, 8, 2, 1, 0.0F, false));
-		body.cubeList.add(new ModelBox(body, 44, 38, -4F, 0F, 2F, 8, 2, 1, 0.0F, false));
-		body.cubeList.add(new ModelBox(body, 0, 20, -4F, 1.1F, 3F, 8, 22, 1, 0.0F, false));
+		body.cubeList.add(new ModelBox(body, 18, 20, -4F, -0.05F, -2F, 8, 12, 4, 0.0F, false));
+		body.cubeList.add(new ModelBox(body, 44, 35, -4F, -0.05F, -3F, 8, 2, 1, 0.0F, false));
+		body.cubeList.add(new ModelBox(body, 44, 38, -4F, -0.05F, 2F, 8, 2, 1, 0.0F, false));
+
+		cape = new ModelRenderer(this);
+		body.setRotationPoint(0.0F, 0.0F, 0.0F);
+		cape.cubeList.add(new ModelBox(body, 0, 20, -4F, 1.05F, 3F, 8, 22, 1, 0.0F, false));
 
 		head = new ModelRenderer(this);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -59,10 +64,11 @@ public class ModelGTKnight extends ModelBiped {
 
 		this.bipedHead.addChild(head);
 		this.bipedBody.addChild(body);
+		this.bipedBody.addChild(cape);
 		this.bipedLeftArm.addChild(leftArm);
 		this.bipedRightArm.addChild(rightArm);
-		this.bipedLeftLeg.addChild(leftLeg);
-		this.bipedRightLeg.addChild(rightLeg);
+		//this.bipedLeftLeg.addChild(leftLeg);
+		//this.bipedRightLeg.addChild(rightLeg);
 	}
 
 	@Override
