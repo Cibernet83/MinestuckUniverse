@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.items;
 import com.cibernet.minestuckuniverse.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelGTKnight;
 import com.mraof.minestuck.item.block.ItemAlchemiter;
 import com.mraof.minestuck.util.EnumAspect;
@@ -28,16 +29,19 @@ public class MinestuckUniverseItems
     private static final EnumClass[] classes = EnumClass.values();
     private static final EnumAspect[] aspects = EnumAspect.values();
     //Armor Materials
-    public static ItemArmor.ArmorMaterial[][] GTArmorMaterial = new ItemArmor.ArmorMaterial[classes.length][aspects.length];
-    public static Item[][][] GTArmor = new Item[classes.length][aspects.length][4];
+    public static ItemArmor.ArmorMaterial materialDiverHelmet = EnumHelper.addArmorMaterial("DIVER_HELMET", MinestuckUniverse.MODID+":diver_helmet", 50, new int[] {0, 0, 0, 3}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
 
     //GT Armor
+    public static ItemArmor.ArmorMaterial[][] GTArmorMaterial = new ItemArmor.ArmorMaterial[classes.length][aspects.length];
+    public static Item[][][] GTArmor = new Item[classes.length][aspects.length][4];
 
     //Items
     public static Item spaceSalt = new ItemSpaceSalt();
     public static Item moonstone = new MSUItemBase("moonstone");
     public static Item moonstoneChisel = new ItemChisel("moonstone");
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
+
+    public static Item diverHelmet = new MSUArmorBase(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet", new ModelDiverHelmet());
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -49,10 +53,13 @@ public class MinestuckUniverseItems
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
 
-        registerItemBlock(registry, sbahjBedrock);
-        registerItemBlock(registry, zillyStone);
+        registerItem(registry, diverHelmet);
 
         registerGTArmor(registry);
+
+        //Blocks
+        registerItemBlock(registry, sbahjBedrock);
+        registerItemBlock(registry, zillyStone);
 
         if(MinestuckUniverse.isThaumLoaded)
         {
