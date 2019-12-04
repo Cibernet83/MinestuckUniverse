@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
         modid = MinestuckUniverse.MODID,
         name = MinestuckUniverse.NAME,
         version = MinestuckUniverse.VERSION,
-        dependencies = "required-after:minestuck@[1.2.283,);required-after:baubles@[1.5.2,);"
+        dependencies = "required-after:minestuck@[1.2.283,);"
 )
 public class MinestuckUniverse
 {
@@ -27,7 +27,9 @@ public class MinestuckUniverse
     public static final String NAME = "Minestuck Universe";
     public static final String SHORT = "MSU";
     public static final String VERSION = "@VERSION@";
-
+    
+    public static final CreativeTabs tab = TabMinestuckUniverse.instance;
+    
     @Mod.Instance("minestuckuniverse")
     public static MinestuckUniverse instance;
     @SidedProxy(
@@ -39,7 +41,6 @@ public class MinestuckUniverse
     public static boolean isThaumLoaded;
     public static boolean isBotaniaLoaded;
     public static boolean isArsenalLoaded;
-    public static CreativeTabs tab = TabMinestuckUniverse.instance;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)

@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
+import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -16,6 +17,7 @@ public class MSUArmorBase extends ItemArmor
         setUnlocalizedName(unlocName);
         setRegistryName(registryName);
         this.model = model;
+        setCreativeTab(TabMinestuckUniverse.instance);
 
     }
 

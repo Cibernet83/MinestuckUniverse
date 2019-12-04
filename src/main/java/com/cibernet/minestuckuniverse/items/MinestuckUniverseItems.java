@@ -3,8 +3,10 @@ package com.cibernet.minestuckuniverse.items;
 import com.cibernet.minestuckuniverse.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelGTKnight;
+import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.item.block.ItemAlchemiter;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
@@ -22,10 +24,15 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
 
 public class MinestuckUniverseItems
 {
+    public static ArrayList<Block> itemBlocks = new ArrayList<>();
+    
     private static final EnumClass[] classes = EnumClass.values();
     private static final EnumAspect[] aspects = EnumAspect.values();
     //Armor Materials
@@ -38,7 +45,7 @@ public class MinestuckUniverseItems
     //Items
     public static Item spaceSalt = new ItemSpaceSalt();
     public static Item moonstone = new MSUItemBase("moonstone");
-    public static Item moonstoneChisel = new ItemChisel("moonstone");
+    public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
 
     public static Item diverHelmet = new MSUArmorBase(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet", new ModelDiverHelmet());
@@ -55,21 +62,17 @@ public class MinestuckUniverseItems
 
         registerItem(registry, diverHelmet);
 
-        registerGTArmor(registry);
+        //registerGTArmor(registry);
 
         //Blocks
-        registerItemBlock(registry, sbahjBedrock);
-        registerItemBlock(registry, zillyStone);
-
-        if(MinestuckUniverse.isThaumLoaded)
-        {
-            registerItemBlock(registry, magicBlock);
-            registerItemBlock(registry, thaumChasis);
-            registerItemBlock(registry, gristDecomposer);
-
-        }
+        registerItemBlocks(registry);
+        
+        //Item Mods
+        
+        
     }
-
+    
+    
     public static void registerGTArmor(IForgeRegistry<Item> registry)
     {
         ModelBiped[] models = new ModelBiped[] {new ModelGTKnight()};
@@ -86,7 +89,7 @@ public class MinestuckUniverseItems
                     EntityEquipmentSlot slot = slots[piece];
                     GTArmor[cls][asp][piece] = new MSUArmorBase(GTArmorMaterial[cls][asp],0,
                             slot, unlocName + "." + slot.toString().toLowerCase(),"gt_" + name  + "_" + slot.toString().toLowerCase(),
-                            models[cls % models.length]).setCreativeTab(TabMinestuckUniverse.GTArmor);
+                            models[cls % models.length]);//.setCreativeTab(TabMinestuckUniverse.GTArmor);
                     registerItem(registry, GTArmor[cls][asp][piece]);
                 }
             }
@@ -99,10 +102,12 @@ public class MinestuckUniverseItems
         return item;
     }
 
-    private static Item registerItemBlock(IForgeRegistry<Item> registry, Block block)
+    public static void registerItemBlocks(IForgeRegistry<Item> registry)
     {
-        ItemBlock item = new ItemBlock(block);
-        registerItem(registry, item.setRegistryName(item.getBlock().getRegistryName()));
-        return item;
+        for(Block block : itemBlocks)
+        {
+            ItemBlock item = new ItemBlock(block);
+            registerItem(registry, item.setRegistryName(item.getBlock().getRegistryName()));
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.cibernet.minestuckuniverse;
 
+import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
+import com.mraof.minestuck.alchemy.GristType;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -12,6 +14,7 @@ import java.util.List;
 
 import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
 import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
+import static com.mraof.minestuck.item.MinestuckItems.candy;
 
 public class MSUModelManager
 {
@@ -29,6 +32,12 @@ public class MSUModelManager
     {
         for(Item item : items)
             register(item);
+        
+        //Grist Candy
+        if(MinestuckUniverse.isThaumLoaded)
+            register(candy, GristType.REGISTRY.getID(MinestuckUniverseGrist.Vis) + 1, "vis_nerds");
+        if(MinestuckUniverse.isBotaniaLoaded)
+            register(candy, GristType.REGISTRY.getID(MinestuckUniverseGrist.Mana) + 1, "mana_gummy_drop");
     }
 
     private static void ItemBlockModels()

@@ -15,12 +15,39 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectHelper;
 import thaumcraft.api.aspects.AspectList;
 
+import java.util.ArrayList;
+
 public class MinestuckUniverseGrist
 {
 
     //Mod Checks
     public static final boolean includeMagicGrist = MinestuckUniverse.isThaumLoaded || MinestuckUniverse.isBotaniaLoaded;
-
+    
+    public static ArrayList<GristType> gristList = new ArrayList<GristType>()
+    {{
+        add(GristType.Amber);
+        add(GristType.Iodine);
+        add(GristType.Shale);
+        add(GristType.Marble);
+        add(GristType.Build);
+        add(GristType.Mercury);
+        add(GristType.Tar);
+        add(GristType.Uranium);
+        add(GristType.Quartz);
+        add(GristType.Zillium);
+        add(GristType.Gold);
+        add(GristType.Rust);
+        add(GristType.Ruby);
+        add(GristType.Garnet);
+        add(GristType.Chalk);
+        add(GristType.Amethyst);
+        add(GristType.Artifact);
+        add(GristType.Cobalt);
+        add(GristType.Caulk);
+        add(GristType.Diamond);
+        add(GristType.Sulfur);
+    }};
+    
     //Magic Grist (Thaum, Botania, etc.)
     public static final GristType Vis = new GristType("vis", 0.1F, new ResourceLocation("minestuckuniverse", "vis")).setRegistryName("flux");
     public static final GristType Mana = new GristType("mana", 0.1F, new ResourceLocation("minestuckuniverse", "mana")).setRegistryName("mana");
@@ -36,9 +63,9 @@ public class MinestuckUniverseGrist
         IForgeRegistry<GristType> registry = event.getRegistry();
 
         if(MinestuckUniverse.isThaumLoaded)
-            registry.register(Vis);
+            register(registry, Vis);
         if(MinestuckUniverse.isBotaniaLoaded)
-            registry.register(Mana);
+            register(registry, Mana);
 
 
         if(!MinestuckUniverse.isArsenalLoaded)
@@ -46,5 +73,10 @@ public class MinestuckUniverseGrist
             //registry.register(Fluorite);
         }
     }
-
+    
+    protected void register(IForgeRegistry<GristType> registry, GristType grist)
+    {
+        gristList.add(grist);
+        registry.register(grist);
+    }
 }

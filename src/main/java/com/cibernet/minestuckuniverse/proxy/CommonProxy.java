@@ -42,12 +42,8 @@ public class CommonProxy
         List<KindAbstratusType> abstrata = KindAbstratusList.getTypeList();
         if(MinestuckUniverse.isThaumLoaded)
         {
-           // ResearchCategories.registerCategory("SBURBOMANCY", "FIRSTSTEPS", new AspectList(), new ResourceLocation("minestuckuniverse", "textures/gui/tab.png"), new ResourceLocation("minestuckuniverse", "textures/gui/gui_research_bg.jpg"));
-           // ThaumcraftApi.registerResearchLocation(new ResourceLocation("minestuckuniverse", "research/sburb.json"));
-
-
         }
-
+        
         MSULandAspectRegistry.registerLands();
 
         MSUAlchemyRecipes.registerRecipes();

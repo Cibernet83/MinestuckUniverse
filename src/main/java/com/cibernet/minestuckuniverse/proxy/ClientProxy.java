@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.MSUModelManager;
+import com.cibernet.minestuckuniverse.client.MSURenderMachineOutline;
 import com.cibernet.minestuckuniverse.entity.classes.EntityAcheron;
 import com.cibernet.minestuckuniverse.entity.models.ModelAcheron;
 import com.mraof.minestuck.client.model.ModelLich;
@@ -19,5 +20,6 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityAcheron.class, RenderEntityMinestuck.getFactory(new ModelAcheron(), 0.5F));
         
         MinecraftForge.EVENT_BUS.register(MSUModelManager.class);
+        MinecraftForge.EVENT_BUS.register(MSURenderMachineOutline.class);
     }
 }

@@ -13,10 +13,10 @@ import net.minecraft.world.World;
 
 public class ItemChisel extends MSUItemBase
 {
-	public ItemChisel(String materialName)
+	public ItemChisel(String materialName, int durabillity)
 	{
 		super(materialName+"_chisel", materialName+"Chisel");
-		this.setMaxDamage(32);
+		this.setMaxDamage(durabillity);
 		this.setMaxStackSize(1);
 	}
 	
