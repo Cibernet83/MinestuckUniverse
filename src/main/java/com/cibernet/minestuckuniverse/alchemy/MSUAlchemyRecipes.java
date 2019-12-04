@@ -69,11 +69,15 @@ public class MSUAlchemyRecipes
     public static void registerMSU()
     {
         GristSet magicBlockCost = new GristSet(Build, 2);
-        int magicGristSpread = 16 / (
+         int magicGristTotal = (
                 (MinestuckUniverse.isThaumLoaded ? 1 : 0)
                +(MinestuckUniverse.isBotaniaLoaded ? 1 : 0)
 
         );
+        
+        int magicGristSpread = 0;
+        if(magicGristTotal > 0)
+            magicGristSpread = 16 / magicGristTotal;
 
         if(MinestuckUniverse.isThaumLoaded) magicBlockCost.addGrist(Vis, magicGristSpread);
         if(MinestuckUniverse.isBotaniaLoaded) magicBlockCost.addGrist(Mana, magicGristSpread);
