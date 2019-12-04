@@ -45,7 +45,7 @@ public class BlockGrist extends MSUBlockBase
 		this.value = (type.getValue() >= 5.0F || !type.equals(GristType.Build)) ? 1 : 10;
 		
 		
-		setHardness(1.0f);
+		setHardness(0.4f);
 		
 		setUnlocalizedName("gristBlock." + type.getName().toLowerCase());
 		setRegistryName("grist_block_" + type.getName().toLowerCase());
