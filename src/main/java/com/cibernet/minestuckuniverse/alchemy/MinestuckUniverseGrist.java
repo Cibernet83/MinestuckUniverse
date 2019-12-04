@@ -49,7 +49,7 @@ public class MinestuckUniverseGrist
     }};
     
     //Magic Grist (Thaum, Botania, etc.)
-    public static final GristType Vis = new GristType("vis", 0.1F, new ResourceLocation("minestuckuniverse", "vis")).setRegistryName("flux");
+    public static final GristType Vis = new GristType("vis", 0.1F, new ResourceLocation("minestuckuniverse", "vis")).setRegistryName("vis");
     public static final GristType Mana = new GristType("mana", 0.1F, new ResourceLocation("minestuckuniverse", "mana")).setRegistryName("mana");
 
     //Arsenal Grist (for when it's not available)
