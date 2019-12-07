@@ -42,10 +42,11 @@ public class BlockGrist extends MSUBlockBase
 	{
 		super(Material.GOURD, MapColor.LIGHT_BLUE_STAINED_HARDENED_CLAY);
 		this.type = type;
-		this.value = (type.getValue() >= 5.0F || !type.equals(GristType.Build)) ? 1 : 10;
+		this.value = (type.getValue() >= 5.0F || !type.equals(GristType.Build)) ? 10 : 100;
 		
 		
 		setHardness(0.4f);
+		setHarvestLevel("pickaxe", 0);
 		
 		setUnlocalizedName("gristBlock." + type.getName().toLowerCase());
 		setRegistryName("grist_block_" + type.getName().toLowerCase());

@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse;
 
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.init.Blocks;
@@ -25,13 +26,13 @@ public class MSUBannerPatterns
         registerPattern("blood", new ItemStack(MinestuckBlocks.coagulatedBlood));
         registerPattern("rage", new ItemStack(Items.ROTTEN_FLESH));
         registerPattern("hope", new ItemStack(Items.GHAST_TEAR));
-        registerPattern("moon", new ItemStack(Blocks.END_STONE));
+        registerPattern("moon", new ItemStack(MinestuckUniverseItems.moonstone));
     }
 
     public static BannerPattern registerPattern(String id, ItemStack ingredient)
     {
         Class<?>[] paramTypes = new Class[] {String.class, String.class, ItemStack.class};
-        Object[] paramVals = new Object[] {MinestuckUniverse.SHORT + "_" + id, MinestuckUniverse.SHORT.toLowerCase() + "." + id, ingredient};
+        Object[] paramVals = new Object[] {MinestuckUniverse.SHORT.toLowerCase() + "_" + id, MinestuckUniverse.SHORT.toLowerCase() + "." + id, ingredient};
         return EnumHelper.addEnum(BannerPattern.class, id.toUpperCase(), paramTypes, paramVals);
     }
 }

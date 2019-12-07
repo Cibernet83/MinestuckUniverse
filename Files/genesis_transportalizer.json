@@ -2,6 +2,6 @@
 	"credit": "Made with Blockbench",
 	"parent": "minestuckuniverse:block/msu_transportalizer",
 	"textures": {
-		"texture": "minestuckuniverse:blocks/machines/ruby_red_transportalizer"
+		"texture": "minestuckuniverse:blocks/machines/genesis_transportalizer"
 	}
 }
