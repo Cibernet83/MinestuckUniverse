@@ -1,0 +1,45 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"particle": "#wool",
+		"texture": "minestuck:blocks/transportalizer"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 6, 16],
+			"faces": {
+				"north": {"uv": [0, 10, 16, 16], "texture": "#wool", "cullface": "north"},
+				"east": {"uv": [0, 10, 16, 16], "texture": "#wool", "cullface": "east"},
+				"south": {"uv": [0, 10, 16, 16], "texture": "#wool", "cullface": "south"},
+				"west": {"uv": [0, 10, 16, 16], "texture": "#wool", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#wool"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#wool", "cullface": "down"}
+			}
+		},
+		{
+			"from": [1, 6, 1],
+			"to": [15, 7, 15],
+			"faces": {
+				"north": {"uv": [1, 9, 15, 10], "texture": "#wool"},
+				"east": {"uv": [1, 9, 15, 10], "texture": "#wool"},
+				"south": {"uv": [1, 9, 15, 10], "texture": "#wool"},
+				"west": {"uv": [1, 9, 15, 10], "texture": "#wool"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#wool"},
+				"down": {"uv": [0, 0, 0, 0], "texture": "#wool"}
+			}
+		},
+		{
+			"from": [2, 6, 2],
+			"to": [14, 8, 14],
+			"faces": {
+				"north": {"uv": [7.5, 8, 15.5, 9], "texture": "#texture"},
+				"east": {"uv": [7.5, 4, 15.5, 5], "texture": "#texture"},
+				"south": {"uv": [7.5, 0, 15.5, 1], "texture": "#texture"},
+				"west": {"uv": [7.5, 12, 15.5, 13], "texture": "#texture"},
+				"up": {"uv": [1, 1, 7, 7], "texture": "#texture"}
+			}
+		}
+	]
+}
