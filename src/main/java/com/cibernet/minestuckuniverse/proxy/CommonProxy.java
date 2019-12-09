@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.entity.MSUEntities;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.tileentity.TileEntityGristHopper;
 import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
 import com.mraof.minestuck.client.gui.playerStats.GuiGristCache;
 import com.mraof.minestuck.util.EnumAspect;
@@ -16,6 +17,7 @@ import com.mraof.minestuck.util.KindAbstratusType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.research.ResearchCategories;
@@ -34,6 +36,8 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
         MSUBannerPatterns.init();
         MSUEntities.registerEntities();
+
+        GameRegistry.registerTileEntity(TileEntityGristHopper.class, MinestuckUniverse.MODID + ":grist_hopper");
 
     }
 

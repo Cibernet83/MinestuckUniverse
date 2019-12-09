@@ -1,9 +1,10 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "Desktop/grist_hopper",
-		"particle": "Desktop/grist_hopper"
+		"0": "minestuckuniverse:machines/grist_hopper",
+		"particle": "minestuckuniverse:machines/grist_hopper"
 	},
 	"elements": [
 		{
@@ -78,5 +79,12 @@
 				"down": {"uv": [2, 10, 6, 14], "texture": "#0"}
 			}
 		}
-	]
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 225, 0],
+			"translation": [0, -2, 0],
+			"scale": [0.625, 0.625, 0.625]
+		}
+	}
 }

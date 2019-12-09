@@ -24,7 +24,9 @@ public class MinestuckUniverseBlocks
 
     public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "sbahjBedrock").setResistance(0F).setHardness(-1F);
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
-	
+
+    public static Block gristHopper = new BlockGristHopper();
+
 	public static Block whiteWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.WHITE);
 	public static Block orangeWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.ORANGE);
 	public static Block magentaWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.MAGENTA);
@@ -78,7 +80,9 @@ public class MinestuckUniverseBlocks
         registerBlock(registry, magicBlock, true);
         registerBlock(registry, sbahjBedrock, true);
         registerBlock(registry, zillyStone, true);
-	
+
+        registerBlock(registry, gristHopper, true);
+
 		registerBlock(registry, whiteWoolTransportalizer, true);
 		registerBlock(registry, orangeWoolTransportalizer, true);
 		registerBlock(registry, magentaWoolTransportalizer, true);
