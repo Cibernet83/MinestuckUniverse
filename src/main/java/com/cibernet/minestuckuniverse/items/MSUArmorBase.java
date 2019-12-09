@@ -6,17 +6,19 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MSUArmorBase extends ItemArmor
 {
-    private final ModelBiped model;
+    @SideOnly(Side.CLIENT)
+    private ModelBiped model;
 
     public MSUArmorBase(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String unlocName, String registryName, ModelBiped model)
     {
         super(materialIn, renderIndexIn, equipmentSlotIn);
         setUnlocalizedName(unlocName);
         setRegistryName(registryName);
-        this.model = model;
         setCreativeTab(TabMinestuckUniverse.instance);
 
     }
@@ -25,6 +27,8 @@ public class MSUArmorBase extends ItemArmor
     {
         this(materialIn,renderIndexIn,equipmentSlotIn,unlocName,registryName,null);
     }
+
+    public void setArmorModel(ModelBiped model) {this.model = model;}
 
     @Override
     public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack stack, EntityEquipmentSlot slot,

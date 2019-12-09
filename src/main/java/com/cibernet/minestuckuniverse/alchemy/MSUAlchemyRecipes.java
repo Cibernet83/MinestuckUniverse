@@ -100,7 +100,8 @@ public class MSUAlchemyRecipes
         //Alchemy
         
         CombinationRegistry.addCombination(new ItemStack(Items.IRON_HELMET), new ItemStack(Blocks.IRON_BLOCK), MODE_AND, false, false, new ItemStack(diverHelmet));
-        
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 1), new ItemStack(Items.LEATHER_HELMET), MODE_AND, true, false, new ItemStack(froghat));
+
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.rawCruxite), new ItemStack(Blocks.END_STONE), MODE_OR, new ItemStack(moonstone));
         CombinationRegistry.addCombination(new ItemStack(Blocks.BEDROCK), new ItemStack(MinestuckItems.sbahjPoster), MODE_AND, new ItemStack(sbahjBedrock));
         CombinationRegistry.addCombination(new ItemStack(sbahjBedrock), Zillium.getCandyItem(), MODE_OR, false, true, new ItemStack(zillyStone));
