@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.tileentity.TileEntityGristHopper;
 import com.mraof.minestuck.entity.item.EntityGrist;
 import com.mraof.minestuck.util.IdentifierHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +21,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class BlockGristHopper extends MSUBlockBase
+public class BlockGristHopper extends MSUBlockBase implements ITileEntityProvider
 {
 
     public BlockGristHopper()
@@ -36,10 +37,6 @@ public class BlockGristHopper extends MSUBlockBase
     }
 
     @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityGristHopper();
-    }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
@@ -67,4 +64,9 @@ public class BlockGristHopper extends MSUBlockBase
         return false;
     }
 
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntityGristHopper();
+    }
 }

@@ -1,9 +1,10 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "Files/machine_chasis",
-		"particle": "Files/machine_chasis"
+		"0": "minestuckuniverse:machines/machine_chasis",
+		"particle": "minestuckuniverse:machines/machine_chasis"
 	},
+	"parent": "minecraft:block/block",
 	"elements": [
 		{
 			"from": [0, 0, 0],

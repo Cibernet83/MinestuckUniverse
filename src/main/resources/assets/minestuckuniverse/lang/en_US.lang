@@ -30,6 +30,7 @@ tile.gristBlock.vis.name=Block of Vis Grist
 tile.gristBlock.mana.name=Block of Mana Grist
 tile.gristBlock.tooltip=The building blocks of SBURB, now in a more tangible form!
 
+tile.machineChasis.name=Machine Chasis
 tile.gristHopper.name=Grist Hopper
 
 tile.magicBlock.name=Perfectly Magical Object
@@ -69,6 +70,8 @@ entity.minestuck.acheron.type=%s Acheron
 
 grist.vis=Vis
 grist.mana=Mana
+
+container.machineChasis=Machine Assembly
 
 item.banner.msu_light.black=Black Light Symbol
 item.banner.msu_light.red=Red Light Symbol
