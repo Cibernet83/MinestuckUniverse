@@ -12,6 +12,7 @@ import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityGristHopper;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
+import com.cibernet.minestuckuniverse.tileentity.TileEntityRedTransportalizer;
 import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
 import com.mraof.minestuck.client.gui.playerStats.GuiGristCache;
 import com.mraof.minestuck.network.MinestuckChannelHandler;
@@ -45,6 +46,7 @@ public class CommonProxy
 
         GameRegistry.registerTileEntity(TileEntityGristHopper.class, MinestuckUniverse.MODID + ":grist_hopper");
         GameRegistry.registerTileEntity(TileEntityMachineChasis.class, MinestuckUniverse.MODID + ":machine_chasis");
+        GameRegistry.registerTileEntity(TileEntityRedTransportalizer.class, MinestuckUniverse.MODID + ":red_transportalizer");
 
     }
 
