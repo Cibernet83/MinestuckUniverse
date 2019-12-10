@@ -63,6 +63,9 @@ tile.woolTransportalizer.green.name=Green Sleeved Transportalizer
 tile.woolTransportalizer.red.name=Red Sleeved Transportalizer
 tile.woolTransportalizer.black.name=Black Sleeved Transportalizer
 
+tile.redTransportalizer.name=Ruby Red Transportalizer
+tile.redTransportalizer.tooltip=A slightly safer transportalizer!
+
 item.candyVis.name=Vis Nerds
 item.candyMana.name=Mana Gummy Drop
 
@@ -73,6 +76,8 @@ grist.vis=Vis
 grist.mana=Mana
 
 container.machineChassis=Machine Assembly
+
+message.transportalizer.notOwner=This is not your transportalizer!
 
 item.banner.msu_light.black=Black Light Symbol
 item.banner.msu_light.red=Red Light Symbol
