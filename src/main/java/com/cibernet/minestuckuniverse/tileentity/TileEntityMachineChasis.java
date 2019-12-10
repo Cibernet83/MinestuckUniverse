@@ -2,12 +2,14 @@ package com.cibernet.minestuckuniverse.tileentity;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -16,11 +18,13 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public class TileEntityMachineChasis extends TileEntity implements IInventory
+public class TileEntityMachineChasis extends TileEntity implements IInventory, ITickable
 {
 
     private NonNullList<ItemStack> inventory = NonNullList.withSize(5, ItemStack.EMPTY);
     private String customName;
+
+    public boolean assembling = false;
 
     @Override
     public int getSizeInventory() {
@@ -76,17 +80,34 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory
         return super.writeToNBT(compound);
     }
 
+
+
+    public ItemStack[] invToArray()
+    {
+        return new ItemStack[]
+        {
+            inventory.get(0),
+            inventory.get(1),
+            inventory.get(2),
+            inventory.get(3),
+            inventory.get(4),
+        };
+
+    }
+
     public boolean canAssemble()
     {
-        return MachineChasisRecipes.recipeExists((ItemStack[]) inventory.toArray());
+        return MachineChasisRecipes.recipeExists(invToArray());
     }
 
     public void assemble()
     {
-        if(canAssemble())
+        if(canAssemble() /*&& !world.isRemote*/)
         {
+            IBlockState output = MachineChasisRecipes.getOutput(invToArray()).getDefaultState();
+            clear();
             world.destroyBlock(pos, false);
-            world.setBlockState(pos, MachineChasisRecipes.getOutput((ItemStack[]) inventory.toArray()).getDefaultState());
+            world.setBlockState(pos, output);
         }
     }
 
@@ -100,7 +121,7 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory
         return this.world.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
-    public String getGUIID() {return MinestuckUniverse.MODID + ":machine_chasis";}
+    public String getGuiID() {return MinestuckUniverse.MODID + ":machine_chasis";}
 
     @Override
     public void openInventory(EntityPlayer player) {}
@@ -109,23 +130,26 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory
     public void closeInventory(EntityPlayer player) {}
 
     @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return true;
+    public boolean isItemValidForSlot(int index, ItemStack stack)
+    {
+        return inventory.get(index).isEmpty();
     }
 
     @Override
-    public int getField(int id) {
-        return 0;
+    public int getField(int id)
+    {
+        return assembling ? 1 : 0;
     }
 
     @Override
-    public void setField(int id, int value) {
-
+    public void setField(int id, int value)
+    {
+        assembling = value == 1;
     }
 
     @Override
     public int getFieldCount() {
-        return 0;
+        return 1;
     }
 
     @Override
@@ -135,7 +159,7 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory
 
     @Override
     public String getName() {
-        return this.hasCustomName() ? this.customName : I18n.translateToLocal("container.machineChasis");
+        return this.hasCustomName() ? this.customName : I18n.translateToLocal("container.machineChassis");
     }
 
     @Override
@@ -150,5 +174,11 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory
     public ITextComponent getDisplayName()
     {
         return new TextComponentString(this.getName());
+    }
+
+    @Override
+    public void update() {
+        if(assembling)
+            assemble();
     }
 }

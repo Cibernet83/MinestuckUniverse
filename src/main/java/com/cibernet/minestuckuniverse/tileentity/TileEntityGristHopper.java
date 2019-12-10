@@ -35,13 +35,10 @@ public class TileEntityGristHopper extends TileEntity implements ITickable
     {
 
         List<EntityGrist> entities = world.getEntitiesWithinAABB(EntityGrist.class, new AxisAlignedBB(pos.up()));
-        System.out.println("0");
         if(world != null && !entities.isEmpty() && !world.getBlockState(pos.up()).isFullBlock())
         {
-            System.out.println("1");
             if(owner != null && !world.isRemote)
             {
-                System.out.println("2");
                 for(EntityGrist grist : entities)
                 {
                     grist.consumeGrist(owner, false);

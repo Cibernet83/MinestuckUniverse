@@ -8,6 +8,8 @@ import com.mraof.minestuck.block.MinestuckBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import org.lwjgl.Sys;
+
 import java.util.TreeMap;
 
 public class MachineChasisRecipes
@@ -27,12 +29,15 @@ public class MachineChasisRecipes
         if(recipes.containsKey(key) || key.isEmpty() || key == null)
             return false;
         recipes.put(key, output);
+
+
         return true;
     }
 
     public static Block getOutput(ItemStack... input)
     {
         String key = toKey(input);
+
         if(recipes.containsKey(key))
             return recipes.get(key);
         return Blocks.AIR;

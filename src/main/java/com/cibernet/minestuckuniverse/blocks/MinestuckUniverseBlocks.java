@@ -26,6 +26,7 @@ public class MinestuckUniverseBlocks
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
 
     public static Block gristHopper = new BlockGristHopper();
+    public static Block machineChasis = new BlockMachineChasis();
 
 	public static Block whiteWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.WHITE);
 	public static Block orangeWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.ORANGE);
@@ -82,6 +83,7 @@ public class MinestuckUniverseBlocks
         registerBlock(registry, zillyStone, true);
 
         registerBlock(registry, gristHopper, true);
+        registerBlock(registry, machineChasis, true);
 
 		registerBlock(registry, whiteWoolTransportalizer, true);
 		registerBlock(registry, orangeWoolTransportalizer, true);
