@@ -30,7 +30,7 @@ tile.gristBlock.vis.name=Block of Vis Grist
 tile.gristBlock.mana.name=Block of Mana Grist
 tile.gristBlock.tooltip=The building blocks of SBURB, now in a more tangible form!
 
-tile.machineChassis.name=Machine Chassis
+tile.machineChassis.name=Assemblificator
 tile.machineChassis.tooltip=The bare essentials to creating all sorts of machines!
 tile.gristHopper.name=Grist Hopper
 
