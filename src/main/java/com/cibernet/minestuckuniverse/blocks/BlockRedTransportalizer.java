@@ -64,7 +64,8 @@ public class BlockRedTransportalizer extends BlockCustomTransportalizer
         IdentifierHandler.PlayerIdentifier id = IdentifierHandler.encode(playerIn);
         if(!id.equals(tileEntity.owner))
         {
-            playerIn.sendMessage(new TextComponentTranslation("message.transportalizer.notOwner"));
+            if(!worldIn.isRemote)
+                playerIn.sendMessage(new TextComponentTranslation("message.transportalizer.notOwner"));
             return false;
         }
 
