@@ -29,6 +29,8 @@ public class BlockGristHopper extends MSUBlockBase implements ITileEntityProvide
         super(Material.IRON, MapColor.EMERALD);
         setUnlocalizedName("gristHopper");
         setRegistryName("grist_hopper");
+        setHarvestLevel("pickaxe", 0);
+        setHardness(3.0F);
     }
 
     @Override

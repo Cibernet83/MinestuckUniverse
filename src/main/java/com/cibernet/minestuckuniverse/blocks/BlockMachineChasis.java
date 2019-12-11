@@ -29,6 +29,8 @@ public class BlockMachineChasis extends MSUBlockBase implements ITileEntityProvi
         super(Material.IRON, MapColor.IRON);
         setUnlocalizedName("machineChassis");
         setRegistryName("machine_chassis");
+        setHarvestLevel("pickaxe", 0);
+        setHardness(3.0F);
     }
 
     @Override
