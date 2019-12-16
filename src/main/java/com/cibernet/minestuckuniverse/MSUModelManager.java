@@ -30,6 +30,9 @@ public class MSUModelManager
 
     private static void ItemModels()
     {
+        
+        register(unbreakableKatana, 0, "unbreakable_katana");
+        
         for(Item item : items)
             register(item);
         
@@ -53,7 +56,7 @@ public class MSUModelManager
 
     private static void register(Item item, int meta, String modelResource)
     {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation("minestuckuniverse:"+modelResource, "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(MinestuckUniverse.MODID+":"+modelResource, "inventory"));
     }
 
     private static void register(Block block)
