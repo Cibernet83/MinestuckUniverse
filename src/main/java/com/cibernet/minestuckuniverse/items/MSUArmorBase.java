@@ -9,23 +9,19 @@ import net.minecraft.item.ItemStack;
 
 public class MSUArmorBase extends ItemArmor
 {
-    private final ModelBiped model;
+    private ModelBiped model;
 
-    public MSUArmorBase(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String unlocName, String registryName, ModelBiped model)
+    public MSUArmorBase(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String unlocName, String registryName)
     {
         super(materialIn, renderIndexIn, equipmentSlotIn);
         setUnlocalizedName(unlocName);
         setRegistryName(registryName);
-        this.model = model;
         setCreativeTab(TabMinestuckUniverse.instance);
 
     }
-
-    public MSUArmorBase(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String unlocName, String registryName)
-    {
-        this(materialIn,renderIndexIn,equipmentSlotIn,unlocName,registryName,null);
-    }
-
+    
+    public void setArmorModel(ModelBiped model) {this.model = model;}
+    
     @Override
     public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack stack, EntityEquipmentSlot slot,
                                     ModelBiped _default)

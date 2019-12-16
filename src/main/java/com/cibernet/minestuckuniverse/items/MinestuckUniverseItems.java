@@ -11,7 +11,6 @@ import com.mraof.minestuck.item.block.ItemAlchemiter;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.block.Block;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -22,6 +21,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class MinestuckUniverseItems
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
 
-    public static Item diverHelmet = new MSUArmorBase(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet", new ModelDiverHelmet());
+    public static MSUArmorBase diverHelmet = new MSUArmorBase(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -72,9 +73,17 @@ public class MinestuckUniverseItems
         
     }
     
+    @SideOnly(Side.CLIENT)
+    public static void setClientsideVariables()
+    {
+        diverHelmet.setArmorModel(new ModelDiverHelmet());
+    }
+    
+    
     
     public static void registerGTArmor(IForgeRegistry<Item> registry)
     {
+        /*
         ModelBiped[] models = new ModelBiped[] {new ModelGTKnight()};
         EntityEquipmentSlot[] slots = new EntityEquipmentSlot[] {EntityEquipmentSlot.FEET, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.HEAD};
         for(int cls = 0; cls < classes.length; cls++)
@@ -88,11 +97,12 @@ public class MinestuckUniverseItems
                 {
                     EntityEquipmentSlot slot = slots[piece];
                     GTArmor[cls][asp][piece] = new MSUArmorBase(GTArmorMaterial[cls][asp],0,
-                            slot, unlocName + "." + slot.toString().toLowerCase(),"gt_" + name  + "_" + slot.toString().toLowerCase(),
-                            models[cls % models.length]);//.setCreativeTab(TabMinestuckUniverse.GTArmor);
+                            slot, unlocName + "." + slot.toString().toLowerCase(),"gt_" + name  + "_" + slot.toString().toLowerCase()
+                            );//.setCreativeTab(TabMinestuckUniverse.GTArmor);
                     registerItem(registry, GTArmor[cls][asp][piece]);
                 }
             }
+            */
     }
 
     private static Item registerItem(IForgeRegistry<Item> registry, Item item)
