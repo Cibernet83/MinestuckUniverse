@@ -107,11 +107,10 @@ public class MSURenderMachineOutline
 				placeable = SpaceSaltUtils.canPlaceTotemLathe(stack, player, player.world, placementPos, placedFacing, mchnPos);
 			} else if(machineType == BlockSburbMachine.MachineType.CRUXTRUDER)
 			{
-				BlockPos placementPos = pos.offset(placedFacing.rotateY()).offset(placedFacing,2);
-				pos = pos.offset(placedFacing.getOpposite()).add(1, 0, -1);
+				BlockPos placementPos = pos.offset(placedFacing.rotateYCCW(), (placedFacing.equals(EnumFacing.SOUTH) || placedFacing.equals(EnumFacing.WEST) ? -1 : 1)).offset(placedFacing, (placedFacing.equals(EnumFacing.NORTH) || placedFacing.equals(EnumFacing.WEST) ? 2 : 0));
 				
-				boundingBox = new AxisAlignedBB(0,0,0, 3, 3, 3).offset(pos).offset(-d1, -d2, -d3).shrink(0.002);
-				placeable = SpaceSaltUtils.canPlaceCruxtruder(stack, player, player.world, placementPos, placedFacing, mchnPos);
+				boundingBox = new AxisAlignedBB(0,0,0, 3, 3, 3).offset(placementPos).offset(-d1, -d2, -d3).shrink(0.002);
+				placeable = SpaceSaltUtils.canPlaceCruxtruder(stack, player, player.world, pos.offset(placedFacing.rotateY()).offset(placedFacing, 2), placedFacing, mchnPos);
 			} else	//Alchemiter
 			{
 				pos = pos.offset(placedFacing.rotateY());
