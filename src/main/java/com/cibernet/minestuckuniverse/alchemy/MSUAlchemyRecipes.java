@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.alchemy;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockGrist;
+import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.*;
@@ -43,6 +44,8 @@ public class MSUAlchemyRecipes
     private static ArrayList<Block> gristBlocks = new ArrayList<Block>() {{add(gristBlockAmber); add(gristBlockAmethyst); add(gristBlockArtifact); add(gristBlockCaulk); add(gristBlockChalk); add(gristBlockCobalt); add(gristBlockBuild); add(gristBlockDiamond); add(gristBlockGarnet); add(gristBlockGold); add(gristBlockIodine); add(gristBlockMarble);
         add(gristBlockMercury); add(gristBlockQuartz); add(gristBlockRuby); add(gristBlockRust); add(gristBlockSulfur); add(gristBlockShale); add(gristBlockTar); add(gristBlockUranium); add(gristBlockZillium);}};
     
+    private static ArrayList<BlockWoolTransportalizer> sleevedTPs = new ArrayList<BlockWoolTransportalizer>() {{add(cyanWoolTransportalizer); add(whiteWoolTransportalizer); add(orangeWoolTransportalizer); add(magentaWoolTransportalizer); add(lightBlueWoolTransportalizer); add(yellowWoolTransportalizer); add(limeWoolTransportalizer); add(pinkWoolTransportalizer);
+    add(grayWoolTransportalizer); add(silverWoolTransportalizer); add(purpleWoolTransportalizer); add(blueWoolTransportalizer); add(brownWoolTransportalizer); add(greenWoolTransportalizer); add(redWoolTransportalizer); add(blackWoolTransportalizer);}};
     
     public static void registerRecipes()
     {
@@ -54,6 +57,7 @@ public class MSUAlchemyRecipes
         if(!MinestuckUniverse.isArsenalLoaded) registerArsenalFallback();
         
         registerGristBlockRecipes();
+        registerSleevedTransportalizerRecipes();
     }
 
     public static void registerVanilla()
@@ -120,6 +124,20 @@ public class MSUAlchemyRecipes
         
         if(MinestuckUniverse.isBotaniaLoaded)
             gristBlocks.add(gristBlockMana);
+    }
+    
+    public static void registerSleevedTransportalizerRecipes()
+    {
+        for(BlockWoolTransportalizer block : sleevedTPs)
+        {
+            ItemStack dye = new ItemStack(Items.DYE, 1, block.color.getDyeDamage());
+            ItemStack wool = new ItemStack(Blocks.WOOL, 1, block.color.getMetadata());
+            ItemStack stack = new ItemStack(block);
+            GristRegistry.addGristConversion(stack, GristRegistry.getGristConversion(wool).addGrist(GristRegistry.getGristConversion(new ItemStack(MinestuckBlocks.transportalizer))));
+            if(!block.equals(whiteWoolTransportalizer))
+                CombinationRegistry.addCombination(new ItemStack(whiteWoolTransportalizer), dye, MODE_OR, stack);
+            CombinationRegistry.addCombination(new ItemStack(MinestuckBlocks.transportalizer), wool, MODE_AND, stack);
+        }
     }
     
     public static void registerGristBlockRecipes()
@@ -209,7 +227,7 @@ public class MSUAlchemyRecipes
     {
         if(MinestuckUniverse.isBotaniaLoaded)
         {
-
+        
         }
     }
 
