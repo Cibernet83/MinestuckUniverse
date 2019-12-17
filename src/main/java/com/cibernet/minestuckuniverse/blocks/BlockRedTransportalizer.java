@@ -16,6 +16,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -45,15 +46,6 @@ public class BlockRedTransportalizer extends BlockCustomTransportalizer
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
-        String key = getUnlocalizedName()+".tooltip";
-        if(!I18n.translateToLocal(key).equals(key))
-            tooltip.add(I18n.translateToLocal(key));
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-    }
-
-    @Override
     public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityRedTransportalizer();
     }
@@ -64,9 +56,9 @@ public class BlockRedTransportalizer extends BlockCustomTransportalizer
         IdentifierHandler.PlayerIdentifier id = IdentifierHandler.encode(playerIn);
         if(!id.equals(tileEntity.owner))
         {
-            if(!worldIn.isRemote)
+            if (playerIn instanceof EntityPlayerMP)
                 playerIn.sendMessage(new TextComponentTranslation("message.transportalizer.notOwner"));
-            return false;
+            return true;
         }
 
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
