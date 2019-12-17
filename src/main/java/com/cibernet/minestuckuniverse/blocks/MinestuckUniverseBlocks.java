@@ -46,6 +46,7 @@ public class MinestuckUniverseBlocks
 	public static BlockWoolTransportalizer blackWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.BLACK);
 	public static Block rubyRedTransportalizer = new BlockRedTransportalizer();
 	public static Block goldenTransportalizer = new BlockGoldTransportalizer();
+	public static Block paradoxTransportalizer = new BlockParadoxTransportalizer();
 
 	public static Block gristBlockAmber = new BlockGrist(GristType.Amber);
 	public static Block gristBlockAmethyst = new BlockGrist(GristType.Amethyst);
@@ -105,6 +106,7 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, blackWoolTransportalizer, true);
 		registerBlock(registry, rubyRedTransportalizer, true);
 		registerBlock(registry, goldenTransportalizer, true);
+		registerBlock(registry, paradoxTransportalizer, true);
 
 		registerBlock(registry, gristBlockBuild, true);
 		registerBlock(registry, gristBlockAmber, true);

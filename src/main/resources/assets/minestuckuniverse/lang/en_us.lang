@@ -71,6 +71,8 @@ tile.redTransportalizer.name=Ruby Red Transportalizer
 tile.redTransportalizer.tooltip=A slightly safer transportalizer!
 tile.goldenTransportalizer.name=Golden Transportalizer
 tile.goldenTransportalizer.tooltip=No nned to worry about those pesky imps using your transportalizers anymore, or anything that isn't a player, really.
+tile.paradoxTransportalizer.name=Paradox Transportalizer
+tile.paradoxTransportalizer.tooltip=Your one-way ticket back to Earth, Make sure to pack a way back home.
 
 item.candyVis.name=Vis Nerds
 item.candyMana.name=Mana Gummy Drop
