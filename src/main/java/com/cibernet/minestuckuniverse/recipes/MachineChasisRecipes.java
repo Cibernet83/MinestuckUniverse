@@ -5,24 +5,35 @@ import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
 import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
 
 import com.mraof.minestuck.block.MinestuckBlocks;
+import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.lwjgl.Sys;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.TreeMap;
 
 public class MachineChasisRecipes
 {
-    protected static TreeMap<String, Block> recipes = new TreeMap<>();
+    protected static Hashtable<String, Block> recipes = new Hashtable<>();
     protected static int inputLimit = 5;
 
     public static void registerRecipes()
     {
         addRecipe(gristHopper, new ItemStack(Blocks.HOPPER), new ItemStack(gristBlockBuild),
                 new ItemStack(gristBlockUranium), new ItemStack(MinestuckBlocks.blockComputerOff), new ItemStack(gristBlockUranium));
+        addRecipe(autoWidget, new ItemStack(MinestuckBlocks.crockerMachine), new ItemStack(MinestuckItems.boondollars),
+                new ItemStack(MinestuckItems.boondollars), new ItemStack(MinestuckItems.energyCore), new ItemStack(zillystoneShard));
     }
-
+    
+    public static Hashtable<String, Block> getRecipes() {return recipes;}
+    
     public static boolean addRecipe(Block output, ItemStack... input)
     {
         String key = toKey(input);
@@ -53,12 +64,31 @@ public class MachineChasisRecipes
         String key = "";
         for(int i = 0; i < inputLimit; i++) {
             if (i >= input.length)
-                key += ItemStack.EMPTY.toString();
+                key += "0x" + ItemStack.EMPTY.getItem().getRegistryName() + "@0" + ";";
             else {
                 input[i].setCount(1);
-                key += input[i].toString() + ";";
+                key += input[i].getCount() + "x" + input[i].getItem().getRegistryName() + "@" + input[i].getMetadata() + ";";
             }
         }
         return key;
     }
+    
+    public static List<List<ItemStack>> getIngredientList(String key)
+    {
+        key = key.substring(0,key.length()-1);
+        List<List<ItemStack>> out = new ArrayList<>();
+        String[] list = key.split(";",inputLimit);
+        for(String item : list)
+        {
+            System.out.println(item);
+            int count = Integer.parseInt(item.substring(0, item.indexOf("x")));
+            String regName = item.substring(item.indexOf("x")+1, item.indexOf("@"));
+            int meta = Integer.parseInt(item.substring(item.indexOf("@")+1));
+            ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(regName)), count, meta);
+            out.add(new ArrayList<ItemStack>(){{add(stack);}});
+        }
+        System.out.println(out.toString());
+        return out;
+    }
+    
 }

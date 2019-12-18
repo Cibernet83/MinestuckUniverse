@@ -53,29 +53,37 @@ public class ContainerMachineChasis extends Container
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
     {
-        ItemStack stack = ItemStack.EMPTY;
-        Slot slot = inventorySlots.get(index);
-        int slotTotal = inventorySlots.size();
-
-        if(slot != null && !slot.getHasStack())
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(index);
+    
+        if (slot != null && slot.getHasStack())
         {
-            ItemStack ogStack = slot.getStack();
-            stack = ogStack.copy();
-            boolean result = false;
-
-            if(index <= 4)
-                result = mergeItemStack(ogStack,5, slotTotal, false);
-            else
-                result = mergeItemStack(ogStack, 0, 1, false);
-
-            if(!result)
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
+        
+            if (index < 5)
+            {
+                if (!this.mergeItemStack(itemstack1, 5, this.inventorySlots.size(), true))
+                {
+                    return ItemStack.EMPTY;
+                }
+            }
+            else if (!this.mergeItemStack(itemstack1, 0, 5, false))
+            {
                 return ItemStack.EMPTY;
-
-            if(!ogStack.isEmpty())
+            }
+        
+            if (itemstack1.isEmpty())
+            {
+                slot.putStack(ItemStack.EMPTY);
+            }
+            else
+            {
                 slot.onSlotChanged();
+            }
         }
-
-        return stack;
+    
+        return itemstack;
     }
 
     public void assemble() {assembling = true;}

@@ -33,7 +33,7 @@ public class GuiMachineChasis extends GuiContainer
     public void initGui()
     {
         super.initGui();
-        goButton = new GuiButton(0,  (this.width-this.xSize)/2+ 20, (this.height-this.ySize)/2+ 62, fontRenderer.getStringWidth("ASSEMBLE")+5, 14, "ASSEMBLE");
+        goButton = new GuiButton(0,  (this.width-this.xSize)/2+ 20, (this.height-this.ySize)/2+ 60, fontRenderer.getStringWidth("ASSEMBLE")+5, 14, "ASSEMBLE");
         buttonList.add(goButton);
 
     }

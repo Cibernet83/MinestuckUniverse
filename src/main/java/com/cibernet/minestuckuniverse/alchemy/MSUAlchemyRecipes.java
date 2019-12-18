@@ -99,7 +99,9 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(machineChasis), new GristSet(new GristType[] {Build, Rust, Uranium, Diamond}, new int[] {750, 98, 55, 4}));
         GristRegistry.addGristConversion(new ItemStack(gristHopper), new GristSet(new GristType[] {Build, Rust, Uranium}, new int[] {250, 55, 10}));
         
-        GristRegistry.addGristConversion(new ItemStack(rubyRedTransportalizer), new GristSet(new GristType[] {Build, Ruby, Rust, Uranium, Zillium}, new int[] {450, 100, 36, 24, 1}));
+        GristRegistry.addGristConversion(new ItemStack(rubyRedTransportalizer), new GristSet(new GristType[] {Build, Ruby, Rust, Uranium}, new int[] {450, 100, 36, 24}));
+        GristRegistry.addGristConversion(new ItemStack(goldenTransportalizer), new GristSet(new GristType[] {Build, Gold, Shale, Uranium}, new int[] {350, 36, 30, 20}));
+        GristRegistry.addGristConversion(new ItemStack(paradoxTransportalizer), new GristSet(new GristType[] {Build, Rust, Uranium, Diamond, Zillium}, new int[] {750, 120, 256, 74, 25}));
 
         GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium}, new int[] {5, 4, 3, 2}));
         GristRegistry.addGristConversion(new ItemStack(zillystoneShard), new GristSet(new GristType[] {Zillium}, new int[] {1}));
@@ -119,6 +121,8 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(moonstone), new ItemStack(Blocks.IRON_BLOCK), MODE_AND, new ItemStack(machineChasis));
         
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 2), new ItemStack(MinestuckBlocks.transportalizer), MODE_AND, true, false, new ItemStack(rubyRedTransportalizer));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 5), new ItemStack(MinestuckBlocks.transportalizer), MODE_AND, true, false, new ItemStack(goldenTransportalizer));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 6), new ItemStack(MinestuckBlocks.transportalizer), MODE_AND, true, false, new ItemStack(paradoxTransportalizer));
 
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 6), new ItemStack(Items.GLOWSTONE_DUST), MODE_OR, true, false, new ItemStack(spaceSalt));
         
