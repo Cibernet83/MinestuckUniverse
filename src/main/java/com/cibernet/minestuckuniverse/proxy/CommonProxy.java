@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.MSUBannerPatterns;
+import com.cibernet.minestuckuniverse.MSUUtils;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MSUAlchemyRecipes;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
@@ -59,5 +60,6 @@ public class CommonProxy
         MachineChasisRecipes.registerRecipes();
 
         MSUChannelHandler.setupChannel();
+        MSUUtils.registerDeployList();
     }
 }

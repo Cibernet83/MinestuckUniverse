@@ -25,6 +25,8 @@ public class MinestuckUniverseBlocks
     public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "sbahjBedrock").setResistance(0F).setHardness(-1F);
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
 
+    public static Block holopad = new BlockHolopad();
+    
     public static Block gristHopper = new BlockGristHopper();
     public static Block autoWidget = new BlockAutoWidget();
     public static Block machineChasis = new BlockMachineChasis();
@@ -85,7 +87,9 @@ public class MinestuckUniverseBlocks
         registerBlock(registry, magicBlock, true);
         registerBlock(registry, sbahjBedrock, true);
         registerBlock(registry, zillyStone, true);
-
+		
+        registerBlock(registry, holopad, true);
+        
         registerBlock(registry, machineChasis, true);
 		registerBlock(registry, gristHopper, true);
 		registerBlock(registry, autoWidget, true);
