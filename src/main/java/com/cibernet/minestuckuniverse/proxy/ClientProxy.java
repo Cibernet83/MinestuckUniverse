@@ -17,11 +17,11 @@ public class ClientProxy extends CommonProxy
     public void preInit()
     {
         super.preInit();
-
+    
         MinestuckUniverseItems.setClientsideVariables();
 
         RenderingRegistry.registerEntityRenderingHandler(EntityAcheron.class, RenderEntityMinestuck.getFactory(new ModelAcheron(), 0.5F));
-        
+
         MinecraftForge.EVENT_BUS.register(MSUModelManager.class);
         MinecraftForge.EVENT_BUS.register(MSURenderMachineOutline.class);
     }

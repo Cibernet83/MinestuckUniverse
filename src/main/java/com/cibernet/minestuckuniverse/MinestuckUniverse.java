@@ -47,7 +47,7 @@ public class MinestuckUniverse
     {
         isThaumLoaded = Loader.isModLoaded("thaumcraft");
         isBotaniaLoaded = Loader.isModLoaded("botania");
-        isArsenalLoaded = Loader.isModLoaded("minestucarsenal");
+        isArsenalLoaded = Loader.isModLoaded("minestuckarsenal");
 
         proxy.preInit();
     }

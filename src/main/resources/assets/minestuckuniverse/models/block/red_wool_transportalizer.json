@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:block/wool_transportalizer",
+    "textures": {
+        "wool": "minecraft:blocks/wool_colored_red"
+    }
+}

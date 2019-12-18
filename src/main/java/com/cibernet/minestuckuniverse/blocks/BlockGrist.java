@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -57,6 +58,14 @@ public class BlockGrist extends MSUBlockBase
 	{
 		tooltip.add(I18n.translateToLocal("tile.gristBlock.tooltip"));
 		super.addInformation(stack, player, tooltip, advanced);
+	}
+	
+	@Override
+	public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn)
+	{
+		if(!worldIn.isRemote)
+			worldIn.spawnEntity(new EntityGrist(worldIn, pos.getX(),pos.getY() + 0.5F,pos.getZ(), new GristAmount(this.type,this.value)));
+		super.onBlockDestroyedByExplosion(worldIn, pos, explosionIn);
 	}
 	
 	@Override

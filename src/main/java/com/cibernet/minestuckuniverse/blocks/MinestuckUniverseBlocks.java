@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.alchemy.GristType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -24,6 +25,23 @@ public class MinestuckUniverseBlocks
     public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "sbahjBedrock").setResistance(0F).setHardness(-1F);
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
 	
+	public static Block whiteWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.WHITE);
+	public static Block orangeWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.ORANGE);
+	public static Block magentaWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.MAGENTA);
+	public static Block lightBlueWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.LIGHT_BLUE);
+	public static Block yellowWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.YELLOW);
+	public static Block limeWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.LIME);
+	public static Block pinkWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.PINK);
+	public static Block grayWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.GRAY);
+	public static Block silverWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.SILVER);
+	public static Block cyanWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.CYAN);
+	public static Block purpleWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.PURPLE);
+	public static Block blueWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.BLUE);
+	public static Block brownWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.BROWN);
+	public static Block greenWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.GREEN);
+	public static Block redWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.RED);
+	public static Block blackWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.BLACK);
+    
 	public static Block gristBlockAmber = new BlockGrist(GristType.Amber);
 	public static Block gristBlockAmethyst = new BlockGrist(GristType.Amethyst);
 	public static Block gristBlockArtifact = new BlockGrist(GristType.Artifact);
@@ -61,7 +79,23 @@ public class MinestuckUniverseBlocks
         registerBlock(registry, sbahjBedrock, true);
         registerBlock(registry, zillyStone, true);
 	
-	
+		registerBlock(registry, whiteWoolTransportalizer, true);
+		registerBlock(registry, orangeWoolTransportalizer, true);
+		registerBlock(registry, magentaWoolTransportalizer, true);
+		registerBlock(registry, lightBlueWoolTransportalizer, true);
+		registerBlock(registry, yellowWoolTransportalizer, true);
+		registerBlock(registry, limeWoolTransportalizer, true);
+		registerBlock(registry, pinkWoolTransportalizer, true);
+		registerBlock(registry, grayWoolTransportalizer, true);
+		registerBlock(registry, silverWoolTransportalizer, true);
+		registerBlock(registry, cyanWoolTransportalizer, true);
+		registerBlock(registry, purpleWoolTransportalizer, true);
+		registerBlock(registry, blueWoolTransportalizer, true);
+		registerBlock(registry, brownWoolTransportalizer, true);
+		registerBlock(registry, greenWoolTransportalizer, true);
+		registerBlock(registry, redWoolTransportalizer, true);
+		registerBlock(registry, blackWoolTransportalizer, true);
+  
 		registerBlock(registry, gristBlockBuild, true);
 		registerBlock(registry, gristBlockAmber, true);
 		registerBlock(registry, gristBlockAmethyst, true);

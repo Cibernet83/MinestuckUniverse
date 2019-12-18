@@ -42,6 +42,23 @@ item.moonstoneChisel.tooltip=Just by holding it you can feel how magical it is, 
 item.zillystoneShard.name=Zillystone Shard
 item.zillystoneShard.tooltip=You've managed to chip this shard away from a Zillystone block, but what will you do with it next?
 
+tile.woolTransportalizer.white.name=White Sleeved Transportalizer
+tile.woolTransportalizer.orange.name=Orange Sleeved Transportalizer
+tile.woolTransportalizer.magenta.name=Magenta Sleeved Transportalizer
+tile.woolTransportalizer.lightBlue.name=Light Blue Sleeved Transportalizer
+tile.woolTransportalizer.yellow.name=Yellow Sleeved Transportalizer
+tile.woolTransportalizer.lime.name=Lime Sleeved Transportalizer
+tile.woolTransportalizer.pink.name=Pink Sleeved Transportalizer
+tile.woolTransportalizer.gray.name=Gray Sleeved Transportalizer
+tile.woolTransportalizer.silver.name=Light Gray Sleeved Transportalizer
+tile.woolTransportalizer.cyan.name=Cyan Sleeved Transportalizer
+tile.woolTransportalizer.purple.name=Purple Sleeved Transportalizer
+tile.woolTransportalizer.blue.name=Blue Sleeved Transportalizer
+tile.woolTransportalizer.brown.name=Brown Sleeved Transportalizer
+tile.woolTransportalizer.green.name=Green Sleeved Transportalizer
+tile.woolTransportalizer.red.name=Red Sleeved Transportalizer
+tile.woolTransportalizer.black.name=Black Sleeved Transportalizer
+
 item.candyVis.name=Vis Nerds
 item.candyMana.name=Mana Gummy Drop
 
