@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse;
+package com.cibernet.minestuckuniverse.util;
 
 import com.mraof.minestuck.block.*;
 import com.mraof.minestuck.editmode.EditData;

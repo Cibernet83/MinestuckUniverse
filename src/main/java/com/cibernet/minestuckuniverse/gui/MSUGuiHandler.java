@@ -1,8 +1,7 @@
 package com.cibernet.minestuckuniverse.gui;
 
-import static com.cibernet.minestuckuniverse.MSUUtils.*;
+import static com.cibernet.minestuckuniverse.util.MSUUtils.*;
 
-import com.cibernet.minestuckuniverse.MSUUtils;
 import com.cibernet.minestuckuniverse.gui.container.ContainerMachineChasis;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
 import net.minecraft.entity.player.EntityPlayer;

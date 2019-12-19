@@ -1,5 +1,6 @@
-package com.cibernet.minestuckuniverse;
+package com.cibernet.minestuckuniverse.util;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;

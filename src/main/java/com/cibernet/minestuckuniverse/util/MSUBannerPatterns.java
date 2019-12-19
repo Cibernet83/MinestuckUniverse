@@ -1,5 +1,6 @@
-package com.cibernet.minestuckuniverse;
+package com.cibernet.minestuckuniverse.util;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.MinestuckItems;
