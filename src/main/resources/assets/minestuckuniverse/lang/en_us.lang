@@ -46,6 +46,10 @@ item.moonstoneChisel.tooltip=Just by holding it you can feel how magical it is, 
 item.zillystoneShard.name=Zillystone Shard
 item.zillystoneShard.tooltip=You've managed to chip this shard away from a Zillystone block, but what will you do with it next?
 
+item.murica.name='murica
+item.muricaSouth.name='murica
+item.muricaSouth.tooltip=redneck edition
+
 item.katana.name=Obsidian Katana
 item.unbreakableKatana.name=Unbreakable Katana
 item.unbreakableKatana.tooltip=A real hard sword for a real hard dude. It was said to be forged by an ancient Otaku Master over the heat of a roaring manga fire.

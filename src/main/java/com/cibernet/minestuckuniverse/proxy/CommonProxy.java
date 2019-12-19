@@ -1,7 +1,8 @@
 package com.cibernet.minestuckuniverse.proxy;
 
-import com.cibernet.minestuckuniverse.MSUBannerPatterns;
-import com.cibernet.minestuckuniverse.MSUUtils;
+import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
+import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
+import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MSUAlchemyRecipes;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
@@ -15,23 +16,9 @@ import com.cibernet.minestuckuniverse.tileentity.TileEntityGristHopper;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityRedTransportalizer;
 import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
-import com.mraof.minestuck.client.gui.playerStats.GuiGristCache;
-import com.mraof.minestuck.network.MinestuckChannelHandler;
-import com.mraof.minestuck.util.EnumAspect;
-import com.mraof.minestuck.util.EnumClass;
-import com.mraof.minestuck.util.KindAbstratusList;
-import com.mraof.minestuck.util.KindAbstratusType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.research.ResearchCategories;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CommonProxy
 {
@@ -42,6 +29,9 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(new MinestuckUniverseGrist());
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
+        MinecraftForge.EVENT_BUS.register(MSUSoundHandler.instance);
+        
+        MSUSoundHandler.initSounds();
         MSUBannerPatterns.init();
         MSUEntities.registerEntities();
 
