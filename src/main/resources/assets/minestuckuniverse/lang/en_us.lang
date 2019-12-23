@@ -34,6 +34,8 @@ tile.machineChassis.name=Assemblificator
 tile.machineChassis.tooltip=The bare essentials to creating all sorts of machines!
 tile.gristHopper.name=Grist Hopper
 tile.autoWidget.name=Grist-o-Matic 50000
+tile.autoCaptcha.name=Captchaloguifyer
+tile.autoCaptcha.tooltip=Automatically captchalogues items.
 
 tile.magicBlock.name=Perfectly Magical Object
 

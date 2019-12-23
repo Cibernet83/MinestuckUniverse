@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
-import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoWidget;
+import com.cibernet.minestuckuniverse.tileentity.*;
 import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -13,9 +13,6 @@ import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
-import com.cibernet.minestuckuniverse.tileentity.TileEntityGristHopper;
-import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
-import com.cibernet.minestuckuniverse.tileentity.TileEntityRedTransportalizer;
 import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -38,6 +35,7 @@ public class CommonProxy
 
         GameRegistry.registerTileEntity(TileEntityGristHopper.class, MinestuckUniverse.MODID + ":grist_hopper");
         GameRegistry.registerTileEntity(TileEntityAutoWidget.class, MinestuckUniverse.MODID + ":auto_widget");
+        GameRegistry.registerTileEntity(TileEntityAutoCaptcha.class, MinestuckUniverse.MODID + ":auto_captcha");
         GameRegistry.registerTileEntity(TileEntityMachineChasis.class, MinestuckUniverse.MODID + ":machine_chasis");
         GameRegistry.registerTileEntity(TileEntityRedTransportalizer.class, MinestuckUniverse.MODID + ":red_transportalizer");
 

@@ -2,7 +2,9 @@ package com.cibernet.minestuckuniverse.gui;
 
 import static com.cibernet.minestuckuniverse.util.MSUUtils.*;
 
+import com.cibernet.minestuckuniverse.gui.container.ContainerAutoCaptcha;
 import com.cibernet.minestuckuniverse.gui.container.ContainerMachineChasis;
+import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoCaptcha;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -23,6 +25,8 @@ public class MSUGuiHandler implements IGuiHandler
         {
             case MACHINE_CHASIS_GUI:
                 return new ContainerMachineChasis(player.inventory, (TileEntityMachineChasis) te);
+            case AUTO_CAPTCHA_GUI:
+                return new ContainerAutoCaptcha(player.inventory, (TileEntityAutoCaptcha) te);
 
         }
         return null;
@@ -37,6 +41,8 @@ public class MSUGuiHandler implements IGuiHandler
         {
             case MACHINE_CHASIS_GUI:
                 return new GuiMachineChasis(player.inventory, (TileEntityMachineChasis) te);
+            case AUTO_CAPTCHA_GUI:
+                return new GuiAutoCaptcha(player.inventory, (TileEntityAutoCaptcha) te);
 
         }
         return null;

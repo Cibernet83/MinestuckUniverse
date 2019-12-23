@@ -12,7 +12,6 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -30,6 +29,8 @@ public class MachineChasisRecipes
                 new ItemStack(gristBlockUranium), new ItemStack(MinestuckBlocks.blockComputerOff), new ItemStack(gristBlockUranium));
         addRecipe(autoWidget, new ItemStack(MinestuckBlocks.crockerMachine), new ItemStack(MinestuckItems.boondollars),
                 new ItemStack(MinestuckItems.boondollars), new ItemStack(MinestuckItems.energyCore), new ItemStack(zillystoneShard));
+        addRecipe(autoCaptcha, new ItemStack(Blocks.DISPENSER), new ItemStack(MinestuckItems.captchaCard),
+                new ItemStack(moonstone), ItemStack.EMPTY, new ItemStack(MinestuckItems.energyCore));
     }
     
     public static Hashtable<String, Block> getRecipes() {return recipes;}
@@ -80,14 +81,12 @@ public class MachineChasisRecipes
         String[] list = key.split(";",inputLimit);
         for(String item : list)
         {
-            System.out.println(item);
             int count = Integer.parseInt(item.substring(0, item.indexOf("x")));
             String regName = item.substring(item.indexOf("x")+1, item.indexOf("@"));
             int meta = Integer.parseInt(item.substring(item.indexOf("@")+1));
             ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(regName)), count, meta);
             out.add(new ArrayList<ItemStack>(){{add(stack);}});
         }
-        System.out.println(out.toString());
         return out;
     }
     

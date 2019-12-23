@@ -22,10 +22,11 @@ public class MinestuckUniverseBlocks
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
 
     public static Block holopad = new BlockHolopad();
-    
+	
+	public static Block machineChasis = new BlockMachineChasis();
     public static Block gristHopper = new BlockGristHopper();
     public static Block autoWidget = new BlockAutoWidget();
-    public static Block machineChasis = new BlockMachineChasis();
+    public static Block autoCaptcha = new BlockAutoCaptcha();
 
 	public static BlockWoolTransportalizer whiteWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.WHITE);
 	public static BlockWoolTransportalizer orangeWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.ORANGE);
@@ -89,6 +90,7 @@ public class MinestuckUniverseBlocks
         registerBlock(registry, machineChasis, true);
 		registerBlock(registry, gristHopper, true);
 		registerBlock(registry, autoWidget, true);
+		registerBlock(registry, autoCaptcha, true);
 
 		registerBlock(registry, whiteWoolTransportalizer, true);
 		registerBlock(registry, orangeWoolTransportalizer, true);
@@ -135,8 +137,6 @@ public class MinestuckUniverseBlocks
         if(MinestuckUniverse.isThaumLoaded)
         {
         	registerBlock(registry, gristBlockVis, true);
-            //registerBlock(registry, thaumChasis, true);
-            //registerBlock(registry, gristDecomposer, true);
         }
         
         if(MinestuckUniverse.isBotaniaLoaded)
