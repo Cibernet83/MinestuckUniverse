@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoWidget;
 import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -36,6 +37,7 @@ public class CommonProxy
         MSUEntities.registerEntities();
 
         GameRegistry.registerTileEntity(TileEntityGristHopper.class, MinestuckUniverse.MODID + ":grist_hopper");
+        GameRegistry.registerTileEntity(TileEntityAutoWidget.class, MinestuckUniverse.MODID + ":auto_widget");
         GameRegistry.registerTileEntity(TileEntityMachineChasis.class, MinestuckUniverse.MODID + ":machine_chasis");
         GameRegistry.registerTileEntity(TileEntityRedTransportalizer.class, MinestuckUniverse.MODID + ":red_transportalizer");
 

@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
-import com.cibernet.minestuckuniverse.MSUModelManager;
+import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
@@ -11,10 +11,6 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class MinestuckUniverseBlocks
 {

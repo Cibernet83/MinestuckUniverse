@@ -33,6 +33,7 @@ tile.gristBlock.tooltip=The building blocks of SBURB, now in a more tangible for
 tile.machineChassis.name=Assemblificator
 tile.machineChassis.tooltip=The bare essentials to creating all sorts of machines!
 tile.gristHopper.name=Grist Hopper
+tile.autoWidget.name=Grist-o-Matic 50000
 
 tile.magicBlock.name=Perfectly Magical Object
 

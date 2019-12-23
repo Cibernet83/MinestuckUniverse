@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
-import com.cibernet.minestuckuniverse.MSUUtils;
+import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
 import net.minecraft.block.Block;

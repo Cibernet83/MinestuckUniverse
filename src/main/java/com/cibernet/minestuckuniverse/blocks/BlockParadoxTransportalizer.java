@@ -45,7 +45,7 @@ public class BlockParadoxTransportalizer extends MSUBlockBase
 		if (!world.isRemote && entity.getRidingEntity() == null && entity.getPassengers().isEmpty())
 		{
 			WorldServer spawnWorld = entity.getServer().getWorld(0);
-			BlockPos spawnPos = spawnWorld.getSpawnPoint();
+			BlockPos spawnPos = spawnWorld.getTopSolidOrLiquidBlock(spawnWorld.getSpawnPoint());
 			
 			if(world.isBlockPowered(pos))
 			{
