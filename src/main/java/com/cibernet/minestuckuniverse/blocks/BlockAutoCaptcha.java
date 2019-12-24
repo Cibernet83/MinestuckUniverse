@@ -119,7 +119,7 @@ public class BlockAutoCaptcha extends BlockContainer
 	@Override
 	public boolean hasComparatorInputOverride(IBlockState state)
 	{
-		return /*true*/ false;
+		return true;
 	}
 	
 	@Override
