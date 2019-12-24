@@ -36,6 +36,7 @@ tile.gristHopper.name=Grist Hopper
 tile.autoWidget.name=Grist-o-Matic 50000
 tile.autoCaptcha.name=Captchaloguifier
 tile.autoCaptcha.tooltip=Automatically captchalogues items.
+tile.porkhollowATM.name=Porkhollow ATM
 
 tile.magicBlock.name=Perfectly Magical Object
 
@@ -314,3 +315,10 @@ item.banner.msu_moon.lightBlue=Light Blue Moon
 item.banner.msu_moon.magenta=Magenta Moon
 item.banner.msu_moon.orange=Orange Moon
 item.banner.msu_moon.white=White Moon
+
+gui.atm.withdraw=Withdraw
+gui.atm.go=Accept
+gui.atm.withdrawSuccess=Successfully withdrawn %s Boondollars
+gui.atm.sendSuccess=Successfully sent %s Boondollars to %s
+gui.atm.amountLabel=Value per Boondollar:
+gui.atm.nLabel=Boondollars to withdraw:

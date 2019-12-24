@@ -8,6 +8,7 @@ import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -31,6 +32,8 @@ public class MachineChasisRecipes
                 new ItemStack(MinestuckItems.boondollars), new ItemStack(MinestuckItems.energyCore), new ItemStack(zillystoneShard));
         addRecipe(autoCaptcha, new ItemStack(Blocks.DISPENSER), new ItemStack(MinestuckItems.captchaCard),
                 new ItemStack(moonstone), ItemStack.EMPTY, new ItemStack(MinestuckItems.energyCore));
+        addRecipe(porkhollowAtm, new ItemStack(MinestuckBlocks.blockComputerOff), new ItemStack(MinestuckItems.boondollars),
+                new ItemStack(MinestuckItems.boondollars), new ItemStack(Items.PORKCHOP), new ItemStack(MinestuckItems.boondollars));
     }
     
     public static Hashtable<String, Block> getRecipes() {return recipes;}

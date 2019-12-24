@@ -6,7 +6,10 @@ import com.mraof.minestuck.alchemy.AlchemyRecipes;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.editmode.DeployList;
+import com.mraof.minestuck.item.ItemBoondollars;
 import com.mraof.minestuck.item.MinestuckItems;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -14,6 +17,7 @@ public class MSUUtils
 {
     public static final int MACHINE_CHASIS_GUI = 0;
     public static final int AUTO_CAPTCHA_GUI = 1;
+    public static final int PORKHOLLOW_ATM_GUI = 2;
     
     public static void registerDeployList()
     {
@@ -37,5 +41,16 @@ public class MSUUtils
         if(stack1.hasTagCompound() && stack2.hasTagCompound())
             return stack1.getTagCompound().equals(stack2.getTagCompound());
         else return true;
+    }
+    
+    public static void giveBoonItem(EntityPlayer reciever, int value)
+    {
+        ItemStack stack = ItemBoondollars.setCount(new ItemStack(MinestuckItems.boondollars), value);
+        if(!reciever.addItemStackToInventory(stack))
+        {
+            EntityItem entity = reciever.dropItem(stack, false);
+            if(entity != null)
+                entity.setNoPickupDelay();
+        } else reciever.inventoryContainer.detectAndSendChanges();
     }
 }

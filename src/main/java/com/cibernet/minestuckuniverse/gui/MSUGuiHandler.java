@@ -43,6 +43,8 @@ public class MSUGuiHandler implements IGuiHandler
                 return new GuiMachineChasis(player.inventory, (TileEntityMachineChasis) te);
             case AUTO_CAPTCHA_GUI:
                 return new GuiAutoCaptcha(player.inventory, (TileEntityAutoCaptcha) te);
+            case PORKHOLLOW_ATM_GUI:
+                return new GuiPorkhollowAtm(player);
 
         }
         return null;
