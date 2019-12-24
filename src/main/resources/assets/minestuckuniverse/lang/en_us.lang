@@ -4,6 +4,7 @@ tile.sbahjBedrock.name=Artifact Bedrock
 tile.sbahjBedrock.tooltip=is it rally as hard as bedrok?
 tile.zillystone.name=Zillystone
 tile.zillystone.tooltip=It's hard enough to withstand most conventional means of destruction, yet it looks like it can be chipped away by a magical tool.
+tile.smoothIron.name=Smooth Iron Block
 
 tile.gristBlock.amber.name=Block of Amber Grist
 tile.gristBlock.amethyst.name=Block of Amethyst Grist
