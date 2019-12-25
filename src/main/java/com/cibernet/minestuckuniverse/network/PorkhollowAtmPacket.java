@@ -55,7 +55,7 @@ public class PorkhollowAtmPacket extends MSUPacket
 		{
 			case SEND:
 				MinestuckPlayerData.addBoondollars(reciever, amount);
-				sender.sendMessage(new TextComponentTranslation("gui.atm.sendSuccess", amount, reciever));
+				sender.sendMessage(new TextComponentTranslation("message.atm.sendSuccess", amount, reciever));
 			break;
 			case TAKE:
 				int split = 0;
@@ -65,7 +65,7 @@ public class PorkhollowAtmPacket extends MSUPacket
 					MSUUtils.giveBoonItem(reciever, split);
 				if(split*n != amount)
 					MSUUtils.giveBoonItem(reciever, amount-split*n);
-				sender.sendMessage(new TextComponentTranslation("gui.atm.withdrawSuccess", amount));
+				sender.sendMessage(new TextComponentTranslation("message.atm.withdrawSuccess", amount));
 			break;
 		} else sender.sendMessage(new TextComponentTranslation("commands.porkhollow.notEnough"));
 	}

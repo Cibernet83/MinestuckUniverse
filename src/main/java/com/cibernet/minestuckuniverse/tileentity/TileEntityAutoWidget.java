@@ -102,19 +102,22 @@ public class TileEntityAutoWidget extends TileEntity implements ITickable, ISide
 	public void processContents()
 	{
 		GristAmount gristAmount;
-		Iterator var2 = getGristWidgetResult().getMap().entrySet().iterator();
-		
-		while(var2.hasNext() && !world.isRemote)
+		GristSet set = getGristWidgetResult();
+		if(set != null)
 		{
-			Map.Entry<GristType, Integer> entry = (Map.Entry)var2.next();
-			for(int grist = entry.getValue(); grist != 0; grist -= gristAmount.getAmount())
+			Iterator var2 = set.getMap().entrySet().iterator();
+			while(var2.hasNext() && !world.isRemote)
 			{
-				gristAmount = new GristAmount(entry.getKey(), grist <= 3 ? grist : this.world.rand.nextInt(grist) + 1);
-				EntityGrist entity = new EntityGrist(this.world, (double) this.pos.getX() + 0.5D, (double) (this.pos.getY() + 1), (double) this.pos.getZ() + 0.5D, gristAmount);
-				entity.motionX /= 2.0D;
-				entity.motionY /= 2.0D;
-				entity.motionZ /= 2.0D;
-				this.world.spawnEntity(entity);
+				Map.Entry<GristType, Integer> entry = (Map.Entry) var2.next();
+				for(int grist = entry.getValue(); grist != 0; grist -= gristAmount.getAmount())
+				{
+					gristAmount = new GristAmount(entry.getKey(), grist <= 3 ? grist : this.world.rand.nextInt(grist) + 1);
+					EntityGrist entity = new EntityGrist(this.world, (double) this.pos.getX() + 0.5D, (double) (this.pos.getY() + 1), (double) this.pos.getZ() + 0.5D, gristAmount);
+					entity.motionX /= 2.0D;
+					entity.motionY /= 2.0D;
+					entity.motionZ /= 2.0D;
+					this.world.spawnEntity(entity);
+				}
 			}
 		}
 		ItemStackHelper.getAndSplit(this.inventory, 0, 1);
@@ -204,7 +207,7 @@ public class TileEntityAutoWidget extends TileEntity implements ITickable, ISide
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
 		if (stack.getItem() == MinestuckItems.captchaCard && isEmpty())
-			return !stack.getTagCompound().getBoolean("punched") && stack.getTagCompound().getInteger("contentSize") > 0 && AlchemyRecipes.getDecodedItem(stack).getItem() != MinestuckItems.captchaCard;
+			return !stack.getTagCompound().getBoolean("punched") && stack.getTagCompound().getInteger("contentSize") > 0 && GristRegistry.getGristConversion(AlchemyRecipes.getDecodedItem(stack)) != null;
 	 	else
 	 		return false;
 	}

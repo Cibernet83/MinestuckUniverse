@@ -79,7 +79,7 @@ tile.woolTransportalizer.black.name=Black Sleeved Transportalizer
 tile.redTransportalizer.name=Ruby Red Transportalizer
 tile.redTransportalizer.tooltip=A slightly safer transportalizer!
 tile.goldenTransportalizer.name=Golden Transportalizer
-tile.goldenTransportalizer.tooltip=No nned to worry about those pesky imps using your transportalizers anymore, or anything that isn't a player, really.
+tile.goldenTransportalizer.tooltip=No need to worry about those pesky imps using your transportalizers anymore, or anything that isn't a player, really.
 tile.paradoxTransportalizer.name=Paradox Transportalizer
 tile.paradoxTransportalizer.tooltip=Your one-way ticket back to Earth, Make sure to pack a way back home.
 
@@ -95,6 +95,8 @@ grist.mana=Mana
 container.machineChassis=Machine Assembly
 
 message.transportalizer.notOwner=This is not your transportalizer!
+message.atm.withdrawSuccess=Successfully withdrawn %s Boondollars
+message.atm.sendSuccess=Successfully sent %s Boondollars to %s
 
 item.banner.msu_light.black=Black Light Symbol
 item.banner.msu_light.red=Red Light Symbol
@@ -319,7 +321,5 @@ item.banner.msu_moon.white=White Moon
 
 gui.atm.withdraw=Withdraw
 gui.atm.go=Accept
-gui.atm.withdrawSuccess=Successfully withdrawn %s Boondollars
-gui.atm.sendSuccess=Successfully sent %s Boondollars to %s
 gui.atm.amountLabel=Value per Boondollar:
 gui.atm.nLabel=Boondollars to withdraw:

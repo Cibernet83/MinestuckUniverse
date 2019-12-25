@@ -40,6 +40,18 @@ public class BlockParadoxTransportalizer extends MSUBlockBase
 	}
 	
 	@Override
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return false;
+	}
+	
+	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
 		if (!world.isRemote && entity.getRidingEntity() == null && entity.getPassengers().isEmpty())
