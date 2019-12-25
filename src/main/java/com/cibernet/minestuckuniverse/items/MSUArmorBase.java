@@ -19,9 +19,9 @@ public class MSUArmorBase extends ItemArmor
         setCreativeTab(TabMinestuckUniverse.instance);
 
     }
-    
+
     public void setArmorModel(ModelBiped model) {this.model = model;}
-    
+
     @Override
     public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack stack, EntityEquipmentSlot slot,
                                     ModelBiped _default)

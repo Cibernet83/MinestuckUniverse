@@ -1,23 +1,19 @@
 package com.cibernet.minestuckuniverse.items;
 
-import com.cibernet.minestuckuniverse.MSUModelManager;
+import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
-import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
-import com.cibernet.minestuckuniverse.entity.models.armor.ModelGTKnight;
-import com.mraof.minestuck.item.MinestuckItems;
-import com.mraof.minestuck.item.block.ItemAlchemiter;
+import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
+import com.mraof.minestuck.Minestuck;
+import com.mraof.minestuck.item.weapon.ItemWeapon;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -26,14 +22,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
 
 public class MinestuckUniverseItems
 {
     public static ArrayList<Block> itemBlocks = new ArrayList<>();
-    
+
     private static final EnumClass[] classes = EnumClass.values();
     private static final EnumAspect[] aspects = EnumAspect.values();
     //Armor Materials
@@ -49,7 +42,17 @@ public class MinestuckUniverseItems
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
 
+    public static Item murica = new ItemSound("murica", "murica", MSUSoundHandler.murica).setCreativeTab(null);
+    public static Item muricaSouth = new ItemSound("murica_south", "muricaSouth", MSUSoundHandler.murica_south).setCreativeTab(null);
+
+    //Weapons
+    public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool("sword", 0, 15.0F);
+
+    //Armor
     public static MSUArmorBase diverHelmet = new MSUArmorBase(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
+
+    //Overrides
+    public static Item unbreakableKatana = new ItemWeapon(2200, 7, -2.4D, 20, "katana").setTool("sword", 0, 15.0F).setRegistryName(Minestuck.MOD_ID, "unbreakable_katana");
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -61,26 +64,33 @@ public class MinestuckUniverseItems
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
 
+        registerItem(registry, trueUnbreakableKatana);
+
         registerItem(registry, diverHelmet);
+
+        registry.register(unbreakableKatana);
+
+        registerItem(registry, murica);
+        registerItem(registry, muricaSouth);
 
         //registerGTArmor(registry);
 
         //Blocks
         registerItemBlocks(registry);
-        
+
         //Item Mods
-        
-        
+
+
     }
-    
+
     @SideOnly(Side.CLIENT)
     public static void setClientsideVariables()
     {
         diverHelmet.setArmorModel(new ModelDiverHelmet());
     }
-    
-    
-    
+
+
+
     public static void registerGTArmor(IForgeRegistry<Item> registry)
     {
         /*

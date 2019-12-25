@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "active=false,facing=north":    { "model": "minestuckuniverse:auto_widget" },
+        "active=false,facing=east":     { "model": "minestuckuniverse:auto_widget", "y": 90 },
+        "active=false,facing=south":    { "model": "minestuckuniverse:auto_widget", "y": 180 },
+        "active=false,facing=west":     { "model": "minestuckuniverse:auto_widget", "y": 270 },
+        "active=true,facing=north":     { "model": "minestuckuniverse:auto_widget_active" },
+        "active=true,facing=east":      { "model": "minestuckuniverse:auto_widget_active", "y": 90 },
+        "active=true,facing=south":     { "model": "minestuckuniverse:auto_widget_active", "y": 180 },
+        "active=true,facing=west":      { "model": "minestuckuniverse:auto_widget_active", "y": 270 }
+    }
+}

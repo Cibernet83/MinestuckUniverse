@@ -1,11 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
-import com.cibernet.minestuckuniverse.SpaceSaltUtils;
+import com.cibernet.minestuckuniverse.util.SpaceSaltUtils;
 import com.mraof.minestuck.block.*;
-import com.mraof.minestuck.item.block.ItemAlchemiter;
-import com.mraof.minestuck.item.block.ItemCruxtruder;
-import com.mraof.minestuck.item.block.ItemPunchDesignix;
-import com.mraof.minestuck.item.block.ItemTotemLathe;
 import com.mraof.minestuck.tileentity.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -19,7 +15,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.lwjgl.Sys;
 
 public class ItemSpaceSalt extends MSUItemBase {
 

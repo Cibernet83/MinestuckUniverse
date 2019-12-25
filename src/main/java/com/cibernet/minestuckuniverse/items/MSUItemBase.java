@@ -25,6 +25,8 @@ public class MSUItemBase extends Item
         this.setCreativeTab(TabMinestuckUniverse.instance);
     }
     
+    public MSUItemBase() {this.setCreativeTab(TabMinestuckUniverse.instance);}
+    
     public MSUItemBase(String name)
     {
         this(name, name);

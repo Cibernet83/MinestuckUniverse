@@ -1,18 +1,14 @@
 package com.cibernet.minestuckuniverse.client;
 
-import com.cibernet.minestuckuniverse.SpaceSaltUtils;
+import com.cibernet.minestuckuniverse.util.SpaceSaltUtils;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
-import com.mraof.minestuck.block.BlockLargeMachine;
 import com.mraof.minestuck.block.BlockSburbMachine;
-import com.mraof.minestuck.block.MinestuckBlocks;
-import com.mraof.minestuck.item.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
