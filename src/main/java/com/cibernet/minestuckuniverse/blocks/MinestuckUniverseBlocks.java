@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
-import com.cibernet.minestuckuniverse.MSUModelManager;
+import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
@@ -12,10 +12,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
-
 public class MinestuckUniverseBlocks
 {
 
@@ -24,24 +20,36 @@ public class MinestuckUniverseBlocks
 
     public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "sbahjBedrock").setResistance(0F).setHardness(-1F);
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
+    public static Block smoothIron = new MSUBlockBase(Material.IRON, "smooth_iron", "smoothIron").setHardness(3.0F);
+
+    public static Block holopad = new BlockHolopad();
 	
-	public static Block whiteWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.WHITE);
-	public static Block orangeWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.ORANGE);
-	public static Block magentaWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.MAGENTA);
-	public static Block lightBlueWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.LIGHT_BLUE);
-	public static Block yellowWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.YELLOW);
-	public static Block limeWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.LIME);
-	public static Block pinkWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.PINK);
-	public static Block grayWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.GRAY);
-	public static Block silverWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.SILVER);
-	public static Block cyanWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.CYAN);
-	public static Block purpleWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.PURPLE);
-	public static Block blueWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.BLUE);
-	public static Block brownWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.BROWN);
-	public static Block greenWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.GREEN);
-	public static Block redWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.RED);
-	public static Block blackWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.BLACK);
-    
+	public static Block machineChasis = new BlockMachineChasis();
+    public static Block gristHopper = new BlockGristHopper();
+    public static Block autoWidget = new BlockAutoWidget();
+    public static Block autoCaptcha = new BlockAutoCaptcha();
+    public static Block porkhollowAtm = new BlockPorkhollowAtm();
+
+	public static BlockWoolTransportalizer whiteWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.WHITE);
+	public static BlockWoolTransportalizer orangeWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.ORANGE);
+	public static BlockWoolTransportalizer magentaWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.MAGENTA);
+	public static BlockWoolTransportalizer lightBlueWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.LIGHT_BLUE);
+	public static BlockWoolTransportalizer yellowWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.YELLOW);
+	public static BlockWoolTransportalizer limeWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.LIME);
+	public static BlockWoolTransportalizer pinkWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.PINK);
+	public static BlockWoolTransportalizer grayWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.GRAY);
+	public static BlockWoolTransportalizer silverWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.SILVER);
+	public static BlockWoolTransportalizer cyanWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.CYAN);
+	public static BlockWoolTransportalizer purpleWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.PURPLE);
+	public static BlockWoolTransportalizer blueWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.BLUE);
+	public static BlockWoolTransportalizer brownWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.BROWN);
+	public static BlockWoolTransportalizer greenWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.GREEN);
+	public static BlockWoolTransportalizer redWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.RED);
+	public static BlockWoolTransportalizer blackWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.BLACK);
+	public static Block rubyRedTransportalizer = new BlockRedTransportalizer();
+	public static Block goldenTransportalizer = new BlockGoldTransportalizer();
+	public static Block paradoxTransportalizer = new BlockParadoxTransportalizer();
+
 	public static Block gristBlockAmber = new BlockGrist(GristType.Amber);
 	public static Block gristBlockAmethyst = new BlockGrist(GristType.Amethyst);
 	public static Block gristBlockArtifact = new BlockGrist(GristType.Artifact);
@@ -78,7 +86,16 @@ public class MinestuckUniverseBlocks
         registerBlock(registry, magicBlock, true);
         registerBlock(registry, sbahjBedrock, true);
         registerBlock(registry, zillyStone, true);
-	
+        registerBlock(registry, smoothIron, true);
+		
+        registerBlock(registry, holopad, true);
+        
+        registerBlock(registry, machineChasis, true);
+		registerBlock(registry, gristHopper, true);
+		registerBlock(registry, autoWidget, true);
+		registerBlock(registry, autoCaptcha, true);
+		registerBlock(registry, porkhollowAtm, true);
+
 		registerBlock(registry, whiteWoolTransportalizer, true);
 		registerBlock(registry, orangeWoolTransportalizer, true);
 		registerBlock(registry, magentaWoolTransportalizer, true);
@@ -95,7 +112,10 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, greenWoolTransportalizer, true);
 		registerBlock(registry, redWoolTransportalizer, true);
 		registerBlock(registry, blackWoolTransportalizer, true);
-  
+		registerBlock(registry, rubyRedTransportalizer, true);
+		registerBlock(registry, goldenTransportalizer, true);
+		registerBlock(registry, paradoxTransportalizer, true);
+
 		registerBlock(registry, gristBlockBuild, true);
 		registerBlock(registry, gristBlockAmber, true);
 		registerBlock(registry, gristBlockAmethyst, true);
@@ -121,8 +141,6 @@ public class MinestuckUniverseBlocks
         if(MinestuckUniverse.isThaumLoaded)
         {
         	registerBlock(registry, gristBlockVis, true);
-            //registerBlock(registry, thaumChasis, true);
-            //registerBlock(registry, gristDecomposer, true);
         }
         
         if(MinestuckUniverse.isBotaniaLoaded)

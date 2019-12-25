@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north":    { "model": "minestuckuniverse:auto_captcha" },
+        "facing=east":     { "model": "minestuckuniverse:auto_captcha", "y": 90 },
+        "facing=south":    { "model": "minestuckuniverse:auto_captcha", "y": 180 },
+        "facing=west":     { "model": "minestuckuniverse:auto_captcha", "y": 270 }
+    }
+}

@@ -1,25 +1,19 @@
 package com.cibernet.minestuckuniverse.items;
 
-import com.cibernet.minestuckuniverse.MSUModelManager;
+import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
-import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
-import com.cibernet.minestuckuniverse.entity.models.armor.ModelFroghat;
-import com.cibernet.minestuckuniverse.entity.models.armor.ModelGTKnight;
-import com.cibernet.minestuckuniverse.entity.models.armor.ModelSpikedHelmet;
-import com.mraof.minestuck.item.MinestuckItems;
-import com.mraof.minestuck.item.block.ItemAlchemiter;
+import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
+import com.mraof.minestuck.Minestuck;
+import com.mraof.minestuck.item.weapon.ItemWeapon;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -28,9 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
 
 public class MinestuckUniverseItems
 {
@@ -59,6 +50,9 @@ public class MinestuckUniverseItems
     public static MSUArmorBase spikedDiverHelmet = new MSUArmorBase(materialSpikedHelmet, 0, EntityEquipmentSlot.HEAD, "spikedHelmet", "spiked_diver_helmet");
     public static MSUArmorBase froghat = new MSUArmorBase(materialFroghat, 0, EntityEquipmentSlot.HEAD, "froghat", "froghat");
 
+    //Overrides
+    public static Item unbreakableKatana = new ItemWeapon(2200, 7, -2.4D, 20, "katana").setTool("sword", 0, 15.0F).setRegistryName(Minestuck.MOD_ID, "unbreakable_katana");
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
@@ -69,9 +63,16 @@ public class MinestuckUniverseItems
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
 
+        registerItem(registry, trueUnbreakableKatana);
+
         registerItem(registry, diverHelmet);
         registerItem(registry, spikedDiverHelmet);
         registerItem(registry, froghat);
+
+        registry.register(unbreakableKatana);
+
+        registerItem(registry, murica);
+        registerItem(registry, muricaSouth);
 
         //registerGTArmor(registry);
 
@@ -83,6 +84,7 @@ public class MinestuckUniverseItems
 
     }
 
+    @SideOnly(Side.CLIENT)
     public static void setClientsideVariables()
     {
         diverHelmet.setArmorModel(new ModelDiverHelmet());
