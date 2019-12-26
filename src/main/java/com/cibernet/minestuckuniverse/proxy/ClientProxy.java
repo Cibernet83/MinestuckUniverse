@@ -1,5 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.registries.MSUFillerItems;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.client.MSURenderMachineOutline;
 import com.cibernet.minestuckuniverse.entity.classes.EntityAcheron;
@@ -23,6 +25,9 @@ public class ClientProxy extends CommonProxy
 
         MinecraftForge.EVENT_BUS.register(MSUModelManager.class);
         MinecraftForge.EVENT_BUS.register(MSURenderMachineOutline.class);
+        
+        if(MinestuckUniverse.fillerItemsEnabled)
+            MSUFillerItems.setClientsideVariables();
     }
 
     @Override

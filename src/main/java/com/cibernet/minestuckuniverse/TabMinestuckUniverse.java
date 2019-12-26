@@ -9,9 +9,10 @@ import net.minecraft.item.ItemStack;
 public class TabMinestuckUniverse extends CreativeTabs
 {
     public static final TabMinestuckUniverse instance = new TabMinestuckUniverse("tabMinestuckUniverse");
+    public static TabMinestuckUniverse fillerItems;
     //public static final TabMinestuckUniverse GTArmor = new TabMinestuckUniverse("tabMSUGTArmor", new ItemStack(MinestuckUniverseItems.spaceSalt));
     
-    private TabMinestuckUniverse(String label)
+    public TabMinestuckUniverse(String label)
     {
         super(label);
     }

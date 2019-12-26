@@ -29,8 +29,7 @@ public class MinestuckUniverseItems
 
     private static final EnumClass[] classes = EnumClass.values();
     private static final EnumAspect[] aspects = EnumAspect.values();
-    //Armor Materials
-    public static ItemArmor.ArmorMaterial materialDiverHelmet = EnumHelper.addArmorMaterial("DIVER_HELMET", MinestuckUniverse.MODID+":diver_helmet", 50, new int[] {0, 0, 0, 3}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+
 
     //GT Armor
     public static ItemArmor.ArmorMaterial[][] GTArmorMaterial = new ItemArmor.ArmorMaterial[classes.length][aspects.length];
@@ -41,18 +40,13 @@ public class MinestuckUniverseItems
     public static Item moonstone = new MSUItemBase("moonstone");
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
-
-    public static Item murica = new ItemSound("murica", "murica", MSUSoundHandler.murica).setCreativeTab(null);
-    public static Item muricaSouth = new ItemSound("murica_south", "muricaSouth", MSUSoundHandler.murica_south).setCreativeTab(null);
-
+    
     //Weapons
-    public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool("sword", 0, 15.0F);
+    public static Item trueUnbreakableKatana = new MSUWeaponBase(2200, 7, -2.4D, 20, "true_unbreakable_katana", "unbreakableKatana").setTool("sword", 0, 15.0F);
 
     //Armor
-    public static MSUArmorBase diverHelmet = new MSUArmorBase(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
 
     //Overrides
-    public static Item unbreakableKatana = new ItemWeapon(2200, 7, -2.4D, 20, "katana").setTool("sword", 0, 15.0F).setRegistryName(Minestuck.MOD_ID, "unbreakable_katana");
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -65,13 +59,6 @@ public class MinestuckUniverseItems
         registerItem(registry, zillystoneShard);
 
         registerItem(registry, trueUnbreakableKatana);
-
-        registerItem(registry, diverHelmet);
-
-        registry.register(unbreakableKatana);
-
-        registerItem(registry, murica);
-        registerItem(registry, muricaSouth);
 
         //registerGTArmor(registry);
 
@@ -86,10 +73,7 @@ public class MinestuckUniverseItems
     @SideOnly(Side.CLIENT)
     public static void setClientsideVariables()
     {
-        diverHelmet.setArmorModel(new ModelDiverHelmet());
     }
-
-
 
     public static void registerGTArmor(IForgeRegistry<Item> registry)
     {
