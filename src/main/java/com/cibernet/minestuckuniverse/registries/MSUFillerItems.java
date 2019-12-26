@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
 import com.cibernet.minestuckuniverse.items.ItemSound;
 import com.cibernet.minestuckuniverse.items.MSUArmorBase;
+import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
@@ -32,7 +33,7 @@ public class MSUFillerItems
 	//Items
 	public static Item murica = new ItemSound("murica", "murica", MSUSoundHandler.murica);
 	public static Item muricaSouth = new ItemSound("murica_south", "muricaSouth", MSUSoundHandler.murica_south);
-	
+	public static Item CHS = new MSUItemBase("cruxaclysmic_heartstopper", "cruxaclysmicHeartStopper");
 	//Armor
 	public static MSUArmorBase diverHelmet = new MSUArmorBase(materialDiverHelmet,0, EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
 	public static MSUArmorBase spikedDiverHelmet = new MSUArmorBase(materialSpikedHelmet, 0, EntityEquipmentSlot.HEAD, "spikedHelmet", "spiked_diver_helmet");
@@ -53,6 +54,7 @@ public class MSUFillerItems
 		
 		registerItem(registry, murica);
 		registerItem(registry, muricaSouth);
+		registerItem(registry, CHS);
 	}
 	
 	@SideOnly(Side.CLIENT)
