@@ -32,6 +32,7 @@ import javax.swing.text.ComponentView;
 import java.util.ArrayList;
 
 import static com.cibernet.minestuckuniverse.registries.MSUFillerItems.*;
+import static com.cibernet.minestuckuniverse.registries.MSUFillerBlocks.*;
 import static com.mraof.minestuck.alchemy.CombinationRegistry.Mode.*;
 import static com.mraof.minestuck.alchemy.GristType.*;
 import static com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist.*;
