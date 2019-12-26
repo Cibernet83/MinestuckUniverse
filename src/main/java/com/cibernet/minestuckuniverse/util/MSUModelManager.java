@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
 import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
-import static com.mraof.minestuck.item.MinestuckItems.candy;
+import static com.mraof.minestuck.item.MinestuckItems.*;
 
 public class MSUModelManager
 {
@@ -31,7 +31,6 @@ public class MSUModelManager
 
     private static void ItemModels()
     {
-        
         register(unbreakableKatana, 0, "unbreakable_katana");
         
         for(Item item : items)

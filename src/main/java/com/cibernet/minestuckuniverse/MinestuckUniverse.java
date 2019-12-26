@@ -41,6 +41,8 @@ public class MinestuckUniverse
     public static boolean isThaumLoaded;
     public static boolean isBotaniaLoaded;
     public static boolean isArsenalLoaded;
+    
+    public static boolean fillerItemsEnabled = true;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
