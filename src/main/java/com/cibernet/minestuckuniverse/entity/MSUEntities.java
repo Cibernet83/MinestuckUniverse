@@ -2,7 +2,6 @@ package com.cibernet.minestuckuniverse.entity;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.entity.classes.EntityAcheron;
-import com.mraof.minestuck.Minestuck;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
