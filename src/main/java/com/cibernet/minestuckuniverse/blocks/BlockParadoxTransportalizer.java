@@ -1,7 +1,10 @@
 package com.cibernet.minestuckuniverse.blocks;
 
+import com.cibernet.minestuckuniverse.tileentity.TileEntityParadoxTransportalizer;
 import com.mraof.minestuck.MinestuckConfig;
+import com.mraof.minestuck.tileentity.TileEntityTransportalizer;
 import com.mraof.minestuck.util.Teleport;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -18,7 +21,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-public class BlockParadoxTransportalizer extends MSUBlockBase
+import javax.annotation.Nullable;
+
+public class BlockParadoxTransportalizer extends BlockContainer
 {
 	protected static final AxisAlignedBB TRANSPORTALIZER_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 	public BlockParadoxTransportalizer()
@@ -56,33 +61,20 @@ public class BlockParadoxTransportalizer extends MSUBlockBase
 	{
 		if (!world.isRemote && entity.getRidingEntity() == null && entity.getPassengers().isEmpty())
 		{
-			WorldServer spawnWorld = entity.getServer().getWorld(0);
-			BlockPos spawnPos = spawnWorld.getTopSolidOrLiquidBlock(spawnWorld.getSpawnPoint());
-			
-			if(world.isBlockPowered(pos))
-			{
-				if (entity instanceof EntityPlayerMP)
-					entity.sendMessage(new TextComponentTranslation("message.transportalizer.transportalizerDisabled", new Object[0]));
-				return;
-			}
-			
-			if(world.getBlockState(pos.up()).getMaterial().blocksMovement() && world.getBlockState(pos.up()).getMaterial().blocksMovement())
-			{
-				if (entity instanceof EntityPlayerMP)
-					entity.sendMessage(new TextComponentTranslation("message.transportalizer.blocked", new Object[0]));
-				return;
-			}
-			
-			int[] bannedDims = MinestuckConfig.forbiddenDimensionsTpz;
-			for(int dim : bannedDims)
-				if(dim == world.provider.getDimension())
-				{
-					if (entity instanceof EntityPlayerMP)
-						entity.sendMessage(new TextComponentTranslation("message.transportalizer.forbidden", new Object[0]));
-					return;
+			TileEntityParadoxTransportalizer te = (TileEntityParadoxTransportalizer)world.getTileEntity(pos);
+			if(te != null)
+				if (entity.timeUntilPortal == 0) {
+					te.teleport(world, pos, entity);
+				} else {
+					entity.timeUntilPortal = entity.getPortalCooldown();
 				}
-			
-			Teleport.teleportEntity(entity, 0, null, spawnPos);
 		}
+	}
+	
+	@Nullable
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta)
+	{
+		return new TileEntityParadoxTransportalizer();
 	}
 }
