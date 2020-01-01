@@ -9,6 +9,9 @@ import com.mraof.minestuck.item.weapon.ItemWeapon;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -29,7 +32,9 @@ public class MinestuckUniverseItems
 
     private static final EnumClass[] classes = EnumClass.values();
     private static final EnumAspect[] aspects = EnumAspect.values();
-
+    
+    //Tool Classes
+    public static MSUToolClass toolSword = new MSUToolClass(Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
 
     //GT Armor
     public static ItemArmor.ArmorMaterial[][] GTArmorMaterial = new ItemArmor.ArmorMaterial[classes.length][aspects.length];
@@ -42,7 +47,7 @@ public class MinestuckUniverseItems
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
     
     //Weapons
-    public static Item trueUnbreakableKatana = new MSUWeaponBase(2200, 7, -2.4D, 20, "true_unbreakable_katana", "unbreakableKatana").setTool("sword", 0, 15.0F);
+    public static Item trueUnbreakableKatana = new MSUWeaponBase(7, -2.4D, 20, "true_unbreakable_katana", "unbreakableKatana").setTool(toolSword, 0, 15.0F);
 
     //Armor
 

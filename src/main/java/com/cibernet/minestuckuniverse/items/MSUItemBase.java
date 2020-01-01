@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.items;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class MSUItemBase extends Item
 {
+    protected CreativeTabs tab;
     public MSUItemBase(String name, String unlocName)
     {
         this.setRegistryName(name);
@@ -30,6 +32,13 @@ public class MSUItemBase extends Item
     public MSUItemBase(String name)
     {
         this(name, name);
+    }
+    
+    @Override
+    public Item setCreativeTab(CreativeTabs tab)
+    {
+        this.tab = tab;
+        return super.setCreativeTab(tab);
     }
     
     @Override
