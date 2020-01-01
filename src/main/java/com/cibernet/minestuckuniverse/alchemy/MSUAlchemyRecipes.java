@@ -3,11 +3,9 @@ package com.cibernet.minestuckuniverse.alchemy;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockGrist;
 import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
-import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.*;
 import com.mraof.minestuck.block.MinestuckBlocks;
-import com.mraof.minestuck.item.ItemMinestuckCandy;
 import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -20,19 +18,12 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.blocks.BlocksTC;
-import thaumcraft.api.casters.FocusMod;
 import thaumcraft.api.crafting.CrucibleRecipe;
-import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.items.ItemsTC;
-import thaumcraft.common.config.ConfigItems;
-
-import javax.swing.*;
-import javax.swing.text.ComponentView;
 
 import java.util.ArrayList;
 
-import static com.cibernet.minestuckuniverse.registries.MSUFillerItems.*;
-import static com.cibernet.minestuckuniverse.registries.MSUFillerBlocks.*;
+import static com.cibernet.minestuckuniverse.fillerItems.MSUFillerItems.*;
 import static com.mraof.minestuck.alchemy.CombinationRegistry.Mode.*;
 import static com.mraof.minestuck.alchemy.GristType.*;
 import static com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist.*;
@@ -139,22 +130,6 @@ public class MSUAlchemyRecipes
         
         if(MinestuckUniverse.isBotaniaLoaded)
             gristBlocks.add(gristBlockMana);
-    }
-    
-    public static void registerFillerItemRecipes()
-    {
-    
-        //Grist Conversions
-        GristRegistry.addGristConversion(new ItemStack(diverHelmet), new GristSet(new GristType[] {Rust}, new int[] {64}));
-        GristRegistry.addGristConversion(new ItemStack(murica), new GristSet(Artifact, -1));
-        GristRegistry.addGristConversion(new ItemStack(muricaSouth), new GristSet(new GristType[] {Artifact, Garnet}, new int[] {-10, 1}));
-    
-        //Alchemy
-        CombinationRegistry.addCombination(new ItemStack(Items.IRON_HELMET), new ItemStack(Blocks.IRON_BLOCK), MODE_AND, false, false, new ItemStack(diverHelmet));
-        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 1), new ItemStack(Items.LEATHER_HELMET), MODE_AND, true, false, new ItemStack(froghat));
-        
-        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.sbahjPoster), new ItemStack(Items.COMPASS), MODE_OR, new ItemStack(murica));
-        CombinationRegistry.addCombination(new ItemStack(murica), new ItemStack(Blocks.WOOL, 1, EnumDyeColor.RED.getMetadata()), MODE_AND, false, true, new ItemStack(muricaSouth));
     }
     
     public static void registerSleevedTransportalizerRecipes()

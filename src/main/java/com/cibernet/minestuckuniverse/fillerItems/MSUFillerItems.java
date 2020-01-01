@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.registries;
+package com.cibernet.minestuckuniverse.fillerItems;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
@@ -8,7 +8,6 @@ import com.cibernet.minestuckuniverse.items.MSUArmorBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
-import com.mraof.minestuck.item.weapon.ItemWeapon;
 import net.minecraft.block.Block;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
