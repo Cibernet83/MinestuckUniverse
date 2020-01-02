@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.entity.models.armor.ModelPrismarineArmor;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
@@ -10,11 +11,13 @@ import com.mraof.minestuck.item.weapon.ItemWeapon;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.block.Block;
+import net.minecraft.client.audio.ISoundEventAccessor;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -49,8 +52,12 @@ public class MinestuckUniverseItems
     public static Item chc = new Item().setRegistryName("chc").setUnlocalizedName("chc").setCreativeTab(TabMinestuckUniverse.instance);
     public static Item plm = new Item().setRegistryName("plm").setUnlocalizedName("plm").setCreativeTab(TabMinestuckUniverse.instance);
 
+    public static ItemArmor.ArmorMaterial prismarine=EnumHelper.addArmorMaterial("PRISMARINE", MinestuckUniverse.MODID+":prismarine",20, new int[]{3,7,6,2},15, SoundEvents.ITEM_ARMOR_EQUIP_IRON,0.0f);
     //Armor
-
+    public static MSUArmorBase parmorh = new MSUArmorBase (prismarine,0,EntityEquipmentSlot.HEAD,"parmor_head","parmor_2");
+    public static MSUArmorBase parmorc = new MSUArmorBase (prismarine,0,EntityEquipmentSlot.CHEST,"parmor_chest","parmor_3");
+    public static MSUArmorBase parmorl = new MSUArmorBase (prismarine,0,EntityEquipmentSlot.LEGS,"parmor_legs","parmor_4");
+    public static MSUArmorBase parmorf = new MSUArmorBase (prismarine,0,EntityEquipmentSlot.FEET,"parmor_feet","parmor_5");
     //Overrides
 
     @SubscribeEvent
@@ -62,6 +69,10 @@ public class MinestuckUniverseItems
         registerItem(registry, moonstone);
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
+        registerItem(registry, parmorh);
+        registerItem(registry, parmorc);
+        registerItem(registry, parmorl);
+        registerItem(registry, parmorf);
 
         registerItem(registry, trueUnbreakableKatana);
         registerItem(registry, ctd);
@@ -81,6 +92,10 @@ public class MinestuckUniverseItems
     @SideOnly(Side.CLIENT)
     public static void setClientsideVariables()
     {
+        parmorh.setArmorModel(new ModelPrismarineArmor());
+        parmorl.setArmorModel(new ModelPrismarineArmor());
+        parmorc.setArmorModel(new ModelPrismarineArmor());
+        parmorf.setArmorModel(new ModelPrismarineArmor());
     }
 
     public static void registerGTArmor(IForgeRegistry<Item> registry)
