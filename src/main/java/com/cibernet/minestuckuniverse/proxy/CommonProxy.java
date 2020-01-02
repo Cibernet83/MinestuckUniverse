@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.fillerItems.MSUFillerAlchemyRecipes;
 import com.cibernet.minestuckuniverse.fillerItems.MSUFillerBlocks;
 import com.cibernet.minestuckuniverse.fillerItems.MSUFillerItems;
 import com.cibernet.minestuckuniverse.tileentity.*;
@@ -57,6 +58,7 @@ public class CommonProxy
 
         MSULandAspectRegistry.registerLands();
         MSUAlchemyRecipes.registerRecipes();
+        MSUFillerAlchemyRecipes.registerRecipes();
         MachineChasisRecipes.registerRecipes();
 
         MSUChannelHandler.setupChannel();
