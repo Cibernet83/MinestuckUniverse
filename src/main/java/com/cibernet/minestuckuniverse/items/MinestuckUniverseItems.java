@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
+import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
@@ -40,9 +41,13 @@ public class MinestuckUniverseItems
     public static Item moonstone = new MSUItemBase("moonstone");
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
-    
+
     //Weapons
     public static Item trueUnbreakableKatana = new MSUWeaponBase(2200, 7, -2.4D, 20, "true_unbreakable_katana", "unbreakableKatana").setTool("sword", 0, 15.0F);
+    public static Item ctd = new Item().setRegistryName("ctd").setUnlocalizedName("ctd").setCreativeTab(TabMinestuckUniverse.instance);
+    public static Item cht = new Item().setRegistryName("cht").setUnlocalizedName("cht").setCreativeTab(TabMinestuckUniverse.instance);
+    public static Item chc = new Item().setRegistryName("chc").setUnlocalizedName("chc").setCreativeTab(TabMinestuckUniverse.instance);
+    public static Item plm = new Item().setRegistryName("plm").setUnlocalizedName("plm").setCreativeTab(TabMinestuckUniverse.instance);
 
     //Armor
 
@@ -59,7 +64,10 @@ public class MinestuckUniverseItems
         registerItem(registry, zillystoneShard);
 
         registerItem(registry, trueUnbreakableKatana);
-
+        registerItem(registry, ctd);
+        registerItem(registry, cht);
+        registerItem(registry, chc);
+        registerItem(registry, plm);
         //registerGTArmor(registry);
 
         //Blocks

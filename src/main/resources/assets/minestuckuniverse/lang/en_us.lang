@@ -52,7 +52,14 @@ item.zillystoneShard.name=Zillystone Shard
 item.zillystoneShard.tooltip=You've managed to chip this shard away from a Zillystone block, but what will you do with it next?
 item.cruxaclysmicHeartStopper.name=Cruxaclysmic HeartStopper
 item.cruxaclysmicHeartStopper.tooltip=pretty fuckin cool, nuff said
-
+item.ctd.name=Cruxatonic Derringer
+item.ctd.tooltip=the true gentlemen's gun
+item.cht.name=Cruxaclysmic Hearttaker
+item.cht.tooltip=yuht
+item.chc.name=Cruxatomic HandCannon
+item.chc.tooltip=dead silent
+item.plm.name=Palmhusk
+item.okn.tooltip=calls made with a bug
 item.murica.name='murica
 item.muricaSouth.name='murica
 item.muricaSouth.tooltip=redneck edition
