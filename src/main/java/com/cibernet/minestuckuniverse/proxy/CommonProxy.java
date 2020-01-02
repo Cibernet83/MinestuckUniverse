@@ -1,7 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
-import com.cibernet.minestuckuniverse.registries.MSUFillerBlocks;
-import com.cibernet.minestuckuniverse.registries.MSUFillerItems;
+import com.cibernet.minestuckuniverse.fillerItems.MSUFillerBlocks;
+import com.cibernet.minestuckuniverse.fillerItems.MSUFillerItems;
 import com.cibernet.minestuckuniverse.tileentity.*;
 import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;

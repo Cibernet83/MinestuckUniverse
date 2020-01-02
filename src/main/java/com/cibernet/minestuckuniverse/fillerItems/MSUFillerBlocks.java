@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.registries;
+package com.cibernet.minestuckuniverse.fillerItems;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;

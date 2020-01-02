@@ -1,7 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.registries.MSUFillerItems;
+import com.cibernet.minestuckuniverse.fillerItems.MSUFillerItems;
 import com.cibernet.minestuckuniverse.entity.render.RenderHologram;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
