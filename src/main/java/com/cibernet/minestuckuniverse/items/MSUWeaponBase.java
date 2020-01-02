@@ -76,6 +76,7 @@ public class MSUWeaponBase extends MSUItemBase
         return !unbreakable;
     }
     
+    @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase player) {
         if (!this.unbreakable) {
             stack.damageItem(1, player);
@@ -125,7 +126,7 @@ public class MSUWeaponBase extends MSUItemBase
     {
         if(tool == null)
             return super.isEnchantable(stack);
-        return !tool.getEnchantments().isEmpty();
+        return !tool.getEnchantments().isEmpty() || isDamageable();
     }
     
     @Override

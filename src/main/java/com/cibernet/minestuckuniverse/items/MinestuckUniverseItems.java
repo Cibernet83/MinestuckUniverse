@@ -5,7 +5,6 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.mraof.minestuck.Minestuck;
-import com.mraof.minestuck.item.weapon.ItemWeapon;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.block.Block;
@@ -35,6 +34,7 @@ public class MinestuckUniverseItems
     
     //Tool Classes
     public static MSUToolClass toolSword = new MSUToolClass(Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolGauntlet = new MSUToolClass(Material.GLASS, Material.ICE, Material.PACKED_ICE);
 
     //GT Armor
     public static ItemArmor.ArmorMaterial[][] GTArmorMaterial = new ItemArmor.ArmorMaterial[classes.length][aspects.length];
@@ -48,7 +48,15 @@ public class MinestuckUniverseItems
     
     //Weapons
     public static Item trueUnbreakableKatana = new MSUWeaponBase(7, -2.4D, 20, "true_unbreakable_katana", "unbreakableKatana").setTool(toolSword, 0, 15.0F);
-
+    
+    public static Item fancyGlove = new MSUWeaponBase(50, 0D, 0, 5, "fancy_glove", "fancyGlove").setTool(toolGauntlet, 0, 0);
+    public static Item spikedGlove = new MSUWeaponBase(95, 3.5D, 0.25D, 8, "spiked_glove", "spikedGlove").setTool(toolGauntlet, 0, 0.5F);
+    public static Item cobbleBasher = new MSUWeaponBase(175, 4D, -1.8D, 4, "cobble_basher","cobbleBasher").setTool(toolGauntlet, 0, 1.2F);
+    public static Item fluoriteGauntlet = new ItemRandomWeapon(980, 7D, -0.3D,  8, "fluorite_gauntlet", "fluoriteGauntlet").setTool(toolGauntlet, 0, 2.4F);
+    public static Item goldenGenesisGauntlet = new MSUWeaponBase(1256, 11D, -0.25D, 15, "golden_genesis_gauntlet","goldenGenesisGauntlet").setTool(toolGauntlet, 0, 3F);
+    public static Item pogoFist = new ItemPogoWeapon(700, 7.0D, -0.3, 8, "pogo_fist", "pogoFist", 0.55D).setTool(toolGauntlet, 0, 1.4F);
+    public static Item rocketFist = new MSUWeaponBase(124, 3D, 0.4D, 6, "rocket_powered_fist", "rocketFist").setTool(toolGauntlet, 0, 0.5F);
+    
     //Armor
 
     //Overrides
@@ -64,6 +72,14 @@ public class MinestuckUniverseItems
         registerItem(registry, zillystoneShard);
 
         registerItem(registry, trueUnbreakableKatana);
+        
+        registerItem(registry, fancyGlove);
+        registerItem(registry, spikedGlove);
+        registerItem(registry, cobbleBasher);
+        registerItem(registry, fluoriteGauntlet);
+        registerItem(registry, goldenGenesisGauntlet);
+        registerItem(registry, pogoFist);
+        registerItem(registry, rocketFist);
 
         //registerGTArmor(registry);
 
