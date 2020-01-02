@@ -46,6 +46,8 @@ public class CommonProxy
         GameRegistry.registerTileEntity(TileEntityAutoCaptcha.class, MinestuckUniverse.MODID + ":auto_captcha");
         GameRegistry.registerTileEntity(TileEntityMachineChasis.class, MinestuckUniverse.MODID + ":machine_chasis");
         GameRegistry.registerTileEntity(TileEntityRedTransportalizer.class, MinestuckUniverse.MODID + ":red_transportalizer");
+        GameRegistry.registerTileEntity(TileEntityParadoxTransportalizer.class, MinestuckUniverse.MODID + ":paradox_transportalizer");
+        GameRegistry.registerTileEntity(TileEntityHolopad.class, MinestuckUniverse.MODID + ":holopad");
 
     }
 

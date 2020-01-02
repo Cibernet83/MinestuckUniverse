@@ -206,7 +206,7 @@ public class TileEntityAutoWidget extends TileEntity implements ITickable, ISide
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		if (stack.getItem() == MinestuckItems.captchaCard && isEmpty())
+		if (stack.getItem() == MinestuckItems.captchaCard && isEmpty() && stack.hasTagCompound())
 			return !stack.getTagCompound().getBoolean("punched") && stack.getTagCompound().getInteger("contentSize") > 0 && GristRegistry.getGristConversion(AlchemyRecipes.getDecodedItem(stack)) != null;
 	 	else
 	 		return false;
