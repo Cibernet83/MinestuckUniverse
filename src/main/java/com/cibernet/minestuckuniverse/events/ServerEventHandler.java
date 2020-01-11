@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -35,7 +36,7 @@ public class ServerEventHandler
 		//EnumAspect aspect = MinestuckPlayerData.getTitle(identifier).getHeroAspect();
 		//EnumClass heroClass = MinestuckPlayerData.getTitle(identifier).getHeroClass();
 		
-		if(rung > 10)
+		if(rung >= 49)
 			event.player.capabilities.allowFlying = true;
 		
 		if(heroHold)
@@ -53,6 +54,13 @@ public class ServerEventHandler
 		if(title == null)
 			return;
 		
+		int rung = MinestuckPlayerData.getData(identifier).echeladder.getRung();
+		if(rung < 23)
+		{
+			player.sendStatusMessage(new TextComponentTranslation("message.power.locked"), true);
+			return;
+		}
+		
 		Minecraft mc = Minecraft.getMinecraft();
 		World world = player.getEntityWorld();
 		MSUPowerBase power = MSUHeroPowers.getPower(title.getHeroClass(), title.getHeroAspect());
@@ -62,7 +70,7 @@ public class ServerEventHandler
 		
 		if(entity != null)
 		{
-		
+			power.useOnEntity(world,player,entity,true);
 		}
 		else if(pos != null && !world.getBlockState(pos).getMaterial().equals(Material.AIR))
 		{

@@ -323,3 +323,4 @@ gui.atm.withdraw=Withdraw
 gui.atm.go=Accept
 gui.atm.amountLabel=Value per Boondollar:
 gui.atm.nLabel=Boondollars to withdraw:
+message.power.locked=You haven't unlocked Hero Powers
