@@ -22,7 +22,7 @@ public class MSUHeroPowers
 	
 	public static MSUPowerBase getPower(EnumClass clss, EnumAspect aspect)
 	{
-		return powers.get(aspect,clss);
+		return powers.contains(aspect,clss) ? powers.get(aspect,clss) : powers.get(aspect,null);
 	}
 	
 	public static MSUPowerBase getPlayerPower(EntityPlayer player)
