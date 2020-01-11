@@ -2,16 +2,13 @@ package com.cibernet.minestuckuniverse.events;
 
 import com.cibernet.minestuckuniverse.powers.MSUHeroPowers;
 import com.cibernet.minestuckuniverse.powers.MSUPowerBase;
-import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.network.skaianet.SburbConnection;
 import com.mraof.minestuck.network.skaianet.SkaianetHandler;
 import com.mraof.minestuck.util.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -65,6 +62,9 @@ public class ServerEventHandler
 		World world = player.getEntityWorld();
 		MSUPowerBase power = MSUHeroPowers.getPower(title.getHeroClass(), title.getHeroAspect());
 		
+		if(power == null)
+			return;
+		
 		BlockPos pos = mc.objectMouseOver.getBlockPos();
 		EntityLiving entity = (EntityLiving) mc.objectMouseOver.entityHit;
 		
@@ -83,9 +83,6 @@ public class ServerEventHandler
 		}
 		else
 			power.use(world,player, true);
-		
-		
-		
-		
 	}
+	
 }
