@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
+import static com.cibernet.minestuckuniverse.powers.MSUClasspectPowers.*;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
@@ -37,7 +38,7 @@ public class MinestuckUniverseItems
     public static Item[][][] GTArmor = new Item[classes.length][aspects.length][4];
 
     //Items
-    public static Item spaceSalt = new ItemSpaceSalt();
+    public static Item spaceSalt = new ItemClasspectPower(machineResize, "space_salt", "spaceSalt");
     public static Item moonstone = new MSUItemBase("moonstone");
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
