@@ -38,11 +38,14 @@ public class MinestuckUniverseItems
     public static Item[][][] GTArmor = new Item[classes.length][aspects.length][4];
 
     //Items
-    public static Item spaceSalt = new ItemClasspectPower(machineResize, "space_salt", "spaceSalt");
     public static Item moonstone = new MSUItemBase("moonstone");
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
-
+    
+    
+    public static Item spaceSalt = new ItemClasspectPower(machineResize, "space_salt", "spaceSalt");
+    public static Item timeShiftClock = new ItemClasspectPower(daytimeShift, "time_shift_clock", "timeShiftClock").setMaxDamage(130).setMaxStackSize(1);
+    
     public static Item murica = new ItemSound("murica", "murica", MSUSoundHandler.murica).setCreativeTab(null);
     public static Item muricaSouth = new ItemSound("murica_south", "muricaSouth", MSUSoundHandler.murica_south).setCreativeTab(null);
 
@@ -60,11 +63,13 @@ public class MinestuckUniverseItems
     {
         IForgeRegistry<Item> registry = event.getRegistry();
 
-        registerItem(registry, spaceSalt);
         registerItem(registry, moonstone);
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
-
+        
+        registerItem(registry, spaceSalt);
+        registerItem(registry, timeShiftClock);
+        
         registerItem(registry, trueUnbreakableKatana);
 
         registerItem(registry, diverHelmet);

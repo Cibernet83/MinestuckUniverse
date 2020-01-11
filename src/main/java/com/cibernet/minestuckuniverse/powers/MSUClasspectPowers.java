@@ -10,4 +10,5 @@ public class MSUClasspectPowers
 	public static final Table<EnumAspect, EnumClass, MSUPowerBase> powers = HashBasedTable.create();
 	
 	public static MSUPowerBase machineResize = new PowerMachineResize();
+	public static MSUPowerBase daytimeShift = new PowerDaytimeShift();
 }
