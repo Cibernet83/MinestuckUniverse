@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
-import static com.cibernet.minestuckuniverse.powers.MSUClasspectPowers.*;
+import static com.cibernet.minestuckuniverse.powers.MSUHeroPowers.*;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;

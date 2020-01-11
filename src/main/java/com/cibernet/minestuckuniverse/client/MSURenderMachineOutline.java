@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.client;
 
+import com.cibernet.minestuckuniverse.powers.MSUHeroPowers;
 import com.cibernet.minestuckuniverse.util.SpaceSaltUtils;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.block.BlockSburbMachine;
@@ -34,9 +35,10 @@ public class MSURenderMachineOutline
 			if (rayTraceResult == null || rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK)
 				return;
 			
+			boolean canResize = MSUHeroPowers.hasPower(mc.player, MSUHeroPowers.machineResize) && mc.player.isSneaking();
 			
 			IBlockState state = mc.player.getEntityWorld().getBlockState(mc.objectMouseOver.getBlockPos());
-			if (mc.player.getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.spaceSalt) && state.getBlock() instanceof BlockSburbMachine)
+			if ((mc.player.getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.spaceSalt) || canResize) && state.getBlock() instanceof BlockSburbMachine)
 			{
 				BlockSburbMachine.MachineType type = state.getValue(BlockSburbMachine.MACHINE_TYPE);
 				EnumFacing facing = state.getValue(BlockSburbMachine.FACING);

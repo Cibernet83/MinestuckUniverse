@@ -12,6 +12,7 @@ import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryHelper;
@@ -237,6 +238,18 @@ public class PowerMachineResize extends MSUPowerBase
 			return true;
 		}
 		
+		return false;
+	}
+	
+	@Override
+	public boolean onHeld(World worldIn, EntityPlayer playerIn, boolean isNative)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean useOnEntity(World worldIn, EntityPlayer playerIn, EntityLiving entityIn, boolean isNative)
+	{
 		return false;
 	}
 }

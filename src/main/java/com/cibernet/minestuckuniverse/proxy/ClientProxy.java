@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.client.MSUKeyHandler;
 import com.cibernet.minestuckuniverse.entity.render.RenderHologram;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
@@ -21,10 +22,12 @@ public class ClientProxy extends CommonProxy
         super.preInit();
 
         MinestuckUniverseItems.setClientsideVariables();
-
+    
+        MSUKeyHandler.instance.registerKeys();
         RenderingRegistry.registerEntityRenderingHandler(EntityAcheron.class, RenderEntityMinestuck.getFactory(new ModelAcheron(), 0.5F));
         MinecraftForge.EVENT_BUS.register(MSUModelManager.class);
         MinecraftForge.EVENT_BUS.register(MSURenderMachineOutline.class);
+        MinecraftForge.EVENT_BUS.register(MSUKeyHandler.instance);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHolopad.class, new RenderHologram());
     }
 

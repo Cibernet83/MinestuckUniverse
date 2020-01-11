@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.events.ServerEventHandler;
 import com.cibernet.minestuckuniverse.tileentity.*;
 import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
@@ -47,6 +48,8 @@ public class CommonProxy
     {
         NetworkRegistry.INSTANCE.registerGuiHandler(MinestuckUniverse.instance, new MSUGuiHandler());
 
+        MinecraftForge.EVENT_BUS.register(ServerEventHandler.instance);
+        
         MSULandAspectRegistry.registerLands();
         MSUAlchemyRecipes.registerRecipes();
         MachineChasisRecipes.registerRecipes();

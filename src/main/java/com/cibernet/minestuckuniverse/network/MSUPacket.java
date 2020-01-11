@@ -53,18 +53,19 @@ public abstract class MSUPacket
     public static enum Type
     {
         MACHINE_CHASSIS(MachineChassisPacket.class),
-        ATM(PorkhollowAtmPacket.class)
+        ATM(PorkhollowAtmPacket.class),
+        HERO_POWER(HeroPowerPacket.class),
         ;
 
         Class<? extends MSUPacket> packetType;
 
-        private Type(Class<? extends MSUPacket> packetClass) {
+        Type(Class<? extends MSUPacket> packetClass) {
             this.packetType = packetClass;
         }
 
         MSUPacket make() {
             try {
-                return (MSUPacket)this.packetType.newInstance();
+                return this.packetType.newInstance();
             } catch (Exception var2) {
                 var2.printStackTrace();
                 return null;
