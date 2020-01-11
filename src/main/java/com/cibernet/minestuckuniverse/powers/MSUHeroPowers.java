@@ -12,6 +12,7 @@ public class MSUHeroPowers
 	public static MSUPowerBase machineResize = new PowerMachineResize();
 	public static MSUPowerBase daytimeShift = new PowerDaytimeShift();
 	public static MSUPowerBase windSpeed = new PowerWindSpeed();
+	public static MSUPowerBase teleport = new PowerTeleport();
 	
 	public static boolean hasPower(EntityPlayer playerIn, MSUPowerBase power)
 	{
