@@ -8,10 +8,14 @@ import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.editmode.DeployList;
 import com.mraof.minestuck.item.ItemBoondollars;
 import com.mraof.minestuck.item.MinestuckItems;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumParticleTypes;
+
+import java.util.Random;
 
 public class MSUUtils
 {
@@ -52,5 +56,27 @@ public class MSUUtils
             if(entity != null)
                 entity.setNoPickupDelay();
         } else reciever.inventoryContainer.detectAndSendChanges();
+    }
+    
+    public static void spawnEntityParticles(Entity entityIn, EnumParticleTypes particleTypes)
+    {
+        Random rand = new Random();
+        if (entityIn.world.isRemote)
+        {
+            for (int i = 0; i < 20; ++i)
+            {
+                double d0 = rand.nextGaussian() * 0.02D;
+                double d1 = rand.nextGaussian() * 0.02D;
+                double d2 = rand.nextGaussian() * 0.02D;
+                double d3 = 10.0D;
+                entityIn.world.spawnParticle(particleTypes, entityIn.posX + (double)(rand.nextFloat() * entityIn.width * 2.0F) - (double)entityIn.width - d0 * 10.0D,
+                        entityIn.posY + (double)(rand.nextFloat() * entityIn.height) - d1 * 10.0D,
+                        entityIn.posZ + (double)(rand.nextFloat() * entityIn.width * 2.0F) - (double)entityIn.width - d2 * 10.0D, d0, d1, d2);
+            }
+        }
+        else
+        {
+            entityIn.world.setEntityState(entityIn, (byte)20);
+        }
     }
 }
