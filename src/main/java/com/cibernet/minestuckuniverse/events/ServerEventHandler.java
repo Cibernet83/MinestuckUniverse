@@ -7,14 +7,18 @@ import com.mraof.minestuck.network.skaianet.SkaianetHandler;
 import com.mraof.minestuck.util.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import java.util.UUID;
 
 public class ServerEventHandler
 {
@@ -43,6 +47,7 @@ public class ServerEventHandler
 				power.onHeld(event.player.world, event.player, true);
 		}
 	}
+	
 	public static void useHeroPower(EntityPlayer player)
 	{
 		IdentifierHandler.PlayerIdentifier identifier = IdentifierHandler.encode(player);
@@ -66,11 +71,14 @@ public class ServerEventHandler
 			return;
 		
 		BlockPos pos = mc.objectMouseOver.getBlockPos();
-		EntityLiving entity = (EntityLiving) mc.objectMouseOver.entityHit;
+		Entity entity = mc.objectMouseOver.entityHit;
 		
-		if(entity != null)
+		if(entity instanceof EntityLiving)
 		{
-			power.useOnEntity(world,player,entity,true);
+			int id = entity.getEntityId();
+			entity = world.getEntityByID(id);
+			if(!power.useOnEntity(world,player, (EntityLiving) entity,true))
+				power.use(world,player, true);
 		}
 		else if(pos != null && !world.getBlockState(pos).getMaterial().equals(Material.AIR))
 		{
