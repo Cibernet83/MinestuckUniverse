@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.tileentity.*;
 import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
@@ -53,5 +54,11 @@ public class CommonProxy
 
         MSUChannelHandler.setupChannel();
         MSUUtils.registerDeployList();
+    }
+
+    public void postInit()
+    {
+        if(MinestuckUniverse.isBotaniaLoaded)
+            BotaniaSupport.generateGristCosts();
     }
 }

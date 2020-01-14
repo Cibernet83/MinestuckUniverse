@@ -3,7 +3,9 @@ package com.cibernet.minestuckuniverse.alchemy;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockGrist;
 import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.*;
 import com.mraof.minestuck.block.MinestuckBlocks;
@@ -25,6 +27,9 @@ import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.items.ItemsTC;
 import thaumcraft.common.config.ConfigItems;
+import vazkii.botania.api.BotaniaAPI;
+import vazkii.botania.common.block.ModBlocks;
+import vazkii.botania.common.item.ModItems;
 
 import javax.swing.*;
 import javax.swing.text.ComponentView;
@@ -54,9 +59,9 @@ public class MSUAlchemyRecipes
         registerMSU();
 
         if(MinestuckUniverse.isThaumLoaded) registerThaumcraft();
-
+        if(MinestuckUniverse.isBotaniaLoaded) registerBotania();
         if(!MinestuckUniverse.isArsenalLoaded) registerArsenalFallback();
-        
+
         registerGristBlockRecipes();
         registerSleevedTransportalizerRecipes();
     }
@@ -246,6 +251,53 @@ public class MSUAlchemyRecipes
         //Infusion
         //ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("minestuckuniverse","gristDecomposer"), new InfusionRecipe("SBURBOMANCY@1", new ItemStack(gristDecomposer), 1, (new AspectList()).add(Aspect.ALCHEMY, 30).add(Aspect.MECHANISM, 40).add(Aspect.MAGIC, 30), new ItemStack(thaumChasis), new Object[]{new ItemStack(MinestuckBlocks.sburbMachine, 1, 3), new ItemStack(MinestuckItems.energyCore), ConfigItems.ENTROPY_CRYSTAL, ConfigItems.ORDER_CRYSTAL}));
 
+    }
+
+    public static void registerBotania()
+    {
+        //Grist Conversions
+        GristRegistry.addGristConversion(ModBlocks.livingwood, new GristSet(new GristType[] {Build, Mana}, new int[] {2,2}));
+        GristRegistry.addGristConversion(ModBlocks.livingrock, new GristSet(new GristType[] {Build, Mana}, new int[] {2,2}));
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 0), true, GristRegistry.getGristConversion(new ItemStack(Items.IRON_INGOT)).addGrist(Mana, 3));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 1), true, GristRegistry.getGristConversion(new ItemStack(Items.ENDER_PEARL)).addGrist(Mana, 6));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 2), true, GristRegistry.getGristConversion(new ItemStack(Items.DIAMOND)).addGrist(Mana, 10));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 16), true, GristRegistry.getGristConversion(new ItemStack(Items.STRING)).addGrist(Mana, 5));
+        //GristRegistry.addGristConversion(new ItemStack(ModItems.manaBottle, 1, 16), true, GristRegistry.getGristConversion(new ItemStack(Items.GLASS_BOTTLE)).addGrist(Mana, 5));
+        //GristRegistry.addGristConversion(new ItemStack(ModItems.manaCookie), false, GristRegistry.getGristConversion(new ItemStack(Items.COOKIE)).addGrist(Mana, 20));
+        //GristRegistry.addGristConversion(new ItemStack(ModBlocks.pistonRelay), false, GristRegistry.getGristConversion(new ItemStack(Blocks.PISTON)).addGrist(Mana, 15));
+        GristRegistry.addGristConversion(new ItemStack(ModBlocks.tinyPotato), false, GristRegistry.getGristConversion(new ItemStack(Items.POTATO)).addGrist(Mana, 1));
+        GristRegistry.addGristConversion(new ItemStack(ModBlocks.manaGlass), false, GristRegistry.getGristConversion(new ItemStack(Blocks.GLASS)));
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 23), true, new GristSet(new GristType[] {Mana, Chalk}, new int[] {5,5}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.quartz, 1, 1), true, new GristSet(new GristType[] {Marble}, new int[] {5}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.grassSeeds, 1, 0), true, new GristSet(new GristType[]{Iodine, Amber}, new int[]{1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.grassSeeds, 1, 1), true, new GristSet(new GristType[]{Sulfur, Amber}, new int[]{1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.grassSeeds, 1, 2), true, new GristSet(new GristType[]{Iodine, Ruby}, new int[]{1, 1}));
+
+
+        if(MinestuckUniverse.isThaumLoaded)
+            //GristRegistry.addGristConversion(new ItemStack(ModItems.manaInkwell), false, GristRegistry.getGristConversion(new ItemStack(ItemsTC.scribingTools)).addGrist(Mana, 35));
+
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 15), true, new GristSet(new GristType[] {Shale, Uranium, Build}, new int[] {2, 3, 3}));
+
+        //Combination Recipes
+        CombinationRegistry.addCombination(new ItemStack(gristBlockMana), new ItemStack(Items.GLASS_BOTTLE), MODE_OR, false, false, new ItemStack(ModItems.manaBottle));
+
+        for(EnumDyeColor color : EnumDyeColor.values())
+        {
+            int meta = color.getMetadata();
+            //GristRegistry.addGristConversion(ModBlocks.flower, meta, GristRegistry.getGristConversion(new ItemStack(Items.DYE, 1, meta)).scaleGrist(2).addGrist(Iodine, 1));
+            //GristRegistry.addGristConversion(new ItemStack(ModItems.dye, 1, meta), GristRegistry.getGristConversion(new ItemStack(Items.DYE, 1, meta)));
+            CombinationRegistry.addCombination(new ItemStack(Items.SUGAR), new ItemStack(Items.DYE, 1, meta), MODE_AND, false, true, new ItemStack(ModItems.dye, 1, meta));
+
+        }
+
+        //Botania Recipes
+        BotaniaAPI.registerManaInfusionRecipe(new ItemStack(magicBlock), new ItemStack(MinestuckBlocks.genericObject), 16000);
+
+        BotaniaSupport.gristCosts = GristRegistry.getAllConversions();
     }
 
     public static void registerArsenalFallback()
