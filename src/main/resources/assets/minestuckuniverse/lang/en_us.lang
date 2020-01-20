@@ -38,6 +38,7 @@ tile.autoWidget.name=Grist-o-Matic 50000
 tile.autoCaptcha.name=Captchaloguifier
 tile.autoCaptcha.tooltip=Automatically captchalogues items.
 tile.porkhollowATM.name=Porkhollow ATM
+tile.porkhollowVault.name=Porkhollow Vault
 
 tile.magicBlock.name=Perfectly Magical Object
 
@@ -323,3 +324,9 @@ gui.atm.withdraw=Withdraw
 gui.atm.go=Accept
 gui.atm.amountLabel=Value per Boondollar:
 gui.atm.nLabel=Boondollars to withdraw:
+tooltip.machineOwner=Owned By: %s
+container.porkhollowVault=Porkhollow Vault
+message.vault.msgSet=Custom Message Set!
+message.vault.msgRemoved=Custom Message Removed!
+gui.vault.amountLabel=Boondollars Stored: %s
+gui.vault.auto=Auto Collect: %s

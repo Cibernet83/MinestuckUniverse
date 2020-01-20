@@ -53,7 +53,8 @@ public abstract class MSUPacket
     public static enum Type
     {
         MACHINE_CHASSIS(MachineChassisPacket.class),
-        ATM(PorkhollowAtmPacket.class)
+        ATM(PorkhollowAtmPacket.class),
+        VAULT(PorkhollowVaultPacket.class)
         ;
 
         Class<? extends MSUPacket> packetType;

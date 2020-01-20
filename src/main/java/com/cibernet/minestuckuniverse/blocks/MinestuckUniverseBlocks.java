@@ -29,6 +29,7 @@ public class MinestuckUniverseBlocks
     public static Block autoWidget = new BlockAutoWidget();
     public static Block autoCaptcha = new BlockAutoCaptcha();
     public static Block porkhollowAtm = new BlockPorkhollowAtm();
+    public static Block porkhollowVault = new BlockPorkhollowVault();
 
 	public static BlockWoolTransportalizer whiteWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.WHITE);
 	public static BlockWoolTransportalizer orangeWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.ORANGE);
@@ -95,6 +96,7 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, autoWidget, true);
 		registerBlock(registry, autoCaptcha, true);
 		registerBlock(registry, porkhollowAtm, true);
+		registerBlock(registry, porkhollowVault, true);
 
 		registerBlock(registry, whiteWoolTransportalizer, true);
 		registerBlock(registry, orangeWoolTransportalizer, true);

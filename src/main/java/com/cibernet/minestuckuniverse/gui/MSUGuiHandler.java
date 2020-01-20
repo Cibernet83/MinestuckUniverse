@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.gui.container.ContainerAutoCaptcha;
 import com.cibernet.minestuckuniverse.gui.container.ContainerMachineChasis;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoCaptcha;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
+import com.cibernet.minestuckuniverse.tileentity.TileEntityPorkhollowVault;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -45,6 +46,8 @@ public class MSUGuiHandler implements IGuiHandler
                 return new GuiAutoCaptcha(player.inventory, (TileEntityAutoCaptcha) te);
             case PORKHOLLOW_ATM_GUI:
                 return new GuiPorkhollowAtm(player);
+            case PORKHOLLOW_VAULT_GUI:
+                return new GuiPorkhollowVault(player, (TileEntityPorkhollowVault) te);
 
         }
         return null;
