@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -46,6 +47,12 @@ public class ServerEventHandler
 			if(power != null)
 				power.onHeld(event.player.world, event.player, true);
 		}
+	}
+	
+	@SubscribeEvent
+	public void attachCapabilities(AttachCapabilitiesEvent<Entity> event)
+	{
+		//TODO store entity-toggling powers (check rageShift)
 	}
 	
 	public static void useHeroPower(EntityPlayer player)

@@ -1,15 +1,13 @@
 package com.cibernet.minestuckuniverse.powers;
 
+import com.cibernet.minestuckuniverse.entity.ai.EntityAIAttackShifted;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAICreeperSwell;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAITasks;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -51,23 +49,28 @@ public class PowerRageShift extends MSUPowerBase
 	{
 		boolean isHostile = false;
 		
-		for(Object a : entityIn.targetTasks.taskEntries.toArray())
+		if(isNative)
 		{
-			EntityAIBase ai = ((EntityAITasks.EntityAITaskEntry) a).action;
-			if(ai instanceof EntityAINearestAttackableTarget)
-			
-				System.out.println(ai);
+			if(!(entityIn instanceof EntityCreature))
+				return false;
+			for(Object a : entityIn.targetTasks.taskEntries.toArray())
+			{
+				EntityAIBase ai = ((EntityAITasks.EntityAITaskEntry) a).action;
+				if(ai instanceof EntityAINearestAttackableTarget)
+					
+					System.out.println(ai);
 				entityIn.targetTasks.removeTask(ai);
 				isHostile = true;
-			
-		}
-		for(Object a : entityIn.tasks.taskEntries.toArray())
-		{
-			EntityAIBase ai = ((EntityAITasks.EntityAITaskEntry) a).action;
-			if(ai instanceof EntityAICreeperSwell)
+				
+			}
+			for(Object a : entityIn.tasks.taskEntries.toArray())
 			{
-				entityIn.tasks.removeTask(ai);
-				isHostile = true;
+				EntityAIBase ai = ((EntityAITasks.EntityAITaskEntry) a).action;
+				if(ai instanceof EntityAICreeperSwell)
+				{
+					entityIn.tasks.removeTask(ai);
+					isHostile = true;
+				}
 			}
 		}
 		
@@ -76,10 +79,12 @@ public class PowerRageShift extends MSUPowerBase
 		{
 			entityIn.targetTasks.addTask(3, new EntityAINearestAttackableTarget((EntityCreature) entityIn, EntityPlayer.class, true));
 			entityIn.targetTasks.addTask(3, new EntityAINearestAttackableTarget((EntityCreature) entityIn, EntityIronGolem.class, true));
+			entityIn.tasks.addTask(2, new EntityAIAttackShifted(entityIn,1.0D,false));
 			
 			if(entityIn instanceof EntityCreeper)
 				entityIn.tasks.addTask(2, new EntityAICreeperSwell((EntityCreeper) entityIn));
 		}
+		
 		
 		MSUUtils.spawnEntityParticles(entityIn, EnumParticleTypes.DRAGON_BREATH);
 		return true;
