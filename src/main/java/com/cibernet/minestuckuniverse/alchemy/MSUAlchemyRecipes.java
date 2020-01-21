@@ -129,8 +129,7 @@ public class MSUAlchemyRecipes
     
     
         GristRegistry.addGristConversion(new ItemStack(trueUnbreakableKatana) , new GristSet(Zillium, 1000));
-        
-        CombinationRegistry.addCombination(new ItemStack(zillystoneShard), new ItemStack(Items.SUGAR), MODE_OR, Zillium.getCandyItem());
+        GristRegistry.addGristConversion(new ItemStack(cybersword), new GristSet(new GristType[] {Build, Cobalt, Mercury, Diamond}, new int[] {4000, 800, 250, 8}));
         
         GristRegistry.addGristConversion(new ItemStack(murica), new GristSet(Artifact, -1));
         GristRegistry.addGristConversion(new ItemStack(muricaSouth), new GristSet(new GristType[] {Artifact, Garnet}, new int[] {-10, 1}));
@@ -156,7 +155,9 @@ public class MSUAlchemyRecipes
         
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.sbahjPoster), new ItemStack(Items.COMPASS), MODE_OR, new ItemStack(murica));
         CombinationRegistry.addCombination(new ItemStack(murica), new ItemStack(Blocks.WOOL, 1, EnumDyeColor.RED.getMetadata()), MODE_AND, false, true, new ItemStack(muricaSouth));
-        
+
+        CombinationRegistry.addCombination(new ItemStack(zillystoneShard), new ItemStack(Items.SUGAR), MODE_OR, Zillium.getCandyItem());
+
         if(MinestuckUniverse.isBotaniaLoaded)
             gristBlocks.add(gristBlockMana);
     }

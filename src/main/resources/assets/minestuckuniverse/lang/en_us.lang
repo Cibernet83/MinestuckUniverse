@@ -58,6 +58,8 @@ item.muricaSouth.tooltip=redneck edition
 item.katana.name=Obsidian Katana
 item.unbreakableKatana.name=Unbreakable Katana
 item.unbreakableKatana.tooltip=A real hard sword for a real hard dude. It was said to be forged by an ancient Otaku Master over the heat of a roaring manga fire.
+item.cybersword.name=Cybersword
+item.cybersword.tooltip=Cibernet's weapon of choice, this sword can call down fierce lightning with a simple strike.
 
 tile.woolTransportalizer.white.name=White Sleeved Transportalizer
 tile.woolTransportalizer.orange.name=Orange Sleeved Transportalizer

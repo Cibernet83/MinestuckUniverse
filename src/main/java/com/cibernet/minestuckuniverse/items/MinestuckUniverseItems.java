@@ -47,6 +47,7 @@ public class MinestuckUniverseItems
 
     //Weapons
     public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool("sword", 0, 15.0F);
+    public static Item cybersword = new ItemLightningWeapon(8300, 7.0D, -2.2, 16, "cybersword", "cybersword");
 
     //Armor
     public static MSUArmorBase diverHelmet = new MSUArmorBase(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
@@ -65,6 +66,7 @@ public class MinestuckUniverseItems
         registerItem(registry, zillystoneShard);
 
         registerItem(registry, trueUnbreakableKatana);
+        registerItem(registry, cybersword);
 
         registerItem(registry, diverHelmet);
 
