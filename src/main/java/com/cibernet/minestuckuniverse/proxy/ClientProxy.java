@@ -57,32 +57,32 @@ public class ClientProxy extends CommonProxy
 
         MinecraftForge.EVENT_BUS.register(MSUChannelHandler.instance);
     }
-    
+
     @Override
     public void postInit()
     {
         super.postInit();
-        
+
         overridePlayerModels();
     }
-    
+
     public void overridePlayerModels()
     {
         Map<String, RenderPlayer> skinMap = ObfuscationReflectionHelper.getPrivateValue(RenderManager.class, Minecraft.getMinecraft().getRenderManager(), "field_178636_l");
         if(skinMap == null) return;
-    
+
         RenderPlayer defaultRender = skinMap.get("default");
         overridePlayerModels(defaultRender, false);
-    
+
         RenderPlayer slimRender = skinMap.get("slim");
         overridePlayerModels(slimRender, true);
     }
-    
+
     public void overridePlayerModels(RenderPlayer renderPlayer, boolean slim)
     {
         ModelBase oldModel = ObfuscationReflectionHelper.getPrivateValue(RenderLivingBase.class, renderPlayer, "field_77045_g");
         ObfuscationReflectionHelper.setPrivateValue(RenderLivingBase.class, renderPlayer, new ModelPlayerOverride(oldModel, 0.0F, slim), "field_77045_g");
-    
+
         List<LayerRenderer<EntityLivingBase>> layers = ObfuscationReflectionHelper.getPrivateValue(RenderLivingBase.class, renderPlayer, "field_177097_h");
         if(layers != null)
         {

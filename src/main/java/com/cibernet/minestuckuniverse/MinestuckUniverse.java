@@ -30,11 +30,11 @@ public class MinestuckUniverse
     public static final String NAME = "Minestuck Universe";
     public static final String SHORT = "MSU";
     public static final String VERSION = "@VERSION@";
-    
+
     public static final Random RANDOM = new Random();
-    
+
     public static final CreativeTabs tab = TabMinestuckUniverse.instance;
-    
+
     @Mod.Instance("minestuckuniverse")
     public static MinestuckUniverse instance;
     @SidedProxy(
@@ -46,7 +46,7 @@ public class MinestuckUniverse
     public static boolean isThaumLoaded;
     public static boolean isBotaniaLoaded;
     public static boolean isArsenalLoaded;
-    
+
     public static boolean fillerItemsEnabled = true;
 
     @EventHandler
@@ -64,6 +64,7 @@ public class MinestuckUniverse
     {
         proxy.init();
     }
+
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
