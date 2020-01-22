@@ -64,4 +64,6 @@ public class CommonProxy
         MSUChannelHandler.setupChannel();
         MSUUtils.registerDeployList();
     }
+    
+    public void postInit() {}
 }
