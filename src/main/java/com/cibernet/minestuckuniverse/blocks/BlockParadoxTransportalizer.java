@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
+import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityParadoxTransportalizer;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.tileentity.TileEntityTransportalizer;
@@ -33,6 +34,7 @@ public class BlockParadoxTransportalizer extends BlockContainer
 		setRegistryName("paradox_transportalizer");
 		this.setHardness(3.5F);
 		this.setHarvestLevel("pickaxe", 0);
+		setCreativeTab(TabMinestuckUniverse.instance);
 	}
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return TRANSPORTALIZER_AABB;

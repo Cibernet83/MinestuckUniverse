@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.events.ServerEventHandler;
+import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.tileentity.*;
 import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
@@ -29,7 +30,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
         MinecraftForge.EVENT_BUS.register(MSUSoundHandler.instance);
-        
+
         MSUSoundHandler.initSounds();
         MSUBannerPatterns.init();
         MSUEntities.registerEntities();
@@ -49,12 +50,18 @@ public class CommonProxy
         NetworkRegistry.INSTANCE.registerGuiHandler(MinestuckUniverse.instance, new MSUGuiHandler());
 
         MinecraftForge.EVENT_BUS.register(ServerEventHandler.instance);
-        
+
         MSULandAspectRegistry.registerLands();
         MSUAlchemyRecipes.registerRecipes();
         MachineChasisRecipes.registerRecipes();
 
         MSUChannelHandler.setupChannel();
         MSUUtils.registerDeployList();
+    }
+
+    public void postInit()
+    {
+        if(MinestuckUniverse.isBotaniaLoaded)
+            BotaniaSupport.generateGristCosts();
     }
 }

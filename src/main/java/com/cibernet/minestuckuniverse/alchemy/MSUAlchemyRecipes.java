@@ -3,7 +3,9 @@ package com.cibernet.minestuckuniverse.alchemy;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockGrist;
 import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.*;
 import com.mraof.minestuck.block.MinestuckBlocks;
@@ -25,11 +27,15 @@ import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.items.ItemsTC;
 import thaumcraft.common.config.ConfigItems;
+import vazkii.botania.api.BotaniaAPI;
+import vazkii.botania.common.block.ModBlocks;
+import vazkii.botania.common.item.ModItems;
 
 import javax.swing.*;
 import javax.swing.text.ComponentView;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import static com.mraof.minestuck.alchemy.CombinationRegistry.Mode.*;
 import static com.mraof.minestuck.alchemy.GristType.*;
@@ -42,23 +48,28 @@ public class MSUAlchemyRecipes
     private static GristType wood = MinestuckUniverse.isArsenalLoaded ? GristType.getTypeFromString("minestuckarsenal:wood")  : Build;
     private static GristType iron = MinestuckUniverse.isArsenalLoaded ? GristType.getTypeFromString("minestuckarsenal:iron")  : Rust;
     
-    private static ArrayList<Block> gristBlocks = new ArrayList<Block>() {{add(gristBlockAmber); add(gristBlockAmethyst); add(gristBlockArtifact); add(gristBlockCaulk); add(gristBlockChalk); add(gristBlockCobalt); add(gristBlockBuild); add(gristBlockDiamond); add(gristBlockGarnet); add(gristBlockGold); add(gristBlockIodine); add(gristBlockMarble);
+    private static final ArrayList<Block> gristBlocks = new ArrayList<Block>() {{add(gristBlockAmber); add(gristBlockAmethyst); add(gristBlockArtifact); add(gristBlockCaulk); add(gristBlockChalk); add(gristBlockCobalt); add(gristBlockBuild); add(gristBlockDiamond); add(gristBlockGarnet); add(gristBlockGold); add(gristBlockIodine); add(gristBlockMarble);
         add(gristBlockMercury); add(gristBlockQuartz); add(gristBlockRuby); add(gristBlockRust); add(gristBlockSulfur); add(gristBlockShale); add(gristBlockTar); add(gristBlockUranium); add(gristBlockZillium);}};
     
-    private static ArrayList<BlockWoolTransportalizer> sleevedTPs = new ArrayList<BlockWoolTransportalizer>() {{add(cyanWoolTransportalizer); add(whiteWoolTransportalizer); add(orangeWoolTransportalizer); add(magentaWoolTransportalizer); add(lightBlueWoolTransportalizer); add(yellowWoolTransportalizer); add(limeWoolTransportalizer); add(pinkWoolTransportalizer);
+    private static final ArrayList<BlockWoolTransportalizer> sleevedTPs = new ArrayList<BlockWoolTransportalizer>() {{add(cyanWoolTransportalizer); add(whiteWoolTransportalizer); add(orangeWoolTransportalizer); add(magentaWoolTransportalizer); add(lightBlueWoolTransportalizer); add(yellowWoolTransportalizer); add(limeWoolTransportalizer); add(pinkWoolTransportalizer);
     add(grayWoolTransportalizer); add(silverWoolTransportalizer); add(purpleWoolTransportalizer); add(blueWoolTransportalizer); add(brownWoolTransportalizer); add(greenWoolTransportalizer); add(redWoolTransportalizer); add(blackWoolTransportalizer);}};
-    
+
+    private static final TreeMap<EnumDyeColor, GristSet> dyeGrist = new TreeMap<>();
+
     public static void registerRecipes()
     {
+        for(EnumDyeColor color : EnumDyeColor.values())
+            dyeGrist.put(color, GristRegistry.getGristConversion(new ItemStack(Items.DYE, 1, color.getDyeDamage())));
+
         registerVanilla();
         registerMSU();
-
-        if(MinestuckUniverse.isThaumLoaded) registerThaumcraft();
-
-        if(!MinestuckUniverse.isArsenalLoaded) registerArsenalFallback();
-        
         registerGristBlockRecipes();
         registerSleevedTransportalizerRecipes();
+
+        if(MinestuckUniverse.isThaumLoaded) registerThaumcraft();
+        if(MinestuckUniverse.isBotaniaLoaded) registerBotania();
+        if(!MinestuckUniverse.isArsenalLoaded) registerArsenalFallback();
+
     }
 
     public static void registerVanilla()
@@ -246,6 +257,130 @@ public class MSUAlchemyRecipes
         //Infusion
         //ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("minestuckuniverse","gristDecomposer"), new InfusionRecipe("SBURBOMANCY@1", new ItemStack(gristDecomposer), 1, (new AspectList()).add(Aspect.ALCHEMY, 30).add(Aspect.MECHANISM, 40).add(Aspect.MAGIC, 30), new ItemStack(thaumChasis), new Object[]{new ItemStack(MinestuckBlocks.sburbMachine, 1, 3), new ItemStack(MinestuckItems.energyCore), ConfigItems.ENTROPY_CRYSTAL, ConfigItems.ORDER_CRYSTAL}));
 
+    }
+
+    public static void registerBotania()
+    {
+        //Grist Conversions
+        GristRegistry.addGristConversion(ModBlocks.livingwood, new GristSet(new GristType[] {Build, Mana}, new int[] {2,2}));
+        GristRegistry.addGristConversion(ModBlocks.livingrock, new GristSet(new GristType[] {Build, Mana}, new int[] {2,2}));
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 0), true, GristRegistry.getGristConversion(new ItemStack(Items.IRON_INGOT)).addGrist(Mana, 3));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 1), true, GristRegistry.getGristConversion(new ItemStack(Items.ENDER_PEARL)).addGrist(Mana, 6));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 2), true, GristRegistry.getGristConversion(new ItemStack(Items.DIAMOND)).addGrist(Mana, 10));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 16), true, GristRegistry.getGristConversion(new ItemStack(Items.STRING)).addGrist(Mana, 5));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaBottle, 1, 16), true, new GristSet(new GristType[] {Build, Mana}, new int[] {1, 5}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaCookie), false, new GristSet(new GristType[] {Amber, Iodine, Mana}, new int[] {1, 1, 20}));
+        GristRegistry.addGristConversion(new ItemStack(ModBlocks.pistonRelay), false, new GristSet(new GristType[] {Build, Garnet, Rust, Mana}, new int[] {14, 4, 9, 15}));
+        GristRegistry.addGristConversion(new ItemStack(ModBlocks.tinyPotato), false, GristRegistry.getGristConversion(new ItemStack(Items.POTATO)).addGrist(Mana, 1));
+        GristRegistry.addGristConversion(new ItemStack(ModBlocks.manaGlass), false, GristRegistry.getGristConversion(new ItemStack(Blocks.GLASS)).addGrist(Mana, 1));
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 23), true, new GristSet(new GristType[] {Mana, Chalk}, new int[] {5,5}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.quartz, 1, 1), true, new GristSet(new GristType[] {Quartz, Marble, Mana}, new int[] {4,1,1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.grassSeeds, 1, 0), true, new GristSet(new GristType[]{Iodine, Amber}, new int[]{1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.grassSeeds, 1, 1), true, new GristSet(new GristType[]{Sulfur, Amber}, new int[]{1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.grassSeeds, 1, 2), true, new GristSet(new GristType[]{Iodine, Ruby}, new int[]{1, 1}));
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 4), true, new GristSet(new GristType[]{Build, Mana, Uranium, Rust, Diamond}, new int[] {210, 500, 22, 18, 24}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 5), true, new GristSet(new GristType[]{Mana, Uranium, Artifact}, new int[] {440, 84, 10}));
+
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.overgrowthSeed), false, new GristSet(new GristType[]{Mana, Iodine, Amber, Build}, new int[] {18, 132, 128, 24}));
+
+        if(MinestuckUniverse.isThaumLoaded)
+            GristRegistry.addGristConversion(new ItemStack(ModItems.manaInkwell), false, new GristSet(new GristType[] {Mana, Build, Chalk, Shale, Tar}, new int[] {35, 1, 4, 1, 4}));
+
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.blackLotus, 1, 0), true, new GristSet(new GristType[] {Mana, Iodine}, new int[] {8, 2}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.blackLotus, 1, 1), true, new GristSet(new GristType[] {Mana, Iodine}, new int[] {100, 2}));
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 6), true, new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 15), true, new GristSet(new GristType[] {Mercury, Uranium, Build}, new int[] {2, 2, 3}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 7), true, new GristSet(new GristType[] {Mana, Ruby, Rust}, new int[] {5, 8, 16}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 8), true, new GristSet(new GristType[] {Mana, Ruby, Uranium}, new int[] {5, 8, 16}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 9), true, new GristSet(new GristType[] {Mana, Ruby, Diamond}, new int[] {5, 16, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ModBlocks.elfGlass), false, new GristSet(new GristType[] {Build, Mana, Diamond}, new int[] {1, 2, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.quartz, 1, 5), true, new GristSet(new GristType[] {Quartz, Marble, Mana}, new int[] {1, 1, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModBlocks.dreamwood), false, new GristSet(new GristType[]{Build, Mana}, new int[] {2, 4}));
+
+        GristRegistry.addGristConversion(new ItemStack(ModBlocks.altar), false, new GristSet(Build, 10));
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 0), true, new GristSet(new GristType[]{Mana, Marble, Rust, Cobalt}, new int[] {5, 8, 4, 16}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 1), true, new GristSet(new GristType[]{Mana, Marble, Rust, Tar}, new int[] {5, 8, 4, 16}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 2), true, new GristSet(new GristType[]{Mana, Marble, Rust, Shale}, new int[] {5, 8, 4, 16}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 3), true, new GristSet(new GristType[]{Mana, Marble, Rust, Chalk}, new int[] {5, 8, 4, 16}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 4), true, new GristSet(new GristType[]{Mana, Marble, Rust, Cobalt, Tar, Iodine}, new int[] {8, 8, 4, 8, 8, 12}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 5), true, new GristSet(new GristType[]{Mana, Marble, Rust, Shale, Chalk, Caulk}, new int[] {8, 8, 4, 8, 8, 12}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 6), true, new GristSet(new GristType[]{Mana, Marble, Rust, Chalk, Tar, Sulfur}, new int[] {8, 8, 4, 8, 8, 12}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 7), true, new GristSet(new GristType[]{Mana, Marble, Rust, Cobalt, Shale}, new int[] {8, 8, 4, 16, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 8), true, new GristSet(new GristType[]{Mana, Marble, Rust, Uranium}, new int[] {24, 8, 8, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 9), true, new GristSet(new GristType[]{Mana, Marble, Rust, Shale, Chalk, Caulk, Quartz}, new int[] {12, 8, 4, 8, 16, 8, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 10), true, new GristSet(new GristType[]{Mana, Marble, Rust, Shale, Tar, Cobalt, Iodine}, new int[] {12, 8, 4, 8, 8, 16, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 11), true, new GristSet(new GristType[]{Mana, Marble, Rust, Cobalt, Tar, Iodine, Gold}, new int[] {12, 8, 4, 8, 16, 8, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 12), true, new GristSet(new GristType[]{Mana, Marble, Rust, Chalk, Tar, Sulfur, Caulk}, new int[] {12, 8, 4, 8, 16, 8, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 13), true, new GristSet(new GristType[]{Mana, Marble, Rust, Shale, Cobalt, Garnet}, new int[] {12, 8, 4, 16, 16, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 13), true, new GristSet(new GristType[]{Mana, Marble, Rust, Shale, Cobalt, Amethyst}, new int[] {12, 8, 4, 8, 24, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.rune, 1, 12), true, new GristSet(new GristType[]{Mana, Marble, Rust, Chalk, Tar, Shale, Caulk, Diamond}, new int[] {12, 8, 4, 8, 8, 8, 8, 4}));
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.gaiaHead), false, new GristSet(new GristType[]{Build, Mana, Artifact, Zillium}, new int[] {125, 340, 200, 10}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.recordGaia1), false, new GristSet(new GristType[]{Build, Mana, Artifact, Tar}, new int[] {84, 4, 5, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.recordGaia2), false, new GristSet(new GristType[]{Build, Mana, Artifact, Gold}, new int[] {88, 20, 50, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.pinkinator), false, new GristSet(new GristType[]{Build, Mana, Artifact, Zillium}, new int[] {1200, 200, 924, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.ancientWill), false, new GristSet(new GristType[]{Build, Mana}, new int[] {800, 400}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.infiniteFruit), false, new GristSet(new GristType[]{Mana, Iodine, Zillium}, new int[] {800, 1600, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.kingKey), false, new GristSet(new GristType[]{Mana, Sulfur, Zillium}, new int[] {800, 1600, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.flugelEye), false, new GristSet(new GristType[]{Mana, Uranium, Zillium}, new int[] {800, 1200, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.odinRing), false, new GristSet(new GristType[]{Mana, Garnet, Ruby, Zillium}, new int[] {800, 600, 600, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.thorRing), false, new GristSet(new GristType[]{Mana, Uranium, Shale, Zillium}, new int[] {800, 400, 800, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.lokiRing), false, new GristSet(new GristType[]{Mana, Cobalt, Gold, Zillium}, new int[] {800, 800, 400, 1}));
+
+        GristRegistry.addGristConversion(new ItemStack(ModItems.starSword), false, new GristSet(new GristType[]{Build, Mana, Uranium, Rust, Diamond, Ruby, Garnet}, new int[] {450, 1020, 48, 36, 56, 84, 12}));
+        GristRegistry.addGristConversion(new ItemStack(ModItems.thunderSword), false, new GristSet(new GristType[]{Build, Mana, Uranium, Rust, Diamond, Cobalt, Mercury}, new int[] {450, 1020, 48, 36, 56, 84, 12}));
+
+        //Combination Recipes
+        CombinationRegistry.addCombination(new ItemStack(ModItems.manaBottle), new ItemStack(Items.SUGAR), MODE_OR, Mana.getCandyItem());
+        CombinationRegistry.addCombination(new ItemStack(gristBlockMana), new ItemStack(Items.GLASS_BOTTLE), MODE_OR, false, false, new ItemStack(ModItems.manaBottle));
+        CombinationRegistry.addCombination(new ItemStack(ModItems.grassSeeds), new ItemStack(Blocks.DIRT), MODE_OR, true, false, new ItemStack(Blocks.GRASS));
+        CombinationRegistry.addCombination(new ItemStack(ModItems.grassSeeds, 1, 1), new ItemStack(Blocks.DIRT), MODE_OR, true, false, new ItemStack(Blocks.DIRT, 1, 2));
+        CombinationRegistry.addCombination(new ItemStack(ModItems.grassSeeds, 1, 2), new ItemStack(Blocks.DIRT), MODE_OR, true, false, new ItemStack(Blocks.MYCELIUM));
+        CombinationRegistry.addCombination(new ItemStack(ModItems.overgrowthSeed), new ItemStack(Blocks.DIRT), MODE_OR, false, false, new ItemStack(ModBlocks.enchantedSoil));
+        CombinationRegistry.addCombination(new ItemStack(ModItems.manaResource, 1, 5), new ItemStack(Items.SKULL, 1, 3), MODE_AND, true, true, new ItemStack(ModItems.gaiaHead));
+        CombinationRegistry.addCombination(new ItemStack(ModItems.manaResource, 1, 5), new ItemStack(Items.RECORD_WAIT), MODE_AND, true, false, new ItemStack(ModItems.recordGaia1));
+        CombinationRegistry.addCombination(new ItemStack(ModItems.manaResource, 1, 5), new ItemStack(Items.RECORD_13), MODE_AND, true, false, new ItemStack(ModItems.recordGaia1));
+        CombinationRegistry.addCombination(new ItemStack(ModItems.manaResource, 1, 14), new ItemStack(Items.RECORD_13), MODE_AND, true, false, new ItemStack(ModItems.recordGaia2));
+        CombinationRegistry.addCombination(new ItemStack(ModItems.manaResource, 1, 14), new ItemStack(Items.RECORD_WAIT), MODE_AND, true, false, new ItemStack(ModItems.recordGaia2));
+        CombinationRegistry.addCombination(new ItemStack(ModBlocks.dreamwood, 1, 1), new ItemStack(Blocks.CRAFTING_TABLE), MODE_AND, true, false, new ItemStack(ModBlocks.openCrate, 1, 1));
+        CombinationRegistry.addCombination(new ItemStack(ModBlocks.livingwood, 1, 1), new ItemStack(Blocks.CRAFTING_TABLE), MODE_AND, true, false, new ItemStack(ModBlocks.openCrate, 1, 0));
+
+        for(EnumDyeColor color : EnumDyeColor.values())
+        {
+            int i = color.getMetadata();
+            //flowerGrist.addGrist(flowerGrist);
+            //flowerGrist.addGrist(Iodine, 1);
+
+            ItemStack dye = new ItemStack(Items.DYE, 1, color.getDyeDamage());
+            ItemStack wool = new ItemStack(Blocks.WOOL, 1, color.getMetadata());
+            GristSet dyeGrist = GristRegistry.getGristConversion(wool).addGrist(Chalk, -6);
+
+            if(dyeGrist.getGrist(Chalk) == 0) dyeGrist.addGrist(Chalk, 0);
+
+            GristSet flowerGrist = dyeGrist.copy().scaleGrist(2).addGrist(Iodine, 1);
+            GristSet doubleFlowerGrist = dyeGrist.copy().scaleGrist(4).addGrist(Iodine, 2);
+
+            GristRegistry.addGristConversion(ModBlocks.flower, i, flowerGrist);
+            GristRegistry.addGristConversion( i < 8 ? ModBlocks.doubleFlower1 : ModBlocks.doubleFlower2, i % 8, doubleFlowerGrist);
+            GristRegistry.addGristConversion(new ItemStack(ModItems.dye, 1, i), dyeGrist);
+            CombinationRegistry.addCombination(new ItemStack(Items.SUGAR), new ItemStack(Items.DYE, 1, i), MODE_AND, false, true, new ItemStack(ModItems.dye, 1, i));
+            CombinationRegistry.addCombination(new ItemStack(Blocks.TALLGRASS), new ItemStack(ModItems.petal, 1, i), MODE_AND, false, true, new ItemStack(ModBlocks.flower, 1, i));
+            CombinationRegistry.addCombination(new ItemStack(Blocks.DOUBLE_PLANT, 1, 2), new ItemStack(ModItems.petal, 1, i), MODE_AND, true, true, new ItemStack( i < 8 ? ModBlocks.doubleFlower1 : ModBlocks.doubleFlower2, 1, i));
+            CombinationRegistry.addCombination(new ItemStack(ModBlocks.flower, 1, i), new ItemStack(Items.GLOWSTONE_DUST), MODE_OR, true, false, new ItemStack(ModBlocks.shinyFlower, 1, i));
+            CombinationRegistry.addCombination(new ItemStack(ModBlocks.shinyFlower, 1, i), new ItemStack(Blocks.GRASS), MODE_OR, true, false, new ItemStack(ModBlocks.floatingFlower, 1, i));
+        }
+
+        //Botania Recipes
+        BotaniaAPI.registerManaInfusionRecipe(new ItemStack(magicBlock), new ItemStack(MinestuckBlocks.genericObject), 16000);
+
+        BotaniaSupport.gristCosts = GristRegistry.getAllConversions();
     }
 
     public static void registerArsenalFallback()

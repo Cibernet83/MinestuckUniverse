@@ -35,7 +35,7 @@ public class ItemChisel extends MSUItemBase
 			int luck = (luckFX != null ? luckFX.getAmplifier()+1 : 0) - (unluckFX != null ? unluckFX.getAmplifier()+1 : 0);
 			int val = 1;
 
-			val += Math.signum(luck)*((new Random().nextInt(10) < Math.abs(luck) ? 1 : 0));
+			val += Math.signum(luck)*((new Random().nextInt(10) < Math.abs(luck) ? 1 : 0)) - 2; //TODO turn the modifier into a config option
 
 			InventoryHelper.spawnItemStack(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(MinestuckUniverseItems.zillystoneShard, val));
 			player.getHeldItem(hand).damageItem(1, player);

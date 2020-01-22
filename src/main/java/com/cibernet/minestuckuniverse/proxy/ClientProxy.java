@@ -37,4 +37,9 @@ public class ClientProxy extends CommonProxy
 
         MinecraftForge.EVENT_BUS.register(MSUChannelHandler.instance);
     }
+
+    @Override
+    public void postInit() {
+        super.postInit();
+    }
 }
