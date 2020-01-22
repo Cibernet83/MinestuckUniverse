@@ -45,6 +45,16 @@ item.diverHelmet.name=Diver Helmet
 
 item.spaceSalt.name=Spatial Manipulation Dust
 item.spaceSalt.tooltip=A way to shrink and grow things, especially machines!
+
+item.obsidianBottle.name=Obsidian Bottle
+item.obsidianBottle.tooltip=looks like it might be able to resist all kinds of natural conditions, who knows what cool things you could store in it!
+item.bottledLightning.name=Lightning in a Bottle
+item.bottledLightning.tooltip=How did you get it, it's like catching, well, lightning in a bottle.
+item.bottledFire.name=Fire in a Bottle
+item.bottledFire.tooltip=Despite the constantly burning inside it, this bottle manages to stay relatively cool.
+item.bottledCloud.name=Cloud in a Bottle
+item.bottledCloud.tooltip=Harness the wind!
+
 item.moonstone.name=Moonstone
 item.moonstoneChisel.name=Moonstone Chisel
 item.moonstoneChisel.tooltip=Just by holding it you can feel how magical it is, yet it's not strong enough to chisel a block of stone.

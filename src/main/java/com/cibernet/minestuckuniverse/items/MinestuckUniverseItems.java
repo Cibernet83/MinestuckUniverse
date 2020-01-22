@@ -42,6 +42,12 @@ public class MinestuckUniverseItems
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
 
+
+    public static Item obsidianBottle = new MSUItemBase("obsidian_bottle", "obsidianBottle");
+    public static Item bottledLightning = new MSUItemBase("bottled_lightning", "bottledLightning");
+    public static Item bottledFire = new MSUItemBase("bottled_fire", "bottledFire");
+    public static Item bottledCloud = new MSUItemBase("bottled_cloud", "bottledCloud");
+
     public static Item murica = new ItemSound("murica", "murica", MSUSoundHandler.murica).setCreativeTab(null);
     public static Item muricaSouth = new ItemSound("murica_south", "muricaSouth", MSUSoundHandler.murica_south).setCreativeTab(null);
 
@@ -64,6 +70,11 @@ public class MinestuckUniverseItems
         registerItem(registry, moonstone);
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
+
+        registerItem(registry, obsidianBottle);
+        registerItem(registry, bottledLightning);
+        registerItem(registry, bottledFire);
+        registerItem(registry, bottledCloud);
 
         registerItem(registry, trueUnbreakableKatana);
         registerItem(registry, cybersword);

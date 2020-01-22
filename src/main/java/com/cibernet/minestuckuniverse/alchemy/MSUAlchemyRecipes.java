@@ -127,7 +127,11 @@ public class MSUAlchemyRecipes
     
         GristRegistry.addGristConversion(new ItemStack(spaceSalt), new GristSet(new GristType[] {Uranium, Tar, Zillium}, new int[] {10, 32, 1}));
     
-    
+        GristRegistry.addGristConversion(new ItemStack(obsidianBottle), new GristSet(new GristType[]{Build, Tar, Cobalt}, new int[] {1,2,1}));
+        GristRegistry.addGristConversion(new ItemStack(bottledLightning), new GristSet(new GristType[]{Build, Tar, Cobalt, Mercury}, new int[] {1,1,16, 48}));
+        GristRegistry.addGristConversion(new ItemStack(bottledLightning), new GristSet(new GristType[]{Build, Tar, Cobalt, Uranium}, new int[] {1,16,1, 48}));
+        GristRegistry.addGristConversion(new ItemStack(bottledLightning), new GristSet(new GristType[]{Build, Tar, Cobalt, Chalk}, new int[] {1,1,16, 48}));
+
         GristRegistry.addGristConversion(new ItemStack(trueUnbreakableKatana) , new GristSet(Zillium, 1000));
         GristRegistry.addGristConversion(new ItemStack(cybersword), new GristSet(new GristType[] {Build, Cobalt, Mercury, Diamond}, new int[] {4000, 800, 250, 8}));
         
@@ -150,9 +154,13 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 6), new ItemStack(MinestuckBlocks.transportalizer), MODE_AND, true, false, new ItemStack(paradoxTransportalizer));
 
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 6), new ItemStack(Items.GLOWSTONE_DUST), MODE_OR, true, false, new ItemStack(spaceSalt));
-        
+
+        CombinationRegistry.addCombination(new ItemStack(Items.GLASS_BOTTLE), new ItemStack(Blocks.OBSIDIAN), MODE_AND, new ItemStack(obsidianBottle));
+        CombinationRegistry.addCombination(new ItemStack(Items.BLAZE_POWDER), new ItemStack(obsidianBottle), MODE_OR, new ItemStack(bottledFire));
+
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.unbreakableKatana), new ItemStack(Blocks.BEDROCK), MODE_AND, false, false, new ItemStack(trueUnbreakableKatana));
-        
+        CombinationRegistry.addCombination(new ItemStack(Items.IRON_SWORD), new ItemStack(bottledLightning), MODE_AND, false, false, new ItemStack(cybersword));
+
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.sbahjPoster), new ItemStack(Items.COMPASS), MODE_OR, new ItemStack(murica));
         CombinationRegistry.addCombination(new ItemStack(murica), new ItemStack(Blocks.WOOL, 1, EnumDyeColor.RED.getMetadata()), MODE_AND, false, true, new ItemStack(muricaSouth));
 
