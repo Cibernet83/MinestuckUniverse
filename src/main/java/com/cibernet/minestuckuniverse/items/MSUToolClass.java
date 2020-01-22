@@ -60,7 +60,9 @@ public class MSUToolClass
 		return this;
 	}
 	
-	public MSUToolClass addEnchantmesnts(List<Enchantment> enchantments)
+	
+	
+	public MSUToolClass addEnchantments(List<Enchantment> enchantments)
 	{
 		this.enchantments.addAll(enchantments);
 		return this;
