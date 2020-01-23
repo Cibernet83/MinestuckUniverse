@@ -7,13 +7,16 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.mraof.minestuck.Minestuck;
+import com.mraof.minestuck.item.weapon.ItemDualWeapon;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
+import javafx.util.Pair;
 import net.minecraft.block.Block;
 
 import net.minecraft.client.audio.ISoundEventAccessor;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 
@@ -29,6 +32,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import scala.collection.mutable.HashEntry;
 
 import java.util.ArrayList;
 
@@ -53,7 +57,7 @@ public class MinestuckUniverseItems
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
 
-
+    public static Item battery = new MSUItemBase("battery", "battery");
     public static Item obsidianBottle = new MSUItemBase("obsidian_bottle", "obsidianBottle");
     public static Item bottledLightning = new MSUItemBase("bottled_lightning", "bottledLightning");
     public static Item bottledFire = new MSUItemBase("bottled_fire", "bottledFire");
@@ -61,7 +65,9 @@ public class MinestuckUniverseItems
 
     //Weapons
     public static Item trueUnbreakableKatana = new MSUWeaponBase(7, -2.4D, 20, "true_unbreakable_katana", "unbreakableKatana").setTool(toolSword, 0, 15.0F);
-    public static Item cybersword = new ItemLightningWeapon(8300, 7.0D, -2.2, 16, "cybersword", "cybersword");
+    //public static Item batteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade", "batteryBeamBlade").setTool(toolSword, 0, 15.0F);
+    public static Item batteryBeamBlade = new ItemDualWeapon(345, 5, -2.3, 20, 1, 1, "batteryBeamBlade").setRegistryName("battery_beam_blade");//.setTool(toolSword, 0, 15.0F);
+    public static Item cybersword = new ItemLightningWeapon(8300, 7.0D, -2.2, 16, "cybersword", "cybersword").setTool(toolSword, 0, 15.0F);;
 
     public static Item fancyGlove = new MSUWeaponBase(50, 0D, 0, 5, "fancy_glove", "fancyGlove").setTool(toolGauntlet, 0, 0);
     public static Item spikedGlove = new MSUWeaponBase(95, 3.5D, 0.25D, 8, "spiked_glove", "spikedGlove").setTool(toolGauntlet, 0, 0.5F);
@@ -92,10 +98,11 @@ public class MinestuckUniverseItems
         registerItem(registry, moonstone);
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
-        registerItem(registry, parmorh);
-        registerItem(registry, parmorc);
-        registerItem(registry, parmorl);
-        registerItem(registry, parmorf);
+        registerItem(registry, battery);
+        //registerItem(registry, parmorh);
+        //registerItem(registry, parmorc);
+        //registerItem(registry, parmorl);
+        //registerItem(registry, parmorf);
 
         registerItem(registry, obsidianBottle);
         registerItem(registry, bottledLightning);
@@ -103,6 +110,9 @@ public class MinestuckUniverseItems
         registerItem(registry, bottledCloud);
 
         registerItem(registry, trueUnbreakableKatana);
+        //registerItem(registry, batteryBeamBlade, new MSUModelManager.BeamBladeDefinition(batteryBeamBlade));
+        //registry.register(batteryBeamBlade);
+        registerItem(registry, batteryBeamBlade);
         registerItem(registry, cybersword);
 
         registerItem(registry, fancyGlove);
@@ -167,6 +177,14 @@ public class MinestuckUniverseItems
         MSUModelManager.items.add(item);
         return item;
     }
+
+    private static Item registerItem(IForgeRegistry<Item> registry, Item item, MSUModelManager.CustomItemMeshDefinition customMesh)
+    {
+        registry.register(item);
+        MSUModelManager.customItemModels.add(new Pair<>(item, customMesh));
+        return item;
+    }
+
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry)
     {
