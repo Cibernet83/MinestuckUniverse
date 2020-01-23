@@ -53,8 +53,15 @@ public class MinestuckUniverseItems
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
 
+
+    public static Item obsidianBottle = new MSUItemBase("obsidian_bottle", "obsidianBottle");
+    public static Item bottledLightning = new MSUItemBase("bottled_lightning", "bottledLightning");
+    public static Item bottledFire = new MSUItemBase("bottled_fire", "bottledFire");
+    public static Item bottledCloud = new MSUItemBase("bottled_cloud", "bottledCloud");
+
     //Weapons
     public static Item trueUnbreakableKatana = new MSUWeaponBase(7, -2.4D, 20, "true_unbreakable_katana", "unbreakableKatana").setTool(toolSword, 0, 15.0F);
+    public static Item cybersword = new ItemLightningWeapon(8300, 7.0D, -2.2, 16, "cybersword", "cybersword");
 
     public static Item fancyGlove = new MSUWeaponBase(50, 0D, 0, 5, "fancy_glove", "fancyGlove").setTool(toolGauntlet, 0, 0);
     public static Item spikedGlove = new MSUWeaponBase(95, 3.5D, 0.25D, 8, "spiked_glove", "spikedGlove").setTool(toolGauntlet, 0, 0.5F);
@@ -90,7 +97,13 @@ public class MinestuckUniverseItems
         registerItem(registry, parmorl);
         registerItem(registry, parmorf);
 
+        registerItem(registry, obsidianBottle);
+        registerItem(registry, bottledLightning);
+        registerItem(registry, bottledFire);
+        registerItem(registry, bottledCloud);
+
         registerItem(registry, trueUnbreakableKatana);
+        registerItem(registry, cybersword);
 
         registerItem(registry, fancyGlove);
         registerItem(registry, spikedGlove);
