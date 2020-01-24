@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.util;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.items.ItemBeamBlade;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.client.util.MinestuckModelManager;
 import com.mraof.minestuck.item.MinestuckItems;
@@ -46,16 +47,19 @@ public class MSUModelManager
         
         for(Item item : items)
             register(item);
-        /*
+
         for(Pair<Item, CustomItemMeshDefinition> pair : customItemModels)
         {
             ModelLoader.registerItemVariants(pair.getKey(), pair.getValue().getResourceLocations());
             ModelLoader.setCustomMeshDefinition(pair.getKey(), pair.getValue());
-        }*/
+        }
 
         //ModelLoader.registerItemVariants(batteryBeamBlade, new ModelResourceLocation[]{new ModelResourceLocation("minestuck:catclaws_sheathed"), new ModelResourceLocation("minestuck:catclaws_drawn")});
         //ModelLoader.setCustomMeshDefinition(batteryBeamBlade, new DualWeaponDefinition(batteryBeamBlade));
 
+
+        //ModelLoader.registerItemVariants(batteryBeamBlade, );
+       // ModelLoader.setCustomMeshDefinition(batteryBeamBlade, new BeamBladeDefinition());
 
         //register(batteryBeamBlade);
 
@@ -101,36 +105,31 @@ public class MSUModelManager
         public ResourceLocation[] getResourceLocations();
     }
 
+
     public static class BeamBladeDefinition implements CustomItemMeshDefinition {
-        private Item item;
-
-        public BeamBladeDefinition(Item item /*, String onLocation, String offLocation*/) {
-
-            this.item = item;
-
-            System.out.println(item);
-            System.out.println(getResourceLocations());
+        public BeamBladeDefinition() {
         }
 
         public ModelResourceLocation getModelLocation(ItemStack stack) {
-            return new ModelResourceLocation(item.getRegistryName().toString() + (((ItemBeamBlade)this.item).isDrawn(stack) ? "_drawn ": ""), "inventory");
+            return new ModelResourceLocation( MinestuckUniverse.MODID+":" + (batteryBeamBlade.isDrawn(stack) ? "battery_beam_blade" : "battery_beam_blade_off"), "inventory");
         }
 
         @Override
         public ResourceLocation[] getResourceLocations() {
-            return new ResourceLocation[] {item.getRegistryName(), new ResourceLocation(item.getRegistryName().toString() + "_drawn")};
+            return new ResourceLocation[]{new ResourceLocation(MinestuckUniverse.MODID+":battery_beam_blade"), new ResourceLocation(MinestuckUniverse.MODID+":battery_beam_blade_off")};
         }
     }
-
-    private static class DualWeaponDefinition implements ItemMeshDefinition {
-        private Item item;
-
-        public DualWeaponDefinition(Item item) {
-            this.item = item;
+    public static class DyedBeamBladeDefinition implements CustomItemMeshDefinition {
+        public DyedBeamBladeDefinition() {
         }
 
         public ModelResourceLocation getModelLocation(ItemStack stack) {
-            return ((ItemDualWeapon)this.item).IsDrawn(stack) ? new ModelResourceLocation("minestuck:" + ((ItemDualWeapon)this.item).Prefex + "_drawn", "inventory") : new ModelResourceLocation("minestuck:" + ((ItemDualWeapon)this.item).Prefex + "", "inventory");
+            return new ModelResourceLocation( MinestuckUniverse.MODID+":" + (batteryBeamBlade.isDrawn(stack) ? "battery_beam_blade" : "battery_beam_blade_off"), "inventory");
+        }
+
+        @Override
+        public ResourceLocation[] getResourceLocations() {
+            return new ResourceLocation[]{new ResourceLocation(MinestuckUniverse.MODID+":dyed_battery_beam_blade"), new ResourceLocation(MinestuckUniverse.MODID+":dyed_battery_beam_blade_off")};
         }
     }
 }

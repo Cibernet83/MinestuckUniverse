@@ -5,13 +5,15 @@ import com.cibernet.minestuckuniverse.entity.models.ModelArmorOverride;
 import com.cibernet.minestuckuniverse.entity.models.ModelPlayerOverride;
 import com.cibernet.minestuckuniverse.fillerItems.MSUFillerItems;
 import com.cibernet.minestuckuniverse.entity.render.RenderHologram;
+import com.cibernet.minestuckuniverse.items.ItemBeamBlade;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.client.MSURenderMachineOutline;
 import com.cibernet.minestuckuniverse.entity.classes.EntityAcheron;
 import com.cibernet.minestuckuniverse.entity.models.ModelAcheron;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
-import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
 import com.mraof.minestuck.client.renderer.entity.RenderEntityMinestuck;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -35,6 +37,14 @@ import java.util.Map;
 
 public class ClientProxy extends CommonProxy
 {
+
+    protected static void registerRenderers()
+    {
+        Minecraft mc = Minecraft.getMinecraft();
+
+        mc.getItemColors().registerItemColorHandler(new ItemBeamBlade.BladeColorHandler(), batteryBeamBlade);
+    }
+
     @Override
     public void preInit()
     {
@@ -56,6 +66,7 @@ public class ClientProxy extends CommonProxy
         super.init();
 
         MinecraftForge.EVENT_BUS.register(MSUChannelHandler.instance);
+        registerRenderers();
     }
 
     @Override
