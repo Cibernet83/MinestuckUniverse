@@ -10,6 +10,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntitySpectralArrow;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
@@ -21,14 +22,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemGunWeapon extends Item {
+public class MSUGunBase extends Item {
     protected float projectileDamage;
     protected double fireRate;
     protected float speed;
     protected float inaccuracy;
     int counter = 0;
 
-    public ItemGunWeapon(int maxUses, float damageVsEntity, double fireRate, float speed, float inaccuracy, String name)
+    public MSUGunBase(int maxUses, float damageVsEntity, double fireRate, float speed, float inaccuracy, String name)
     {
         super();
         this.maxStackSize = 1;
@@ -60,8 +61,6 @@ public class ItemGunWeapon extends Item {
             tooltip.add(2, "20 Cooldown");
         }
 
-        }
-
     }
 
     @Override
@@ -80,8 +79,8 @@ public class ItemGunWeapon extends Item {
 
             if (!worldIn.isRemote)
             {
-                EntityArrow entityBullet = new EntityArrow(worldIn, playerIn);
-                entityBullet.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, speed, inaccuracy);
+                EntityArrow entityBullet = new EntitySpectralArrow(worldIn, playerIn);
+                entityBullet.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, speed, inaccuracy);
                 worldIn.spawnEntity(entityBullet);
             }
 
