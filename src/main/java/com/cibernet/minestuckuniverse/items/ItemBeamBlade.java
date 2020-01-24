@@ -1,8 +1,10 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.mraof.minestuck.client.util.MinestuckModelManager;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,20 +15,16 @@ import net.minecraft.world.World;
 
 public class ItemBeamBlade extends MSUWeaponBase
 {
-    public boolean dyeable = false;
+    public EnumDyeColor color = null;
     public ItemBeamBlade(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName) {
         super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
     }
 
-    public ItemBeamBlade setDyeable() {dyeable = true; return this;}
-    public boolean isDyeable() {return dyeable;}
+    public ItemBeamBlade setColor(EnumDyeColor color) {this.color = color; return this;}
+    public EnumDyeColor getColor() {return color;}
+    public boolean isDyeable() {return color != null;}
     public boolean isDrawn(ItemStack itemStack) {
         return this.checkTagCompound(itemStack).getBoolean("IsDrawn");
-    }
-
-    @Override
-    public boolean getHasSubtypes() {
-        return super.getHasSubtypes() || dyeable;
     }
 
     @Override
@@ -58,7 +56,7 @@ public class ItemBeamBlade extends MSUWeaponBase
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
 
-        changeState(stack, isDrawn(stack));
+        changeState(stack, !isDrawn(stack));
         return new ActionResult(EnumActionResult.SUCCESS, stack);
 
 
@@ -75,5 +73,25 @@ public class ItemBeamBlade extends MSUWeaponBase
     public void changeState(ItemStack stack, boolean drawn) {
         NBTTagCompound tagCompound = this.checkTagCompound(stack);
         tagCompound.setBoolean("IsDrawn", drawn);
+    }
+
+    @Override
+    public ItemBeamBlade setTool(MSUToolClass cls, int harvestLevel, float harvestSpeed) {
+        super.setTool(cls, harvestLevel, harvestSpeed);
+        return this;
+    }
+
+    public static class BladeColorHandler implements IItemColor
+    {
+
+        @Override
+        public int colorMultiplier(ItemStack stack, int tintIndex)
+        {
+            if(tintIndex != 1 || ((ItemBeamBlade) stack.getItem()).getColor() == null)
+                return -1;
+
+            int meta = stack.getMetadata();
+            return ((ItemBeamBlade) stack.getItem()).getColor().getColorValue();
+        }
     }
 }

@@ -1,7 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "minestuckuniverse:items/battery_beam_blade_handle",
-        "layer1": "minestuckuniverse:items/battery_beam_blade_on"
+        "layer0": "minestuckuniverse:items/battery_beam_blade_on"
     }
 }
