@@ -6,6 +6,7 @@ import com.google.common.collect.Multimap;
 import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.item.TabMinestuck;
 import com.mraof.minestuck.item.weapon.ItemWeapon;
+import javafx.scene.paint.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,6 +19,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
@@ -25,12 +28,14 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MSUWeaponBase extends MSUItemBase
+public class MSUWeaponBase extends ItemSword
 {
     protected boolean unbreakable;
     protected double weaponDamage;
     protected int enchantability;
     protected double weaponSpeed;
+    protected ToolMaterial material;
+    ItemStack repairMaterial = ItemStack.EMPTY;
     
     protected MSUToolClass tool = null;
     protected float harvestSpeed = 0;
@@ -38,7 +43,10 @@ public class MSUWeaponBase extends MSUItemBase
     
     public MSUWeaponBase(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
     {
-        super(name, unlocName);
+        super(ToolMaterial.IRON);
+        this.setRegistryName(name);
+        this.setUnlocalizedName(unlocName);
+        this.setCreativeTab(TabMinestuckUniverse.instance);
     
         this.unbreakable = maxUses <= 0;
         this.maxStackSize = 1;
@@ -46,6 +54,32 @@ public class MSUWeaponBase extends MSUItemBase
         this.weaponDamage = damageVsEntity;
         this.enchantability = enchantability;
         this.weaponSpeed = weaponSpeed;
+    }
+    
+    public MSUWeaponBase setMaterial(Item.ToolMaterial material)
+    {
+        this.material = material;
+        return this;
+    }
+    
+    public MSUWeaponBase setRepairMaterial(ItemStack stack)
+    {
+        this.repairMaterial = stack;
+        return this;
+    }
+    
+    @Override
+    public String getToolMaterialName()
+    {
+        return this.material.toString();
+    }
+    
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
+    {
+        ItemStack mat = repairMaterial;
+        if (!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
+        return super.getIsRepairable(toRepair, repair);
     }
     
     public MSUWeaponBase(double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
@@ -85,6 +119,20 @@ public class MSUWeaponBase extends MSUItemBase
         return true;
     }
     
+    @Override
+    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
+    {
+        int dmg = 1;
+        if(!canHarvestBlock(state))
+            dmg = 2;
+        if((double)state.getBlockHardness(worldIn, pos) == 0.0D)
+            dmg = 0;
+        
+        stack.damageItem(dmg, entityLiving);
+        
+        return true;
+    }
+    
     public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
         Multimap<String, AttributeModifier> multimap = HashMultimap.create();
         if (slot == EntityEquipmentSlot.MAINHAND) {
@@ -103,12 +151,14 @@ public class MSUWeaponBase extends MSUItemBase
         return this;
     }
     
+    public MSUToolClass getTool() {return tool;}
+    
     @Override
     public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
-        if(tool == null)
+        if(getTool() == null)
             return super.getDestroySpeed(stack, state);
-        if(tool.canHarvest(state))
+        if(getTool().canHarvest(state))
             return harvestSpeed;
         return super.getDestroySpeed(stack, state);
     }
@@ -116,7 +166,7 @@ public class MSUWeaponBase extends MSUItemBase
     @Override
     public boolean canHarvestBlock(IBlockState blockIn)
     {
-        if(tool == null)
+        if(getTool() == null)
             return super.canHarvestBlock(blockIn);
         return tool.canHarvest(blockIn);
     }
@@ -124,17 +174,17 @@ public class MSUWeaponBase extends MSUItemBase
     @Override
     public boolean isEnchantable(ItemStack stack)
     {
-        if(tool == null)
+        if(getTool() == null)
             return super.isEnchantable(stack);
-        return !tool.getEnchantments().isEmpty() || isDamageable();
+        return !getTool().getEnchantments().isEmpty() || isDamageable();
     }
     
     @Override
     public int getHarvestLevel(ItemStack stack, String toolClass, @Nullable EntityPlayer player, @Nullable IBlockState blockState)
     {
-        if(tool == null)
+        if(getTool() == null)
             return super.getHarvestLevel(stack, toolClass, player, blockState);
-        return tool.canHarvest(blockState) ? harvestLevel : -1;
+        return getTool().canHarvest(blockState) ? harvestLevel : -1;
     }
     
     @Override
@@ -143,9 +193,9 @@ public class MSUWeaponBase extends MSUItemBase
         if(enchantment.type.equals(EnumEnchantmentType.BREAKABLE))
             return !unbreakable;
         
-        if(tool == null)
+        if(getTool() == null)
             return super.canApplyAtEnchantingTable(stack, enchantment);
         
-        return tool.enchantments.contains(enchantment);
+        return getTool().enchantments.contains(enchantment);
     }
 }
