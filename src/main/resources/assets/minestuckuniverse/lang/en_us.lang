@@ -60,6 +60,8 @@ item.moonstoneChisel.name=Moonstone Chisel
 item.moonstoneChisel.tooltip=Just by holding it you can feel how magical it is, yet it's not strong enough to chisel a block of stone.
 item.zillystoneShard.name=Zillystone Shard
 item.zillystoneShard.tooltip=You've managed to chip this shard away from a Zillystone block, but what will you do with it next?
+item.battery.name=Battery
+
 item.cruxaclysmicHeartStopper.name=Cruxaclysmic HeartStopper
 item.cruxaclysmicHeartStopper.tooltip=pretty fuckin cool, nuff said
 item.ctd.name=Cruxatonic Derringer
@@ -77,6 +79,28 @@ item.muricaSouth.tooltip=redneck edition
 item.katana.name=Obsidian Katana
 item.unbreakableKatana.name=Unbreakable Katana
 item.unbreakableKatana.tooltip=A real hard sword for a real hard dude. It was said to be forged by an ancient Otaku Master over the heat of a roaring manga fire.
+item.cybersword.name=Cybersword
+item.cybersword.tooltip=Cibernet's weapon of choice, this sword can call down fierce lightning with a simple strike.
+
+item.batteryBeamBlade.name=Battery Beam Blade
+item.batteryBeamBlade.tooltip=lightsaber? what lightsaber? this isn't a lightsaber, it's a completely unique idea!
+item.batteryBeamBlade.white.name=White Battery Beam Blade
+item.batteryBeamBlade.orange.name=Orange Battery Beam Blade
+item.batteryBeamBlade.magenta.name=Magenta Battery Beam Blade
+item.batteryBeamBlade.lightBlue.name=Light Blue Battery Beam Blade
+item.batteryBeamBlade.yellow.name=Yellow Battery Beam Blade
+item.batteryBeamBlade.lime.name=Lime Battery Beam Blade
+item.batteryBeamBlade.pink.name=Pink Battery Beam Blade
+item.batteryBeamBlade.gray.name=Gray Battery Beam Blade
+item.batteryBeamBlade.silver.name=Silver Battery Beam Blade
+item.batteryBeamBlade.cyan.name=Cyan Battery Beam Blade
+item.batteryBeamBlade.purple.name=Purple Battery Beam Blade
+item.batteryBeamBlade.blue.name=Blue Battery Beam Blade
+item.batteryBeamBlade.brown.name=Brown Battery Beam Blade
+item.batteryBeamBlade.green.name=Green Battery Beam Blade
+item.batteryBeamBlade.red.name=Red Battery Beam Blade
+item.batteryBeamBlade.black.name=Black Battery Beam Blade
+
 item.fancyGlove.name=Fancy Glove
 item.glove.tooltip=A nice looking glove, it doesn't do much damage, but it sure looks fancy!
 item.spikedGlove.name=Spiked Gloves
@@ -89,8 +113,6 @@ item.pogoFist.tooltip=Uppercut your foes into the stratosphere with this bouncy 
 item.goldenGenesisGauntlet.name=Golden Genesis Gauntlet
 item.goldenGenesisGauntlet.tooltip=Feel the power of frogs (and the cosmos) within your palm!
 item.rocketFist.name=Rocket-Powered Fist
-item.cybersword.name=Cybersword
-item.cybersword.tooltip=Cibernet's weapon of choice, this sword can call down fierce lightning with a simple strike.
 
 tile.woolTransportalizer.white.name=White Sleeved Transportalizer
 tile.woolTransportalizer.orange.name=Orange Sleeved Transportalizer

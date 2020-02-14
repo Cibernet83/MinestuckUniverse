@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.mraof.minestuck.client.util.MinestuckModelManager;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class ItemBeamBlade extends MSUWeaponBase
@@ -26,19 +28,26 @@ public class ItemBeamBlade extends MSUWeaponBase
     public boolean isDrawn(ItemStack itemStack) {
         return this.checkTagCompound(itemStack).getBoolean("IsDrawn");
     }
-
+    
+    @Override
+    public String getItemStackDisplayName(ItemStack stack)
+    {
+        String color = "";
+        if(this.color != null)
+            color = "."+this.color.getUnlocalizedName();
+        return I18n.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + color + ".name").trim();
+    }
+    
     @Override
     public void setDamage(ItemStack stack, int damage)
     {
         if(!isDrawn(stack))
             return;
-        if(damage < 1) {
+        if(damage >= getMaxDamage(stack)+1)
             changeState(stack, false);
-            damage = 1;
-        }
-        super.setDamage(stack, damage);
+        else super.setDamage(stack, damage);
     }
-
+    
     private NBTTagCompound checkTagCompound(ItemStack stack) {
         NBTTagCompound tagCompound = stack.getTagCompound();
         if (tagCompound == null) {
@@ -55,8 +64,9 @@ public class ItemBeamBlade extends MSUWeaponBase
 
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
-
-        changeState(stack, !isDrawn(stack));
+    
+        if(getDamage(stack) < getMaxDamage(stack))
+            changeState(stack, !isDrawn(stack));
         return new ActionResult(EnumActionResult.SUCCESS, stack);
 
 
@@ -89,9 +99,10 @@ public class ItemBeamBlade extends MSUWeaponBase
         {
             if(tintIndex != 1 || ((ItemBeamBlade) stack.getItem()).getColor() == null)
                 return -1;
-
+            
             int meta = stack.getMetadata();
             return ((ItemBeamBlade) stack.getItem()).getColor().getColorValue();
         }
     }
+    
 }

@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.events.ServerEventHandler;
 import com.cibernet.minestuckuniverse.fillerItems.MSUFillerAlchemyRecipes;
 import com.cibernet.minestuckuniverse.fillerItems.MSUFillerBlocks;
 import com.cibernet.minestuckuniverse.fillerItems.MSUFillerItems;
@@ -32,6 +33,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
         MinecraftForge.EVENT_BUS.register(MSUSoundHandler.instance);
+        MinecraftForge.EVENT_BUS.register(ServerEventHandler.instance);
 
         if(MinestuckUniverse.fillerItemsEnabled)
         {

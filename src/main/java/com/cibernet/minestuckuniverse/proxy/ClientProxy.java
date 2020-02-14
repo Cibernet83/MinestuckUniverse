@@ -42,7 +42,7 @@ public class ClientProxy extends CommonProxy
     {
         Minecraft mc = Minecraft.getMinecraft();
 
-        mc.getItemColors().registerItemColorHandler(new ItemBeamBlade.BladeColorHandler(), batteryBeamBlade);
+        mc.getItemColors().registerItemColorHandler(new ItemBeamBlade.BladeColorHandler(), dyedBeamBlade);
     }
 
     @Override

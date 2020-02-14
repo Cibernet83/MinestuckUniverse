@@ -60,8 +60,8 @@ public class MinestuckUniverseItems
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
 
     public static Item battery = new MSUItemBase("battery", "battery");
-    public static Item obsidianBottle = new MSUItemBase("obsidian_bottle", "obsidianBottle");
-    public static Item bottledLightning = new MSUItemBase("bottled_lightning", "bottledLightning");
+    public static Item obsidianBottle = new ItemFireproof("obsidian_bottle", "obsidianBottle");
+    public static Item bottledLightning = new ItemFireproof("bottled_lightning", "bottledLightning");
     public static Item bottledFire = new MSUItemBase("bottled_fire", "bottledFire");
     public static Item bottledCloud = new MSUItemBase("bottled_cloud", "bottledCloud");
 
@@ -70,22 +70,23 @@ public class MinestuckUniverseItems
     public static Item cybersword = new ItemLightningWeapon(8300, 7.0D, -2.2, 16, "cybersword", "cybersword").setTool(toolSword, 0, 15.0F);
 
     public static ItemBeamBlade batteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade", "batteryBeamBlade").setTool(toolSword, 0, 15.0F);
-    public static ItemBeamBlade whiteBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_white", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.WHITE);
-    public static ItemBeamBlade orangeBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_orange", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.ORANGE);
-    public static ItemBeamBlade magentaBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_magenta", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.MAGENTA);
-    public static ItemBeamBlade lightBlueBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_light_blue", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.LIGHT_BLUE);
-    public static ItemBeamBlade yellowBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_yellow", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.YELLOW);
-    public static ItemBeamBlade limeBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_lime", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.LIME);
-    public static ItemBeamBlade pinkBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_pink", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.PINK);
-    public static ItemBeamBlade grayBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_gray", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.GRAY);
-    public static ItemBeamBlade silverBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_silver", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.SILVER);
-    public static ItemBeamBlade cyanBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_cyan", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.CYAN);
-    public static ItemBeamBlade purpleBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_purple", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.PURPLE);
-    public static ItemBeamBlade blueBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_blue", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BLUE);
-    public static ItemBeamBlade brownBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_brown", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BROWN);
-    public static ItemBeamBlade greenBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_green", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.GREEN);
-    public static ItemBeamBlade redBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_red", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.RED);
-    public static ItemBeamBlade blackBatteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_black", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BLACK);
+    public static ItemBeamBlade[] dyedBeamBlade = new ItemBeamBlade[] {
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_white", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.WHITE),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_orange", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.ORANGE),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_magenta", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.MAGENTA),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_light_blue", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.LIGHT_BLUE),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_yellow", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.YELLOW),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_lime", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.LIME),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_pink", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.PINK),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_gray", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.GRAY),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_silver", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.SILVER),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_cyan", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.CYAN),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_purple", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.PURPLE),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_blue", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BLUE),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_brown", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BROWN),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_green", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.GREEN),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_red", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.RED),
+    new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_black", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BLACK)};
 
     public static Item fancyGlove = new MSUWeaponBase(50, 0D, 0, 5, "fancy_glove", "fancyGlove").setTool(toolGauntlet, 0, 0);
     public static Item spikedGlove = new MSUWeaponBase(95, 3.5D, 0.25D, 8, "spiked_glove", "spikedGlove").setTool(toolGauntlet, 0, 0.5F);
@@ -127,23 +128,9 @@ public class MinestuckUniverseItems
         registerItem(registry, bottledFire);
         registerItem(registry, bottledCloud);
 
-        registerItem(registry, whiteBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, orangeBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, magentaBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, lightBlueBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, yellowBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, limeBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, pinkBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, grayBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, silverBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, cyanBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, purpleBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, blueBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, brownBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, greenBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, redBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, blackBatteryBeamBlade, new MSUModelManager.DyedBeamBladeDefinition());
-        registerItem(registry, batteryBeamBlade, new MSUModelManager.BeamBladeDefinition());
+        for(ItemBeamBlade blade : dyedBeamBlade)
+            registerItem(registry, blade, new MSUModelManager.DualWeaponDefinition("dyed_battery_beam_blade", "dyed_battery_beam_blade_off"));
+        registerItem(registry, batteryBeamBlade, new MSUModelManager.DualWeaponDefinition("battery_beam_blade", "battery_beam_blade_off"));
 
         registerItem(registry, trueUnbreakableKatana);
         //registerItem(registry, batteryBeamBlade);

@@ -62,7 +62,7 @@ public class MSUAlchemyRecipes
         registerVanilla();
         registerMSU();
         registerGristBlockRecipes();
-        registerSleevedTransportalizerRecipes();
+        registerDyeRecipes();
 
         if(MinestuckUniverse.isThaumLoaded) registerThaumcraft();
         if(MinestuckUniverse.isBotaniaLoaded) registerBotania();
@@ -120,14 +120,16 @@ public class MSUAlchemyRecipes
             GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium}, new int[] {5, 4, 3, 2}));
 
         GristRegistry.addGristConversion(new ItemStack(zillystoneShard), new GristSet(new GristType[] {Zillium}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(battery), new GristSet(new GristType[] {Build, Mercury}, new int[] {1, 2}));
 
         GristRegistry.addGristConversion(new ItemStack(spaceSalt), new GristSet(new GristType[] {Uranium, Tar, Zillium}, new int[] {10, 32, 1}));
 
         GristRegistry.addGristConversion(new ItemStack(obsidianBottle), new GristSet(new GristType[]{Build, Tar, Cobalt}, new int[] {1,2,1}));
         GristRegistry.addGristConversion(new ItemStack(bottledLightning), new GristSet(new GristType[]{Build, Tar, Cobalt, Mercury}, new int[] {1,1,16, 48}));
-        GristRegistry.addGristConversion(new ItemStack(bottledLightning), new GristSet(new GristType[]{Build, Tar, Cobalt, Uranium}, new int[] {1,16,1, 48}));
-        GristRegistry.addGristConversion(new ItemStack(bottledLightning), new GristSet(new GristType[]{Build, Tar, Cobalt, Chalk}, new int[] {1,1,16, 48}));
+        GristRegistry.addGristConversion(new ItemStack(bottledFire), new GristSet(new GristType[]{Build, Tar, Cobalt, Sulfur}, new int[] {1,16,1, 48}));
+        GristRegistry.addGristConversion(new ItemStack(bottledCloud), new GristSet(new GristType[]{Build, Tar, Cobalt, Chalk}, new int[] {1,1,16, 48}));
 
+        GristRegistry.addGristConversion(new ItemStack(batteryBeamBlade), new GristSet(new GristType[]{Build, Uranium, Mercury}, new int[]{27, 54, 83}));
         GristRegistry.addGristConversion(new ItemStack(cybersword), new GristSet(new GristType[] {Build, Cobalt, Mercury, Diamond}, new int[] {4000, 800, 250, 8}));
         GristRegistry.addGristConversion(new ItemStack(trueUnbreakableKatana) , new GristSet(Zillium, 1000));
         GristRegistry.addGristConversion(new ItemStack(fancyGlove), false, new GristSet(new GristType[] {GristType.Build, GristType.Chalk}, new int[] {5, 2}));
@@ -158,7 +160,8 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(Items.GLASS_BOTTLE), new ItemStack(Blocks.OBSIDIAN), MODE_AND, new ItemStack(obsidianBottle));
         CombinationRegistry.addCombination(new ItemStack(Items.BLAZE_POWDER), new ItemStack(obsidianBottle), MODE_OR, new ItemStack(bottledFire));
         
-        CombinationRegistry.addCombination(new ItemStack(Items.IRON_SWORD), new ItemStack(bottledLightning), MODE_AND, false, false, new ItemStack(cybersword));
+        CombinationRegistry.addCombination(new ItemStack(Items.IRON_SWORD), new ItemStack(battery), MODE_AND, false, false, new ItemStack(batteryBeamBlade));
+        CombinationRegistry.addCombination(new ItemStack(batteryBeamBlade), new ItemStack(bottledLightning), MODE_AND, false, false, new ItemStack(cybersword));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.unbreakableKatana), new ItemStack(Blocks.BEDROCK), MODE_AND, false, false, new ItemStack(trueUnbreakableKatana));
         CombinationRegistry.addCombination(new ItemStack(Blocks.IRON_BARS), new ItemStack(fancyGlove), MODE_AND, false, false, new ItemStack(spikedGlove));
         CombinationRegistry.addCombination(new ItemStack(Blocks.COBBLESTONE), new ItemStack(fancyGlove), MODE_AND, false, false, new ItemStack(cobbleBasher));
@@ -171,8 +174,9 @@ public class MSUAlchemyRecipes
             gristBlocks.add(gristBlockMana);
     }
 
-    public static void registerSleevedTransportalizerRecipes()
+    public static void registerDyeRecipes()
     {
+        
         for(BlockWoolTransportalizer block : sleevedTPs)
         {
             ItemStack dye = new ItemStack(Items.DYE, 1, block.color.getDyeDamage());
@@ -182,6 +186,20 @@ public class MSUAlchemyRecipes
             if(!block.equals(whiteWoolTransportalizer))
                 CombinationRegistry.addCombination(new ItemStack(whiteWoolTransportalizer), dye, MODE_OR, stack);
             CombinationRegistry.addCombination(new ItemStack(MinestuckBlocks.transportalizer), wool, MODE_AND, stack);
+        }
+        
+        
+        for(EnumDyeColor dyeColor : EnumDyeColor.values())
+        {
+            ItemStack dye = new ItemStack(Items.DYE, 1, dyeColor.getDyeDamage());
+            ItemStack wool = new ItemStack(Blocks.WOOL, 1, dyeColor.getMetadata());
+            GristSet dyeGrist = GristRegistry.getGristConversion(wool).addGrist(Chalk, -6);
+            if(dyeGrist.getGrist(Chalk) == 0) dyeGrist.addGrist(Chalk, 0);
+            
+            ItemStack beamBlade = new ItemStack(dyedBeamBlade[dyeColor.getMetadata()]);
+    
+            GristRegistry.addGristConversion(beamBlade, GristRegistry.getGristConversion(new ItemStack(batteryBeamBlade)).addGrist(dyeGrist));
+            CombinationRegistry.addCombination(new ItemStack(batteryBeamBlade), dye, MODE_OR, false, true, beamBlade);
         }
     }
 

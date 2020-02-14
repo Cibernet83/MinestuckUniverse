@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "u",
+        "i"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:redstone"
+        },
+        "u": {
+            "item": "minestuck:raw_uranium"
+        },
+        "i": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:battery",
+        "count": 1
+    }
+}
