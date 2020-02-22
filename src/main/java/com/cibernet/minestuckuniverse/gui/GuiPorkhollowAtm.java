@@ -127,7 +127,7 @@ public class GuiPorkhollowAtm extends GuiScreen
 	{
 		super.keyTyped(typedChar, keyCode);
 		
-		if(Character.digit(typedChar, 10) >= 0 || keyCode == 14)
+		if((Character.digit(typedChar, 10) >= 0 || keyCode == 14) && selectedTextField != null)
 			selectedTextField.textboxKeyTyped(typedChar, keyCode);
 		
 	}
