@@ -77,6 +77,10 @@ item.muricaSouth.name='murica
 item.muricaSouth.tooltip=redneck edition
 item.royalStick.name=Royal Stick
 item.royalStick.tooltip=It's just a golden stick, I don't know what the fuck did you expect.
+item.reinforcedStick.name=Reinforced Stick
+item.reinforcedStick.tooltip=You can't do shit with this but hey, it's a cool stick... probably.
+item.luxuryStick.name=Luxury Stick
+item.luxuryStick.tooltip=Damn, this is one fancy ass stick.
 
 item.katana.name=Obsidian Katana
 item.unbreakableKatana.name=Unbreakable Katana

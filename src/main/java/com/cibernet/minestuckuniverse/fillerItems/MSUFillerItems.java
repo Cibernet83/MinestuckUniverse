@@ -34,7 +34,9 @@ public class MSUFillerItems
 	public static Item muricaSouth = new ItemSound("murica_south", "muricaSouth", MSUSoundHandler.murica_south);
 	public static Item CHS = new MSUItemBase("cruxaclysmic_heartstopper", "cruxaclysmicHeartStopper");
 	public static Item cruxatonicDerringer = new MSUItemBase("cruxatonic_derringer,", "cruxatonicDerringer");
+	public static Item luxuryStick = new MSUItemBase("luxury_stick", "luxuryStick");
 	public static Item royalStick = new MSUItemBase("royal_stick,", "royalStick");
+	public static Item reinforcedStick = new MSUItemBase("reinforced_stick", "reinforcedStick");
 
 	//Armor
 	public static MSUArmorBase diverHelmet = new MSUArmorBase(materialDiverHelmet,0, EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
