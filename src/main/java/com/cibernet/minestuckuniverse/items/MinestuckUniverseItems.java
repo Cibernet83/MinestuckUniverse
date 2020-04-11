@@ -99,7 +99,6 @@ public class MinestuckUniverseItems
     public static Item cht = new Item().setRegistryName("cht").setUnlocalizedName("cht").setCreativeTab(TabMinestuckUniverse.instance);
     public static Item chc = new Item().setRegistryName("chc").setUnlocalizedName("chc").setCreativeTab(TabMinestuckUniverse.instance);
     public static Item plm = new Item().setRegistryName("plm").setUnlocalizedName("plm").setCreativeTab(TabMinestuckUniverse.instance);
-    public static Item carotene_hole_sinker = new MSUWeaponBase(double damageVsEntity: )
     public static ItemArmor.ArmorMaterial prismarine=EnumHelper.addArmorMaterial("PRISMARINE", MinestuckUniverse.MODID+":prismarine",20, new int[]{3,7,6,2},15, SoundEvents.ITEM_ARMOR_EQUIP_IRON,0.0f);
     //Armor
     public static MSUArmorBase parmorh = new MSUArmorBase (prismarine,0,EntityEquipmentSlot.HEAD,"parmor_head","parmor_2");
