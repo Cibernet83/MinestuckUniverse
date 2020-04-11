@@ -31,6 +31,7 @@ public class MSUFillerAlchemyRecipes
 		GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.ctd), new GristSet(new GristType[] {Shale, Tar, Mercury, Sulfur}, new int[] {100, 34, 236, 152}));
 		GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.cht), new GristSet(new GristType[] {Shale, Build, Uranium, Mercury, Chalk, Quartz, Diamond, Zillium}, new int[] {999999999, 999999999, 999, 9999, 9999, 20, 40, 20}));
 		GristRegistry.addGristConversion(new ItemStack(MSUFillerItems.CHS), new GristSet(new GristType[] {Shale, Build, Uranium, Mercury, Chalk, Quartz, Diamond, Zillium}, new int[] {999999999, 999999999, 999, 9999, 9999, 999, 999, 999}));
+		GristRegistry.addGristConversion(new ItemStack(royalStick), new GristSet(new GristType[] {Build, Gold}, new int[] {1, 9}));
 		//Alchemy
 		CombinationRegistry.addCombination(new ItemStack(Items.IRON_HELMET), new ItemStack(Blocks.IRON_BLOCK), MODE_AND, false, false, new ItemStack(diverHelmet));
 		CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 1), new ItemStack(Items.LEATHER_HELMET), MODE_AND, true, false, new ItemStack(froghat));
@@ -40,6 +41,7 @@ public class MSUFillerAlchemyRecipes
 		CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.ctd), new ItemStack(Items.PRISMARINE_SHARD), MODE_OR, false, false, new ItemStack(MSUFillerItems.CHS));
 		CombinationRegistry.addCombination(new ItemStack(MinestuckItems.sbahjPoster), new ItemStack(Items.COMPASS), MODE_OR, new ItemStack(murica));
 		CombinationRegistry.addCombination(new ItemStack(murica), new ItemStack(Blocks.WOOL, 1, EnumDyeColor.RED.getMetadata()), MODE_AND, false, true, new ItemStack(muricaSouth));
+		CombinationRegistry.addCombination(new ItemStack(Items.STICK), new ItemStack(Items.GOLD_INGOT), MODE_AND, false, false, new ItemStack(royalStick));
 		
 	}
 }
