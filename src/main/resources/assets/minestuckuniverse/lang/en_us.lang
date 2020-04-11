@@ -81,6 +81,9 @@ item.reinforcedStick.name=Reinforced Stick
 item.reinforcedStick.tooltip=You can't do shit with this but hey, it's a cool stick... probably.
 item.luxuryStick.name=Luxury Stick
 item.luxuryStick.tooltip=Damn, this is one fancy ass stick.
+item.diamondIngot.name=Diamond Ingot
+item.luxuriousGem.name=Luxurious Gem
+item.diamerald.name=Diamerald
 
 item.katana.name=Obsidian Katana
 item.unbreakableKatana.name=Unbreakable Katana

@@ -34,6 +34,9 @@ public class MSUFillerAlchemyRecipes
 		GristRegistry.addGristConversion(new ItemStack(luxuryStick), new GristSet(new GristType[] {Build, Diamond}, new int[] {1, 9}));
 		GristRegistry.addGristConversion(new ItemStack(royalStick), new GristSet(new GristType[] {Build, Gold}, new int[] {1, 9}));
 		GristRegistry.addGristConversion(new ItemStack(reinforcedStick), new GristSet(new GristType[] {Build, Rust}, new int[] {1, 9}));
+		GristRegistry.addGristConversion(new ItemStack(diamondIngot), new GristSet(new GristType[] {Diamond}, new int[] {8}));
+		GristRegistry.addGristConversion(new ItemStack(luxuriousGem), new GristSet(new GristType[] {Diamond, Gold}, new int[] {4, 4}));
+		GristRegistry.addGristConversion(new ItemStack(diamerald), new GristSet(new GristType[] {Diamond, Ruby}, new int[] {9, 9}));
 		//Alchemy
 		CombinationRegistry.addCombination(new ItemStack(Items.IRON_HELMET), new ItemStack(Blocks.IRON_BLOCK), MODE_AND, false, false, new ItemStack(diverHelmet));
 		CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 1), new ItemStack(Items.LEATHER_HELMET), MODE_AND, true, false, new ItemStack(froghat));
@@ -46,6 +49,9 @@ public class MSUFillerAlchemyRecipes
 		CombinationRegistry.addCombination(new ItemStack(Items.STICK), new ItemStack(Items.DIAMOND), MODE_AND, false, false, new ItemStack(luxuryStick));
 		CombinationRegistry.addCombination(new ItemStack(Items.STICK), new ItemStack(Items.GOLD_INGOT), MODE_AND, false, false, new ItemStack(royalStick));
 		CombinationRegistry.addCombination(new ItemStack(Items.STICK), new ItemStack(Items.IRON_INGOT), MODE_AND, false, false, new ItemStack(reinforcedStick));
+		CombinationRegistry.addCombination(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.DIAMOND), MODE_OR, false, false, new ItemStack(diamondIngot));
+		CombinationRegistry.addCombination(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.DIAMOND), MODE_AND, false, false, new ItemStack(luxuriousGem));
+		CombinationRegistry.addCombination(new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD), MODE_AND, false, false, new ItemStack(diamerald));
 		
 	}
 }

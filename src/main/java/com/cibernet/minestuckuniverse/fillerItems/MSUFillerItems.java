@@ -37,6 +37,9 @@ public class MSUFillerItems
 	public static Item luxuryStick = new MSUItemBase("luxury_stick", "luxuryStick");
 	public static Item royalStick = new MSUItemBase("royal_stick,", "royalStick");
 	public static Item reinforcedStick = new MSUItemBase("reinforced_stick", "reinforcedStick");
+	public static Item diamondIngot = new MSUItemBase("diamond_ingot", "diamondIngot");
+	public static Item luxuriousGem = new MSUItemBase("luxurious_gem", "luxuriousGem");
+	public static Item diamerald = new MSUItemBase("diamerald", "diamerald");
 
 	//Armor
 	public static MSUArmorBase diverHelmet = new MSUArmorBase(materialDiverHelmet,0, EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
