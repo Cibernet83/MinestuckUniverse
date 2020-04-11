@@ -65,10 +65,10 @@ dependencies {
     deobfCompile name: "Botania+r1.10-363-deobf"
     deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}:api"
     
-    runtime "mezz.jei:jei_${mc_version}:${jei_version}"
-    runtime name: "Minestuck-${mc_version}-${minestuck_version}"
-    runtime name: "Thaumcraft-${mc_version}-${thaumcraft_version}"
-    runtime name: "Baubles-${mc_version}-${baubles_version}"
+    //runtime "mezz.jei:jei_${mc_version}:${jei_version}"
+    //runtime name: "Minestuck-${mc_version}-${minestuck_version}"
+    //runtime name: "Thaumcraft-${mc_version}-${thaumcraft_version}"
+    //runtime name: "Baubles-${mc_version}-${baubles_version}"
     //runtime fileTree(dir: 'runtimeMods', include: '*.jar')
 }
 
