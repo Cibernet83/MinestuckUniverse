@@ -40,6 +40,12 @@ public class MSUFillerItems
 	public static Item diamondIngot = new MSUItemBase("diamond_ingot", "diamondIngot");
 	public static Item luxuriousGem = new MSUItemBase("luxurious_gem", "luxuriousGem");
 	public static Item diamerald = new MSUItemBase("diamerald", "diamerald");
+	public static Item oakPlank = new MSUItemBase("oak_plank", "oakPlank");
+	public static Item birchPlank = new MSUItemBase("birch_plank", "birchPlank");
+	public static Item sprucePlank = new MSUItemBase("spruce_plank", "sprucePlank");
+	public static Item darkOakPlank = new MSUItemBase("dark_oak_plank", "DarkOakPlank");
+	public static Item junglePlank = new MSUItemBase("jungle_plank", "junglePlank");
+	public static Item acaciaPlank = new MSUItemBase("acacia_plank", "acaciaPlank");
 
 	//Armor
 	public static MSUArmorBase diverHelmet = new MSUArmorBase(materialDiverHelmet,0, EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");

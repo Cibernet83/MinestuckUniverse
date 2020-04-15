@@ -8,6 +8,8 @@ import com.mraof.minestuck.alchemy.GristRegistry;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.item.MinestuckItems;
+import mezz.jei.api.gui.IGuiItemStackGroup;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -37,6 +39,12 @@ public class MSUFillerAlchemyRecipes
 		GristRegistry.addGristConversion(new ItemStack(diamondIngot), new GristSet(new GristType[] {Diamond}, new int[] {8}));
 		GristRegistry.addGristConversion(new ItemStack(luxuriousGem), new GristSet(new GristType[] {Diamond, Gold}, new int[] {4, 4}));
 		GristRegistry.addGristConversion(new ItemStack(diamerald), new GristSet(new GristType[] {Diamond, Ruby}, new int[] {9, 9}));
+		GristRegistry.addGristConversion(new ItemStack(oakPlank), new GristSet(new GristType[] {Build}, new int[] {3}));
+		GristRegistry.addGristConversion(new ItemStack(birchPlank), new GristSet(new GristType[] {Build}, new int[] {3}));
+		GristRegistry.addGristConversion(new ItemStack(sprucePlank), new GristSet(new GristType[] {Build}, new int[] {3}));
+		GristRegistry.addGristConversion(new ItemStack(darkOakPlank), new GristSet(new GristType[] {Build}, new int[] {3}));
+		GristRegistry.addGristConversion(new ItemStack(junglePlank), new GristSet(new GristType[] {Build}, new int[] {3}));
+		GristRegistry.addGristConversion(new ItemStack(acaciaPlank), new GristSet(new GristType[] {Build}, new int[] {3}));
 		//Alchemy
 		CombinationRegistry.addCombination(new ItemStack(Items.IRON_HELMET), new ItemStack(Blocks.IRON_BLOCK), MODE_AND, false, false, new ItemStack(diverHelmet));
 		CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 1), new ItemStack(Items.LEATHER_HELMET), MODE_AND, true, false, new ItemStack(froghat));
@@ -52,6 +60,11 @@ public class MSUFillerAlchemyRecipes
 		CombinationRegistry.addCombination(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.DIAMOND), MODE_OR, false, false, new ItemStack(diamondIngot));
 		CombinationRegistry.addCombination(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.DIAMOND), MODE_AND, false, false, new ItemStack(luxuriousGem));
 		CombinationRegistry.addCombination(new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD), MODE_AND, false, false, new ItemStack(diamerald));
-		
+		CombinationRegistry.addCombination(new ItemStack(Items.STICK), new ItemStack(Block.getBlockById(5)), MODE_OR, false, false, new ItemStack(oakPlank));
+		CombinationRegistry.addCombination(new ItemStack(Items.STICK), new ItemStack(Block.getBlockById(5-2)), MODE_OR, false, false, new ItemStack(birchPlank));
+		CombinationRegistry.addCombination(new ItemStack(Items.STICK), new ItemStack(Block.getBlockById(5-1)), MODE_OR, false, false, new ItemStack(sprucePlank));
+		CombinationRegistry.addCombination(new ItemStack(Items.STICK), new ItemStack(Block.getBlockById(5-5)), MODE_OR, false, false, new ItemStack(darkOakPlank));
+		CombinationRegistry.addCombination(new ItemStack(Items.STICK), new ItemStack(Block.getBlockById(5-3)), MODE_OR, false, false, new ItemStack(junglePlank));
+		CombinationRegistry.addCombination(new ItemStack(Items.STICK), new ItemStack(Block.getBlockById(5-4)), MODE_OR, false, false, new ItemStack(acaciaPlank));
 	}
 }

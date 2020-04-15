@@ -84,6 +84,12 @@ item.luxuryStick.tooltip=Damn, this is one fancy ass stick.
 item.diamondIngot.name=Diamond Ingot
 item.luxuriousGem.name=Luxurious Gem
 item.diamerald.name=Diamerald
+item.oakPlank.name=Oak Plank
+item.birchPlank.name=Birch Plank
+item.sprucePlank.name=Spruce Plank
+item.darkOakPlank.name=Dark Oak Plank
+item.junglePlank.name=Jungle Plank
+item.acaciaPlank.name=Acacia Plank
 
 item.katana.name=Obsidian Katana
 item.unbreakableKatana.name=Unbreakable Katana
