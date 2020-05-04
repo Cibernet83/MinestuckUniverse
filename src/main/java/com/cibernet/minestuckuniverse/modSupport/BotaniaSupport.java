@@ -9,6 +9,7 @@ import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import scala.collection.mutable.HashTable;
@@ -49,7 +50,7 @@ public class BotaniaSupport
             if(recipe.getCatalyst() != null)
                 continue;
 
-            if(out.getItem() != ModItems.manaBottle)
+            if(out.getItem() != ModItems.manaBottle && out.getItem() != Item.getItemFromBlock(MinestuckUniverseBlocks.magicBlock))
             {
                 CombinationRegistry.addCombination(in, new ItemStack(gristBlockMana), CombinationRegistry.Mode.MODE_AND, false, false, out);
                 CombinationRegistry.addCombination(in, new ItemStack(ModItems.manaBottle), CombinationRegistry.Mode.MODE_OR, false, false, out);

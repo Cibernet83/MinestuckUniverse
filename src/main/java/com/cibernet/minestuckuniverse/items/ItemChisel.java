@@ -18,6 +18,8 @@ import java.util.Random;
 
 public class ItemChisel extends MSUItemBase
 {
+	public static int baseLuck = -2;
+	
 	public ItemChisel(String materialName, int durabillity)
 	{
 		super(materialName+"_chisel", materialName+"Chisel");
@@ -32,10 +34,10 @@ public class ItemChisel extends MSUItemBase
 		{
 			PotionEffect luckFX = player.getActivePotionEffect(MobEffects.LUCK);
 			PotionEffect unluckFX = player.getActivePotionEffect(MobEffects.UNLUCK);
-			int luck = (luckFX != null ? luckFX.getAmplifier()+1 : 0) - (unluckFX != null ? unluckFX.getAmplifier()+1 : 0);
+			int luck = (luckFX != null ? luckFX.getAmplifier()+1 : 0) - (unluckFX != null ? unluckFX.getAmplifier()+1 : 0) + baseLuck;
 			int val = 1;
 
-			val += Math.signum(luck)*((new Random().nextInt(10) < Math.abs(luck) ? 1 : 0)) - 2;
+			val += Math.signum(luck)*((new Random().nextInt(10) < Math.abs(luck) ? 1 : 0)); //TODO turn the modifier into a config option
 
 			InventoryHelper.spawnItemStack(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(MinestuckUniverseItems.zillystoneShard, val));
 			player.getHeldItem(hand).damageItem(1, player);

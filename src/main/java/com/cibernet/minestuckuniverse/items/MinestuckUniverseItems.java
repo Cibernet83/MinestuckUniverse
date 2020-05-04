@@ -41,10 +41,7 @@ public class MinestuckUniverseItems
     public static Item moonstone = new MSUItemBase("moonstone");
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
-
-    public static Item murica = new ItemSound("murica", "murica", MSUSoundHandler.murica).setCreativeTab(null);
-    public static Item muricaSouth = new ItemSound("murica_south", "muricaSouth", MSUSoundHandler.murica_south).setCreativeTab(null);
-
+    
     //Weapons
     public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool("sword", 0, 15.0F);
 
@@ -69,9 +66,6 @@ public class MinestuckUniverseItems
         registerItem(registry, diverHelmet);
 
         registry.register(unbreakableKatana);
-
-        registerItem(registry, murica);
-        registerItem(registry, muricaSouth);
 
         //registerGTArmor(registry);
 

@@ -133,9 +133,6 @@ public class MSUAlchemyRecipes
         
         CombinationRegistry.addCombination(new ItemStack(zillystoneShard), new ItemStack(Items.SUGAR), MODE_OR, Zillium.getCandyItem());
         
-        GristRegistry.addGristConversion(new ItemStack(murica), new GristSet(Artifact, -1));
-        GristRegistry.addGristConversion(new ItemStack(muricaSouth), new GristSet(new GristType[] {Artifact, Garnet}, new int[] {-10, 1}));
-        
         //Alchemy
         
         CombinationRegistry.addCombination(new ItemStack(Items.IRON_HELMET), new ItemStack(Blocks.IRON_BLOCK), MODE_AND, false, false, new ItemStack(diverHelmet));
@@ -154,9 +151,6 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 6), new ItemStack(Items.GLOWSTONE_DUST), MODE_OR, true, false, new ItemStack(spaceSalt));
         
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.unbreakableKatana), new ItemStack(Blocks.BEDROCK), MODE_AND, false, false, new ItemStack(trueUnbreakableKatana));
-        
-        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.sbahjPoster), new ItemStack(Items.COMPASS), MODE_OR, new ItemStack(murica));
-        CombinationRegistry.addCombination(new ItemStack(murica), new ItemStack(Blocks.WOOL, 1, EnumDyeColor.RED.getMetadata()), MODE_AND, false, true, new ItemStack(muricaSouth));
         
         if(MinestuckUniverse.isBotaniaLoaded)
             gristBlocks.add(gristBlockMana);
@@ -339,6 +333,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(ModItems.thunderSword), false, new GristSet(new GristType[]{Build, Mana, Uranium, Rust, Diamond, Cobalt, Mercury}, new int[] {450, 1020, 48, 36, 56, 84, 12}));
 
         //Combination Recipes
+        CombinationRegistry.addCombination(new ItemStack(ModItems.manaBottle), new ItemStack(Items.SUGAR), MODE_OR, Mana.getCandyItem());
         CombinationRegistry.addCombination(new ItemStack(gristBlockMana), new ItemStack(Items.GLASS_BOTTLE), MODE_OR, false, false, new ItemStack(ModItems.manaBottle));
         CombinationRegistry.addCombination(new ItemStack(ModItems.grassSeeds), new ItemStack(Blocks.DIRT), MODE_OR, true, false, new ItemStack(Blocks.GRASS));
         CombinationRegistry.addCombination(new ItemStack(ModItems.grassSeeds, 1, 1), new ItemStack(Blocks.DIRT), MODE_OR, true, false, new ItemStack(Blocks.DIRT, 1, 2));

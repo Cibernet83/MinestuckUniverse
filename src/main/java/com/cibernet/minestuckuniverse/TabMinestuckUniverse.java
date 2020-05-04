@@ -18,6 +18,6 @@ public class TabMinestuckUniverse extends CreativeTabs
     
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(MinestuckUniverseItems.moonstone, 1, 0);
+        return new ItemStack(MinestuckUniverseBlocks.gristBlockBuild, 1, 0);
     }
 }
