@@ -35,7 +35,7 @@ public class MSUFillerItems
 	public static Item CHS = new MSUItemBase("cruxaclysmic_heartstopper", "cruxaclysmicHeartStopper");
 	public static Item cruxatonicDerringer = new MSUItemBase("cruxatonic_derringer,", "cruxatonicDerringer");
 	public static Item luxuryStick = new MSUItemBase("luxury_stick", "luxuryStick");
-	public static Item royalStick = new MSUItemBase("royal_stick,", "royalStick");
+	public static Item royalStick = new MSUItemBase("royal_stick", "royalStick");
 	public static Item reinforcedStick = new MSUItemBase("reinforced_stick", "reinforcedStick");
 	public static Item diamondIngot = new MSUItemBase("diamond_ingot", "diamondIngot");
 	public static Item luxuriousGem = new MSUItemBase("luxurious_gem", "luxuriousGem");
@@ -68,6 +68,18 @@ public class MSUFillerItems
 		registerItem(registry, murica);
 		registerItem(registry, muricaSouth);
 		registerItem(registry, CHS);
+		
+		registerItem(registry,luxuryStick);
+		registerItem(registry,royalStick);
+		registerItem(registry,reinforcedStick);
+		registerItem(registry,luxuriousGem);
+		registerItem(registry,diamerald);
+		registerItem(registry,oakPlank);
+		registerItem(registry,birchPlank);
+		registerItem(registry,sprucePlank);
+		registerItem(registry,junglePlank);
+		registerItem(registry,darkOakPlank);
+		registerItem(registry,acaciaPlank);
 	}
 	
 	@SideOnly(Side.CLIENT)
