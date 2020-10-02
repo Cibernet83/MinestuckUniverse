@@ -41,6 +41,7 @@ public class MinestuckUniverse
 
     public static boolean isThaumLoaded;
     public static boolean isBotaniaLoaded;
+    public static boolean isSplatcraftLodaded;
     public static boolean isArsenalLoaded;
 
     @EventHandler
@@ -49,6 +50,7 @@ public class MinestuckUniverse
         isThaumLoaded = Loader.isModLoaded("thaumcraft");
         isBotaniaLoaded = Loader.isModLoaded("botania");
         isArsenalLoaded = Loader.isModLoaded("minestuckarsenal");
+        isSplatcraftLodaded = Loader.isModLoaded("splatcraft");
 
         proxy.preInit();
     }

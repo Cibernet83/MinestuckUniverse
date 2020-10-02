@@ -68,10 +68,11 @@ public class MSUAlchemyRecipes
 
         if(MinestuckUniverse.isThaumLoaded) registerThaumcraft();
         if(MinestuckUniverse.isBotaniaLoaded) registerBotania();
+        if(MinestuckUniverse.isSplatcraftLodaded) registerSplatcraft();
         if(!MinestuckUniverse.isArsenalLoaded) registerArsenalFallback();
 
     }
-
+    
     public static void registerVanilla()
     {
         GristRegistry.addGristConversion(new ItemStack(MinestuckItems.scarletZillyhoo) , new GristSet(new GristType[] {Build, Zillium, Ruby, Quartz, Diamond}, new int[] {1200, 800, 600, 30, 15}));
@@ -256,8 +257,8 @@ public class MSUAlchemyRecipes
     public static void registerBotania()
     {
         //Grist Conversions
-        GristRegistry.addGristConversion(ModBlocks.livingwood, new GristSet(new GristType[] {Build, Mana}, new int[] {2,2}));
-        GristRegistry.addGristConversion(ModBlocks.livingrock, new GristSet(new GristType[] {Build, Mana}, new int[] {2,2}));
+        GristRegistry.addGristConversion(ModBlocks.livingwood, new GristSet(new GristType[] {Build}, new int[] {4}));
+        GristRegistry.addGristConversion(ModBlocks.livingrock, new GristSet(new GristType[] {Build}, new int[] {4}));
 
         GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 0), true, GristRegistry.getGristConversion(new ItemStack(Items.IRON_INGOT)).addGrist(Mana, 3));
         GristRegistry.addGristConversion(new ItemStack(ModItems.manaResource, 1, 1), true, GristRegistry.getGristConversion(new ItemStack(Items.ENDER_PEARL)).addGrist(Mana, 6));
@@ -375,6 +376,16 @@ public class MSUAlchemyRecipes
         BotaniaAPI.registerManaInfusionRecipe(new ItemStack(magicBlock), new ItemStack(MinestuckBlocks.genericObject), 16000);
 
         BotaniaSupport.gristCosts = GristRegistry.getAllConversions();
+    }
+    
+    
+    private static void registerSplatcraft()
+    {
+        addGristConversion("splatcraft", "power_egg", new GristSet(new GristType[] {Amber, Iodine}, new int[] {6, 3}));
+        addGristConversion("splatcraft", "sardinium", new GristSet(new GristType[] {Rust, Caulk}, new int[] {8, 2}));
+        addGristConversion("splatcraft", "sardinium_ore", new GristSet(new GristType[] {Build, Rust, Caulk}, new int[] {4, 8, 2}));
+        
+        CombinationRegistry.addCombination(new ItemStack(Items.FISH), new ItemStack(Blocks.IRON_ORE), MODE_AND, true, false, new ItemStack(Item.REGISTRY.getObject(new ResourceLocation("splatcraft", "sardinium_ore"))));
     }
 
     public static void registerArsenalFallback()
