@@ -101,7 +101,7 @@ public class MSUAlchemyRecipes
 
         //Grist Conversions
         
-        GristRegistry.addGristConversion(new ItemStack(diverHelmet), new GristSet(new GristType[] {Rust}, new int[] {64}));
+        GristRegistry.addGristConversion(new ItemStack(diverHelmet), new GristSet(new GristType[] {Rust, Cobalt}, new int[] {80, 16}));
         
         GristRegistry.addGristConversion(new ItemStack(magicBlock), magicBlockCost);
         GristRegistry.addGristConversion(new ItemStack(sbahjBedrock), new GristSet(new GristType[] {Artifact}, new int[] {2000}));
