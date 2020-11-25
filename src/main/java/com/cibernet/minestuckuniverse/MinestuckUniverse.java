@@ -43,6 +43,7 @@ public class MinestuckUniverse
     public static boolean isBotaniaLoaded;
     public static boolean isSplatcraftLodaded;
     public static boolean isArsenalLoaded;
+    public static boolean isMSGTLoaded;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -51,6 +52,7 @@ public class MinestuckUniverse
         isBotaniaLoaded = Loader.isModLoaded("botania");
         isArsenalLoaded = Loader.isModLoaded("minestuckarsenal");
         isSplatcraftLodaded = Loader.isModLoaded("splatcraft");
+        isMSGTLoaded = Loader.isModLoaded("minestuckgodtier");
 
         proxy.preInit();
     }

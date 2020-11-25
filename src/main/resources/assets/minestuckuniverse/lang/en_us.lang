@@ -50,6 +50,7 @@ item.moonstoneChisel.name=Moonstone Chisel
 item.moonstoneChisel.tooltip=Just by holding it you can feel how magical it is, yet it's not strong enough to chisel a block of stone.
 item.zillystoneShard.name=Zillystone Shard
 item.zillystoneShard.tooltip=You've managed to chip this shard away from a Zillystone block, but what will you do with it next?
+item.battery.name=Battery
 
 item.murica.name='murica
 item.muricaSouth.name='murica
@@ -58,6 +59,38 @@ item.muricaSouth.tooltip=redneck edition
 item.katana.name=Obsidian Katana
 item.unbreakableKatana.name=Unbreakable Katana
 item.unbreakableKatana.tooltip=A real hard sword for a real hard dude. It was said to be forged by an ancient Otaku Master over the heat of a roaring manga fire.
+
+item.batteryBeamBlade.name=Battery Beam Blade
+item.batteryBeamBlade.tooltip=lightsaber? what lightsaber? this isn't a lightsaber, it's a completely unique idea!
+item.batteryBeamBlade.white.name=White Battery Beam Blade
+item.batteryBeamBlade.orange.name=Orange Battery Beam Blade
+item.batteryBeamBlade.magenta.name=Magenta Battery Beam Blade
+item.batteryBeamBlade.lightBlue.name=Light Blue Battery Beam Blade
+item.batteryBeamBlade.yellow.name=Yellow Battery Beam Blade
+item.batteryBeamBlade.lime.name=Lime Battery Beam Blade
+item.batteryBeamBlade.pink.name=Pink Battery Beam Blade
+item.batteryBeamBlade.gray.name=Gray Battery Beam Blade
+item.batteryBeamBlade.silver.name=Silver Battery Beam Blade
+item.batteryBeamBlade.cyan.name=Cyan Battery Beam Blade
+item.batteryBeamBlade.purple.name=Purple Battery Beam Blade
+item.batteryBeamBlade.blue.name=Blue Battery Beam Blade
+item.batteryBeamBlade.brown.name=Brown Battery Beam Blade
+item.batteryBeamBlade.green.name=Green Battery Beam Blade
+item.batteryBeamBlade.red.name=Red Battery Beam Blade
+item.batteryBeamBlade.black.name=Black Battery Beam Blade
+
+item.fancyGlove.name=Fancy Glove
+item.glove.tooltip=A nice looking glove, it doesn't do much damage, but it sure looks fancy!
+item.spikedGlove.name=Spiked Gloves
+item.spikedGlove.tooltip=This glove will sure leave your enemies with some scars, and probably anyone who tries to give you a fist bump.
+item.fluoriteGauntlet.name=Fluorite Gauntlet
+item.cobbleBasher.name=Cobble Basher
+item.cobbleBasher.tooltip=Punch your enemies in the face with the strength of ONE block of cobblestone!
+item.pogoFist.name=Pogo Fist
+item.pogoFist.tooltip=Uppercut your foes into the stratosphere with this bouncy glove.
+item.goldenGenesisGauntlet.name=Golden Genesis Gauntlet
+item.goldenGenesisGauntlet.tooltip=Feel the power of frogs (and the cosmos) within your palm!
+item.rocketFist.name=Rocket-Powered Fist
 
 tile.woolTransportalizer.white.name=White Sleeved Transportalizer
 tile.woolTransportalizer.orange.name=Orange Sleeved Transportalizer

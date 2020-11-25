@@ -11,9 +11,13 @@ import com.mraof.minestuck.item.block.ItemTransportalizer;
 import com.mraof.minestuck.item.weapon.ItemWeapon;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
+import javafx.util.Pair;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
@@ -39,6 +43,9 @@ public class MinestuckUniverseItems
     public static ItemArmor.ArmorMaterial[][] GTArmorMaterial = new ItemArmor.ArmorMaterial[classes.length][aspects.length];
     public static Item[][][] GTArmor = new Item[classes.length][aspects.length][4];
 
+    public static MSUToolClass toolSword = new MSUToolClass(Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolGauntlet = new MSUToolClass(Material.GLASS, Material.ICE, Material.PACKED_ICE);
+
     //Items
     public static Item spaceSalt = new ItemSpaceSalt();
     public static Item moonstone = new MSUItemBase("moonstone");
@@ -46,7 +53,34 @@ public class MinestuckUniverseItems
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
     
     //Weapons
-    public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool("sword", 0, 15.0F);
+    public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool(toolSword, 0, 15.0F);
+    public static Item battery = new MSUItemBase("battery", "battery");
+    public static ItemBeamBlade batteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade", "batteryBeamBlade").setTool(toolSword, 0, 15.0F);
+    public static ItemBeamBlade[] dyedBeamBlade = new ItemBeamBlade[] {
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_white", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.WHITE),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_orange", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.ORANGE),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_magenta", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.MAGENTA),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_light_blue", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.LIGHT_BLUE),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_yellow", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.YELLOW),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_lime", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.LIME),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_pink", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.PINK),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_gray", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.GRAY),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_silver", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.SILVER),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_cyan", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.CYAN),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_purple", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.PURPLE),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_blue", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BLUE),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_brown", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BROWN),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_green", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.GREEN),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_red", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.RED),
+            new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade_black", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BLACK)};
+
+    public static Item fancyGlove = new MSUWeaponBase(50, 0D, 0, 5, "fancy_glove", "fancyGlove").setTool(toolGauntlet, 0, 0);
+    public static Item spikedGlove = new MSUWeaponBase(95, 3.5D, 0.25D, 8, "spiked_glove", "spikedGlove").setTool(toolGauntlet, 0, 0.5F);
+    public static Item cobbleBasher = new MSUWeaponBase(175, 4D, -1.8D, 4, "cobble_basher","cobbleBasher").setTool(toolGauntlet, 0, 1.2F);
+    public static Item fluoriteGauntlet = new ItemRandomWeapon(980, 7D, -0.3D,  8, "fluorite_gauntlet", "fluoriteGauntlet").setTool(toolGauntlet, 0, 2.4F);
+    public static Item goldenGenesisGauntlet = new MSUWeaponBase(1256, 11D, -0.25D, 15, "golden_genesis_gauntlet","goldenGenesisGauntlet").setTool(toolGauntlet, 0, 3F);
+    public static Item pogoFist = new ItemPogoWeapon(700, 7.0D, -0.3, 8, "pogo_fist", "pogoFist", 0.55D).setTool(toolGauntlet, 0, 1.4F);
+    public static Item rocketFist = new MSUWeaponBase(124, 3D, 0.4D, 6, "rocket_powered_fist", "rocketFist").setTool(toolGauntlet, 0, 0.5F);
 
     //Armor
     public static MSUArmorBase diverHelmet = new ItemDiverHelmet(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
@@ -70,6 +104,18 @@ public class MinestuckUniverseItems
 
         registry.register(unbreakableKatana);
 
+        registerItem(registry, fancyGlove);
+        registerItem(registry, spikedGlove);
+        registerItem(registry, cobbleBasher);
+        registerItem(registry, fluoriteGauntlet);
+        registerItem(registry, goldenGenesisGauntlet);
+        registerItem(registry, pogoFist);
+        registerItem(registry, rocketFist);
+
+        registerItem(registry, battery);
+        for(ItemBeamBlade blade : dyedBeamBlade)
+            registerItem(registry, blade, new MSUModelManager.DualWeaponDefinition("dyed_battery_beam_blade", "dyed_battery_beam_blade_off"));
+        registerItem(registry, batteryBeamBlade, new MSUModelManager.DualWeaponDefinition("battery_beam_blade", "battery_beam_blade_off"));
         //registerGTArmor(registry);
 
         //Blocks
@@ -116,6 +162,13 @@ public class MinestuckUniverseItems
     {
         registry.register(item);
         MSUModelManager.items.add(item);
+        return item;
+    }
+
+    private static Item registerItem(IForgeRegistry<Item> registry, Item item, MSUModelManager.CustomItemMeshDefinition customMesh)
+    {
+        registry.register(item);
+        MSUModelManager.customItemModels.add(new Pair<>(item, customMesh));
         return item;
     }
 

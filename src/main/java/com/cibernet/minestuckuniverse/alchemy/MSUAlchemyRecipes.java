@@ -118,6 +118,25 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(goldenTransportalizer), new GristSet(new GristType[] {Build, Gold, Shale, Uranium}, new int[] {350, 36, 30, 20}));
         GristRegistry.addGristConversion(new ItemStack(paradoxTransportalizer), new GristSet(new GristType[] {Build, Rust, Uranium, Diamond, Zillium}, new int[] {750, 120, 256, 74, 25}));
 
+        GristRegistry.addGristConversion(new ItemStack(battery), new GristSet(new GristType[] {Build, Mercury}, new int[] {1, 2}));
+        GristRegistry.addGristConversion(new ItemStack(batteryBeamBlade), new GristSet(new GristType[]{Build, Uranium, Mercury}, new int[]{27, 54, 83}));
+        GristRegistry.addGristConversion(new ItemStack(trueUnbreakableKatana) , new GristSet(Zillium, 1000));
+        GristRegistry.addGristConversion(new ItemStack(fancyGlove), false, new GristSet(new GristType[] {GristType.Build, GristType.Chalk}, new int[] {5, 2}));
+        GristRegistry.addGristConversion(new ItemStack(spikedGlove), false, new GristSet(new GristType[] {GristType.Build, GristType.Rust, GristType.Chalk}, new int[] {25, 5, 3}));
+        GristRegistry.addGristConversion(new ItemStack(cobbleBasher), false, new GristSet(new GristType[] {GristType.Build, GristType.Marble}, new int[] {30, 5}));
+        GristRegistry.addGristConversion(new ItemStack(pogoFist), false, new GristSet(new GristType[] {GristType.Build, GristType.Shale}, new int[] {16, 21}));
+        GristRegistry.addGristConversion(new ItemStack(fluoriteGauntlet), false, new GristSet(new GristType[] {GristType.Cobalt, GristType.Caulk, GristType.Quartz, GristType.Shale}, new int[] {803, 500, 10, 2}));
+        GristRegistry.addGristConversion(new ItemStack(goldenGenesisGauntlet), false, new GristSet(new GristType[] {GristType.Build, GristType.Gold, GristType.Uranium, GristType.Diamond, GristType.Artifact}, new int[] {8000, 5000, 300, 250, 10}));
+        GristRegistry.addGristConversion(new ItemStack(rocketFist), false, new GristSet(new GristType[] {Build, Chalk, Sulfur, Tar}, new int[] {22, 4, 20, 8}));
+
+
+        GristRegistry.addGristConversion(new ItemStack(fancyGlove), false, new GristSet(new GristType[] {GristType.Build, GristType.Chalk}, new int[] {5, 2}));
+        GristRegistry.addGristConversion(new ItemStack(spikedGlove), false, new GristSet(new GristType[] {GristType.Build, GristType.Rust, GristType.Chalk}, new int[] {25, 5, 3}));
+        GristRegistry.addGristConversion(new ItemStack(cobbleBasher), false, new GristSet(new GristType[] {GristType.Build, GristType.Marble}, new int[] {30, 5}));
+        GristRegistry.addGristConversion(new ItemStack(pogoFist), false, new GristSet(new GristType[] {GristType.Build, GristType.Shale}, new int[] {16, 21}));
+        GristRegistry.addGristConversion(new ItemStack(fluoriteGauntlet), false, new GristSet(new GristType[] {GristType.Cobalt, GristType.Caulk, GristType.Quartz, GristType.Shale}, new int[] {803, 500, 10, 2}));
+        GristRegistry.addGristConversion(new ItemStack(goldenGenesisGauntlet), false, new GristSet(new GristType[] {GristType.Build, GristType.Gold, GristType.Uranium, GristType.Diamond, GristType.Artifact}, new int[] {8000, 5000, 300, 250, 10}));
+        GristRegistry.addGristConversion(new ItemStack(rocketFist), false, new GristSet(new GristType[] {Build, Chalk, Sulfur, Tar}, new int[] {22, 4, 20, 8}));
         
         if(MinestuckUniverse.isArsenalLoaded)
             GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, getTypeFromString("minestuckarsenal:moonstone"), Uranium}, new int[] {5, 5, 2}));
@@ -151,7 +170,32 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 6), new ItemStack(Items.GLOWSTONE_DUST), MODE_OR, true, false, new ItemStack(spaceSalt));
         
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.unbreakableKatana), new ItemStack(Blocks.BEDROCK), MODE_AND, false, false, new ItemStack(trueUnbreakableKatana));
-        
+
+        CombinationRegistry.addCombination(new ItemStack(Items.IRON_SWORD), new ItemStack(battery), MODE_AND, false, false, new ItemStack(batteryBeamBlade));
+
+        CombinationRegistry.addCombination(new ItemStack(Items.IRON_SWORD), new ItemStack(battery), MODE_AND, false, false, new ItemStack(batteryBeamBlade));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.unbreakableKatana), new ItemStack(Blocks.BEDROCK), MODE_AND, false, false, new ItemStack(trueUnbreakableKatana));
+        CombinationRegistry.addCombination(new ItemStack(Blocks.IRON_BARS), new ItemStack(fancyGlove), MODE_AND, false, false, new ItemStack(spikedGlove));
+        CombinationRegistry.addCombination(new ItemStack(Blocks.COBBLESTONE), new ItemStack(fancyGlove), MODE_AND, false, false, new ItemStack(cobbleBasher));
+        CombinationRegistry.addCombination(new ItemStack(Items.SLIME_BALL), new ItemStack(fancyGlove), MODE_OR, false, false, new ItemStack(pogoFist));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.fluoriteOctet), new ItemStack(cobbleBasher), MODE_OR, false, false, new ItemStack(fluoriteGauntlet));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 5), new ItemStack(fluoriteGauntlet), MODE_OR, true, false, new ItemStack(goldenGenesisGauntlet));
+        CombinationRegistry.addCombination(new ItemStack(Items.FIREWORKS), new ItemStack(fancyGlove), MODE_AND, false, false, new ItemStack(rocketFist));
+
+        for(EnumDyeColor dyeColor : EnumDyeColor.values())
+        {
+            ItemStack dye = new ItemStack(Items.DYE, 1, dyeColor.getDyeDamage());
+            ItemStack wool = new ItemStack(Blocks.WOOL, 1, dyeColor.getMetadata());
+            GristSet dyeGrist = GristRegistry.getGristConversion(wool).addGrist(Chalk, -6);
+            if(dyeGrist.getGrist(Chalk) == 0) dyeGrist.addGrist(Chalk, 0);
+
+            ItemStack beamBlade = new ItemStack(dyedBeamBlade[dyeColor.getMetadata()]);
+
+            GristRegistry.addGristConversion(beamBlade, GristRegistry.getGristConversion(new ItemStack(batteryBeamBlade)).addGrist(dyeGrist));
+            CombinationRegistry.addCombination(new ItemStack(batteryBeamBlade), dye, MODE_OR, false, true, beamBlade);
+        }
+
+
         if(MinestuckUniverse.isBotaniaLoaded)
             gristBlocks.add(gristBlockMana);
     }

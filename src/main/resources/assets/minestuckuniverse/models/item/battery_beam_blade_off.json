@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minestuckuniverse:items/battery_beam_blade_off"
+    }
+}
