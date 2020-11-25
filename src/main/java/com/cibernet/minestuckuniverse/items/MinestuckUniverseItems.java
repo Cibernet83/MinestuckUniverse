@@ -1,10 +1,13 @@
 package com.cibernet.minestuckuniverse.items;
 
+import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.mraof.minestuck.Minestuck;
+import com.mraof.minestuck.block.BlockTransportalizer;
+import com.mraof.minestuck.item.block.ItemTransportalizer;
 import com.mraof.minestuck.item.weapon.ItemWeapon;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
@@ -46,7 +49,7 @@ public class MinestuckUniverseItems
     public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool("sword", 0, 15.0F);
 
     //Armor
-    public static MSUArmorBase diverHelmet = new MSUArmorBase(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
+    public static MSUArmorBase diverHelmet = new ItemDiverHelmet(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
 
     //Overrides
     public static Item unbreakableKatana = new ItemWeapon(2200, 7, -2.4D, 20, "katana").setTool("sword", 0, 15.0F).setRegistryName(Minestuck.MOD_ID, "unbreakable_katana");
@@ -120,7 +123,8 @@ public class MinestuckUniverseItems
     {
         for(Block block : itemBlocks)
         {
-            ItemBlock item = new ItemBlock(block);
+            ItemBlock item = (block instanceof BlockCustomTransportalizer || block instanceof BlockTransportalizer)
+                    ? new ItemTransportalizer(block) : new ItemBlock(block);
             registerItem(registry, item.setRegistryName(item.getBlock().getRegistryName()));
         }
     }
