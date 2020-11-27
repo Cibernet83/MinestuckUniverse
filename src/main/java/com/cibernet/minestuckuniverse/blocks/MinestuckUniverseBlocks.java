@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.block.BlockDecor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
@@ -20,6 +21,7 @@ public class MinestuckUniverseBlocks
 	public static Block dungeonDoorKeyhole = new BlockDungeonDoor("dungeon_door_keyhole", "dungeonDoorKeyhole");
 
     public static Block magicBlock = new MSUBlockBase(Material.CLAY, "magic_block", "magicBlock");
+    public static Block wizardStatue = new BlockMSUDecor("wizardStatue", "wizard_statue");
 
     public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "sbahjBedrock").setResistance(0F).setHardness(-1F);
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
@@ -89,10 +91,12 @@ public class MinestuckUniverseBlocks
 
         registerBlock(registry, dungeonDoor, true);
         registerBlock(registry, dungeonDoorKeyhole, true);
-        registerBlock(registry, magicBlock, true);
         registerBlock(registry, sbahjBedrock, true);
         registerBlock(registry, zillyStone, true);
+
+		registerBlock(registry, magicBlock, true);
         registerBlock(registry, smoothIron, true);
+		registerBlock(registry, wizardStatue, true);
 		
         registerBlock(registry, holopad, true);
         

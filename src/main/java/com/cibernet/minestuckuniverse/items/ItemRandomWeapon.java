@@ -37,7 +37,6 @@ public class ItemRandomWeapon extends MSUWeaponBase
 		
 		Random rand = new Random();
 		int dmg = Math.round((rand.nextFloat()*max+min)*mulitiplier);
-		System.out.println(dmg);
 		target.attackEntityFrom(source, dmg);
 		
 		return super.hitEntity(stack, target, player);

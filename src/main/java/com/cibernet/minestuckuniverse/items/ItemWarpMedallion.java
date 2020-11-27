@@ -105,7 +105,7 @@ public class ItemWarpMedallion extends MSUItemBase
 
     public static int getColor(ItemStack stack)
     {
-        if(!stack.hasTagCompound() && !stack.getTagCompound().hasKey("Player"))
+        if(!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Player"))
             return -1;
 
         int colorIndex = MinestuckPlayerData.getData(IdentifierHandler.getById(stack.getTagCompound().getInteger("Player"))).color;

@@ -7,6 +7,8 @@ import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.block.BlockTransportalizer;
+import com.mraof.minestuck.block.MinestuckBlocks;
+import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.item.block.ItemTransportalizer;
 import com.mraof.minestuck.item.weapon.ItemWeapon;
 import com.mraof.minestuck.util.EnumAspect;
@@ -16,6 +18,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
@@ -51,8 +54,13 @@ public class MinestuckUniverseItems
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
-    public static Item returnNode = new MSUItemBase("return_node", "returnNode"){public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {}};
-    public static Item travelGate = new MSUItemBase("travel_gate", "travelGate"){public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {}};
+
+    //Ghost Items
+    public static Item returnNode = new ItemGhostBlock("return_node_ghost_item", MinestuckBlocks.returnNode);
+    public static Item travelGate = new ItemGhostBlock("travel_gate_ghost_item", MinestuckBlocks.gate);
+    public static Item netherPortal = new ItemGhostBlock("nether_portal_ghost_item", Blocks.PORTAL);
+    public static Item endPortal = new ItemGhostBlock("end_portal_ghost_item", Blocks.END_PORTAL);
+    public static Item endGateway = new ItemGhostBlock("end_gateway_ghost_item", Blocks.END_GATEWAY);
 
     public static Item returnMedallion = new ItemWarpMedallion("returnMedallion", "return_medallion", ItemWarpMedallion.EnumTeleportType.RETURN, 80);
     public static Item teleportMedallion = new ItemWarpMedallion("teleportMedallion", "teleport_medallion", ItemWarpMedallion.EnumTeleportType.TRANSPORTALIZER, 80);
@@ -105,6 +113,10 @@ public class MinestuckUniverseItems
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
         registerItem(registry, returnNode);
+        registerItem(registry, travelGate);
+        registerItem(registry, endPortal);
+        registerItem(registry, netherPortal);
+        registerItem(registry, endGateway);
 
         registerItem(registry, returnMedallion);
         registerItem(registry, teleportMedallion);

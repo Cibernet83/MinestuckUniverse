@@ -182,6 +182,12 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 5), new ItemStack(fluoriteGauntlet), MODE_OR, true, false, new ItemStack(goldenGenesisGauntlet));
         CombinationRegistry.addCombination(new ItemStack(Items.FIREWORKS), new ItemStack(fancyGlove), MODE_AND, false, false, new ItemStack(rocketFist));
 
+        CombinationRegistry.addCombination(new ItemStack(endPortal), new ItemStack(MinestuckBlocks.chessboard), MODE_AND, false, false, new ItemStack(MinestuckBlocks.skaiaPortal));
+
+        CombinationRegistry.addCombination(new ItemStack(magicBlock), new ItemStack(returnNode), MODE_OR, false, false, new ItemStack(returnMedallion));
+        CombinationRegistry.addCombination(new ItemStack(returnMedallion), new ItemStack(MinestuckBlocks.transportalizer), MODE_OR, false, false, new ItemStack(teleportMedallion));
+        CombinationRegistry.addCombination(new ItemStack(returnMedallion), new ItemStack(MinestuckBlocks.skaiaPortal), MODE_OR, false, false, new ItemStack(skaianMedallion));
+
         for(EnumDyeColor dyeColor : EnumDyeColor.values())
         {
             ItemStack dye = new ItemStack(Items.DYE, 1, dyeColor.getDyeDamage());

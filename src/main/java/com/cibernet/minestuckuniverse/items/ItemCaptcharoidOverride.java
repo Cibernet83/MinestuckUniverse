@@ -48,12 +48,10 @@ public class ItemCaptcharoidOverride extends ItemCaptcharoidCamera
                 int meta = state.getBlock().damageDropped(state);
                 block.setItemDamage(meta);
 
-                if(worldIn.getBlockState(pos).getBlock() instanceof BlockLargeMachine)
+                if(ItemGhostBlock.containsKey(state.getBlock()))
+                    block = new ItemStack(ItemGhostBlock.get(state.getBlock()));
+                else if(worldIn.getBlockState(pos).getBlock() instanceof BlockLargeMachine)
                     block = new ItemStack(((BlockLargeMachine) worldIn.getBlockState(pos).getBlock()).getItemFromMachine());
-                else if(worldIn.getBlockState(pos).getBlock() instanceof BlockReturnNode)
-                    block = new ItemStack(MinestuckUniverseItems.returnNode);
-                else if(worldIn.getBlockState(pos).getBlock() instanceof BlockGate)
-                    block = new ItemStack(MinestuckUniverseItems.travelGate);
 
                 player.inventory.addItemStackToInventory(AlchemyRecipes.createGhostCard(block));
                 player.getHeldItem(hand).damageItem(1, player);

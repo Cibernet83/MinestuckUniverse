@@ -7,6 +7,7 @@ tile.sbahjBedrock.tooltip=is it rally as hard as bedrok?
 tile.zillystone.name=Zillystone
 tile.zillystone.tooltip=It's hard enough to withstand most conventional means of destruction, yet it looks like it can be chipped away by a magical tool.
 tile.smoothIron.name=Smooth Iron Block
+tile.wizardStatue.name=Wizard Statue
 
 tile.gristBlock.amber.name=Block of Amber Grist
 tile.gristBlock.amethyst.name=Block of Amethyst Grist
@@ -62,8 +63,8 @@ item.teleportMedallion.tooltip=This peculiar medallion allows you to safely trav
 item.skaianMedallion.name=Skaian Medallion
 item.skaianMedallion.tooltip=This peculiar medallion allows you to safely travel to skaia.
 
-item.returnNode.name=Return Node
-item.travelGate.name=Gate
+item.return_node_ghost_item.name=Return Node
+item.travel_gate_ghost_item.name=Gate
 
 item.murica.name='murica
 item.muricaSouth.name='murica
