@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.entity.render.RenderHologram;
 import com.cibernet.minestuckuniverse.items.ItemBeamBlade;
+import com.cibernet.minestuckuniverse.items.ItemWarpMedallion;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.client.MSURenderMachineOutline;
@@ -9,8 +10,11 @@ import com.cibernet.minestuckuniverse.entity.classes.EntityAcheron;
 import com.cibernet.minestuckuniverse.entity.models.ModelAcheron;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.mraof.minestuck.client.renderer.BlockColorCruxite;
 import com.mraof.minestuck.client.renderer.entity.RenderEntityMinestuck;
+import com.mraof.minestuck.util.ColorCollector;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -50,6 +54,9 @@ public class ClientProxy extends CommonProxy
         Minecraft mc = Minecraft.getMinecraft();
 
         mc.getItemColors().registerItemColorHandler(new ItemBeamBlade.BladeColorHandler(), dyedBeamBlade);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) ->
+                        BlockColorCruxite.handleColorTint(ItemWarpMedallion.getColor(stack), tintIndex),
+                new Item[]{MinestuckUniverseItems.returnMedallion});
     }
 
 }

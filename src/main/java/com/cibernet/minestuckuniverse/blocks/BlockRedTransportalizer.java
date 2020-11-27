@@ -57,7 +57,7 @@ public class BlockRedTransportalizer extends BlockCustomTransportalizer
         if(!id.equals(tileEntity.owner))
         {
             if (playerIn instanceof EntityPlayerMP)
-                playerIn.sendMessage(new TextComponentTranslation("message.transportalizer.notOwner"));
+                playerIn.sendStatusMessage(new TextComponentTranslation("message.transportalizer.notOwner"), true);
             return true;
         }
 

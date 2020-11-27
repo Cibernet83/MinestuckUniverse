@@ -14,13 +14,12 @@ import com.mraof.minestuck.util.EnumClass;
 import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.*;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -51,7 +50,14 @@ public class MinestuckUniverseItems
     public static Item moonstone = new MSUItemBase("moonstone");
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
-    
+    public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
+    public static Item returnNode = new MSUItemBase("return_node", "returnNode"){public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {}};
+    public static Item travelGate = new MSUItemBase("travel_gate", "travelGate"){public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {}};
+
+    public static Item returnMedallion = new ItemWarpMedallion("returnMedallion", "return_medallion", ItemWarpMedallion.EnumTeleportType.RETURN, 80);
+    public static Item teleportMedallion = new ItemWarpMedallion("teleportMedallion", "teleport_medallion", ItemWarpMedallion.EnumTeleportType.TRANSPORTALIZER, 80);
+    public static Item skaianMedallion = new ItemWarpMedallion("skaianMedallion", "skaian_medallion", ItemWarpMedallion.EnumTeleportType.SKAIA, 80);
+
     //Weapons
     public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool(toolSword, 0, 15.0F);
     public static Item battery = new MSUItemBase("battery", "battery");
@@ -87,6 +93,7 @@ public class MinestuckUniverseItems
 
     //Overrides
     public static Item unbreakableKatana = new ItemWeapon(2200, 7, -2.4D, 20, "katana").setTool("sword", 0, 15.0F).setRegistryName(Minestuck.MOD_ID, "unbreakable_katana");
+    public static Item captcharoidCamera = new ItemCaptcharoidOverride().setRegistryName(Minestuck.MOD_ID, "captcharoid_camera");
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -97,12 +104,18 @@ public class MinestuckUniverseItems
         registerItem(registry, moonstone);
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
+        registerItem(registry, returnNode);
+
+        registerItem(registry, returnMedallion);
+        registerItem(registry, teleportMedallion);
+        registerItem(registry, skaianMedallion);
 
         registerItem(registry, trueUnbreakableKatana);
 
         registerItem(registry, diverHelmet);
 
         registry.register(unbreakableKatana);
+        registerItem(registry, captcharoidCamera);
 
         registerItem(registry, fancyGlove);
         registerItem(registry, spikedGlove);
@@ -114,9 +127,11 @@ public class MinestuckUniverseItems
 
         registerItem(registry, battery);
         for(ItemBeamBlade blade : dyedBeamBlade)
-            registerItem(registry, blade, new MSUModelManager.DualWeaponDefinition("dyed_battery_beam_blade", "dyed_battery_beam_blade_off"));
-        registerItem(registry, batteryBeamBlade, new MSUModelManager.DualWeaponDefinition("battery_beam_blade", "battery_beam_blade_off"));
+            registerCustomRenderedItem(registry, blade);
+        registerCustomRenderedItem(registry, batteryBeamBlade);
         //registerGTArmor(registry);
+
+        registerItem(registry, dungeonKey);
 
         //Blocks
         registerItemBlocks(registry);
@@ -130,6 +145,9 @@ public class MinestuckUniverseItems
     public static void setClientsideVariables()
     {
         diverHelmet.setArmorModel(new ModelDiverHelmet());
+        for(ItemBeamBlade blade : dyedBeamBlade)
+            registerItemCustomRender(blade, new MSUModelManager.DualWeaponDefinition("dyed_battery_beam_blade", "dyed_battery_beam_blade_off"));
+        registerItemCustomRender(batteryBeamBlade, new MSUModelManager.DualWeaponDefinition("battery_beam_blade", "battery_beam_blade_off"));
     }
 
 
@@ -165,9 +183,15 @@ public class MinestuckUniverseItems
         return item;
     }
 
-    private static Item registerItem(IForgeRegistry<Item> registry, Item item, MSUModelManager.CustomItemMeshDefinition customMesh)
+    private static Item registerCustomRenderedItem(IForgeRegistry<Item> registry, Item item)
     {
         registry.register(item);
+        return item;
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static Item registerItemCustomRender(Item item, MSUModelManager.CustomItemMeshDefinition customMesh)
+    {
         MSUModelManager.customItemModels.add(new Pair<>(item, customMesh));
         return item;
     }

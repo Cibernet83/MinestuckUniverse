@@ -41,6 +41,7 @@ public class CommonProxy
         GameRegistry.registerTileEntity(TileEntityRedTransportalizer.class, MinestuckUniverse.MODID + ":red_transportalizer");
         GameRegistry.registerTileEntity(TileEntityParadoxTransportalizer.class, MinestuckUniverse.MODID + ":paradox_transportalizer");
         GameRegistry.registerTileEntity(TileEntityHolopad.class, MinestuckUniverse.MODID + ":holopad");
+        GameRegistry.registerTileEntity(TileEntityPlatinumTransportalizer.class, MinestuckUniverse.MODID + ":platinum_transportalizer");
 
     }
 

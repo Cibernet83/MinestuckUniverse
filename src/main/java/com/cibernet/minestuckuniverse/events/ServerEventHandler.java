@@ -15,15 +15,6 @@ public class ServerEventHandler
 	@SubscribeEvent
 	public void onTick(TickEvent.PlayerTickEvent event)
 	{
-		IdentifierHandler.PlayerIdentifier identifier = IdentifierHandler.encode(event.player);
-		SburbConnection c = SkaianetHandler.getMainConnection(identifier, true);
-		if(c == null || !c.enteredGame() || MinestuckConfig.aspectEffects == false || !MinestuckPlayerData.getEffectToggle(identifier))
-			return;
-		int rung = MinestuckPlayerData.getData(identifier).echeladder.getRung();
-		EnumAspect aspect = MinestuckPlayerData.getTitle(identifier).getHeroAspect();
-		EnumClass heroClass = MinestuckPlayerData.getTitle(identifier).getHeroClass();
-		
-		
-		
+
 	}
 }

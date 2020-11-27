@@ -16,6 +16,9 @@ public class MinestuckUniverseBlocks
 {
 
     //Base
+	public static Block dungeonDoor = new BlockDungeonDoor("dungeon_door", "dungeonDoor");
+	public static Block dungeonDoorKeyhole = new BlockDungeonDoor("dungeon_door_keyhole", "dungeonDoorKeyhole");
+
     public static Block magicBlock = new MSUBlockBase(Material.CLAY, "magic_block", "magicBlock");
 
     public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "sbahjBedrock").setResistance(0F).setHardness(-1F);
@@ -49,6 +52,7 @@ public class MinestuckUniverseBlocks
 	public static Block rubyRedTransportalizer = new BlockRedTransportalizer();
 	public static Block goldenTransportalizer = new BlockGoldTransportalizer();
 	public static Block paradoxTransportalizer = new BlockParadoxTransportalizer();
+	public static Block platinumTransportalizer = new BlockPlatinumTransportalizer();
 
 	public static Block gristBlockAmber = new BlockGrist(GristType.Amber);
 	public static Block gristBlockAmethyst = new BlockGrist(GristType.Amethyst);
@@ -83,6 +87,8 @@ public class MinestuckUniverseBlocks
     {
         IForgeRegistry<Block> registry = event.getRegistry();
 
+        registerBlock(registry, dungeonDoor, true);
+        registerBlock(registry, dungeonDoorKeyhole, true);
         registerBlock(registry, magicBlock, true);
         registerBlock(registry, sbahjBedrock, true);
         registerBlock(registry, zillyStone, true);
@@ -115,6 +121,7 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, rubyRedTransportalizer, true);
 		registerBlock(registry, goldenTransportalizer, true);
 		registerBlock(registry, paradoxTransportalizer, true);
+		registerBlock(registry, platinumTransportalizer, true);
 
 		registerBlock(registry, gristBlockBuild, true);
 		registerBlock(registry, gristBlockAmber, true);
