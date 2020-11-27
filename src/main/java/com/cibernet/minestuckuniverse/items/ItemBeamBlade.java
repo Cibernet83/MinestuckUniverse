@@ -91,6 +91,17 @@ public class ItemBeamBlade extends MSUWeaponBase
         return this;
     }
 
+    @Override
+    public boolean isRepairable() {
+        return true;
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
+    {
+        return repair.getItem() == MinestuckUniverseItems.battery;
+    }
+
     public static class BladeColorHandler implements IItemColor
     {
 
