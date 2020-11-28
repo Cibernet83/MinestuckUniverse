@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.util;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.item.MinestuckItems;
 import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -37,6 +38,10 @@ public class MSUModelManager
     private static void ItemModels()
     {
         register(unbreakableKatana, 0, "unbreakable_katana");
+
+        DualWeaponDefinition catClawsDef = new DualWeaponDefinition("catclaws_drawn", "catclaws_sheathed");
+        ModelLoader.registerItemVariants(catClaws, catClawsDef.getResourceLocations());
+        ModelLoader.setCustomMeshDefinition(catClaws, catClawsDef);
 
         for(Item item : items)
             register(item);

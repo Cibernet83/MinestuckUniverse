@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "minecraft:blocks/portal"
+        "layer0": "minestuckuniverse:items/iron_medallion"
     }
 }

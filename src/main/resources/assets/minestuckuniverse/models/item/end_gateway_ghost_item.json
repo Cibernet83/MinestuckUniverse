@@ -1,3 +1,6 @@
 {
-    "parent": "minecraft:block/end_gateway"
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "minecraft:entity/end_portal"
+    }
 }

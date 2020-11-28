@@ -40,6 +40,8 @@ public class ItemWarpMedallion extends MSUItemBase
 
         if(uses >= 0)
             setMaxDamage(uses);
+
+        setMaxStackSize(1);
     }
 
     @Override
@@ -116,15 +118,16 @@ public class ItemWarpMedallion extends MSUItemBase
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
     {
-        if(teleport(stack, worldIn, entityLiving))
-        {
-            stack.damageItem(1, entityLiving);
-            entityLiving.motionX = 0;
-            entityLiving.motionY = 0;
-            entityLiving.motionZ = 0;
-            entityLiving.fallDistance = 0;
-        } else entityLiving.sendMessage(new TextComponentTranslation("message.medallion.error"));
-
+        if(!worldIn.isRemote) {
+            if (teleport(stack, worldIn, entityLiving)) {
+                stack.damageItem(1, entityLiving);
+                entityLiving.motionX = 0;
+                entityLiving.motionY = 0;
+                entityLiving.motionZ = 0;
+                entityLiving.fallDistance = 0;
+            } else if(entityLiving instanceof EntityPlayer)
+                ((EntityPlayer) entityLiving).sendStatusMessage(new TextComponentTranslation("message.medallion.error"), true);
+        }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }
 
@@ -146,7 +149,7 @@ public class ItemWarpMedallion extends MSUItemBase
 
                 if(!medallion.hasTagCompound() || !medallion.getTagCompound().hasKey("Code"))
                     return false;
-            return tpToTransportalizer(medallion.getTagCompound().getString("Code"), worldIn, entityLiving);
+            return tpToTransportalizer(medallion.getTagCompound().getString("Code"), worldIn, entityLiving, false);
 
             case RETURN:
 
@@ -170,10 +173,11 @@ public class ItemWarpMedallion extends MSUItemBase
     }
 
 
-    public boolean tpToTransportalizer(String destId, World world, Entity entity)
+    public boolean tpToTransportalizer(String destId, World world, Entity entity, boolean bypassDimBan)
     {
         Location location = (Location)TileEntityTransportalizer.transportalizers.get(destId);
-        if (location != null && location.pos.getY() != -1) {
+        if (location != null && location.pos.getY() != -1)
+        {
             WorldServer destWorld = entity.getServer().getWorld(location.dim);
             TileEntityTransportalizer destTransportalizer = (TileEntityTransportalizer)destWorld.getTileEntity(location.pos);
             if (destTransportalizer == null) {
@@ -187,15 +191,18 @@ public class ItemWarpMedallion extends MSUItemBase
                 return false;
             }
 
-            int[] var5 = MinestuckConfig.forbiddenDimensionsTpz;
+            int[] var5 = bypassDimBan ? new int[0] : MinestuckConfig.forbiddenDimensionsTpz;
             int var6 = var5.length;
             int var7 = 0;
 
             while(true) {
-                if (var7 >= var6) {
-                       IBlockState block0 = world.getBlockState(location.pos.up());
-                       IBlockState block1 = world.getBlockState(location.pos.up(2));
-                        if (!block0.getMaterial().blocksMovement() && !block1.getMaterial().blocksMovement()) {
+                if (var7 >= var6)
+                {
+                       IBlockState block0 = destWorld.getBlockState(location.pos.up());
+                       IBlockState block1 = destWorld.getBlockState(location.pos.up(2));
+
+                        if (!block0.getMaterial().blocksMovement() && !block1.getMaterial().blocksMovement())
+                        {
                             Teleport.teleportEntity(entity, location.dim, (Teleport.ITeleporter)null, (double)destTransportalizer.getPos().getX() + 0.5D, (double)destTransportalizer.getPos().getY() + 0.6D, (double)destTransportalizer.getPos().getZ() + 0.5D);
                             entity.timeUntilPortal = entity.getPortalCooldown();
                             break;

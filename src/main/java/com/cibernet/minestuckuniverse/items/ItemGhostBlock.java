@@ -38,7 +38,6 @@ public class ItemGhostBlock extends MSUItemBase
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        System.out.println(block.getUnlocalizedName().equals("tile.null"));
         return block.getUnlocalizedName().equals("tile.null") ? super.getUnlocalizedName(stack) : this.block.getUnlocalizedName();
     }
 
