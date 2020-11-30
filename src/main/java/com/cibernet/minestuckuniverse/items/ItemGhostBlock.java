@@ -22,7 +22,6 @@ public class ItemGhostBlock extends MSUItemBase
         this.block = block;
         setUnlocalizedName(regName);
         ghostItems.put(new BlockEntry(block), this);
-        setCreativeTab(null);
     }
 
     public static Item get(Block block)

@@ -97,8 +97,8 @@ public class MinestuckUniverseBlocks
 
 		registerBlock(registry, magicBlock, true);
         registerBlock(registry, smoothIron, true);
-		registerBlock(registry, wizardStatue, true);
 		registerBlock(registry, netherReactorCore, true);
+		registerBlock(registry, wizardStatue, true);
 
         registerBlock(registry, holopad, true);
         

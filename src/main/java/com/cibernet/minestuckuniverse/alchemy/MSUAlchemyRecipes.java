@@ -102,7 +102,11 @@ public class MSUAlchemyRecipes
         //Grist Conversions
         
         GristRegistry.addGristConversion(new ItemStack(diverHelmet), new GristSet(new GristType[] {Rust, Cobalt}, new int[] {80, 16}));
-        
+        GristRegistry.addGristConversion(new ItemStack(spikedHelmet), new GristSet(new GristType[] {Rust}, new int[] {260}));
+        GristRegistry.addGristConversion(new ItemStack(frogHat), new GristSet(new GristType[] {Build}, new int[] {20}));
+        GristRegistry.addGristConversion(new ItemStack(wizardHat), new GristSet(new GristType[] {Build, Amethyst}, new int[] {10, 8}));
+        GristRegistry.addGristConversion(new ItemStack(cozySweater), new GristSet(new GristType[] {Build, Garnet}, new int[] {10, 8}));
+
         GristRegistry.addGristConversion(new ItemStack(magicBlock), magicBlockCost);
         GristRegistry.addGristConversion(new ItemStack(sbahjBedrock), new GristSet(new GristType[] {Artifact}, new int[] {2000}));
         GristRegistry.addGristConversion(new ItemStack(zillyStone), new GristSet(new GristType[] {Zillium, Build}, new int[] {1, 100}));
@@ -139,7 +143,12 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(fluoriteGauntlet), false, new GristSet(new GristType[] {GristType.Cobalt, GristType.Caulk, GristType.Quartz, GristType.Shale}, new int[] {803, 500, 10, 2}));
         GristRegistry.addGristConversion(new ItemStack(goldenGenesisGauntlet), false, new GristSet(new GristType[] {GristType.Build, GristType.Gold, GristType.Uranium, GristType.Diamond, GristType.Artifact}, new int[] {8000, 5000, 300, 250, 10}));
         GristRegistry.addGristConversion(new ItemStack(rocketFist), false, new GristSet(new GristType[] {Build, Chalk, Sulfur, Tar}, new int[] {22, 4, 20, 8}));
-        
+
+        GristRegistry.addGristConversion(new ItemStack(pointySticks), false, new GristSet(new GristType[] {Build}, new int[] {12}));
+        GristRegistry.addGristConversion(new ItemStack(boneNeedles), false, new GristSet(new GristType[] {Chalk}, new int[] {24}));
+        GristRegistry.addGristConversion(new ItemStack(needlewands), false, new GristSet(new GristType[] {Diamond, Chalk, Garnet, Gold}, new int[] {1000, 2000, 3000, 500}));
+        GristRegistry.addGristConversion(new ItemStack(oglogothThorn), false, new GristSet(new GristType[] {Iodine, Chalk, Amethyst, Gold, Tar}, new int[] {6000, 5000, 4000, 3000, 666}));
+
         if(MinestuckUniverse.isArsenalLoaded)
             GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, getTypeFromString("minestuckarsenal:moonstone"), Uranium}, new int[] {5, 5, 2}));
         else
@@ -156,14 +165,17 @@ public class MSUAlchemyRecipes
         
         //Alchemy
         
-        CombinationRegistry.addCombination(new ItemStack(Items.IRON_HELMET), new ItemStack(Blocks.IRON_BLOCK), MODE_AND, false, false, new ItemStack(diverHelmet));
-        
+        CombinationRegistry.addCombination(new ItemStack(Items.FISH, 1, 3), new ItemStack(Items.IRON_HELMET), MODE_AND, true, false, new ItemStack(diverHelmet));
+        CombinationRegistry.addCombination(new ItemStack(diverHelmet), new ItemStack(knittingNeedles), MODE_OR, false, false, new ItemStack(spikedHelmet));
+        CombinationRegistry.addCombination(new ItemStack(Items.LEATHER_HELMET), new ItemStack(MinestuckItems.itemFrog, 1, 1), MODE_OR, false, true, new ItemStack(frogHat));
+
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.rawCruxite), new ItemStack(Blocks.END_STONE), MODE_OR, new ItemStack(moonstone));
         CombinationRegistry.addCombination(new ItemStack(Blocks.BEDROCK), new ItemStack(MinestuckItems.sbahjPoster), MODE_AND, new ItemStack(sbahjBedrock));
         CombinationRegistry.addCombination(new ItemStack(sbahjBedrock), Zillium.getCandyItem(), MODE_OR, false, true, new ItemStack(zillyStone));
         CombinationRegistry.addCombination(new ItemStack(Blocks.IRON_BLOCK), new ItemStack(Blocks.QUARTZ_BLOCK, 1, 0), MODE_OR, false, true, new ItemStack(smoothIron));
         CombinationRegistry.addCombination(new ItemStack(MinestuckBlocks.uraniumBlock), new ItemStack(netherPortal), MODE_AND, new ItemStack(netherReactorCore));
-        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.rawCruxite), new ItemStack(Blocks.STONE), MODE_OR, new ItemStack(wizardStatue)); //TODO put wizard hat here
+        CombinationRegistry.addCombination(new ItemStack(wizardHat), new ItemStack(Blocks.STONE), MODE_OR, new ItemStack(wizardStatue));
+        CombinationRegistry.addCombination(new ItemStack(wizardHat), new ItemStack(Blocks.STONE), MODE_OR, new ItemStack(wizardStatue));
 
         CombinationRegistry.addCombination(new ItemStack(moonstone), new ItemStack(Blocks.IRON_BLOCK), MODE_AND, new ItemStack(machineChasis));
         
@@ -185,6 +197,11 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.fluoriteOctet), new ItemStack(goldenGenesisGauntlet), MODE_OR, false, false, new ItemStack(fluoriteGauntlet));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 5), new ItemStack(cobbleBasher), MODE_OR, true, false, new ItemStack(goldenGenesisGauntlet));
         CombinationRegistry.addCombination(new ItemStack(Items.FIREWORKS), new ItemStack(spikedGlove), MODE_AND, false, false, new ItemStack(rocketFist));
+
+        CombinationRegistry.addCombination(new ItemStack(Items.FLINT), new ItemStack(Items.STICK), MODE_AND, false, false, new ItemStack(pointySticks));
+        CombinationRegistry.addCombination(new ItemStack(knittingNeedles), new ItemStack(Items.BONE), MODE_OR, false, false, new ItemStack(boneNeedles));
+        CombinationRegistry.addCombination(new ItemStack(knittingNeedles), new ItemStack(wizardStatue), MODE_OR, false, false, new ItemStack(needlewands));
+        CombinationRegistry.addCombination(new ItemStack(needlewands), new ItemStack(MinestuckItems.grimoire), MODE_AND, false, false, new ItemStack(oglogothThorn));
 
         CombinationRegistry.addCombination(new ItemStack(endPortal), new ItemStack(MinestuckBlocks.chessboard), MODE_OR, false, false, new ItemStack(MinestuckBlocks.skaiaPortal));
 

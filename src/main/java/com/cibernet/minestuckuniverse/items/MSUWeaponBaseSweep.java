@@ -3,13 +3,8 @@ package com.cibernet.minestuckuniverse.items;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.mraof.minestuck.item.MinestuckItems;
-import com.mraof.minestuck.item.TabMinestuck;
-import com.mraof.minestuck.item.weapon.ItemWeapon;
-import javafx.scene.paint.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,18 +12,16 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MSUWeaponBase extends Item
+public class MSUWeaponBaseSweep extends ItemSword
 {
     protected boolean unbreakable;
     protected double weaponDamage;
@@ -41,9 +34,9 @@ public class MSUWeaponBase extends Item
     protected float harvestSpeed = 0;
     private int harvestLevel = 0;
 
-    public MSUWeaponBase(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
+    public MSUWeaponBaseSweep(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
     {
-        super();
+        super(ToolMaterial.IRON);
         this.setRegistryName(name);
         this.setUnlocalizedName(unlocName);
         this.setCreativeTab(TabMinestuckUniverse.instance);
@@ -65,18 +58,19 @@ public class MSUWeaponBase extends Item
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
-    public MSUWeaponBase setMaterial(Item.ToolMaterial material)
+    public MSUWeaponBaseSweep setMaterial(ToolMaterial material)
     {
         this.material = material;
         return this;
     }
 
-    public MSUWeaponBase setRepairMaterial(ItemStack stack)
+    public MSUWeaponBaseSweep setRepairMaterial(ItemStack stack)
     {
         this.repairMaterial = stack;
         return this;
     }
 
+    @Override
     public String getToolMaterialName()
     {
         return this.material.toString();
@@ -90,7 +84,7 @@ public class MSUWeaponBase extends Item
         return super.getIsRepairable(toRepair, repair);
     }
 
-    public MSUWeaponBase(double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
+    public MSUWeaponBaseSweep(double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
     {
         this(-1, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
         unbreakable = true;
@@ -151,7 +145,7 @@ public class MSUWeaponBase extends Item
         return multimap;
     }
 
-    public MSUWeaponBase setTool(MSUToolClass cls, int harvestLevel, float harvestSpeed)
+    public MSUWeaponBaseSweep setTool(MSUToolClass cls, int harvestLevel, float harvestSpeed)
     {
         tool = cls;
         this.harvestLevel = harvestLevel;

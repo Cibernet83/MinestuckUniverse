@@ -47,6 +47,14 @@ tile.porkhollowATM.name=Porkhollow ATM
 tile.magicBlock.name=Perfectly Magical Object
 
 item.diverHelmet.name=Diver Helmet
+item.diverHelmet.tooltip=A Diving Helmet for all your diving needs, this piece of headgear lets traverse the depths of the ocean without needing to worry about oxygen.
+item.spikedDiverHelmet.name=Spiked Diver Helmet
+item.spikedDiverHelmet.tooltip=A Spiked Helmet for all your spiky needs, anyone that dares lay a finger on it will most certainly get poked.
+item.frogHat.name=Frog Hat
+item.wizardHat.name=Wizard Hat
+item.wizardHat.tooltip=Weaved by the most average knitter, using threads from the most generic sheep, this mystical hat grants resistance to magic attacks.
+item.cozySweater.name=Cozy Sweater
+item.scarf.name=Scarf
 
 item.spaceSalt.name=Spatial Manipulation Dust
 item.spaceSalt.tooltip=A way to shrink and grow things, especially machines!
@@ -110,6 +118,22 @@ item.pogoFist.tooltip=Uppercut your foes into the stratosphere with this bouncy 
 item.goldenGenesisGauntlet.name=Golden Genesis Gauntlet
 item.goldenGenesisGauntlet.tooltip=Feel the power of frogs (and the cosmos) within your palm!
 item.rocketFist.name=Rocket-Powered Fist
+
+item.knittingNeedle.name=Knitting Needle
+item.knittingNeedlePlural.name=Knitting Needles
+item.pointyStick.name=Pointy Stick
+item.pointyStickPlural.name=Pointy Sticks
+item.pointyStick.tooltip=For the last time, no, it's not a stake.
+item.boneNeedle.name=Bone Needle
+item.boneNeedlePlural.name=Bone Needles
+item.needlewand.name=Needlewand
+item.needlewandPlural.name=Needlewands
+item.needlewand.tooltip=They crackle with the majyyk enyrjjies.
+item.oglogothThorn.name=Thorn of Oglogoth
+item.oglogothThornPlural.name=Thorns of Oglogoth
+item.oglogothThorn.tooltip=The needles seem to shiver with the dark desires of THE DEEP ONE. Any sane adventurer would cast these instruments of the occult into the FURTHEST RING and forget they ever existed.
+item.echidnaQuill.name=Quill of Echidna
+item.echidnaQuillPlural.name=Quills of Echidna
 
 tile.woolTransportalizer.white.name=White Sleeved Transportalizer
 tile.woolTransportalizer.orange.name=Orange Sleeved Transportalizer

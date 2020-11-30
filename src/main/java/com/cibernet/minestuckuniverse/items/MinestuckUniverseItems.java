@@ -1,15 +1,15 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
+import com.cibernet.minestuckuniverse.entity.models.armor.ModelFrogHat;
+import com.cibernet.minestuckuniverse.entity.models.armor.ModelSpikedHelmet;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.block.BlockTransportalizer;
 import com.mraof.minestuck.block.MinestuckBlocks;
-import com.mraof.minestuck.item.TabMinestuck;
 import com.mraof.minestuck.item.block.ItemTransportalizer;
-import com.mraof.minestuck.item.weapon.ItemDualWeapon;
 import com.mraof.minestuck.item.weapon.ItemWeapon;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
@@ -37,8 +37,9 @@ public class MinestuckUniverseItems
     private static final EnumClass[] classes = EnumClass.values();
     private static final EnumAspect[] aspects = EnumAspect.values();
     //Armor Materials
-    public static ItemArmor.ArmorMaterial materialDiverHelmet = EnumHelper.addArmorMaterial("DIVER_HELMET", MinestuckUniverse.MODID+":diver_helmet", 50, new int[] {0, 0, 0, 3}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
-    public static ItemArmor.ArmorMaterial materialCrumplyHat = EnumHelper.addArmorMaterial("CRUMPLY_HAT", MinestuckUniverse.MODID+":crumply_hat", -1, new int[] {0, 0, 0, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
+    public static ItemArmor.ArmorMaterial materialDiverHelmet = EnumHelper.addArmorMaterial("DIVER_HELMET", MinestuckUniverse.MODID+":diver_helmet", 120, new int[] {0, 0, 0, 3}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+    public static ItemArmor.ArmorMaterial materialSpikedHelmet = EnumHelper.addArmorMaterial("SPIKED_HELMET", MinestuckUniverse.MODID+":spiked_diver_helmet", 230, new int[] {0, 0, 0, 6}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+    public static ItemArmor.ArmorMaterial materialCloth = EnumHelper.addArmorMaterial("CLOTH", MinestuckUniverse.MODID+":cloth", -1, new int[] {0, 0, 0, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
 
     //GT Armor
     public static ItemArmor.ArmorMaterial[][] GTArmorMaterial = new ItemArmor.ArmorMaterial[classes.length][aspects.length];
@@ -46,6 +47,7 @@ public class MinestuckUniverseItems
 
     public static MSUToolClass toolSword = new MSUToolClass(Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
     public static MSUToolClass toolGauntlet = new MSUToolClass(Material.GLASS, Material.ICE, Material.PACKED_ICE);
+    public static MSUToolClass toolNeedles = new MSUToolClass(Material.CLOTH).addEnchantments(EnumEnchantmentType.WEAPON);
 
     //Items
     public static Item spaceSalt = new ItemSpaceSalt();
@@ -68,7 +70,7 @@ public class MinestuckUniverseItems
     public static Item skaianMedallion = new ItemWarpMedallion("skaianMedallion", "skaian_medallion", ItemWarpMedallion.EnumTeleportType.SKAIA, 80);
 
     //Weapons
-    public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool(toolSword, 0, 15.0F);
+    public static Item trueUnbreakableKatana = (new MSUWeaponBaseSweep(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool(toolSword, 0, 15.0F);
     public static Item battery = new MSUItemBase("battery", "battery");
     public static ItemBeamBlade batteryBeamBlade = new ItemBeamBlade(345, 5, -2.3, 20, "battery_beam_blade", "batteryBeamBlade").setTool(toolSword, 0, 15.0F);
     public static ItemBeamBlade[] dyedBeamBlade = new ItemBeamBlade[] {
@@ -97,13 +99,25 @@ public class MinestuckUniverseItems
     public static Item pogoFist = new ItemPogoWeapon(700, 7.0D, -0.3, 8, "pogo_fist", "pogoFist", 0.55D).setTool(toolGauntlet, 0, 1.4F);
     public static Item rocketFist = new MSUWeaponBase(124, 3D, 0.4D, 6, "rocket_powered_fist", "rocketFist").setTool(toolGauntlet, 0, 0.5F);
 
+    public static Item knittingNeedles = new ItemKnittingNeedles(32,2, 1, 1, "knitting_needle", "knittingNeedle");
+    public static Item pointySticks = new ItemPluralWeapon(50,2, 1, 1, "pointy_stick", "pointyStick");
+    public static Item boneNeedles = new ItemPluralWeapon(100,4, 0, 10, "bone_needle", "boneNeedle");
+    public static Item needlewands = new ItemPluralWeapon(250,4, 0.5, 60, "needlewand", "needlewand");
+    public static Item oglogothThorn = new ItemPluralWeapon(366,5.6, -0.5, 80, "thorn_of_oglogoth", "oglogothThorn");
+    public static Item echidnaQuills = new ItemPluralWeapon(5, 1, 100, "quill_of_echidna", "echidnaQuill");
+
     //Armor
     public static MSUArmorBase diverHelmet = new ItemDiverHelmet(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
+    public static MSUArmorBase spikedHelmet = new MSUArmorBase(materialSpikedHelmet,0,EntityEquipmentSlot.HEAD,"spikedDiverHelmet", "spiked_diver_helmet");
+    public static MSUArmorBase frogHat = new MSUArmorBase(materialCloth,0,EntityEquipmentSlot.HEAD,"frogHat", "frog_hat");
+    public static MSUArmorBase wizardHat = new MSUArmorBase(materialCloth,0,EntityEquipmentSlot.HEAD,"wizardHat", "wizard_hat");
+    public static MSUArmorBase cozySweater = new ItemWitherproofArmor(materialCloth,0,EntityEquipmentSlot.CHEST,"cozySweater", "cozy_sweater");
+    //public static MSUArmorBase scarf = new ItemDiverHelmet(materialCloth,0,EntityEquipmentSlot.HEAD,"scarf", "scarf");
 
     //Overrides
-    public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCrumplyHat, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
-    public static Item unbreakableKatana = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "catclaws").setRegistryName(Minestuck.MOD_ID, "catclaws");
-    public static Item catclaws = new ItemWeapon(2200, 7, -2.4D, 20, "katana").setTool("sword", 0, 15.0F).setRegistryName(Minestuck.MOD_ID, "unbreakable_katana");
+    public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCloth, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
+    public static Item catclaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "catclaws").setRegistryName(Minestuck.MOD_ID, "catclaws");
+    public static Item unbreakableKatana = new ItemWeapon(2200, 7, -2.4D, 20, "katana").setTool("sword", 0, 15.0F).setRegistryName(Minestuck.MOD_ID, "unbreakable_katana");
     public static Item captcharoidCamera = new ItemCaptcharoidOverride().setRegistryName(Minestuck.MOD_ID, "captcharoid_camera");
 
     @SubscribeEvent
@@ -111,28 +125,33 @@ public class MinestuckUniverseItems
     {
         IForgeRegistry<Item> registry = event.getRegistry();
 
-        registerItem(registry, spaceSalt);
+        registry.register(catclaws);
+        registry.register(unbreakableKatana);
+        registerItem(registry, captcharoidCamera);
+        registerItem(registry, crumplyHat);
+
         registerItem(registry, moonstone);
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
+        registerItem(registry, battery);
+        registerItem(registry, spaceSalt);
+
         registerItem(registry, returnNode);
         registerItem(registry, travelGate);
         registerItem(registry, endPortal);
         registerItem(registry, netherPortal);
         registerItem(registry, endGateway);
 
+        registerItem(registry, diverHelmet);
+        registerItem(registry, spikedHelmet);
+        registerItem(registry, frogHat);
+        registerItem(registry, wizardHat);
+        registerItem(registry, cozySweater);
+
         registerItem(registry, ironMedallion);
         registerItem(registry, returnMedallion);
         registerItem(registry, teleportMedallion);
         registerItem(registry, skaianMedallion);
-
-        registerItem(registry, trueUnbreakableKatana);
-
-        registerItem(registry, diverHelmet);
-
-        registry.register(unbreakableKatana);
-        registerItem(registry, captcharoidCamera);
-        registerItem(registry, crumplyHat);
 
         registerItem(registry, fancyGlove);
         registerItem(registry, spikedGlove);
@@ -142,7 +161,14 @@ public class MinestuckUniverseItems
         registerItem(registry, pogoFist);
         registerItem(registry, rocketFist);
 
-        registerItem(registry, battery);
+        registerItem(registry, knittingNeedles);
+        registerItem(registry, pointySticks);
+        registerItem(registry, boneNeedles);
+        registerItem(registry, needlewands);
+        registerItem(registry, oglogothThorn);
+        registerItem(registry, echidnaQuills);
+
+        registerItem(registry, trueUnbreakableKatana);
         for(ItemBeamBlade blade : dyedBeamBlade)
             registerCustomRenderedItem(registry, blade);
         registerCustomRenderedItem(registry, batteryBeamBlade);
@@ -162,6 +188,8 @@ public class MinestuckUniverseItems
     public static void setClientsideVariables()
     {
         diverHelmet.setArmorModel(new ModelDiverHelmet());
+        spikedHelmet.setArmorModel(new ModelSpikedHelmet());
+        frogHat.setArmorModel(new ModelFrogHat());
         crumplyHat.setArmorModel(new ModelDiverHelmet()); //TODO
 
         for(ItemBeamBlade blade : dyedBeamBlade)

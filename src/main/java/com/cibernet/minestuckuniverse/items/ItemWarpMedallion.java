@@ -9,6 +9,7 @@ import com.mraof.minestuck.tileentity.TileEntityTransportalizer;
 import com.mraof.minestuck.util.*;
 import com.mraof.minestuck.world.MinestuckDimensionHandler;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,6 +26,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -105,10 +108,11 @@ public class ItemWarpMedallion extends MSUItemBase
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
+    @SideOnly(Side.CLIENT)
     public static int getColor(ItemStack stack)
     {
         if(!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Player"))
-            return -1;
+            return ColorCollector.getColor(MinestuckPlayerData.getData(Minecraft.getMinecraft().player).color);
 
         int colorIndex = MinestuckPlayerData.getData(IdentifierHandler.getById(stack.getTagCompound().getInteger("Player"))).color;
 

@@ -15,7 +15,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
-public class ItemBeamBlade extends MSUWeaponBase
+public class ItemBeamBlade extends MSUWeaponBaseSweep
 {
     public EnumDyeColor color = null;
     public ItemBeamBlade(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName) {
