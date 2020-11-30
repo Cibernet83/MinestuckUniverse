@@ -1,6 +1,8 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.events.ServerEventHandler;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
+import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.tileentity.*;
 import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
@@ -28,6 +30,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(new MinestuckUniverseGrist());
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
+        MinecraftForge.EVENT_BUS.register(MSUPotions.class);
         MinecraftForge.EVENT_BUS.register(MSUSoundHandler.instance);
         
         MSUSoundHandler.initSounds();
@@ -47,6 +50,8 @@ public class CommonProxy
 
     public void init()
     {
+        MinecraftForge.EVENT_BUS.register(ServerEventHandler.class);
+
         NetworkRegistry.INSTANCE.registerGuiHandler(MinestuckUniverse.instance, new MSUGuiHandler());
 
         MSULandAspectRegistry.registerLands();
