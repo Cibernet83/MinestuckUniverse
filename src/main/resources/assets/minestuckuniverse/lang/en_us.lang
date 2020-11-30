@@ -8,6 +8,8 @@ tile.zillystone.name=Zillystone
 tile.zillystone.tooltip=It's hard enough to withstand most conventional means of destruction, yet it looks like it can be chipped away by a magical tool.
 tile.smoothIron.name=Smooth Iron Block
 tile.wizardStatue.name=Wizard Statue
+tile.netherReactorCore.name=Nether Reactor Core
+tile.netherReactorCore.tooltip=A relic from the past! You wonder if it still works.
 
 tile.gristBlock.amber.name=Block of Amber Grist
 tile.gristBlock.amethyst.name=Block of Amethyst Grist
@@ -150,6 +152,10 @@ message.transportalizer.notOpped=You do not have permission to use this transpor
 message.atm.withdrawSuccess=Successfully withdrawn %s Boondollars
 message.atm.sendSuccess=Successfully sent %s Boondollars to %s
 message.medallion.error=The medallion does not seem to activate, perhaps something went wrong?
+
+effect.minestuckuniverse.flight=Skybound
+effect.minestuckuniverse.disableFlight=Earthbound
+effect.minestuckuniverse.disableBuilding=Creative Shock
 
 item.banner.msu_light.black=Black Light Symbol
 item.banner.msu_light.red=Red Light Symbol

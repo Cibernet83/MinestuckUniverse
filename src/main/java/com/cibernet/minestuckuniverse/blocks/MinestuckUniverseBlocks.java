@@ -22,6 +22,7 @@ public class MinestuckUniverseBlocks
 
     public static Block magicBlock = new MSUBlockBase(Material.CLAY, "magic_block", "magicBlock");
     public static Block wizardStatue = new BlockMSUDecor("wizardStatue", "wizard_statue");
+    public static Block netherReactorCore = new MSUBlockBase(Material.ROCK, "nether_reactor_core", "netherReactorCore").setHardness(30.0F).setResistance(6);
 
     public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "sbahjBedrock").setResistance(0F).setHardness(-1F);
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
@@ -97,7 +98,8 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, magicBlock, true);
         registerBlock(registry, smoothIron, true);
 		registerBlock(registry, wizardStatue, true);
-		
+		registerBlock(registry, netherReactorCore, true);
+
         registerBlock(registry, holopad, true);
         
         registerBlock(registry, machineChasis, true);
