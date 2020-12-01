@@ -1,6 +1,5 @@
 package com.cibernet.minestuckuniverse.network;
 
-import com.mraof.minestuck.network.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.EntityPlayer;
@@ -53,7 +52,8 @@ public abstract class MSUPacket
     public static enum Type
     {
         MACHINE_CHASSIS(MachineChassisPacket.class),
-        ATM(PorkhollowAtmPacket.class)
+        ATM(PorkhollowAtmPacket.class),
+        VAULT(BoondollarRegisterPacket.class)
         ;
 
         Class<? extends MSUPacket> packetType;

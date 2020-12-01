@@ -46,6 +46,7 @@ tile.autoWidget.name=Grist-o-Matic 50000
 tile.autoCaptcha.name=Captchaloguifier
 tile.autoCaptcha.tooltip=Automatically captchalogues items.
 tile.porkhollowATM.name=Porkhollow ATM
+tile.boondollarRegister.name=Boondollar Register
 
 tile.magicBlock.name=Perfectly Magical Object
 
@@ -67,6 +68,7 @@ item.moonstoneChisel.tooltip=Just by holding it you can feel how magical it is, 
 item.zillystoneShard.name=Zillystone Shard
 item.zillystoneShard.tooltip=You've managed to chip this shard away from a Zillystone block, but what will you do with it next?
 item.battery.name=Battery
+item.yarnBall.name=Ball of Yarn
 item.dungeonKey.name=Dungeon Key
 
 item.ironMedallion.name=Iron Medallion

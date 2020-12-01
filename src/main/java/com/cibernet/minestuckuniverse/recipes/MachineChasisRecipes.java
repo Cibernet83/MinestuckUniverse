@@ -34,6 +34,8 @@ public class MachineChasisRecipes
                 new ItemStack(moonstone), ItemStack.EMPTY, new ItemStack(MinestuckItems.energyCore));
         addRecipe(porkhollowAtm, new ItemStack(MinestuckBlocks.blockComputerOff), new ItemStack(MinestuckItems.boondollars),
                 new ItemStack(MinestuckItems.boondollars), new ItemStack(Items.PORKCHOP), new ItemStack(MinestuckItems.boondollars));
+        addRecipe(boondollarRegister, new ItemStack(porkhollowAtm), new ItemStack(Blocks.HOPPER), new ItemStack(Items.COMPARATOR),
+                new ItemStack(Blocks.CHEST), new ItemStack(Items.REDSTONE));
     }
     
     public static Hashtable<String, Block> getRecipes() {return recipes;}

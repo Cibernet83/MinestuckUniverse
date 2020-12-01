@@ -46,6 +46,7 @@ public class CommonProxy
         GameRegistry.registerTileEntity(TileEntityHolopad.class, MinestuckUniverse.MODID + ":holopad");
         GameRegistry.registerTileEntity(TileEntityPlatinumTransportalizer.class, MinestuckUniverse.MODID + ":platinum_transportalizer");
         GameRegistry.registerTileEntity(TileEntityEffectBeacon.class, MinestuckUniverse.MODID + ":effect_beacon");
+        GameRegistry.registerTileEntity(TileEntityBoondollarRegister.class, MinestuckUniverse.MODID + ":porkhollow_vault");
 
     }
 

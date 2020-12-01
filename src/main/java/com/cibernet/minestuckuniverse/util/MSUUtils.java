@@ -18,6 +18,7 @@ public class MSUUtils
     public static final int MACHINE_CHASIS_GUI = 0;
     public static final int AUTO_CAPTCHA_GUI = 1;
     public static final int PORKHOLLOW_ATM_GUI = 2;
+    public static final int BOONDOLLAR_REGISTER_GUI = 3;
     
     public static void registerDeployList()
     {
