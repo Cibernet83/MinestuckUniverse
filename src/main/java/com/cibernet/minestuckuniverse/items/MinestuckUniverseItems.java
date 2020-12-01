@@ -53,6 +53,7 @@ public class MinestuckUniverseItems
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
+    public static Item yarnBall = new MSUItemBase("yarn_ball", "yarnBall");
 
     //Ghost Items
     public static Item returnNode = new ItemGhostBlock("return_node_ghost_item", MinestuckBlocks.returnNode);
@@ -132,6 +133,7 @@ public class MinestuckUniverseItems
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
         registerItem(registry, battery);
+        registerItem(registry, yarnBall);
         registerItem(registry, spaceSalt);
 
         registerItem(registry, returnNode);
