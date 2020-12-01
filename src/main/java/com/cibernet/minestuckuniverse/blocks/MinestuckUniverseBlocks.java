@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
+import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
@@ -7,8 +8,10 @@ import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.block.BlockDecor;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -80,8 +83,11 @@ public class MinestuckUniverseBlocks
 	public static Block gristBlockZillium = new BlockGrist(GristType.Zillium);
 	public static Block gristBlockVis = new BlockGrist(MinestuckUniverseGrist.Vis);
 	public static Block gristBlockMana = new BlockGrist(MinestuckUniverseGrist.Mana);
-	
-	
+
+	public static Block dungeonShield = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.CREATIVE_SHOCK, 40, 0), "dungeon_shield", "dungeonShield");
+	public static Block flightBeacon = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.SKYHBOUND, 40, 0), "flight_beacon", "flightBeacon");
+	public static Block flightInhibitor = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.EARTHBOUND, 40, 0), "flight_inhibitor", "flightInhibitor");
+
 	//Thaumcraft
     public static Block thaumChasis = new MSUBlockBase(Material.IRON, "thaumic_machine_frame", "thaumChasis");
 
@@ -150,7 +156,11 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, gristBlockTar, true);
 		registerBlock(registry, gristBlockUranium, true);
 		registerBlock(registry, gristBlockZillium, true);
-        
+
+		registerBlock(registry, dungeonShield, true);
+		registerBlock(registry, flightBeacon, true);
+		registerBlock(registry, flightInhibitor, true);
+
         if(MinestuckUniverse.isThaumLoaded)
         {
         	registerBlock(registry, gristBlockVis, true);

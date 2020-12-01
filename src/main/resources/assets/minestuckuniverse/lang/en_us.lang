@@ -2,6 +2,9 @@ itemGroup.tabMinestuckUniverse=Minestuck Universe
 
 tile.dungeonDoor.name=Dungeon Door
 tile.dungeonDoorKeyhole.name=Dungeon Door Keyhole
+tile.dungeonShield.name=Dungeon Shield
+tile.flightBeacon.name=Flight Beacon
+tile.flightInhibitor.name=Flight Inhibitor
 tile.sbahjBedrock.name=Artifact Bedrock
 tile.sbahjBedrock.tooltip=is it rally as hard as bedrok?
 tile.zillystone.name=Zillystone
@@ -107,7 +110,7 @@ item.batteryBeamBlade.red.name=Red Battery Beam Blade
 item.batteryBeamBlade.black.name=Black Battery Beam Blade
 
 item.fancyGlove.name=Fancy Glove
-item.glove.tooltip=A nice looking glove, it doesn't do much damage, but it sure looks fancy!
+item.fancyGlove.tooltip=A nice looking glove, it doesn't do much damage, but it sure looks fancy!
 item.spikedGlove.name=Spiked Gloves
 item.spikedGlove.tooltip=This glove will sure leave your enemies with some scars, and probably anyone who tries to give you a fist bump.
 item.fluoriteGauntlet.name=Fluorite Gauntlet
