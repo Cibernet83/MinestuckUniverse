@@ -1,11 +1,9 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
-import com.cibernet.minestuckuniverse.entity.models.armor.ModelFrogHat;
-import com.cibernet.minestuckuniverse.entity.models.armor.ModelSpikedHelmet;
+import com.cibernet.minestuckuniverse.entity.models.armor.*;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.entity.models.armor.ModelDiverHelmet;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.block.BlockTransportalizer;
 import com.mraof.minestuck.block.MinestuckBlocks;
@@ -190,7 +188,8 @@ public class MinestuckUniverseItems
         diverHelmet.setArmorModel(new ModelDiverHelmet());
         spikedHelmet.setArmorModel(new ModelSpikedHelmet());
         frogHat.setArmorModel(new ModelFrogHat());
-        crumplyHat.setArmorModel(new ModelDiverHelmet()); //TODO
+        wizardHat.setArmorModel(new ModelWizardHat());
+        crumplyHat.setArmorModel(new ModelCrumplyHat());
 
         for(ItemBeamBlade blade : dyedBeamBlade)
             registerItemCustomRender(blade, new MSUModelManager.DualWeaponDefinition("dyed_battery_beam_blade", "dyed_battery_beam_blade_off"));

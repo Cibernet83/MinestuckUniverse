@@ -39,6 +39,7 @@ public class ModelFrogHat extends ModelBiped
 		froghat.cubeList.add(new ModelBox(froghat, 0, 4, -1.0F, -8.0F, -5.0F, 2, 2, 0, 0.0F, false));
 
 		bipedHead.cubeList.remove(0);
+		bipedHeadwear.cubeList.remove(0);
 		bipedHead.addChild(froghat);
 	}
 
