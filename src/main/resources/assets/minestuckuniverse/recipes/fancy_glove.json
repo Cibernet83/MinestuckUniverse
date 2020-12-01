@@ -7,17 +7,19 @@
     ],
     "key": {
         "#": {
-            "item": "minecraft:white_wool"
+            "item": "minecraft:wool",
+            "data": 0
         },
         "B": {
-            "item": "minecraft:bone_meal"
+            "item": "minecraft:dye",
+            "data": 15
         },
         "L": {
             "item": "minecraft:leather"
         }
     },
     "result": {
-        "item": "minestuck:fancy_glove",
+        "item": "minestuckuniverse:fancy_glove",
         "count": 1
     }
 }

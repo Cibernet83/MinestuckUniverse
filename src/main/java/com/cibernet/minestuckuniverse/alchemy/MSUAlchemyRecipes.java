@@ -119,6 +119,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(autoWidget), new GristSet(new GristType[] {Build, Rust, Uranium, Garnet, Zillium}, new int[] {550, 34, 24, 35, 1}));
         GristRegistry.addGristConversion(new ItemStack(autoCaptcha), new GristSet(new GristType[] {Build, Rust, Uranium, Cobalt, Ruby, Quartz}, new int[] {140, 36, 22, 16, 12, 1}));
         GristRegistry.addGristConversion(new ItemStack(porkhollowAtm), new GristSet(new GristType[] {Build, Rust, Uranium, Iodine, Diamond}, new int[] {180, 35, 16, 18, 4}));
+        GristRegistry.addGristConversion(new ItemStack(boondollarRegister), new GristSet(new GristType[] {Build, Rust, Uranium, Garnet, Iodine, Quartz}, new int[] {280, 35, 20, 25, 16, 8}));
         
         GristRegistry.addGristConversion(new ItemStack(rubyRedTransportalizer), new GristSet(new GristType[] {Build, Ruby, Rust, Uranium}, new int[] {450, 100, 36, 24}));
         GristRegistry.addGristConversion(new ItemStack(goldenTransportalizer), new GristSet(new GristType[] {Build, Gold, Shale, Uranium}, new int[] {350, 36, 30, 20}));
@@ -160,10 +161,15 @@ public class MSUAlchemyRecipes
     
     
         GristRegistry.addGristConversion(new ItemStack(trueUnbreakableKatana) , new GristSet(Zillium, 1000));
-        
-        CombinationRegistry.addCombination(new ItemStack(zillystoneShard), new ItemStack(Items.SUGAR), MODE_OR, Zillium.getCandyItem());
-        
+
+        GristRegistry.addGristConversion(new ItemStack(returnMedallion) , new GristSet(new GristType[] {Build, Rust, Artifact, Quartz}, new int[] {10000, 1000, 250, 500}));
+        GristRegistry.addGristConversion(new ItemStack(teleportMedallion) , new GristSet(new GristType[] {Build, Uranium, Rust, Artifact}, new int[] {5000, 5000, 1000, 250}));
+        GristRegistry.addGristConversion(new ItemStack(skaianMedallion) , new GristSet(new GristType[]
+                {Amber, Amethyst, Caulk, Chalk, Cobalt, Diamond, Garnet, Gold, Iodine, Marble, Mercury, Quartz, Ruby, Rust, Shale, Sulfur, Tar, Uranium, Zillium, Artifact}, new int[]
+                {1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 100000, 100000}));
+
         //Alchemy
+        CombinationRegistry.addCombination(new ItemStack(zillystoneShard), new ItemStack(Items.SUGAR), MODE_OR, Zillium.getCandyItem());
         
         CombinationRegistry.addCombination(new ItemStack(Items.FISH, 1, 3), new ItemStack(Items.IRON_HELMET), MODE_AND, true, false, new ItemStack(diverHelmet));
         CombinationRegistry.addCombination(new ItemStack(diverHelmet), new ItemStack(knittingNeedles), MODE_OR, false, false, new ItemStack(spikedHelmet));
@@ -205,7 +211,7 @@ public class MSUAlchemyRecipes
 
         CombinationRegistry.addCombination(new ItemStack(endPortal), new ItemStack(MinestuckBlocks.chessboard), MODE_OR, false, false, new ItemStack(MinestuckBlocks.skaiaPortal));
 
-        CombinationRegistry.addCombination(new ItemStack(ironMedallion), new ItemStack(returnNode), MODE_OR, false, false, new ItemStack(returnMedallion));
+        CombinationRegistry.addCombination(new ItemStack(ironMedallion), new ItemStack(returnNode), MODE_OR, new ItemStack(returnMedallion));
         CombinationRegistry.addCombination(new ItemStack(returnMedallion), new ItemStack(MinestuckBlocks.transportalizer), MODE_OR, false, false, new ItemStack(teleportMedallion));
         CombinationRegistry.addCombination(new ItemStack(returnMedallion), new ItemStack(MinestuckBlocks.skaiaPortal), MODE_OR, false, false, new ItemStack(skaianMedallion));
 
