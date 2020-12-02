@@ -68,8 +68,25 @@ item.moonstoneChisel.tooltip=Just by holding it you can feel how magical it is, 
 item.zillystoneShard.name=Zillystone Shard
 item.zillystoneShard.tooltip=You've managed to chip this shard away from a Zillystone block, but what will you do with it next?
 item.battery.name=Battery
-item.yarnBall.name=Ball of Yarn
 item.dungeonKey.name=Dungeon Key
+
+item.yarnBall.name=Ball of Yarn
+item.yarnBall.white.name=Ball of White Yarn
+item.yarnBall.orange.name=Ball of Orange Yarn
+item.yarnBall.magenta.name=Ball of Magenta Yarn
+item.yarnBall.lightBlue.name=Ball of Light Blue Yarn
+item.yarnBall.yellow.name=Ball of Yellow Yarn
+item.yarnBall.lime.name=Ball of Lime Yarn
+item.yarnBall.pink.name=Ball of Pink Yarn
+item.yarnBall.gray.name=Ball of Gray Yarn
+item.yarnBall.silver.name=Ball of Light Gray Yarn
+item.yarnBall.cyan.name=Ball of Cyan Yarn
+item.yarnBall.purple.name=Ball of Purple Yarn
+item.yarnBall.blue.name=Ball of Blue Yarn
+item.yarnBall.brown.name=Ball of Brown Yarn
+item.yarnBall.green.name=Ball of Green Yarn
+item.yarnBall.red.name=Ball of Red Yarn
+item.yarnBall.black.name=Ball of Black Yarn
 
 item.ironMedallion.name=Iron Medallion
 item.returnMedallion.name=Return Medallion

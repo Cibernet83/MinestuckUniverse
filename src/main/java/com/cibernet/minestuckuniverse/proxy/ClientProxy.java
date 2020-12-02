@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.entity.render.RenderHologram;
+import com.cibernet.minestuckuniverse.entity.render.ThrowableRenderFactory;
 import com.cibernet.minestuckuniverse.items.ItemBeamBlade;
 import com.cibernet.minestuckuniverse.items.ItemWarpMedallion;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
@@ -14,6 +15,7 @@ import com.mraof.minestuck.client.renderer.BlockColorCruxite;
 import com.mraof.minestuck.client.renderer.entity.RenderEntityMinestuck;
 import com.mraof.minestuck.util.ColorCollector;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -31,6 +33,7 @@ public class ClientProxy extends CommonProxy
         MinestuckUniverseItems.setClientsideVariables();
 
         RenderingRegistry.registerEntityRenderingHandler(EntityAcheron.class, RenderEntityMinestuck.getFactory(new ModelAcheron(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new ThrowableRenderFactory(MinestuckUniverseItems.yarnBall));
         MinecraftForge.EVENT_BUS.register(MSUModelManager.class);
         MinecraftForge.EVENT_BUS.register(MSURenderMachineOutline.class);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHolopad.class, new RenderHologram());

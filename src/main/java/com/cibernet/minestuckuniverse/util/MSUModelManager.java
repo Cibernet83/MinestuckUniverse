@@ -3,11 +3,11 @@ package com.cibernet.minestuckuniverse.util;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.mraof.minestuck.alchemy.GristType;
-import com.mraof.minestuck.item.MinestuckItems;
 import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -103,7 +103,6 @@ public class MSUModelManager
         public ResourceLocation[] getResourceLocations();
     }
 
-
     public static class DualWeaponDefinition implements CustomItemMeshDefinition {
         private final String model1;
         private final String model2;
@@ -120,6 +119,31 @@ public class MSUModelManager
         @Override
         public ResourceLocation[] getResourceLocations() {
             return new ResourceLocation[]{new ResourceLocation(MinestuckUniverse.MODID+":" + model1), new ResourceLocation(MinestuckUniverse.MODID+":" + model2)};
+        }
+    }
+
+    public static class DyedItemDefinition implements CustomItemMeshDefinition
+    {
+        private final String model;
+
+        public DyedItemDefinition(String model) {
+            this.model = model;
+        }
+
+        @Override
+        public ResourceLocation[] getResourceLocations()
+        {
+            ResourceLocation[] result = new ResourceLocation[EnumDyeColor.values().length];
+
+            for(int i = 0; i < result.length; i++)
+                result[i] = new ResourceLocation(MinestuckUniverse.MODID, model + "_" + EnumDyeColor.byDyeDamage(i).getName());
+
+            return result;
+        }
+
+        @Override
+        public ModelResourceLocation getModelLocation(ItemStack stack) {
+            return new ModelResourceLocation(getResourceLocations()[stack.getItemDamage()], "inventory");
         }
     }
 }

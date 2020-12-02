@@ -8,8 +8,8 @@ import net.minecraft.world.World;
 
 public class ItemWitherproofArmor extends MSUArmorBase
 {
-    public ItemWitherproofArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String unlocName, String registryName) {
-        super(materialIn, renderIndexIn, equipmentSlotIn, unlocName, registryName);
+    public ItemWitherproofArmor(int maxUses, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String unlocName, String registryName) {
+        super(maxUses, materialIn, renderIndexIn, equipmentSlotIn, unlocName, registryName);
     }
 
     @Override
@@ -17,6 +17,9 @@ public class ItemWitherproofArmor extends MSUArmorBase
     {
         super.onArmorTick(world, player, itemStack);
         if(player.isPotionActive(MobEffects.WITHER))
+        {
             player.removeActivePotionEffect(MobEffects.WITHER);
+            itemStack.damageItem(1, player);
+        }
     }
 }

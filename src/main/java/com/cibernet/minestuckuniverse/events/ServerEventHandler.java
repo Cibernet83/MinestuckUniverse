@@ -37,7 +37,10 @@ public class ServerEventHandler
 				event.getSource().getImmediateSource().attackEntityFrom(DamageSource.causeThornsDamage(event.getEntityLiving()), 4);
 		}
 		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem().equals(MinestuckUniverseItems.wizardHat) && event.getSource().isMagicDamage())
+		{
 			event.setAmount(event.getAmount()*0.4f);
+			event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).damageItem(1, event.getEntityLiving());
+		}
 	}
 
 	@SideOnly(Side.CLIENT)

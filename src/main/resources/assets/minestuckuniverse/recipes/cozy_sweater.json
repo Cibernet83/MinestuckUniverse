@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "k k",
+        "#O#",
+        "###"
+    ],
+    "key": {
+        "k": {
+            "item": "minestuckuniverse:knitting_needle"
+        },
+        "#": {
+            "item": "minestuckuniverse:yarn_ball",
+            "data": 9
+        },
+        "O": {
+            "item": "minestuckuniverse:yarn_ball",
+            "data": 1
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:cozy_sweater",
+        "count": 1
+    }
+}

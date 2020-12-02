@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
+import com.cibernet.minestuckuniverse.entity.classes.EntityMSUThrowable;
 import com.cibernet.minestuckuniverse.entity.models.armor.*;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
@@ -13,12 +14,20 @@ import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
 import javafx.util.Pair;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
+import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
+import net.minecraft.dispenser.BehaviorProjectileDispense;
+import net.minecraft.dispenser.IPosition;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -53,7 +62,7 @@ public class MinestuckUniverseItems
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
-    public static Item yarnBall = new MSUItemBase("yarn_ball", "yarnBall");
+    public static Item yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
 
     //Ghost Items
     public static Item returnNode = new ItemGhostBlock("return_node_ghost_item", MinestuckBlocks.returnNode);
@@ -109,8 +118,8 @@ public class MinestuckUniverseItems
     public static MSUArmorBase diverHelmet = new ItemDiverHelmet(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
     public static MSUArmorBase spikedHelmet = new MSUArmorBase(materialSpikedHelmet,0,EntityEquipmentSlot.HEAD,"spikedDiverHelmet", "spiked_diver_helmet");
     public static MSUArmorBase frogHat = new MSUArmorBase(materialCloth,0,EntityEquipmentSlot.HEAD,"frogHat", "frog_hat");
-    public static MSUArmorBase wizardHat = new MSUArmorBase(materialCloth,0,EntityEquipmentSlot.HEAD,"wizardHat", "wizard_hat");
-    public static MSUArmorBase cozySweater = new ItemWitherproofArmor(materialCloth,0,EntityEquipmentSlot.CHEST,"cozySweater", "cozy_sweater");
+    public static MSUArmorBase wizardHat = new MSUArmorBase(40, materialCloth,0,EntityEquipmentSlot.HEAD,"wizardHat", "wizard_hat");
+    public static MSUArmorBase cozySweater = new ItemWitherproofArmor(60, materialCloth,0,EntityEquipmentSlot.CHEST,"cozySweater", "cozy_sweater");
     //public static MSUArmorBase scarf = new ItemDiverHelmet(materialCloth,0,EntityEquipmentSlot.HEAD,"scarf", "scarf");
 
     //Overrides
@@ -182,6 +191,18 @@ public class MinestuckUniverseItems
         //Item Mods
 
 
+        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(yarnBall, new BehaviorProjectileDispense()
+        {
+            /**
+             * Return the projectile entity spawned by this dispense behavior.
+             */
+            protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn)
+            {
+                ItemStack thrownStack = stackIn.copy();
+                thrownStack.setCount(1);
+                return new EntityMSUThrowable(worldIn, position.getX(), position.getY(), position.getZ(), thrownStack);
+            }
+        });
     }
 
     @SideOnly(Side.CLIENT)
@@ -196,6 +217,7 @@ public class MinestuckUniverseItems
         for(ItemBeamBlade blade : dyedBeamBlade)
             registerItemCustomRender(blade, new MSUModelManager.DualWeaponDefinition("dyed_battery_beam_blade", "dyed_battery_beam_blade_off"));
         registerItemCustomRender(batteryBeamBlade, new MSUModelManager.DualWeaponDefinition("battery_beam_blade", "battery_beam_blade_off"));
+        registerItemCustomRender(yarnBall, new MSUModelManager.DyedItemDefinition("yarn_ball"));
     }
 
 

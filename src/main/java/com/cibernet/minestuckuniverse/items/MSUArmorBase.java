@@ -30,6 +30,12 @@ public class MSUArmorBase extends ItemArmor
 
     }
 
+    public MSUArmorBase(int maxUses, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String unlocName, String registryName)
+    {
+        this(materialIn, renderIndexIn, equipmentSlotIn, unlocName, registryName);
+        setMaxDamage(maxUses);
+    }
+
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {

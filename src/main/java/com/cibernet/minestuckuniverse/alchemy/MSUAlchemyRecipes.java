@@ -3,13 +3,10 @@ package com.cibernet.minestuckuniverse.alchemy;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockGrist;
 import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
-import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
-import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.*;
 import com.mraof.minestuck.block.MinestuckBlocks;
-import com.mraof.minestuck.item.ItemMinestuckCandy;
 import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -22,17 +19,11 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.blocks.BlocksTC;
-import thaumcraft.api.casters.FocusMod;
 import thaumcraft.api.crafting.CrucibleRecipe;
-import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.items.ItemsTC;
-import thaumcraft.common.config.ConfigItems;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.common.block.ModBlocks;
 import vazkii.botania.common.item.ModItems;
-
-import javax.swing.*;
-import javax.swing.text.ComponentView;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -50,9 +41,6 @@ public class MSUAlchemyRecipes
     
     private static final ArrayList<Block> gristBlocks = new ArrayList<Block>() {{add(gristBlockAmber); add(gristBlockAmethyst); add(gristBlockArtifact); add(gristBlockCaulk); add(gristBlockChalk); add(gristBlockCobalt); add(gristBlockBuild); add(gristBlockDiamond); add(gristBlockGarnet); add(gristBlockGold); add(gristBlockIodine); add(gristBlockMarble);
         add(gristBlockMercury); add(gristBlockQuartz); add(gristBlockRuby); add(gristBlockRust); add(gristBlockSulfur); add(gristBlockShale); add(gristBlockTar); add(gristBlockUranium); add(gristBlockZillium);}};
-    
-    private static final ArrayList<BlockWoolTransportalizer> sleevedTPs = new ArrayList<BlockWoolTransportalizer>() {{add(cyanWoolTransportalizer); add(whiteWoolTransportalizer); add(orangeWoolTransportalizer); add(magentaWoolTransportalizer); add(lightBlueWoolTransportalizer); add(yellowWoolTransportalizer); add(limeWoolTransportalizer); add(pinkWoolTransportalizer);
-    add(grayWoolTransportalizer); add(silverWoolTransportalizer); add(purpleWoolTransportalizer); add(blueWoolTransportalizer); add(brownWoolTransportalizer); add(greenWoolTransportalizer); add(redWoolTransportalizer); add(blackWoolTransportalizer);}};
 
     private static final TreeMap<EnumDyeColor, GristSet> dyeGrist = new TreeMap<>();
 
@@ -235,7 +223,7 @@ public class MSUAlchemyRecipes
     
     public static void registerSleevedTransportalizerRecipes()
     {
-        for(BlockWoolTransportalizer block : sleevedTPs)
+        for(BlockWoolTransportalizer block : sleevedTransportalizers.values())
         {
             ItemStack dye = new ItemStack(Items.DYE, 1, block.color.getDyeDamage());
             ItemStack wool = new ItemStack(Blocks.WOOL, 1, block.color.getMetadata());

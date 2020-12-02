@@ -16,5 +16,7 @@ public class BlockWoolTransportalizer extends BlockTransportalizer
 		this.setUnlocalizedName("woolTransportalizer."+color.getUnlocalizedName());
 		this.setRegistryName(color.getName()+"_wool_transportalizer");
 		this.color = color;
+
+		MinestuckUniverseBlocks.sleevedTransportalizers.put(color, this);
 	}
 }

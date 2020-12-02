@@ -16,10 +16,14 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.ArrayList;
+import java.util.TreeMap;
+
 public class MinestuckUniverseBlocks
 {
+	public static final TreeMap<EnumDyeColor, BlockWoolTransportalizer> sleevedTransportalizers = new TreeMap<>();
 
-    //Base
+	//Base
 	public static Block dungeonDoor = new BlockDungeonDoor("dungeon_door", "dungeonDoor");
 	public static Block dungeonDoorKeyhole = new BlockDungeonDoor("dungeon_door_keyhole", "dungeonDoorKeyhole");
 

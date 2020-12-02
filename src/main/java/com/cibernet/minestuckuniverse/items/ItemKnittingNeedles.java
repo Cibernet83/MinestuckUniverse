@@ -1,10 +1,22 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
+import com.mraof.minestuck.block.BlockTransportalizer;
+import com.mraof.minestuck.block.MinestuckBlocks;
+import com.mraof.minestuck.tileentity.TileEntityTransportalizer;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -14,10 +26,13 @@ import javax.annotation.Nullable;
 
 public class ItemKnittingNeedles extends ItemPluralWeapon
 {
+
+
     public ItemKnittingNeedles(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
     {
         super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
         setMaxStackSize(2);
+        setContainerItem(this);
 
         this.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID,"plural"), new IItemPropertyGetter()
         {
@@ -37,5 +52,38 @@ public class ItemKnittingNeedles extends ItemPluralWeapon
     @Override
     public double getAttackDamage(ItemStack stack) {
         return stack.getCount() >= 2 ? 0 : super.getAttackDamage(stack);
+    }
+
+    @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    {
+        ItemStack stack = player.getHeldItem(hand);
+
+        if(stack.getCount() >= 2 && worldIn.getBlockState(pos).getBlock() instanceof BlockWoolTransportalizer)
+        {
+            EnumDyeColor color = ((BlockWoolTransportalizer)worldIn.getBlockState(pos).getBlock()).color;
+            NBTTagCompound nbt = worldIn.getTileEntity(pos).writeToNBT(new NBTTagCompound());
+            TileEntity te = MinestuckBlocks.transportalizer.createTileEntity(worldIn, MinestuckBlocks.transportalizer.getDefaultState());
+            te.readFromNBT(nbt);
+            worldIn.setBlockState(pos, MinestuckBlocks.transportalizer.getDefaultState());
+            worldIn.setTileEntity(pos, te);
+
+
+            stack.damageItem(1, player);
+            if(!worldIn.isRemote)
+                InventoryHelper.spawnItemStack(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(MinestuckUniverseItems.yarnBall, 1, color.getDyeDamage()));
+            worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_BREAK, SoundCategory.BLOCKS, 0.5f, 1);
+
+            return EnumActionResult.SUCCESS;
+        }
+        return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+    }
+
+    @Override
+    public ItemStack getContainerItem(ItemStack itemStack)
+    {
+        ItemStack result = itemStack.copy();
+        result.setItemDamage(getDamage(itemStack)-1);
+        return result;
     }
 }
