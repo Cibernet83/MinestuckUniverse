@@ -10,19 +10,23 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockParadoxTransportalizer extends BlockContainer
 {
@@ -36,6 +40,17 @@ public class BlockParadoxTransportalizer extends BlockContainer
 		this.setHarvestLevel("pickaxe", 0);
 		setCreativeTab(TabMinestuckUniverse.instance);
 	}
+
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced)
+	{
+		String key = getUnlocalizedName()+".tooltip";
+		if(!I18n.translateToLocal(key).equals(key))
+			tooltip.add(I18n.translateToLocal(key));
+		super.addInformation(stack, player, tooltip, advanced);
+	}
+
+
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return TRANSPORTALIZER_AABB;
 	}
