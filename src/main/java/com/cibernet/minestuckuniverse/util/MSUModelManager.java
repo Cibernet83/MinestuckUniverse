@@ -14,6 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.*;
 
@@ -35,6 +37,7 @@ public class MSUModelManager
         ItemBlockModels();
     }
 
+    @SideOnly(Side.CLIENT)
     private static void ItemModels()
     {
         register(unbreakableKatana, 0, "unbreakable_katana");
@@ -68,41 +71,37 @@ public class MSUModelManager
             register(candy, GristType.REGISTRY.getID(MinestuckUniverseGrist.Mana) + 1, "mana_gummy_drop");
     }
 
+    @SideOnly(Side.CLIENT)
     private static void ItemBlockModels()
     {
         for(Block block : blocks)
             register(block);
     }
 
+    @SideOnly(Side.CLIENT)
     private static void register(Item item)
     {
         ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(Item.REGISTRY.getNameForObject(item), "inventory"));
     }
 
+    @SideOnly(Side.CLIENT)
     private static void register(Item item, int meta, String modelResource)
     {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(MinestuckUniverse.MODID+":"+modelResource, "inventory"));
     }
 
-    private static void register(Item item, ItemMeshDefinition mesh)
-    {
-        ModelLoader.setCustomMeshDefinition(item, mesh);
-    }
-
+    @SideOnly(Side.CLIENT)
     private static void register(Block block)
     {
         register(Item.getItemFromBlock(block));
     }
 
-    private static void register(Block block, int meta, String modelResource)
-    {
-        register(Item.getItemFromBlock(block), meta, modelResource);
-    }
-
-    public static interface CustomItemMeshDefinition extends ItemMeshDefinition {
+    @SideOnly(Side.CLIENT)
+    public interface CustomItemMeshDefinition extends ItemMeshDefinition {
         public ResourceLocation[] getResourceLocations();
     }
 
+    @SideOnly(Side.CLIENT)
     public static class DualWeaponDefinition implements CustomItemMeshDefinition {
         private final String model1;
         private final String model2;
@@ -122,6 +121,7 @@ public class MSUModelManager
         }
     }
 
+    @SideOnly(Side.CLIENT)
     public static class DyedItemDefinition implements CustomItemMeshDefinition
     {
         private final String model;

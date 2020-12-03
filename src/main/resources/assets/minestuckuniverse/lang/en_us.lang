@@ -58,6 +58,7 @@ item.frogHat.name=Frog Hat
 item.wizardHat.name=Wizard Hat
 item.wizardHat.tooltip=Weaved by the most average knitter, using threads from the most generic sheep, this mystical hat grants resistance to magic attacks.
 item.cozySweater.name=Cozy Sweater
+item.cozySweater.tooltip=Made with the ultimate weapon against evil, the power of l-l-liking someone a lot.
 item.scarf.name=Scarf
 
 item.spaceSalt.name=Spatial Manipulation Dust
@@ -195,6 +196,7 @@ container.machineChassis=Machine Assembly
 
 message.transportalizer.notOwner=This is not your transportalizer!
 message.transportalizer.notOpped=You do not have permission to use this transportalizer.
+message.transportalizer.destinationInvalid=This transportalizer no longer exists.
 message.atm.withdrawSuccess=Successfully withdrawn %s Boondollars
 message.atm.sendSuccess=Successfully sent %s Boondollars to %s
 message.medallion.error=The medallion does not seem to activate, perhaps something went wrong?

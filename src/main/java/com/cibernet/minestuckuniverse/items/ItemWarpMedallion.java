@@ -111,12 +111,11 @@ public class ItemWarpMedallion extends MSUItemBase
     @SideOnly(Side.CLIENT)
     public static int getColor(ItemStack stack)
     {
-        if(!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Player"))
-            return ColorCollector.getColor(MinestuckPlayerData.getData(Minecraft.getMinecraft().player).color);
+        int colorIndex = ColorCollector.getColor(MinestuckPlayerData.getData(Minecraft.getMinecraft().player).color);
+        if(stack.hasTagCompound() && stack.getTagCompound().hasKey("Player"))
+            colorIndex = MinestuckPlayerData.getData(IdentifierHandler.getById(stack.getTagCompound().getInteger("Player"))).color;
 
-        int colorIndex = MinestuckPlayerData.getData(IdentifierHandler.getById(stack.getTagCompound().getInteger("Player"))).color;
-
-       return colorIndex <= -1 || colorIndex >= ColorCollector.getColorSize() ? 0x99D9EA : ColorCollector.getColor(colorIndex);
+        return colorIndex <= -1 || colorIndex >= ColorCollector.getColorSize() ? 0x99D9EA : ColorCollector.getColor(colorIndex);
     }
 
     @Override
@@ -145,7 +144,8 @@ public class ItemWarpMedallion extends MSUItemBase
 
                 int dimId = MinestuckDimensionHandler.skaiaDimensionId == worldIn.provider.getDimension() ? 0 : MinestuckDimensionHandler.skaiaDimensionId;
                 WorldServer dimWorld = entityLiving.getServer().getWorld(dimId);
-                pos = dimWorld.getTopSolidOrLiquidBlock(new BlockPos(entityLiving)).up(5);
+                pos = dimWorld.provider.getRandomizedSpawnPoint();
+                //pos = dimWorld.getTopSolidOrLiquidBlock(new BlockPos(entityLiving)).up(5); TODO config maybe?
 
             return Teleport.teleportEntity(entityLiving, dimId, null, pos);
 
@@ -232,7 +232,12 @@ public class ItemWarpMedallion extends MSUItemBase
 
                 ++var7;
             }
-        } else entity.sendMessage(new TextComponentTranslation("message.transportalizer.destinationInvalid", new Object[0]));
+        }
+        else
+        {
+            entity.sendMessage(new TextComponentTranslation("message.transportalizer.destinationInvalid", new Object[0]));
+            return false;
+        }
         return true;
     }
 

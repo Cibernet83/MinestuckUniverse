@@ -178,9 +178,9 @@ public class MinestuckUniverseItems
         registerItem(registry, echidnaQuills);
 
         registerItem(registry, trueUnbreakableKatana);
+        registerCustomRenderedItem(registry, batteryBeamBlade);
         for(ItemBeamBlade blade : dyedBeamBlade)
             registerCustomRenderedItem(registry, blade);
-        registerCustomRenderedItem(registry, batteryBeamBlade);
         //registerGTArmor(registry);
 
         registerItem(registry, dungeonKey);

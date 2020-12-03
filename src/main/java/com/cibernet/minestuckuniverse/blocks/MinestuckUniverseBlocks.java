@@ -103,6 +103,10 @@ public class MinestuckUniverseBlocks
 
         registerBlock(registry, dungeonDoor, true);
         registerBlock(registry, dungeonDoorKeyhole, true);
+		registerBlock(registry, dungeonShield, true);
+		registerBlock(registry, flightBeacon, true);
+		registerBlock(registry, flightInhibitor, true);
+
         registerBlock(registry, sbahjBedrock, true);
         registerBlock(registry, zillyStone, true);
 
@@ -162,10 +166,6 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, gristBlockTar, true);
 		registerBlock(registry, gristBlockUranium, true);
 		registerBlock(registry, gristBlockZillium, true);
-
-		registerBlock(registry, dungeonShield, true);
-		registerBlock(registry, flightBeacon, true);
-		registerBlock(registry, flightInhibitor, true);
 
         if(MinestuckUniverse.isThaumLoaded)
         {

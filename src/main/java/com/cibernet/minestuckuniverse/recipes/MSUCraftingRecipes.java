@@ -7,6 +7,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
@@ -63,7 +64,12 @@ public class MSUCraftingRecipes
                 {
                     ItemStack stack = ingredient.getMatchingStacks()[i];
                     if(stack.getItem() instanceof ItemKnittingNeedles)
+                    {
                         stack.setCount(2);
+                        NBTTagCompound nbt = new NBTTagCompound();
+                        nbt.setBoolean("JEIDisplay", true);
+                        stack.setTagCompound(nbt);
+                    }
                 }
 
             return result;

@@ -37,6 +37,8 @@ public class ItemKnittingNeedles extends ItemPluralWeapon
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
             {
+                if(stack.hasTagCompound() && stack.getTagCompound().hasKey("JEIDisplay"))
+                    return 1;
                 return (entityIn != null && stack.getCount() >= 2) ? 1 : 0;
             }
         });

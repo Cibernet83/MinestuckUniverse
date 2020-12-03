@@ -64,7 +64,7 @@ public class MSUUtils
 
     public static GameType getPlayerGameType(EntityPlayer player)
     {
-        if(player instanceof EntityPlayerSP)
+        if(player.world.isRemote)
             return getPlayerGameTypeClient((EntityPlayerSP) player);
         return ((EntityPlayerMP) player).interactionManager.getGameType();
     }
