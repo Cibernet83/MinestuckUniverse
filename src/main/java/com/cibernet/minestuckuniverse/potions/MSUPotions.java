@@ -9,9 +9,9 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class MSUPotions
 {
 
-    public static final Potion CREATIVE_SHOCK = new MSUPotionBase(true, 0x993030, "disableBuilding");
-    public static final Potion EARTHBOUND = new MSUPotionBase(true, 0xFFCD70, "disableFlight");
-    public static final Potion SKYHBOUND = new MSUPotionBase(false, 0x70FFFF, "flight").setBeneficial();
+    public static final Potion CREATIVE_SHOCK = new PotionBuildInhibit( 0x993030, "disableBuilding");
+    public static final Potion EARTHBOUND = new PotionFlight(true, 0xFFCD70, "disableFlight");
+    public static final Potion SKYHBOUND = new PotionFlight(false, 0x70FFFF, "flight").setBeneficial();
 
     @SubscribeEvent
     public static void registerEffects(RegistryEvent.Register<Potion> event)

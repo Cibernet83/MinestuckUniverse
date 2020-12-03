@@ -53,7 +53,9 @@ public abstract class MSUPacket
     {
         MACHINE_CHASSIS(MachineChassisPacket.class),
         ATM(PorkhollowAtmPacket.class),
-        VAULT(BoondollarRegisterPacket.class)
+        VAULT(BoondollarRegisterPacket.class),
+        FLIGHT_EFFECT(StopFlightEffectPacket.class),
+        BUILD_INHIBIT_EFFECT(StopBuildInhibitEffectPacket.class),
         ;
 
         Class<? extends MSUPacket> packetType;

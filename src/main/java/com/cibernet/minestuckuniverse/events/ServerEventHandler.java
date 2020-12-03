@@ -1,7 +1,11 @@
 package com.cibernet.minestuckuniverse.events;
 
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
+import com.cibernet.minestuckuniverse.potions.MSUPotionBase;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
+import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.network.skaianet.SburbConnection;
 import com.mraof.minestuck.network.skaianet.SkaianetHandler;
@@ -14,10 +18,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -54,14 +60,6 @@ public class ServerEventHandler
 	@SubscribeEvent
 	public static void onTick(TickEvent.PlayerTickEvent event)
 	{
-		if(event.player.isPotionActive(MSUPotions.SKYHBOUND) || (event.player.isCreative() && event.player.isPotionActive(MSUPotions.SKYHBOUND) && event.player.getActivePotionEffect(MSUPotions.EARTHBOUND).getDuration() < 5))
-			event.player.capabilities.allowFlying = true;
-		if(event.player.isPotionActive(MSUPotions.EARTHBOUND) || (!event.player.isCreative() && event.player.isPotionActive(MSUPotions.SKYHBOUND) && event.player.getActivePotionEffect(MSUPotions.SKYHBOUND).getDuration() < 5))
-		{
-			event.player.capabilities.allowFlying = false;
-			event.player.capabilities.isFlying = false;
-		}
-
 		if(event.player.isSpectator())
 		{
 			event.player.capabilities.isFlying = true;
@@ -70,6 +68,7 @@ public class ServerEventHandler
 	}
 
 	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
 	public static void onClientTick(TickEvent.ClientTickEvent event)
 	{
 		if(Minecraft.getMinecraft().player == null)
@@ -77,13 +76,25 @@ public class ServerEventHandler
 
 		EntityPlayer player = Minecraft.getMinecraft().player;
 
-		if(player.isPotionActive(MSUPotions.SKYHBOUND) || (player.isCreative() && player.isPotionActive(MSUPotions.SKYHBOUND) && player.getActivePotionEffect(MSUPotions.EARTHBOUND).getDuration() < 5))
+		if((player.isPotionActive(MSUPotions.SKYHBOUND) && player.getActivePotionEffect(MSUPotions.SKYHBOUND).getDuration() >= 5)
+				|| (player.isCreative() && player.isPotionActive(MSUPotions.EARTHBOUND) && player.getActivePotionEffect(MSUPotions.EARTHBOUND).getDuration() < 5))
 			player.capabilities.allowFlying = true;
-		if(player.isPotionActive(MSUPotions.EARTHBOUND) || (!player.isCreative() && player.isPotionActive(MSUPotions.SKYHBOUND) && player.getActivePotionEffect(MSUPotions.SKYHBOUND).getDuration() < 5))
+		if((player.isPotionActive(MSUPotions.EARTHBOUND) && player.getActivePotionEffect(MSUPotions.EARTHBOUND).getDuration() >= 5)
+				|| (!player.isCreative() && player.isPotionActive(MSUPotions.SKYHBOUND) && player.getActivePotionEffect(MSUPotions.SKYHBOUND).getDuration() < 5))
 		{
+			System.out.println("earthbound client tick");
 			player.capabilities.allowFlying = false;
 			player.capabilities.isFlying = false;
 		}
+
+		if(!player.isCreative() && player.isPotionActive(MSUPotions.CREATIVE_SHOCK))
+		{
+			int duration = player.getActivePotionEffect(MSUPotions.CREATIVE_SHOCK).getDuration();
+			if(duration >= 5)
+				player.capabilities.allowEdit = false;
+			else player.capabilities.allowEdit = !MSUUtils.getPlayerGameType(player).hasLimitedInteractions();
+		}
+
 
 		if(player.isSpectator())
 		{
@@ -93,17 +104,47 @@ public class ServerEventHandler
 	}
 
 	@SubscribeEvent
+	public static void onPotionRemove(PotionEvent.PotionRemoveEvent event)
+	{
+		onPotionEnd(event.getEntityLiving(), event.getPotion());
+	}
+
+	@SubscribeEvent
+	public static void onPotionExpire(PotionEvent.PotionExpiryEvent expiryEvent)
+	{
+		onPotionEnd(expiryEvent.getEntityLiving(), expiryEvent.getPotionEffect().getPotion());
+	}
+
+	private static void onPotionEnd(EntityLivingBase entityLiving, Potion potion)
+	{
+		if(entityLiving instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) entityLiving;
+
+			if(potion == MSUPotions.EARTHBOUND && player.isCreative())
+			{
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.FLIGHT_EFFECT, potion == MSUPotions.EARTHBOUND), player);
+				player.capabilities.allowFlying = true;
+			}
+			if(potion == MSUPotions.SKYHBOUND && !player.isCreative())
+			{
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.FLIGHT_EFFECT, potion == MSUPotions.EARTHBOUND), player);
+				player.capabilities.allowFlying = false;
+				player.capabilities.isFlying = false;
+			}
+			if(!player.isCreative() && potion == MSUPotions.CREATIVE_SHOCK)
+			{
+				player.capabilities.allowEdit = !MSUUtils.getPlayerGameType(player).hasLimitedInteractions();
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.BUILD_INHIBIT_EFFECT), player);
+			}
+		}
+	}
+
+
+	@SubscribeEvent
 	public static void onBreakSpeed(PlayerEvent.BreakSpeed event)
 	{
 		if(event.getEntityPlayer().isPotionActive(MSUPotions.CREATIVE_SHOCK))
 			event.setNewSpeed(0);
-	}
-
-	@SubscribeEvent
-	public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event)
-	{
-		//TODO find better alternative, maybe look into FTB utils code?
-		if(event.getEntity() instanceof EntityLivingBase && ((EntityLivingBase) event.getEntity()).isPotionActive(MSUPotions.CREATIVE_SHOCK))
-			event.setCanceled(true);
 	}
 }

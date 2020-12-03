@@ -8,10 +8,17 @@ import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.editmode.DeployList;
 import com.mraof.minestuck.item.ItemBoondollars;
 import com.mraof.minestuck.item.MinestuckItems;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.GameType;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MSUUtils
 {
@@ -53,5 +60,19 @@ public class MSUUtils
             if(entity != null)
                 entity.setNoPickupDelay();
         } else reciever.inventoryContainer.detectAndSendChanges();
+    }
+
+    public static GameType getPlayerGameType(EntityPlayer player)
+    {
+        if(player instanceof EntityPlayerSP)
+            return getPlayerGameTypeClient((EntityPlayerSP) player);
+        return ((EntityPlayerMP) player).interactionManager.getGameType();
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static GameType getPlayerGameTypeClient(EntityPlayerSP player)
+    {
+        NetworkPlayerInfo networkplayerinfo = Minecraft.getMinecraft().getConnection().getPlayerInfo(player.getGameProfile().getId());
+        return networkplayerinfo.getGameType();
     }
 }
