@@ -32,9 +32,7 @@ public class ItemChisel extends MSUItemBase
 	{
 		if(worldIn.getBlockState(pos).getBlock().equals(MinestuckUniverseBlocks.zillyStone) && !worldIn.isRemote)
 		{
-			PotionEffect luckFX = player.getActivePotionEffect(MobEffects.LUCK);
-			PotionEffect unluckFX = player.getActivePotionEffect(MobEffects.UNLUCK);
-			int luck = (luckFX != null ? luckFX.getAmplifier()+1 : 0) - (unluckFX != null ? unluckFX.getAmplifier()+1 : 0) + baseLuck;
+			float luck = player.getLuck() + baseLuck;
 			int val = 1;
 
 			val += Math.signum(luck)*((new Random().nextInt(10) < Math.abs(luck) ? 1 : 0)); //TODO turn the modifier into a config option
