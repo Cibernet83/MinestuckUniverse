@@ -1,0 +1,5 @@
+{
+  "recipes": {
+    "knitting": "com.cibernet.minestuckuniverse.recipes.MSUCraftingRecipes$KnittingRecipe$Factory"
+  }
+}

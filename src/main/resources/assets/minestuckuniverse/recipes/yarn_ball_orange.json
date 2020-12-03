@@ -1,25 +1,21 @@
 {
     "type": "minestuckuniverse:knitting",
     "pattern": [
-        "#k#",
-        "#O#",
-        "###"
+        "k ",
+        " #"
     ],
     "key": {
         "k": {
             "item": "minestuckuniverse:knitting_needle"
         },
         "#": {
-            "item": "minestuckuniverse:yarn_ball",
-            "data": 9
-        },
-        "O": {
-            "item": "minestuckuniverse:yarn_ball",
+            "item": "minecraft:wool",
             "data": 1
         }
     },
     "result": {
-        "item": "minestuckuniverse:cozy_sweater",
+        "item": "minestuckuniverse:yarn_ball",
+        "data": 14,
         "count": 1
     }
 }

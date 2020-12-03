@@ -12,6 +12,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -26,20 +27,17 @@ import javax.annotation.Nullable;
 
 public class ItemKnittingNeedles extends ItemPluralWeapon
 {
-
-
     public ItemKnittingNeedles(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
     {
         super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
         setMaxStackSize(2);
-        setContainerItem(this);
 
         this.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID,"plural"), new IItemPropertyGetter()
         {
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
             {
-                return stack.getCount() >= 2 ? 1 : 0;
+                return (entityIn != null && stack.getCount() >= 2) ? 1 : 0;
             }
         });
     }
@@ -79,11 +77,23 @@ public class ItemKnittingNeedles extends ItemPluralWeapon
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     }
 
+    /*
+    @Override
+    public boolean hasContainerItem(ItemStack stack)
+    {
+        return stack.getCount() >= 2;
+    }
+
     @Override
     public ItemStack getContainerItem(ItemStack itemStack)
     {
-        ItemStack result = itemStack.copy();
-        result.setItemDamage(getDamage(itemStack)-1);
-        return result;
+        if(hasContainerItem(itemStack))
+        {
+            ItemStack result = itemStack.copy();
+            result.setItemDamage(result.getItemDamage());
+            return result;
+        }
+        return super.getContainerItem(itemStack);
     }
+    */
 }
