@@ -2,7 +2,7 @@
     "type": "minestuckuniverse:knitting",
     "pattern": [
         "#k#",
-        "#O#",
+        "###",
         "###"
     ],
     "key": {
@@ -12,10 +12,6 @@
         "#": {
             "item": "minestuckuniverse:yarn_ball",
             "data": 9
-        },
-        "O": {
-            "item": "minestuckuniverse:yarn_ball",
-            "data": 1
         }
     },
     "result": {
