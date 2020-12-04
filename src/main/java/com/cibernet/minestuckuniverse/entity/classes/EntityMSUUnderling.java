@@ -14,7 +14,6 @@ public abstract class EntityMSUUnderling extends EntityUnderling
     @Override
     public ResourceLocation getTextureResource()
     {
-        //System.out.println("archieron");
         this.textureResource = new ResourceLocation(MinestuckUniverse.MODID, this.getTexture());
 
         if(this.textureResource == null) {

@@ -82,7 +82,6 @@ public class ServerEventHandler
 		if((player.isPotionActive(MSUPotions.EARTHBOUND) && player.getActivePotionEffect(MSUPotions.EARTHBOUND).getDuration() >= 5)
 				|| (!player.isCreative() && player.isPotionActive(MSUPotions.SKYHBOUND) && player.getActivePotionEffect(MSUPotions.SKYHBOUND).getDuration() < 5))
 		{
-			System.out.println("earthbound client tick");
 			player.capabilities.allowFlying = false;
 			player.capabilities.isFlying = false;
 		}
