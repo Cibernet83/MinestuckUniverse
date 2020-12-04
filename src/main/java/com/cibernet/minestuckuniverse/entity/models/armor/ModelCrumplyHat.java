@@ -31,79 +31,78 @@ public class ModelCrumplyHat extends ModelBiped {
 
 		Head = new ModelRenderer(this);
 		Head.setRotationPoint(0.0F, 0.0F, 0.0F);
-		
 
 		msCrumpled = new ModelRenderer(this);
 		msCrumpled.setRotationPoint(0.0F, -8.0F, 0.0F);
 		Head.addChild(msCrumpled);
-		msCrumpled.cubeList.add(new ModelBox(msCrumpled, 0, 38, -4.0F, 0.0F, -4.0F, 8, 0, 8, 0.25F, false));
+		msCrumpled.cubeList.add(new ModelBox(msCrumpled, 0, 55, -4.0F, 0.0F, -4.0F, 8, 0, 8, 0.25F, false));
 
 		bone = new ModelRenderer(this);
 		bone.setRotationPoint(-2.0F, 0.0F, 0.0F);
 		msCrumpled.addChild(bone);
-		
+
 
 		cube_r1 = new ModelRenderer(this);
 		cube_r1.setRotationPoint(3.5F, 0.0F, 0.0F);
 		bone.addChild(cube_r1);
 		setRotationAngle(cube_r1, 0.0F, 0.0F, 0.3491F);
-		cube_r1.cubeList.add(new ModelBox(cube_r1, 14, 29, -1.5F, -4.0F, -3.0F, 2, 3, 6, 0.0F, false));
+		cube_r1.cubeList.add(new ModelBox(cube_r1, 0, 15, -1.5F, -4.0F, -3.0F, 2, 3, 6, 0.0F, false));
 
 		cube_r2 = new ModelRenderer(this);
 		cube_r2.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bone.addChild(cube_r2);
 		setRotationAngle(cube_r2, 0.0F, 0.0F, 0.3491F);
-		cube_r2.cubeList.add(new ModelBox(cube_r2, 0, 30, -1.0F, -2.0F, -3.0F, 1, 2, 6, 0.0F, false));
+		cube_r2.cubeList.add(new ModelBox(cube_r2, 0, 24, -1.0F, -2.0F, -3.0F, 1, 2, 6, 0.0F, false));
 
 		bone2 = new ModelRenderer(this);
 		bone2.setRotationPoint(0.0F, 0.0F, 3.0F);
 		msCrumpled.addChild(bone2);
-		
+
 
 		cube_r3 = new ModelRenderer(this);
 		cube_r3.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bone2.addChild(cube_r3);
 		setRotationAngle(cube_r3, 0.0873F, 0.0F, 0.0F);
-		cube_r3.cubeList.add(new ModelBox(cube_r3, 10, 24, -2.0F, -5.0F, -0.5F, 4, 5, 1, 0.0F, false));
+		cube_r3.cubeList.add(new ModelBox(cube_r3, 24, 10, -2.0F, -5.0F, -0.5F, 4, 5, 1, 0.0F, false));
 
 		cube_r4 = new ModelRenderer(this);
 		cube_r4.setRotationPoint(0.0F, 0.0F, -6.0F);
 		bone2.addChild(cube_r4);
 		setRotationAngle(cube_r4, 0.0873F, 0.0F, 0.0F);
-		cube_r4.cubeList.add(new ModelBox(cube_r4, 0, 24, -2.0F, -5.0F, 0.0F, 4, 5, 1, 0.0F, false));
+		cube_r4.cubeList.add(new ModelBox(cube_r4, 10, 15, -2.0F, -5.0F, 0.0F, 4, 5, 1, 0.0F, false));
 
 		bone3 = new ModelRenderer(this);
 		bone3.setRotationPoint(2.0F, 0.0F, 0.0F);
 		msCrumpled.addChild(bone3);
-		
+
 
 		cube_r5 = new ModelRenderer(this);
 		cube_r5.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bone3.addChild(cube_r5);
 		setRotationAngle(cube_r5, 0.0F, 0.0F, -0.3491F);
-		cube_r5.cubeList.add(new ModelBox(cube_r5, 0, 16, 0.0F, -2.0F, -3.0F, 1, 2, 6, 0.0F, false));
+		cube_r5.cubeList.add(new ModelBox(cube_r5, 18, 2, 0.0F, -2.0F, -3.0F, 1, 2, 6, 0.0F, false));
 
 		bone4 = new ModelRenderer(this);
 		bone4.setRotationPoint(2.0F, 0.0F, 0.0F);
 		msCrumpled.addChild(bone4);
-		
+
 
 		cube_r6 = new ModelRenderer(this);
 		cube_r6.setRotationPoint(-3.5F, -1.0F, 0.0F);
 		bone4.addChild(cube_r6);
 		setRotationAngle(cube_r6, 0.0F, 0.0F, -0.2182F);
-		cube_r6.cubeList.add(new ModelBox(cube_r6, 0, 7, -0.5F, -4.0F, -3.0F, 1, 3, 6, 0.0F, false));
+		cube_r6.cubeList.add(new ModelBox(cube_r6, 16, 16, -0.5F, -4.0F, -3.0F, 1, 3, 6, 0.0F, false));
 
 		bone5 = new ModelRenderer(this);
 		bone5.setRotationPoint(2.0F, 0.0F, 0.0F);
 		msCrumpled.addChild(bone5);
-		
+
 
 		cube_r7 = new ModelRenderer(this);
 		cube_r7.setRotationPoint(-2.0F, -5.0F, 0.0F);
 		bone5.addChild(cube_r7);
 		setRotationAngle(cube_r7, 0.0F, 0.0F, 0.1745F);
-		cube_r7.cubeList.add(new ModelBox(cube_r7, 0, 0, -2.5F, -0.5F, -3.25F, 6, 1, 6, 0.5F, false));
+		cube_r7.cubeList.add(new ModelBox(cube_r7, 0, 8, -2.5F, -0.5F, -3.25F, 6, 1, 6, 0.5F, false));
 
 		bipedHead.cubeList.remove(0);
 		bipedHeadwear.cubeList.remove(0);
