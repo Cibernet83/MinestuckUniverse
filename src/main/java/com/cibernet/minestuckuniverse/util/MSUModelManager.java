@@ -3,7 +3,6 @@ package com.cibernet.minestuckuniverse.util;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.mraof.minestuck.alchemy.GristType;
-import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -16,6 +15,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import com.mraof.minestuck.util.Pair;
 
 import java.util.*;
 
@@ -28,7 +28,7 @@ public class MSUModelManager
     public static List<Item> items = new ArrayList<>();
     public static List<Block> blocks = new ArrayList<>();
 
-    public static List<Pair<Item, CustomItemMeshDefinition>> customItemModels = new ArrayList<>();
+    public static List<com.mraof.minestuck.util.Pair<Item, CustomItemMeshDefinition>> customItemModels = new ArrayList<>();
 
     @SubscribeEvent
     public static void handleModelRegistry(ModelRegistryEvent event)
@@ -51,8 +51,8 @@ public class MSUModelManager
 
         for(Pair<Item, CustomItemMeshDefinition> pair : customItemModels)
         {
-            ModelLoader.registerItemVariants(pair.getKey(), pair.getValue().getResourceLocations());
-            ModelLoader.setCustomMeshDefinition(pair.getKey(), pair.getValue());
+            ModelLoader.registerItemVariants(pair.object1, pair.object2.getResourceLocations());
+            ModelLoader.setCustomMeshDefinition(pair.object1, pair.object2);
         }
 
         //ModelLoader.registerItemVariants(batteryBeamBlade, new ModelResourceLocation[]{new ModelResourceLocation("minestuck:catclaws_sheathed"), new ModelResourceLocation("minestuck:catclaws_drawn")});

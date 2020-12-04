@@ -49,14 +49,6 @@ public class ServerEventHandler
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public static void onEntityRender(RenderLivingEvent.Pre event)
-	{
-		if(event.getEntity().isPotionActive(MobEffects.INVISIBILITY) && event.getEntity().getActivePotionEffect(MobEffects.INVISIBILITY).getAmplifier() >= 4)
-			event.setCanceled(true);
-	}
-
 	@SubscribeEvent
 	public static void onTick(TickEvent.PlayerTickEvent event)
 	{
