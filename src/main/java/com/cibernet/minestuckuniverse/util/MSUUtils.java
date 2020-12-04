@@ -53,6 +53,8 @@ public class MSUUtils
     
     public static void giveBoonItem(EntityPlayer reciever, int value)
     {
+        if(value == 0)
+            return;
         ItemStack stack = ItemBoondollars.setCount(new ItemStack(MinestuckItems.boondollars), value);
         if(!reciever.addItemStackToInventory(stack))
         {

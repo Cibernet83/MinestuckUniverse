@@ -62,9 +62,9 @@ public class PorkhollowAtmPacket extends MSUPacket
 				if(n > 0)
 					split = (int) Math.floor(amount/n);
 				for(int i = 0; i < n; i++)
-					MSUUtils.giveBoonItem(reciever, split);
+					MSUUtils.giveBoonItem(sender, split);
 				if(split*n != amount)
-					MSUUtils.giveBoonItem(reciever, amount-split*n);
+					MSUUtils.giveBoonItem(sender, amount-split*n);
 				sender.sendMessage(new TextComponentTranslation("message.atm.withdrawSuccess", amount));
 			break;
 		} else sender.sendMessage(new TextComponentTranslation("commands.porkhollow.notEnough"));

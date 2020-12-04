@@ -64,8 +64,8 @@ public class BlockBoondollarRegister extends BlockContainer
         if(stack.hasTagCompound())
         {
             NBTTagCompound nbt = stack.getTagCompound();
-            if(nbt.hasUniqueId("owner"))
-                tooltip.add(I18n.translateToLocalFormatted("tooltip.machineOwner", IdentifierHandler.load(nbt, "owner").getUsername()));
+            if(nbt.hasKey("OwnerName"))
+                tooltip.add(I18n.translateToLocalFormatted("tooltip.machineOwner", nbt.getString("OwnerName")));
         }
         super.addInformation(stack, player, tooltip, advanced);
     }
@@ -161,7 +161,10 @@ public class BlockBoondollarRegister extends BlockContainer
         }
 
         if(te != null && placer instanceof EntityPlayer)
+        {
             te.owner = IdentifierHandler.encode((EntityPlayer) placer);
+            te.ownerName = ((EntityPlayer) placer).getDisplayNameString();
+        }
 
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
@@ -191,7 +194,7 @@ public class BlockBoondollarRegister extends BlockContainer
         player.addExhaustion(0.005F);
 
         TileEntityBoondollarRegister vault = (TileEntityBoondollarRegister) te;
-        if(vault.owner != null && vault.owner.getPlayer().equals(player) && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) <= 0)
+        if(vault.owner != null && IdentifierHandler.encode(player).equals(vault.owner) && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) <= 0)
         {
             super.harvestBlock(worldIn, player, pos, state, te, stack);
             onVaultBroken(vault);
@@ -223,14 +226,16 @@ public class BlockBoondollarRegister extends BlockContainer
         TileEntityBoondollarRegister te = (TileEntityBoondollarRegister) worldIn.getTileEntity(pos);
         ItemStack stack = playerIn.getHeldItem(hand);
 
-        if(!worldIn.isRemote) {
+        IdentifierHandler.PlayerIdentifier playerIdentifier = IdentifierHandler.encode(playerIn);
 
+        if(!worldIn.isRemote)
+        {
             if (stack.getItem().equals(MinestuckItems.boondollars))
             {
                 int boonValue = ItemBoondollars.getCount(stack);
-                if(!te.isFull(boonValue))
+                if(te.isFull(boonValue))
                     playerIn.sendStatusMessage(new TextComponentTranslation("message.vault.full"), true);
-                else if(boonValue < te.mav) {
+                else if(boonValue >= te.mav) {
                     te.addBoondollars(boonValue);
                     stack.shrink(1);
 
@@ -243,7 +248,7 @@ public class BlockBoondollarRegister extends BlockContainer
                         playerIn.sendStatusMessage(new TextComponentString("[" + te.getName() + "] " + te.customMessage), false);
                 } else playerIn.sendStatusMessage(new TextComponentTranslation("message.vault.notEnough", te.mav - boonValue), true);
 
-            } else if (te.owner.getPlayer().equals(playerIn)) {
+            } else if (playerIdentifier.equals(te.owner)) {
                 if (stack.getItem().equals(Items.PAPER)) {
                     if (stack.hasDisplayName() && te.customMessage.isEmpty()) {
                         te.customMessage = stack.getDisplayName();
@@ -257,11 +262,12 @@ public class BlockBoondollarRegister extends BlockContainer
                         playerIn.sendStatusMessage(new TextComponentTranslation("message.vault.msgRemoved"), true);
                     }
                 } else {
-                    return false;
+                    return true;
                 }
-            } else return false;
+            }
+            return false;
         }
-        else if(te.owner != null && te.owner.getPlayer().equals(playerIn) && !stack.getItem().equals(Items.PAPER) && !stack.getItem().equals(MinestuckItems.boondollars))
+        else if(playerIdentifier.equals(te.owner) && !stack.getItem().equals(Items.PAPER) && !stack.getItem().equals(MinestuckItems.boondollars))
                 playerIn.openGui(MinestuckUniverse.instance, MSUUtils.BOONDOLLAR_REGISTER_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }

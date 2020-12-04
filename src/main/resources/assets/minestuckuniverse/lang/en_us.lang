@@ -1,5 +1,7 @@
 itemGroup.tabMinestuckUniverse=Minestuck Universe
 
+tooltip.machineOwner=Owner: %s
+
 tile.dungeonDoor.name=Dungeon Door
 tile.dungeonDoorKeyhole.name=Dungeon Door Keyhole
 tile.dungeonShield.name=Dungeon Shield
@@ -203,7 +205,7 @@ message.atm.sendSuccess=Successfully sent %s Boondollars to %s
 message.vault.collectSuccess=Successfully collected %s Boondollars
 message.vault.msgSet=Custom Message successfully added.
 message.vault.msgRemoved=Removed Custom Message.
-message.vault.full=This Boondollar Register is full!.
+message.vault.full=This Boondollar Register is full!
 message.vault.notEnough=You need %s more Boondollars.
 message.medallion.error=The medallion does not seem to activate, perhaps something went wrong?
 

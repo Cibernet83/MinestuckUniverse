@@ -19,6 +19,7 @@ import java.util.List;
 public class TileEntityBoondollarRegister extends TileEntity implements IWorldNameable
 {
     public IdentifierHandler.PlayerIdentifier owner = IdentifierHandler.nullIdentifier;
+    public String ownerName = "???";
     protected int storedBoons = 0;
     private String customName = "";
     public String customMessage = "";
@@ -44,7 +45,9 @@ public class TileEntityBoondollarRegister extends TileEntity implements IWorldNa
 
     public void loadFromNBT(NBTTagCompound compound)
     {
-        this.owner = IdentifierHandler.getById(compound.getInteger("OwnerId"));
+        owner = IdentifierHandler.load(compound, "owner");
+        if(compound.hasKey("OwnerName"))
+        ownerName = compound.getString("OwnerName");
         storedBoons = compound.getInteger("StoredBoondollars");
         customName = compound.getString("CustomName");
         customMessage = compound.getString("CustomMessage");
@@ -56,7 +59,8 @@ public class TileEntityBoondollarRegister extends TileEntity implements IWorldNa
     public NBTTagCompound saveToNBT(NBTTagCompound compound)
     {
         if(owner != null)
-            compound.setInteger("OwnerId", owner.getId());
+            this.owner.saveToNBT(compound, "owner");
+        compound.setString("OwnerName", ownerName);
         compound.setInteger("StoredBoondollars", storedBoons);
         compound.setString("CustomName", customName);
         compound.setString("CustomMessage", customMessage);

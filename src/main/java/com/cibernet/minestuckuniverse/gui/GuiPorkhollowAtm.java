@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.gui;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.network.BoondollarRegisterPacket;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.network.PorkhollowAtmPacket;
@@ -87,8 +88,10 @@ public class GuiPorkhollowAtm extends GuiScreen
 		withdrawButton = new GuiButton(0,xOffset+9,yOffset+38,158,20, I18n.translateToLocal("gui.atm.withdraw"));
 		goButton = new GuiButton(0,xOffset+9,yOffset+138,158,20, I18n.translateToLocal("gui.atm.go"));
 		amountTextField = new GuiTextField(1, fontRenderer,xOffset+9, yOffset+55, 158, 20);
+		amountTextField.setText("0");
 		nTextField = new GuiTextField(1, fontRenderer,xOffset+9, yOffset+89, 158, 20);
 		nTextField.setMaxStringLength(2);
+		nTextField.setText("0");
 		updateButtons();
 	}
 	
@@ -128,8 +131,18 @@ public class GuiPorkhollowAtm extends GuiScreen
 		super.keyTyped(typedChar, keyCode);
 		
 		if((Character.digit(typedChar, 10) >= 0 || keyCode == 14) && selectedTextField != null)
+		{
+			int value;
 			selectedTextField.textboxKeyTyped(typedChar, keyCode);
-		
+			try {value = selectedTextField.getText().isEmpty() ? 0 : Integer.parseInt(selectedTextField.getText()); }
+			catch (NumberFormatException e) {value = Integer.MAX_VALUE;}
+
+			if(String.valueOf(value).length() > selectedTextField.getMaxStringLength()-1)
+				value = (int) (Math.pow(10,selectedTextField.getMaxStringLength()) -1);
+
+			selectedTextField.setText(String.valueOf(value));
+		}
+
 	}
 	
 	@Override
@@ -144,6 +157,7 @@ public class GuiPorkhollowAtm extends GuiScreen
 					setSelectedTextField(amountTextField);
 				else if(nTextField.mouseClicked(mouseX, mouseY, mouseButton))
 					setSelectedTextField(nTextField);
+				else setSelectedTextField(null);
 			break;
 		}
 	}
