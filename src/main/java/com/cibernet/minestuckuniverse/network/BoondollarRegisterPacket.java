@@ -14,15 +14,18 @@ public class BoondollarRegisterPacket extends MSUPacket
 {
     BlockPos pos;
     EnumType type;
+    int mav;
 
     @Override
     public MSUPacket generatePacket(Object... dat)
     {
         this.data.writeInt(((EnumType)dat[0]).ordinal());
-        TileEntity te = (TileEntity) dat[1];
+        TileEntityBoondollarRegister te = (TileEntityBoondollarRegister) dat[1];
         data.writeInt(te.getPos().getX());
         data.writeInt(te.getPos().getY());
         data.writeInt(te.getPos().getZ());
+
+        data.writeInt(te.mav);
         return this;
     }
 
@@ -31,6 +34,7 @@ public class BoondollarRegisterPacket extends MSUPacket
     {
         type = EnumType.values()[dat.readInt()];
         pos = new BlockPos(dat.readInt(), dat.readInt(), dat.readInt());
+        mav = dat.readInt();
         return this;
     }
 
@@ -45,11 +49,13 @@ public class BoondollarRegisterPacket extends MSUPacket
             {
                 case AUTO: vault.auto = !vault.auto; break;
                 case TAKE:
-                    MinestuckPlayerData.addBoondollars(player, vault.storedBoons);
-                    vault.storedBoons = 0;
+                    MinestuckPlayerData.addBoondollars(player, vault.getStoredBoons());
+                    vault.setStoredBoons(0);
                 break;
+                case MAV: vault.mav = mav; break;
             }
-
+            //player.world.scheduleUpdate(pos, vault.getBlockType(), vault.getBlockType().tickRate(player.world));
+            player.world.notifyBlockUpdate(vault.getPos(), player.world.getBlockState(pos), player.world.getBlockState(pos), 3);
         }
     }
 
@@ -61,8 +67,10 @@ public class BoondollarRegisterPacket extends MSUPacket
 
     public enum EnumType
     {
+        UPDATE,
         TAKE,
         AUTO,
+        MAV,
         ;
     }
 }

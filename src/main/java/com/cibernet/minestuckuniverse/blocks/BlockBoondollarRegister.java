@@ -64,7 +64,7 @@ public class BlockBoondollarRegister extends BlockContainer
         if(stack.hasTagCompound())
         {
             NBTTagCompound nbt = stack.getTagCompound();
-            if(nbt.hasKey("ownerMost"))
+            if(nbt.hasUniqueId("owner"))
                 tooltip.add(I18n.translateToLocalFormatted("tooltip.machineOwner", IdentifierHandler.load(nbt, "owner").getUsername()));
         }
         super.addInformation(stack, player, tooltip, advanced);
@@ -144,8 +144,6 @@ public class BlockBoondollarRegister extends BlockContainer
     {
         TileEntityBoondollarRegister te = (TileEntityBoondollarRegister) worldIn.getTileEntity(pos);
 
-        System.out.println(te);
-
         if(stack.hasTagCompound())
         {
             NBTTagCompound nbt = stack.getTagCompound();
@@ -154,7 +152,7 @@ public class BlockBoondollarRegister extends BlockContainer
                 TileEntityBoondollarRegister vault = (TileEntityBoondollarRegister) worldIn.getTileEntity(pos);
                 if(stack.hasDisplayName())
                     vault.setName(stack.getDisplayName());
-                if (nbt.hasKey("ownerMost"))
+                if (nbt.hasUniqueId("owner"))
                 {
                     vault.loadFromNBT(nbt);
                     return;
@@ -170,8 +168,8 @@ public class BlockBoondollarRegister extends BlockContainer
 
     public void onVaultBroken(TileEntityBoondollarRegister vault)
     {
-        if(vault.storedBoons > 0)
-            spawnAsEntity(vault.getWorld(), vault.getPos(), ItemBoondollars.setCount(new ItemStack(MinestuckItems.boondollars), vault.storedBoons));
+        if(vault.getStoredBoons() > 0)
+            spawnAsEntity(vault.getWorld(), vault.getPos(), ItemBoondollars.setCount(new ItemStack(MinestuckItems.boondollars), vault.getStoredBoons()));
         if(!vault.customMessage.isEmpty())
         {
             ItemStack paper = new ItemStack(Items.PAPER);
@@ -193,7 +191,7 @@ public class BlockBoondollarRegister extends BlockContainer
         player.addExhaustion(0.005F);
 
         TileEntityBoondollarRegister vault = (TileEntityBoondollarRegister) te;
-        if(vault.owner.getPlayer().equals(player) && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) <= 0)
+        if(vault.owner != null && vault.owner.getPlayer().equals(player) && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) <= 0)
         {
             super.harvestBlock(worldIn, player, pos, state, te, stack);
             onVaultBroken(vault);
@@ -214,9 +212,6 @@ public class BlockBoondollarRegister extends BlockContainer
         if(vault.hasCustomName())
             stack.setStackDisplayName(vault.getName());
 
-        System.out.println(vault.owner);
-        System.out.println(IdentifierHandler.load(stack.getTagCompound(), "owner").getUsername());
-
         return stack;
     }
 
@@ -230,17 +225,23 @@ public class BlockBoondollarRegister extends BlockContainer
 
         if(!worldIn.isRemote) {
 
-            if (stack.getItem().equals(MinestuckItems.boondollars)) {
-                te.storedBoons += ItemBoondollars.getCount(stack);
-                stack.shrink(1);
+            if (stack.getItem().equals(MinestuckItems.boondollars))
+            {
+                int boonValue = ItemBoondollars.getCount(stack);
+                if(!te.isFull(boonValue))
+                    playerIn.sendStatusMessage(new TextComponentTranslation("message.vault.full"), true);
+                else if(boonValue < te.mav) {
+                    te.addBoondollars(boonValue);
+                    stack.shrink(1);
 
-                worldIn.setBlockState(pos, state.withProperty(POWERED, true), 3);
-                worldIn.markBlockRangeForRenderUpdate(pos, pos);
-                this.notifyNeighbors(worldIn, pos, state.getValue(FACING));
-                worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+                    worldIn.setBlockState(pos, state.withProperty(POWERED, true), 3);
+                    worldIn.markBlockRangeForRenderUpdate(pos, pos);
+                    this.notifyNeighbors(worldIn, pos, state.getValue(FACING));
+                    worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
 
-                if (te.customMessage != "")
-                    playerIn.sendStatusMessage(new TextComponentString("[" + te.getName() + "] " + te.customMessage), false);
+                    if (!te.customMessage.isEmpty())
+                        playerIn.sendStatusMessage(new TextComponentString("[" + te.getName() + "] " + te.customMessage), false);
+                } else playerIn.sendStatusMessage(new TextComponentTranslation("message.vault.notEnough", te.mav - boonValue), true);
 
             } else if (te.owner.getPlayer().equals(playerIn)) {
                 if (stack.getItem().equals(Items.PAPER)) {
@@ -256,13 +257,27 @@ public class BlockBoondollarRegister extends BlockContainer
                         playerIn.sendStatusMessage(new TextComponentTranslation("message.vault.msgRemoved"), true);
                     }
                 } else {
-
+                    return false;
                 }
             } else return false;
         }
         else if(te.owner != null && te.owner.getPlayer().equals(playerIn) && !stack.getItem().equals(Items.PAPER) && !stack.getItem().equals(MinestuckItems.boondollars))
-            playerIn.openGui(MinestuckUniverse.instance, MSUUtils.BOONDOLLAR_REGISTER_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                playerIn.openGui(MinestuckUniverse.instance, MSUUtils.BOONDOLLAR_REGISTER_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
+    }
+
+    @Override
+    public boolean hasComparatorInputOverride(IBlockState state)
+    {
+        return true;
+    }
+
+    @Override
+    public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos)
+    {
+        if(worldIn.getTileEntity(pos) instanceof TileEntityBoondollarRegister && worldIn.getBlockState(pos).getValue(POWERED))
+            return ((TileEntityBoondollarRegister) worldIn.getTileEntity(pos)).getComparatorOutput();
+        return super.getComparatorInputOverride(blockState, worldIn, pos);
     }
 
     @Nullable

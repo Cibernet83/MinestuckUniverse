@@ -193,12 +193,18 @@ grist.vis=Vis
 grist.mana=Mana
 
 container.machineChassis=Machine Assembly
+container.boondollarRegister=Boondollar Register
 
 message.transportalizer.notOwner=This is not your transportalizer!
 message.transportalizer.notOpped=You do not have permission to use this transportalizer.
 message.transportalizer.destinationInvalid=This transportalizer no longer exists.
 message.atm.withdrawSuccess=Successfully withdrawn %s Boondollars
 message.atm.sendSuccess=Successfully sent %s Boondollars to %s
+message.vault.collectSuccess=Successfully collected %s Boondollars
+message.vault.msgSet=Custom Message successfully added.
+message.vault.msgRemoved=Removed Custom Message.
+message.vault.full=This Boondollar Register is full!.
+message.vault.notEnough=You need %s more Boondollars.
 message.medallion.error=The medallion does not seem to activate, perhaps something went wrong?
 
 effect.minestuckuniverse.flight=Skybound
@@ -430,3 +436,11 @@ gui.atm.withdraw=Withdraw
 gui.atm.go=Accept
 gui.atm.amountLabel=Value per Boondollar:
 gui.atm.nLabel=Boondollars to withdraw:
+gui.vault.amountLabel=Stored Boondollars: %s
+gui.vault.amountLabelShort=Stored Boons: %s
+gui.vault.mavLabel=Minimum Accepted Value:
+gui.vault.collect=Collect
+gui.vault.auto=Auto Collect: %s
+gui.vault.label=Boondollar Register
+gui.vault.label.1=Boondollar
+gui.vault.label.2=register
