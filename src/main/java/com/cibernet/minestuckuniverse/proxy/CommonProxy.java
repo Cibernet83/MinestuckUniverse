@@ -34,7 +34,6 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(MSUSoundHandler.instance);
         
         MSUSoundHandler.initSounds();
-        MSUBannerPatterns.init();
         MSUEntities.registerEntities();
 
         GameRegistry.registerTileEntity(TileEntityGristHopper.class, MinestuckUniverse.MODID + ":grist_hopper");
@@ -52,6 +51,8 @@ public class CommonProxy
 
     public void init()
     {
+        MSUBannerPatterns.init();
+
         MinecraftForge.EVENT_BUS.register(ServerEventHandler.class);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(MinestuckUniverse.instance, new MSUGuiHandler());
