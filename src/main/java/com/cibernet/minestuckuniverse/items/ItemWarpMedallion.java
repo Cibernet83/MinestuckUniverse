@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
+import com.cibernet.minestuckuniverse.tileentity.TileEntityRedTransportalizer;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.block.BlockTransportalizer;
 import com.mraof.minestuck.item.MinestuckItems;
@@ -24,6 +25,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -50,8 +52,14 @@ public class ItemWarpMedallion extends MSUItemBase
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
-        if(teleportType == EnumTeleportType.TRANSPORTALIZER && stack.hasTagCompound() && stack.getTagCompound().hasKey("Code"))
-            tooltip.add("[" + stack.getTagCompound().getString("Code") + "]");
+        if(teleportType == EnumTeleportType.TRANSPORTALIZER && stack.hasTagCompound())
+        {
+            if(stack.getTagCompound().getBoolean("IsHidden"))
+                tooltip.add(I18n.translateToLocalFormatted("tooltip.transportalizerOwner", IdentifierHandler.load(stack.getTagCompound(), "Player").getUsername()));
+            else if(stack.getTagCompound().hasKey("Code"))
+                tooltip.add("[" + stack.getTagCompound().getString("Code") + "]");
+            else super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
         else super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
@@ -76,8 +84,13 @@ public class ItemWarpMedallion extends MSUItemBase
         {
             if(stack.getTagCompound() == null)
                 stack.setTagCompound(new NBTTagCompound());
-            if(!stack.getTagCompound().hasKey("Player"))
-            stack.getTagCompound().setInteger("Player", IdentifierHandler.encode((EntityPlayer)entityIn).getId());
+            if(!stack.getTagCompound().hasUniqueId("Player"))
+            {
+                IdentifierHandler.PlayerIdentifier id = IdentifierHandler.encode((EntityPlayer)entityIn);
+                if(!worldIn.isRemote)
+                stack.getTagCompound().setInteger("Color", MinestuckPlayerData.getData(id).color);
+                id.saveToNBT(stack.getTagCompound(), "Player");
+            }
         }
     }
 
@@ -90,8 +103,24 @@ public class ItemWarpMedallion extends MSUItemBase
             {
                 TileEntityTransportalizer te = (TileEntityTransportalizer) worldIn.getTileEntity(pos);
                 ItemStack stack = player.getHeldItem(hand);
+
                 if(stack.getTagCompound() == null)
                     stack.setTagCompound(new NBTTagCompound());
+
+                if(te instanceof TileEntityRedTransportalizer)
+                {
+                    if(player.equals(((TileEntityRedTransportalizer) te).owner.getPlayer()))
+                    {
+                        stack.getTagCompound().setBoolean("IsHidden", true);
+                        IdentifierHandler.encode(player).saveToNBT(stack.getTagCompound(), "Player");
+                    }
+                    else
+                    {
+                        player.sendStatusMessage(new TextComponentTranslation("message.transportalizer.notOwner"), true);
+                        return EnumActionResult.SUCCESS;
+                    }
+                }
+
                 stack.getTagCompound().setString("Code", te.getId());
                 return EnumActionResult.SUCCESS;
             }
@@ -105,15 +134,15 @@ public class ItemWarpMedallion extends MSUItemBase
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         playerIn.setActiveHand(handIn);
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
     @SideOnly(Side.CLIENT)
     public static int getColor(ItemStack stack)
     {
         int colorIndex = ColorCollector.getColor(MinestuckPlayerData.getData(Minecraft.getMinecraft().player).color);
-        if(stack.hasTagCompound() && stack.getTagCompound().hasKey("Player"))
-            colorIndex = MinestuckPlayerData.getData(IdentifierHandler.getById(stack.getTagCompound().getInteger("Player"))).color;
+        if(stack.hasTagCompound() && stack.getTagCompound().hasKey("Color"))
+            colorIndex = stack.getTagCompound().getInteger("Color");
 
         return colorIndex <= -1 || colorIndex >= ColorCollector.getColorSize() ? 0x99D9EA : ColorCollector.getColor(colorIndex);
     }
@@ -157,13 +186,13 @@ public class ItemWarpMedallion extends MSUItemBase
 
             case RETURN:
 
-                if(!medallion.hasTagCompound() || !medallion.getTagCompound().hasKey("Player"))
+                if(!medallion.hasTagCompound() || !medallion.getTagCompound().hasUniqueId("Player"))
                     return false;
-                IdentifierHandler.PlayerIdentifier identifier = IdentifierHandler.getById(medallion.getTagCompound().getInteger("Player"));
+                IdentifierHandler.PlayerIdentifier identifier = IdentifierHandler.load(medallion.getTagCompound(), "Player");
                 if(identifier == null)
                     return false;
 
-                SburbConnection c = SkaianetHandler.getMainConnection(identifier, false);
+                SburbConnection c = SkaianetHandler.getMainConnection(identifier, true);
                 if(c == null)
                     return false;
 

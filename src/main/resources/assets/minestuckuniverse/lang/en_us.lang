@@ -1,6 +1,7 @@
 itemGroup.tabMinestuckUniverse=Minestuck Universe
 
 tooltip.machineOwner=Owner: %s
+tooltip.transportalizerOwner=%s's Transportalizer
 
 tile.dungeonDoor.name=Dungeon Door
 tile.dungeonDoorKeyhole.name=Dungeon Door Keyhole
