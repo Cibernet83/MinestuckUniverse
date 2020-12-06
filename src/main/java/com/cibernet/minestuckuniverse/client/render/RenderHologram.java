@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.entity.render;
+package com.cibernet.minestuckuniverse.client.render;
 
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
 import com.mraof.minestuck.alchemy.AlchemyRecipes;

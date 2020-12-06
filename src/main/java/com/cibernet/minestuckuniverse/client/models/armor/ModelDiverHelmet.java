@@ -1,16 +1,10 @@
-package com.cibernet.minestuckuniverse.entity.models.armor;
+package com.cibernet.minestuckuniverse.client.models.armor;
 
 //Made with Blockbench
 //Paste this code into your mod.
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.item.EntityArmorStand;
-import net.minecraft.entity.player.EntityPlayer;
-import org.lwjgl.opengl.GL11;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelDiverHelmet extends ModelBiped {

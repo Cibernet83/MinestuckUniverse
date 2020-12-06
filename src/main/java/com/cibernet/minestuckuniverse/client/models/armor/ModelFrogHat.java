@@ -1,13 +1,10 @@
-package com.cibernet.minestuckuniverse.entity.models.armor;//Made by Ishumire
+package com.cibernet.minestuckuniverse.client.models.armor;//Made by Ishumire
 //Paste this code into your mod.
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.item.EntityArmorStand;
-import org.lwjgl.opengl.GL11;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelFrogHat extends ModelBiped

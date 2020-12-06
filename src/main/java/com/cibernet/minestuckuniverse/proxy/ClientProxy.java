@@ -1,19 +1,18 @@
 package com.cibernet.minestuckuniverse.proxy;
 
-import com.cibernet.minestuckuniverse.entity.render.RenderHologram;
-import com.cibernet.minestuckuniverse.entity.render.ThrowableRenderFactory;
+import com.cibernet.minestuckuniverse.client.render.RenderHologram;
+import com.cibernet.minestuckuniverse.client.render.ThrowableRenderFactory;
 import com.cibernet.minestuckuniverse.items.ItemBeamBlade;
 import com.cibernet.minestuckuniverse.items.ItemWarpMedallion;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.client.MSURenderMachineOutline;
-import com.cibernet.minestuckuniverse.entity.classes.EntityAcheron;
-import com.cibernet.minestuckuniverse.entity.models.ModelAcheron;
+import com.cibernet.minestuckuniverse.entity.EntityAcheron;
+import com.cibernet.minestuckuniverse.client.models.ModelAcheron;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.client.renderer.BlockColorCruxite;
 import com.mraof.minestuck.client.renderer.entity.RenderEntityMinestuck;
-import com.mraof.minestuck.util.ColorCollector;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item;

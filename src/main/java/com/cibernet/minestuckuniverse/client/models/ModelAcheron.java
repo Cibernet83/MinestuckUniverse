@@ -1,12 +1,10 @@
-package com.cibernet.minestuckuniverse.entity.models;
+package com.cibernet.minestuckuniverse.client.models;
 //Made with Blockbench
 //Paste this code into your mod.
 
-import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelAcheron extends ModelBase {

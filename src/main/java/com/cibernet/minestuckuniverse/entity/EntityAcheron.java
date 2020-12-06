@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.entity.classes;
+package com.cibernet.minestuckuniverse.entity;
 
 import com.mraof.minestuck.alchemy.GristHelper;
 import com.mraof.minestuck.alchemy.GristSet;

@@ -1,9 +1,7 @@
-package com.cibernet.minestuckuniverse.entity.models.armor;//Made with Blockbench
+package com.cibernet.minestuckuniverse.client.models.armor;//Made with Blockbench
 //Paste this code into your mod.
 
 import net.minecraft.client.model.ModelBiped;
-import org.lwjgl.opengl.GL11;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

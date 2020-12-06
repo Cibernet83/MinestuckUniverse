@@ -1,8 +1,8 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
-import com.cibernet.minestuckuniverse.entity.classes.EntityMSUThrowable;
-import com.cibernet.minestuckuniverse.entity.models.armor.*;
+import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
+import com.cibernet.minestuckuniverse.client.models.armor.*;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.mraof.minestuck.Minestuck;
@@ -16,14 +16,11 @@ import com.mraof.minestuck.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
-import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.IProjectile;
-import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;

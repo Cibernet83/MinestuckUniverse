@@ -1,7 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
-import com.cibernet.minestuckuniverse.entity.classes.EntityMSUThrowable;
+import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

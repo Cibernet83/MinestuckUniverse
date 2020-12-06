@@ -1,6 +1,6 @@
-package com.cibernet.minestuckuniverse.entity.render;
+package com.cibernet.minestuckuniverse.client.render;
 
-import com.cibernet.minestuckuniverse.entity.classes.EntityMSUThrowable;
+import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;

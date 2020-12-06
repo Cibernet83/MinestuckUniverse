@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.entity.classes;
+package com.cibernet.minestuckuniverse.entity;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.mraof.minestuck.entity.underling.EntityUnderling;
