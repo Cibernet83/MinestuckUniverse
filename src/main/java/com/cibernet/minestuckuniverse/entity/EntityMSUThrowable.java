@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -42,18 +43,19 @@ public class EntityMSUThrowable extends EntityThrowable
     {
         if (!this.world.isRemote)
         {
-            spawnItem(0);
+            spawnItem(posX, posY + (EnumFacing.DOWN.equals(result.sideHit) ? -0.3 : 0), posZ, 5);
             this.setDead();
         }
     }
 
-    protected void spawnItem(int pickupDelay)
+    protected EntityItem spawnItem(double x, double y, double z, int pickupDelay)
     {
-        EntityItem item = new EntityItem(world, posX, posY, posZ, getStack());
+        EntityItem item = new EntityItem(world, x, y, z, getStack());
         item.motionY = (rand.nextGaussian() * 0.05000000074505806D + 0.20000000298023224D)/2.0;
         item.setPickupDelay(pickupDelay);
 
         world.spawnEntity(item);
+        return item;
     }
 
     public ItemStack getStack()
