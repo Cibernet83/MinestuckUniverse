@@ -14,7 +14,12 @@ public class ItemRandomWeapon extends MSUWeaponBase
 	protected float min = 0;
 	protected float max = 7;
 	protected float mulitiplier = 1;
-	
+
+	@Override
+	public double getAttackDamage(ItemStack stack) {
+		return super.getAttackDamage(stack);
+	}
+
 	public ItemRandomWeapon(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
 	{
 		super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
@@ -27,7 +32,20 @@ public class ItemRandomWeapon extends MSUWeaponBase
 		this.mulitiplier = multiplier;
 		return this;
 	}
-	
+
+	public float getMin()
+	{
+		return min;
+	}
+
+	public float getMax() {
+		return max;
+	}
+
+	public float getMulitiplier() {
+		return mulitiplier;
+	}
+
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase player)
 	{
