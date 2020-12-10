@@ -79,6 +79,14 @@ public class ItemKnittingNeedles extends ItemPluralWeapon
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     }
 
+    @Override
+    public void setDamage(ItemStack stack, int damage)
+    {
+        super.setDamage(stack, damage);
+        if(stack.getItemDamage() > stack.getMaxDamage())
+            stack.setCount(1);
+    }
+
     /*
     @Override
     public boolean hasContainerItem(ItemStack stack)
