@@ -294,13 +294,13 @@ public class BlockBoondollarRegister extends BlockContainer
     }
 
     public boolean isFullCube(IBlockState state) {
-        return false;
+        return true;
     }
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
     public boolean isOpaqueCube(IBlockState state) {
-        return false;
+        return true;
     }
 
 }
