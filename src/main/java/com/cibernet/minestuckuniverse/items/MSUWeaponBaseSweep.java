@@ -27,16 +27,17 @@ public class MSUWeaponBaseSweep extends ItemSword
     protected double weaponDamage;
     protected int enchantability;
     protected double weaponSpeed;
-    protected ToolMaterial material;
+    protected final String materialName;
     ItemStack repairMaterial = ItemStack.EMPTY;
 
     protected MSUToolClass tool = null;
     protected float harvestSpeed = 0;
     private int harvestLevel = 0;
 
-    public MSUWeaponBaseSweep(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
+    public MSUWeaponBaseSweep(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName, String material)
     {
         super(ToolMaterial.IRON);
+        this.materialName = material;
         this.setRegistryName(name);
         this.setUnlocalizedName(unlocName);
         this.setCreativeTab(TabMinestuckUniverse.instance);
@@ -58,12 +59,6 @@ public class MSUWeaponBaseSweep extends ItemSword
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
-    public MSUWeaponBaseSweep setMaterial(ToolMaterial material)
-    {
-        this.material = material;
-        return this;
-    }
-
     public MSUWeaponBaseSweep setRepairMaterial(ItemStack stack)
     {
         this.repairMaterial = stack;
@@ -73,7 +68,7 @@ public class MSUWeaponBaseSweep extends ItemSword
     @Override
     public String getToolMaterialName()
     {
-        return this.material.toString();
+        return this.materialName;
     }
 
     @Override
@@ -82,12 +77,6 @@ public class MSUWeaponBaseSweep extends ItemSword
         ItemStack mat = repairMaterial;
         if (!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
         return super.getIsRepairable(toRepair, repair);
-    }
-
-    public MSUWeaponBaseSweep(double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
-    {
-        this(-1, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
-        unbreakable = true;
     }
 
     public double getAttackDamage(ItemStack stack)
