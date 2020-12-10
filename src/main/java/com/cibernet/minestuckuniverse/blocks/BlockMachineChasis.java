@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
@@ -95,5 +96,10 @@ public class BlockMachineChasis extends MSUBlockBase implements ITileEntityProvi
             TileEntityMachineChasis te = (TileEntityMachineChasis) worldIn.getTileEntity(pos);
             te.assemble();
         }
+    }
+
+    @Override
+    public boolean isNormalCube(IBlockState state) {
+        return true;
     }
 }
