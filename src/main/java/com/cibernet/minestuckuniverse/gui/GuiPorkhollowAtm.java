@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
+import org.lwjgl.input.Keyboard;
 import scala.Char;
 
 import java.io.IOException;
@@ -82,6 +83,7 @@ public class GuiPorkhollowAtm extends GuiScreen
 	@Override
 	public void initGui()
 	{
+		Keyboard.enableRepeatEvents(true);
 		super.initGui();
 		int yOffset = this.height / 2 - 83;
 		int xOffset = this.width / 2 - 88;
@@ -91,8 +93,15 @@ public class GuiPorkhollowAtm extends GuiScreen
 		amountTextField.setText("0");
 		nTextField = new GuiTextField(1, fontRenderer,xOffset+9, yOffset+89, 158, 20);
 		nTextField.setMaxStringLength(2);
-		nTextField.setText("0");
+		nTextField.setText("1");
 		updateButtons();
+	}
+
+
+	@Override
+	public void onGuiClosed() {
+		super.onGuiClosed();
+		Keyboard.enableRepeatEvents(false);
 	}
 	
 	public void updateButtons()
@@ -129,7 +138,10 @@ public class GuiPorkhollowAtm extends GuiScreen
 	protected void keyTyped(char typedChar, int keyCode) throws IOException
 	{
 		super.keyTyped(typedChar, keyCode);
-		
+
+		if(keyCode == 15 && textboxList.size() > 0)
+			setSelectedTextField(textboxList.get((textboxList.indexOf(selectedTextField)+1) % textboxList.size()));
+
 		if((Character.digit(typedChar, 10) >= 0 || keyCode == 14) && selectedTextField != null)
 		{
 			int value;
@@ -175,7 +187,8 @@ public class GuiPorkhollowAtm extends GuiScreen
 		if(selectedTextField != null)
 			selectedTextField.setFocused(false);
 		selectedTextField = field;
-		//selectedTextField.setFocused(true);
+		if(selectedTextField != null)
+			selectedTextField.setFocused(true);
 	}
 	
 	@Override

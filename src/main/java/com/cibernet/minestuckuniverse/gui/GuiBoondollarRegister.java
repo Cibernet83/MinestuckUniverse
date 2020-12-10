@@ -87,6 +87,7 @@ public class GuiBoondollarRegister extends GuiScreen
 	@Override
 	public void initGui()
 	{
+		Keyboard.enableRepeatEvents(true);
 		super.initGui();
 		int yOffset = this.height / 2 - 77;
 		int xOffset = this.width / 2 - 88;
