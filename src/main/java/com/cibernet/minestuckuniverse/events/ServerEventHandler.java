@@ -154,7 +154,9 @@ public class ServerEventHandler
 							String attackString = (" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), ItemStack.DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
 							String newAttackString = (" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), (ItemStack.DECIMALFORMAT.format(d1) + "-" + ItemStack.DECIMALFORMAT.format(d1+randValue)), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
 
-							event.getToolTip().set(event.getToolTip().indexOf(attackString), newAttackString);
+							if(event.getToolTip().contains(attackString))
+								event.getToolTip().set(event.getToolTip().indexOf(attackString), newAttackString);
+							else event.getToolTip().add(newAttackString);
 						}
 					}
 
