@@ -152,7 +152,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(teleportMedallion) , new GristSet(new GristType[] {Build, Uranium, Rust, Artifact}, new int[] {5000, 5000, 1000, 250}));
         GristRegistry.addGristConversion(new ItemStack(skaianMedallion) , new GristSet(new GristType[]
                 {Amber, Amethyst, Caulk, Chalk, Cobalt, Diamond, Garnet, Gold, Iodine, Marble, Mercury, Quartz, Ruby, Rust, Shale, Sulfur, Tar, Uranium, Zillium, Artifact}, new int[]
-                {1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 100000, 100000}));
+                {250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 100000, 100000}));
 
         //Alchemy
         CombinationRegistry.addCombination(new ItemStack(zillystoneShard), new ItemStack(Items.SUGAR), MODE_OR, Zillium.getCandyItem());
