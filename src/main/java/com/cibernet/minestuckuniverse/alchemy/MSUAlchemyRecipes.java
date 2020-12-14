@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockGrist;
 import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
+import com.cibernet.minestuckuniverse.util.MSUCalendarUtil;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.*;
 import com.mraof.minestuck.block.MinestuckBlocks;
@@ -103,6 +104,10 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(wizardStatue), new GristSet(new GristType[] {Build}, new int[] {12}));
         GristRegistry.addGristConversion(new ItemStack(netherReactorCore), new GristSet(new GristType[] {Uranium, Garnet, Rust, Diamond}, new int[] {250, 121, 50, 2}));
 
+        if(MSUCalendarUtil.isChristmas())
+            GristRegistry.addGristConversion(new ItemStack(sbahjTree), new GristSet(new GristType[] {}, new int[] {}));
+        else GristRegistry.addGristConversion(new ItemStack(sbahjTree), new GristSet(new GristType[] {Artifact}, new int[] {10}));
+
         GristRegistry.addGristConversion(new ItemStack(machineChasis), new GristSet(new GristType[] {Build, Rust, Uranium, Diamond}, new int[] {750, 98, 55, 4}));
         GristRegistry.addGristConversion(new ItemStack(gristHopper), new GristSet(new GristType[] {Build, Rust, Uranium}, new int[] {250, 55, 10}));
         GristRegistry.addGristConversion(new ItemStack(autoWidget), new GristSet(new GristType[] {Build, Rust, Uranium, Garnet, Zillium}, new int[] {550, 34, 24, 35, 1}));
@@ -162,7 +167,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(Blocks.IRON_BLOCK), new ItemStack(Blocks.QUARTZ_BLOCK, 1, 0), MODE_OR, false, true, new ItemStack(smoothIron));
         CombinationRegistry.addCombination(new ItemStack(MinestuckBlocks.uraniumBlock), new ItemStack(netherPortal), MODE_AND, new ItemStack(netherReactorCore));
         CombinationRegistry.addCombination(new ItemStack(wizardHat), new ItemStack(Blocks.STONE), MODE_OR, new ItemStack(wizardStatue));
-        CombinationRegistry.addCombination(new ItemStack(wizardHat), new ItemStack(Blocks.STONE), MODE_OR, new ItemStack(wizardStatue));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.sbahjPoster), new ItemStack(Blocks.SAPLING), MODE_AND, new ItemStack(sbahjTree));
 
         CombinationRegistry.addCombination(new ItemStack(moonstone), new ItemStack(Blocks.IRON_BLOCK), MODE_AND, new ItemStack(machineChasis));
         

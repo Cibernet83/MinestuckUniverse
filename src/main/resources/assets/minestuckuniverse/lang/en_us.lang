@@ -16,6 +16,9 @@ tile.smoothIron.name=Smooth Iron Block
 tile.wizardStatue.name=Wizard Statue
 tile.netherReactorCore.name=Nether Reactor Core
 tile.netherReactorCore.tooltip=A relic from the past! You wonder if it still works.
+tile.kringlefucker.name=Kringlefucker
+tile.kringlefucker.tooltip=It is the prettiest tree you have ever seen!!!!!
+tile.kringlefucker.christmas=mer crimbo
 
 tile.gristBlock.amber.name=Block of Amber Grist
 tile.gristBlock.amethyst.name=Block of Amethyst Grist
