@@ -42,6 +42,7 @@ public class MinestuckUniverse
     public static boolean isThaumLoaded;
     public static boolean isBotaniaLoaded;
     public static boolean isSplatcraftLodaded;
+    public static boolean isCarryOnLoaded;
     public static boolean isArsenalLoaded;
     public static boolean isMSGTLoaded;
 
@@ -53,6 +54,7 @@ public class MinestuckUniverse
         isArsenalLoaded = Loader.isModLoaded("minestuckarsenal");
         isSplatcraftLodaded = Loader.isModLoaded("splatcraft");
         isMSGTLoaded = Loader.isModLoaded("minestuckgodtier");
+        isCarryOnLoaded = Loader.isModLoaded("carryon");
 
         proxy.preInit();
     }

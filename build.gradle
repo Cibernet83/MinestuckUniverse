@@ -58,6 +58,7 @@ repositories {
 
 dependencies {
     //deobfCompile fileTree(dir: 'libs' , include: '*-deobf.jar')
+    deobfCompile name: "carryon-1.12.2-1.12.3.15-deobf"
     deobfCompile name: "Minestuck-${mc_version}-${minestuck_version}-deobf"
     deobfCompile name: "Thaumcraft-${mc_version}-${thaumcraft_version}-deobf"
     deobfCompile name: "Baubles-${mc_version}-${baubles_version}-deobf"
@@ -69,6 +70,7 @@ dependencies {
     runtime name: "Minestuck-${mc_version}-${minestuck_version}"
     runtime name: "Thaumcraft-${mc_version}-${thaumcraft_version}"
     runtime name: "Baubles-${mc_version}-${baubles_version}"
+    runtime name: "carryon-1.12.2-1.12.3.15-deobf"
     //runtime fileTree(dir: 'runtimeMods', include: '*.jar')
 }
 

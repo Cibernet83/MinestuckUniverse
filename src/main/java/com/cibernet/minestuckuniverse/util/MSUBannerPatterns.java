@@ -21,10 +21,7 @@ public class MSUBannerPatterns
         if(MinestuckUniverse.isMSGTLoaded)
         {
             for(EnumAspect aspect : EnumAspect.values())
-            {
-                System.out.println(aspect.toString());
                 registerPattern(aspect.toString(), new ItemStack(Item.REGISTRY.getObject(new ResourceLocation("minestuckgodtier", "hero_stone_shard_"+aspect.toString()))));
-            }
         }
         else
         {
