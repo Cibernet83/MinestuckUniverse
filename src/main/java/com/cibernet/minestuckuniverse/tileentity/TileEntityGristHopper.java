@@ -41,7 +41,8 @@ public class TileEntityGristHopper extends TileEntity implements ITickable
             {
                 for(EntityGrist grist : entities)
                 {
-                    grist.consumeGrist(owner, false);
+                    if(grist.isEntityAlive())
+                        grist.consumeGrist(owner, false);
                 }
             }
         }
