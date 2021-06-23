@@ -209,4 +209,11 @@ public class ServerEventHandler
 		if(event.getEntityPlayer().isPotionActive(MSUPotions.CREATIVE_SHOCK))
 			event.setNewSpeed(0);
 	}
+
+	@SubscribeEvent
+	public static void onHarvestCheck(PlayerEvent.HarvestCheck event)
+	{
+		if(event.getEntityPlayer().isPotionActive(MSUPotions.CREATIVE_SHOCK))
+			event.setCanHarvest(false);
+	}
 }
