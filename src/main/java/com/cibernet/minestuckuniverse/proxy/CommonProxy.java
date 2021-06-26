@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.events.ServerEventHandler;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
@@ -35,6 +36,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
         MinecraftForge.EVENT_BUS.register(MSUPotions.class);
+        MinecraftForge.EVENT_BUS.register(MSUEnchantments.class);
         MinecraftForge.EVENT_BUS.register(MSUSoundHandler.instance);
         
         MSUSoundHandler.initSounds();

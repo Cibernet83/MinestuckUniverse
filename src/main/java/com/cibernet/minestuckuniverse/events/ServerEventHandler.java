@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.events;
 
+import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.ItemRandomWeapon;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
@@ -33,6 +34,7 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -215,5 +217,12 @@ public class ServerEventHandler
 	{
 		if(event.getEntityPlayer().isPotionActive(MSUPotions.CREATIVE_SHOCK))
 			event.setCanHarvest(false);
+	}
+
+	@SubscribeEvent
+	public static void onKnockback(LivingKnockBackEvent event)
+	{
+		if(event.getAttacker() instanceof EntityPlayer)
+			event.setStrength(event.getStrength() + Math.max(0, 0.5f*(EnchantmentHelper.getMaxEnchantmentLevel(MSUEnchantments.SUPERPUNCH, (EntityLivingBase) event.getAttacker())-1)));
 	}
 }
