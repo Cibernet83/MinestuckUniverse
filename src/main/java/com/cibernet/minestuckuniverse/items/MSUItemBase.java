@@ -16,16 +16,17 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MSUItemBase extends Item
+public class MSUItemBase extends Item implements IRegistryItem
 {
+
+    final String registryName;
+
     public MSUItemBase(String name, String unlocName)
     {
-        this.setRegistryName(name);
         this.setUnlocalizedName(unlocName);
         this.setCreativeTab(TabMinestuckUniverse.instance);
+        registryName = name;
     }
-    
-    public MSUItemBase() {this.setCreativeTab(TabMinestuckUniverse.instance);}
     
     public MSUItemBase(String name)
     {
@@ -39,5 +40,10 @@ public class MSUItemBase extends Item
         if(!I18n.translateToLocal(key).equals(key))
             tooltip.add(I18n.translateToLocal(key));
         super.addInformation(stack, worldIn, tooltip, flagIn);
+    }
+
+    @Override
+    public void setRegistryName() {
+        setRegistryName(registryName);
     }
 }

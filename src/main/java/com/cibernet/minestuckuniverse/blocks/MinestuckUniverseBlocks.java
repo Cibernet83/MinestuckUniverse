@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
@@ -178,19 +179,15 @@ public class MinestuckUniverseBlocks
 			registerBlock(registry, gristBlockMana, true);
     }
     
-    private static Block registerBlock(IForgeRegistry<Block> registry, Block block, boolean... hasItem)
+    private static Block registerBlock(IForgeRegistry<Block> registry, Block block, boolean hasItem)
     {
+	    ((IRegistryItem)block).setRegistryName();
         registry.register(block);
         MSUModelManager.blocks.add(block);
         
-        if(hasItem.length > 0)
+        if(hasItem)
 			MinestuckUniverseItems.itemBlocks.add(block);
         
         return block;
     }
-	
-	
-	private static void registerGristBlocks(IForgeRegistry<Block> registry)
-	{
-	}
 }

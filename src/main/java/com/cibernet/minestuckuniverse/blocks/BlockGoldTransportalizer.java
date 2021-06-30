@@ -15,7 +15,6 @@ public class BlockGoldTransportalizer extends BlockCustomTransportalizer
 	{
 		super(MapColor.GOLD);
 		setUnlocalizedName("goldenTransportalizer");
-		setRegistryName("golden_transportalizer");
 	}
 	
 	@Override
@@ -29,5 +28,10 @@ public class BlockGoldTransportalizer extends BlockCustomTransportalizer
 	{
 		if(entity instanceof EntityPlayer)
 			super.onEntityCollidedWithBlock(world, pos, state, entity);
+	}
+
+	@Override
+	public void setRegistryName() {
+		setRegistryName("golden_transportalizer");
 	}
 }

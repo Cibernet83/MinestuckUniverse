@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoWidget;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
@@ -22,7 +23,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockAutoWidget extends BlockContainer
+public class BlockAutoWidget extends BlockContainer implements IRegistryItem
 {
 	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0,0,0,1,10/16F,1);
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
@@ -32,7 +33,6 @@ public class BlockAutoWidget extends BlockContainer
 	{
 		super(Material.IRON);
 		setUnlocalizedName("autoWidget");
-		setRegistryName("auto_widget");
 		setHarvestLevel("pickaxe", 0);
 		setHardness(3.0F);
 		setCreativeTab(TabMinestuckUniverse.instance);
@@ -106,5 +106,10 @@ public class BlockAutoWidget extends BlockContainer
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		return AABB;
+	}
+
+	@Override
+	public void setRegistryName() {
+		setRegistryName("auto_widget");
 	}
 }

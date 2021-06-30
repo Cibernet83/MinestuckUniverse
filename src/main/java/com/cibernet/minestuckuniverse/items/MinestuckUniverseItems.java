@@ -9,6 +9,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.block.BlockTransportalizer;
 import com.mraof.minestuck.block.MinestuckBlocks;
+import com.mraof.minestuck.item.TabMinestuck;
 import com.mraof.minestuck.item.block.ItemTransportalizer;
 import com.mraof.minestuck.item.weapon.ItemWeapon;
 import com.mraof.minestuck.util.EnumAspect;
@@ -123,19 +124,22 @@ public class MinestuckUniverseItems
 
     //Overrides
     public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCloth, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
-    public static Item catclaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "catclaws").setRegistryName(Minestuck.MOD_ID, "catclaws");
-    public static Item unbreakableKatana = new ItemWeapon(2200, 7, -2.4D, 20, "katana").setTool("sword", 0, 15.0F).setRegistryName(Minestuck.MOD_ID, "unbreakable_katana");
-    public static Item captcharoidCamera = new ItemCaptcharoidOverride().setRegistryName(Minestuck.MOD_ID, "captcharoid_camera");
+    public static Item catclaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "catclaws",Minestuck.MOD_ID+ ":catclaws");
+    public static Item unbreakableKatana = new MSUWeaponBaseSweep(2200, 7, -2.4D, 20, Minestuck.MOD_ID +":unbreakable_katana", "katana", Item.ToolMaterial.IRON.toString())
+            .setTool(toolSword, 0, 15.0F).setCreativeTab(TabMinestuck.instance);
+    public static Item captcharoidCamera = new ItemCaptcharoidOverride();
+
+
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         IForgeRegistry<Item> registry = event.getRegistry();
 
-        registry.register(catclaws);
-        registry.register(unbreakableKatana);
-        registerItem(registry, captcharoidCamera);
-        registerItem(registry, crumplyHat);
+        registry.register(catclaws.setRegistryName(Minestuck.MOD_ID, "catclaws"));
+        registry.register(unbreakableKatana.setRegistryName(Minestuck.MOD_ID, "unbreakable_katana"));
+	    registry.register(captcharoidCamera.setRegistryName(Minestuck.MOD_ID, "captcharoid_camera"));
+	    registry.register(crumplyHat.setRegistryName(Minestuck.MOD_ID, "crumply_hat"));
 
         registerItem(registry, moonstone);
         registerItem(registry, moonstoneChisel);
@@ -180,7 +184,6 @@ public class MinestuckUniverseItems
         registerCustomRenderedItem(registry, batteryBeamBlade);
         for(ItemBeamBlade blade : dyedBeamBlade)
             registerCustomRenderedItem(registry, blade);
-        //registerGTArmor(registry);
 
         registerItem(registry, dungeonKey);
 
@@ -188,7 +191,6 @@ public class MinestuckUniverseItems
         registerItemBlocks(registry);
 
         //Item Mods
-
 
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(yarnBall, new BehaviorProjectileDispense()
         {
@@ -219,34 +221,10 @@ public class MinestuckUniverseItems
         registerItemCustomRender(yarnBall, new MSUModelManager.DyedItemDefinition("yarn_ball"));
     }
 
-
-
-    public static void registerGTArmor(IForgeRegistry<Item> registry)
-    {
-        /*
-        ModelBiped[] models = new ModelBiped[] {new ModelGTKnight()};
-        EntityEquipmentSlot[] slots = new EntityEquipmentSlot[] {EntityEquipmentSlot.FEET, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.HEAD};
-        for(int cls = 0; cls < classes.length; cls++)
-            for(int asp = 0; asp < aspects.length; asp++)
-            {
-                String name = classes[cls].toString()+"_"+aspects[asp].toString();
-                String unlocName = classes[cls].toString() + "." + aspects[asp].toString();
-                GTArmorMaterial[cls][asp] = EnumHelper.addArmorMaterial(name.toUpperCase(), MinestuckUniverse.MODID + ":godtier/" + name, 1,
-                        new int[] {4,4,4,4}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f);
-                for(int piece = 0; piece < 4; piece++)
-                {
-                    EntityEquipmentSlot slot = slots[piece];
-                    GTArmor[cls][asp][piece] = new MSUArmorBase(GTArmorMaterial[cls][asp],0,
-                            slot, unlocName + "." + slot.toString().toLowerCase(),"gt_" + name  + "_" + slot.toString().toLowerCase()
-                            );//.setCreativeTab(TabMinestuckUniverse.GTArmor);
-                    registerItem(registry, GTArmor[cls][asp][piece]);
-                }
-            }
-            */
-    }
-
     private static Item registerItem(IForgeRegistry<Item> registry, Item item)
     {
+    	if(item instanceof IRegistryItem)
+            ((IRegistryItem)item).setRegistryName();
         registry.register(item);
         MSUModelManager.items.add(item);
         return item;
@@ -254,6 +232,7 @@ public class MinestuckUniverseItems
 
     private static Item registerCustomRenderedItem(IForgeRegistry<Item> registry, Item item)
     {
+        ((IRegistryItem)item).setRegistryName();
         registry.register(item);
         return item;
     }

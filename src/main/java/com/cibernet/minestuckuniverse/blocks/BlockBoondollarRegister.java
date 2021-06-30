@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityBoondollarRegister;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.item.ItemBoondollars;
@@ -39,7 +40,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class BlockBoondollarRegister extends BlockContainer
+public class BlockBoondollarRegister extends BlockContainer implements IRegistryItem
 {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyBool POWERED = PropertyBool.create("powered");
@@ -47,7 +48,6 @@ public class BlockBoondollarRegister extends BlockContainer
     {
         super(Material.IRON);
         setUnlocalizedName("boondollarRegister");
-        setRegistryName("boondollar_register");
         setHarvestLevel("pickaxe", 0);
         setHardness(3.0F);
         setCreativeTab(TabMinestuckUniverse.instance);
@@ -303,4 +303,8 @@ public class BlockBoondollarRegister extends BlockContainer
         return true;
     }
 
+    @Override
+    public void setRegistryName() {
+        setRegistryName("boondollar_register");
+    }
 }

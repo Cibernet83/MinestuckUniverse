@@ -30,6 +30,8 @@ import java.util.List;
 
 public class MSUWeaponBase extends Item implements IClassedTool
 {
+    private final String registryName;
+
     protected boolean unbreakable;
     protected double weaponDamage;
     protected int enchantability;
@@ -44,7 +46,7 @@ public class MSUWeaponBase extends Item implements IClassedTool
     public MSUWeaponBase(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
     {
         super();
-        this.setRegistryName(name);
+        registryName = name;
         this.setUnlocalizedName(unlocName);
         this.setCreativeTab(TabMinestuckUniverse.instance);
 
@@ -210,5 +212,10 @@ public class MSUWeaponBase extends Item implements IClassedTool
     @Override
     public MSUToolClass getToolClass() {
         return tool;
+    }
+
+    @Override
+    public void setRegistryName() {
+        setRegistryName(registryName);
     }
 }

@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.block.BlockDecor;
 import net.minecraft.block.SoundType;
@@ -12,12 +13,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockMSUDecor extends BlockDecor
+public class BlockMSUDecor extends BlockDecor implements IRegistryItem
 {
+    private final String registryName;
+
     protected BlockMSUDecor(String unlocalizedName, String regName)
     {
         super(unlocalizedName);
-        setRegistryName(regName);
+        registryName = regName;
         setCreativeTab(TabMinestuckUniverse.instance);
     }
 
@@ -68,7 +71,12 @@ public class BlockMSUDecor extends BlockDecor
     {
         return EnumBB.WIZARD;
     }
-    
+
+    @Override
+    public void setRegistryName() {
+        setRegistryName(registryName);
+    }
+
     public enum EnumBB implements IStringSerializable
     {
         WIZARD	(new AxisAlignedBB(3/16D, 0.0D, 3/16D, 13/16D, 1D, 12/16D))

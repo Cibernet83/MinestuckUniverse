@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
 import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.block.BlockContainer;
@@ -25,12 +26,12 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockHolopad extends BlockContainer
+public class BlockHolopad extends BlockContainer implements IRegistryItem
 {
+
 	public BlockHolopad()
 	{
 		super(Material.ROCK, MapColor.SNOW);
-		setRegistryName("holopad");
 		setUnlocalizedName("holopad");
 		setCreativeTab(TabMinestuckUniverse.instance);
 		this.setHardness(2.0F);
@@ -166,5 +167,10 @@ public class BlockHolopad extends BlockContainer
 	static {
 		FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 		CARD = PropertyBool.create("card");
+	}
+
+	@Override
+	public void setRegistryName() {
+		setRegistryName("holopad");
 	}
 }

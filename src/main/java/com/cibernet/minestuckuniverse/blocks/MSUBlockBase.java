@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -14,12 +15,15 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MSUBlockBase extends Block
+public class MSUBlockBase extends Block implements IRegistryItem
 {
-    public MSUBlockBase(Material blockMaterialIn, MapColor blockMapColorIn)
+    final String registryName;
+
+    public MSUBlockBase(Material blockMaterialIn, MapColor blockMapColorIn, String registryName)
     {
         super(blockMaterialIn, blockMapColorIn);
         this.setCreativeTab(TabMinestuckUniverse.instance);
+        this.registryName = registryName;
     }
     
     @Override
@@ -33,13 +37,17 @@ public class MSUBlockBase extends Block
     
     public MSUBlockBase(Material blockMaterialIn, MapColor blockMapColorIn, String registryName, String unlocalizedName)
     {
-        this(blockMaterialIn, blockMapColorIn);
-        this.setRegistryName(registryName);
+        this(blockMaterialIn, blockMapColorIn, registryName);
         this.setUnlocalizedName(unlocalizedName);
     }
 
     public MSUBlockBase(Material blockMaterialIn, String registryName, String unlocalizedName)
     {
         this(blockMaterialIn, blockMaterialIn.getMaterialMapColor(), registryName, unlocalizedName);
+    }
+
+    @Override
+    public void setRegistryName() {
+        setRegistryName(registryName);
     }
 }

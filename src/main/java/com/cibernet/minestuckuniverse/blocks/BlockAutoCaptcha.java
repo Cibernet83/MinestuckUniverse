@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoCaptcha;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -31,7 +32,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockAutoCaptcha extends BlockContainer
+public class BlockAutoCaptcha extends BlockContainer implements IRegistryItem
 {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	
@@ -39,7 +40,6 @@ public class BlockAutoCaptcha extends BlockContainer
 	{
 		super(Material.IRON);
 		setUnlocalizedName("autoCaptcha");
-		setRegistryName("auto_captcha");
 		setHarvestLevel("pickaxe", 0);
 		setHardness(3.0F);
 		setCreativeTab(TabMinestuckUniverse.instance);
@@ -137,5 +137,10 @@ public class BlockAutoCaptcha extends BlockContainer
 		if(stack.getCount() == stack.getMaxStackSize())
 			strength++;
 		return strength;
+	}
+
+	@Override
+	public void setRegistryName() {
+		setRegistryName("auto_captcha");
 	}
 }

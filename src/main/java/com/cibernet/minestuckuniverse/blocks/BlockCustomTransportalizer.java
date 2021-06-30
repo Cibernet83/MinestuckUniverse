@@ -6,6 +6,7 @@ package com.cibernet.minestuckuniverse.blocks;//
 
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.client.gui.GuiHandler.GuiId;
 import com.mraof.minestuck.item.TabMinestuck;
@@ -37,7 +38,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public abstract class BlockCustomTransportalizer extends BlockContainer {
+public abstract class BlockCustomTransportalizer extends BlockContainer implements IRegistryItem
+{
+
     protected static final AxisAlignedBB TRANSPORTALIZER_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
     public BlockCustomTransportalizer(MapColor color)

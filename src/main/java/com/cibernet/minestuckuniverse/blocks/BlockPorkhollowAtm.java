@@ -22,14 +22,13 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockPorkhollowAtm extends Block
+public class BlockPorkhollowAtm extends MSUBlockBase
 {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	protected BlockPorkhollowAtm()
 	{
-		super(Material.IRON);
+		super(Material.IRON, Material.IRON.getMaterialMapColor(), "porkhollow_atm");
 		setUnlocalizedName("porkhollowATM");
-		setRegistryName("porkhollow_atm");
 		setHarvestLevel("pickaxe", 0);
 		setHardness(3.0F);
 		setCreativeTab(TabMinestuckUniverse.instance);

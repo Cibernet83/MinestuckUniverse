@@ -20,7 +20,6 @@ public class BlockPlatinumTransportalizer extends BlockCustomTransportalizer
     public BlockPlatinumTransportalizer() {
         super(MapColor.WHITE_STAINED_HARDENED_CLAY);
         this.setUnlocalizedName("platinumTransportalizer");
-        this.setRegistryName("platinum_transportalizer");
         setBlockUnbreakable();
         setResistance(6000000.0F);
         disableStats();
@@ -45,4 +44,8 @@ public class BlockPlatinumTransportalizer extends BlockCustomTransportalizer
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
+    @Override
+    public void setRegistryName() {
+        this.setRegistryName("platinum_transportalizer");
+    }
 }

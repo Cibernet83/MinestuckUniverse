@@ -17,15 +17,16 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MSUArmorBase extends ItemArmor
+public class MSUArmorBase extends ItemArmor implements IRegistryItem
 {
+    private final String registryName;
     private ModelBiped model;
 
     public MSUArmorBase(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String unlocName, String registryName)
     {
         super(materialIn, renderIndexIn, equipmentSlotIn);
         setUnlocalizedName(unlocName);
-        setRegistryName(registryName);
+        this.registryName = registryName;
         setCreativeTab(registryName.contains(Minestuck.MOD_ID+":") ? TabMinestuck.instance : TabMinestuckUniverse.instance);
 
     }
@@ -89,5 +90,10 @@ public class MSUArmorBase extends ItemArmor
         }
 
         return null;
+    }
+
+    @Override
+    public void setRegistryName() {
+        setRegistryName(registryName);
     }
 }

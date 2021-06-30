@@ -49,8 +49,8 @@ public class MinestuckUniverseGrist
     }};
     
     //Magic Grist (Thaum, Botania, etc.)
-    public static final GristType Vis = new GristType("vis", 0F, 5.0F, new ResourceLocation("minestuckuniverse", "vis")).setRegistryName("vis");
-    public static final GristType Mana = new GristType("mana", 0F, 5.0F, new ResourceLocation("minestuckuniverse", "mana")).setRegistryName("mana");
+    public static final GristType Vis = new GristType("vis", 0F, 5.0F, new ResourceLocation("minestuckuniverse", "vis"));
+    public static final GristType Mana = new GristType("mana", 0F, 5.0F, new ResourceLocation("minestuckuniverse", "mana"));
 
     //Arsenal Grist (for when it's not available)
 
@@ -63,9 +63,9 @@ public class MinestuckUniverseGrist
         IForgeRegistry<GristType> registry = event.getRegistry();
 
         if(MinestuckUniverse.isThaumLoaded)
-            register(registry, Vis);
+            register(registry, Vis.setRegistryName("vis"));
         if(MinestuckUniverse.isBotaniaLoaded)
-            register(registry, Mana);
+            register(registry, Mana.setRegistryName("mana"));
 
 
         if(!MinestuckUniverse.isArsenalLoaded)

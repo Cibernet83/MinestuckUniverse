@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityParadoxTransportalizer;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.tileentity.TileEntityTransportalizer;
@@ -28,14 +29,13 @@ import net.minecraft.world.WorldServer;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockParadoxTransportalizer extends BlockContainer
+public class BlockParadoxTransportalizer extends BlockContainer implements IRegistryItem
 {
 	protected static final AxisAlignedBB TRANSPORTALIZER_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 	public BlockParadoxTransportalizer()
 	{
 		super(Material.IRON, MapColor.IRON);
 		setUnlocalizedName("paradoxTransportalizer");
-		setRegistryName("paradox_transportalizer");
 		this.setHardness(3.5F);
 		this.setHarvestLevel("pickaxe", 0);
 		setCreativeTab(TabMinestuckUniverse.instance);
@@ -93,5 +93,10 @@ public class BlockParadoxTransportalizer extends BlockContainer
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
 		return new TileEntityParadoxTransportalizer();
+	}
+
+	@Override
+	public void setRegistryName() {
+		setRegistryName("paradox_transportalizer");
 	}
 }

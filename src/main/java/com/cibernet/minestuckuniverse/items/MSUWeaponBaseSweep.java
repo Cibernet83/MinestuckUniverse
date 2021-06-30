@@ -23,6 +23,8 @@ import java.util.List;
 
 public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool
 {
+    private final String registryName;
+
     protected boolean unbreakable;
     protected double weaponDamage;
     protected int enchantability;
@@ -38,7 +40,7 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool
     {
         super(ToolMaterial.IRON);
         this.materialName = material;
-        this.setRegistryName(name);
+        registryName = name;
         this.setUnlocalizedName(unlocName);
         this.setCreativeTab(TabMinestuckUniverse.instance);
 
@@ -193,5 +195,10 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool
     @Override
     public MSUToolClass getToolClass() {
         return tool;
+    }
+
+    @Override
+    public void setRegistryName() {
+        setRegistryName(registryName);
     }
 }
