@@ -41,8 +41,8 @@ public class TileEntityPlatinumTransportalizer extends TileEntityTransportalizer
     public void invalidate() {
         super.invalidate();
         if (!this.world.isRemote && this.active) {
-            Location location = (Location)transportalizers.get(this.id);
-            if (location.equals(new Location(this.pos, this.world.provider.getDimension()))) {
+            Location location = transportalizers.get(this.id);
+            if (location != null && location.equals(new Location(this.pos, this.world.provider.getDimension()))) {
                 transportalizers.remove(this.id);
             }
         }
