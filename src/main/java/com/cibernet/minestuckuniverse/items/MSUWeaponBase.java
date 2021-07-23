@@ -28,7 +28,7 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MSUWeaponBase extends Item
+public class MSUWeaponBase extends Item implements IClassedTool
 {
     protected boolean unbreakable;
     protected double weaponDamage;
@@ -205,5 +205,10 @@ public class MSUWeaponBase extends Item
             return super.canApplyAtEnchantingTable(stack, enchantment);
 
         return getTool().enchantments.contains(enchantment);
+    }
+
+    @Override
+    public MSUToolClass getToolClass() {
+        return tool;
     }
 }

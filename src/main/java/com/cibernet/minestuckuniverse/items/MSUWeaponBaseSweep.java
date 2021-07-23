@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MSUWeaponBaseSweep extends ItemSword
+public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool
 {
     protected boolean unbreakable;
     protected double weaponDamage;
@@ -188,5 +188,10 @@ public class MSUWeaponBaseSweep extends ItemSword
             return super.canApplyAtEnchantingTable(stack, enchantment);
 
         return getTool().enchantments.contains(enchantment);
+    }
+
+    @Override
+    public MSUToolClass getToolClass() {
+        return tool;
     }
 }
