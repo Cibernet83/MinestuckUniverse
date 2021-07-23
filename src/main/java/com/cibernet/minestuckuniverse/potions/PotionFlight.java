@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.potions;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 public class PotionFlight extends MSUPotionBase
 {
@@ -25,6 +26,9 @@ public class PotionFlight extends MSUPotionBase
             player.capabilities.allowFlying = !isBadEffect();
             if(isBadEffect())
                 player.capabilities.isFlying = false;
+
+            if(!player.world.isRemote)
+                ((EntityPlayerMP)player).clearElytraFlying();
         }
     }
 
