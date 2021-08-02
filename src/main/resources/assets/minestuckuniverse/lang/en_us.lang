@@ -452,3 +452,4 @@ gui.vault.label.1=Boondollar
 gui.vault.label.2=register
 
 enchantment.minestuckuniverse.superpunch=Superpunch
+enchantment.minestuckuniverse.superpunch.desc=Increases the knockback strength of the weapon but increases its attack damage inversely to the enchanment level
