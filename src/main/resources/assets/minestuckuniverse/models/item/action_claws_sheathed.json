@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/claw",
+    "textures": {
+        "layer0": "minestuckuniverse:items/action_claws_sheathed"
+    }
+}

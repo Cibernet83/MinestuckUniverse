@@ -60,7 +60,12 @@ public class ServerEventHandler
 		}
 		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem().equals(MinestuckUniverseItems.wizardHat) && event.getSource().isMagicDamage())
 		{
-			event.setAmount(event.getAmount()*0.4f);
+			event.setAmount(event.getAmount()*0.5f);
+			event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).damageItem(1, event.getEntityLiving());
+		}
+		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem().equals(MinestuckUniverseItems.archmageHat) && event.getSource().isMagicDamage())
+		{
+			event.setAmount(event.getAmount()*0.2f);
 			event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).damageItem(1, event.getEntityLiving());
 		}
 	}

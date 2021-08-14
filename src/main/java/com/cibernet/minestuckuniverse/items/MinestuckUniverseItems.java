@@ -11,9 +11,6 @@ import com.mraof.minestuck.block.BlockTransportalizer;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.TabMinestuck;
 import com.mraof.minestuck.item.block.ItemTransportalizer;
-import com.mraof.minestuck.item.weapon.ItemWeapon;
-import com.mraof.minestuck.util.EnumAspect;
-import com.mraof.minestuck.util.EnumClass;
 import com.mraof.minestuck.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
@@ -41,16 +38,11 @@ public class MinestuckUniverseItems
 {
     public static ArrayList<Block> itemBlocks = new ArrayList<>();
 
-    private static final EnumClass[] classes = EnumClass.values();
-    private static final EnumAspect[] aspects = EnumAspect.values();
     //Armor Materials
     public static ItemArmor.ArmorMaterial materialDiverHelmet = EnumHelper.addArmorMaterial("DIVER_HELMET", MinestuckUniverse.MODID+":diver_helmet", 120, new int[] {0, 0, 0, 3}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
     public static ItemArmor.ArmorMaterial materialSpikedHelmet = EnumHelper.addArmorMaterial("SPIKED_HELMET", MinestuckUniverse.MODID+":spiked_diver_helmet", 230, new int[] {0, 0, 0, 6}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+    public static ItemArmor.ArmorMaterial materialMetal = EnumHelper.addArmorMaterial("METAL", MinestuckUniverse.MODID+":metal", 200, new int[] {0, 0, 0, 4}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
     public static ItemArmor.ArmorMaterial materialCloth = EnumHelper.addArmorMaterial("CLOTH", MinestuckUniverse.MODID+":cloth", -1, new int[] {0, 0, 0, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
-
-    //GT Armor
-    public static ItemArmor.ArmorMaterial[][] GTArmorMaterial = new ItemArmor.ArmorMaterial[classes.length][aspects.length];
-    public static Item[][][] GTArmor = new Item[classes.length][aspects.length][4];
 
     public static MSUToolClass toolSword = new MSUToolClass(Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
     public static MSUToolClass toolGauntlet = new MSUToolClass(Material.GLASS, Material.ICE, Material.PACKED_ICE).addEnchantments(Enchantments.SILK_TOUCH, Enchantments.FIRE_ASPECT, Enchantments.LOOTING, MSUEnchantments.SUPERPUNCH);
@@ -63,6 +55,7 @@ public class MinestuckUniverseItems
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
     public static Item yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
+    public static Item wizardbeardYarn = new MSUItemBase("wizardbeard_yarn", "wizardbeardYarn");
 
     //Ghost Items
     public static Item returnNode = new ItemGhostBlock("return_node_ghost_item", MinestuckBlocks.returnNode);
@@ -106,6 +99,8 @@ public class MinestuckUniverseItems
     public static Item goldenGenesisGauntlet = new MSUWeaponBase(1256, 11D, -0.25D, 15, "golden_genesis_gauntlet","goldenGenesisGauntlet").setTool(toolGauntlet, 1, 3F);
     public static Item pogoFist = new ItemPogoWeapon(700, 7.0D, -0.3, 8, "pogo_fist", "pogoFist", 0.55D).setTool(toolGauntlet, 1, 2F);
     public static Item rocketFist = new MSUWeaponBase(124, 3D, 0.4D, 6, "rocket_powered_fist", "rocketFist").setTool(toolGauntlet, 1, 1.6F);
+    public static Item jawbreaker = new MSUWeaponBase(124, 3D, 0.4D, 6, "jawbreaker", "jawbreaker").setTool(toolGauntlet, 1, 1.6F);
+    public static Item eldrichGauntlet = new MSUWeaponBase(124, 3D, 0.4D, 6, "eldritch_gauntlet", "eldrichGauntlet").setTool(toolGauntlet, 1, 1.6F);
 
     public static Item knittingNeedles = new ItemKnittingNeedles(32,2, 1, 1, "knitting_needle", "knittingNeedle").setTool(toolNeedles, 2, 1f);
     public static Item pointySticks = new ItemPluralWeapon(50,2, 1, 1, "pointy_stick", "pointyStick").setTool(toolNeedles, 1, 1f);
@@ -114,13 +109,30 @@ public class MinestuckUniverseItems
     public static Item oglogothThorn = new ItemPluralWeapon(366,5.6, -0.5, 80, "thorn_of_oglogoth", "oglogothThorn").setTool(toolNeedles, 4, 3f);
     public static Item echidnaQuills = new ItemPluralWeapon(5, 1, 100, "quill_of_echidna", "echidnaQuill").setTool(toolNeedles, 5, 5f);
 
+    public static Item midasMallet = new MSUItemBase("midas_mallet", "midasMallet");
+    public static Item aaaNailShocker = new MSUItemBase("aaa_nail_shocker", "aaaNailShocker");
+    public static Item highVoltageStormCrusher = new MSUItemBase("high_voltage_storm_crusher", "highVoltageStormCrusher");
+    public static Item hereticusAurum = new MSUItemBase("hereticus_aurum", "hereticusAurum");
+    public static Item actionClaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "actionClaws","action_claws");
+    public static Item candyCornClaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "candyCornClaws","candy_corn_claws");
+    public static Item rocketKatars = new MSUItemBase("rocket_katars", "rocketKatars");
+    public static Item staffOfRegrowth = new MSUItemBase("staff_of_regrowth", "staffOfRegrowth");
+    public static Item goldCane = new MSUItemBase("gold_cane", "goldCane");
+    public static Item goldenCuestaff = new MSUItemBase("golden_cuestaff", "goldenCuestaff");
+    public static Item rubyContrabat = new MSUItemBase("ruby_contrabat", "rubyContrabat");
+    public static Item homeRunBat = new MSUItemBase("home_run_bat", "homeRunBat");
+    public static Item dragonCharge = new MSUItemBase("dragon_charge", "dragonCharge");
+
     //Armor
     public static MSUArmorBase diverHelmet = new ItemDiverHelmet(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
     public static MSUArmorBase spikedHelmet = new MSUArmorBase(materialSpikedHelmet,0,EntityEquipmentSlot.HEAD,"spikedDiverHelmet", "spiked_diver_helmet");
+    public static MSUArmorBase cruxtruderHat = new MSUArmorBase(materialMetal,0,EntityEquipmentSlot.HEAD,"cruxtruderHelmet", "cruxtruder_helmet");
     public static MSUArmorBase frogHat = new MSUArmorBase(materialCloth,0,EntityEquipmentSlot.HEAD,"frogHat", "frog_hat");
     public static MSUArmorBase wizardHat = new MSUArmorBase(40, materialCloth,0,EntityEquipmentSlot.HEAD,"wizardHat", "wizard_hat");
+    public static MSUArmorBase archmageHat = new MSUArmorBase(500, materialCloth,0,EntityEquipmentSlot.HEAD,"archmageHat", "archmage_hat");
     public static MSUArmorBase cozySweater = new ItemWitherproofArmor(60, materialCloth,0,EntityEquipmentSlot.CHEST,"cozySweater", "cozy_sweater");
     //public static MSUArmorBase scarf = new ItemDiverHelmet(materialCloth,0,EntityEquipmentSlot.HEAD,"scarf", "scarf");
+    public static Item rocketWings = new MSUItemBase("rocket_wings");
 
     //Overrides
     public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCloth, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
@@ -146,6 +158,7 @@ public class MinestuckUniverseItems
         registerItem(registry, zillystoneShard);
         registerItem(registry, battery);
         registerItem(registry, yarnBall);
+        registerItem(registry, wizardbeardYarn);
         registerItem(registry, spaceSalt);
 
         registerItem(registry, returnNode);
@@ -157,8 +170,11 @@ public class MinestuckUniverseItems
         registerItem(registry, diverHelmet);
         registerItem(registry, spikedHelmet);
         registerItem(registry, frogHat);
+        registerItem(registry, cruxtruderHat);
         registerItem(registry, wizardHat);
+        registerItem(registry, archmageHat);
         registerItem(registry, cozySweater);
+        registerItem(registry, rocketWings);
 
         registerItem(registry, ironMedallion);
         registerItem(registry, returnMedallion);
@@ -172,6 +188,12 @@ public class MinestuckUniverseItems
         registerItem(registry, goldenGenesisGauntlet);
         registerItem(registry, pogoFist);
         registerItem(registry, rocketFist);
+        registerItem(registry, jawbreaker);
+        registerItem(registry, eldrichGauntlet);
+
+        registerCustomRenderedItem(registry, actionClaws);
+        registerCustomRenderedItem(registry, candyCornClaws);
+        registerItem(registry, rocketKatars);
 
         registerItem(registry, knittingNeedles);
         registerItem(registry, pointySticks);
@@ -179,6 +201,21 @@ public class MinestuckUniverseItems
         registerItem(registry, needlewands);
         registerItem(registry, oglogothThorn);
         registerItem(registry, echidnaQuills);
+
+        registerItem(registry, midasMallet);
+        registerItem(registry, aaaNailShocker);
+        registerItem(registry, highVoltageStormCrusher);
+
+        registerItem(registry, hereticusAurum);
+
+        registerItem(registry, rubyContrabat);
+        registerItem(registry, homeRunBat);
+
+        registerItem(registry, staffOfRegrowth);
+        registerItem(registry, goldCane);
+        registerItem(registry, goldenCuestaff);
+
+        registerItem(registry, dragonCharge);
 
         registerItem(registry, trueUnbreakableKatana);
         registerCustomRenderedItem(registry, batteryBeamBlade);
@@ -211,14 +248,18 @@ public class MinestuckUniverseItems
     {
         diverHelmet.setArmorModel(new ModelDiverHelmet());
         spikedHelmet.setArmorModel(new ModelSpikedHelmet());
+        cruxtruderHat.setArmorModel(new ModelCruxtruderHat());
         frogHat.setArmorModel(new ModelFrogHat());
         wizardHat.setArmorModel(new ModelWizardHat());
+        archmageHat.setArmorModel(new ModelWizardHat());
         crumplyHat.setArmorModel(new ModelCrumplyHat());
 
         for(ItemBeamBlade blade : dyedBeamBlade)
             registerItemCustomRender(blade, new MSUModelManager.DualWeaponDefinition("dyed_battery_beam_blade", "dyed_battery_beam_blade_off"));
         registerItemCustomRender(batteryBeamBlade, new MSUModelManager.DualWeaponDefinition("battery_beam_blade", "battery_beam_blade_off"));
         registerItemCustomRender(yarnBall, new MSUModelManager.DyedItemDefinition("yarn_ball"));
+        registerItemCustomRender(actionClaws, new MSUModelManager.DualWeaponDefinition("action_claws_drawn", "action_claws_sheathed"));
+        registerItemCustomRender(candyCornClaws, new MSUModelManager.DualWeaponDefinition("candy_corn_claws_drawn", "candy_corn_claws_sheathed"));
     }
 
     private static Item registerItem(IForgeRegistry<Item> registry, Item item)
