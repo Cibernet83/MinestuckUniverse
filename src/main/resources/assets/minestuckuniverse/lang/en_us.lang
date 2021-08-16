@@ -68,7 +68,23 @@ item.archmageHat.name=Archmage Hat
 item.archmageHat.tooltip=Weaved by the most skilled knitter, using threads from the most magical yarn, this dumb hat grants major resistance to magic attacks.
 item.cozySweater.name=Cozy Sweater
 item.cozySweater.tooltip=Made with the ultimate weapon against evil, the power of l-l-liking someone a lot.
-item.scarf.name=Scarf
+
+item.scarf.black.name=Black Scarf
+item.scarf.blue.name=Blue Scarf
+item.scarf.brown.name=Brown Scarf
+item.scarf.cyan.name=Cyan Scarf
+item.scarf.gray.name=Gray Scarf
+item.scarf.green.name=Green Scarf
+item.scarf.lightBlue.name=Light Blue Scarf
+item.scarf.lime.name=Lime Scarf
+item.scarf.magenta.name=Magenta Scarf
+item.scarf.orange.name=Orange Scarf
+item.scarf.pink.name=Pink Scarf
+item.scarf.purple.name=Purple Scarf
+item.scarf.red.name=Red Scarf
+item.scarf.silver.name=Light Gray Scarf
+item.scarf.white.name=White Scarf
+item.scarf.yellow.name=Yellow Scarf
 
 item.spaceSalt.name=Spatial Manipulation Dust
 item.spaceSalt.tooltip=A way to shrink and grow things, especially machines!

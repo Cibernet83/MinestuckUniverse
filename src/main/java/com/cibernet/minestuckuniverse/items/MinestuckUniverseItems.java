@@ -178,7 +178,7 @@ public class MinestuckUniverseItems
     public static MSUArmorBase wizardHat = new MSUArmorBase(40, materialCloth,0,EntityEquipmentSlot.HEAD,"wizardHat", "wizard_hat");
     public static MSUArmorBase archmageHat = new MSUArmorBase(500, materialCloth,0,EntityEquipmentSlot.HEAD,"archmageHat", "archmage_hat");
     public static MSUArmorBase cozySweater = new ItemWitherproofArmor(60, materialCloth,0,EntityEquipmentSlot.CHEST,"cozySweater", "cozy_sweater");
-    //public static MSUArmorBase scarf = new ItemDiverHelmet(materialCloth,0,EntityEquipmentSlot.HEAD,"scarf", "scarf");
+    public static MSUArmorBase scarf = new ItemScarf(materialCloth,0,EntityEquipmentSlot.HEAD,"scarf", "scarf");
     public static Item rocketWings = new MSUItemBase("rocket_wings");
 
     //Overrides
@@ -219,6 +219,7 @@ public class MinestuckUniverseItems
         registerItem(registry, wizardHat);
         registerItem(registry, archmageHat);
         registerItem(registry, cozySweater);
+        registerItem(registry, scarf);
         registerItem(registry, rocketWings);
 
         registerItem(registry, ironMedallion);
@@ -300,12 +301,14 @@ public class MinestuckUniverseItems
         frogHat.setArmorModel(new ModelFrogHat());
         wizardHat.setArmorModel(new ModelWizardHat());
         archmageHat.setArmorModel(new ModelArchmageHat());
+        scarf.setArmorModel(new ModelScarf());
         crumplyHat.setArmorModel(new ModelCrumplyHat());
 
         for(ItemBeamBlade blade : dyedBeamBlade)
             registerItemCustomRender(blade, new MSUModelManager.DualWeaponDefinition("dyed_battery_beam_blade", "dyed_battery_beam_blade_off"));
         registerItemCustomRender(batteryBeamBlade, new MSUModelManager.DualWeaponDefinition("battery_beam_blade", "battery_beam_blade_off"));
         registerItemCustomRender(yarnBall, new MSUModelManager.DyedItemDefinition("yarn_ball"));
+        registerItemCustomRender(scarf, new MSUModelManager.DyedItemDefinition("scarf"));
         registerItemCustomRender(actionClaws, new MSUModelManager.DualWeaponDefinition("action_claws_drawn", "action_claws_sheathed"));
         registerItemCustomRender(candyCornClaws, new MSUModelManager.DualWeaponDefinition("candy_corn_claws_drawn", "candy_corn_claws_sheathed"));
     }
