@@ -145,23 +145,32 @@ item.aaaNailShocker.name=AAA Nail Shocker
 item.midasMallet.name=Midas' Mallet
 item.midasMallet.tooltip=A swing from this luxurious hammer can turn any underling into Gold, seems like it lives up to legend!
 item.highVoltageStormCrusher.name=High Voltage Storm Crusher
-item.logHammer.name=Loghammer
-item.overgrownLogHammer.name=Overgrown Loghammer
-item.glowingLogHammer.name=Glowing Loghammer
+item.loghammer.name=Loghammer
+item.overgrownLoghammer.name=Overgrown Loghammer
+item.glowingLoghammer.name=Glowing Loghammer
 
+item.catClaws.name=Cat Claws
+item.catClaws.name.plural=Cat Claws
 item.actionClaws.name=Action Claws
+item.actionClaws.name.plural=Action Claws
 item.actionClaws.tooltip=A pair of claws suited for fast-paced combat! Deals extra damage right after being drawn.
 item.candyCornClaws.name=Candy Corn Claws
+item.candyCornClaws.name.plural=Candy Corn Claws
 item.candyCornClaws.tooltip=This sweet weapon makes underlings drop candy when killed, tasty!
-item.sneakyDaggers.name=Sneaky Daggers
+item.sneakyDaggers.name=Sneaky Dagger
+item.sneakyDaggers.name.plural=Sneaky Daggers
 item.sneakyDaggers.tooltip=These daggers deal extra damage against players that can't easily see you, very sneaky...
-item.rocketKatars.name=Rocket Katars
+item.rocketKatars.name=Rocket Katar
+item.rocketKatars.name.plural=Rocket Katars
 item.rocketKatars.tooltip=Against all common sense you decided to strap rockets to your hands, greatly increasing your mobility.
-item.blizzardCutters.name=Blizzard Cutters
+item.blizzardCutters.name=Blizzard Cutter
+item.blizzardCutters.name.plural=Blizzard Cutters
 item.blizzardCutters.tooltip=Harness the frozen winds with this cool pair of katars, knocking anyone you hit back while giving them slowness.
+item.thunderbirdTalons.name.plural=Thunderbird Talon
 item.thunderbirdTalons.name=Thunderbird Talons
 item.thunderbirdTalons.tooltip=This weapon speaks to the wind, it tells your opponents to fuck off.
-item.archmageDaggers.name=Archmage Daggers
+item.archmageDaggers.name=Archmage Dagger
+item.archmageDaggers.name.plural=Archmage Daggers
 item.archmageDaggers.tooltip=These daggers have been infused with raw magic and wizardbeard silk, making them deal magic damage and allows them to release a powerful beam when held on both hands
 
 item.rubyContrabat.name=Ruby Contrabat
@@ -171,7 +180,7 @@ item.dynamiteStick.tooltip=Woah hey, be careful with that. Hitting something wit
 
 item.goldCane.name=Gold Cane
 item.goldenCuestaff.name=Golden Cuestaff
-item.staffOfRegrowth.name=Staff of Overgrowth
+item.staffOfOvergrowth.name=Staff of Overgrowth
 
 item.hereticusAurum.name=Hereticus Aurum
 item.hereticusAurum.tooltip=Did the Dersites get their Latin correct? I dunno, probably not. Go ask a Roman.
@@ -194,20 +203,20 @@ item.eldrichGauntlet.name=Eye of Ng'Mhagul
 item.eldrichGauntlet.tooltip=You can feel it slowly consuming your hand, somehow both empowering and weakening you the more it does so.
 
 item.knittingNeedle.name=Knitting Needle
-item.knittingNeedlePlural.name=Knitting Needles
+item.knittingNeedle.name.plural=Knitting Needles
 item.pointyStick.name=Pointy Stick
-item.pointyStickPlural.name=Pointy Sticks
+item.pointyStick.name.plural=Pointy Sticks
 item.pointyStick.tooltip=For the last time, no, it's not a stake.
 item.boneNeedle.name=Bone Needle
-item.boneNeedlePlural.name=Bone Needles
+item.boneNeedle.name.plural=Bone Needles
 item.needlewand.name=Needlewand
-item.needlewandPlural.name=Needlewands
+item.needlewand.name.plural=Needlewands
 item.needlewand.tooltip=They crackle with the majyyk enyrjjies.
 item.oglogothThorn.name=Thorn of Oglogoth
-item.oglogothThornPlural.name=Thorns of Oglogoth
+item.oglogothThorn.name.plural=Thorns of Oglogoth
 item.oglogothThorn.tooltip=The needles seem to shiver with the dark desires of THE DEEP ONE. Any sane adventurer would cast these instruments of the occult into the FURTHEST RING and forget they ever existed.
 item.echidnaQuill.name=Quill of Echidna
-item.echidnaQuillPlural.name=Quills of Echidna
+item.echidnaQuill.name.plural=Quills of Echidna
 
 item.infernoShot.name=Inferno Shot
 item.kingOfThePond.name=King of the Pond
@@ -274,6 +283,8 @@ message.medallion.error=The medallion does not seem to activate, perhaps somethi
 effect.minestuckuniverse.flight=Skybound
 effect.minestuckuniverse.disableFlight=Earthbound
 effect.minestuckuniverse.disableBuilding=Creative Shock
+
+subtitle.minestuckuniverse.homeRunBat=Home Run!
 
 item.banner.msu_light.black=Black Light Symbol
 item.banner.msu_light.red=Red Light Symbol

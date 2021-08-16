@@ -15,6 +15,10 @@ public class MSUToolClass
 	protected List<Enchantment> enchantments = new ArrayList<>();
 	protected List<String> baseTool = new ArrayList<>();
 	
+	public MSUToolClass()
+	{
+	}
+
 	public MSUToolClass(String... baseTools)
 	{
 		for(String baseTool : baseTools)

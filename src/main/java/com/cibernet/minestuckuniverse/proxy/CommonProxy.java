@@ -1,7 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
-import com.cibernet.minestuckuniverse.events.ServerEventHandler;
+import com.cibernet.minestuckuniverse.events.CommonEventHandler;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
@@ -19,9 +19,6 @@ import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
 import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -38,8 +35,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(MSUPotions.class);
         MinecraftForge.EVENT_BUS.register(MSUEnchantments.class);
         MinecraftForge.EVENT_BUS.register(MSUSoundHandler.instance);
-        
-        MSUSoundHandler.initSounds();
+
         MSUEntities.registerEntities();
 
         GameRegistry.registerTileEntity(TileEntityGristHopper.class, MinestuckUniverse.MODID + ":grist_hopper");
@@ -59,7 +55,7 @@ public class CommonProxy
     {
         MSUBannerPatterns.init();
 
-        MinecraftForge.EVENT_BUS.register(ServerEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(MinestuckUniverse.instance, new MSUGuiHandler());
 

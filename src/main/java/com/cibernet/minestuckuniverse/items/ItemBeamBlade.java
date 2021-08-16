@@ -19,7 +19,7 @@ public class ItemBeamBlade extends MSUWeaponBaseSweep
 {
     public EnumDyeColor color = null;
     public ItemBeamBlade(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName) {
-        super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName, "ENERGY");
+        super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
     }
 
     public ItemBeamBlade setColor(EnumDyeColor color) {this.color = color; return this;}

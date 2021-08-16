@@ -2,17 +2,14 @@ package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
-import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
-import com.mraof.minestuck.block.BlockTransportalizer;
+import com.cibernet.minestuckuniverse.items.properties.PropertyPlural;
 import com.mraof.minestuck.block.MinestuckBlocks;
-import com.mraof.minestuck.tileentity.TileEntityTransportalizer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.IItemPropertyGetter;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -25,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class ItemKnittingNeedles extends ItemPluralWeapon
+public class ItemKnittingNeedles extends MSUWeaponBase
 {
     public ItemKnittingNeedles(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
     {
@@ -42,6 +39,7 @@ public class ItemKnittingNeedles extends ItemPluralWeapon
                 return (entityIn != null && stack.getCount() >= 2) ? 1 : 0;
             }
         });
+        addProperties(new PropertyPlural());
     }
 
     @Override

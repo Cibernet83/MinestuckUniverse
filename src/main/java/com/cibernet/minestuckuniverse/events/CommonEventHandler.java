@@ -1,54 +1,48 @@
 package com.cibernet.minestuckuniverse.events;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
-import com.cibernet.minestuckuniverse.items.ItemRandomWeapon;
+import com.cibernet.minestuckuniverse.items.properties.PropertyRandomDamage;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
+import com.cibernet.minestuckuniverse.items.properties.PropertyGristSetter;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
-import com.cibernet.minestuckuniverse.potions.MSUPotionBase;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.google.common.collect.Multimap;
-import com.mraof.minestuck.MinestuckConfig;
-import com.mraof.minestuck.network.skaianet.SburbConnection;
-import com.mraof.minestuck.network.skaianet.SkaianetHandler;
-import com.mraof.minestuck.util.EnumAspect;
-import com.mraof.minestuck.util.EnumClass;
-import com.mraof.minestuck.util.IdentifierHandler;
-import com.mraof.minestuck.util.MinestuckPlayerData;
+import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.entity.EntityFrog;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.text.translation.I18n;
-import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.Sys;
 
 import java.util.Map;
 import java.util.UUID;
 
-public class ServerEventHandler
+public class CommonEventHandler
 {
 	@SubscribeEvent
 	public static void onEntityHurt(LivingDamageEvent event)
@@ -70,6 +64,37 @@ public class ServerEventHandler
 		}
 	}
 
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onLivingDamage(LivingDamageEvent event)
+	{
+		if(event.getSource() instanceof EntityDamageSource && event.getSource().getTrueSource() instanceof EntityLivingBase)
+		{
+			EntityLivingBase sauce = ((EntityLivingBase) event.getSource().getTrueSource());
+			ItemStack stack = sauce.getHeldItemMainhand();
+
+			//Mallet on frog initial hit
+			if(stack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) stack.getItem()).hasProperty(PropertyGristSetter.class))
+			{
+				GristType gristType = ((PropertyGristSetter) ((IPropertyWeapon) stack.getItem()).getProperty(PropertyGristSetter.class)).gristType;
+				int frogType = -1;
+				if(gristType == GristType.Gold)
+					frogType = 5;
+				if(gristType == GristType.Ruby)
+					frogType = 2;
+				if(gristType == GristType.Artifact)
+					frogType = 6;
+
+				if(event.getEntityLiving() instanceof EntityFrog && (((EntityFrog) event.getEntityLiving()).getType() != frogType || ((EntityFrog) event.getEntityLiving()).getType() == 4))
+					event.setAmount(0);
+			}
+
+		}
+	}
+
+
+	public static final IAttribute COOLED_ATTACK_STRENGTH = new RangedAttribute(null, MinestuckUniverse.MODID+".cooledAttackStrength", 0, 0, 1).setDescription("Cooled Attack Strength").setShouldWatch(true);
+
 	@SubscribeEvent
 	public static void onTick(TickEvent.PlayerTickEvent event)
 	{
@@ -78,6 +103,23 @@ public class ServerEventHandler
 			event.player.capabilities.isFlying = true;
 			event.player.capabilities.allowFlying = true;
 		}
+
+		if(event.player.getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH) == null)
+			event.player.getAttributeMap().registerAttribute(COOLED_ATTACK_STRENGTH);
+
+		if(event.phase == TickEvent.Phase.END)
+		{
+			double str = getCooledAttackStrength(event.player);
+			double currStr = event.player.getCooledAttackStrength(0.5f);
+
+			if(str != currStr)
+				event.player.getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH).setBaseValue(currStr);
+		}
+	}
+
+	public static double getCooledAttackStrength(EntityPlayer player)
+	{
+		return player.getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH).getAttributeValue();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -124,9 +166,10 @@ public class ServerEventHandler
 		boolean isRandom = false;
 		float randValue = 0;
 
-		if(stack.getItem() instanceof ItemRandomWeapon)
+		if(stack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) stack.getItem()).hasProperty(PropertyRandomDamage.class))
 		{
-			randValue = ((ItemRandomWeapon) stack.getItem()).getMax() * ((ItemRandomWeapon) stack.getItem()).getMulitiplier();
+			PropertyRandomDamage prop = (PropertyRandomDamage) ((IPropertyWeapon) stack.getItem()).getProperty(PropertyRandomDamage.class);
+			randValue = prop.getMax() * prop.getMulitiplier();
 			isRandom = true;
 		}
 		else if(stack.getItem() instanceof com.mraof.minestuck.item.weapon.ItemRandomWeapon)

@@ -1,1 +1,9 @@
-{}
+{
+  "item.home_run_bat": {
+    "category": "players",
+    "subtitle": "subtitle.minestuckuniverse.homeRunBat",
+    "sounds": [
+        "minestuckuniverse:item/home_run_bat"
+    ]
+  }
+}

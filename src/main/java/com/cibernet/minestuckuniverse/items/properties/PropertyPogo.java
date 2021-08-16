@@ -1,5 +1,6 @@
-package com.cibernet.minestuckuniverse.items;
+package com.cibernet.minestuckuniverse.items.properties;
 
+import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,22 +12,19 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemPogoWeapon extends MSUWeaponBase
+public class PropertyPogo extends WeaponProperty
 {
 	private double pogoMotion;
 	
-	public ItemPogoWeapon(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName, double pogoMotion)
+	public PropertyPogo(double pogoMotion)
 	{
-		super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
 		this.pogoMotion = pogoMotion;
 	}
 	
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase player)
+	public void onEntityHit(ItemStack stack, EntityLivingBase target, EntityLivingBase player)
 	{
-		super.hitEntity(stack, target, player);
 		hitEntity(stack, target, player, getPogoMotion(stack));
-		return true;
 	}
 	
 	private double getPogoMotion(ItemStack stack)

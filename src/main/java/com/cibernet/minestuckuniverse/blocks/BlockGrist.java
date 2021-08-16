@@ -29,23 +29,23 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.TreeMap;
+import java.util.*;
 
 public class BlockGrist extends MSUBlockBase
 {
 	public GristType type;
 	public int value;
-	
+
+	public static final HashMap<GristType, BlockGrist> BLOCKS = new HashMap<>();
+
 	public BlockGrist(GristType type)
 	{
 		super(Material.GOURD, MapColor.LIGHT_BLUE_STAINED_HARDENED_CLAY, "grist_block_" + type.getName().toLowerCase());
 		this.type = type;
 		this.value = (type.getValue() >= 5.0F || !type.equals(GristType.Build)) ? 10 : 100;
 		
-		
+		BLOCKS.put(type, this);
+
 		setHardness(0.4f);
 		setHarvestLevel("pickaxe", 0);
 		
