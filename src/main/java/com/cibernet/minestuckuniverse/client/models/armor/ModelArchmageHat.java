@@ -72,7 +72,7 @@ public class ModelArchmageHat extends ModelBiped {
 	private final ModelRenderer cube_r50;
 	private final ModelRenderer cube_r51;
 	private final ModelRenderer wizardStar;
-	private final ModelRenderer bb_main;
+	private final ModelRenderer bottom;
 
 	public ModelArchmageHat() {
 		textureWidth = 64;
@@ -457,9 +457,10 @@ public class ModelArchmageHat extends ModelBiped {
 		setRotationAngle(wizardStar, -0.3491F, 0.0F, 0.0F);
 		wizardStar.cubeList.add(new ModelBox(wizardStar, 0, 10, -4.0F, -5.75F, -1.775F, 8, 8, 4, -2.0F, false));
 
-		bb_main = new ModelRenderer(this);
-		bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
-		bb_main.cubeList.add(new ModelBox(bb_main, 0, 46, -5.0F, -0.75F, -5.0F, 10, 0, 10, 0.0F, false));
+		bottom = new ModelRenderer(this);
+		bottom.setRotationPoint(0.0F, 0.0F, 0.0F);
+		bottom.cubeList.add(new ModelBox(bottom, 0, 46, -5.0F, -0.75F, -5.0F, 10, 0, 10, 0.0F, false));
+		wizardHat.addChild(bottom);
 	}
 
 
