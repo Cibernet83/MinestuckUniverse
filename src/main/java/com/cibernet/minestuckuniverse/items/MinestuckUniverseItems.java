@@ -264,7 +264,7 @@ public class MinestuckUniverseItems
         cruxtruderHat.setArmorModel(new ModelCruxtruderHat());
         frogHat.setArmorModel(new ModelFrogHat());
         wizardHat.setArmorModel(new ModelWizardHat());
-        archmageHat.setArmorModel(new ModelWizardHat());
+        archmageHat.setArmorModel(new ModelArchmageHat());
         crumplyHat.setArmorModel(new ModelCrumplyHat());
 
         for(ItemBeamBlade blade : dyedBeamBlade)
