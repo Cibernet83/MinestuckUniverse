@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.client.models.armor.*;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import com.cibernet.minestuckuniverse.items.properties.*;
+import com.cibernet.minestuckuniverse.util.BlockMetaPair;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.mraof.minestuck.Minestuck;
@@ -36,8 +37,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import vazkii.botania.common.block.ModBlocks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MinestuckUniverseItems
 {
@@ -49,11 +52,45 @@ public class MinestuckUniverseItems
     public static ItemArmor.ArmorMaterial materialMetal = EnumHelper.addArmorMaterial("METAL", MinestuckUniverse.MODID+":metal", 200, new int[] {0, 0, 0, 4}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
     public static ItemArmor.ArmorMaterial materialCloth = EnumHelper.addArmorMaterial("CLOTH", MinestuckUniverse.MODID+":cloth", -1, new int[] {0, 0, 0, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
 
+    //Tool Classes
     public static MSUToolClass toolSword = new MSUToolClass(Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
     public static MSUToolClass toolGauntlet = new MSUToolClass(Material.GLASS, Material.ICE, Material.PACKED_ICE).addEnchantments(Enchantments.SILK_TOUCH, Enchantments.FIRE_ASPECT, Enchantments.LOOTING, MSUEnchantments.SUPERPUNCH);
     public static MSUToolClass toolNeedles = new MSUToolClass(Material.CLOTH).addEnchantments(EnumEnchantmentType.WEAPON);
     public static MSUToolClass toolHammer = new MSUToolClass("pickaxe").addEnchantments(EnumEnchantmentType.WEAPON, EnumEnchantmentType.DIGGER);
     public static MSUToolClass toolClub = new MSUToolClass().addEnchantments(EnumEnchantmentType.WEAPON);
+
+
+    //Block Swap Property Maps
+    public static final HashMap<BlockMetaPair, BlockMetaPair> overgrowthTransforms = new HashMap<BlockMetaPair, BlockMetaPair>()
+    {{
+        put(Blocks.DIRT, 0, Blocks.GRASS, 0);
+        put(Blocks.COBBLESTONE, Blocks.MOSSY_COBBLESTONE);
+        put(Blocks.STONEBRICK, 0, Blocks.STONEBRICK, 1);
+        put(Blocks.MONSTER_EGG, 2, Blocks.MONSTER_EGG, 3);
+        put(Blocks.COBBLESTONE_WALL, 0, Blocks.COBBLESTONE_WALL, 1);
+        put(Blocks.END_STONE, MinestuckBlocks.endGrass);
+        put(MinestuckBlocks.pinkStoneBricks, MinestuckBlocks.pinkStoneMossy);
+        put(Blocks.LOG, 0, MinestuckBlocks.log, 4);
+        put(Blocks.LOG, 4, MinestuckBlocks.log, 0);
+        put(Blocks.LOG, 8, MinestuckBlocks.log, 8);
+        put(Blocks.LOG, 12, MinestuckBlocks.log, 12);
+
+        if(MinestuckUniverse.isBotaniaLoaded)
+        {
+            put(ModBlocks.livingrock, 1, ModBlocks.livingrock, 2);
+            put(ModBlocks.livingwood, 1, ModBlocks.livingwood, 2);
+            put(ModBlocks.dreamwood, 1, ModBlocks.dreamwood, 2);
+        }
+    }
+        void put(Block k, Block v)
+        {
+            put(new BlockMetaPair(k, -1), new BlockMetaPair(v, -1));
+        }
+        void put(Block k, int kMeta, Block v, int vMeta)
+        {
+            put(new BlockMetaPair(k, kMeta), new BlockMetaPair(v, vMeta));
+        }
+    };
 
     //Items
     public static Item spaceSalt = new ItemSpaceSalt();
@@ -126,7 +163,7 @@ public class MinestuckUniverseItems
     public static Item actionClaws = new ItemDualClaw(500, 3.0D, 1.0D, -1.5D, -1.0D, 6, "actionClaws","action_claws").addProperties(new PropertyActionBuff(200, 2.5));
     public static Item candyCornClaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "candyCornClaws","candy_corn_claws").addProperties(new PropertyCandyWeapon());
     public static Item rocketKatars = new MSUItemBase("rocket_katars", "rocketKatars");
-    public static Item staffOfOvergrowth = new MSUItemBase("staff_of_overgrowth", "staffOfOvergrowth");
+    public static Item staffOfOvergrowth = new MSUWeaponBase(455, 6.0f, -1.2, 20, "staff_of_overgrowth", "staffOfOvergrowth").addProperties(new PropertyBlockSwap(overgrowthTransforms, 1), new PropertyPotion(new PotionEffect(MobEffects.POISON, 400, 1), false, 0.4f));
     public static Item goldCane = new MSUItemBase("gold_cane", "goldCane");
     public static Item goldenCuestaff = new MSUItemBase("golden_cuestaff", "goldenCuestaff");
     public static Item rubyContrabat = new MSUWeaponBaseSweep(185, 6.5, -2.2, 22, "ruby_contrabat", "rubyContrabat").setTool(toolClub, 3, 4.0f).addProperties(new PropertyGristSetter(GristType.Ruby));
@@ -150,8 +187,6 @@ public class MinestuckUniverseItems
     public static Item unbreakableKatana = new MSUWeaponBaseSweep(2200, 7, -2.4D, 20, Minestuck.MOD_ID +":unbreakable_katana", "katana")
             .setTool(toolSword, 0, 15.0F).setCreativeTab(TabMinestuck.instance);
     public static Item captcharoidCamera = new ItemCaptcharoidOverride();
-
-
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
