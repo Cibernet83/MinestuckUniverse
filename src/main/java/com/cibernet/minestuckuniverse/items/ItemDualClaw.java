@@ -12,12 +12,17 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemDualClaw extends MSUWeaponBaseSweep
 {
     public double damage;
     public double damageSheathed;
     public double attackSpeed;
     public double attackSpeedSheathed;
+
+    protected final ArrayList<WeaponProperty> sheathedProperties = new ArrayList<>();
 
     public ItemDualClaw(int maxUses, double damageVsEntity, double damagedVsEntityWhileShiethed, double weaponSpeed, double weaponSpeedWhileShiethed, int enchantability, String name, String regName) {
         super(maxUses, damageVsEntity, weaponSpeed, enchantability, regName, name);
@@ -83,11 +88,46 @@ public class ItemDualClaw extends MSUWeaponBaseSweep
 
         if(stack.getItem() instanceof ItemDualClaw)
         {
-        	((ItemDualClaw) stack.getItem()).getProperties().forEach(p ->
+        	((ItemDualClaw) stack.getItem()).getProperties(stack).forEach(p ->
 	        {
 	        	if(p instanceof PropertyAbstractClaw)
 	        		((PropertyAbstractClaw) p).onStateChange(player, stack, draw);
 	        });
         }
+    }
+
+    @Override
+    public MSUWeaponBaseSweep addProperties(WeaponProperty... properties)
+    {
+        List<WeaponProperty> propertiesList = sheathedProperties;
+        for(WeaponProperty p : properties)
+        {
+            for (WeaponProperty p1 : propertiesList)
+                if(!p.compatibleWith(p1))
+                    throw new IllegalArgumentException("Property " + p1 + " is not compatible with " + p);
+
+            propertiesList.add(p);
+        }
+        return super.addProperties(properties);
+    }
+
+    public MSUWeaponBaseSweep addProperties(boolean drawn, WeaponProperty... properties)
+    {
+        List<WeaponProperty> propertiesList = (drawn ? getProperties() : sheathedProperties);
+        for(WeaponProperty p : properties)
+        {
+            for (WeaponProperty p1 : propertiesList)
+                if(!p.compatibleWith(p1))
+                    throw new IllegalArgumentException("Property " + p1 + " is not compatible with " + p);
+
+            propertiesList.add(p);
+        }
+
+        return this;
+    }
+
+    @Override
+    public List<WeaponProperty> getProperties(ItemStack stack) {
+        return isDrawn(stack) ? super.getProperties() : sheathedProperties;
     }
 }

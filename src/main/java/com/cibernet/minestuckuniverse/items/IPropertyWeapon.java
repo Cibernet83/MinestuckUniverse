@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
@@ -10,7 +11,12 @@ public interface IPropertyWeapon<T extends Item>
 
 	List<WeaponProperty> getProperties();
 
-	public default T addProperties(WeaponProperty... properties)
+	default List<WeaponProperty> getProperties(ItemStack stack)
+	{
+		return getProperties();
+	}
+
+	default T addProperties(WeaponProperty... properties)
 	{
 		List<WeaponProperty> propertiesList = getProperties();
 		for(WeaponProperty p : properties)
@@ -23,14 +29,14 @@ public interface IPropertyWeapon<T extends Item>
 		}
 		return (T) this;
 	}
-	public default boolean hasProperty(Class<WeaponProperty> propertyClass)
+	default boolean hasProperty(Class<WeaponProperty> propertyClass, ItemStack stack)
 	{
-		return getProperty(propertyClass) != null;
+		return getProperty(propertyClass, stack) != null;
 	}
 
-	default WeaponProperty getProperty(Class<WeaponProperty> propertyClass)
+	default WeaponProperty getProperty(Class<WeaponProperty> propertyClass, ItemStack stack)
 	{
-		for(WeaponProperty p : getProperties())
+		for(WeaponProperty p : getProperties(stack))
 			if(propertyClass.isInstance(p))
 				return p;
 		return null;

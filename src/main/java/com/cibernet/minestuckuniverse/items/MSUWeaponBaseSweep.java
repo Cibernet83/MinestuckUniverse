@@ -96,7 +96,7 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
 
         if (!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
 
-        for (WeaponProperty p : properties)
+        for (WeaponProperty p : getProperties(toRepair))
             if (p.getIsRepairable(toRepair, repair))
                 return true;
 
@@ -112,7 +112,7 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
     {
         double dmg = weaponDamage;
 
-        for (WeaponProperty p : properties)
+        for (WeaponProperty p : getProperties(stack))
             dmg = p.getAttackDamage(stack, dmg);
 
         return dmg;
@@ -121,7 +121,7 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
     public double getAttackSpeed(ItemStack stack) {
         double spd = weaponSpeed;
 
-        for (WeaponProperty p : properties)
+        for (WeaponProperty p : getProperties(stack))
             spd = p.getAttackSpeed(stack, spd);
 
         return spd;
@@ -139,13 +139,13 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
-        properties.forEach(p -> p.onEntityItemUpdate(entityItem));
+        getProperties(entityItem.getItem()).forEach(p -> p.onEntityItemUpdate(entityItem));
         return super.onEntityItemUpdate(entityItem);
     }
 
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        properties.forEach(p -> p.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected));
+        getProperties(stack).forEach(p -> p.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected));
         super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
     }
 
@@ -155,14 +155,14 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
             stack.damageItem(1, player);
         }
 
-        properties.forEach(p -> p.onEntityHit(stack, target, player));
+        getProperties(stack).forEach(p -> p.onEntityHit(stack, target, player));
 
         return true;
     }
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        for (WeaponProperty p : properties) {
+        for (WeaponProperty p : getProperties(player.getHeldItem(hand))) {
             EnumActionResult actionResult = p.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
             if (actionResult != EnumActionResult.PASS)
                 return actionResult;
@@ -173,7 +173,7 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
 
     @Override
     public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
-        for (WeaponProperty p : properties) {
+        for (WeaponProperty p : getProperties(player.getHeldItem(hand))) {
             EnumActionResult actionResult = p.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
             if (actionResult != EnumActionResult.PASS)
                 return actionResult;
@@ -183,7 +183,7 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-        for (WeaponProperty p : properties)
+        for (WeaponProperty p : getProperties(stack))
             stack = p.onItemUseFinish(stack, worldIn, entityLiving);
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }
@@ -191,14 +191,14 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
     @Override
     public int getMaxItemUseDuration(ItemStack stack) {
         int result = super.getMaxItemUseDuration(stack);
-        for (WeaponProperty p : properties)
+        for (WeaponProperty p : getProperties(stack))
             result = p.getMaxItemUseDuration(stack, result);
         return result;
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        for (WeaponProperty p : properties) {
+        for (WeaponProperty p : getProperties(playerIn.getHeldItem(handIn))) {
             EnumActionResult actionResult = p.onItemRightClick(worldIn, playerIn, handIn);
             if (actionResult != EnumActionResult.PASS)
                 return ActionResult.newResult(actionResult, playerIn.getHeldItem(handIn));
@@ -209,7 +209,7 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
 
     @Override
     public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack) {
-        for (WeaponProperty p : properties)
+        for (WeaponProperty p : getProperties(oldStack))
             if (!p.shouldCauseBlockBreakReset(oldStack, newStack))
                 return false;
 
@@ -218,7 +218,7 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
 
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        for (WeaponProperty p : properties)
+        for (WeaponProperty p : getProperties(oldStack))
             if (!p.shouldCauseReequipAnimation(oldStack, newStack, slotChanged))
                 return false;
 
@@ -235,7 +235,7 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
 
         stack.damageItem(dmg, entityLiving);
 
-        properties.forEach(p -> p.onBlockDestroyed(stack, worldIn, state, pos, entityLiving));
+        getProperties(stack).forEach(p -> p.onBlockDestroyed(stack, worldIn, state, pos, entityLiving));
 
         return true;
     }

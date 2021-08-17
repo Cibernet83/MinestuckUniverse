@@ -132,7 +132,7 @@ public class MinestuckUniverseItems
     public static Item highVoltageStormCrusher = new MSUItemBase("high_voltage_storm_crusher", "highVoltageStormCrusher");
     public static Item hereticusAurum = new MSUItemBase("hereticus_aurum", "hereticusAurum");
     public static Item actionClaws = new ItemDualClaw(500, 3.0D, 1.0D, -1.5D, -1.0D, 6, "actionClaws","action_claws").addProperties(new PropertyActionBuff(200, 2.5));
-    public static Item candyCornClaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "candyCornClaws","candy_corn_claws").addProperties(new PropertyCandyWeapon());
+    public static Item candyCornClaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "candyCornClaws","candy_corn_claws").addProperties(true, new PropertyCandyWeapon());
     public static Item rocketKatars = new MSUItemBase("rocket_katars", "rocketKatars");
     public static Item staffOfOvergrowth = new MSUWeaponBase(455, 6.0f, -1.2, 20, "staff_of_overgrowth", "staffOfOvergrowth").addProperties(new PropertyBlockSwap(overgrowthTransforms, 1), new PropertyPotion(new PotionEffect(MobEffects.POISON, 400, 1), false, 0.4f));
     public static Item goldCane = new MSUItemBase("gold_cane", "goldCane");

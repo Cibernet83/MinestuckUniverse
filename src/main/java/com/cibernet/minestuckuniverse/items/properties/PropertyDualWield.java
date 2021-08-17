@@ -30,9 +30,11 @@ public class PropertyDualWield extends PropertyPlural
 	{
 		super.onEntityHit(stack, target, player);
 
-		if(player instanceof EntityPlayer && player.getHeldItemOffhand().getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) player.getHeldItemOffhand().getItem()).hasProperty(this.getClass()))
+		ItemStack offhandStack = player.getHeldItemOffhand();
+
+		if(player instanceof EntityPlayer && offhandStack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) offhandStack.getItem()).hasProperty(this.getClass(), offhandStack))
 		{
-			List<WeaponProperty> propertyList = new ArrayList<>(((IPropertyWeapon) player.getHeldItemOffhand().getItem()).getProperties());
+			List<WeaponProperty> propertyList = new ArrayList<>(((IPropertyWeapon) offhandStack.getItem()).getProperties(offhandStack));
 			propertyList.removeIf(p -> this.getClass().isInstance(p));
 
 			target.hurtResistantTime = 0;
@@ -46,9 +48,10 @@ public class PropertyDualWield extends PropertyPlural
 	@Override
 	public float onCrit(ItemStack stack, EntityPlayer player, EntityLivingBase target, float damageModifier)
 	{
-		if(player instanceof EntityPlayer && player.getHeldItemOffhand().getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) player.getHeldItemOffhand().getItem()).hasProperty(this.getClass()))
+		ItemStack offhandStack = player.getHeldItemOffhand();
+		if(player instanceof EntityPlayer && offhandStack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) offhandStack.getItem()).hasProperty(this.getClass(), offhandStack))
 		{
-			List<WeaponProperty> propertyList = new ArrayList<>(((IPropertyWeapon) player.getHeldItemOffhand().getItem()).getProperties());
+			List<WeaponProperty> propertyList = new ArrayList<>(((IPropertyWeapon) offhandStack.getItem()).getProperties(offhandStack));
 			propertyList.removeIf(p -> this.getClass().isInstance(p));
 			for(WeaponProperty p : propertyList)
 				p.onCrit(stack, player, target, damageModifier);

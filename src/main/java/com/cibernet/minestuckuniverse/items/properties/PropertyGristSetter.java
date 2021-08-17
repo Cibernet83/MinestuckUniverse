@@ -87,9 +87,9 @@ public class PropertyGristSetter extends WeaponProperty
 			ItemStack stack = sauce.getHeldItemMainhand();
 
 			//On frog initial hit
-			if(stack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) stack.getItem()).hasProperty(PropertyGristSetter.class))
+			if(stack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) stack.getItem()).hasProperty(PropertyGristSetter.class, stack))
 			{
-				GristType gristType = ((PropertyGristSetter) ((IPropertyWeapon) stack.getItem()).getProperty(PropertyGristSetter.class)).gristType;
+				GristType gristType = ((PropertyGristSetter) ((IPropertyWeapon) stack.getItem()).getProperty(PropertyGristSetter.class, stack)).gristType;
 				int frogType = -1;
 				if(gristType == GristType.Gold)
 					frogType = 5;

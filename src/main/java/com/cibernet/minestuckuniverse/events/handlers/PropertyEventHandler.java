@@ -27,7 +27,7 @@ public class PropertyEventHandler
 
 		if(event.isVanillaCritical() && stack.getItem() instanceof IPropertyWeapon && event.getTarget() instanceof EntityLivingBase)
 		{
-			List<WeaponProperty> propertyList = ((IPropertyWeapon) stack.getItem()).getProperties();
+			List<WeaponProperty> propertyList = ((IPropertyWeapon) stack.getItem()).getProperties(stack);
 			for(WeaponProperty p : propertyList)
 				event.setDamageModifier(p.onCrit(event.getEntityPlayer().getHeldItemMainhand(), event.getEntityPlayer(), (EntityLivingBase) event.getTarget(), event.getDamageModifier()));
 		}

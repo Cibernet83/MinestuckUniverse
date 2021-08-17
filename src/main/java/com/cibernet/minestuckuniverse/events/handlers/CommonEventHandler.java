@@ -148,9 +148,9 @@ public class CommonEventHandler
 		boolean isRandom = false;
 		float randValue = 0;
 
-		if(stack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) stack.getItem()).hasProperty(PropertyRandomDamage.class))
+		if(stack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) stack.getItem()).hasProperty(PropertyRandomDamage.class, stack))
 		{
-			PropertyRandomDamage prop = (PropertyRandomDamage) ((IPropertyWeapon) stack.getItem()).getProperty(PropertyRandomDamage.class);
+			PropertyRandomDamage prop = (PropertyRandomDamage) ((IPropertyWeapon) stack.getItem()).getProperty(PropertyRandomDamage.class, stack);
 			randValue = prop.getMax() * prop.getMulitiplier();
 			isRandom = true;
 		}
