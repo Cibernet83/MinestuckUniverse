@@ -1,11 +1,8 @@
 package com.cibernet.minestuckuniverse.items.properties;
 
-import com.cibernet.minestuckuniverse.events.CommonEventHandler;
+import com.cibernet.minestuckuniverse.events.handlers.CommonEventHandler;
 import com.cibernet.minestuckuniverse.items.IClassedTool;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
-import com.cibernet.minestuckuniverse.items.MSUItemBase;
-import com.cibernet.minestuckuniverse.items.MSUWeaponBase;
-import com.google.common.collect.Multimap;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.*;
@@ -44,6 +41,19 @@ public class PropertyDualWield extends PropertyPlural
 			for(WeaponProperty p : propertyList)
 				p.onEntityHit(stack, target, player);
 		}
+	}
+
+	@Override
+	public float onCrit(ItemStack stack, EntityPlayer player, EntityLivingBase target, float damageModifier)
+	{
+		if(player instanceof EntityPlayer && player.getHeldItemOffhand().getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) player.getHeldItemOffhand().getItem()).hasProperty(this.getClass()))
+		{
+			List<WeaponProperty> propertyList = new ArrayList<>(((IPropertyWeapon) player.getHeldItemOffhand().getItem()).getProperties());
+			propertyList.removeIf(p -> this.getClass().isInstance(p));
+			for(WeaponProperty p : propertyList)
+				p.onCrit(stack, player, target, damageModifier);
+		}
+		return super.onCrit(stack, player, target, damageModifier);
 	}
 
 	public void attackTargetEntityWithOffhandItem(EntityPlayer player, Entity targetEntity)

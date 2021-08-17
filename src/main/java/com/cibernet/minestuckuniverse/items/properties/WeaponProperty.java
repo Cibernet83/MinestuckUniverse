@@ -11,8 +11,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class WeaponProperty
 {
@@ -89,5 +87,9 @@ public abstract class WeaponProperty
 	public boolean compatibleWith(WeaponProperty other)
 	{
 		return true;
+	}
+
+	public float onCrit(ItemStack stack, EntityPlayer player, EntityLivingBase target, float damageModifier) {
+		return damageModifier;
 	}
 }

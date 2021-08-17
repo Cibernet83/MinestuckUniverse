@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.items.properties;
 
-import com.cibernet.minestuckuniverse.events.CommonEventHandler;
+import com.cibernet.minestuckuniverse.events.handlers.CommonEventHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.items.properties;
 
-import com.cibernet.minestuckuniverse.events.CommonEventHandler;
+import com.cibernet.minestuckuniverse.events.handlers.CommonEventHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,6 @@ public class PropertyPotion extends WeaponProperty
 		this.chance = chance;
 	}
 
-
 	@Override
 	public void onEntityHit(ItemStack stack, EntityLivingBase target, EntityLivingBase player)
 	{
@@ -27,4 +26,11 @@ public class PropertyPotion extends WeaponProperty
 			target.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
 	}
 
+	@Override
+	public float onCrit(ItemStack stack, EntityPlayer player, EntityLivingBase target, float damageModifier)
+	{
+		if(onCrit && (player.world.rand.nextFloat() <= chance) && (!(player instanceof EntityPlayer) || CommonEventHandler.getCooledAttackStrength(((EntityPlayer) player)) >= 1))
+			target.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
+		return super.onCrit(stack, player, target, damageModifier);
+	}
 }

@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items.properties;
 
 import com.cibernet.minestuckuniverse.blocks.BlockGrist;
+import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.entity.EntityFrog;
 import com.mraof.minestuck.entity.underling.EntityUnderling;
@@ -9,9 +10,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -73,4 +78,30 @@ public class PropertyGristSetter extends WeaponProperty
 		}
 	}
 
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onLivingDamage(LivingDamageEvent event)
+	{
+		if(event.getSource() instanceof EntityDamageSource && event.getSource().getTrueSource() instanceof EntityLivingBase)
+		{
+			EntityLivingBase sauce = ((EntityLivingBase) event.getSource().getTrueSource());
+			ItemStack stack = sauce.getHeldItemMainhand();
+
+			//On frog initial hit
+			if(stack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) stack.getItem()).hasProperty(PropertyGristSetter.class))
+			{
+				GristType gristType = ((PropertyGristSetter) ((IPropertyWeapon) stack.getItem()).getProperty(PropertyGristSetter.class)).gristType;
+				int frogType = -1;
+				if(gristType == GristType.Gold)
+					frogType = 5;
+				if(gristType == GristType.Ruby)
+					frogType = 2;
+				if(gristType == GristType.Artifact)
+					frogType = 6;
+
+				if(event.getEntityLiving() instanceof EntityFrog && (((EntityFrog) event.getEntityLiving()).getType() != frogType || ((EntityFrog) event.getEntityLiving()).getType() == 4))
+					event.setAmount(0);
+			}
+
+		}
+	}
 }

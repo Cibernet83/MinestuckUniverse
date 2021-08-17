@@ -1,7 +1,8 @@
 package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
-import com.cibernet.minestuckuniverse.events.CommonEventHandler;
+import com.cibernet.minestuckuniverse.events.handlers.CommonEventHandler;
+import com.cibernet.minestuckuniverse.events.handlers.PropertyEventHandler;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
@@ -56,6 +57,7 @@ public class CommonProxy
         MSUBannerPatterns.init();
 
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
+        PropertyEventHandler.register();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(MinestuckUniverse.instance, new MSUGuiHandler());
 
