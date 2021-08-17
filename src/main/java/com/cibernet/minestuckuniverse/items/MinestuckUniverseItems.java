@@ -61,36 +61,7 @@ public class MinestuckUniverseItems
 
 
     //Block Swap Property Maps
-    public static final HashMap<BlockMetaPair, BlockMetaPair> overgrowthTransforms = new HashMap<BlockMetaPair, BlockMetaPair>()
-    {{
-        put(Blocks.DIRT, 0, Blocks.GRASS, 0);
-        put(Blocks.COBBLESTONE, Blocks.MOSSY_COBBLESTONE);
-        put(Blocks.STONEBRICK, 0, Blocks.STONEBRICK, 1);
-        put(Blocks.MONSTER_EGG, 2, Blocks.MONSTER_EGG, 3);
-        put(Blocks.COBBLESTONE_WALL, 0, Blocks.COBBLESTONE_WALL, 1);
-        put(Blocks.END_STONE, MinestuckBlocks.endGrass);
-        put(MinestuckBlocks.pinkStoneBricks, MinestuckBlocks.pinkStoneMossy);
-        put(Blocks.LOG, 0, MinestuckBlocks.log, 4);
-        put(Blocks.LOG, 4, MinestuckBlocks.log, 0);
-        put(Blocks.LOG, 8, MinestuckBlocks.log, 8);
-        put(Blocks.LOG, 12, MinestuckBlocks.log, 12);
-
-        if(MinestuckUniverse.isBotaniaLoaded)
-        {
-            put(ModBlocks.livingrock, 1, ModBlocks.livingrock, 2);
-            put(ModBlocks.livingwood, 1, ModBlocks.livingwood, 2);
-            put(ModBlocks.dreamwood, 1, ModBlocks.dreamwood, 2);
-        }
-    }
-        void put(Block k, Block v)
-        {
-            put(new BlockMetaPair(k, -1), new BlockMetaPair(v, -1));
-        }
-        void put(Block k, int kMeta, Block v, int vMeta)
-        {
-            put(new BlockMetaPair(k, kMeta), new BlockMetaPair(v, vMeta));
-        }
-    };
+    public static final BlockMetaPair.Map overgrowthTransforms = new BlockMetaPair.Map();
 
     //Items
     public static Item spaceSalt = new ItemSpaceSalt();
@@ -290,6 +261,28 @@ public class MinestuckUniverseItems
                 return new EntityMSUThrowable(worldIn, position.getX(), position.getY(), position.getZ(), thrownStack);
             }
         });
+    }
+
+    public static void setPostInitVariables()
+    {
+        overgrowthTransforms.put(Blocks.DIRT, 0, Blocks.GRASS, 0);
+        overgrowthTransforms.put(Blocks.COBBLESTONE, Blocks.MOSSY_COBBLESTONE);
+        overgrowthTransforms.put(Blocks.STONEBRICK, 0, Blocks.STONEBRICK, 1);
+        overgrowthTransforms.put(Blocks.MONSTER_EGG, 2, Blocks.MONSTER_EGG, 3);
+        overgrowthTransforms.put(Blocks.COBBLESTONE_WALL, 0, Blocks.COBBLESTONE_WALL, 1);
+        overgrowthTransforms.put(Blocks.END_STONE, MinestuckBlocks.endGrass);
+        overgrowthTransforms.put(MinestuckBlocks.pinkStoneBricks, MinestuckBlocks.pinkStoneMossy);
+        overgrowthTransforms.put(Blocks.LOG, 0, MinestuckBlocks.log, 4);
+        overgrowthTransforms. put(Blocks.LOG, 4, MinestuckBlocks.log, 0);
+        overgrowthTransforms.put(Blocks.LOG, 8, MinestuckBlocks.log, 8);
+        overgrowthTransforms.put(Blocks.LOG, 12, MinestuckBlocks.log, 12);
+
+        if(MinestuckUniverse.isBotaniaLoaded)
+        {
+            overgrowthTransforms.put(ModBlocks.livingrock, 1, ModBlocks.livingrock, 2);
+            overgrowthTransforms.put(ModBlocks.livingwood, 1, ModBlocks.livingwood, 2);
+            overgrowthTransforms.put(ModBlocks.dreamwood, 1, ModBlocks.dreamwood, 2);
+        }
     }
 
     @SideOnly(Side.CLIENT)

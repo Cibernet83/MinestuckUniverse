@@ -74,5 +74,6 @@ public class CommonProxy
     {
         if(MinestuckUniverse.isBotaniaLoaded)
             BotaniaSupport.generateGristCosts();
+        MinestuckUniverseItems.setPostInitVariables();
     }
 }

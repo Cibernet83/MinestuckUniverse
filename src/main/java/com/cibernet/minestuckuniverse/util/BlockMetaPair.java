@@ -2,6 +2,8 @@ package com.cibernet.minestuckuniverse.util;
 
 import net.minecraft.block.Block;
 
+import java.util.HashMap;
+
 public class BlockMetaPair implements Comparable<BlockMetaPair>
 {
 
@@ -30,5 +32,17 @@ public class BlockMetaPair implements Comparable<BlockMetaPair>
 	@Override
 	public String toString() {
 		return block.getRegistryName() + ":" + meta;
+	}
+
+	public static class Map extends HashMap<BlockMetaPair, BlockMetaPair>
+	{
+		public void put(Block k, Block v)
+		{
+			put(new BlockMetaPair(k, -1), new BlockMetaPair(v, -1));
+		}
+		public void put(Block k, int kMeta, Block v, int vMeta)
+		{
+			put(new BlockMetaPair(k, kMeta), new BlockMetaPair(v, vMeta));
+		}
 	}
 }
