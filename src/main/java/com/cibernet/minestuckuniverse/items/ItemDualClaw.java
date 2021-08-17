@@ -1,7 +1,9 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.items.properties.PropertyAbstractClaw;
+import com.cibernet.minestuckuniverse.items.properties.PropertyDualWield;
 import com.cibernet.minestuckuniverse.items.properties.PropertyPlural;
+import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,7 +26,7 @@ public class ItemDualClaw extends MSUWeaponBaseSweep
         this.attackSpeed = weaponSpeed;
         this.attackSpeedSheathed = weaponSpeedWhileShiethed;
 
-        this.addProperties(new PropertyPlural());
+        this.addProperties(new PropertyDualWield());
     }
 
     @Override
@@ -62,7 +64,12 @@ public class ItemDualClaw extends MSUWeaponBaseSweep
     }
 
     public double getAttackDamage(ItemStack stack) {
-        return this.isDrawn(stack) ? this.damage : this.damageSheathed;
+        double dmg = isDrawn(stack) ? this.damage : this.damageSheathed;
+
+        for (WeaponProperty p : properties)
+            dmg = p.getAttackDamage(stack, dmg);
+
+        return dmg;
     }
 
     public double getAttackSpeed(ItemStack stack) {

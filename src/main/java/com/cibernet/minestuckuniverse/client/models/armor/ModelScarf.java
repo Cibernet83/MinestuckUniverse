@@ -56,9 +56,11 @@ public class ModelScarf extends ModelBiped {
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
 
 
-		Tail.rotateAngleX = -bipedHead.rotateAngleX;
-		TailSub.rotationPointZ = (float) Math.abs(bipedHead.rotateAngleX*Math.PI/2f);
-		Tail.rotateAngleX += Math.max(isSneak ? 0.5f : 0, ((float) Math.sqrt(Math.pow((entityIn.posX - entityIn.prevPosX), 2) + Math.pow(Math.max(0, entityIn.posY - entityIn.prevPosY), 2) + Math.pow((entityIn.posZ - entityIn.prevPosZ), 2)) * limbSwingAmount));
+		Tail.rotateAngleX = Math.max(isSneak ? 0.5f : 0, -bipedHead.rotateAngleX);
+		TailSub.rotationPointZ = (float) Math.max(0, -bipedHead.rotateAngleX*Math.PI/2f);
+		Tail.rotateAngleX += Math.max(0,
+				((float) Math.sqrt(Math.pow((entityIn.posX - entityIn.prevPosX), 2) + Math.pow(Math.max(0, entityIn.posY - entityIn.prevPosY), 2) + Math.pow((entityIn.posZ - entityIn.prevPosZ), 2)) * limbSwingAmount)-
+				Math.max(0, bipedHead.rotateAngleX));
 
 		if(isSneak)
 			TailSub.rotationPointZ += Math.PI/2f;

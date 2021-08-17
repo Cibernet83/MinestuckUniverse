@@ -1,7 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
-import com.cibernet.minestuckuniverse.events.CommonEventHandler;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -31,6 +30,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon<MSUWeaponBase>
 {
@@ -339,5 +339,14 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     @Override
     public List<WeaponProperty> getProperties() {
         return properties;
+    }
+
+    public static UUID getAttackDamageUUID()
+    {
+        return ATTACK_DAMAGE_MODIFIER;
+    }
+    public static UUID getAttackSpeedUUID()
+    {
+        return ATTACK_SPEED_MODIFIER;
     }
 }

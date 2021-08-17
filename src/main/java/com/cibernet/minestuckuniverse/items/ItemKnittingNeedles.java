@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
+import com.cibernet.minestuckuniverse.items.properties.PropertyDualWield;
 import com.cibernet.minestuckuniverse.items.properties.PropertyPlural;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import net.minecraft.entity.EntityLivingBase;
@@ -39,7 +40,7 @@ public class ItemKnittingNeedles extends MSUWeaponBase
                 return (entityIn != null && stack.getCount() >= 2) ? 1 : 0;
             }
         });
-        addProperties(new PropertyPlural());
+        addProperties(new PropertyDualWield());
     }
 
     @Override

@@ -27,6 +27,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import org.lwjgl.Sys;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -107,7 +108,8 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
         unbreakable = true;
     }
 
-    public double getAttackDamage(ItemStack stack) {
+    public double getAttackDamage(ItemStack stack)
+    {
         double dmg = weaponDamage;
 
         for (WeaponProperty p : properties)
@@ -240,7 +242,8 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
 
     public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
         Multimap<String, AttributeModifier> multimap = HashMultimap.create();
-        if (slot == EntityEquipmentSlot.MAINHAND) {
+        if (slot == EntityEquipmentSlot.MAINHAND)
+        {
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.getAttackDamage(stack), 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", this.getAttackSpeed(stack), 0));
         }

@@ -33,8 +33,6 @@ public class PropertyEldrichBoost extends WeaponProperty
 					stack.setTagCompound(new NBTTagCompound());
 				int heldTime = stack.getTagCompound().getInteger("HeldTime");
 
-				System.out.println(heldTime);
-
 				stack.getTagCompound().setInteger("HeldTime", Math.min(6000, heldTime + 1));
 
 				if (heldTime % 40 == 0 && worldIn.rand.nextInt(12000) < heldTime)
@@ -58,28 +56,34 @@ public class PropertyEldrichBoost extends WeaponProperty
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
 	{
-		if(!oldStack.hasTagCompound())
-			oldStack.setTagCompound(new NBTTagCompound());
-		if(!newStack.hasTagCompound())
-			newStack.setTagCompound(new NBTTagCompound());
+		ItemStack stackA = oldStack.copy();
+		ItemStack stackB = newStack.copy();
 
-		oldStack.getTagCompound().setInteger("HeldTime", 0);
-		newStack.getTagCompound().setInteger("HeldTime", 0);
+		if(!stackA.hasTagCompound())
+			stackA.setTagCompound(new NBTTagCompound());
+		if(!stackB.hasTagCompound())
+			stackB.setTagCompound(new NBTTagCompound());
 
-		return !ItemStack.areItemStacksEqual(oldStack, newStack);
+		stackA.getTagCompound().setInteger("HeldTime", 0);
+		stackB.getTagCompound().setInteger("HeldTime", 0);
+
+		return !ItemStack.areItemStacksEqual(stackA, stackB);
 	}
 
 	@Override
 	public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack)
 	{
-		if(!oldStack.hasTagCompound())
-			oldStack.setTagCompound(new NBTTagCompound());
-		if(!newStack.hasTagCompound())
-			newStack.setTagCompound(new NBTTagCompound());
+		ItemStack stackA = oldStack.copy();
+		ItemStack stackB = newStack.copy();
 
-		oldStack.getTagCompound().setInteger("HeldTime", 0);
-		newStack.getTagCompound().setInteger("HeldTime", 0);
+		if(!stackA.hasTagCompound())
+			stackA.setTagCompound(new NBTTagCompound());
+		if(!stackB.hasTagCompound())
+			stackB.setTagCompound(new NBTTagCompound());
 
-		return super.shouldCauseBlockBreakReset(oldStack, newStack);
+		stackA.getTagCompound().setInteger("HeldTime", 0);
+		stackB.getTagCompound().setInteger("HeldTime", 0);
+
+		return super.shouldCauseBlockBreakReset(stackA, stackB);
 	}
 }

@@ -147,11 +147,11 @@ public class MinestuckUniverseItems
     public static Item eldrichGauntlet = new MSUWeaponBase(124, 3D, 0.4D, 6, "eldritch_gauntlet", "eldrichGauntlet").setTool(toolGauntlet, 1, 1.6F).addProperties(new PropertyEldrichBoost());
 
     public static Item knittingNeedles = new ItemKnittingNeedles(32,2, 1, 1, "knitting_needle", "knittingNeedle").setTool(toolNeedles, 2, 1f);
-    public static Item pointySticks = new MSUWeaponBase(50,2, 1, 1, "pointy_stick", "pointyStick").setTool(toolNeedles, 1, 1f).addProperties(new PropertyPlural());
-    public static Item boneNeedles = new MSUWeaponBase(100,4, 0, 10, "bone_needle", "boneNeedle").setTool(toolNeedles, 1, 1f).addProperties(new PropertyPlural());
-    public static Item needlewands = new MSUWeaponBase(250,4, 0.5, 60, "needlewand", "needlewand").setTool(toolNeedles, 3, 2f).addProperties(new PropertyPlural());
-    public static Item oglogothThorn = new MSUWeaponBase(366,5.6, -0.5, 80, "thorn_of_oglogoth", "oglogothThorn").setTool(toolNeedles, 4, 3f);
-    public static Item echidnaQuills = new MSUWeaponBase(5, 1, 100, "quill_of_echidna", "echidnaQuill").setTool(toolNeedles, 5, 5f);
+    public static Item pointySticks = new MSUWeaponBase(50,2, 1, 1, "pointy_stick", "pointyStick").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield());
+    public static Item boneNeedles = new MSUWeaponBase(100,4, 0, 10, "bone_needle", "boneNeedle").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield());
+    public static Item needlewands = new MSUWeaponBase(250,4, 0.5, 60, "needlewand", "needlewand").setTool(toolNeedles, 3, 2f).addProperties(new PropertyDualWield());
+    public static Item oglogothThorn = new MSUWeaponBase(366,5.6, -0.5, 80, "thorn_of_oglogoth", "oglogothThorn").setTool(toolNeedles, 4, 3f).addProperties(new PropertyDualWield());
+    public static Item echidnaQuills = new MSUWeaponBase(5, 1, 100, "quill_of_echidna", "echidnaQuill").setTool(toolNeedles, 5, 5f).addProperties(new PropertyDualWield());
 
     public static Item loghammer = new MSUWeaponBase(355, 7, -2.8, 7, "loghammer", "loghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial(new ItemStack(Blocks.LOG));
     public static Item overgrownLoghammer = new MSUWeaponBase(210, 7, -2.8, 7, "overgrown_loghammer", "overgrownLoghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial(new ItemStack(Blocks.LOG)).addProperties(new PropertyPlantMend());

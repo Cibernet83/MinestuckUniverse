@@ -18,16 +18,16 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttribute;
-import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.entity.ai.attributes.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.SPacketEntityEquipment;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
@@ -93,10 +93,10 @@ public class CommonEventHandler
 	}
 
 
-	public static final IAttribute COOLED_ATTACK_STRENGTH = new RangedAttribute(null, MinestuckUniverse.MODID+".cooledAttackStrength", 0, 0, 1).setDescription("Cooled Attack Strength").setShouldWatch(true);
+	public static final IAttribute COOLED_ATTACK_STRENGTH = new RangedAttribute(null, MinestuckUniverse.MODID+".cooledAttackStrength", 0, 0, 1).setDescription("Cooled Attack Strength");
 
 	@SubscribeEvent
-	public static void onTick(TickEvent.PlayerTickEvent event)
+	public static void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
 		if(event.player.isSpectator())
 		{
@@ -107,7 +107,25 @@ public class CommonEventHandler
 		if(event.player.getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH) == null)
 			event.player.getAttributeMap().registerAttribute(COOLED_ATTACK_STRENGTH);
 
-		if(event.phase == TickEvent.Phase.END)
+		if(event.phase == TickEvent.Phase.START)
+		{
+			for (EntityEquipmentSlot slot : EntityEquipmentSlot.values())
+			{
+				ItemStack stack = event.player.getItemStackFromSlot(slot);
+				AbstractAttributeMap attrMap = event.player.getAttributeMap();
+
+				for (Map.Entry<String, AttributeModifier> attr : stack.getAttributeModifiers(slot).entries()) {
+					IAttributeInstance attrInstance = attrMap.getAttributeInstanceByName(attr.getKey());
+
+					if (attrInstance != null && attrInstance.hasModifier(attr.getValue()) && attrInstance.getModifier(attr.getValue().getID()).getAmount() != attr.getValue().getAmount()) {
+						attrInstance.removeModifier(attr.getValue().getID());
+						attrInstance.applyModifier(attr.getValue());
+					}
+
+				}
+			}
+		}
+		else if(event.phase == TickEvent.Phase.END)
 		{
 			double str = getCooledAttackStrength(event.player);
 			double currStr = event.player.getCooledAttackStrength(0.5f);
@@ -117,9 +135,9 @@ public class CommonEventHandler
 		}
 	}
 
-	public static double getCooledAttackStrength(EntityPlayer player)
+	public static float getCooledAttackStrength(EntityPlayer player)
 	{
-		return player.getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH).getAttributeValue();
+		return (float) player.getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH).getAttributeValue();
 	}
 
 	@SideOnly(Side.CLIENT)

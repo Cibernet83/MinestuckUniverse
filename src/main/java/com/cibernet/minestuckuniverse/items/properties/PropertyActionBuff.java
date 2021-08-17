@@ -19,12 +19,11 @@ public class PropertyActionBuff extends PropertyAbstractClaw
 	}
 
 	@Override
-	public double getAttackDamage(ItemStack stack, double dmg)
+	public double getAttackDamage(ItemStack stack, double parent)
 	{
 		if(stack.hasTagCompound())
-			dmg *= actionMultiplier*stack.getTagCompound().getInteger("ActionTime")/(double)actionTime;
-
-		return dmg;
+			return parent* Math.max(1,actionMultiplier*(double)stack.getTagCompound().getInteger("ActionTime")/(double)actionTime);
+		return parent;
 	}
 
 	@Override
@@ -52,5 +51,40 @@ public class PropertyActionBuff extends PropertyAbstractClaw
 				stack.setTagCompound(new NBTTagCompound());
 			stack.getTagCompound().setInteger("ActionTime", actionTime);
 		}
+	}
+
+
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
+	{
+		ItemStack stackA = oldStack.copy();
+		ItemStack stackB = newStack.copy();
+
+		if(!stackA.hasTagCompound())
+			stackA.setTagCompound(new NBTTagCompound());
+		if(!stackB.hasTagCompound())
+			stackB.setTagCompound(new NBTTagCompound());
+
+		stackA.getTagCompound().setInteger("ActionTime", 0);
+		stackB.getTagCompound().setInteger("ActionTime", 0);
+
+		return !ItemStack.areItemStacksEqual(stackA, stackB);
+	}
+
+	@Override
+	public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack)
+	{
+		ItemStack stackA = oldStack.copy();
+		ItemStack stackB = newStack.copy();
+
+		if(!stackA.hasTagCompound())
+			stackA.setTagCompound(new NBTTagCompound());
+		if(!stackB.hasTagCompound())
+			stackB.setTagCompound(new NBTTagCompound());
+
+		stackA.getTagCompound().setInteger("ActionTime", 0);
+		stackB.getTagCompound().setInteger("ActionTime", 0);
+
+		return super.shouldCauseBlockBreakReset(stackA, stackB);
 	}
 }
