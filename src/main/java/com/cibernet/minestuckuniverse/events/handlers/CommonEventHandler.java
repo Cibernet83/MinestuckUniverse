@@ -11,6 +11,7 @@ import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -25,9 +26,12 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -37,6 +41,7 @@ import java.util.UUID;
 
 public class CommonEventHandler
 {
+
 	@SubscribeEvent
 	public static void onEntityHurt(LivingDamageEvent event)
 	{
@@ -58,6 +63,7 @@ public class CommonEventHandler
 	}
 
 	public static final IAttribute COOLED_ATTACK_STRENGTH = new RangedAttribute(null, MinestuckUniverse.MODID+".cooledAttackStrength", 0, 0, 1).setDescription("Cooled Attack Strength");
+	public static final AttributeModifier STUN_MODIFIER = new AttributeModifier(UUID.randomUUID(), "Stun modifier", 0, 1);
 
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event)
@@ -88,6 +94,10 @@ public class CommonEventHandler
 
 				}
 			}
+
+			ItemStack stack = event.player.getHeldItemMainhand();
+			if(event.player.getCooldownTracker().hasCooldown(stack.getItem()))
+				event.player.resetCooldown();
 		}
 		else if(event.phase == TickEvent.Phase.END)
 		{
@@ -97,6 +107,13 @@ public class CommonEventHandler
 			if(str != currStr)
 				event.player.getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH).setBaseValue(currStr);
 		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityAttacked(AttackEntityEvent event)
+	{
+		if(event.getEntityLiving() instanceof EntityPlayer && ((EntityPlayer) event.getEntityLiving()).getCooldownTracker().hasCooldown(event.getEntityLiving().getHeldItemMainhand().getItem()))
+			event.setCanceled(true);
 	}
 
 	public static float getCooledAttackStrength(EntityPlayer player)
@@ -233,7 +250,6 @@ public class CommonEventHandler
 			}
 		}
 	}
-
 
 	@SubscribeEvent
 	public static void onBreakSpeed(PlayerEvent.BreakSpeed event)

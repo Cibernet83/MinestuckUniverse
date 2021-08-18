@@ -56,6 +56,7 @@ public abstract class MSUPacket
         VAULT(BoondollarRegisterPacket.class),
         FLIGHT_EFFECT(StopFlightEffectPacket.class),
         BUILD_INHIBIT_EFFECT(StopBuildInhibitEffectPacket.class),
+        RESET_COOLDOWN(ResetCooldownPacket.class),
         ;
 
         Class<? extends MSUPacket> packetType;

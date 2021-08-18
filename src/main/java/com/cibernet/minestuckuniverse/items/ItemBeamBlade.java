@@ -1,8 +1,11 @@
 package com.cibernet.minestuckuniverse.items;
 
+import com.cibernet.minestuckuniverse.items.properties.PropertyElectric;
+import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.mraof.minestuck.client.util.MinestuckModelManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
@@ -15,16 +18,20 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemBeamBlade extends MSUWeaponBaseSweep
 {
     public EnumDyeColor color = null;
     public ItemBeamBlade(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName) {
         super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
+        addProperties(new PropertyElectric(10, 2, 0.6f, false));
     }
 
     public ItemBeamBlade setColor(EnumDyeColor color) {this.color = color; return this;}
     public EnumDyeColor getColor() {return color;}
-    public boolean isDyeable() {return color != null;}
+
     public boolean isDrawn(ItemStack itemStack) {
         return this.checkTagCompound(itemStack).getBoolean("IsDrawn");
     }
@@ -37,7 +44,16 @@ public class ItemBeamBlade extends MSUWeaponBaseSweep
             color = "."+this.color.getUnlocalizedName();
         return I18n.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + color + ".name").trim();
     }
-    
+
+    @Override
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+    {
+        super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+
+        if(entityIn instanceof  EntityLivingBase && isDrawn(stack) && worldIn.getTotalWorldTime() % 80 == 0)
+            stack.damageItem(1, (EntityLivingBase) entityIn);
+    }
+
     @Override
     public void setDamage(ItemStack stack, int damage)
     {
@@ -115,5 +131,9 @@ public class ItemBeamBlade extends MSUWeaponBaseSweep
             return ((ItemBeamBlade) stack.getItem()).getColor().getColorValue();
         }
     }
-    
+
+    @Override
+    public List<WeaponProperty> getProperties(ItemStack stack) {
+        return isDrawn(stack) ? super.getProperties() : new ArrayList<>();
+    }
 }
