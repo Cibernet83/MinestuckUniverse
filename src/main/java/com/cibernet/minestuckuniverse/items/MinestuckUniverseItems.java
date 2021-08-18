@@ -129,7 +129,7 @@ public class MinestuckUniverseItems
     public static Item glowingLoghammer = new MSUWeaponBase(310, 7, -2.8, 7, "glowing_loghammer", "glowingLoghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial(new ItemStack(MinestuckBlocks.glowingLog)).addProperties(new PropertyPotion(new PotionEffect(MobEffects.GLOWING, 200, 0), false, 1));
     public static Item midasMallet = new MSUWeaponBase(415, 6.5D, -2.5D, 15, "midas_mallet", "midasMallet").setTool(toolHammer, 3, 2f).addProperties(new PropertyGristSetter(GristType.Gold));
     public static Item aaaNailShocker = new MSUWeaponBase(325, 7, -2.4, 10,"aaa_nail_shocker", "aaaNailShocker").setTool(toolHammer, 2, 3f).setRepairMaterial(new ItemStack(battery)).addProperties(new PropertyElectric(20, 0, 0.7f, true));
-    public static Item highVoltageStormCrusher = new MSUItemBase("high_voltage_storm_crusher", "highVoltageStormCrusher");
+    public static Item highVoltageStormCrusher = new MSUWeaponBase(580, 10, -2.4, 18, "high_voltage_storm_crusher", "highVoltageStormCrusher").setTool(toolHammer, 4, 3.0f).addProperties(new PropertyLightning(8, 1, true, false), new PropertyElectric(60, 8, -1, false));
     public static Item hereticusAurum = new MSUItemBase("hereticus_aurum", "hereticusAurum");
     public static Item actionClaws = new ItemDualClaw(500, 3.0D, 1.0D, -1.5D, -1.0D, 6, "actionClaws","action_claws").addProperties(new PropertyActionBuff(200, 2.5));
     public static Item candyCornClaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "candyCornClaws","candy_corn_claws").addProperties(true, new PropertyCandyWeapon());

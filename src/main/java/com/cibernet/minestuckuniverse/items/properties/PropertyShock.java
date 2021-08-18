@@ -55,6 +55,8 @@ public class PropertyShock extends WeaponProperty
 		if(target instanceof EntityPlayer && !target.world.isRemote)
 		{
 			((EntityPlayer) target).getCooldownTracker().setCooldown(target.getHeldItemMainhand().getItem(), time);
+			if(player == null || target == player)
+				((EntityPlayer) target).getCooldownTracker().setCooldown(target.getHeldItemOffhand().getItem(), time);
 			((EntityPlayer) target).resetCooldown();
 			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.RESET_COOLDOWN), (EntityPlayer) target);
 		}
@@ -63,7 +65,7 @@ public class PropertyShock extends WeaponProperty
 			for(EnumHand hand : EnumHand.values())
 			{
 				GristSet heldGristCost = GristRegistry.getGristConversion(target.getHeldItem(hand));
-				if(!target.getHeldItem(hand).isEmpty() && (player == target || (heldGristCost != null && (heldGristCost.getGrist(GristType.Rust) != 0 || heldGristCost.getGrist(GristType.Gold) != 0))))
+				if(!target.getHeldItem(hand).isEmpty() && (player == null || player == target || (heldGristCost != null && (heldGristCost.getGrist(GristType.Rust) != 0 || heldGristCost.getGrist(GristType.Gold) != 0))))
 				{
 					EntityItem item = target.entityDropItem(target.getHeldItem(hand), target.getEyeHeight());
 					item.setPickupDelay(20);
