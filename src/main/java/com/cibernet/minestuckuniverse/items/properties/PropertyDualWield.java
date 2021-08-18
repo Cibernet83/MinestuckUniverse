@@ -15,8 +15,10 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 import java.util.ArrayList;
@@ -25,6 +27,20 @@ import java.util.Map;
 
 public class PropertyDualWield extends PropertyPlural
 {
+	@Override
+	public EnumActionResult onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn)
+	{
+		ItemStack offhandStack = player.getHeldItemOffhand();
+		if(player instanceof EntityPlayer && offhandStack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) offhandStack.getItem()).hasProperty(this.getClass(), offhandStack))
+		{
+			List<WeaponProperty> propertyList = new ArrayList<>(((IPropertyWeapon) offhandStack.getItem()).getProperties(offhandStack));
+			propertyList.removeIf(p -> this.getClass().isInstance(p));
+			for(WeaponProperty p : propertyList)
+				p.onItemRightClick(worldIn, player, handIn);
+		}
+		return super.onItemRightClick(worldIn, player, handIn);
+	}
+
 	@Override
 	public void onEntityHit(ItemStack stack, EntityLivingBase target, EntityLivingBase player)
 	{

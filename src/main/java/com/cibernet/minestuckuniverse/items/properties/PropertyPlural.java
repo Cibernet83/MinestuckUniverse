@@ -16,13 +16,13 @@ public class PropertyPlural extends WeaponProperty
     public String getItemStackDisplayName(ItemStack stack, String name)
     {
         if(FMLCommonHandler.instance().getSide().equals(Side.CLIENT))
-            return getClientsideDisplayName(stack);
+            return getClientsideDisplayName(stack, name);
 
         return super.getItemStackDisplayName(stack, name);
     }
 
     @SideOnly(Side.CLIENT)
-    public String getClientsideDisplayName(ItemStack stack)
+    public String getClientsideDisplayName(ItemStack stack, String name)
     {
         EntityPlayer player = Minecraft.getMinecraft().player;
 
@@ -35,6 +35,6 @@ public class PropertyPlural extends WeaponProperty
                 return I18n.translateToLocal(stack.getItem().getUnlocalizedNameInefficiently(stack) + ".name.plural").trim();
         }
 
-        return stack.getItem().getItemStackDisplayName(stack);
+        return name;
     }
 }

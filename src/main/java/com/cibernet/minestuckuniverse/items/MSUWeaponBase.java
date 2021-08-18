@@ -65,6 +65,15 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     }
 
     @Override
+    public String getItemStackDisplayName(ItemStack stack)
+    {
+        String name = super.getItemStackDisplayName(stack);
+        for(WeaponProperty p : getProperties(stack))
+            name = p.getItemStackDisplayName(stack, name);
+        return name;
+    }
+
+    @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
         String key = getUnlocalizedName()+".tooltip";
