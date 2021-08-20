@@ -33,7 +33,7 @@ public class PropertyEventHandler
 	{
 		ItemStack stack = event.getEntityPlayer().getHeldItemMainhand();
 
-		if(event.isVanillaCritical() && stack.getItem() instanceof IPropertyWeapon && event.getTarget() instanceof EntityLivingBase)
+		if(!event.getTarget().world.isRemote && event.isVanillaCritical() && stack.getItem() instanceof IPropertyWeapon && event.getTarget() instanceof EntityLivingBase)
 		{
 			List<WeaponProperty> propertyList = ((IPropertyWeapon) stack.getItem()).getProperties(stack);
 			for(WeaponProperty p : propertyList)
@@ -44,7 +44,7 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onAttack(LivingAttackEvent event)
 	{
-		if(!event.getEntityLiving().isEntityInvulnerable(event.getSource()))
+		if(!event.getEntityLiving().isEntityInvulnerable(event.getSource()) && !event.getEntity().world.isRemote)
 		{
 			ItemStack stack = event.getEntityLiving().getActiveItemStack();
 
