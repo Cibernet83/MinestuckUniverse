@@ -19,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -333,6 +334,12 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
             return super.canApplyAtEnchantingTable(stack, enchantment);
 
         return getTool().enchantments.contains(enchantment);
+    }
+
+    @Override
+    public boolean canContinueUsing(ItemStack oldStack, ItemStack newStack)
+    {
+        return oldStack.isItemEqualIgnoreDurability(newStack);
     }
 
     @Override

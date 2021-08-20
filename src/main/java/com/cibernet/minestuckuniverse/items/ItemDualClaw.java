@@ -1,8 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
-import com.cibernet.minestuckuniverse.items.properties.PropertyAbstractClaw;
+import com.cibernet.minestuckuniverse.items.properties.clawkind.IPropertyClaw;
 import com.cibernet.minestuckuniverse.items.properties.PropertyDualWield;
-import com.cibernet.minestuckuniverse.items.properties.PropertyPlural;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -90,8 +89,8 @@ public class ItemDualClaw extends MSUWeaponBaseSweep
         {
         	((ItemDualClaw) stack.getItem()).getProperties(stack).forEach(p ->
 	        {
-	        	if(p instanceof PropertyAbstractClaw)
-	        		((PropertyAbstractClaw) p).onStateChange(player, stack, draw);
+	        	if(p instanceof IPropertyClaw)
+	        		((IPropertyClaw) p).onStateChange(player, stack, draw);
 	        });
         }
     }

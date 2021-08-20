@@ -6,6 +6,11 @@ import com.cibernet.minestuckuniverse.client.models.armor.*;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import com.cibernet.minestuckuniverse.items.properties.*;
+import com.cibernet.minestuckuniverse.items.properties.clawkind.PropertyActionBuff;
+import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyRocketShieldDash;
+import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldEject;
+import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldFire;
+import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldShock;
 import com.cibernet.minestuckuniverse.util.BlockMetaPair;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
@@ -23,10 +28,7 @@ import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.IProjectile;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Enchantments;
-import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.potion.PotionEffect;
@@ -40,7 +42,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 import vazkii.botania.common.block.ModBlocks;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MinestuckUniverseItems
 {
@@ -124,21 +125,34 @@ public class MinestuckUniverseItems
     public static Item oglogothThorn = new MSUWeaponBase(366,5.6, -0.5, 80, "thorn_of_oglogoth", "oglogothThorn").setTool(toolNeedles, 4, 3f).addProperties(new PropertyDualWield());
     public static Item echidnaQuills = new MSUWeaponBase(5, 1, 100, "quill_of_echidna", "echidnaQuill").setTool(toolNeedles, 5, 5f).addProperties(new PropertyDualWield());
 
+    public static Item woodenDoorshield = new MSUShieldBase(340, 12, 0.3f, 5, "wooden_doorshield", "woodenDoorshield").setRepairMaterial(new ItemStack(Blocks.PLANKS));
+    public static Item ironDoorshield = new MSUShieldBase(540, 8, 0.4f, 7, "iron_doorshield", "ironDoorshield").setRepairMaterial(new ItemStack(Items.IRON_INGOT));
+    public static Item clearShield = new MSUShieldBase(180, 20, 0.25f, 5, "clear_shield", "clearShield");
+    public static Item shockerShell = new MSUShieldBase(480, 14, 0.3f, 8, "shocker_shell", "shockerShell").setRepairMaterial(new ItemStack(battery)).addProperties(new PropertyElectric(10, 2, 0, false), new PropertyShieldShock(5, 2, 0.1f, 10, 4, 0.8f));
+    public static Item rocketRiotShield = new MSUShieldBase(450, 6, 0.35f, 7, "rocket_riot_shield", "rocketRiotShield").addProperties(new PropertyRocketShieldDash(0.4f));
+    public static Item ejectorShield = new MSUShieldBase(320, 7, 0.3f, 7, "ejector_shield", "ejectorShield").addProperties(new PropertyShieldEject(4f, 15));
+    public static Item firewall = new MSUShieldBase(320, 7, 0.3f, 7, "firewall", "firewall").addProperties(new PropertyShieldFire(10, 1000, 0.7f, 1f, true));
+
     public static Item loghammer = new MSUWeaponBase(355, 7, -2.8, 7, "loghammer", "loghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial(new ItemStack(Blocks.LOG));
     public static Item overgrownLoghammer = new MSUWeaponBase(210, 7, -2.8, 7, "overgrown_loghammer", "overgrownLoghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial(new ItemStack(Blocks.LOG)).addProperties(new PropertyPlantMend());
     public static Item glowingLoghammer = new MSUWeaponBase(310, 7, -2.8, 7, "glowing_loghammer", "glowingLoghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial(new ItemStack(MinestuckBlocks.glowingLog)).addProperties(new PropertyPotion(new PotionEffect(MobEffects.GLOWING, 200, 0), false, 1));
     public static Item midasMallet = new MSUWeaponBase(415, 6.5D, -2.5D, 15, "midas_mallet", "midasMallet").setTool(toolHammer, 3, 2f).addProperties(new PropertyGristSetter(GristType.Gold));
     public static Item aaaNailShocker = new MSUWeaponBase(325, 7, -2.4, 10,"aaa_nail_shocker", "aaaNailShocker").setTool(toolHammer, 2, 3f).setRepairMaterial(new ItemStack(battery)).addProperties(new PropertyElectric(20, 0, 0.7f, true));
     public static Item highVoltageStormCrusher = new MSUWeaponBase(580, 10, -2.4, 18, "high_voltage_storm_crusher", "highVoltageStormCrusher").setTool(toolHammer, 4, 3.0f).addProperties(new PropertyLightning(8, 1, true, false), new PropertyElectric(60, 8, -1, false));
+
     public static Item hereticusAurum = new MSUItemBase("hereticus_aurum", "hereticusAurum");
+
     public static Item actionClaws = new ItemDualClaw(280, 3.0D, 0.0D, -1.5D, -1.0D, 6, "actionClaws","action_claws").addProperties(new PropertyActionBuff(200, 2.5));
     public static Item candyCornClaws = new ItemDualClaw(310, 4.0D, 0.0D, -1.5D, -1.0D, 6, "candyCornClaws","candy_corn_claws").addProperties(true, new PropertyCandyWeapon());
     public static Item rocketKatars = new MSUWeaponBaseSweep(195, 3, -0.5, 8, "rocket_katars", "rocketKatars").addProperties(new PropertyDualWield(), new PropertyRocketDash(3, 20, 0.3f, 2.5f));
+
     public static Item staffOfOvergrowth = new MSUWeaponBase(455, 6.0f, -1.2, 20, "staff_of_overgrowth", "staffOfOvergrowth").addProperties(new PropertyBlockSwap(overgrowthTransforms, 1), new PropertyPotion(new PotionEffect(MobEffects.POISON, 400, 1), false, 0.4f));
     public static Item goldCane = new MSUItemBase("gold_cane", "goldCane");
     public static Item goldenCuestaff = new MSUItemBase("golden_cuestaff", "goldenCuestaff");
+
     public static Item rubyContrabat = new MSUWeaponBaseSweep(185, 6.5, -2.2, 22, "ruby_contrabat", "rubyContrabat").setTool(toolClub, 3, 4.0f).addProperties(new PropertyGristSetter(GristType.Ruby));
     public static Item homeRunBat = new MSUWeaponBaseSweep(500, 5, -3.9, 10, "home_run_bat", "homeRunBat").setTool(toolClub, 5, 2.0f).addProperties(new PropertyKnockback(15), new PropertySoundOnHit(MSUSoundHandler.homeRunBat, 1, 1.2f));
+
     public static Item dragonCharge = new MSUItemBase("dragon_charge", "dragonCharge");
 
     //Armor
@@ -207,6 +221,14 @@ public class MinestuckUniverseItems
         registerItem(registry, rocketFist);
         registerItem(registry, jawbreaker);
         registerItem(registry, eldrichGauntlet);
+
+        registerItem(registry, clearShield);
+        registerItem(registry, woodenDoorshield);
+        registerItem(registry, ironDoorshield);
+        registerItem(registry, shockerShell);
+        registerItem(registry, rocketRiotShield);
+        registerItem(registry, ejectorShield);
+        registerItem(registry, firewall);
 
         registerCustomRenderedItem(registry, actionClaws);
         registerCustomRenderedItem(registry, candyCornClaws);

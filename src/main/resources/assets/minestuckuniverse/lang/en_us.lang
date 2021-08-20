@@ -188,6 +188,32 @@ item.thunderbirdTalons.tooltip=This weapon speaks to the wind, it tells your opp
 item.archmageDaggers.name=Archmage Dagger
 item.archmageDaggers.name.plural=Archmage Daggers
 item.archmageDaggers.tooltip=These daggers have been infused with raw magic and wizardbeard silk, making them deal magic damage and allows them to release a powerful beam when held on both hands
+item.christopherBlades.name=Blades of the Warrior
+
+item.clearShield.name=Clear Shield
+item.woodenDoorshield.name=Wooden Doorshield
+item.ironDoorshield.name=Iron Doorshield
+item.bladedShield.name=Bladed Shield
+item.bladedShield.tooltip=A shield that's as versatile as it is pointy, not only can it block but it can also do melee damage.
+item.shockerShell.name=Shocker Shell
+item.shockerShell.tooltip=This shield has a chance to zap targets upon a successful parry, truly shocking in comparison to the rest.
+item.chistopherShield.name=Clarity's Ward
+
+item.firewall.name=Firewall
+item.firewall.tooltip=This shield may not monitor your network trafic, but will surely leave those who touch it with third-degree burns!
+item.obsidianShield.name=Obsidian Shield
+item.obsidianShield.tooltip=This shield may be heavy, but it can absorb even the strongest of hits.
+item.rocketRiotShield.name=Rocket Riot Shield
+item.rocketRiotShield.tooltip=Nothing screams more "charge forward!" than a big shield with 4 rockets attached to it.
+item.ejectorShield.name=Ejector Shield
+item.ejectorShield.tooltip=Blocking any attack with this shield will propel you away from the attacker, immediately putting you out of harm's way.
+item.windshield.name=Windshield
+item.windshield.tooltip=You'd expect this shield to protect you from the wind, right?
+item.wallOfThorns.name=Wall of Thorns
+item.livingShield.name=Living Shield
+item.nuclearNeglector.name=Nuclear Neglector
+item.perfectAegis.name=Perfect Aegis
+item.perfectAegis.tooltip=A perfect shield for the perfect fighter, it's perfect parry can perfectly deflect all projectiles and perfectly reflect all the damage dealt.
 
 item.rubyContrabat.name=Ruby Contrabat
 item.homeRunBat.name=Home Run Bat

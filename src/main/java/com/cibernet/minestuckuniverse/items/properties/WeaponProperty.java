@@ -54,7 +54,7 @@ public abstract class WeaponProperty
 	}
 
 	public int getMaxItemUseDuration(ItemStack stack, int duration) {
-		return 0;
+		return duration;
 	}
 
 	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {

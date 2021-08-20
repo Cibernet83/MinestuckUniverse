@@ -20,6 +20,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -306,6 +307,12 @@ public class MSUWeaponBaseSweep extends ItemSword implements IClassedTool, IProp
     @Override
     public MSUToolClass getToolClass() {
         return tool;
+    }
+
+    @Override
+    public boolean canContinueUsing(ItemStack oldStack, ItemStack newStack)
+    {
+        return oldStack.isItemEqualIgnoreDurability(newStack);
     }
 
     @Override

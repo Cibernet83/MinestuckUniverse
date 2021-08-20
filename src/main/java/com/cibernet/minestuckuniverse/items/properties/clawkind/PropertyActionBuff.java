@@ -1,5 +1,6 @@
-package com.cibernet.minestuckuniverse.items.properties;
+package com.cibernet.minestuckuniverse.items.properties.clawkind;
 
+import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class PropertyActionBuff extends PropertyAbstractClaw
+public class PropertyActionBuff extends WeaponProperty implements IPropertyClaw
 {
 	int actionTime;
 	double actionMultiplier;
