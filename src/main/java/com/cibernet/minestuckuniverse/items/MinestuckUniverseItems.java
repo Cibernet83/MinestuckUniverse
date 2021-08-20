@@ -70,6 +70,7 @@ public class MinestuckUniverseItems
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
+    public static Item battery = new MSUItemBase("battery", "battery");
     public static Item yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
     public static Item wizardbeardYarn = new MSUItemBase("wizardbeard_yarn", "wizardbeardYarn");
 
@@ -87,8 +88,7 @@ public class MinestuckUniverseItems
     public static Item skaianMedallion = new ItemWarpMedallion("skaianMedallion", "skaian_medallion", ItemWarpMedallion.EnumTeleportType.SKAIA, 80);
 
     //Weapons
-    public static Item trueUnbreakableKatana = (new MSUWeaponBaseSweep(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).setTool(toolSword, 0, 15.0F);
-    public static Item battery = new MSUItemBase("battery", "battery");
+    public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).addProperties(new PropertySweep()).setTool(toolSword, 0, 15.0F);
     public static ItemBeamBlade batteryBeamBlade = new ItemBeamBlade(345, 6, -2.3, 30, "battery_beam_blade", "batteryBeamBlade").setTool(toolSword, 0, 15.0F);
     public static ItemBeamBlade[] dyedBeamBlade = new ItemBeamBlade[] {
             new ItemBeamBlade(345, 6, -2.3, 30, "battery_beam_blade_white", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.WHITE),
@@ -144,14 +144,14 @@ public class MinestuckUniverseItems
 
     public static Item actionClaws = new ItemDualClaw(280, 3.0D, 0.0D, -1.5D, -1.0D, 6, "actionClaws","action_claws").addProperties(new PropertyActionBuff(200, 2.5));
     public static Item candyCornClaws = new ItemDualClaw(310, 4.0D, 0.0D, -1.5D, -1.0D, 6, "candyCornClaws","candy_corn_claws").addProperties(true, new PropertyCandyWeapon());
-    public static Item rocketKatars = new MSUWeaponBaseSweep(195, 3, -0.5, 8, "rocket_katars", "rocketKatars").addProperties(new PropertyDualWield(), new PropertyRocketDash(3, 20, 0.3f, 2.5f));
+    public static Item rocketKatars = new MSUWeaponBase(195, 3, -0.5, 8, "rocket_katars", "rocketKatars").addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyRocketDash(3, 20, 0.3f, 2.5f));
 
     public static Item staffOfOvergrowth = new MSUWeaponBase(455, 6.0f, -1.2, 20, "staff_of_overgrowth", "staffOfOvergrowth").addProperties(new PropertyBlockSwap(overgrowthTransforms, 1), new PropertyPotion(new PotionEffect(MobEffects.POISON, 400, 1), false, 0.4f));
     public static Item goldCane = new MSUItemBase("gold_cane", "goldCane");
     public static Item goldenCuestaff = new MSUItemBase("golden_cuestaff", "goldenCuestaff");
 
-    public static Item rubyContrabat = new MSUWeaponBaseSweep(185, 6.5, -2.2, 22, "ruby_contrabat", "rubyContrabat").setTool(toolClub, 3, 4.0f).addProperties(new PropertyGristSetter(GristType.Ruby));
-    public static Item homeRunBat = new MSUWeaponBaseSweep(500, 5, -3.9, 10, "home_run_bat", "homeRunBat").setTool(toolClub, 5, 2.0f).addProperties(new PropertyKnockback(15), new PropertySoundOnHit(MSUSoundHandler.homeRunBat, 1, 1.2f));
+    public static Item rubyContrabat = new MSUWeaponBase(185, 6.5, -2.2, 22, "ruby_contrabat", "rubyContrabat").setTool(toolClub, 3, 4.0f).addProperties(new PropertySweep(), new PropertyGristSetter(GristType.Ruby));
+    public static Item homeRunBat = new MSUWeaponBase(500, 5, -3.9, 10, "home_run_bat", "homeRunBat").setTool(toolClub, 5, 2.0f).addProperties(new PropertySweep(), new PropertyKnockback(15), new PropertySoundOnHit(MSUSoundHandler.homeRunBat, 1, 1.2f));
 
     public static Item dragonCharge = new MSUItemBase("dragon_charge", "dragonCharge");
 
@@ -169,8 +169,8 @@ public class MinestuckUniverseItems
     //Overrides
     public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCloth, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
     public static Item catclaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "catClaws",Minestuck.MOD_ID+ ":catclaws");
-    public static Item unbreakableKatana = new MSUWeaponBaseSweep(2200, 7, -2.4D, 20, Minestuck.MOD_ID +":unbreakable_katana", "katana")
-            .setTool(toolSword, 0, 15.0F).setCreativeTab(TabMinestuck.instance);
+    public static Item unbreakableKatana = new MSUWeaponBase(2200, 7, -2.4D, 20, Minestuck.MOD_ID +":unbreakable_katana", "katana")
+            .setTool(toolSword, 0, 15.0F).addProperties(new PropertySweep()).setCreativeTab(TabMinestuck.instance);
     public static Item captcharoidCamera = new ItemCaptcharoidOverride();
 
     @SubscribeEvent

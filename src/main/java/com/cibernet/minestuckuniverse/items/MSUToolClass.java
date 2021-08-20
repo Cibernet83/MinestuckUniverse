@@ -13,6 +13,7 @@ public class MSUToolClass
 {
 	protected List<Material> harvestMaterials = new ArrayList<>();
 	protected List<Enchantment> enchantments = new ArrayList<>();
+	protected List<EnumEnchantmentType> enchantmentTypes = new ArrayList<>();
 	protected List<String> baseTool = new ArrayList<>();
 	
 	public MSUToolClass()
@@ -37,6 +38,7 @@ public class MSUToolClass
 		{
 			harvestMaterials.addAll(cls.harvestMaterials);
 			enchantments.addAll(cls.enchantments);
+			enchantmentTypes.addAll(cls.enchantmentTypes);
 			baseTool.addAll(cls.baseTool);
 		}
 	}
@@ -63,26 +65,38 @@ public class MSUToolClass
 			this.enchantments.add(ench);
 		return this;
 	}
-	
-	
-	
+
 	public MSUToolClass addEnchantments(List<Enchantment> enchantments)
 	{
 		this.enchantments.addAll(enchantments);
 		return this;
 	}
-	
+
 	public MSUToolClass addEnchantments(EnumEnchantmentType... enchantmentTypes)
 	{
-		for(EnumEnchantmentType type : enchantmentTypes)
-		{
-			Enchantment.REGISTRY.forEach(enchantment ->
-			{if(enchantment.type.equals(type)) addEnchantments(enchantment);});
-		}
-		
+		for(EnumEnchantmentType ench : enchantmentTypes)
+			this.enchantmentTypes.add(ench);
 		return this;
 	}
-	
+
+	public boolean canEnchantWith(Enchantment enchantment)
+	{
+		return getEnchantments().contains(enchantment) || getEnchantmentTypes().contains(enchantment.type);
+	}
+
 	public List<Material> getHarvestMaterials() {return harvestMaterials;}
 	public List<Enchantment> getEnchantments() {return enchantments;}
+	public List<EnumEnchantmentType> getEnchantmentTypes() {return enchantmentTypes;}
+
+	public List<Enchantment> getAllEnchantments()
+	{
+		ArrayList<Enchantment> result = new ArrayList<>(getEnchantments());
+
+		 Enchantment.REGISTRY.forEach(ench ->
+		 {
+		 	if(!result.contains(ench) && getEnchantmentTypes().contains(ench.type))
+		 		result.add(ench);
+		 });
+		 return result;
+	}
 }

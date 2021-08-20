@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.items.properties.PropertyElectric;
+import com.cibernet.minestuckuniverse.items.properties.PropertySweep;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.mraof.minestuck.client.util.MinestuckModelManager;
 import net.minecraft.client.Minecraft;
@@ -21,12 +22,12 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemBeamBlade extends MSUWeaponBaseSweep
+public class ItemBeamBlade extends MSUWeaponBase
 {
     public EnumDyeColor color = null;
     public ItemBeamBlade(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName) {
         super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
-        addProperties(new PropertyElectric(10, 2, 0.6f, false));
+        addProperties(new PropertySweep(), new PropertyElectric(10, 2, 0.6f, false));
     }
 
     public ItemBeamBlade setColor(EnumDyeColor color) {this.color = color; return this;}

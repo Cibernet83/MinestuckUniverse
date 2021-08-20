@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.properties.IEnchantableProperty;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -313,7 +314,7 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     {
         if(getTool() == null)
             return super.isEnchantable(stack);
-        return !getTool().getEnchantments().isEmpty() || isDamageable();
+        return !(getTool().getEnchantments().isEmpty() && getTool().getEnchantmentTypes().isEmpty()) || isDamageable();
     }
 
     @Override
@@ -329,6 +330,10 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     {
         if(enchantment.type.equals(EnumEnchantmentType.BREAKABLE))
             return !unbreakable;
+
+        for(WeaponProperty p : getProperties(stack))
+            if(p instanceof IEnchantableProperty && ((IEnchantableProperty) p).canEnchantWith(stack, enchantment))
+                return true;
 
         if(getTool() == null)
             return super.canApplyAtEnchantingTable(stack, enchantment);

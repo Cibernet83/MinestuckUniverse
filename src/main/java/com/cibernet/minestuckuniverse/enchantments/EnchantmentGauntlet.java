@@ -25,7 +25,7 @@ public class EnchantmentGauntlet extends EnchantmentKnockback
 	@Override
 	public boolean canApply(ItemStack stack)
 	{
-		return stack.getItem() instanceof IClassedTool && ((IClassedTool) stack.getItem()).getToolClass().getEnchantments().contains(this);
+		return stack.getItem() instanceof IClassedTool && ((IClassedTool) stack.getItem()).getToolClass().canEnchantWith(this);
 	}
 
 	/**

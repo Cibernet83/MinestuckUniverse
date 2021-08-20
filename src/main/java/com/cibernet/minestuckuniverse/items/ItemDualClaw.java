@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
+import com.cibernet.minestuckuniverse.items.properties.PropertySweep;
 import com.cibernet.minestuckuniverse.items.properties.clawkind.IPropertyClaw;
 import com.cibernet.minestuckuniverse.items.properties.PropertyDualWield;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
@@ -14,7 +15,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemDualClaw extends MSUWeaponBaseSweep
+public class ItemDualClaw extends MSUWeaponBase
 {
     public double damage;
     public double damageSheathed;
@@ -30,7 +31,7 @@ public class ItemDualClaw extends MSUWeaponBaseSweep
         this.attackSpeed = weaponSpeed;
         this.attackSpeedSheathed = weaponSpeedWhileShiethed;
 
-        this.addProperties(new PropertyDualWield());
+        this.addProperties(new PropertySweep(), new PropertyDualWield());
     }
 
     @Override
@@ -96,7 +97,7 @@ public class ItemDualClaw extends MSUWeaponBaseSweep
     }
 
     @Override
-    public MSUWeaponBaseSweep addProperties(WeaponProperty... properties)
+    public MSUWeaponBase addProperties(WeaponProperty... properties)
     {
         List<WeaponProperty> propertiesList = sheathedProperties;
         for(WeaponProperty p : properties)
@@ -110,7 +111,7 @@ public class ItemDualClaw extends MSUWeaponBaseSweep
         return super.addProperties(properties);
     }
 
-    public MSUWeaponBaseSweep addProperties(boolean drawn, WeaponProperty... properties)
+    public MSUWeaponBase addProperties(boolean drawn, WeaponProperty... properties)
     {
         List<WeaponProperty> propertiesList = (drawn ? getProperties() : sheathedProperties);
         for(WeaponProperty p : properties)
