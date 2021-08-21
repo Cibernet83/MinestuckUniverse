@@ -4,7 +4,6 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
 import com.cibernet.minestuckuniverse.client.models.armor.*;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
-import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import com.cibernet.minestuckuniverse.items.armor.ItemDiverHelmet;
 import com.cibernet.minestuckuniverse.items.armor.ItemScarf;
 import com.cibernet.minestuckuniverse.items.armor.ItemWitherproofArmor;
@@ -31,17 +30,12 @@ import com.mraof.minestuck.item.TabMinestuck;
 import com.mraof.minestuck.item.block.ItemTransportalizer;
 import com.mraof.minestuck.util.Pair;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
-import net.minecraft.dispenser.BehaviorProjectileDispense;
-import net.minecraft.dispenser.IPosition;
 import net.minecraft.enchantment.EnumEnchantmentType;
-import net.minecraft.entity.IProjectile;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -78,17 +72,21 @@ public class MinestuckUniverseItems
     public static Item moonstone = new MSUItemBase("moonstone");
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
-    public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
+    public static Item fluorite = new MSUItemBase("fluorite");
     public static Item battery = new MSUItemBase("battery", "battery");
+    public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
     public static Item yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
     public static Item wizardbeardYarn = new MSUThrowableBase("wizardbeard_yarn", "wizardbeardYarn").addProperties(new PropertyMagicDamagePrjctle(6));
 
     //Ghost Items
-    public static Item returnNode = new ItemGhostBlock("return_node_ghost_item", MinestuckBlocks.returnNode);
-    public static Item travelGate = new ItemGhostBlock("travel_gate_ghost_item", MinestuckBlocks.gate);
-    public static Item netherPortal = new ItemGhostBlock("nether_portal_ghost_item", Blocks.PORTAL);
-    public static Item endPortal = new ItemGhostBlock("end_portal_ghost_item", Blocks.END_PORTAL);
-    public static Item endGateway = new ItemGhostBlock("end_gateway_ghost_item", Blocks.END_GATEWAY);
+    public static Item returnNode = new ItemGhost("return_node_ghost_item", MinestuckBlocks.returnNode);
+    public static Item travelGate = new ItemGhost("travel_gate_ghost_item", MinestuckBlocks.gate);
+    public static Item netherPortal = new ItemGhost("nether_portal_ghost_item", Blocks.PORTAL);
+    public static Item endPortal = new ItemGhost("end_portal_ghost_item", Blocks.END_PORTAL);
+    public static Item endGateway = new ItemGhost("end_gateway_ghost_item", Blocks.END_GATEWAY);
+    public static Item sun = new ItemGhost("sun_ghost_item");
+    public static Item moon = new ItemGhost("moon_ghost_item");
+    public static Item skaia = new ItemGhost("skaia_ghost_item");
 
     //Medallions
     public static Item ironMedallion = new MSUItemBase("iron_medallion", "ironMedallion").setMaxStackSize(1);
@@ -193,6 +191,7 @@ public class MinestuckUniverseItems
         registerItem(registry, moonstone);
         registerItem(registry, moonstoneChisel);
         registerItem(registry, zillystoneShard);
+        registerItem(registry, fluorite);
         registerItem(registry, battery);
         registerItem(registry, yarnBall);
         registerItem(registry, wizardbeardYarn);
@@ -203,6 +202,9 @@ public class MinestuckUniverseItems
         registerItem(registry, endPortal);
         registerItem(registry, netherPortal);
         registerItem(registry, endGateway);
+        registerItem(registry, sun);
+        registerItem(registry, moon);
+        registerItem(registry, skaia);
 
         registerItem(registry, diverHelmet);
         registerItem(registry, spikedHelmet);

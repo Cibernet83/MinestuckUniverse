@@ -13,6 +13,9 @@ tile.sbahjBedrock.tooltip=is it rally as hard as bedrok?
 tile.zillystone.name=Zillystone
 tile.zillystone.tooltip=It's hard enough to withstand most conventional means of destruction, yet it looks like it can be chipped away by a magical tool.
 tile.smoothIron.name=Smooth Iron Block
+tile.fluoriteBlock.name=Block of Fluorite
+tile.fluoriteOre.name=Fluorite Ore
+tile.moonstoneOre.name=Moonstone Ore
 tile.wizardStatue.name=Wizard Statue
 tile.netherReactorCore.name=Nether Reactor Core
 tile.netherReactorCore.tooltip=A relic from the past! You wonder if it still works.
@@ -95,6 +98,7 @@ item.zillystoneShard.name=Zillystone Shard
 item.zillystoneShard.tooltip=You've managed to chip this shard away from a Zillystone block, but what will you do with it next?
 item.battery.name=Battery
 item.dungeonKey.name=Dungeon Key
+item.fluorite.name=Fluorite Chunk
 
 item.yarnBall.name=Ball of Yarn
 item.yarnBall.white.name=Ball of White Yarn
@@ -128,6 +132,9 @@ item.return_node_ghost_item.name=Return Node
 item.travel_gate_ghost_item.name=Gate
 item.end_portal_ghost_item.name=End Portal
 item.end_gateway_ghost_item.name=End Gateway
+item.sun_ghost_item.name=Sun
+item.moon_ghost_item.name=Moon
+item.skaia_ghost_item.name=skaia
 
 item.murica.name='murica
 item.muricaSouth.name='murica

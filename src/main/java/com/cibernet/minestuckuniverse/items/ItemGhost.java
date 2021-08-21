@@ -10,18 +10,24 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.TreeMap;
 
-public class ItemGhostBlock extends MSUItemBase
+public class ItemGhost extends MSUItemBase
 {
     private final Block block;
 
     public static final TreeMap<BlockEntry, Item> ghostItems = new TreeMap<>();
 
-    public ItemGhostBlock(String regName, Block block)
+    public ItemGhost(String regName, Block block)
     {
         super(regName);
         this.block = block;
         setUnlocalizedName(regName);
-        ghostItems.put(new BlockEntry(block), this);
+        if(block != null)
+            ghostItems.put(new BlockEntry(block), this);
+    }
+
+    public ItemGhost(String name)
+    {
+        this(name, null);
     }
 
     public static Item get(Block block)
@@ -37,13 +43,13 @@ public class ItemGhostBlock extends MSUItemBase
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        return block.getUnlocalizedName().equals("tile.null") ? super.getUnlocalizedName(stack) : this.block.getUnlocalizedName();
+        return block == null || block.getUnlocalizedName().equals("tile.null") ? super.getUnlocalizedName(stack) : this.block.getUnlocalizedName();
     }
 
     @Override
     public String getUnlocalizedName()
     {
-        return block.getUnlocalizedName().equals("tile.null") ? super.getUnlocalizedName() : this.block.getUnlocalizedName();
+        return block == null || block.getUnlocalizedName().equals("tile.null") ? super.getUnlocalizedName() : this.block.getUnlocalizedName();
     }
 
     @Override
