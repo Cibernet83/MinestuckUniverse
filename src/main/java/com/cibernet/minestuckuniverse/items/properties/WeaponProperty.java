@@ -92,4 +92,9 @@ public abstract class WeaponProperty
 	public float onCrit(ItemStack stack, EntityPlayer player, EntityLivingBase target, float damageModifier) {
 		return damageModifier;
 	}
+
+	public float damageAgainstEntity(ItemStack stack, EntityLivingBase player, EntityLivingBase target, float amount)
+	{
+		return amount;
+	}
 }

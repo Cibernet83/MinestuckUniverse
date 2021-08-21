@@ -135,7 +135,7 @@ item.end_gateway_ghost_item.name=End Gateway
 item.sun_ghost_item.name=Sun
 item.green_sun_ghost_item.name=Green Sun
 item.moon_ghost_item.name=Moon
-item.skaia_ghost_item.name=skaia
+item.skaia_ghost_item.name=Skaia
 
 item.murica.name='murica
 item.muricaSouth.name='murica
@@ -145,6 +145,7 @@ item.katana.name=Obsidian Katana
 item.unbreakableKatana.name=Unbreakable Katana
 item.unbreakableKatana.tooltip=A real hard sword for a real hard dude. It was said to be forged by an ancient Otaku Master over the heat of a roaring manga fire.
 
+item.bloodKatana.name=Bleeding Katana
 item.lightbringer.name=The Lightbringer
 item.batteryBeamBlade.name=Battery Beam Blade
 item.batteryBeamBlade.tooltip=lightsaber? what lightsaber? this isn't a lightsaber, it's a completely unique idea!
@@ -229,13 +230,19 @@ item.rubyContrabat.name=Ruby Contrabat
 item.homeRunBat.name=Home Run Bat
 item.dynamiteStick.name=Dynamite Stick
 item.dynamiteStick.tooltip=Woah hey, be careful with that. Hitting something with it might cause it to explode.
+item.insomniacsAid.name=Insomniac's Aid
+item.cranialEnder.name=Cranial Ender
 
 item.goldCane.name=Gold Cane
 item.goldenCuestaff.name=Golden Cuestaff
 item.staffOfOvergrowth.name=Staff of Overgrowth
+item.atomicIrradiator.name=Atomic Irradiator
 
 item.hereticusAurum.name=Hereticus Aurum
 item.hereticusAurum.tooltip=Did the Dersites get their Latin correct? I dunno, probably not. Go ask a Roman.
+
+item.gravediggerShovel.name=Gravedigger's Shovel
+item.gravediggerShovel.tooltip=A tool suited for people taking over the night shift, deals extra damage against undead mobs.
 
 item.fancyGlove.name=Fancy Glove
 item.fancyGlove.tooltip=A nice looking glove, it doesn't do much damage, but it sure looks fancy!

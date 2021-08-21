@@ -15,6 +15,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -38,6 +39,23 @@ public class PropertyEventHandler
 			List<WeaponProperty> propertyList = ((IPropertyWeapon) stack.getItem()).getProperties(stack);
 			for(WeaponProperty p : propertyList)
 				event.setDamageModifier(p.onCrit(event.getEntityPlayer().getHeldItemMainhand(), event.getEntityPlayer(), (EntityLivingBase) event.getTarget(), event.getDamageModifier()));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onLivingHurt(LivingHurtEvent event)
+	{
+		if(event.getSource().getImmediateSource() instanceof EntityLivingBase)
+		{
+			ItemStack stack = ((EntityLivingBase) event.getSource().getImmediateSource()).getHeldItemMainhand();
+
+			if(stack.getItem() instanceof IPropertyWeapon)
+			{
+				List<WeaponProperty> propertyList = ((IPropertyWeapon) stack.getItem()).getProperties(stack);
+				for(WeaponProperty p : propertyList)
+					event.setAmount(p.damageAgainstEntity(stack, (EntityLivingBase) event.getSource().getImmediateSource(), event.getEntityLiving(), event.getAmount()));
+			}
+
 		}
 	}
 
