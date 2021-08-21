@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
  * This event is {@link Cancelable}.<br>
  * The effect will count as successful if the event is cancelled, consuming one piece of Space Salt.<br>
  **/
+@Cancelable
 public class SpaceSaltEffectEvent extends Event
 {
 	private final BlockPos blockPos;

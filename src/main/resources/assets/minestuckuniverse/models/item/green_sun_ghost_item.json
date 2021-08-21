@@ -3,8 +3,8 @@
 	"parent": "block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "minestuckuniverse:models/sun",
-		"particle": "minestuckuniverse:models/sun"
+		"0": "minestuckuniverse:models/green_sun",
+		"particle": "minestuckuniverse:models/green_sun"
 	},
 	"elements": [
 		{

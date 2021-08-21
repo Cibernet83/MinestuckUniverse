@@ -133,6 +133,7 @@ item.travel_gate_ghost_item.name=Gate
 item.end_portal_ghost_item.name=End Portal
 item.end_gateway_ghost_item.name=End Gateway
 item.sun_ghost_item.name=Sun
+item.green_sun_ghost_item.name=Green Sun
 item.moon_ghost_item.name=Moon
 item.skaia_ghost_item.name=skaia
 

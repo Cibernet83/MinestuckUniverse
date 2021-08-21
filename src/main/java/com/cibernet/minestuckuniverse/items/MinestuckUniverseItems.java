@@ -85,6 +85,7 @@ public class MinestuckUniverseItems
     public static Item endPortal = new ItemGhost("end_portal_ghost_item", Blocks.END_PORTAL);
     public static Item endGateway = new ItemGhost("end_gateway_ghost_item", Blocks.END_GATEWAY);
     public static Item sun = new ItemGhost("sun_ghost_item");
+    public static Item greenSun = new ItemGhost("green_sun_ghost_item");
     public static Item moon = new ItemGhost("moon_ghost_item");
     public static Item skaia = new ItemGhost("skaia_ghost_item");
 
@@ -205,6 +206,7 @@ public class MinestuckUniverseItems
         registerItem(registry, sun);
         registerItem(registry, moon);
         registerItem(registry, skaia);
+        registerItem(registry, greenSun);
 
         registerItem(registry, diverHelmet);
         registerItem(registry, spikedHelmet);

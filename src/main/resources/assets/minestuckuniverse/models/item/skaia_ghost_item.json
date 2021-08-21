@@ -1,6 +1,63 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minestuckuniverse:items/skaia"
-    }
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "minestuckuniverse:models/skaia_inner",
+		"1": "minestuckuniverse:models/skaia_outer",
+		"particle": "minestuckuniverse:models/skaia_inner"
+	},
+	"elements": [
+		{
+			"from": [4, 4, 4],
+			"to": [12, 12, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 4, 4]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"south": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"down": {"uv": [0, 0, 8, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-3, -3, 8],
+			"to": [19, 19, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-3, -3, 3]},
+			"faces": {
+				"north": {"uv": [2.5, 2.5, 13.5, 13.5], "texture": "#1"},
+				"south": {"uv": [2.5, 2.5, 13.5, 13.5], "texture": "#1"}
+			}
+		},
+		{
+			"from": [8, -3, -3],
+			"to": [8, 19, 19],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, -3, -3]},
+			"faces": {
+				"east": {"uv": [2.5, 2.5, 13.5, 13.5], "texture": "#1"},
+				"west": {"uv": [2.5, 2.5, 13.5, 13.5], "texture": "#1"}
+			}
+		},
+		{
+			"from": [-3, 8, -3],
+			"to": [19, 8, 19],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-3, 13, -3]},
+			"faces": {
+				"up": {"uv": [2.5, 2.5, 13.5, 13.5], "rotation": 180, "texture": "#1"},
+				"down": {"uv": [2.5, 2.5, 13.5, 13.5], "texture": "#1"}
+			}
+		}
+	],
+	"display": {
+		"ground": {
+			"translation": [0, 10, 0]
+		},
+		"gui": {
+			"scale": [0.65, 0.65, 0.65]
+		},
+		"fixed": {
+			"translation": [0, 0, -0.25]
+		}
+	}
 }

@@ -1,6 +1,38 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minestuckuniverse:items/travel_gate"
-    }
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "minestuckuniverse:items/travel_gate",
+		"1": "minestuckuniverse:items/return_node",
+		"particle": "minestuckuniverse:items/travel_gate"
+	},
+	"elements": [
+		{
+			"from": [-8, 9, -8],
+			"to": [24, 9, 24],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 9, 8]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-8, 7, -8],
+			"to": [24, 7, 24],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 7, 8]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		}
+	],
+	"display": {
+		"ground": {
+			"translation": [0, 5, 0]
+		},
+		"gui": {
+			"rotation": [-90, 0, 0],
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
 }

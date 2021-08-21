@@ -1,6 +1,26 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minecraft:entity/end_portal"
-    }
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"particle": "entity/end_portal",
+		"portal": "entity/end_portal"
+	},
+	"elements": [
+		{
+			"from": [0, 8, 0],
+			"to": [16, 8, 16],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 8, 8]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#portal"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [90, 0, 0]
+		},
+		"fixed": {
+			"rotation": [-90, 0, 0]
+		}
+	}
 }
