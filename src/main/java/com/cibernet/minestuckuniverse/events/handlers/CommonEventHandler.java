@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.events.handlers;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
+import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyRandomDamage;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
@@ -18,11 +19,13 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
@@ -270,5 +273,12 @@ public class CommonEventHandler
 	{
 		if(event.getAttacker() instanceof EntityPlayer)
 			event.setStrength(event.getStrength() + Math.max(0, 0.5f*(EnchantmentHelper.getMaxEnchantmentLevel(MSUEnchantments.SUPERPUNCH, (EntityLivingBase) event.getAttacker())-1)));
+	}
+
+	@SubscribeEvent
+	public static void playSoundEvent(PlaySoundAtEntityEvent entityEvent)
+	{
+		if(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC.equals(entityEvent.getSound()) && entityEvent.getEntity() instanceof EntityPlayer && ((EntityPlayer) entityEvent.getEntity()).getActiveItemStack().getItem() instanceof MSUItemBase)
+			entityEvent.setCanceled(true);
 	}
 }

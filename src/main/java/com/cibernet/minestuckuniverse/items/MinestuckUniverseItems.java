@@ -5,12 +5,21 @@ import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
 import com.cibernet.minestuckuniverse.client.models.armor.*;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
+import com.cibernet.minestuckuniverse.items.armor.ItemDiverHelmet;
+import com.cibernet.minestuckuniverse.items.armor.ItemScarf;
+import com.cibernet.minestuckuniverse.items.armor.ItemWitherproofArmor;
+import com.cibernet.minestuckuniverse.items.armor.MSUArmorBase;
 import com.cibernet.minestuckuniverse.items.properties.*;
 import com.cibernet.minestuckuniverse.items.properties.clawkind.PropertyActionBuff;
+import com.cibernet.minestuckuniverse.items.properties.prjctilekind.PropertyMagicDamagePrjctle;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyRocketShieldDash;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldEject;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldFire;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldShock;
+import com.cibernet.minestuckuniverse.items.weapons.ItemBeamBlade;
+import com.cibernet.minestuckuniverse.items.weapons.ItemDualClaw;
+import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
+import com.cibernet.minestuckuniverse.items.weapons.MSUWeaponBase;
 import com.cibernet.minestuckuniverse.util.BlockMetaPair;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
@@ -72,7 +81,7 @@ public class MinestuckUniverseItems
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
     public static Item battery = new MSUItemBase("battery", "battery");
     public static Item yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
-    public static Item wizardbeardYarn = new MSUItemBase("wizardbeard_yarn", "wizardbeardYarn");
+    public static Item wizardbeardYarn = new MSUThrowableBase("wizardbeard_yarn", "wizardbeardYarn").addProperties(new PropertyMagicDamagePrjctle(6));
 
     //Ghost Items
     public static Item returnNode = new ItemGhostBlock("return_node_ghost_item", MinestuckBlocks.returnNode);
@@ -153,7 +162,7 @@ public class MinestuckUniverseItems
     public static Item rubyContrabat = new MSUWeaponBase(185, 6.5, -2.2, 22, "ruby_contrabat", "rubyContrabat").setTool(toolClub, 3, 4.0f).addProperties(new PropertySweep(), new PropertyGristSetter(GristType.Ruby));
     public static Item homeRunBat = new MSUWeaponBase(500, 5, -3.9, 10, "home_run_bat", "homeRunBat").setTool(toolClub, 5, 2.0f).addProperties(new PropertySweep(), new PropertyKnockback(15), new PropertySoundOnHit(MSUSoundHandler.homeRunBat, 1, 1.2f));
 
-    public static Item dragonCharge = new MSUItemBase("dragon_charge", "dragonCharge");
+    public static Item dragonCharge = new ItemDragonCharge("dragon_charge", "dragonCharge");
 
     //Armor
     public static MSUArmorBase diverHelmet = new ItemDiverHelmet(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
@@ -171,7 +180,6 @@ public class MinestuckUniverseItems
     public static Item catclaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "catClaws",Minestuck.MOD_ID+ ":catclaws");
     public static Item unbreakableKatana = new MSUWeaponBase(2200, 7, -2.4D, 20, Minestuck.MOD_ID +":unbreakable_katana", "katana")
             .setTool(toolSword, 0, 15.0F).addProperties(new PropertySweep()).setCreativeTab(TabMinestuck.instance);
-    public static Item captcharoidCamera = new ItemCaptcharoidOverride();
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -180,7 +188,6 @@ public class MinestuckUniverseItems
 
         registry.register(catclaws.setRegistryName(Minestuck.MOD_ID, "catclaws"));
         registry.register(unbreakableKatana.setRegistryName(Minestuck.MOD_ID, "unbreakable_katana"));
-	    registry.register(captcharoidCamera.setRegistryName(Minestuck.MOD_ID, "captcharoid_camera"));
 	    registry.register(crumplyHat.setRegistryName(Minestuck.MOD_ID, "crumply_hat"));
 
         registerItem(registry, moonstone);
@@ -269,20 +276,6 @@ public class MinestuckUniverseItems
         //Blocks
         registerItemBlocks(registry);
 
-        //Item Mods
-
-        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(yarnBall, new BehaviorProjectileDispense()
-        {
-            /**
-             * Return the projectile entity spawned by this dispense behavior.
-             */
-            protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn)
-            {
-                ItemStack thrownStack = stackIn.copy();
-                thrownStack.setCount(1);
-                return new EntityMSUThrowable(worldIn, position.getX(), position.getY(), position.getZ(), thrownStack);
-            }
-        });
     }
 
     public static void setPostInitVariables()

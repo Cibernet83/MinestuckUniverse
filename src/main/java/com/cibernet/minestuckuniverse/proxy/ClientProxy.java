@@ -2,7 +2,7 @@ package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.client.render.RenderHologram;
 import com.cibernet.minestuckuniverse.client.render.ThrowableRenderFactory;
-import com.cibernet.minestuckuniverse.items.ItemBeamBlade;
+import com.cibernet.minestuckuniverse.items.weapons.ItemBeamBlade;
 import com.cibernet.minestuckuniverse.items.ItemWarpMedallion;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;

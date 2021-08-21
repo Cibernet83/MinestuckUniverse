@@ -1,7 +1,7 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
-import com.cibernet.minestuckuniverse.items.MSUShieldBase;
+import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
 import com.cibernet.minestuckuniverse.items.properties.PropertyGristSetter;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;

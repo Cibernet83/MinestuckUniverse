@@ -1,6 +1,9 @@
-package com.cibernet.minestuckuniverse.items;
+package com.cibernet.minestuckuniverse.items.weapons;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.IClassedTool;
+import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
+import com.cibernet.minestuckuniverse.items.MSUToolClass;
 import com.cibernet.minestuckuniverse.items.properties.IEnchantableProperty;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.google.common.collect.HashMultimap;
@@ -20,7 +23,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -338,7 +340,7 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
         if(getTool() == null)
             return super.canApplyAtEnchantingTable(stack, enchantment);
 
-        return getTool().enchantments.contains(enchantment);
+        return getTool().canEnchantWith(enchantment);
     }
 
     @Override

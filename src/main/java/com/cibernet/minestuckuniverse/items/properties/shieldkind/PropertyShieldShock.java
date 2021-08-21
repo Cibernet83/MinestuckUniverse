@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.items.properties.shieldkind;
 
-import com.cibernet.minestuckuniverse.items.MSUShieldBase;
+import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
 import com.cibernet.minestuckuniverse.items.properties.PropertyShock;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import net.minecraft.entity.EntityLivingBase;

@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.items;
+package com.cibernet.minestuckuniverse.items.armor;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

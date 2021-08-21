@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.items;
+package com.cibernet.minestuckuniverse.items.armor;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import net.minecraft.creativetab.CreativeTabs;

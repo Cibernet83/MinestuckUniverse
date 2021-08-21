@@ -1,7 +1,8 @@
-package com.cibernet.minestuckuniverse.items;
+package com.cibernet.minestuckuniverse.items.armor;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.client.model.ModelBiped;

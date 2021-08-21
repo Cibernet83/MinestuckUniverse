@@ -1,16 +1,15 @@
-package com.cibernet.minestuckuniverse.items;
+package com.cibernet.minestuckuniverse.items.weapons;
 
+import com.cibernet.minestuckuniverse.items.MSUToolClass;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyElectric;
 import com.cibernet.minestuckuniverse.items.properties.PropertySweep;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
-import com.mraof.minestuck.client.util.MinestuckModelManager;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;

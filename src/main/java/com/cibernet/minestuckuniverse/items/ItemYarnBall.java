@@ -15,7 +15,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemYarnBall extends MSUItemBase
+public class ItemYarnBall extends MSUThrowableBase
 {
     public ItemYarnBall(String regName, String unlocName)
     {
@@ -66,28 +66,5 @@ public class ItemYarnBall extends MSUItemBase
             return EnumActionResult.SUCCESS;
         }
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-    }
-
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
-    {
-        ItemStack stack = playerIn.getHeldItem(handIn);
-
-        if (!worldIn.isRemote)
-        {
-            ItemStack thrownStack = stack.copy();
-            thrownStack.setCount(1);
-
-            EntityMSUThrowable proj = new EntityMSUThrowable(worldIn, playerIn, thrownStack);
-            proj.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0, 1.5F, 1.0F);
-            worldIn.spawnEntity(proj);
-        }
-
-        if (!playerIn.capabilities.isCreativeMode)
-            stack.shrink(1);
-        worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-
-        playerIn.addStat(StatList.getObjectUseStats(this));
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
     }
 }

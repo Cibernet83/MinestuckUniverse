@@ -3,7 +3,7 @@ package com.cibernet.minestuckuniverse.items;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
 import com.cibernet.minestuckuniverse.items.properties.PropertyDualWield;
-import com.cibernet.minestuckuniverse.items.properties.PropertyPlural;
+import com.cibernet.minestuckuniverse.items.weapons.MSUWeaponBase;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

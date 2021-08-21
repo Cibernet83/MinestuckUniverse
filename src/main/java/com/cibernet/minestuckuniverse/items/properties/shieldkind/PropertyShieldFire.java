@@ -1,12 +1,10 @@
 package com.cibernet.minestuckuniverse.items.properties.shieldkind;
 
-import com.cibernet.minestuckuniverse.items.MSUShieldBase;
-import com.cibernet.minestuckuniverse.items.properties.PropertyShock;
+import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
