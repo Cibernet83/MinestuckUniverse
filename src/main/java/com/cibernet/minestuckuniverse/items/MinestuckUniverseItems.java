@@ -100,7 +100,7 @@ public class MinestuckUniverseItems
 
     //Bladekind
     public static Item trueUnbreakableKatana = (new MSUWeaponBase(-1, 7.0D, -2.35D, 20, "true_unbreakable_katana", "unbreakableKatana")).addProperties(new PropertySweep()).setTool(toolSword, 0, 15.0F);
-    public static Item bloodKatana = (new MSUWeaponBase(450, 9.0D, -2.3D, 10, "blood_katana", "bloodKatana")).addProperties(new PropertySweep()).setTool(toolSword, 0, 15.0F);
+    public static Item bloodKatana = (new ItemBloodWeapon(450, 9.0D, -2.3D, 10, "blood_katana", "bloodKatana")).addProperties(new PropertySweep()).setTool(toolSword, 0, 15.0F);
     public static ItemBeamBlade batteryBeamBlade = new ItemBeamBlade(345, 6, -2.3, 30, "battery_beam_blade", "batteryBeamBlade").setTool(toolSword, 0, 15.0F);
     public static ItemBeamBlade[] dyedBeamBlade = new ItemBeamBlade[] {
             new ItemBeamBlade(345, 6, -2.3, 30, "battery_beam_blade_white", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.WHITE),
@@ -176,7 +176,6 @@ public class MinestuckUniverseItems
     public static Item rubyContrabat = new MSUWeaponBase(185, 6.5, -2.2, 22, "ruby_contrabat", "rubyContrabat").setTool(toolClub, 3, 4.0f).addProperties(new PropertySweep(), new PropertyGristSetter(GristType.Ruby));
     public static Item homeRunBat = new MSUWeaponBase(500, 5, -3.9, 10, "home_run_bat", "homeRunBat").setTool(toolClub, 5, 2.0f).addProperties(new PropertySweep(), new PropertyKnockback(15), new PropertySoundOnHit(MSUSoundHandler.homeRunBat, 1, 1.2f));
     public static Item dynamiteStick = new MSUWeaponBase(110, 8, -2.2, 8, "dynamite_stick", "dynamiteStick").setTool(toolClub, 1, 2.0f).addProperties(new PropertySweep(), new PropertyExplode(2.5f, 1, true));
-    public static Item insomniacsAid = new MSUWeaponBase(210, 7, -2.2, 9, "insomniacs_aid", "insomniacsAid").setTool(toolClub, 2, 2.0f).addProperties(new PropertySweep(), new PropertyDaytimeBasedDamage(2, false));
 
     //Prjctilekind
     public static Item dragonCharge = new ItemDragonCharge("dragon_charge", "dragonCharge");
@@ -285,7 +284,6 @@ public class MinestuckUniverseItems
         registerItem(registry, rubyContrabat);
         registerItem(registry, homeRunBat);
         registerItem(registry, dynamiteStick);
-        registerItem(registry, insomniacsAid);
 
         registerItem(registry, staffOfOvergrowth);
         registerItem(registry, atomicIrradiator);

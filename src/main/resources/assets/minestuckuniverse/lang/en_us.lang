@@ -348,6 +348,7 @@ subtitle.minestuckuniverse.homeRunBat=Home Run!
 death.attack.minestuckuniverse.shock=%s was zapped to death by %s
 death.attack.minestuckuniverse.shock.item=%s was zapped to death by %s using %s
 death.attack.minestuckuniverse.shock.self=%s doesn't know what "Caution: High Voltage" means
+death.attack.minestuckuniverse.bloodSword=%s bled to death
 
 item.banner.msu_light.black=Black Light Symbol
 item.banner.msu_light.red=Red Light Symbol
