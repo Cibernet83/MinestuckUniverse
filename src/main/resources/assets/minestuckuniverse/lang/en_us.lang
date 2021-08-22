@@ -72,6 +72,21 @@ item.archmageHat.tooltip=Weaved by the most skilled knitter, using threads from 
 item.cozySweater.name=Cozy Sweater
 item.cozySweater.tooltip=Made with the ultimate weapon against evil, the power of l-l-liking someone a lot.
 
+item.rubberBoots.name=Rubber Boots
+item.rubberBoots.tooltip=The average boots for the average worker, they're perfect at insulating electric shocks as long as they're not wet.
+item.bunnySlippers.name=Bunny Slippers
+item.moonShoes.name=Moon Shoes
+item.moonShoes.tooltip=Who needs a fancy pogo weapon when you've got these sick kicks?
+item.solarShoes.name=Solar Shoes
+item.solarShoes.tooltip=Shoes so bouncy they'll blast you off into the sun, try not to get burned!
+item.airJordans.name=Air Jordans
+item.airJordans.tooltip=Wearing these grants you the ability to jump in midair and negates all fall damage, now you know it's definitely gotta be the soes.
+item.airJordansCobalt.name=Air Jordans Cobalt
+item.airJordansCobalt.tooltip=Wearing these grants you the ability to jump in midair and negates all fall damage, now you know it's definitely gotta be the soes.
+item.windWalkers.name=Wind Walkers
+item.windWalkers.tooltip=These magical boots let you cruise through the air as you would in the ground, perfect for making long jumps or platforming through floating islands.
+item.rocketBoots.name=Rocket Boots
+
 item.scarf.black.name=Black Scarf
 item.scarf.blue.name=Blue Scarf
 item.scarf.brown.name=Brown Scarf

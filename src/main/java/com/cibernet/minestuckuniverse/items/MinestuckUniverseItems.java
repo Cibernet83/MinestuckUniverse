@@ -54,7 +54,11 @@ public class MinestuckUniverseItems
     //Armor Materials
     public static ItemArmor.ArmorMaterial materialDiverHelmet = EnumHelper.addArmorMaterial("DIVER_HELMET", MinestuckUniverse.MODID+":diver_helmet", 120, new int[] {0, 0, 0, 3}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
     public static ItemArmor.ArmorMaterial materialSpikedHelmet = EnumHelper.addArmorMaterial("SPIKED_HELMET", MinestuckUniverse.MODID+":spiked_diver_helmet", 230, new int[] {0, 0, 0, 6}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
-    public static ItemArmor.ArmorMaterial materialMetal = EnumHelper.addArmorMaterial("METAL", MinestuckUniverse.MODID+":metal", 200, new int[] {0, 0, 0, 4}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+    public static ItemArmor.ArmorMaterial materialMetal = EnumHelper.addArmorMaterial("METAL", MinestuckUniverse.MODID+":metal", 200, new int[] {2, 0, 0, 4}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+    public static ItemArmor.ArmorMaterial materialRubber = EnumHelper.addArmorMaterial("RUBBER", MinestuckUniverse.MODID+":rubber", 240, new int[] {1, 2, 3, 1}, 5, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
+    public static ItemArmor.ArmorMaterial materialSunShoes = EnumHelper.addArmorMaterial("SOLAR", MinestuckUniverse.MODID+":solar", 240, new int[] {3, 0, 0, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F);
+    public static ItemArmor.ArmorMaterial materialWindWalkers = EnumHelper.addArmorMaterial("WIND_WALKERS", MinestuckUniverse.MODID+":sun_shoes", 240, new int[] {3, 0, 0, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
+    public static ItemArmor.ArmorMaterial materialCobalt = EnumHelper.addArmorMaterial("COBALT", MinestuckUniverse.MODID+":cobalt", 640, new int[] {1, 0, 0, 2}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.1F);
     public static ItemArmor.ArmorMaterial materialCloth = EnumHelper.addArmorMaterial("CLOTH", MinestuckUniverse.MODID+":cloth", -1, new int[] {0, 0, 0, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
 
     //Tool Classes
@@ -192,7 +196,15 @@ public class MinestuckUniverseItems
     public static MSUArmorBase archmageHat = new MSUArmorBase(500, materialCloth,0,EntityEquipmentSlot.HEAD,"archmageHat", "archmage_hat");
     public static MSUArmorBase cozySweater = new ItemWitherproofArmor(60, materialCloth,0,EntityEquipmentSlot.CHEST,"cozySweater", "cozy_sweater");
     public static MSUArmorBase scarf = new ItemScarf(materialCloth,0,EntityEquipmentSlot.HEAD,"scarf", "scarf");
-    public static Item rocketWings = new MSUItemBase("rocket_wings");
+    public static Item rocketWings = new MSUItemBase("rocket_wings", "rocketWings");
+    public static MSUArmorBase rubberBoots = new MSUArmorBase(materialRubber,0,EntityEquipmentSlot.FEET,"rubberBoots", "rubber_boots");
+    public static MSUArmorBase bunnySlippers = new MSUArmorBase(materialCloth,0,EntityEquipmentSlot.FEET,"bunnySlippers", "bunny_slippers");
+    public static MSUArmorBase moonShoes = new ItemPogoBoots(1.1f, materialRubber,0,"moonShoes", "moon_shoes");
+    public static MSUArmorBase sunShoes = new ItemPogoBoots(1.6f, materialSunShoes,0,"solarShoes", "solar_shoes").setSolar();
+    public static MSUArmorBase rocketBoots = new MSUArmorBase(350, materialSunShoes,0,EntityEquipmentSlot.FEET,"rocketBoots", "rocket_boots");
+    public static MSUArmorBase windWalkers = new MSUArmorBase(283, materialWindWalkers,0,EntityEquipmentSlot.FEET,"windWalkers", "wind_walkers");
+    public static MSUArmorBase airJordans = new MSUArmorBase(230, materialRubber,0,EntityEquipmentSlot.FEET,"airJordans", "air_jordans");
+    public static MSUArmorBase cobaltJordans = new MSUArmorBase(480, materialCobalt,0,EntityEquipmentSlot.FEET,"airJordansCobalt", "air_jordans_cobalt");
 
     //Overrides
     public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCloth, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
@@ -236,6 +248,16 @@ public class MinestuckUniverseItems
         registerItem(registry, archmageHat);
         registerItem(registry, cozySweater);
         registerItem(registry, scarf);
+
+        registerItem(registry, bunnySlippers);
+        registerItem(registry, rubberBoots);
+        registerItem(registry, moonShoes);
+        registerItem(registry, sunShoes);
+        registerItem(registry, airJordans);
+        registerItem(registry, cobaltJordans);
+        registerItem(registry, rocketBoots);
+        registerItem(registry, windWalkers);
+
         registerItem(registry, rocketWings);
 
         registerItem(registry, ironMedallion);

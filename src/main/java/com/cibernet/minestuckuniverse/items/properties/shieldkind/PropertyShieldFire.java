@@ -81,7 +81,7 @@ public class PropertyShieldFire extends WeaponProperty implements IPropertyShiel
 	public void onHitWhileShielding(ItemStack stack, EntityLivingBase player, DamageSource source, float damage, boolean blocked)
 	{
 		if(isLit(stack) && blocked && source.getImmediateSource() != null && (player.world.rand.nextFloat() < chance))
-			source.getImmediateSource().setFire(fireTicks);
+			source.getImmediateSource().setFire(fireTicks/20);
 	}
 
 	@Override
