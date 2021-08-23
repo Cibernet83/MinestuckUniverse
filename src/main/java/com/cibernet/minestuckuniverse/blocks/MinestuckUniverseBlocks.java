@@ -11,12 +11,20 @@ import com.mraof.minestuck.block.BlockDecor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -97,6 +105,19 @@ public class MinestuckUniverseBlocks
 	public static Block dungeonShield = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.CREATIVE_SHOCK, 40, 0), "dungeon_shield", "dungeonShield");
 	public static Block flightBeacon = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.SKYHBOUND, 40, 0), "flight_beacon", "flightBeacon");
 	public static Block flightInhibitor = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.EARTHBOUND, 40, 0), "flight_inhibitor", "flightInhibitor");
+
+	public static Block uniqueObject = new MSUBlockBase(Material.CORAL, MapColor.DIAMOND, "unique_object", "uniqueObject");
+	public static Block artifact = new MSUBlockBase(Material.FIRE, MapColor.PURPLE, "artifact", "artifact")
+	{
+		@Override
+		public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {}
+
+		@Nullable
+		@Override
+		public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+			return NULL_AABB;
+		}
+	};
 
 	//Thaumcraft
     public static Block thaumChasis = new MSUBlockBase(Material.IRON, "thaumic_machine_frame", "thaumChasis");
@@ -183,6 +204,9 @@ public class MinestuckUniverseBlocks
         
         if(MinestuckUniverse.isBotaniaLoaded)
 			registerBlock(registry, gristBlockMana, true);
+
+	    registerBlock(registry, artifact, true);
+	    registerBlock(registry, uniqueObject, true);
     }
     
     private static Block registerBlock(IForgeRegistry<Block> registry, Block block, boolean hasItem)

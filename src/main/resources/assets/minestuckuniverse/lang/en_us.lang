@@ -58,6 +58,8 @@ tile.porkhollowATM.name=Porkhollow ATM
 tile.boondollarRegister.name=Boondollar Register
 
 tile.magicBlock.name=Perfectly Magical Object
+tile.uniqueObject.name=Perfectly Unique Object
+tile.artifact.name=§kArtifact
 
 item.diverHelmet.name=Diver Helmet
 item.diverHelmet.tooltip=A Diving Helmet for all your diving needs, this piece of headgear lets traverse the depths of the ocean without needing to worry about oxygen.

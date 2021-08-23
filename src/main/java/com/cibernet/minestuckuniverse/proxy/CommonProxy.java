@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.events.handlers.CommonEventHandler;
+import com.cibernet.minestuckuniverse.events.handlers.IDBasedAlchemyHandler;
 import com.cibernet.minestuckuniverse.events.handlers.PropertyEventHandler;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
@@ -57,6 +58,7 @@ public class CommonProxy
         MSUBannerPatterns.init();
 
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(IDBasedAlchemyHandler.class);
         PropertyEventHandler.register();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(MinestuckUniverse.instance, new MSUGuiHandler());
@@ -77,5 +79,10 @@ public class CommonProxy
         if(MinestuckUniverse.isBotaniaLoaded)
             BotaniaSupport.generateGristCosts();
         MinestuckUniverseItems.setPostInitVariables();
+    }
+
+    public void serverStarted()
+    {
+        IDBasedAlchemyHandler.calculateMaxID();
     }
 }

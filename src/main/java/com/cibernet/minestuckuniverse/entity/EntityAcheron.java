@@ -66,7 +66,7 @@ public class EntityAcheron extends EntityUnderling
 	@Override
 	public GristSet getGristSpoils()
 	{
-		return GristHelper.getRandomDrop(type, 20);
+		return GristHelper.getRandomDrop(getGristType(), 20);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class EntityAcheron extends EntityUnderling
 	@Override
 	protected float getMaximumHealth()
 	{
-		return type != null ? 500 * type.getPower() + 1200 : 1;
+		return getGristType() != null ? 500 * getGristType().getPower() + 1200 : 1;
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class EntityAcheron extends EntityUnderling
 	@Override
 	protected double getAttackDamage()
 	{
-		return this.type.getPower() * 10 + 20;
+		return this.getGristType().getPower() * 10 + 20;
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class EntityAcheron extends EntityUnderling
 	}
 
 	@Override
-	protected void applyGristType(GristType type, boolean fullHeal)
+	public void applyGristType(GristType type, boolean fullHeal)
 	{
 		super.applyGristType(type, fullHeal);
 		this.experienceValue = (int) (4000 * type.getPower() + 700);
@@ -111,9 +111,9 @@ public class EntityAcheron extends EntityUnderling
 	{
 		super.onDeath(cause);
 		Entity entity = cause.getTrueSource();
-		if(this.dead && !this.world.isRemote && type != null)
+		if(this.dead && !this.world.isRemote && getGristType() != null)
 		{
-			computePlayerProgress((int) (400*type.getPower() + 800));
+			computePlayerProgress((int) (400*getGristType().getPower() + 800));
 			if(entity != null && entity instanceof EntityPlayerMP)
 			{
 				Echeladder ladder = MinestuckPlayerData.getData((EntityPlayerMP) entity).echeladder;

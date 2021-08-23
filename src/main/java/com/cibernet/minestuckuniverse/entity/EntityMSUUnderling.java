@@ -24,7 +24,7 @@ public abstract class EntityMSUUnderling extends EntityUnderling
 
     @Override
     public String getTexture() {
-        return "textures/mobs/underlings/" + this.type.getName() + '_' + this.getUnderlingName() + ".png";
+        return "textures/mobs/underlings/" + this.getGristType().getName() + '_' + this.getUnderlingName() + ".png";
     }
 
 }
