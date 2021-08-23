@@ -16,6 +16,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -107,17 +108,7 @@ public class MinestuckUniverseBlocks
 	public static Block flightInhibitor = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.EARTHBOUND, 40, 0), "flight_inhibitor", "flightInhibitor");
 
 	public static Block uniqueObject = new MSUBlockBase(Material.CORAL, MapColor.DIAMOND, "unique_object", "uniqueObject");
-	public static Block artifact = new MSUBlockBase(Material.FIRE, MapColor.PURPLE, "artifact", "artifact")
-	{
-		@Override
-		public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {}
-
-		@Nullable
-		@Override
-		public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-			return NULL_AABB;
-		}
-	};
+	public static Block artifact = new BlockArtifact(Material.FIRE, MapColor.PURPLE, "artifact", "artifact");
 
 	//Thaumcraft
     public static Block thaumChasis = new MSUBlockBase(Material.IRON, "thaumic_machine_frame", "thaumChasis");

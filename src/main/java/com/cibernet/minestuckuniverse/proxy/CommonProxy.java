@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.events.handlers.CommonEventHandler;
 import com.cibernet.minestuckuniverse.events.handlers.IDBasedAlchemyHandler;
@@ -59,6 +60,7 @@ public class CommonProxy
 
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
         MinecraftForge.EVENT_BUS.register(IDBasedAlchemyHandler.class);
+        MinecraftForge.EVENT_BUS.register(BlockArtifact.class);
         PropertyEventHandler.register();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(MinestuckUniverse.instance, new MSUGuiHandler());

@@ -91,6 +91,9 @@ public class MSUAlchemyRecipes
 
         //Grist Conversions
         
+        GristRegistry.addGristConversion(new ItemStack(uniqueObject), new GristSet(new GristType[] {Zillium}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(artifact), new GristSet(new GristType[] {Artifact}, new int[] {1000} ));
+
         GristRegistry.addGristConversion(new ItemStack(diverHelmet), new GristSet(new GristType[] {Rust, Cobalt}, new int[] {80, 16}));
         GristRegistry.addGristConversion(new ItemStack(spikedHelmet), new GristSet(new GristType[] {Rust}, new int[] {260}));
         GristRegistry.addGristConversion(new ItemStack(frogHat), new GristSet(new GristType[] {Build}, new int[] {20}));

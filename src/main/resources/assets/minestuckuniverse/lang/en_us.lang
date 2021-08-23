@@ -1,4 +1,6 @@
-itemGroup.tabMinestuckUniverse=Minestuck Universe
+itemGroup.minestuckUniverse=Minestuck Universe
+itemGroup.minestuckUniverseWeapons=Minestuck Universe Weapons
+itemGroup.minestuckWeapons=Minestuck Weapons
 
 tooltip.machineOwner=Owner: %s
 tooltip.transportalizerOwner=%s's Transportalizer
