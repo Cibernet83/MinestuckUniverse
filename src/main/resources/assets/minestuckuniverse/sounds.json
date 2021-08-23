@@ -5,5 +5,26 @@
     "sounds": [
         "minestuckuniverse:item/home_run_bat"
     ]
+  },
+  "item.shield_parry": {
+    "category": "players",
+    "subtitle": "subtitle.minestuckuniverse.shieldParry",
+    "sounds": [
+        "minestuckuniverse:item/shield_parry"
+    ]
+  },
+  "item.whip_crack": {
+    "category": "players",
+    "subtitle": "subtitle.minestuckuniverse.whipCrack",
+    "sounds": [
+        "minestuckuniverse:item/whip_crack"
+    ]
+  },
+  "item.whip_crock": {
+    "category": "players",
+    "subtitle": "subtitle.minestuckuniverse.whipCrock",
+    "sounds": [
+        "minestuckuniverse:item/whip_crock"
+    ]
   }
 }

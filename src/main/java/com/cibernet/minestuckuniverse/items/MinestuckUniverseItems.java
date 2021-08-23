@@ -82,6 +82,8 @@ public class MinestuckUniverseItems
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
     public static Item yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
     public static Item wizardbeardYarn = new MSUThrowableBase("wizardbeard_yarn", "wizardbeardYarn").addProperties(new PropertyMagicDamagePrjctle(6));
+    public static Item whip = new ItemSound("whip", "whip", MSUSoundHandler.whipCrack);
+    public static Item sbahjWhip = new ItemSound("whip_sbahj", "whipSbahj", MSUSoundHandler.whipCrock).setSecret();
 
     //Ghost Items
     public static Item returnNode = new ItemGhost("return_node_ghost_item", MinestuckBlocks.returnNode);
@@ -229,6 +231,9 @@ public class MinestuckUniverseItems
         registerItem(registry, yarnBall);
         registerItem(registry, wizardbeardYarn);
         registerItem(registry, spaceSalt);
+
+        registerItem(registry, whip);
+        registerItem(registry, sbahjWhip);
 
         registerItem(registry, returnNode);
         registerItem(registry, travelGate);
