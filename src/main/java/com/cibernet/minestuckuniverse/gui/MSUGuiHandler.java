@@ -48,6 +48,8 @@ public class MSUGuiHandler implements IGuiHandler
                 return new GuiPorkhollowAtm(player);
             case BOONDOLLAR_REGISTER_GUI:
                 return new GuiBoondollarRegister(player, (TileEntityBoondollarRegister) te);
+            case STRIFE_CARD_GUI:
+                return new GuiStrifeCard(player);
 
         }
         return null;

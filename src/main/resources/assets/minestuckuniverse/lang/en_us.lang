@@ -108,6 +108,7 @@ item.scarf.silver.name=Light Gray Scarf
 item.scarf.white.name=White Scarf
 item.scarf.yellow.name=Yellow Scarf
 
+item.strifeCard.name=Strife Specibus Card
 item.spaceSalt.name=Spatial Manipulation Dust
 item.spaceSalt.tooltip=A way to shrink and grow things, especially machines!
 item.moonstone.name=Moonstone
@@ -343,6 +344,39 @@ entity.minestuck.acheron.type=%s Acheron
 
 grist.vis=Vis
 grist.mana=Mana
+
+kindAbstratus.fist.name=fistkind
+kindAbstratus.hammer.name=hammerkind
+kindAbstratus.sword.name=bladekind
+kindAbstratus.needles.name=needlekind
+kindAbstratus.rifle.name=riflekind
+kindAbstratus.pistol.name=pistolkind
+kindAbstratus.spoon.name=spoonkind
+kindAbstratus.fork.name=forkkind
+kindAbstratus.spork.name=sporkkind
+kindAbstratus.club.name=clubkind
+kindAbstratus.sickle.name=sicklekind
+kindAbstratus.dice.name=dicekind
+kindAbstratus.glove.name=gauntletkind
+kindAbstratus.shield.name=shield
+kindAbstratus.throwable.name=throwkind
+kindAbstratus.pickaxe.name=pickaxekind
+kindAbstratus.axe.name=axekind
+kindAbstratus.shovel.name=shovelkind
+kindAbstratus.hoe.name=hoekind
+kindAbstratus.fishingRod.name=fshngrodkind
+kindAbstratus.trident.name=tridentkind
+kindAbstratus.2x3dent.name=2x3dentkind
+kindAbstratus.drill.name=drillkind
+kindAbstratus.wand.name=wandkind
+kindAbstratus.umbrella.name=umbrllakind
+kindAbstratus.lance.name=lancekind
+kindAbstratus.key.name=keykind
+kindAbstratus.flashlight.name=flshlghtkind
+kindAbstratus.paperkind.name=paperkind
+kindAbstratus.joker.name=jokerkind
+kindAbstratus.sbahj.name=sbahjkind
+kindAbstratus.bunny.name=bunnykind
 
 container.machineChassis=Machine Assembly
 container.boondollarRegister=Boondollar Register
@@ -609,3 +643,4 @@ gui.vault.label.2=register
 
 enchantment.minestuckuniverse.superpunch=Superpunch
 enchantment.minestuckuniverse.superpunch.desc=Increases the knockback strength of the weapon but increases its attack damage inversely to the enchanment level
+gui.strifeCard.label=kind abstrata

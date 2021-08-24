@@ -1,0 +1,9 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/strife_card"
+    },
+    "overrides": [
+        { "predicate": { "minestuckuniverse:assigned": 1 }, "model": "minestuckuniverse:item/strife_card_assigned" }
+    ]
+}

@@ -73,6 +73,7 @@ public class MinestuckUniverseItems
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
     public static Item fluorite = new MSUItemBase("fluorite");
     public static Item battery = new MSUItemBase("battery", "battery");
+    public static Item strifeCard = new ItemStrifeCard("strife_card", "strifeCard");
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
     public static Item yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
     public static Item wizardbeardYarn = new MSUThrowableBase("wizardbeard_yarn", "wizardbeardYarn").addProperties(new PropertyMagicDamagePrjctle(6));
@@ -225,6 +226,7 @@ public class MinestuckUniverseItems
         registerItem(registry, yarnBall);
         registerItem(registry, wizardbeardYarn);
         registerItem(registry, spaceSalt);
+        registerItem(registry, strifeCard);
 
         registerItem(registry, whip);
         registerItem(registry, sbahjWhip);

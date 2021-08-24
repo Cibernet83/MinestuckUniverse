@@ -15,7 +15,8 @@ public class MSUToolClass
 	protected List<Enchantment> enchantments = new ArrayList<>();
 	protected List<EnumEnchantmentType> enchantmentTypes = new ArrayList<>();
 	protected List<String> baseTool = new ArrayList<>();
-	
+	protected List<MSUToolClass> parents = new ArrayList<>();
+
 	public MSUToolClass()
 	{
 	}
@@ -40,6 +41,7 @@ public class MSUToolClass
 			enchantments.addAll(cls.enchantments);
 			enchantmentTypes.addAll(cls.enchantmentTypes);
 			baseTool.addAll(cls.baseTool);
+			parents.add(cls);
 		}
 	}
 	
@@ -98,5 +100,13 @@ public class MSUToolClass
 		 		result.add(ench);
 		 });
 		 return result;
+	}
+
+	public boolean isCompatibleWith(MSUToolClass other)
+	{
+		for(MSUToolClass parent : parents)
+			if(isCompatibleWith(other))
+				return true;
+		return equals(other);
 	}
 }

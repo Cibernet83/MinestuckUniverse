@@ -8,6 +8,8 @@ import com.cibernet.minestuckuniverse.events.handlers.PropertyEventHandler;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
+import com.cibernet.minestuckuniverse.strife.KindAbstratus;
+import com.cibernet.minestuckuniverse.strife.MSUKindAbstrata;
 import com.cibernet.minestuckuniverse.tileentity.*;
 import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
@@ -38,6 +40,9 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(MSUPotions.class);
         MinecraftForge.EVENT_BUS.register(MSUEnchantments.class);
         MinecraftForge.EVENT_BUS.register(MSUSoundHandler.instance);
+
+        MinecraftForge.EVENT_BUS.register(KindAbstratus.class);
+        MinecraftForge.EVENT_BUS.register(MSUKindAbstrata.class);
 
         MSUEntities.registerEntities();
 
