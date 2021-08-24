@@ -29,9 +29,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +46,7 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     protected int enchantability;
     protected double weaponSpeed;
     protected ToolMaterial material;
-    ItemStack repairMaterial = ItemStack.EMPTY;
+    ArrayList<ItemStack> repairMaterials = new ArrayList<>();
 
     protected MSUToolClass tool = null;
     protected float harvestSpeed = 0;
@@ -91,9 +93,23 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
         return this;
     }
 
-    public MSUWeaponBase setRepairMaterial(ItemStack stack)
+    public MSUWeaponBase setRepairMaterials(ItemStack... stacks)
     {
-        this.repairMaterial = stack;
+        for(ItemStack i : stacks)
+            repairMaterials.add(i);
+        return this;
+    }
+
+    public MSUWeaponBase setRepairMaterials(Collection<ItemStack> stacks)
+    {
+        repairMaterials.addAll(stacks);
+        return this;
+    }
+
+    public MSUWeaponBase setRepairMaterial(String oredic)
+    {
+        if(OreDictionary.doesOreNameExist(oredic))
+            setRepairMaterials(OreDictionary.getOres(oredic));
         return this;
     }
 
@@ -105,9 +121,9 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
-        ItemStack mat = repairMaterial;
 
-        if (!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
+        for(ItemStack mat : repairMaterials)
+            if (!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
 
         for(WeaponProperty p : getProperties(toRepair))
             if(p.getIsRepairable(toRepair, repair))

@@ -26,6 +26,7 @@ public class ItemBeamBlade extends MSUWeaponBase
     public ItemBeamBlade(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName) {
         super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
         addProperties(new PropertySweep(), new PropertyElectric(10, 2, 0.6f, false));
+        setRepairMaterials(new ItemStack(MinestuckUniverseItems.battery));
     }
 
     public ItemBeamBlade setColor(EnumDyeColor color) {this.color = color; return this;}
@@ -109,12 +110,6 @@ public class ItemBeamBlade extends MSUWeaponBase
     @Override
     public boolean isRepairable() {
         return true;
-    }
-
-    @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
-    {
-        return repair.getItem() == MinestuckUniverseItems.battery;
     }
 
     public static class BladeColorHandler implements IItemColor
