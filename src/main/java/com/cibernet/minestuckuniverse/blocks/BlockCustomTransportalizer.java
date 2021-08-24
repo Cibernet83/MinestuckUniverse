@@ -9,7 +9,6 @@ import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.client.gui.GuiHandler.GuiId;
-import com.mraof.minestuck.item.TabMinestuck;
 import com.mraof.minestuck.tileentity.TileEntityTransportalizer;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -46,7 +45,7 @@ public abstract class BlockCustomTransportalizer extends BlockContainer implemen
     public BlockCustomTransportalizer(MapColor color)
     {
         super(Material.IRON, color);
-        this.setCreativeTab(TabMinestuckUniverse.instance);
+        this.setCreativeTab(TabMinestuckUniverse.main);
     }
     
     @Override

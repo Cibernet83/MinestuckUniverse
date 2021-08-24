@@ -35,7 +35,7 @@ public class BlockAutoWidget extends BlockContainer implements IRegistryItem
 		setUnlocalizedName("autoWidget");
 		setHarvestLevel("pickaxe", 0);
 		setHardness(3.0F);
-		setCreativeTab(TabMinestuckUniverse.instance);
+		setCreativeTab(TabMinestuckUniverse.main);
 		
 		this.setDefaultState(this.getDefaultState().withProperty(FACING, EnumFacing.NORTH).withProperty(ACTIVE, false));
 	}

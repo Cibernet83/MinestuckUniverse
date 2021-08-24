@@ -4,9 +4,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoCaptcha;
-import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -18,7 +16,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -42,7 +39,7 @@ public class BlockAutoCaptcha extends BlockContainer implements IRegistryItem
 		setUnlocalizedName("autoCaptcha");
 		setHarvestLevel("pickaxe", 0);
 		setHardness(3.0F);
-		setCreativeTab(TabMinestuckUniverse.instance);
+		setCreativeTab(TabMinestuckUniverse.main);
 	}
 	
 	

@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.items;
+package com.cibernet.minestuckuniverse.items.weapons;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

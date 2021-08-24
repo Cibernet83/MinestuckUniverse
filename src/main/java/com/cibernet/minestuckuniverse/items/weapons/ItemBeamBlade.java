@@ -1,6 +1,5 @@
 package com.cibernet.minestuckuniverse.items.weapons;
 
-import com.cibernet.minestuckuniverse.items.MSUToolClass;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyElectric;
 import com.cibernet.minestuckuniverse.items.properties.PropertySweep;
@@ -64,7 +63,7 @@ public class ItemBeamBlade extends MSUWeaponBase
         else super.setDamage(stack, damage);
     }
     
-    private NBTTagCompound checkTagCompound(ItemStack stack) {
+    private static NBTTagCompound checkTagCompound(ItemStack stack) {
         NBTTagCompound tagCompound = stack.getTagCompound();
         if (tagCompound == null) {
             tagCompound = new NBTTagCompound();
@@ -96,8 +95,8 @@ public class ItemBeamBlade extends MSUWeaponBase
         return this.isDrawn(stack) ? super.getAttackSpeed(stack) : 0;
     }
 
-    public void changeState(ItemStack stack, boolean drawn) {
-        NBTTagCompound tagCompound = this.checkTagCompound(stack);
+    public static void changeState(ItemStack stack, boolean drawn) {
+        NBTTagCompound tagCompound = checkTagCompound(stack);
         tagCompound.setBoolean("IsDrawn", drawn);
     }
 

@@ -28,7 +28,7 @@ public class MSUArmorBase extends ItemArmor implements IRegistryItem
         super(materialIn, renderIndexIn, equipmentSlotIn);
         setUnlocalizedName(unlocName);
         this.registryName = registryName;
-        setCreativeTab(registryName.contains(Minestuck.MOD_ID+":") ? TabMinestuck.instance : TabMinestuckUniverse.instance);
+        setCreativeTab(registryName.contains(Minestuck.MOD_ID+":") ? TabMinestuck.instance : TabMinestuckUniverse.main);
 
     }
 

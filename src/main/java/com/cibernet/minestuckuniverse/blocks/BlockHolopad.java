@@ -3,7 +3,6 @@ package com.cibernet.minestuckuniverse.blocks;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
-import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -33,7 +32,7 @@ public class BlockHolopad extends BlockContainer implements IRegistryItem
 	{
 		super(Material.ROCK, MapColor.SNOW);
 		setUnlocalizedName("holopad");
-		setCreativeTab(TabMinestuckUniverse.instance);
+		setCreativeTab(TabMinestuckUniverse.main);
 		this.setHardness(2.0F);
 		this.setHarvestLevel("pickaxe", 0);
 	}

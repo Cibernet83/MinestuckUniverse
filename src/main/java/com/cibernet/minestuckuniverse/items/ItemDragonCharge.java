@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
+import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
@@ -22,6 +23,7 @@ public class ItemDragonCharge extends MSUItemBase
 	{
 		super(name, unlocName);
 		setMaxStackSize(16);
+		setCreativeTab(TabMinestuckUniverse.weapons);
 
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BehaviorDefaultDispenseItem()
 		{

@@ -1,17 +1,11 @@
 package com.cibernet.minestuckuniverse.items;
 
-import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
@@ -27,7 +21,7 @@ public class MSUItemBase extends Item implements IRegistryItem
     public MSUItemBase(String name, String unlocName)
     {
         this.setUnlocalizedName(unlocName);
-        this.setCreativeTab(TabMinestuckUniverse.instance);
+        this.setCreativeTab(TabMinestuckUniverse.main);
         registryName = name;
     }
 

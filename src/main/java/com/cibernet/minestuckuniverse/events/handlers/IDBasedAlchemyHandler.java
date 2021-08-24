@@ -84,7 +84,6 @@ public class IDBasedAlchemyHandler
 			if(itemID > MAX_ID)
 				MAX_ID = itemID;
 		}
-		System.out.println("Max Alchemy ID set to " + MAX_ID);
 	}
 
 	public static int getMaxId()

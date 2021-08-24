@@ -5,7 +5,7 @@ import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.advancements.CriteriaTriggers;
+import javafx.scene.control.Tab;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.dispenser.BehaviorProjectileDispense;
@@ -17,8 +17,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Bootstrap;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
@@ -51,7 +49,7 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 		this.attackSpeed = meleeSpeed;
 
 		setMaxStackSize(stackSize);
-
+		setCreativeTab(TabMinestuckUniverse.weapons);
 
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BehaviorProjectileDispense()
 		{
@@ -76,7 +74,7 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 	public MSUThrowableBase(String name, String unlocName)
 	{
 		this(1, 0, 64, 0, 0, name, unlocName);
-		setCreativeTab(TabMinestuckUniverse.instance);
+		setCreativeTab(TabMinestuckUniverse.main);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.items;
+package com.cibernet.minestuckuniverse.items.properties;
 
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import net.minecraft.entity.EntityLivingBase;

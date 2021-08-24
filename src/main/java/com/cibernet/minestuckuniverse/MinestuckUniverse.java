@@ -1,12 +1,7 @@
 package com.cibernet.minestuckuniverse;
 
 import com.cibernet.minestuckuniverse.proxy.CommonProxy;
-import com.mraof.minestuck.Minestuck;
-import com.mraof.minestuck.alchemy.GristRegistry;
-import com.mraof.minestuck.alchemy.GristType;
-import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -30,7 +25,7 @@ public class MinestuckUniverse
     public static final String SHORT = "MSU";
     public static final String VERSION = "@VERSION@";
     
-    public static final CreativeTabs tab = TabMinestuckUniverse.instance;
+    public static final CreativeTabs tab = TabMinestuckUniverse.main;
     
     @Mod.Instance("minestuckuniverse")
     public static MinestuckUniverse instance;

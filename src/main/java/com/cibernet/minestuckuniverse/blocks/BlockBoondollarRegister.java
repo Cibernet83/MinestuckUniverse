@@ -50,7 +50,7 @@ public class BlockBoondollarRegister extends BlockContainer implements IRegistry
         setUnlocalizedName("boondollarRegister");
         setHarvestLevel("pickaxe", 0);
         setHardness(3.0F);
-        setCreativeTab(TabMinestuckUniverse.instance);
+        setCreativeTab(TabMinestuckUniverse.main);
 
         setDefaultState(getDefaultState().withProperty(POWERED, false));
     }

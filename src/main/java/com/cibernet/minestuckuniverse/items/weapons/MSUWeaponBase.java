@@ -3,7 +3,6 @@ package com.cibernet.minestuckuniverse.items.weapons;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IClassedTool;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
-import com.cibernet.minestuckuniverse.items.MSUToolClass;
 import com.cibernet.minestuckuniverse.items.properties.IEnchantableProperty;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.google.common.collect.HashMultimap;
@@ -58,7 +57,7 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
         super();
         registryName = name;
         this.setUnlocalizedName(unlocName);
-        this.setCreativeTab(registryName.split(":")[0].equals(Minestuck.MOD_ID) ? TabMinestuck.instance : TabMinestuckUniverse.instance);
+        this.setCreativeTab(registryName.split(":")[0].equals(Minestuck.MOD_ID) ? TabMinestuck.instance : TabMinestuckUniverse.weapons);
 
         this.unbreakable = maxUses <= 0;
         this.maxStackSize = 1;

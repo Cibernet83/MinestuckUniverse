@@ -1,13 +1,11 @@
 package com.cibernet.minestuckuniverse.blocks;
 
-import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -22,7 +20,7 @@ public class MSUBlockBase extends Block implements IRegistryItem
     public MSUBlockBase(Material blockMaterialIn, MapColor blockMapColorIn, String registryName)
     {
         super(blockMaterialIn, blockMapColorIn);
-        this.setCreativeTab(TabMinestuckUniverse.instance);
+        this.setCreativeTab(TabMinestuckUniverse.main);
         this.registryName = registryName;
     }
     

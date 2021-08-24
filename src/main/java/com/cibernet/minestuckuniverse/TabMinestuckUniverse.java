@@ -6,18 +6,20 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class TabMinestuckUniverse extends CreativeTabs
+public class TabMinestuckUniverse
 {
-    public static final TabMinestuckUniverse instance = new TabMinestuckUniverse("tabMinestuckUniverse");
-    //public static final TabMinestuckUniverse GTArmor = new TabMinestuckUniverse("tabMSUGTArmor", new ItemStack(MinestuckUniverseItems.spaceSalt));
-    
-    private TabMinestuckUniverse(String label)
+    public static final CreativeTabs main = new CreativeTabs("minestuckUniverse")
     {
-        super(label);
-    }
-    
-    @Override
-    public ItemStack getTabIconItem() {
-        return new ItemStack(MinestuckUniverseBlocks.gristBlockBuild, 1, 0);
-    }
+        @Override
+        public ItemStack getTabIconItem() {
+            return  new ItemStack(MinestuckUniverseBlocks.gristBlockBuild);
+        }
+    };
+    public static final CreativeTabs weapons = new CreativeTabs("minestuckUniverseWeapons")
+    {
+        @Override
+        public ItemStack getTabIconItem() {
+            return  new ItemStack(MinestuckUniverseItems.batteryBeamBlade);
+        }
+    };
 }

@@ -3,8 +3,6 @@ package com.cibernet.minestuckuniverse.blocks;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.mraof.minestuck.block.BlockTransportalizer;
-import com.mraof.minestuck.item.TabMinestuck;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 
 public class BlockWoolTransportalizer extends BlockTransportalizer implements IRegistryItem
@@ -13,7 +11,7 @@ public class BlockWoolTransportalizer extends BlockTransportalizer implements IR
 	public BlockWoolTransportalizer(EnumDyeColor color)
 	{
 		super();
-		this.setCreativeTab(TabMinestuckUniverse.instance);
+		this.setCreativeTab(TabMinestuckUniverse.main);
 		this.setUnlocalizedName("woolTransportalizer."+color.getUnlocalizedName());
 		this.color = color;
 

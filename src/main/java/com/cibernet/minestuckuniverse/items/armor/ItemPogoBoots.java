@@ -1,6 +1,5 @@
-package com.cibernet.minestuckuniverse.items;
+package com.cibernet.minestuckuniverse.items.armor;
 
-import com.cibernet.minestuckuniverse.items.armor.MSUArmorBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class ItemPogoBoots extends MSUArmorBase

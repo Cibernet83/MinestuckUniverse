@@ -2,9 +2,7 @@ package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
-import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.block.BlockDecor;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -21,7 +19,7 @@ public class BlockMSUDecor extends BlockDecor implements IRegistryItem
     {
         super(unlocalizedName);
         registryName = regName;
-        setCreativeTab(TabMinestuckUniverse.instance);
+        setCreativeTab(TabMinestuckUniverse.main);
     }
 
     @Override

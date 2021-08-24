@@ -4,10 +4,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
 import com.cibernet.minestuckuniverse.client.models.armor.*;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
-import com.cibernet.minestuckuniverse.items.armor.ItemDiverHelmet;
-import com.cibernet.minestuckuniverse.items.armor.ItemScarf;
-import com.cibernet.minestuckuniverse.items.armor.ItemWitherproofArmor;
-import com.cibernet.minestuckuniverse.items.armor.MSUArmorBase;
+import com.cibernet.minestuckuniverse.items.armor.*;
 import com.cibernet.minestuckuniverse.items.properties.*;
 import com.cibernet.minestuckuniverse.items.properties.clawkind.PropertyActionBuff;
 import com.cibernet.minestuckuniverse.items.properties.prjctilekind.PropertyMagicDamagePrjctle;
@@ -15,10 +12,7 @@ import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyRocket
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldEject;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldFire;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldShock;
-import com.cibernet.minestuckuniverse.items.weapons.ItemBeamBlade;
-import com.cibernet.minestuckuniverse.items.weapons.ItemDualClaw;
-import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
-import com.cibernet.minestuckuniverse.items.weapons.MSUWeaponBase;
+import com.cibernet.minestuckuniverse.items.weapons.*;
 import com.cibernet.minestuckuniverse.util.BlockMetaPair;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
@@ -176,7 +170,7 @@ public class MinestuckUniverseItems
     public static Item staffOfOvergrowth = new MSUWeaponBase(455, 6.0f, -1.2, 20, "staff_of_overgrowth", "staffOfOvergrowth").addProperties(new PropertyBlockSwap(overgrowthTransforms, 1), new PropertyPotion(new PotionEffect(MobEffects.POISON, 400, 1), false, 0.4f));
     public static Item atomicIrradiator = new MSUWeaponBase(455, 6.0f, -1.2, 20, "atomic_irradiator", "atomicIrradiator").addProperties(new PropertyPotion(new PotionEffect(MobEffects.WITHER, 400, 1), true, 0.6f), new PropertyGristSetter(GristType.Uranium));
     public static Item goldCane = new MSUWeaponBase(340, 6.0f, -1.2, 18, "gold_cane", "goldCane").setRepairMaterial(new ItemStack(Items.GOLD_INGOT));
-    public static Item goldenCuestaff = new MSUItemBase("golden_cuestaff", "goldenCuestaff");
+    public static Item goldenCuestaff = new MSUWeaponBase(780, 10f, 32, "golden_cuestaff", "goldenCuestaff");
 
     //Clubkind
     public static Item rubyContrabat = new MSUWeaponBase(185, 6.5, -2.2, 22, "ruby_contrabat", "rubyContrabat").setTool(toolClub, 3, 4.0f).addProperties(new PropertySweep(), new PropertyGristSetter(GristType.Ruby));

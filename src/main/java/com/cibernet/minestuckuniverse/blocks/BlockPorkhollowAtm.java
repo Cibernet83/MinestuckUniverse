@@ -2,10 +2,7 @@ package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
-import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoCaptcha;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -14,13 +11,10 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class BlockPorkhollowAtm extends MSUBlockBase
 {
@@ -31,7 +25,7 @@ public class BlockPorkhollowAtm extends MSUBlockBase
 		setUnlocalizedName("porkhollowATM");
 		setHarvestLevel("pickaxe", 0);
 		setHardness(3.0F);
-		setCreativeTab(TabMinestuckUniverse.instance);
+		setCreativeTab(TabMinestuckUniverse.main);
 	}
 	
 	@Override
