@@ -3,15 +3,24 @@ package com.cibernet.minestuckuniverse.events.handlers;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
-import com.cibernet.minestuckuniverse.items.ItemPogoBoots;
+import com.cibernet.minestuckuniverse.items.armor.ItemPogoBoots;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyRandomDamage;
+import com.cibernet.minestuckuniverse.items.weapons.ItemBeamBlade;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.google.common.collect.Multimap;
+import com.mraof.minestuck.alchemy.AlchemyRecipes;
+import com.mraof.minestuck.event.AlchemizeItemEvent;
+import com.mraof.minestuck.item.ItemCaptcharoidCamera;
+import com.mraof.minestuck.item.MinestuckItems;
+import com.mraof.minestuck.network.skaianet.SburbHandler;
+import com.mraof.minestuck.world.MinestuckDimensionHandler;
+import com.mraof.minestuck.world.lands.gen.ChunkProviderLands;
+import com.sun.javafx.geom.Vec3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,12 +31,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemClock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MovementInput;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -36,11 +50,11 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import thaumcraft.codechicken.lib.math.MathHelper;
 
 import java.util.Map;
 import java.util.UUID;
@@ -365,5 +379,63 @@ public class CommonEventHandler
 	{
 		if(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC.equals(entityEvent.getSound()) && entityEvent.getEntity() instanceof EntityPlayer && ((EntityPlayer) entityEvent.getEntity()).getActiveItemStack().getItem() instanceof MSUItemBase)
 			entityEvent.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void onRightClickEmpty(PlayerInteractEvent.RightClickItem event)
+	{
+		if(event.getItemStack().getItem() instanceof ItemCaptcharoidCamera)
+		{
+			EntityPlayer player = event.getEntityPlayer();
+			World world = player.world;
+
+			ItemStack stack = ItemStack.EMPTY;
+
+			if(MinestuckDimensionHandler.isLandDimension(world.provider.getDimension()) && player.rotationPitch < -75)
+				stack = new ItemStack(MinestuckUniverseItems.skaia);
+			else if(world.provider.getDimension() == 0)
+			{
+				Vec3d playerPosVec = new Vec3d(player.posX, player.posY, player.posZ);
+				Vec3d playerLookVec = player.getLookVec();
+
+				RayTraceResult rayTrace = world.rayTraceBlocks(playerPosVec, playerPosVec.add(playerLookVec.scale(200)), true, true, false);
+
+				if(rayTrace != null)
+					return;
+
+				playerLookVec = getVecFromRotation(-player.rotationPitch, player.rotationYaw);
+				float celestialAngle = (world.getCelestialAngle(0)*360f + 90f) % 360f;
+				Vec3d sunVec = getVecFromRotation(celestialAngle, -90);
+				Vec3d moonVec = getVecFromRotation((celestialAngle+180f) % 360f, -90);
+
+				if(playerLookVec.squareDistanceTo(sunVec) < 0.07f)
+					stack = new ItemStack(MinestuckUniverseItems.sun);
+				else if(playerLookVec.distanceTo(moonVec) < 0.07f)
+					stack = new ItemStack(MinestuckUniverseItems.moon);
+
+			}
+
+
+			player.inventory.addItemStackToInventory(stack.isEmpty() ? new ItemStack(MinestuckItems.captchaCard) : AlchemyRecipes.createGhostCard(stack));
+			event.getItemStack().damageItem(1, player);
+			event.setCancellationResult(EnumActionResult.SUCCESS);
+			event.setCanceled(true);
+		}
+	}
+
+	public static Vec3d getVecFromRotation(float pitch, float yaw)
+	{
+		float f = MathHelper.cos(-yaw * 0.017453292F - (float)Math.PI);
+		float f1 = MathHelper.sin(-yaw * 0.017453292F - (float)Math.PI);
+		float f2 = -MathHelper.cos(-pitch * 0.017453292F);
+		float f3 = MathHelper.sin(-pitch * 0.017453292F);
+		return new Vec3d((double)(f1 * f2), (double)f3, (double)(f * f2)).normalize();
+	}
+
+	@SubscribeEvent
+	public static void onAlchemize(AlchemizeItemEvent event)
+	{
+		if(event.getResultItem().getItem() instanceof ItemBeamBlade)
+			ItemBeamBlade.changeState(event.getResultItem(), false);
 	}
 }
