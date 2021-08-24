@@ -33,7 +33,7 @@ public class StrifeSpecibus
 		if(nbt.hasKey("CustomName"))
 			setCustomName(nbt.getString("CustomName"));
 
-		NBTTagList inv = nbt.getTagList("Contents", 9);
+		NBTTagList inv = nbt.getTagList("Contents", 10);
 
 		for(int i = 0; i < inv.tagCount(); i++)
 		{
@@ -129,5 +129,10 @@ public class StrifeSpecibus
 	public boolean hasCustomName()
 	{
 		return customName != null && !customName.isEmpty();
+	}
+
+	@Override
+	public String toString() {
+		return kindAbstratus + " " + items;
 	}
 }

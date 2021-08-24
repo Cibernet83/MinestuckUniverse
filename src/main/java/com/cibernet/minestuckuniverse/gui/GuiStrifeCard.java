@@ -4,7 +4,10 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.client.MSUFontRenderer;
 import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.strife.KindAbstratus;
+import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.item.MinestuckItems;
@@ -48,10 +51,7 @@ public class GuiStrifeCard extends GuiScreen
 		this.player = player;
 		ArrayList<KindAbstratus> list = new ArrayList<>();
 		for(KindAbstratus i : KindAbstratus.REGISTRY.getValuesCollection())
-		{
-			System.out.println(i.getRegistryName());
 			if(i.canSelect()) list.add(i);
-		}
 		abstrataList = list;
 		maxScroll = Math.max(0, (abstrataList.size() - size)/2);
 	}
@@ -99,9 +99,6 @@ public class GuiStrifeCard extends GuiScreen
 
 			String typeName = type.getDisplayName();
 
-			if(typeName.length() > 12)
-				typeName = typeName.substring(0, 9) + "...";
-
 			//txPos += 78 (0.1625*width)
 			//tyPos += 36 (9540 / height)
 
@@ -126,11 +123,7 @@ public class GuiStrifeCard extends GuiScreen
 
 					if(card.isItemEqual(new ItemStack(MinestuckUniverseItems.strifeCard)))
 					{
-						StrifeSpecibus specibus = new StrifeSpecibus(type);
-
-						if(false /*StrifePortfolioHandler.addSpecibus(player, specibus) TODO add specibus to portfolio*/)
-							card.shrink(1);
-						else ItemStrifeCard.injectStrifeSpecibus(specibus, card);
+						MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.ASSIGN_STRIFE, hand, new StrifeSpecibus(type)));
 						this.mc.displayGuiScreen(null);
 					}
 

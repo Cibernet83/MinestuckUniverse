@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
+import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.Minestuck;
@@ -14,6 +15,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -63,11 +65,15 @@ public class ItemStrifeCard extends MSUItemBase
 	{
 		ItemStack stack = playerIn.getHeldItem(handIn);
 
-		//TODO limit check
-		if(hasSpecibus(stack))
+		if(StrifePortfolioHandler.isFull(playerIn))
 		{
-			//TODO insert assigned
+			if(!worldIn.isRemote)
+				playerIn.sendStatusMessage(new TextComponentTranslation("status.strife.portfolioFull"), true);
+			return ActionResult.newResult(EnumActionResult.FAIL, stack);
 		}
+
+		if(hasSpecibus(stack))
+			StrifePortfolioHandler.assignStrife(playerIn, handIn);
 		else playerIn.openGui(MinestuckUniverse.instance, MSUUtils.STRIFE_CARD_GUI, worldIn, (int)playerIn.posX, (int)playerIn.posY, (int)playerIn.posZ);
 
 		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
@@ -85,7 +91,7 @@ public class ItemStrifeCard extends MSUItemBase
 		return null;
 	}
 
-	private static boolean hasSpecibus(ItemStack stack)
+	public static boolean hasSpecibus(ItemStack stack)
 	{
 		return stack.hasTagCompound() && stack.getTagCompound().hasKey("StrifeSpecibus");
 	}

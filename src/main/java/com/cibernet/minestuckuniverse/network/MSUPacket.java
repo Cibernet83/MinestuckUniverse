@@ -57,6 +57,8 @@ public abstract class MSUPacket
         FLIGHT_EFFECT(StopFlightEffectPacket.class),
         BUILD_INHIBIT_EFFECT(StopBuildInhibitEffectPacket.class),
         RESET_COOLDOWN(ResetCooldownPacket.class),
+        UPDATE_STRIFE(UpdateStrifeDataPacket.class),
+        ASSIGN_STRIFE(AssignStrifePacket.class),
         ;
 
         Class<? extends MSUPacket> packetType;

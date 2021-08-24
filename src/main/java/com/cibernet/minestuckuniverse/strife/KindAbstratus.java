@@ -123,9 +123,19 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 		return "kindAbstratus."+unlocName;
 	}
 
-	public String getDisplayName()
+	public String getLocalizedName()
 	{
 		return I18n.translateToLocal(I18n.translateToLocal(this.getUnlocalizedName()) + ".name").trim();
+	}
+
+	public String getDisplayName()
+	{
+		String name = getLocalizedName().toLowerCase();
+
+		if(name.length() > 12)
+			name = name.substring(0, 9) + "...";
+
+		return name;
 	}
 
 	public KindAbstratus setUnlocalizedName(String unlocName) {
@@ -148,5 +158,10 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 	{
 		KindAbstratus.REGISTRY = (ForgeRegistry)(new RegistryBuilder()).setName(new ResourceLocation(MinestuckUniverse.MODID, "kind_abstrata"))
 				.setType(KindAbstratus.class).setDefaultKey(new ResourceLocation(MinestuckUniverse.MODID)).create();
+	}
+
+	@Override
+	public String toString() {
+		return getRegistryName().toString();
 	}
 }

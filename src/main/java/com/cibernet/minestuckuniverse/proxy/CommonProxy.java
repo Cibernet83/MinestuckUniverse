@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
+import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.events.handlers.CommonEventHandler;
 import com.cibernet.minestuckuniverse.events.handlers.IDBasedAlchemyHandler;
@@ -45,6 +46,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(MSUKindAbstrata.class);
 
         MSUEntities.registerEntities();
+        MSUCapabilities.registerCapabilities();
 
         GameRegistry.registerTileEntity(TileEntityGristHopper.class, MinestuckUniverse.MODID + ":grist_hopper");
         GameRegistry.registerTileEntity(TileEntityAutoWidget.class, MinestuckUniverse.MODID + ":auto_widget");
