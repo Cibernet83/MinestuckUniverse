@@ -75,6 +75,7 @@ item.archmageHat.name=Archmage Hat
 item.archmageHat.tooltip=Weaved by the most skilled knitter, using threads from the most magical yarn, this dumb hat grants major resistance to magic attacks.
 item.cozySweater.name=Cozy Sweater
 item.cozySweater.tooltip=Made with the ultimate weapon against evil, the power of l-l-liking someone a lot.
+item.rocketWings.name=Rocket Wings
 
 item.rubberBoots.name=Rubber Boots
 item.rubberBoots.tooltip=The average boots for the average worker, they're perfect at insulating electric shocks as long as they're not wet.
@@ -652,3 +653,5 @@ enchantment.minestuckuniverse.superpunch.desc=Increases the knockback strength o
 status.strife.portfolioFull=Your Strife Portfolio is full!
 status.strife.portfolioDuplicate=You already have a %s Strife Specibus in your Portfolio
 status.strife.assign=The %s Strife Specibus has been assigned to your Portfolio
+status.strife.assignWeapon=Your %s has been assigned to your %s Strife Deck
+status.strife.weaponMissmach=Your %s doesn't fit inside any of your Strife Specibi

@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.client.MSUFontRenderer;
+import com.cibernet.minestuckuniverse.client.MSUKeys;
 import com.cibernet.minestuckuniverse.client.render.RenderHologram;
 import com.cibernet.minestuckuniverse.client.render.ThrowableRenderFactory;
 import com.cibernet.minestuckuniverse.items.weapons.ItemBeamBlade;
@@ -45,6 +46,7 @@ public class ClientProxy extends CommonProxy
 
         MinecraftForge.EVENT_BUS.register(MSUChannelHandler.instance);
         registerRenderers();
+        MSUKeys.register();
         MSUFontRenderer.registerFonts();
     }
 

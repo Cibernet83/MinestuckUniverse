@@ -27,9 +27,34 @@ public class StrifePortfolioHandler
 		return entity.getCapability(MSUCapabilities.STRIFE_DATA, null).isPortfolioEmpty();
 	}
 
+	public static boolean addWeapon(EntityLivingBase entity, ItemStack stack)
+	{
+		if(entity.world.isRemote || !entity.hasCapability(MSUCapabilities.STRIFE_DATA, null))
+			return false;
+
+		IStrifeData cap = entity.getCapability(MSUCapabilities.STRIFE_DATA, null);
+
+		for(StrifeSpecibus specibus : cap.getPortfolio())
+		{
+			if(specibus != null && specibus.putItemStack(stack))
+			{
+				if(entity instanceof EntityPlayer)
+				{
+					((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.assignWeapon", stack.getTextComponent(), specibus.getDisplayName()), true);
+					MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity), (EntityPlayer) entity);
+				}
+				return true;
+			}
+		}
+
+		if(entity instanceof EntityPlayer)
+			((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.weaponMissmach", stack.getTextComponent()), true);
+		return false;
+	}
+
 	public static boolean addSpecibus(EntityLivingBase entity, StrifeSpecibus specibus)
 	{
-		if(entity.world.isRemote)
+		if(entity.world.isRemote || !entity.hasCapability(MSUCapabilities.STRIFE_DATA, null))
 			return false;
 
 		IStrifeData cap = entity.getCapability(MSUCapabilities.STRIFE_DATA, null);
@@ -69,7 +94,11 @@ public class StrifePortfolioHandler
 			if(addSpecibus(player, ItemStrifeCard.getStrifeSpecibus(stack)))
 				stack.shrink(1);
 		}
-		//TODO weapon assign
+		else
+		{
+			if(addWeapon(player, stack))
+				player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+		}
 	}
 
 	public static StrifeSpecibus[] getPortfolio(EntityLivingBase entity)
@@ -85,7 +114,6 @@ public class StrifePortfolioHandler
 			return;
 
 		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
-
 		ItemStack card = ItemStrifeCard.injectStrifeSpecibus(cap.removeSpecibus(index), new ItemStack(MinestuckUniverseItems.strifeCard));
 
 		if(!(player instanceof EntityPlayer) || !((EntityPlayer) player).addItemStackToInventory(card))

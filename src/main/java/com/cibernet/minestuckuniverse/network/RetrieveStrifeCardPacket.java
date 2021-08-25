@@ -10,11 +10,13 @@ import java.util.EnumSet;
 public class RetrieveStrifeCardPacket extends MSUPacket
 {
 	int index;
+	boolean isCard;
 
 	@Override
 	public MSUPacket generatePacket(Object... args)
 	{
 		data.writeInt((int) args[0]);
+		data.writeBoolean(args.length == 1 || (boolean)args[1]);
 		return this;
 	}
 
@@ -22,13 +24,16 @@ public class RetrieveStrifeCardPacket extends MSUPacket
 	public MSUPacket consumePacket(ByteBuf data)
 	{
 		index = data.readInt();
+		isCard = data.readBoolean();
 		return this;
 	}
 
 	@Override
 	public void execute(EntityPlayer player)
 	{
-		StrifePortfolioHandler.retrieveCard(player, index);
+		if(isCard)
+			StrifePortfolioHandler.retrieveCard(player, index);
+		//TODO strife deck retrieve
 		MSUChannelHandler.sendToPlayer(makePacket(Type.UPDATE_STRIFE, player), player);
 	}
 

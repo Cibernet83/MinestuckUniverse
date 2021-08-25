@@ -61,6 +61,7 @@ public class StrifeSpecibus
 
 			for(ItemStack stack : items)
 				inv.appendTag(stack.writeToNBT(new NBTTagCompound()));
+
 			nbt.setTag("Contents", inv);
 		}
 
