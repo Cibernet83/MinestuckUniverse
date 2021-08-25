@@ -1,10 +1,14 @@
 package com.cibernet.minestuckuniverse.strife;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
+import com.cibernet.minestuckuniverse.capabilities.strife.StrifeData;
 import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -66,5 +70,25 @@ public class StrifePortfolioHandler
 				stack.shrink(1);
 		}
 		//TODO weapon assign
+	}
+
+	public static StrifeSpecibus[] getPortfolio(EntityLivingBase entity)
+	{
+		if(entity.hasCapability(MSUCapabilities.STRIFE_DATA, null))
+			return entity.getCapability(MSUCapabilities.STRIFE_DATA, null).getPortfolio();
+		return new StrifeSpecibus[StrifeData.PORTFOLIO_SIZE];
+	}
+
+	public static void retrieveCard(EntityLivingBase player, int index)
+	{
+		if(!player.hasCapability(MSUCapabilities.STRIFE_DATA, null))
+			return;
+
+		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
+
+		ItemStack card = ItemStrifeCard.injectStrifeSpecibus(cap.removeSpecibus(index), new ItemStack(MinestuckUniverseItems.strifeCard));
+
+		if(!(player instanceof EntityPlayer) || !((EntityPlayer) player).addItemStackToInventory(card))
+			player.entityDropItem(card, player.getEyeHeight());
 	}
 }

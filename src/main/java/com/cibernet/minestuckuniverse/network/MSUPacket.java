@@ -41,11 +41,11 @@ public abstract class MSUPacket
 
         }
 
-        public abstract MSUPacket generatePacket(Object... var1);
+        public abstract MSUPacket generatePacket(Object... args);
 
-        public abstract MSUPacket consumePacket(ByteBuf var1);
+        public abstract MSUPacket consumePacket(ByteBuf data);
 
-        public abstract void execute(EntityPlayer var1);
+        public abstract void execute(EntityPlayer player);
 
         public abstract EnumSet<Side> getSenderSide();
 
@@ -59,6 +59,8 @@ public abstract class MSUPacket
         RESET_COOLDOWN(ResetCooldownPacket.class),
         UPDATE_STRIFE(UpdateStrifeDataPacket.class),
         ASSIGN_STRIFE(AssignStrifePacket.class),
+        RETRIEVE_STRIFE(RetrieveStrifeCardPacket.class),
+        SET_ACTIVE_STRIFE(SetActiveStrifePacket.class),
         ;
 
         Class<? extends MSUPacket> packetType;

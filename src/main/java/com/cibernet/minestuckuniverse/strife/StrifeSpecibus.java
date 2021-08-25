@@ -1,11 +1,9 @@
 package com.cibernet.minestuckuniverse.strife;
 
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.LinkedList;
 
@@ -20,6 +18,11 @@ public class StrifeSpecibus
 		this.kindAbstratus = abstratus;
 	}
 
+	public static StrifeSpecibus empty()
+	{
+		return new StrifeSpecibus((KindAbstratus) null);
+	}
+
 	public StrifeSpecibus(NBTTagCompound nbt)
 	{
 		readFromNBT(nbt);
@@ -30,17 +33,20 @@ public class StrifeSpecibus
 		if(nbt.hasKey("KindAbstratus"))
 			kindAbstratus = KindAbstratus.REGISTRY.getValue(new ResourceLocation(nbt.getString("KindAbstratus")));
 
+		if(isAssigned())
+		{
+			NBTTagList inv = nbt.getTagList("Contents", 10);
+
+			for(int i = 0; i < inv.tagCount(); i++)
+			{
+				ItemStack stack = new ItemStack(inv.getCompoundTagAt(i));
+				if(!stack.isEmpty())
+					items.add(stack);
+			}
+		}
+
 		if(nbt.hasKey("CustomName"))
 			setCustomName(nbt.getString("CustomName"));
-
-		NBTTagList inv = nbt.getTagList("Contents", 10);
-
-		for(int i = 0; i < inv.tagCount(); i++)
-		{
-			ItemStack stack = new ItemStack(inv.getCompoundTagAt(i));
-			if(!stack.isEmpty())
-				items.add(stack);
-		}
 
 		return this;
 	}
@@ -48,16 +54,18 @@ public class StrifeSpecibus
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
 		if(isAssigned())
+		{
 			nbt.setString("KindAbstratus", kindAbstratus.getRegistryName().toString());
+
+			NBTTagList inv = new NBTTagList();
+
+			for(ItemStack stack : items)
+				inv.appendTag(stack.writeToNBT(new NBTTagCompound()));
+			nbt.setTag("Contents", inv);
+		}
 
 		if(hasCustomName())
 			nbt.setString("CustomName", getCustomName());
-
-		NBTTagList inv = new NBTTagList();
-
-		for(ItemStack stack : items)
-			inv.appendTag(stack.writeToNBT(new NBTTagCompound()));
-		nbt.setTag("Contents", inv);
 		return nbt;
 	}
 
@@ -134,5 +142,21 @@ public class StrifeSpecibus
 	@Override
 	public String toString() {
 		return kindAbstratus + " " + items;
+	}
+
+	public String getDisplayName()
+	{
+		if(hasCustomName())
+			return customName;
+		return kindAbstratus == null ? "" : kindAbstratus.getLocalizedName();
+	}
+	public String getDisplayNameForCard()
+	{
+		String name = (hasCustomName() ? customName : kindAbstratus == null ? "" : kindAbstratus.getDisplayName()).toLowerCase();
+
+		if(name.length() > 12)
+			name = name.substring(0, 9) + "...";
+
+		return name;
 	}
 }

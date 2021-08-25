@@ -32,12 +32,10 @@ public class IDBasedAlchemyHandler
 
 			if(event.getMode() == CombinationRegistry.Mode.MODE_AND)
 			{
-				System.out.println(idA + " && " + idB + " = " + (idA & idB));
 				result = getItemFromAlchemyID(idA & idB);
 			}
 			else if(event.getMode() == CombinationRegistry.Mode.MODE_OR)
 			{
-				System.out.println(idA + " || " + idB + " = " + (idA | idB));
 				result = getItemFromAlchemyID(idA | idB);
 			}
 

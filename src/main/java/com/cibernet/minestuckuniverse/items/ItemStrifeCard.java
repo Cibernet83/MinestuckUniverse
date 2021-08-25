@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
+import com.cibernet.minestuckuniverse.strife.KindAbstratus;
 import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -30,7 +31,7 @@ public class ItemStrifeCard extends MSUItemBase
 		super(name, unlocName);
 		setMaxStackSize(1);
 
-		addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "assigned"), ((stack, worldIn, entityIn) -> hasSpecibus(stack) ? 1 : 0));
+		addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "assigned"), ((stack, worldIn, entityIn) -> hasSpecibus(stack) ? getStrifeSpecibus(stack).isAssigned() ? 1 : 0.5f : 0));
 	}
 
 	@Override
@@ -57,6 +58,7 @@ public class ItemStrifeCard extends MSUItemBase
 					tooltip.add(String.format(TextFormatting.ITALIC + I18n.translateToLocal("container.shulkerBox.more"), remaining));
 
 			}
+			else tooltip.add("(invalid data)");
 		}
 	}
 
@@ -73,7 +75,12 @@ public class ItemStrifeCard extends MSUItemBase
 		}
 
 		if(hasSpecibus(stack))
-			StrifePortfolioHandler.assignStrife(playerIn, handIn);
+		{
+			StrifeSpecibus specibus = getStrifeSpecibus(stack);
+			if(specibus.isAssigned())
+				StrifePortfolioHandler.assignStrife(playerIn, handIn);
+			else injectStrifeSpecibus(StrifeSpecibus.empty(), stack);
+		}
 		else playerIn.openGui(MinestuckUniverse.instance, MSUUtils.STRIFE_CARD_GUI, worldIn, (int)playerIn.posX, (int)playerIn.posY, (int)playerIn.posZ);
 
 		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
@@ -93,11 +100,13 @@ public class ItemStrifeCard extends MSUItemBase
 
 	public static boolean hasSpecibus(ItemStack stack)
 	{
-		return stack.hasTagCompound() && stack.getTagCompound().hasKey("StrifeSpecibus");
+		return stack.hasTagCompound() && stack.getTagCompound().hasKey("StrifeSpecibus") && !stack.getTagCompound().getCompoundTag("StrifeSpecibus").hasNoTags();
 	}
 
 	public static ItemStack injectStrifeSpecibus(StrifeSpecibus specibus, ItemStack stack)
 	{
+		if(specibus == null)
+			return stack;
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
 		stack.getTagCompound().setTag("StrifeSpecibus", specibus.writeToNBT(new NBTTagCompound()));

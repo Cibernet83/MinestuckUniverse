@@ -14,7 +14,9 @@ public interface IStrifeData extends IMSUCapabilityBase<EntityLivingBase>
 	boolean portfolioHasAbstratus(KindAbstratus abstratus);
 
 	boolean addSpecibus(StrifeSpecibus specibus);
+	StrifeSpecibus removeSpecibus(int index);
 	void setSpecibus(StrifeSpecibus specibus, int index);
+	void clearPortfolio();
 
 	int getSelectedSpecibusIndex();
 	int getSelectedWeaponIndex();

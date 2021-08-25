@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.events.handlers.CommonEventHandler;
 import com.cibernet.minestuckuniverse.events.handlers.IDBasedAlchemyHandler;
 import com.cibernet.minestuckuniverse.events.handlers.PropertyEventHandler;
+import com.cibernet.minestuckuniverse.events.handlers.StrifeEventHandler;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
@@ -44,6 +45,7 @@ public class CommonProxy
 
         MinecraftForge.EVENT_BUS.register(KindAbstratus.class);
         MinecraftForge.EVENT_BUS.register(MSUKindAbstrata.class);
+        MinecraftForge.EVENT_BUS.register(StrifeEventHandler.class);
 
         MSUEntities.registerEntities();
         MSUCapabilities.registerCapabilities();

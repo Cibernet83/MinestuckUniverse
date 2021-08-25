@@ -36,8 +36,14 @@ public class UpdateStrifeDataPacket extends MSUPacket
 	public void execute(EntityPlayer player)
 	{
 		UUID uuid = nbtData.getUniqueId("TargetUUID");
+
 		for (EntityLivingBase entity : player.world.getEntities(EntityLivingBase.class, (entity) -> entity.getUniqueID().equals(uuid)))
+		{
+			if(entity.getUniqueID().equals(player.getUniqueID()))
+				entity = player;
+
 			entity.getCapability(MSUCapabilities.STRIFE_DATA, null).readFromNBT(nbtData);
+		}
 	}
 
 	@Override

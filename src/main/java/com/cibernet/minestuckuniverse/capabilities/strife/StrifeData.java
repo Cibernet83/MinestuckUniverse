@@ -11,15 +11,22 @@ public class StrifeData implements IStrifeData
 	public static final int PORTFOLIO_SIZE = 10;
 
 	protected EntityLivingBase owner;
-	protected StrifeSpecibus[] portfolio = new StrifeSpecibus[PORTFOLIO_SIZE];
-	protected int selWeapon = 0;
-	protected int selSpecibus = 0;
+	protected final StrifeSpecibus[] portfolio = new StrifeSpecibus[PORTFOLIO_SIZE];
+	protected int selWeapon = -1;
+	protected int selSpecibus = -1;
 
 	@Override
 	public NBTTagCompound writeToNBT()
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		NBTTagList portfolioList = new NBTTagList();
+
+		if(selWeapon < 0)
+		{
+			clearPortfolio();
+			portfolio[0] = StrifeSpecibus.empty();
+			selWeapon = 0;
+		}
 
 		for(int i = 0; i < portfolio.length; i++)
 			if(portfolio[i] != null)
@@ -41,6 +48,11 @@ public class StrifeData implements IStrifeData
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
+		clearPortfolio();
+
+		setSelectedSpecibusIndex(nbt.getInteger("SelectedSpecibus"));
+		setSelectedWeaponIndex(nbt.getInteger("SelectedWeapon"));
+
 		NBTTagList portfolioList = nbt.getTagList("Portfolio", 10);
 
 		for(int i = 0; i < portfolioList.tagCount(); i++)
@@ -50,9 +62,6 @@ public class StrifeData implements IStrifeData
 			if(slot >= 0 && slot < portfolio.length)
 				portfolio[slot] = new StrifeSpecibus(spNbt.getCompoundTag("Specibus"));
 		}
-
-		setSelectedSpecibusIndex(nbt.getInteger("SelectedSpecibus"));
-		setSelectedWeaponIndex(nbt.getInteger("SelectedWeapon"));
 	}
 
 	@Override
@@ -81,7 +90,6 @@ public class StrifeData implements IStrifeData
 	@Override
 	public boolean portfolioHasAbstratus(KindAbstratus abstratus)
 	{
-		System.out.println(portfolio);
 		for(StrifeSpecibus sp : portfolio)
 			if(sp != null && sp.getKindAbstratus() == abstratus)
 				return true;
@@ -104,9 +112,26 @@ public class StrifeData implements IStrifeData
 	}
 
 	@Override
+	public StrifeSpecibus removeSpecibus(int index)
+	{
+		if(index < 0 || index > portfolio.length || portfolio[index] == null)
+			return null;
+		StrifeSpecibus result = portfolio[index];
+		portfolio[index] = null;
+		setSelectedSpecibusIndex(-1);
+		return result;
+	}
+
+	@Override
 	public void setSpecibus(StrifeSpecibus specibus, int index)
 	{
 		portfolio[index] = specibus;
+	}
+
+	@Override
+	public void clearPortfolio() {
+		for(int i = 0; i < portfolio.length; i++)
+			portfolio[i] = null;
 	}
 
 	@Override

@@ -117,13 +117,9 @@ public class BlockArtifact extends MSUBlockBase
 	@SubscribeEvent
 	public static void onAlchemize(AlchemizeItemEvent event)
 	{
-		System.out.println(event.getResultItem());
-
 		if(event.getResultItem().getItem() instanceof ItemBlock && ((ItemBlock) event.getResultItem().getItem()).getBlock() instanceof BlockArtifact)
 		{
 			BlockPos pos = null;
-
-			System.out.println("!");
 
 			if(event instanceof AlchemizeItemAlchemiterEvent)
 				pos = ((AlchemizeItemAlchemiterEvent) event).getItemPos().down();
@@ -132,7 +128,6 @@ public class BlockArtifact extends MSUBlockBase
 
 			if(pos != null)
 			{
-				System.out.println(pos);
 				event.getWorld().setBlockState(pos, ((ItemBlock) event.getResultItem().getItem()).getBlock().getDefaultState(), 3);
 				event.setCanceled(true);
 			}

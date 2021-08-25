@@ -641,9 +641,14 @@ gui.vault.label=Boondollar Register
 gui.vault.label.1=Boondollar
 gui.vault.label.2=register
 
+gui.strifePortfolio.specibus=strife specibus
+gui.strifePortfolio.deck=sylladex :: strife deck
+gui.strifeSpecibus.name=Strife Portfolio
+gui.strifeCard.label=kind abstrata
+
 enchantment.minestuckuniverse.superpunch=Superpunch
 enchantment.minestuckuniverse.superpunch.desc=Increases the knockback strength of the weapon but increases its attack damage inversely to the enchanment level
-gui.strifeCard.label=kind abstrata
+
 status.strife.portfolioFull=Your Strife Portfolio is full!
 status.strife.portfolioDuplicate=You already have a %s Strife Specibus in your Portfolio
 status.strife.assign=The %s Strife Specibus has been assigned to your Portfolio
