@@ -89,6 +89,7 @@ public class PropertyEventHandler
 				}
 
 				event.getEntityLiving().playSound(MSUSoundHandler.shieldParry, 1.0F, 0.8F + event.getEntity().world.rand.nextFloat() * 0.4F);
+				event.setCanceled(true);
 			}
 		}
 	}
