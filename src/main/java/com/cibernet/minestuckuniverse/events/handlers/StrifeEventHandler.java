@@ -6,10 +6,13 @@ import com.cibernet.minestuckuniverse.gui.GuiStrifePortfolio;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
+import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
 import com.mraof.minestuck.client.gui.playerStats.GuiStrifeSpecibus;
 import com.mraof.minestuck.event.ServerEventHandler;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -46,8 +49,27 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onPlayerAttack(LivingAttackEvent event)
 	{
-		ItemStack stack = event.getEntityLiving().getHeldItemMainhand();
-		//TODO assigned check
+		if(!(event.getSource().getImmediateSource() instanceof EntityPlayer))
+			return;
+
+		EntityLivingBase source = (EntityLivingBase) event.getSource().getImmediateSource();
+		ItemStack stack = source.getHeldItemMainhand();
+
+		if(stack.isEmpty())
+		{
+			IStrifeData cap = source.getCapability(MSUCapabilities.STRIFE_DATA, null);
+			if(cap.getPortfolio().length > 0 && cap.getSelectedSpecibusIndex() >= 0)
+			{
+				StrifeSpecibus selStrife = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];
+
+				if(selStrife != null && selStrife.isAssigned() && selStrife.getKindAbstratus().isFist())
+					return;
+			}
+			event.setCanceled(true);
+		}
+
+		if(!isStackAssigned(stack))
+			event.setCanceled(true);
 	}
 
 	@SubscribeEvent
