@@ -52,6 +52,30 @@ public class StrifePortfolioHandler
 		return false;
 	}
 
+	@Deprecated
+	public static boolean addWeapontoSlot(EntityLivingBase entity, ItemStack stack, int slot)
+	{
+		if(entity.world.isRemote || !entity.hasCapability(MSUCapabilities.STRIFE_DATA, null))
+			return false;
+
+		if(stack.hasTagCompound())
+			stack.getTagCompound().removeTag("StrifeAssigned");
+
+		IStrifeData cap = entity.getCapability(MSUCapabilities.STRIFE_DATA, null);
+
+		for(StrifeSpecibus specibus : cap.getPortfolio())
+		{
+			if(specibus != null && specibus.putItemStack(stack, slot))
+			{
+				if(entity instanceof EntityPlayer)
+					MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity), (EntityPlayer) entity);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public static boolean addSpecibus(EntityLivingBase entity, StrifeSpecibus specibus)
 	{
 		if(entity.world.isRemote || !entity.hasCapability(MSUCapabilities.STRIFE_DATA, null))
@@ -118,5 +142,40 @@ public class StrifePortfolioHandler
 
 		if(!(player instanceof EntityPlayer) || !((EntityPlayer) player).addItemStackToInventory(card))
 			player.entityDropItem(card, player.getEyeHeight());
+	}
+
+	public static void retrieveWeapon(EntityLivingBase player, int index)
+	{
+		if(!player.hasCapability(MSUCapabilities.STRIFE_DATA, null))
+			return;
+
+		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
+
+		ItemStack stack = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].retrieveStack(cap.getSelectedWeaponIndex());
+
+		if(player.getHeldItemMainhand().isEmpty())
+		{
+			player.setHeldItem(EnumHand.MAIN_HAND, stack);
+			cap.setArmed(true);
+			if(player instanceof  EntityPlayer)
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player), (EntityPlayer) player);
+		}
+	}
+
+	public static void unassignSelected(EntityLivingBase player)
+	{
+		if(!player.hasCapability(MSUCapabilities.STRIFE_DATA, null))
+			return;
+
+		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
+
+		StrifeSpecibus selSpecibus = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];
+		selSpecibus.unassign(cap.getSelectedWeaponIndex());
+
+		if(cap.getSelectedWeaponIndex() >= selSpecibus.getContents().size())
+			cap.setSelectedWeaponIndex(0);
+
+		if(player instanceof  EntityPlayer)
+			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player), (EntityPlayer) player);
 	}
 }

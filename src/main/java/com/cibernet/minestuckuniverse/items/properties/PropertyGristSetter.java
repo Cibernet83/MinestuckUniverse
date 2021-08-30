@@ -51,30 +51,14 @@ public class PropertyGristSetter extends WeaponProperty
 			nbt.setInteger("Type", frogType);
 			target.readFromNBT(nbt);
 		}
-		if(target instanceof EntityUnderling && getUnderlingGrist((EntityUnderling) target) != gristType)
+		if(target instanceof EntityUnderling && ((EntityUnderling) target).getGristType() != gristType)
 		{
 			((WorldServer)target.world).spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, target.posX, target.posY + target.height/2f, target.posZ, 1, 0.0D, 0.0D, 0.0D, 0.0D, new int[0]);
 			((WorldServer)target.world).spawnParticle(EnumParticleTypes.BLOCK_CRACK, target.posX, target.posY + target.height/2f, target.posZ, 5, target.width/2f, target.height/2f, target.width/2f, 0.5D,
 					Block.getStateId(BlockGrist.BLOCKS.get(gristType).getDefaultState()));
 			target.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.7f, ((target.world.rand.nextFloat() - target.world.rand.nextFloat()) * 0.2F + 1.0F) * 0.8F);
 
-			setUnderlingGrist((EntityUnderling) target, gristType);
-		}
-	}
-
-	public static GristType getUnderlingGrist(EntityUnderling target)
-	{
-		return ObfuscationReflectionHelper.getPrivateValue(EntityUnderling.class, target, "type");
-	}
-
-	public static void setUnderlingGrist(EntityUnderling target, GristType type)
-	{
-		try {
-			ObfuscationReflectionHelper.findMethod(EntityUnderling.class, "applyGristType", void.class, GristType.class, boolean.class).invoke(target, type, false);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			((EntityUnderling) target).applyGristType(gristType, false);
 		}
 	}
 

@@ -22,4 +22,6 @@ public interface IStrifeData extends IMSUCapabilityBase<EntityLivingBase>
 	int getSelectedWeaponIndex();
 	void setSelectedSpecibusIndex(int index);
 	void setSelectedWeaponIndex(int index);
+	boolean isArmed();
+	void setArmed(boolean armed);
 }

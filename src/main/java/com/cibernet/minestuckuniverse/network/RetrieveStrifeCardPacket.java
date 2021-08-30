@@ -33,6 +33,7 @@ public class RetrieveStrifeCardPacket extends MSUPacket
 	{
 		if(isCard)
 			StrifePortfolioHandler.retrieveCard(player, index);
+		else StrifePortfolioHandler.retrieveWeapon(player, index);
 		//TODO strife deck retrieve
 		MSUChannelHandler.sendToPlayer(makePacket(Type.UPDATE_STRIFE, player), player);
 	}

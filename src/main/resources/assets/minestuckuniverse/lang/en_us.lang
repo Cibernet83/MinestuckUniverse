@@ -655,3 +655,4 @@ status.strife.portfolioDuplicate=You already have a %s Strife Specibus in your P
 status.strife.assign=The %s Strife Specibus has been assigned to your Portfolio
 status.strife.assignWeapon=Your %s has been assigned to your %s Strife Deck
 status.strife.weaponMissmach=Your %s doesn't fit inside any of your Strife Specibi
+strife.item.allocated=§2[Strife Allocated]

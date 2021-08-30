@@ -72,15 +72,23 @@ public class StrifeSpecibus
 
 	public boolean putItemStack(ItemStack stack)
 	{
+		return putItemStack(stack, -1);
+	}
+
+	public boolean putItemStack(ItemStack stack, int slot)
+	{
 		if (stack.isEmpty() || kindAbstratus == null || !kindAbstratus.isStackCompatible(stack))
 			return false;
 
-		if(!items.contains(stack))
+		boolean prevAssigned = stack.hasTagCompound() && stack.getTagCompound().getBoolean("StrifeAssigned");
+		if(!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+		stack.getTagCompound().setBoolean("StrifeAssigned", true);
+		if(!prevAssigned)
 		{
-			if(!stack.hasTagCompound())
-				stack.setTagCompound(new NBTTagCompound());
-			stack.getTagCompound().setBoolean("StrifeAssigned", true);
-			items.add(stack);
+			if(slot == -1)
+				items.add(stack);
+			else items.add(slot, stack);
 		}
 		return true;
 	}
@@ -111,7 +119,7 @@ public class StrifeSpecibus
 	{
 		if(index < 0 || index >= items.size())
 			return ItemStack.EMPTY;
-		return items.get(index);
+		return items.get(index).copy();
 	}
 
 	public LinkedList<ItemStack> getContents() {

@@ -205,6 +205,9 @@ public class GuiStrifePortfolio extends GuiPlayerStats
 		if(!(index >= 0 && index < portfolio.length && (!checkSelected || activeSpecibus != index)))
 			return;
 
+		if(portfolio[index] == null)
+			return;
+
 		setScale(cardScale);
 		int x = (int) ((xOffset+cardX)) - (index == selectedCard ? 5 : 0);
 		int y = (int) ((yOffset+cardY)) - (index == selectedCard ? 5 : 0);

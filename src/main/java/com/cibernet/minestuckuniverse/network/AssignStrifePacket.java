@@ -18,9 +18,21 @@ public class AssignStrifePacket extends MSUPacket
 	EnumHand hand;
 	StrifeSpecibus specibus;
 
+	ItemStack stack;
+	int slot;
+
 	@Override
 	public MSUPacket generatePacket(Object... args)
 	{
+		data.writeBoolean(args[0] instanceof ItemStack);
+
+		if(args[0] instanceof ItemStack)
+		{
+			ByteBufUtils.writeItemStack(data, (ItemStack) args[0]);
+			data.writeInt((Integer) args[1]);
+			return this;
+		}
+
 		data.writeInt(((EnumHand)args[0]).ordinal());
 		data.writeBoolean(args.length > 1);
 		if(args.length > 1)
@@ -32,6 +44,13 @@ public class AssignStrifePacket extends MSUPacket
 	@Override
 	public MSUPacket consumePacket(ByteBuf data)
 	{
+		if(data.readBoolean())
+		{
+			stack = ByteBufUtils.readItemStack(data);
+			slot = data.readInt();
+			return this;
+		}
+
 		hand = EnumHand.values()[data.readInt()];
 		if(data.readBoolean())
 			specibus = new StrifeSpecibus(ByteBufUtils.readTag(data));
@@ -42,6 +61,12 @@ public class AssignStrifePacket extends MSUPacket
 	@Override
 	public void execute(EntityPlayer player)
 	{
+		if(stack != null)
+		{
+			StrifePortfolioHandler.addWeapontoSlot(player, stack, slot);
+			return;
+		}
+
 		if(specibus != null)
 			ItemStrifeCard.injectStrifeSpecibus(specibus, player.getHeldItem(hand));
 		StrifePortfolioHandler.assignStrife(player, hand);

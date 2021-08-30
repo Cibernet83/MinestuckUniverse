@@ -14,6 +14,7 @@ public class StrifeData implements IStrifeData
 	protected final StrifeSpecibus[] portfolio = new StrifeSpecibus[PORTFOLIO_SIZE];
 	protected int selWeapon = -1;
 	protected int selSpecibus = -1;
+	protected boolean isArmed = false;
 
 	@Override
 	public NBTTagCompound writeToNBT()
@@ -41,6 +42,7 @@ public class StrifeData implements IStrifeData
 		nbt.setTag("Portfolio", portfolioList);
 		nbt.setInteger("SelectedSpecibus", getSelectedSpecibusIndex());
 		nbt.setInteger("SelectedWeapon", getSelectedWeaponIndex());
+		nbt.setBoolean("Armed", isArmed());
 
 		return nbt;
 	}
@@ -155,5 +157,16 @@ public class StrifeData implements IStrifeData
 	public void setSelectedWeaponIndex(int index)
 	{
 		selWeapon = index;
+	}
+
+	@Override
+	public boolean isArmed() {
+		return isArmed;
+	}
+
+	@Override
+	public void setArmed(boolean armed)
+	{
+		isArmed = armed;
 	}
 }
