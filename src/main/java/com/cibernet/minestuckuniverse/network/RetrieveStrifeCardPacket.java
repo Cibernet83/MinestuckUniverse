@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.network;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,6 +32,9 @@ public class RetrieveStrifeCardPacket extends MSUPacket
 	@Override
 	public void execute(EntityPlayer player)
 	{
+		if(!MSUConfig.combatOverhaul)
+			return;
+
 		if(isCard)
 			StrifePortfolioHandler.retrieveCard(player, index);
 		else StrifePortfolioHandler.retrieveWeapon(player, index);

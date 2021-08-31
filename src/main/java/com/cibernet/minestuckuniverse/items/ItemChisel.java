@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,8 +19,6 @@ import java.util.Random;
 
 public class ItemChisel extends MSUItemBase
 {
-	public static int baseLuck = -2;
-	
 	public ItemChisel(String materialName, int durabillity)
 	{
 		super(materialName+"_chisel", materialName+"Chisel");
@@ -32,10 +31,10 @@ public class ItemChisel extends MSUItemBase
 	{
 		if(worldIn.getBlockState(pos).getBlock().equals(MinestuckUniverseBlocks.zillyStone) && !worldIn.isRemote)
 		{
-			float luck = player.getLuck() + baseLuck;
+			float luck = player.getLuck() + MSUConfig.baseZillystoneLuck;
 			int val = 1;
 
-			val += Math.signum(luck)*((new Random().nextInt(10) < Math.abs(luck) ? 1 : 0)); //TODO turn the modifier into a config option
+			val += itemRand.nextFloat()*luck*MSUConfig.zillystoneYields;
 
 			InventoryHelper.spawnItemStack(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(MinestuckUniverseItems.zillystoneShard, val));
 			player.getHeldItem(hand).damageItem(1, player);

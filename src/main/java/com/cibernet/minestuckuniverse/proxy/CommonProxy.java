@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
@@ -45,7 +46,9 @@ public class CommonProxy
 
         MinecraftForge.EVENT_BUS.register(KindAbstratus.class);
         MinecraftForge.EVENT_BUS.register(MSUKindAbstrata.class);
-        MinecraftForge.EVENT_BUS.register(StrifeEventHandler.class);
+
+        if(MSUConfig.combatOverhaul)
+            MinecraftForge.EVENT_BUS.register(StrifeEventHandler.class);
 
         MSUEntities.registerEntities();
         MSUCapabilities.registerCapabilities();

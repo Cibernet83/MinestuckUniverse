@@ -686,3 +686,15 @@ status.strife.assign=The %s Strife Specibus has been assigned to your Portfolio
 status.strife.assignWeapon=Your %s has been assigned to your %s Strife Deck
 status.strife.weaponMissmach=Your %s doesn't fit inside any of your Strife Specibi
 strife.item.allocated=§2[Strife Allocated]
+
+config.minestuckuniverse.general.zillystoneYields=Zillystone Luck Modifier
+config.minestuckuniverse.general.baseZillystoneLuck=Zillystone Base Luck
+config.minestuckuniverse.general.IDAlchemy=ID-Based Alchemy
+
+config.minestuckuniverse.strife.combatOverhaul=Combat Overhaul
+config.minestuckuniverse.strife.preventUnallocatedWeaponsUse=Prevent Unallocated Weapon Use
+config.minestuckuniverse.strife.keepPortfolioOnDeath=Keep Strife Portfolio On Death
+config.minestuckuniverse.strife.strifeCardMobDrops=Mobs Drop Strife Cards
+config.minestuckuniverse.strife.strifeDeckMaxSize=Strife Deck Weapon Limit
+config.minestuckuniverse.strife.abstrataSwitcherRung=Strife Specibus Quick Switcher Unlock Rung
+config.minestuckuniverse.title=Minestuck Universe

@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.network;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
 import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
@@ -61,6 +62,9 @@ public class AssignStrifePacket extends MSUPacket
 	@Override
 	public void execute(EntityPlayer player)
 	{
+		if(!MSUConfig.combatOverhaul)
+			return;
+
 		if(stack != null)
 		{
 			StrifePortfolioHandler.addWeapontoSlot(player, stack, slot);

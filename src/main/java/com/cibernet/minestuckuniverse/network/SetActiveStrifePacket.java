@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.network;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import io.netty.buffer.ByteBuf;
@@ -32,7 +33,7 @@ public class SetActiveStrifePacket extends MSUPacket
 	@Override
 	public void execute(EntityPlayer player)
 	{
-		if(!player.hasCapability(MSUCapabilities.STRIFE_DATA, null))
+		if(!MSUConfig.combatOverhaul ||  !player.hasCapability(MSUCapabilities.STRIFE_DATA, null))
 			return;
 
 		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);

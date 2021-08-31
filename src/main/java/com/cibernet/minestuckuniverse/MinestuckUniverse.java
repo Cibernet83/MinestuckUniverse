@@ -16,7 +16,8 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
         modid = MinestuckUniverse.MODID,
         name = MinestuckUniverse.NAME,
         version = MinestuckUniverse.VERSION,
-        dependencies = "required-after:minestuck@[1.2.283,);"
+        dependencies = "required-after:minestuck@[1.2.283,);",
+        guiFactory = "com.cibernet.minestuckuniverse.gui.MSUGuiFactory"
 )
 public class MinestuckUniverse
 {
@@ -45,6 +46,8 @@ public class MinestuckUniverse
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        MSUConfig.load(event.getSuggestedConfigurationFile(), event.getSide());
+
         isThaumLoaded = Loader.isModLoaded("thaumcraft");
         isBotaniaLoaded = Loader.isModLoaded("botania");
         isArsenalLoaded = Loader.isModLoaded("minestuckarsenal");

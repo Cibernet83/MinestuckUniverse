@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.mraof.minestuck.alchemy.CombinationRegistry;
@@ -20,6 +21,9 @@ public class IDBasedAlchemyHandler
 	@SubscribeEvent
 	public static void onAlchemyCombo(AlchemyCombinationEvent event)
 	{
+		if(!MSUConfig.IDAlchemy)
+			return;
+
 		if(event.getResultItem().isEmpty() && !event.getItemB().isEmpty() && !event.getItemB().isEmpty())
 		{
 			int idA = getItemAlchemyID(event.getItemA().getItem());
