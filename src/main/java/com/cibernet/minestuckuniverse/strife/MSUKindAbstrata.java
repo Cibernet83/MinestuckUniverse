@@ -34,7 +34,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus jokerkind = new KindAbstratus("joker").setConditional((i, stack) -> !stack.isEmpty()).setHidden(true);
 
 	public static KindAbstratus sbahjkind = new KindAbstratus("sbahj")
-			.addItemTools(MinestuckUniverseItems.sbahjWhip, MinestuckItems.batleacks, MinestuckItems.sord, MinestuckItems.sbahjPoster,
+			.addItemTools(MinestuckUniverseItems.sbahjWhip, MinestuckUniverseItems.unrealAir, MinestuckItems.batleacks, MinestuckItems.sord, MinestuckItems.sbahjPoster,
 					Item.getItemFromBlock(MinestuckUniverseBlocks.sbahjBedrock), Item.getItemFromBlock(MinestuckUniverseBlocks.sbahjTree))
 			.setConditional((i, stack) -> i.getRegistryName().getResourcePath().equals("sbahjaddon")).setHidden(true);
 	public static KindAbstratus bunnykind = new KindAbstratus("bunny")

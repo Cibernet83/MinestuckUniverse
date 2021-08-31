@@ -11,8 +11,9 @@ public class MSUEntities
 	
 	public static void registerEntities()
 	{
-		registerEntity(EntityAcheron.class, "Acheron");
-		registerEntity(EntityMSUThrowable.class, "YarnBall");
+		registerEntity(EntityAcheron.class, "acheron");
+		registerEntity(EntityMSUThrowable.class, "throwable");
+		registerEntity(EntityUnrealAir.class, "unreal_air");
 	}
 	
 	
@@ -34,7 +35,7 @@ public class MSUEntities
 	}
 	
 	public static void registerEntity(Class<? extends Entity> entityClass, String name, String registryName, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int eggPrimary, int eggSecondary) {
-		EntityRegistry.registerModEntity(new ResourceLocation(MinestuckUniverse.MODID, registryName), entityClass, MinestuckUniverse.MODID + name, currentEntityIdOffset, MinestuckUniverse.instance, trackingRange, updateFrequency, sendsVelocityUpdates, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(new ResourceLocation(MinestuckUniverse.MODID, registryName), entityClass, MinestuckUniverse.MODID + "." + name, currentEntityIdOffset, MinestuckUniverse.instance, trackingRange, updateFrequency, sendsVelocityUpdates, eggPrimary, eggSecondary);
 		++currentEntityIdOffset;
 	}
 }
