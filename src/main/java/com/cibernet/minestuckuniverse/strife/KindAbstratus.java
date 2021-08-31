@@ -31,6 +31,8 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 	protected final ArrayList<Class<? extends Item>> itemClasses = new ArrayList<>();
 	protected final ArrayList<Item> toolItems = new ArrayList<>();
 
+	protected IAbstratusConditional conditional;
+
 	public KindAbstratus(String unlocName, MSUToolClass... toolClasses)
 	{
 		ID = idAt++;
@@ -56,11 +58,16 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 		return this;
 	}
 
-	public KindAbstratus setHidden() {
-		return setFist(true);
+	public KindAbstratus setConditional(IAbstratusConditional condition)
+	{
+		this.conditional = condition;
+		return this;
 	}
 
-
+	public IAbstratusConditional getConditional()
+	{
+		return conditional;
+	}
 
 	public KindAbstratus addToolClasses(MSUToolClass... toolClasses)
 	{
@@ -107,7 +114,7 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 
 		if(item instanceof IClassedTool)
 			for(MSUToolClass tc : toolClasses)
-				if(((IClassedTool) item).getToolClass().isCompatibleWith(tc))
+				if(tc.isCompatibleWith(((IClassedTool) item).getToolClass()))
 					return true;
 		for(Class<? extends Item> clzz : itemClasses)
 			if(clzz.isInstance(item))
@@ -115,6 +122,9 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 		for(Item i : toolItems)
 			if(net.minecraftforge.oredict.OreDictionary.itemMatches(new ItemStack(i), stack, false))
 				return true;
+
+		if(conditional != null && conditional.consume(stack.getItem(), stack))
+			return true;
 
 		return false;
 	}
@@ -150,7 +160,7 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 
 	public boolean canSelect()
 	{
-		return !isHidden() && (isFist() || !toolItems.isEmpty() || !toolClasses.isEmpty() || !itemClasses.isEmpty());
+		return !isHidden() && (conditional != null || isFist() || !toolItems.isEmpty() || !toolClasses.isEmpty() || !itemClasses.isEmpty());
 	}
 
 	@SubscribeEvent
@@ -163,5 +173,10 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 	@Override
 	public String toString() {
 		return getRegistryName().toString();
+	}
+
+	public static interface IAbstratusConditional
+	{
+		boolean consume(Item item, ItemStack stack);
 	}
 }

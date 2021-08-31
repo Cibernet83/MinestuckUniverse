@@ -45,7 +45,7 @@ public class ItemKnittingNeedles extends MSUWeaponBase
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return stack.getCount() >= 2 ? I18n.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + "Plural.name").trim() : super.getItemStackDisplayName(stack);
+        return stack.getCount() >= 2 ? I18n.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name.plural").trim() : super.getItemStackDisplayName(stack);
     }
 
     @Override
@@ -85,24 +85,4 @@ public class ItemKnittingNeedles extends MSUWeaponBase
         if(stack.getItemDamage() > stack.getMaxDamage())
             stack.setCount(1);
     }
-
-    /*
-    @Override
-    public boolean hasContainerItem(ItemStack stack)
-    {
-        return stack.getCount() >= 2;
-    }
-
-    @Override
-    public ItemStack getContainerItem(ItemStack itemStack)
-    {
-        if(hasContainerItem(itemStack))
-        {
-            ItemStack result = itemStack.copy();
-            result.setItemDamage(result.getItemDamage());
-            return result;
-        }
-        return super.getContainerItem(itemStack);
-    }
-    */
 }

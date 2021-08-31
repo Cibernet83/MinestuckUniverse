@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.items.weapons;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IClassedTool;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
+import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.items.properties.IEnchantableProperty;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.google.common.collect.HashMultimap;
@@ -10,6 +11,7 @@ import com.google.common.collect.Multimap;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -82,7 +84,11 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
         String key = getUnlocalizedName()+".tooltip";
-        if(!I18n.translateToLocal(key).equals(key))
+        String playerName = Minecraft.getMinecraft().player == null ? "" : Minecraft.getMinecraft().player.getName();
+
+        if(MSUItemBase.DEDICATED_TOOLTIPS.contains(playerName) && net.minecraft.client.resources.I18n.hasKey(key+"."+playerName))
+            tooltip.add(I18n.translateToLocal(key+"."+playerName));
+        else if(net.minecraft.client.resources.I18n.hasKey(key))
             tooltip.add(I18n.translateToLocal(key));
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }

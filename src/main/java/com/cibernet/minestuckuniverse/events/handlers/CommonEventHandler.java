@@ -23,10 +23,12 @@ import com.mraof.minestuck.world.lands.gen.ChunkProviderLands;
 import com.sun.javafx.geom.Vec3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.*;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -403,15 +405,22 @@ public class CommonEventHandler
 				if(rayTrace != null)
 					return;
 
-				playerLookVec = getVecFromRotation(-player.rotationPitch, player.rotationYaw);
-				float celestialAngle = (world.getCelestialAngle(0)*360f + 90f) % 360f;
-				Vec3d sunVec = getVecFromRotation(celestialAngle, -90);
-				Vec3d moonVec = getVecFromRotation((celestialAngle+180f) % 360f, -90);
+				for(Entity weatherEffect : world.weatherEffects)
+					if(weatherEffect instanceof EntityLightningBolt)
+						stack = new ItemStack(MinestuckUniverseItems.lightning);
 
-				if(playerLookVec.squareDistanceTo(sunVec) < 0.07f)
-					stack = new ItemStack(MinestuckUniverseItems.sun);
-				else if(playerLookVec.distanceTo(moonVec) < 0.07f)
-					stack = new ItemStack(MinestuckUniverseItems.moon);
+				if(stack.isEmpty() && !world.isThundering())
+				{
+					playerLookVec = getVecFromRotation(-player.rotationPitch, player.rotationYaw);
+					float celestialAngle = (world.getCelestialAngle(0)*360f + 90f) % 360f;
+					Vec3d sunVec = getVecFromRotation(celestialAngle, -90);
+					Vec3d moonVec = getVecFromRotation((celestialAngle+180f) % 360f, -90);
+
+					if(playerLookVec.squareDistanceTo(sunVec) < 0.07f)
+						stack = new ItemStack(MinestuckUniverseItems.sun);
+					else if(playerLookVec.distanceTo(moonVec) < 0.07f)
+						stack = new ItemStack(MinestuckUniverseItems.moon);
+				}
 
 			}
 
