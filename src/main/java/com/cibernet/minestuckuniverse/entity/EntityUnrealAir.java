@@ -1,7 +1,9 @@
 package com.cibernet.minestuckuniverse.entity;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,6 +16,8 @@ import net.minecraft.world.WorldServer;
 
 public class EntityUnrealAir extends Entity
 {
+	public static DamageSource UNREAL_DAMAGE = new DamageSource(MinestuckUniverse.MODID+".unrealDamage");
+
 	public EntityUnrealAir(World worldIn)
 	{
 		super(worldIn);
@@ -39,6 +43,14 @@ public class EntityUnrealAir extends Entity
 		posX += motionX;
 		posY += motionY;
 		posZ += motionZ;
+
+		if(!isDead && posY > world.getActualHeight()*1.4f)
+		{
+			for(Entity passenger : getPassengers())
+				passenger.attackEntityFrom(UNREAL_DAMAGE, Float.MAX_VALUE);
+			world.setEntityState(this, (byte) 1);
+			setDead();
+		}
 	}
 
 	@Override
