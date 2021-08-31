@@ -271,7 +271,7 @@ item.homeRunBat.name=Home Run Bat
 item.dynamiteStick.name=Dynamite Stick
 item.dynamiteStick.tooltip=Woah hey, be careful with that. Hitting something with it might cause it to explode.
 item.nightmareMace.name=Nightmare Mace
-item.nightmareMace.tooltip=This mace contains the imprisoned soul of Ng'Mhagul, it can now be more easily weaponized, but at the cost of some of your hunger/
+item.nightmareMace.tooltip=This mace contains the imprisoned soul of Ng'Mhagul, it can now be more easily weaponized at the cost of some of your energy.
 item.cranialEnder.name=Cranial Ender
 
 item.goldCane.name=Gold Cane
