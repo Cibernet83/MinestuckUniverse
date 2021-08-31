@@ -21,6 +21,7 @@ public class ItemSound extends MSUItemBase
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn)
 	{
 		player.world.playSound(player, player.posX, player.posY, player.posZ, sound, SoundCategory.PLAYERS, 1.5F, 1.0F);
+		player.swingArm(handIn);
 		return ActionResult.newResult(EnumActionResult.SUCCESS, player.getHeldItem(handIn));
 	}
 }

@@ -3,7 +3,6 @@ package com.cibernet.minestuckuniverse.entity;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,7 +15,7 @@ import net.minecraft.world.WorldServer;
 
 public class EntityUnrealAir extends Entity
 {
-	public static DamageSource UNREAL_DAMAGE = new DamageSource(MinestuckUniverse.MODID+".unrealDamage");
+	public static DamageSource UNREAL_DAMAGE = new DamageSource(MinestuckUniverse.MODID+".unrealDamage").setDamageBypassesArmor().setDamageAllowedInCreativeMode().setDamageIsAbsolute();
 
 	public EntityUnrealAir(World worldIn)
 	{

@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "minestuckuniverse:items/artifact_whip"
+        "layer0": "minestuckuniverse:items/whip_sbahj"
     }
 }

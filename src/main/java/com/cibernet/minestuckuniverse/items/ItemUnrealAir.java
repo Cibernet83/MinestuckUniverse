@@ -24,7 +24,7 @@ public class ItemUnrealAir extends MSUItemBase
 		{
 			EntityUnrealAir board = new EntityUnrealAir(worldIn);
 			pos = pos.offset(facing);
-			board.setPositionAndRotation(pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, worldIn.rand.nextFloat()*360, worldIn.rand.nextFloat()*-90);
+			board.setPositionAndRotation(pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, worldIn.rand.nextFloat()*360, worldIn.rand.nextFloat()*-45f -45f);
 			worldIn.spawnEntity(board);
 		}
 
