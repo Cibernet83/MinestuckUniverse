@@ -1,9 +1,12 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.gui.GuiStrifePortfolio;
+import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
@@ -19,6 +22,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -48,7 +54,7 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onPlayerAttack(LivingAttackEvent event)
 	{
-		if(!MSUConfig.preventUnallocatedWeaponsUse ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer))
+		if(!MSUConfig.combatOverhaul ||  !MSUConfig.preventUnallocatedWeaponsUse ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer))
 			return;
 
 		EntityLivingBase source = (EntityLivingBase) event.getSource().getImmediateSource();
@@ -177,6 +183,53 @@ public class StrifeEventHandler
 
 	public static boolean isStackAssigned(ItemStack stack)
 	{
-		return !stack.isEmpty() && stack.hasTagCompound() && stack.getTagCompound().getBoolean("StrifeAssigned");
+		return MSUConfig.combatOverhaul && !stack.isEmpty() && stack.hasTagCompound() && stack.getTagCompound().getBoolean("StrifeAssigned");
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onPlayerDrops(PlayerDropsEvent event)
+	{
+		if(!MSUConfig.combatOverhaul)
+			return;
+
+		System.out.println(MSUConfig.keepPortfolioOnDeath);
+
+		IStrifeData cap = event.getEntityPlayer().getCapability(MSUCapabilities.STRIFE_DATA, null);
+
+		ItemStack selectedWeapon = !MSUConfig.keepPortfolioOnDeath && cap.isArmed() && cap.getPortfolio().length > 0 && cap.getSelectedSpecibusIndex() >= 0 && cap.getSelectedWeaponIndex() >= 0
+				&& cap.getPortfolio()[cap.getSelectedSpecibusIndex()] != null && !cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().isEmpty() ?
+				cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()) : ItemStack.EMPTY;
+
+		if(!selectedWeapon.isEmpty())
+		{
+			boolean selectedDropped = false;
+			for(EntityItem item : event.getDrops())
+				if(ItemStack.areItemStacksEqual(item.getItem(), selectedWeapon))
+				{
+					selectedDropped = true;
+					break;
+				}
+			if(!selectedDropped)
+				StrifePortfolioHandler.unassignSelected(event.getEntityPlayer());
+
+		}
+
+		event.getDrops().removeIf(item -> isStackAssigned(item.getItem()));
+		cap.setArmed(false);
+
+		if(!MSUConfig.keepPortfolioOnDeath)
+		{
+			for(StrifeSpecibus specibus : cap.getPortfolio())
+				if(specibus != null)
+					event.getDrops().add(event.getEntityPlayer().dropItem(ItemStrifeCard.injectStrifeSpecibus(specibus, new ItemStack(MinestuckUniverseItems.strifeCard)), true, false));
+			cap.clearPortfolio();
+			cap.setSelectedSpecibusIndex(-1);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerRespawn(PlayerEvent.Clone event)
+	{
+		event.getEntity().getCapability(MSUCapabilities.STRIFE_DATA, null).readFromNBT(event.getOriginal().getCapability(MSUCapabilities.STRIFE_DATA, null).writeToNBT());
 	}
 }

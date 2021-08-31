@@ -46,9 +46,7 @@ public class CommonProxy
 
         MinecraftForge.EVENT_BUS.register(KindAbstratus.class);
         MinecraftForge.EVENT_BUS.register(MSUKindAbstrata.class);
-
-        if(MSUConfig.combatOverhaul)
-            MinecraftForge.EVENT_BUS.register(StrifeEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(StrifeEventHandler.class);
 
         MSUEntities.registerEntities();
         MSUCapabilities.registerCapabilities();

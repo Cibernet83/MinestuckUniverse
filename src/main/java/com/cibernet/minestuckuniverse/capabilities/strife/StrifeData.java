@@ -101,7 +101,7 @@ public class StrifeData implements IStrifeData
 	@Override
 	public boolean addSpecibus(StrifeSpecibus specibus)
 	{
-		if(isPortfolioFull() || portfolioHasAbstratus(specibus.getKindAbstratus()))
+		if(isPortfolioFull() || (specibus.isAssigned() && portfolioHasAbstratus(specibus.getKindAbstratus())))
 			return false;
 
 		for(int i = 0; i < portfolio.length; i++)

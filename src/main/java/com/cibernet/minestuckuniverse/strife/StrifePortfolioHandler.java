@@ -81,6 +81,9 @@ public class StrifePortfolioHandler
 		if(entity.world.isRemote || !entity.hasCapability(MSUCapabilities.STRIFE_DATA, null))
 			return false;
 
+		if(specibus == null)
+			specibus = StrifeSpecibus.empty();
+
 		IStrifeData cap = entity.getCapability(MSUCapabilities.STRIFE_DATA, null);
 
 		if(cap.isPortfolioFull())
@@ -89,7 +92,7 @@ public class StrifePortfolioHandler
 				((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.portfolioFull"), true);
 			return false;
 		}
-		if(cap.portfolioHasAbstratus(specibus.kindAbstratus))
+		if(specibus.isAssigned() && cap.portfolioHasAbstratus(specibus.kindAbstratus))
 		{
 			if(entity instanceof EntityPlayer)
 				((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.portfolioDuplicate", specibus.kindAbstratus.getLocalizedName()), true);
@@ -100,7 +103,8 @@ public class StrifePortfolioHandler
 
 		if(entity instanceof EntityPlayer)
 		{
-			((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.assign", specibus.kindAbstratus.getLocalizedName()), true);
+			if(specibus.isAssigned())
+				((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.assign", specibus.kindAbstratus.getLocalizedName()), true);
 			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity), (EntityPlayer) entity);
 		}
 
@@ -113,15 +117,21 @@ public class StrifePortfolioHandler
 			return;
 
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getItem() instanceof ItemStrifeCard && ItemStrifeCard.hasSpecibus(stack))
+		if(stack.getItem() instanceof ItemStrifeCard)
 		{
 			if(addSpecibus(player, ItemStrifeCard.getStrifeSpecibus(stack)))
+			{
 				stack.shrink(1);
+				player.inventory.markDirty();
+			}
 		}
 		else
 		{
 			if(addWeapon(player, stack))
+			{
 				player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+				player.inventory.markDirty();
+			}
 		}
 	}
 
