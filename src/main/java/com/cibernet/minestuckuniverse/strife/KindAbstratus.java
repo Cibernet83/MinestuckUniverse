@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.items.IClassedTool;
 import com.cibernet.minestuckuniverse.items.weapons.MSUToolClass;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.event.RegistryEvent;
@@ -112,10 +113,12 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 
 		Item item = stack.getItem();
 
-		if(item instanceof IClassedTool)
-			for(MSUToolClass tc : toolClasses)
-				if(tc.isCompatibleWith(((IClassedTool) item).getToolClass()))
-					return true;
+		if(item instanceof IClassedTool || item instanceof ItemTool)
+		for(MSUToolClass tc : toolClasses)
+		{
+			if((item instanceof IClassedTool && tc.isCompatibleWith(((IClassedTool) item).getToolClass())) || (item instanceof ItemTool && tc.getBaseTools().contains(((ItemTool) item).getToolMaterialName())))
+				return true;
+		}
 		for(Class<? extends Item> clzz : itemClasses)
 			if(clzz.isInstance(item))
 				return true;

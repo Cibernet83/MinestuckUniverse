@@ -89,6 +89,7 @@ public class MSUToolClass
 	public List<Material> getHarvestMaterials() {return harvestMaterials;}
 	public List<Enchantment> getEnchantments() {return enchantments;}
 	public List<EnumEnchantmentType> getEnchantmentTypes() {return enchantmentTypes;}
+	public List<String> getBaseTools() {return baseTool;}
 
 	public List<Enchantment> getAllEnchantments()
 	{
@@ -105,7 +106,7 @@ public class MSUToolClass
 	public boolean isCompatibleWith(MSUToolClass other)
 	{
 		for(MSUToolClass parent : parents)
-			if(isCompatibleWith(other))
+			if(parent.isCompatibleWith(other))
 				return true;
 		return equals(other);
 	}

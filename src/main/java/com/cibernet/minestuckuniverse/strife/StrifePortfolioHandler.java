@@ -36,9 +36,21 @@ public class StrifePortfolioHandler
 
 		IStrifeData cap = entity.getCapability(MSUCapabilities.STRIFE_DATA, null);
 
+		StrifeSpecibus selSpecibus = cap.getSelectedSpecibusIndex() >= 0 ? cap.getPortfolio()[cap.getSelectedSpecibusIndex()] : null;
+
+		if(selSpecibus != null && selSpecibus.putItemStack(stack))
+		{
+			if(entity instanceof EntityPlayer)
+			{
+				((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.assignWeapon", stack.getTextComponent(), selSpecibus.getDisplayName()), true);
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSpecibusIndex(selSpecibus)), (EntityPlayer) entity);
+			}
+			return true;
+		}
+
 		for(StrifeSpecibus specibus : cap.getPortfolio())
 		{
-			if(specibus != null && specibus.putItemStack(stack))
+			if(specibus != null && specibus != selSpecibus && specibus.putItemStack(stack))
 			{
 				if(entity instanceof EntityPlayer)
 				{
