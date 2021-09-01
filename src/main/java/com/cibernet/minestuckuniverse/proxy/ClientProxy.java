@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.client.render.RenderHologram;
 import com.cibernet.minestuckuniverse.client.render.RenderUnrealAir;
 import com.cibernet.minestuckuniverse.client.render.ThrowableRenderFactory;
 import com.cibernet.minestuckuniverse.entity.EntityUnrealAir;
+import com.cibernet.minestuckuniverse.gui.GuiStrifeSwitcher;
 import com.cibernet.minestuckuniverse.items.weapons.ItemBeamBlade;
 import com.cibernet.minestuckuniverse.items.ItemWarpMedallion;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityHolopad;
@@ -15,6 +16,7 @@ import com.cibernet.minestuckuniverse.entity.EntityAcheron;
 import com.cibernet.minestuckuniverse.client.models.ModelAcheron;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.mraof.minestuck.client.gui.playerStats.GuiStrifeSpecibus;
 import com.mraof.minestuck.client.renderer.BlockColorCruxite;
 import com.mraof.minestuck.client.renderer.entity.RenderEntityMinestuck;
 import net.minecraft.client.Minecraft;
@@ -40,6 +42,7 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityUnrealAir.class, RenderUnrealAir::new);
         MinecraftForge.EVENT_BUS.register(MSUModelManager.class);
         MinecraftForge.EVENT_BUS.register(MSURenderMachineOutline.class);
+        MinecraftForge.EVENT_BUS.register(GuiStrifeSwitcher.class);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHolopad.class, new RenderHologram());
     }
 

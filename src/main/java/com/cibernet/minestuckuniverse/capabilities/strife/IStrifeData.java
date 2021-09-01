@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.IMSUCapabilityBase;
 import com.cibernet.minestuckuniverse.strife.KindAbstratus;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.nbt.NBTTagCompound;
 
 public interface IStrifeData extends IMSUCapabilityBase<EntityLivingBase>
 {
@@ -24,4 +25,10 @@ public interface IStrifeData extends IMSUCapabilityBase<EntityLivingBase>
 	void setSelectedWeaponIndex(int index);
 	boolean isArmed();
 	void setArmed(boolean armed);
+
+	StrifeSpecibus[] getNonEmptyPortfolio();
+	int getSpecibusIndex(StrifeSpecibus specibus);
+
+	NBTTagCompound writeSelectedIndexes(NBTTagCompound nbt);
+	NBTTagCompound writePortfolio(NBTTagCompound nbt, int... indexes);
 }

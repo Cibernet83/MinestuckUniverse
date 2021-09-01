@@ -5,11 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.capabilities.strife.StrifeData;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
-import com.mraof.minestuck.network.skaianet.SburbConnection;
-import com.mraof.minestuck.network.skaianet.SkaianetHandler;
-import com.mraof.minestuck.util.IdentifierHandler;
-import com.mraof.minestuck.world.MinestuckDimensionHandler;
-import com.mraof.minestuck.world.lands.LandAspectRegistry;
+import com.cibernet.minestuckuniverse.network.UpdateStrifeDataPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,6 +42,6 @@ public class MSUCapabilities
 	public static void onPlayerJoinWorld(EntityJoinWorldEvent event)
 	{
 		if(event.getEntity() instanceof EntityPlayerMP)
-			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, ((EntityPlayer)event.getEntity())), ((EntityPlayer)event.getEntity()));
+			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, event.getEntity(), UpdateStrifeDataPacket.UpdateType.ALL), ((EntityPlayer)event.getEntity()));
 	}
 }

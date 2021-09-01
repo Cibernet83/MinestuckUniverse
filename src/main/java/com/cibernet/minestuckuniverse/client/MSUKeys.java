@@ -2,8 +2,12 @@ package com.cibernet.minestuckuniverse.client;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
+import com.cibernet.minestuckuniverse.events.handlers.StrifeEventHandler;
+import com.cibernet.minestuckuniverse.gui.GuiStrifeSwitcher;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
+import com.mraof.minestuck.editmode.ClientEditHandler;
+import com.mraof.minestuck.network.skaianet.SburbHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
@@ -35,16 +39,12 @@ public class MSUKeys
 		if(player == null)
 			return;
 
-		if(player.getHeldItemMainhand().isEmpty() && strifeKey.isPressed())
+		if(strifeKey.isPressed() && !ClientEditHandler.isActive())
 		{
-			IStrifeData data = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
-			//TODO Strife Switcher
-
-			MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.RETRIEVE_STRIFE, data.getSelectedWeaponIndex(), false));
-		}
-		else if(strifeKey.isPressed() && !player.getHeldItemMainhand().isEmpty())
-		{
-			MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.ASSIGN_STRIFE, EnumHand.MAIN_HAND));
+			if(player.getHeldItemMainhand().isEmpty() || StrifeEventHandler.isStackAssigned(player.getHeldItemMainhand()) || StrifeEventHandler.isStackAssigned(player.getHeldItemOffhand()))
+				GuiStrifeSwitcher.showSwitcher = true;
+			else if(!player.getHeldItemMainhand().isEmpty())
+				MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.ASSIGN_STRIFE, EnumHand.MAIN_HAND));
 		}
 	}
 

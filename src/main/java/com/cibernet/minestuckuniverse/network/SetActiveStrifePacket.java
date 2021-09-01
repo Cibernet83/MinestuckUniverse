@@ -41,7 +41,7 @@ public class SetActiveStrifePacket extends MSUPacket
 			cap.setSelectedSpecibusIndex(index);
 		else cap.setSelectedWeaponIndex(index);
 
-		MSUChannelHandler.sendToPlayer(makePacket(Type.UPDATE_STRIFE, player), player);
+		MSUChannelHandler.sendToPlayer(makePacket(Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.INDEXES), player);
 	}
 
 	@Override

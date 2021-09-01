@@ -6,9 +6,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import java.util.Arrays;
+
 public class StrifeData implements IStrifeData
 {
 	public static final int PORTFOLIO_SIZE = 10;
+	public static int abstrataSwitcherRung = -1; //TODO client sync
 
 	protected EntityLivingBase owner;
 	protected final StrifeSpecibus[] portfolio = new StrifeSpecibus[PORTFOLIO_SIZE];
@@ -20,7 +23,6 @@ public class StrifeData implements IStrifeData
 	public NBTTagCompound writeToNBT()
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
-		NBTTagList portfolioList = new NBTTagList();
 
 		if(selWeapon < 0)
 		{
@@ -29,8 +31,27 @@ public class StrifeData implements IStrifeData
 			selWeapon = 0;
 		}
 
+		writePortfolio(nbt);
+		writeSelectedIndexes(nbt);
+
+		return nbt;
+	}
+
+	@Override
+	public NBTTagCompound writeSelectedIndexes(NBTTagCompound nbt)
+	{
+		nbt.setInteger("SelectedSpecibus", getSelectedSpecibusIndex());
+		nbt.setInteger("SelectedWeapon", getSelectedWeaponIndex());
+		nbt.setBoolean("Armed", isArmed());
+		return nbt;
+	}
+
+	@Override
+	public NBTTagCompound writePortfolio(NBTTagCompound nbt, int... indexes)
+	{
+		NBTTagList portfolioList = new NBTTagList();
 		for(int i = 0; i < portfolio.length; i++)
-			if(portfolio[i] != null)
+			if((indexes.length <= 0 || Arrays.asList(indexes).contains(i)) && portfolio[i] != null)
 			{
 				NBTTagCompound spNbt = new NBTTagCompound();
 				spNbt.setInteger("Slot", i);
@@ -40,20 +61,22 @@ public class StrifeData implements IStrifeData
 			}
 
 		nbt.setTag("Portfolio", portfolioList);
-		nbt.setInteger("SelectedSpecibus", getSelectedSpecibusIndex());
-		nbt.setInteger("SelectedWeapon", getSelectedWeaponIndex());
-		nbt.setBoolean("Armed", isArmed());
-
 		return nbt;
 	}
+
+
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		clearPortfolio();
 
-		setSelectedSpecibusIndex(nbt.getInteger("SelectedSpecibus"));
-		setSelectedWeaponIndex(nbt.getInteger("SelectedWeapon"));
+		if(nbt.hasKey("SelectedSpecibus"))
+			setSelectedSpecibusIndex(nbt.getInteger("SelectedSpecibus"));
+		if(nbt.hasKey("SelectedWeapon"))
+			setSelectedWeaponIndex(nbt.getInteger("SelectedWeapon"));
+		if(nbt.hasKey("Armed"))
+			setArmed(nbt.getBoolean("Armed"));
 
 		NBTTagList portfolioList = nbt.getTagList("Portfolio", 10);
 
@@ -168,5 +191,30 @@ public class StrifeData implements IStrifeData
 	public void setArmed(boolean armed)
 	{
 		isArmed = armed;
+	}
+
+	@Override
+	public StrifeSpecibus[] getNonEmptyPortfolio()
+	{
+		int size = 0;
+		for(StrifeSpecibus specibus : portfolio)
+			if(specibus != null && specibus.isAssigned() && (specibus.getKindAbstratus().isFist() || !specibus.getContents().isEmpty()))
+				size++;
+		StrifeSpecibus[] result = new StrifeSpecibus[size];
+		int i = 0;
+		for(StrifeSpecibus specibus : portfolio)
+			if(specibus != null && specibus.isAssigned() && (specibus.getKindAbstratus().isFist() || !specibus.getContents().isEmpty()))
+				result[i++] = specibus;
+
+		return result;
+	}
+
+	@Override
+	public int getSpecibusIndex(StrifeSpecibus specibus)
+	{
+		for(int i = 0; i < portfolio.length; i++)
+			if(portfolio[i] == specibus)
+				return i;
+		return -1;
 	}
 }
