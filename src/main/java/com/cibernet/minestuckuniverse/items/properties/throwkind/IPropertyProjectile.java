@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.items.properties.prjctilekind;
+package com.cibernet.minestuckuniverse.items.properties.throwkind;
 
 import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import net.minecraft.util.math.RayTraceResult;

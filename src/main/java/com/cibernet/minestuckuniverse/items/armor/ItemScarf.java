@@ -34,7 +34,7 @@ public class ItemScarf extends MSUArmorBase
 	public static EnumDyeColor getDyeColor(ItemStack stack)
 	{
 		if(stack.getItem() instanceof ItemScarf)
-			return EnumDyeColor.byMetadata(stack.getMetadata());
+			return EnumDyeColor.byDyeDamage(stack.getMetadata());
 		return EnumDyeColor.WHITE;
 	}
 

@@ -8,7 +8,7 @@ import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.armor.*;
 import com.cibernet.minestuckuniverse.items.properties.*;
 import com.cibernet.minestuckuniverse.items.properties.clawkind.PropertyActionBuff;
-import com.cibernet.minestuckuniverse.items.properties.prjctilekind.PropertyMagicDamagePrjctle;
+import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyMagicDamagePrjctle;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyRocketShieldDash;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldEject;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldFire;
@@ -132,7 +132,7 @@ public class MinestuckUniverseItems
             new ItemBeamBlade(345, 6, -2.3, 30, "battery_beam_blade_green", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.GREEN),
             new ItemBeamBlade(345, 6, -2.3, 30, "battery_beam_blade_red", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.RED),
             new ItemBeamBlade(345, 6, -2.3, 30, "battery_beam_blade_black", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BLACK)};
-    public static Item lightbringer = new MSUWeaponBase(803, 10, -2.3, 32, "lightbringer", "lightbringer").setTool(toolSword, 4, 10F).addProperties(new PropertySweep(), new PropertyFire(80, 0.8f, true), new PropertyLuckBasedDamage(0.5f), new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
+    public static Item lightbringer = new MSUWeaponBase(803, 10, -2.3, 32, "lightbringer", "lightbringer").setTool(toolSword, 4, 10F).addProperties(new PropertySweep(), new PropertyFire(4, 0.8f, true), new PropertyLuckBasedDamage(0.5f), new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
     public static Item cybersword = new MSUWeaponBase(803, 10, -2.3, 32, "cybersword", "cybersword").setTool(toolSword, 5, 8F).addProperties(new PropertySweep(), new PropertyShock(15, 8, 0.5f, false), new PropertyLightning(15, 1, true, false), new PropertyLuckBasedDamage(0.1f));
     public static Item crystallineRibbitar = new MSUWeaponBase(584, 14, -2.3, 24, "crystalline_ribbitar", "crystallineRibbitar").setTool(toolSword, 4, 6F).addProperties(new PropertySweep());
     public static Item quantumEntangloporter = new MSUWeaponBase(325, 10, -2.3, 9, "quantum_entangloporter", "quantumEntangloporter").setTool(toolSword, 3, 2F).addProperties(new PropertySweep());
@@ -244,12 +244,19 @@ public class MinestuckUniverseItems
     public static Item tornadoGlaive = new MSUThrowableBase(8, 0, 1, "tornado_glaive", "tornadoGlaive");
     public static Item hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato");
 
+    //Rockkind
+    public static Item pebble = new MSUThrowableBase(0, 0, 64, "pebble", "pebble");
+    public static Item rock = new MSUThrowableBase(10, 5, 16, 5, -2.7, "rock", "rock");
+    public static Item bigRock = new ItemBigRock("big_rock", "bigRock");
+
     //Misc.
     public static Item hereticusAurum = new MSUWeaponBase(620, 7, -2.2, 32, "hereticus_aurum", "hereticusAurum").setTool(toolSickle, 5, 4).addProperties(new PropertySweep(3));
     public static Item gravediggerShovel = new MSUWeaponBase(185, 6, -3, 8, "gravedigger_shovel", "gravediggerShovel").setTool(toolShovel, 3, 4).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
     public static Item battlesporkOfZillywut = new MSUWeaponBase(769, 12, -2.3, 24, "battlespork_of_zillywut", "battlesporkOfZillywut").setTool(toolSpork, 10, 3);
     public static Item battleaxeOfZillywahoo = new MSUWeaponBase(780, 17, -3, 24, "battleaxe_of_zillywahoo", "battleaxeOfZillywahoo").setTool(toolAxe, 10, 3);
     public static Item battlepickOfZillydew = new MSUWeaponBase(780, 16, -2.8, 24, "battlepick_of_zillydew", "battlepickOfZillydew").setTool(toolPickaxe, 10, 3);
+    public static Item rolledUpPaper = new MSUWeaponBase(200, 3, 0, 1, "rolled_up_paper", "rolledUpPaper");
+    public static Item yesterdaysNews = new MSUWeaponBase(350, 7, 0, 1, "yesterdays_news", "yesterdaysNews").addProperties(new PropertyPotion(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 1), false, 0.5f), new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 200, 1), false, 0.5f), new PropertyFire(3, 0.7f, true));
 
     //Armor
     public static MSUArmorBase diverHelmet = new ItemDiverHelmet(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
@@ -435,6 +442,12 @@ public class MinestuckUniverseItems
         registerItem(registry, hotPotato);
         registerItem(registry, dragonCharge);
         registerItem(registry, tornadoGlaive);
+
+        registerItem(registry, pebble);
+        registerItem(registry, rock);
+        registerItem(registry, bigRock);
+        registerItem(registry, rolledUpPaper);
+        registerItem(registry, yesterdaysNews);
 
         registerItem(registry, quantumEntangloporter);
         registerItem(registry, bloodKatana);

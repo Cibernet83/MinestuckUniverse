@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.items.MSUThrowableBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.mraof.minestuck.item.MinestuckItems;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
@@ -27,10 +28,14 @@ public class MSUKindAbstrata
 	public static KindAbstratus shovelkind = new KindAbstratus("shovel", MinestuckUniverseItems.toolShovel).addItemClasses(ItemSpade.class);
 	public static KindAbstratus hoekind = new KindAbstratus("hoe").addItemClasses(ItemHoe.class);
 	public static KindAbstratus fshngrodkind = new KindAbstratus("fishingRod").addItemClasses(ItemFishingRod.class);
-	public static KindAbstratus scissorkind = new KindAbstratus("shears").addItemClasses(ItemShears.class);
 	public static KindAbstratus throwkind = new KindAbstratus("projectile").addItemClasses(MSUThrowableBase.class).addItemTools(
 					MinestuckUniverseItems.dragonCharge, Items.SNOWBALL, Items.EGG, Items.ENDER_PEARL, Items.ENDER_EYE, Items.EXPERIENCE_BOTTLE, Items.SPLASH_POTION, Items.LINGERING_POTION,
 					getItem("botania", "chakram"));
+
+	public static KindAbstratus rockkind = new KindAbstratus("rock").addItemTools(MinestuckUniverseItems.pebble, MinestuckUniverseItems.rock, MinestuckUniverseItems.bigRock,
+			Item.getItemFromBlock(Blocks.COBBLESTONE), Item.getItemFromBlock(Blocks.STONE), Item.getItemFromBlock(Blocks.MOSSY_COBBLESTONE));
+	public static KindAbstratus paperkind = new KindAbstratus("paper").addItemTools(Items.PAPER, Items.MAP, Items.FILLED_MAP, MinestuckUniverseItems.rolledUpPaper, MinestuckUniverseItems.yesterdaysNews);
+	public static KindAbstratus scissorkind = new KindAbstratus("shears").addItemClasses(ItemShears.class);
 
 	public static KindAbstratus clawkind = new KindAbstratus("claw", MinestuckUniverseItems.toolClaws);
 	public static KindAbstratus glovekind = new KindAbstratus("glove", MinestuckUniverseItems.toolGauntlet).addItemTools(getItem("thaumcraft", "caster_basic"));
@@ -58,7 +63,6 @@ public class MSUKindAbstrata
 	public static KindAbstratus drillkind = new KindAbstratus("drill").addItemTools(getItem("actuallyadditions", "item_drill"), getItem("industrialforegoing", "infinity_drill"));
 	public static KindAbstratus umbrellakind = new KindAbstratus("umbrella");
 	public static KindAbstratus flshlghtkind = new KindAbstratus("flashlight");
-	public static KindAbstratus paperkind = new KindAbstratus("paper");
 	public static KindAbstratus knifekind = new KindAbstratus("knife").addItemTools(getItem("actiallyadditions", "item_knife"), getItem("cfm", "item_knife"),
 			getItem("mysticalworld", "amethyst_knife"), getItem("mysticalworld", "copper_knife"), getItem("mysticalworld", "silver_knife"), getItem("mysticalworld", "wood_knife"),
 			getItem("mysticalworld", "stone_knife"), getItem("mysticalworld", "iron_knife"), getItem("mysticalworld", "diamond_knife"), getItem("mysticalworld", "gold_knife"));
@@ -93,8 +97,11 @@ public class MSUKindAbstrata
 		registry.register(shovelkind.setRegistryName("shovel"));
 		registry.register(hoekind.setRegistryName("hoe"));
 		registry.register(fshngrodkind.setRegistryName("fishing_rod"));
-		registry.register(scissorkind.setRegistryName("shears"));
 		registry.register(throwkind.setRegistryName("projectile"));
+
+		registry.register(rockkind.setRegistryName("rock"));
+		registry.register(paperkind.setRegistryName("paper"));
+		registry.register(scissorkind.setRegistryName("shears"));
 
 		registry.register(clawkind.setRegistryName("claw"));
 		registry.register(glovekind.setRegistryName("gauntlet"));
@@ -117,7 +124,6 @@ public class MSUKindAbstrata
 		registry.register(knifekind.setRegistryName("knife"));
 		registry.register(flshlghtkind.setRegistryName("flashlight"));
 		registry.register(umbrellakind.setRegistryName("umbrella"));
-		registry.register(paperkind.setRegistryName("paper"));
 		registry.register(tridentkind.setRegistryName("tridentkind"));
 		registry.register(doubleTridentkind.setRegistryName("2x3dent"));
 

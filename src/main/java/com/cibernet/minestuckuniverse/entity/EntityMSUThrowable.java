@@ -2,7 +2,7 @@ package com.cibernet.minestuckuniverse.entity;
 
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
-import com.cibernet.minestuckuniverse.items.properties.prjctilekind.IPropertyProjectile;
+import com.cibernet.minestuckuniverse.items.properties.throwkind.IPropertyProjectile;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.projectile.EntityThrowable;

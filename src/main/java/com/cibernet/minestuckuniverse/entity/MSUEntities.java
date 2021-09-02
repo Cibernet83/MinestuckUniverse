@@ -14,6 +14,7 @@ public class MSUEntities
 		registerEntity(EntityAcheron.class, "acheron");
 		registerEntity(EntityMSUThrowable.class, "throwable");
 		registerEntity(EntityUnrealAir.class, "unreal_air");
+		registerEntity(EntityRock.class, "rock");
 	}
 	
 	
