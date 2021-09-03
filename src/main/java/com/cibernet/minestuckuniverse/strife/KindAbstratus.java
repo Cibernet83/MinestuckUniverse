@@ -161,9 +161,14 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 		return this.ID - o.ID;
 	}
 
+	public boolean isEmpty()
+	{
+		return !isFist() && conditional == null && toolItems.isEmpty() && toolClasses.isEmpty() && itemClasses.isEmpty();
+	}
+
 	public boolean canSelect()
 	{
-		return !isHidden() && (conditional != null || isFist() || !toolItems.isEmpty() || !toolClasses.isEmpty() || !itemClasses.isEmpty());
+		return !isHidden() && !isEmpty();
 	}
 
 	@SubscribeEvent

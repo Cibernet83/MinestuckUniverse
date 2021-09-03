@@ -19,6 +19,14 @@ public interface IStrifeData extends IMSUCapabilityBase<EntityLivingBase>
 	void setSpecibus(StrifeSpecibus specibus, int index);
 	void clearPortfolio();
 
+	boolean canStrife();
+	void setStrifeEnabled(boolean canStrife);
+	boolean abstrataSwitcherUnlocked();
+	void unlockAbstrataSwitcher(boolean unlocked);
+	int getDroppedCards();
+	void setDroppedCards(int v);
+	boolean canDropCards();
+
 	int getSelectedSpecibusIndex();
 	int getSelectedWeaponIndex();
 	void setSelectedSpecibusIndex(int index);
@@ -31,4 +39,6 @@ public interface IStrifeData extends IMSUCapabilityBase<EntityLivingBase>
 
 	NBTTagCompound writeSelectedIndexes(NBTTagCompound nbt);
 	NBTTagCompound writePortfolio(NBTTagCompound nbt, int... indexes);
+	NBTTagCompound writeDroppedCards(NBTTagCompound nbt);
+	NBTTagCompound writeConfig(NBTTagCompound nbt);
 }

@@ -144,8 +144,9 @@ public class GuiStrifeSwitcher extends Gui
 		if(MSUKeys.strifeKey.isKeyDown() && Minecraft.getMinecraft().player != null)
 		{
 			IStrifeData cap = Minecraft.getMinecraft().player.getCapability(MSUCapabilities.STRIFE_DATA, null);
+			StrifeSpecibus[] nonNullPortfolio = cap.getNonEmptyPortfolio();
 
-			if(!cap.isPortfolioEmpty())
+			if(nonNullPortfolio.length > 0)
 			{
 				if(Minecraft.getMinecraft().player.isSneaking() && canUseAbstrataSwitcher())
 				{
@@ -154,7 +155,6 @@ public class GuiStrifeSwitcher extends Gui
 					else
 					{
 						StrifeSpecibus selectedSpecibus = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];
-						StrifeSpecibus[] nonNullPortfolio = cap.getNonEmptyPortfolio();
 						int i = 0;
 						for(int j = 0; j < nonNullPortfolio.length; j++)
 							if(nonNullPortfolio[j] == selectedSpecibus)
@@ -182,7 +182,7 @@ public class GuiStrifeSwitcher extends Gui
 
 	protected static boolean canUseAbstrataSwitcher()
 	{
-		return MinestuckPlayerData.rung >= StrifeData.abstrataSwitcherRung;
+		return Minecraft.getMinecraft().player.getCapability(MSUCapabilities.STRIFE_DATA, null).abstrataSwitcherUnlocked();
 	}
 
 	protected static void renderItem(Minecraft mc, int x, int y, float partialTicks, EntityPlayer player, ItemStack stack)

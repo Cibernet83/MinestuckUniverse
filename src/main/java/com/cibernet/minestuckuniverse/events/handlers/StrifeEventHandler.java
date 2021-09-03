@@ -1,7 +1,6 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
-import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.gui.GuiStrifePortfolio;
@@ -9,18 +8,28 @@ import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
+import com.cibernet.minestuckuniverse.network.UpdateStrifeDataPacket;
+import com.cibernet.minestuckuniverse.strife.KindAbstratus;
+import com.cibernet.minestuckuniverse.strife.MSUKindAbstrata;
 import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
 import com.mraof.minestuck.client.gui.playerStats.GuiStrifeSpecibus;
+import com.mraof.minestuck.entity.underling.EntityUnderling;
+import com.mraof.minestuck.util.MinestuckPlayerData;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -29,6 +38,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 
 public class StrifeEventHandler
 {
@@ -39,7 +52,7 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onGuiOpen(GuiOpenEvent event)
 	{
-		if(event.getGui() instanceof GuiStrifeSpecibus)
+		if(event.getGui() instanceof GuiStrifeSpecibus && Minecraft.getMinecraft().player.getCapability(MSUCapabilities.STRIFE_DATA, null).canStrife())
 			event.setGui(new GuiStrifePortfolio());
 	}
 
@@ -179,11 +192,80 @@ public class StrifeEventHandler
 			StrifePortfolioHandler.unassignSelected(event.player);
 			cap.setArmed(false);
 		}
+
+		boolean unlockSwitcher = MinestuckPlayerData.getData(event.player).echeladder.getRung() >= MSUConfig.abstrataSwitcherRung;
+		if(cap.abstrataSwitcherUnlocked() != unlockSwitcher)
+		{
+			cap.unlockAbstrataSwitcher(unlockSwitcher);
+			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, event.player, UpdateStrifeDataPacket.UpdateType.CONFIG), event.player);
+
+			if(unlockSwitcher)
+				event.player.sendStatusMessage(new TextComponentTranslation("status.strife.unlockSwitcher"), false);
+		}
 	}
 
 	public static boolean isStackAssigned(ItemStack stack)
 	{
 		return MSUConfig.combatOverhaul && !stack.isEmpty() && stack.hasTagCompound() && stack.getTagCompound().getBoolean("StrifeAssigned");
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onMobDrops(LivingDropsEvent event)
+	{
+		if(!MSUConfig.strifeCardMobDrops || !(event.getEntityLiving() instanceof IMob) || event instanceof PlayerDropsEvent || !event.isRecentlyHit() || !(event.getSource().getTrueSource() instanceof EntityPlayer) || event.getSource().getTrueSource() instanceof FakePlayer)
+			return;
+
+		EntityPlayer source = (EntityPlayer) event.getSource().getTrueSource();
+		IStrifeData cap = source.getCapability(MSUCapabilities.STRIFE_DATA, null);
+
+		if(cap.canDropCards() && source.world.rand.nextFloat() < 0.02f*event.getLootingLevel())
+		{
+			boolean droppedCard = false;
+			for(EntityItem item : event.getDrops())
+			{
+				LinkedList<KindAbstratus> abstrata = getAbstrataList(item.getItem(), false);
+				if(!abstrata.isEmpty())
+				{
+					StrifeSpecibus specibus = new StrifeSpecibus(abstrata.get(source.world.rand.nextInt(abstrata.size())));
+					specibus.putItemStack(item.getItem());
+					item.setItem(ItemStrifeCard.injectStrifeSpecibus(specibus, new ItemStack(MinestuckUniverseItems.strifeCard)));
+					cap.setDroppedCards(cap.getDroppedCards()+1);
+					droppedCard = true;
+					break;
+				}
+			}
+
+			if(!droppedCard && event.getEntityLiving() instanceof EntityUnderling)
+			{
+				ArrayList<KindAbstratus> abstrata = new ArrayList<>(KindAbstratus.REGISTRY.getValuesCollection());
+
+				abstrata.removeIf(k -> k.isEmpty());
+				abstrata.add(null);
+
+				EntityItem item = new EntityItem(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ,
+						ItemStrifeCard.injectStrifeSpecibus(new StrifeSpecibus(abstrata.get(source.world.rand.nextInt(abstrata.size()))), new ItemStack(MinestuckUniverseItems.strifeCard)));
+				item.setDefaultPickupDelay();
+				event.getDrops().add(item);
+				cap.setDroppedCards(cap.getDroppedCards()+1);
+			}
+		}
+	}
+
+	public static LinkedList<KindAbstratus> getAbstrataList(ItemStack stack, boolean ignoreHidden)
+	{
+		LinkedList<KindAbstratus> result = new LinkedList<>();
+
+		if(stack.isEmpty())
+			result.add(MSUKindAbstrata.fistkind);
+		else for(KindAbstratus abstratus : KindAbstratus.REGISTRY.getValuesCollection())
+		{
+			if(abstratus.isEmpty() || abstratus == MSUKindAbstrata.jokerkind)
+				continue;
+
+			if((!ignoreHidden || ignoreHidden != abstratus.isHidden()) && abstratus.isStackCompatible(stack))
+				result.add(abstratus);
+		}
+		return result;
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)

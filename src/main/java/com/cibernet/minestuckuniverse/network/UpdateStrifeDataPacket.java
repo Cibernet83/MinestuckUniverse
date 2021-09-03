@@ -24,13 +24,18 @@ public class UpdateStrifeDataPacket extends MSUPacket
 	{
 		EntityLivingBase entity = (EntityLivingBase) args[0];
 		NBTTagCompound nbt;
+
+		IStrifeData cap = entity.getCapability(MSUCapabilities.STRIFE_DATA, null);
+
 		if(args.length <= 1)
-			nbt = entity.getCapability(MSUCapabilities.STRIFE_DATA, null).writeToNBT();
+			nbt = cap.writeConfig(cap.writeToNBT());
 		else switch ((UpdateType)args[1])
 		{
-			case PORTFOLIO: nbt = entity.getCapability(MSUCapabilities.STRIFE_DATA, null).writeToNBT(); break;
-			case INDEXES: nbt = entity.getCapability(MSUCapabilities.STRIFE_DATA, null).writeToNBT(); break;
-			default: nbt = entity.getCapability(MSUCapabilities.STRIFE_DATA, null).writeToNBT(); break;
+			case PORTFOLIO: nbt = cap.writePortfolio(new NBTTagCompound()); break;
+			case INDEXES: nbt = cap.writeSelectedIndexes(new NBTTagCompound()); break;
+			case DROPPED_CARDS: nbt = cap.writeDroppedCards(new NBTTagCompound()); break;
+			case CONFIG: nbt = cap.writeConfig(new NBTTagCompound()); break;
+			default: nbt = cap.writeConfig(cap.writeToNBT()); break;
 		}
 		nbt.setUniqueId("TargetUUID", entity.getUniqueID());
 		ByteBufUtils.writeTag(data, nbt);
@@ -79,10 +84,12 @@ public class UpdateStrifeDataPacket extends MSUPacket
 		return EnumSet.allOf(Side.class);
 	}
 
-	public static enum UpdateType
+	public enum UpdateType
 	{
 		ALL,
 		PORTFOLIO,
-		INDEXES
+		INDEXES,
+		DROPPED_CARDS,
+		CONFIG
 	}
 }

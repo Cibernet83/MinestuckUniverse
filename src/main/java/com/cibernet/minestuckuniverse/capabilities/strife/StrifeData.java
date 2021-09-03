@@ -2,22 +2,35 @@ package com.cibernet.minestuckuniverse.capabilities.strife;
 
 import com.cibernet.minestuckuniverse.strife.KindAbstratus;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
+import com.mraof.minestuck.util.Echeladder;
+import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.FakePlayer;
 
 import java.util.Arrays;
 
 public class StrifeData implements IStrifeData
 {
 	public static final int PORTFOLIO_SIZE = 10;
-	public static int abstrataSwitcherRung = -1; //TODO client sync
 
 	protected EntityLivingBase owner;
 	protected final StrifeSpecibus[] portfolio = new StrifeSpecibus[PORTFOLIO_SIZE];
 	protected int selWeapon = -1;
 	protected int selSpecibus = -1;
 	protected boolean isArmed = false;
+
+	protected int droppedCards = 0;
+
+	protected boolean abstrataSwitcherUnlocked = false;
+	protected boolean strifeEnabled = false;
+
+	@Override
+	public void setOwner(EntityLivingBase owner) {
+		this.owner = owner;
+	}
 
 	@Override
 	public NBTTagCompound writeToNBT()
@@ -33,6 +46,8 @@ public class StrifeData implements IStrifeData
 
 		writePortfolio(nbt);
 		writeSelectedIndexes(nbt);
+		writeDroppedCards(nbt);
+		nbt.setBoolean("AbstrataSwitcherUnlocked", abstrataSwitcherUnlocked);
 
 		return nbt;
 	}
@@ -64,12 +79,27 @@ public class StrifeData implements IStrifeData
 		return nbt;
 	}
 
+	@Override
+	public NBTTagCompound writeDroppedCards(NBTTagCompound nbt)
+	{
+		nbt.setInteger("DroppedCards", droppedCards);
+		return nbt;
+	}
+
+	@Override
+	public NBTTagCompound writeConfig(NBTTagCompound nbt)
+	{
+		nbt.setBoolean("AbstrataSwitcherUnlocked", abstrataSwitcherUnlocked);
+		nbt.setBoolean("CanStrife", strifeEnabled);
+		return nbt;
+	}
 
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
-		clearPortfolio();
+		if(nbt.hasKey("Portfolio"))
+			clearPortfolio();
 
 		if(nbt.hasKey("SelectedSpecibus"))
 			setSelectedSpecibusIndex(nbt.getInteger("SelectedSpecibus"));
@@ -77,6 +107,13 @@ public class StrifeData implements IStrifeData
 			setSelectedWeaponIndex(nbt.getInteger("SelectedWeapon"));
 		if(nbt.hasKey("Armed"))
 			setArmed(nbt.getBoolean("Armed"));
+
+		if(nbt.hasKey("CanStrife"))
+			strifeEnabled = nbt.getBoolean("CanStrife");
+		if(nbt.hasKey("AbstrataSwitcherUnlocked"))
+			abstrataSwitcherUnlocked = nbt.getBoolean("AbstrataSwitcherUnlocked");
+		if(nbt.hasKey("DroppedCards"))
+			droppedCards = nbt.getInteger("DroppedCards");
 
 		NBTTagList portfolioList = nbt.getTagList("Portfolio", 10);
 
@@ -157,6 +194,44 @@ public class StrifeData implements IStrifeData
 	public void clearPortfolio() {
 		for(int i = 0; i < portfolio.length; i++)
 			portfolio[i] = null;
+	}
+
+	@Override
+	public boolean canStrife() {
+		return strifeEnabled;
+	}
+
+	@Override
+	public void setStrifeEnabled(boolean canStrife) {
+		strifeEnabled = canStrife;
+	}
+
+	@Override
+	public boolean abstrataSwitcherUnlocked() {
+		return abstrataSwitcherUnlocked;
+	}
+
+	@Override
+	public void unlockAbstrataSwitcher(boolean unlocked) {
+		abstrataSwitcherUnlocked = unlocked;
+	}
+
+	@Override
+	public int getDroppedCards() {
+		return droppedCards;
+	}
+
+	@Override
+	public void setDroppedCards(int v) {
+		droppedCards = v;
+	}
+
+	@Override
+	public boolean canDropCards()
+	{
+		if(!(owner instanceof EntityPlayer) || owner instanceof FakePlayer)
+			return false;
+		return droppedCards < Math.min(5, MinestuckPlayerData.getData((EntityPlayer) owner).echeladder.getRung()/6);
 	}
 
 	@Override

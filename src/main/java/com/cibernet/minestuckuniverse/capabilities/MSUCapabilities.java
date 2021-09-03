@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.capabilities;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.capabilities.strife.StrifeData;
@@ -42,6 +43,10 @@ public class MSUCapabilities
 	public static void onPlayerJoinWorld(EntityJoinWorldEvent event)
 	{
 		if(event.getEntity() instanceof EntityPlayerMP)
+		{
+			IStrifeData cap = event.getEntity().getCapability(STRIFE_DATA, null);
+			cap.setStrifeEnabled(MSUConfig.combatOverhaul);
 			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, event.getEntity(), UpdateStrifeDataPacket.UpdateType.ALL), ((EntityPlayer)event.getEntity()));
+		}
 	}
 }
