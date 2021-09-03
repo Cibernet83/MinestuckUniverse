@@ -106,6 +106,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(smoothIron), new GristSet(new GristType[] {Build, Rust, Quartz}, new int[] {10, 8, 4}));
         GristRegistry.addGristConversion(new ItemStack(wizardStatue), new GristSet(new GristType[] {Build}, new int[] {12}));
         GristRegistry.addGristConversion(new ItemStack(netherReactorCore), new GristSet(new GristType[] {Uranium, Garnet, Rust, Diamond}, new int[] {250, 121, 50, 2}));
+        GristRegistry.addGristConversion(new ItemStack(bigRock), new GristSet(new GristType[] {Build}, new int[] {1000}));
 
         if(MSUCalendarUtil.isChristmas())
             GristRegistry.addGristConversion(new ItemStack(sbahjTree), new GristSet(new GristType[] {}, new int[] {}));

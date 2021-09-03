@@ -5,10 +5,10 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.strife.MSUKindAbstrata;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityArmorStand;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -37,6 +37,11 @@ public class EntityRock extends EntityLivingBase
 	}
 
 	@Override
+	public double getMountedYOffset() {
+		return height*0.9;
+	}
+
+	@Override
 	public Iterable<ItemStack> getArmorInventoryList() {
 		return NonNullList.create();
 	}
@@ -58,7 +63,8 @@ public class EntityRock extends EntityLivingBase
 
 	@Nullable
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox() {
+	public AxisAlignedBB getCollisionBoundingBox()
+	{
 		return getEntityBoundingBox();
 	}
 
@@ -70,8 +76,12 @@ public class EntityRock extends EntityLivingBase
 	@Override
 	public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
 	{
-		player.startRiding(this);
-		return true;
+		if(!player.isSneaking())
+		{
+			player.startRiding(this);
+			return true;
+		}
+		return super.processInitialInteract(player, hand);
 	}
 
 	@Override
@@ -85,7 +95,7 @@ public class EntityRock extends EntityLivingBase
 
 			rotationYaw = driver.rotationYaw;
 
-			float f = 0.3f;
+			double f = 0.3 * getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
 			motionX = lerp(motionX, -f * MathHelper.sin(this.rotationYaw * 0.017453292F), 0.6);
 			motionZ = lerp(motionZ, f * MathHelper.cos(this.rotationYaw * 0.017453292F), 0.6);
 		}
@@ -96,10 +106,10 @@ public class EntityRock extends EntityLivingBase
 				entity.attackEntityFrom(ROCK_DAMAGE, 20);
 
 			for(int x = (int)getCollisionBoundingBox().minX; x < getCollisionBoundingBox().maxX; x++)
-				for(int z = (int)getCollisionBoundingBox().minZ; z < getCollisionBoundingBox().maxX; z++)
+				for(int z = (int)getCollisionBoundingBox().minZ; z < getCollisionBoundingBox().maxZ; z++)
 				{
 					BlockPos pos = new BlockPos(x, posY, z);
-					if(world.getBlockState(pos).getBlockHardness(world, pos) == 0)
+					if(world.getBlockState(pos).getBlockHardness(world, pos) == 0 && !(world.getBlockState(pos).getBlock() instanceof BlockLiquid))
 						world.destroyBlock(pos, true);
 				}
 		}
@@ -123,7 +133,7 @@ public class EntityRock extends EntityLivingBase
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount)
 	{
-		if(source.isFireDamage())
+		if(source.isFireDamage() || source == ROCK_DAMAGE)
 			return false;
 
 		if(source instanceof EntityDamageSource && source.getImmediateSource() instanceof EntityLivingBase)
@@ -136,11 +146,31 @@ public class EntityRock extends EntityLivingBase
 		boolean result = super.attackEntityFrom(source, amount);
 
 		hurtResistantTime = 0;
+		hurtTime = 0;
+		maxHurtTime = 0;
+		recentlyHit = 0;
+
+		if(getHealth() <= 0)
+			setDead();
 
 		if(result)
-			playParticles(isDead ? 20 : 5);
+			playParticles(5);
 
 		return result;
+	}
+
+	@Override
+	public void onDeath(DamageSource cause)
+	{
+		playParticles(getHealth() <= 0 ? 32 : 5);
+		super.onDeath(cause);
+
+	}
+
+	@Override
+	public void handleStatusUpdate(byte id) {
+		if(id != 3)
+			super.handleStatusUpdate(id);
 	}
 
 	private void playParticles(int particleCount)

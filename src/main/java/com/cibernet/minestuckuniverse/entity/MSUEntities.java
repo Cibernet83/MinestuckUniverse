@@ -31,7 +31,7 @@ public class MSUEntities
 	}
 	
 	public static void registerEntity(Class<? extends Entity> entityClass, String name, String registryName, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates) {
-		EntityRegistry.registerModEntity(new ResourceLocation(MinestuckUniverse.MODID, registryName), entityClass, MinestuckUniverse.MODID + name, currentEntityIdOffset, MinestuckUniverse.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
+		EntityRegistry.registerModEntity(new ResourceLocation(MinestuckUniverse.MODID, registryName), entityClass, MinestuckUniverse.MODID + "." +  name, currentEntityIdOffset, MinestuckUniverse.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
 		++currentEntityIdOffset;
 	}
 	

@@ -50,6 +50,13 @@ public class ItemBigRock extends MSUItemBase
 			EntityRock rock = new EntityRock(entityItem.world);
 			rock.setPosition(entityItem.posX, entityItem.posY, entityItem.posZ);
 
+			if(entityItem.getThrower() != null)
+			{
+				rock.motionX = entityItem.motionX;
+				rock.motionY = entityItem.motionY;
+				rock.motionZ = entityItem.motionZ;
+			}
+
 			entityItem.world.spawnEntity(rock);
 			entityItem.setDead();
 		}

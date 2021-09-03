@@ -3,8 +3,10 @@ package com.cibernet.minestuckuniverse.proxy;
 import com.cibernet.minestuckuniverse.client.MSUFontRenderer;
 import com.cibernet.minestuckuniverse.client.MSUKeys;
 import com.cibernet.minestuckuniverse.client.render.RenderHologram;
+import com.cibernet.minestuckuniverse.client.render.RenderRock;
 import com.cibernet.minestuckuniverse.client.render.RenderUnrealAir;
 import com.cibernet.minestuckuniverse.client.render.ThrowableRenderFactory;
+import com.cibernet.minestuckuniverse.entity.EntityRock;
 import com.cibernet.minestuckuniverse.entity.EntityUnrealAir;
 import com.cibernet.minestuckuniverse.gui.GuiStrifeSwitcher;
 import com.cibernet.minestuckuniverse.items.weapons.ItemBeamBlade;
@@ -40,6 +42,8 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityAcheron.class, RenderEntityMinestuck.getFactory(new ModelAcheron(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new ThrowableRenderFactory(MinestuckUniverseItems.yarnBall));
         RenderingRegistry.registerEntityRenderingHandler(EntityUnrealAir.class, RenderUnrealAir::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityRock.class, RenderRock::new);
+
         MinecraftForge.EVENT_BUS.register(MSUModelManager.class);
         MinecraftForge.EVENT_BUS.register(MSURenderMachineOutline.class);
         MinecraftForge.EVENT_BUS.register(GuiStrifeSwitcher.class);
