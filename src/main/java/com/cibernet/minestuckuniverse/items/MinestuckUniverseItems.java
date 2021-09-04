@@ -204,6 +204,7 @@ public class MinestuckUniverseItems
     public static Item aaaNailShocker = new MSUWeaponBase(325, 7, -2.4, 10,"aaa_nail_shocker", "aaaNailShocker").setTool(toolHammer, 2, 3f).setRepairMaterials(new ItemStack(battery)).addProperties(new PropertyElectric(20, 0, 0.7f, true));
     public static Item highVoltageStormCrusher = new MSUWeaponBase(580, 10, -2.4, 18, "high_voltage_storm_crusher", "highVoltageStormCrusher").setTool(toolHammer, 4, 3.0f).addProperties(new PropertyLightning(8, 1, true, false), new PropertyElectric(60, 8, -1, false));
     public static Item barrelsWarhammer = new MSUWeaponBase(640, 22, -2.4, 18, "barrel_warhammer", "calamityHammer").setTool(toolHammer, 4, 4.0f);
+    public static Item stardustSmasher = new MSUWeaponBase(1600, 16, -2.4, 20, "stardust_smasher", "stardustSmasher").setTool(toolHammer, 20, 8.0f).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.ARTHROPOD, 1000));
 
     //Clawkind
     public static Item makeshiftClaws = new MSUWeaponBase(80, 2D, -0.5, 8, "makeshift_claws", "makeshiftClaws").setTool(toolClaws, 1, 5).addProperties(new PropertySweep(), new PropertyDualWield());
@@ -414,6 +415,7 @@ public class MinestuckUniverseItems
         registerItem(registry, aaaNailShocker);
         registerItem(registry, highVoltageStormCrusher);
         registerItem(registry, barrelsWarhammer);
+        registerItem(registry, stardustSmasher);
 
         registerItem(registry, gravediggerShovel);
         registerItem(registry, hereticusAurum);

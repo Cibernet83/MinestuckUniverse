@@ -212,6 +212,8 @@ item.loghammer.name=Loghammer
 item.overgrownLoghammer.name=Overgrown Loghammer
 item.glowingLoghammer.name=Glowing Loghammer
 item.calamityHammer.name=Barrel's Warhammer
+item.stardustSmasher.name=Stardust Smasher
+item.stardustSmasher.tooltip=Perfect for crushing stone golems brought to life by void goop, or squashing nasty bugs.
 
 item.makeshiftClaws.name=Makeshift Claws
 item.makeshiftClaws.name.plural=Makeshift Claws
@@ -288,6 +290,10 @@ item.rock.name=Rock
 item.bigRock.name=Big Rock
 item.bigRock.tooltip=It's not just a boulder *sniff*, it's a rock! The pioneers used to ride these for miles, and it's in great shape.
 
+item.rolledUpPaper.name=Rolled-Up Paper
+item.rolledUpPaper.tooltip=WAP WAP WAP WAP WAP
+item.yesterdaysNews.name=Yesterday's News
+
 item.rubyContrabat.name=Ruby Contrabat
 item.homeRunBat.name=Home Run Bat
 item.dynamiteStick.name=Dynamite Stick
@@ -329,7 +335,7 @@ item.jawbreaker.name=The Jawbreaker
 item.jawbreaker.tooltip=This sweet weapon makes underlings drop candy when killed, tasty!
 item.eldrichGauntlet.name=Eye of Ng'Mhagul
 item.eldrichGauntlet.tooltip=You can feel it slowly consuming your hand, somehow both empowering and weakening you the more it does so.
-item.gauntletOfZillywenn=The Gauntlet of Zillywenn
+item.gauntletOfZillywenn.name=The Gauntlet of Zillywenn
 
 item.knittingNeedle.name=Knitting Needle
 item.knittingNeedle.name.plural=Knitting Needles
@@ -346,10 +352,12 @@ item.oglogothThorn.name.plural=Thorns of Oglogoth
 item.oglogothThorn.tooltip=The needles seem to shiver with the dark desires of THE DEEP ONE. Any sane adventurer would cast these instruments of the occult into the FURTHEST RING and forget they ever existed.
 item.echidnaQuill.name=Quill of Echidna
 item.echidnaQuill.name.plural=Quills of Echidna
-item.thistleOfZillywitch.name=The Thistle of Zillywitch
-item.thistleOfZillywitch.name.plural=The Thistles of Zillywitch
-item.thistleOfZillywitch.tooltip=Flippety dippety doo bup bup shrubber double floppy mumblescurry noodlescoop pizzabubble pizzabubble mip mip mip mip mip mip
+item.thistlesOfZillywitch.name=The Thistle of Zillywitch
+item.thistlesOfZillywitch.name.plural=The Thistles of Zillywitch
+item.thistlesOfZillywitch.tooltip=Flippety dippety doo bup bup shrubber double floppy mumblescurry noodlescoop pizzabubble pizzabubble mip mip mip mip mip mip
 
+item.flimsyBow.name=Flimsy Bow
+item.flimsyBow.tooltip=This bow seems to be more useful at hitting things than it is at firing arrows, it should at least help you work towards getting a real bow.
 item.infernoShot.name=Inferno Shot
 item.kingOfThePond.name=King of the Pond
 item.sweetBow.name=Sweet Bow
@@ -725,12 +733,16 @@ gui.strifeCard.label=kind abstrata
 enchantment.minestuckuniverse.superpunch=Superpunch
 enchantment.minestuckuniverse.superpunch.desc=Increases the knockback strength of the weapon but increases its attack damage inversely to the enchanment level
 
+status.strife.unlockSwitcher=§aThe Strife Specibus Quick Switcher has been unlocked! Crouch while holding the STRIFE key to change between your active specibi on the go!
+status.strife.strifeDeckFull=Your %s Strife Deck is full!
 status.strife.portfolioFull=Your Strife Portfolio is full!
 status.strife.portfolioDuplicate=You already have a %s Strife Specibus in your Portfolio
 status.strife.assign=The %s Strife Specibus has been assigned to your Portfolio
 status.strife.assignWeapon=Your %s has been assigned to your %s Strife Deck
 status.strife.weaponMissmach=Your %s doesn't fit inside any of your Strife Specibi
 strife.item.allocated=§2[Strife Allocated]
+
+key.minestuckuniverse.strife=Strife Allocate/Retrieve
 
 config.minestuckuniverse.general.zillystoneYields=Zillystone Luck Modifier
 config.minestuckuniverse.general.baseZillystoneLuck=Zillystone Base Luck
@@ -743,5 +755,3 @@ config.minestuckuniverse.strife.strifeCardMobDrops=Mobs Drop Strife Cards
 config.minestuckuniverse.strife.strifeDeckMaxSize=Strife Deck Weapon Limit
 config.minestuckuniverse.strife.abstrataSwitcherRung=Strife Specibus Quick Switcher Unlock Rung
 config.minestuckuniverse.title=Minestuck Universe
-status.strife.unlockSwitcher=§aThe Strife Specibus Quick Switcher has been unlocked! Crouch while holding the STRIFE key to change between your active specibi on the go!
-status.strife.strifeDeckFull=Your %s Strife Deck is full!

@@ -30,6 +30,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -386,6 +387,12 @@ public class CommonEventHandler
 	@SubscribeEvent
 	public static void onRightClickEmpty(PlayerInteractEvent.RightClickItem event)
 	{
+		if(event.getItemStack().getItem() == Items.PAPER && event.getItemStack().getCount() == 1)
+		{
+			event.getEntityPlayer().setHeldItem(event.getHand(), new ItemStack(MinestuckUniverseItems.rolledUpPaper));
+			event.getEntityPlayer().swingArm(event.getHand());
+		}
+
 		if(event.getItemStack().getItem() instanceof ItemCaptcharoidCamera)
 		{
 			EntityPlayer player = event.getEntityPlayer();

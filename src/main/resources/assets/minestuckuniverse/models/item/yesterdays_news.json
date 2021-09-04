@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/rolled_up_paper",
+    "textures": {
+        "layer0": "minestuckuniverse:items/yesterdays_news"
+    }
+}
