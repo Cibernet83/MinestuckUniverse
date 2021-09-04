@@ -64,6 +64,9 @@ public class StrifeData implements IStrifeData
 	@Override
 	public NBTTagCompound writePortfolio(NBTTagCompound nbt, int... indexes)
 	{
+		if(indexes.length > 0)
+			nbt.setBoolean("KeepPortfolio", true);
+
 		NBTTagList portfolioList = new NBTTagList();
 		for(int i = 0; i < portfolio.length; i++)
 			if((indexes.length <= 0 || Arrays.asList(indexes).contains(i)) && portfolio[i] != null)
@@ -98,7 +101,7 @@ public class StrifeData implements IStrifeData
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
-		if(nbt.hasKey("Portfolio"))
+		if(nbt.hasKey("Portfolio") && !nbt.getBoolean("KeepPortfolio"))
 			clearPortfolio();
 
 		if(nbt.hasKey("SelectedSpecibus"))

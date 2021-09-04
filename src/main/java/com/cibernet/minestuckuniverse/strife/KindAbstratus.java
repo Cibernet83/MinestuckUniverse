@@ -31,6 +31,7 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 	protected final ArrayList<MSUToolClass> toolClasses = new ArrayList<>();
 	protected final ArrayList<Class<? extends Item>> itemClasses = new ArrayList<>();
 	protected final ArrayList<Item> toolItems = new ArrayList<>();
+	protected final ArrayList<String> keywords = new ArrayList<>();
 
 	protected IAbstratusConditional conditional;
 
@@ -91,6 +92,14 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 		for(Item i : items)
 			if(i != null && !this.toolItems.contains(i))
 				this.toolItems.add(i);
+		return this;
+	}
+
+	public KindAbstratus addKeywords(String... keys)
+	{
+		for(String i : keys)
+			if(i != null && !i.isEmpty() && !this.keywords.contains(i))
+				this.keywords.add(i);
 		return this;
 	}
 

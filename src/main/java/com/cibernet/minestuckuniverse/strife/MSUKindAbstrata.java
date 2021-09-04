@@ -16,12 +16,12 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class MSUKindAbstrata
 {
 	public static KindAbstratus hammerkind = new KindAbstratus("hammer", MinestuckUniverseItems.toolHammer);
-	public static KindAbstratus bladekind = new KindAbstratus("sword", MinestuckUniverseItems.toolSword);
-	public static KindAbstratus clubkind = new KindAbstratus("club", MinestuckUniverseItems.toolClub);
-	public static KindAbstratus canekind = new KindAbstratus("cane", MinestuckUniverseItems.toolCane);
-	public static KindAbstratus sicklekind = new KindAbstratus("sickle", MinestuckUniverseItems.toolSickle);
-	public static KindAbstratus spoonkind = new KindAbstratus("spoon", MinestuckUniverseItems.toolSpoon);
-	public static KindAbstratus forkkind = new KindAbstratus("fork", MinestuckUniverseItems.toolFork);
+	public static KindAbstratus bladekind = new KindAbstratus("sword", MinestuckUniverseItems.toolSword).addKeywords("sword", "blade");
+	public static KindAbstratus clubkind = new KindAbstratus("club", MinestuckUniverseItems.toolClub).addKeywords("mace", "club");
+	public static KindAbstratus canekind = new KindAbstratus("cane", MinestuckUniverseItems.toolCane).addKeywords("cane", "staff");
+	public static KindAbstratus sicklekind = new KindAbstratus("sickle", MinestuckUniverseItems.toolSickle).addKeywords("sickle");
+	public static KindAbstratus spoonkind = new KindAbstratus("spoon", MinestuckUniverseItems.toolSpoon).addKeywords("spoon");
+	public static KindAbstratus forkkind = new KindAbstratus("fork", MinestuckUniverseItems.toolFork).addKeywords("fork");
 
 	public static KindAbstratus pickaxekind = new KindAbstratus("pickaxe", MinestuckUniverseItems.toolPickaxe).addItemClasses(ItemPickaxe.class);
 	public static KindAbstratus axekind = new KindAbstratus("axe", MinestuckUniverseItems.toolAxe).addItemClasses(ItemAxe.class);
@@ -32,13 +32,13 @@ public class MSUKindAbstrata
 					MinestuckUniverseItems.dragonCharge, Items.SNOWBALL, Items.EGG, Items.ENDER_PEARL, Items.ENDER_EYE, Items.EXPERIENCE_BOTTLE, Items.SPLASH_POTION, Items.LINGERING_POTION,
 					getItem("botania", "chakram"));
 
-	public static KindAbstratus rockkind = new KindAbstratus("rock").addItemTools(MinestuckUniverseItems.pebble, MinestuckUniverseItems.rock, MinestuckUniverseItems.bigRock,
+	public static KindAbstratus rockkind = new KindAbstratus("rock").addKeywords("rock").addItemTools(MinestuckUniverseItems.pebble, MinestuckUniverseItems.rock, MinestuckUniverseItems.bigRock,
 			Item.getItemFromBlock(Blocks.COBBLESTONE), Item.getItemFromBlock(Blocks.STONE), Item.getItemFromBlock(Blocks.MOSSY_COBBLESTONE));
-	public static KindAbstratus paperkind = new KindAbstratus("paper").addItemTools(Items.PAPER, Items.MAP, Items.FILLED_MAP, MinestuckUniverseItems.rolledUpPaper, MinestuckUniverseItems.yesterdaysNews);
-	public static KindAbstratus scissorkind = new KindAbstratus("shears").addItemClasses(ItemShears.class);
+	public static KindAbstratus paperkind = new KindAbstratus("paper").addKeywords("paper").addItemTools(Items.PAPER, Items.MAP, Items.FILLED_MAP, MinestuckUniverseItems.rolledUpPaper, MinestuckUniverseItems.yesterdaysNews);
+	public static KindAbstratus scissorkind = new KindAbstratus("shears").addKeywords("scissor").addItemClasses(ItemShears.class);
 
-	public static KindAbstratus clawkind = new KindAbstratus("claw", MinestuckUniverseItems.toolClaws);
-	public static KindAbstratus glovekind = new KindAbstratus("glove", MinestuckUniverseItems.toolGauntlet).addItemTools(getItem("thaumcraft", "caster_basic"));
+	public static KindAbstratus clawkind = new KindAbstratus("claw", MinestuckUniverseItems.toolClaws).addKeywords("katar");
+	public static KindAbstratus glovekind = new KindAbstratus("glove", MinestuckUniverseItems.toolGauntlet).addKeywords("glove", "gauntlet", "fist").addItemTools(getItem("thaumcraft", "caster_basic"));
 	public static KindAbstratus needlekind = new KindAbstratus("needles", MinestuckUniverseItems.toolNeedles);
 	public static KindAbstratus shieldkind = new KindAbstratus("shield").setConditional((i, itemStack) -> i.isShield(itemStack, null));
 	public static KindAbstratus bowkind = new KindAbstratus("bow").addItemClasses(ItemBow.class);
@@ -53,23 +53,28 @@ public class MSUKindAbstrata
 			.addItemTools(MinestuckUniverseItems.sbahjWhip, MinestuckUniverseItems.unrealAir, MinestuckItems.batleacks, MinestuckItems.sord, MinestuckItems.sbahjPoster,
 					Item.getItemFromBlock(MinestuckUniverseBlocks.sbahjBedrock), Item.getItemFromBlock(MinestuckUniverseBlocks.sbahjTree))
 			.setConditional((i, stack) -> i.getRegistryName().getResourcePath().equals("sbahjaddon")).setHidden(true);
-	public static KindAbstratus bunnykind = new KindAbstratus("bunny")
+	public static KindAbstratus bunnykind = new KindAbstratus("bunny").addKeywords("bunny", "rabbit", "hare")
 			.addItemTools(MinestuckUniverseItems.bunnySlippers, Items.RABBIT, Items.COOKED_RABBIT, Items.RABBIT_FOOT, Items.RABBIT_HIDE, Items.RABBIT_STEW).setHidden(true);
 
 	//api abstrata
-	public static KindAbstratus tridentkind = new KindAbstratus("trident");
+	public static KindAbstratus tridentkind = new KindAbstratus("trident").addKeywords("trident");
 	public static KindAbstratus doubleTridentkind = new KindAbstratus("2x3dent");
-	public static KindAbstratus lancekind = new KindAbstratus("lance");
+	public static KindAbstratus lancekind = new KindAbstratus("lance").addKeywords("lance");
+	public static KindAbstratus spearkind = new KindAbstratus("spear").addKeywords("spear");
 	public static KindAbstratus drillkind = new KindAbstratus("drill").addItemTools(getItem("actuallyadditions", "item_drill"), getItem("industrialforegoing", "infinity_drill"));
-	public static KindAbstratus umbrellakind = new KindAbstratus("umbrella");
-	public static KindAbstratus flshlghtkind = new KindAbstratus("flashlight");
-	public static KindAbstratus knifekind = new KindAbstratus("knife").addItemTools(getItem("actiallyadditions", "item_knife"), getItem("cfm", "item_knife"),
+	public static KindAbstratus chainsawkind = new KindAbstratus("chainsaw").addKeywords("chainsaw");
+	public static KindAbstratus makeupkind = new KindAbstratus("makeup").addKeywords("lipstick", "lip_stick");
+	public static KindAbstratus umbrellakind = new KindAbstratus("umbrella").addKeywords("umbrella");
+	public static KindAbstratus flshlghtkind = new KindAbstratus("flashlight").addKeywords("flashlight");
+	public static KindAbstratus fncysntatkind = new KindAbstratus("fancySanta").setHidden(true);
+	public static KindAbstratus batonkind = new KindAbstratus("baton").addKeywords("baton");
+	public static KindAbstratus knifekind = new KindAbstratus("knife").addKeywords("knife", "dagger", "katar").addItemTools(getItem("actiallyadditions", "item_knife"), getItem("cfm", "item_knife"),
 			getItem("mysticalworld", "amethyst_knife"), getItem("mysticalworld", "copper_knife"), getItem("mysticalworld", "silver_knife"), getItem("mysticalworld", "wood_knife"),
 			getItem("mysticalworld", "stone_knife"), getItem("mysticalworld", "iron_knife"), getItem("mysticalworld", "diamond_knife"), getItem("mysticalworld", "gold_knife"));
 	public static KindAbstratus keykind = new KindAbstratus("key").addItemTools(getItem("locks", "key"), getItem("locks", "key_blank"),
 			getItem("locks", "key_ring"), getItem("locks", "master_key"),
 			getItem("randomthings", "spectrekey"), getItem("randomthings", "portkey"), getItem("tombstone", "grave_key"));
-	public static KindAbstratus wandkind = new KindAbstratus("wand").addItemTools(
+	public static KindAbstratus wandkind = new KindAbstratus("wand").addKeywords("wand").addItemTools(
 			getItem("botania", "twigwand"), getItem("botania", "dirtrod"), getItem("botania", "skydirtrod"), getItem("botania", "cobblerod"),
 			getItem("botania", "terraformrod"), getItem("botania", "waterrod"), getItem("botania", "rainbowrod"), getItem("botania", "tornadorod"),
 			getItem("botania", "firerod"), getItem("botania", "smeltrod"), getItem("botania", "exchangerod"), getItem("botania", "diviningrod"),
@@ -120,9 +125,14 @@ public class MSUKindAbstrata
 		registry.register(wandkind.setRegistryName("wand"));
 		registry.register(keykind.setRegistryName("key"));
 		registry.register(lancekind.setRegistryName("lance"));
+		registry.register(spearkind.setRegistryName("spear"));
 		registry.register(drillkind.setRegistryName("drill"));
+		registry.register(chainsawkind.setRegistryName("chainsaw"));
+		registry.register(makeupkind.setRegistryName("makeup"));
 		registry.register(knifekind.setRegistryName("knife"));
+		registry.register(batonkind.setRegistryName("baton"));
 		registry.register(flshlghtkind.setRegistryName("flashlight"));
+		registry.register(fncysntatkind.setRegistryName("fancy_santa"));
 		registry.register(umbrellakind.setRegistryName("umbrella"));
 		registry.register(tridentkind.setRegistryName("tridentkind"));
 		registry.register(doubleTridentkind.setRegistryName("2x3dent"));
@@ -141,6 +151,7 @@ public class MSUKindAbstrata
 	protected static void registerArsenalApi()
 	{
 		//TODO
+
 		sbahjkind.addItemTools(getItem("minestuckarsenal", "sbahjifier"), getItem("minestuckarsenal", "aks"));
 		lancekind.addItemTools(getItem("minestuckarsenal", "cigarette_lance"), getItem("minestuckarsenal", "jousting_lance"), getItem("minestuckarsenal", "rocketpop_lance"),
 				getItem("minestuckarsenal", "fiduspawn_lance"));
