@@ -31,7 +31,13 @@ public class UpdateStrifeDataPacket extends MSUPacket
 			nbt = cap.writeConfig(cap.writeToNBT());
 		else switch ((UpdateType)args[1])
 		{
-			case PORTFOLIO: nbt = cap.writePortfolio(new NBTTagCompound()); break;
+			case PORTFOLIO:
+				int[] specibi = new int[args.length-2];
+				for(int i = 0; i < specibi.length; i++)
+					specibi[i] = (int)args[i+2];
+
+				nbt = cap.writePortfolio(new NBTTagCompound(), specibi);
+				break;
 			case INDEXES: nbt = cap.writeSelectedIndexes(new NBTTagCompound()); break;
 			case DROPPED_CARDS: nbt = cap.writeDroppedCards(new NBTTagCompound()); break;
 			case CONFIG: nbt = cap.writeConfig(new NBTTagCompound()); break;

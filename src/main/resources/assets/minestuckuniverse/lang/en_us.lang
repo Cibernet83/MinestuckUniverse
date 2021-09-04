@@ -744,3 +744,4 @@ config.minestuckuniverse.strife.strifeDeckMaxSize=Strife Deck Weapon Limit
 config.minestuckuniverse.strife.abstrataSwitcherRung=Strife Specibus Quick Switcher Unlock Rung
 config.minestuckuniverse.title=Minestuck Universe
 status.strife.unlockSwitcher=§aThe Strife Specibus Quick Switcher has been unlocked! Crouch while holding the STRIFE key to change between your active specibi on the go!
+status.strife.strifeDeckFull=Your %s Strife Deck is full!

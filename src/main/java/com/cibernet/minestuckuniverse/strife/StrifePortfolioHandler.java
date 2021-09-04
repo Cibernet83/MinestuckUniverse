@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.strife;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
@@ -38,31 +39,53 @@ public class StrifePortfolioHandler
 
 		StrifeSpecibus selSpecibus = cap.getSelectedSpecibusIndex() >= 0 ? cap.getPortfolio()[cap.getSelectedSpecibusIndex()] : null;
 
-		if(selSpecibus != null && selSpecibus.putItemStack(stack))
-		{
-			if(entity instanceof EntityPlayer)
-			{
-				((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.assignWeapon", stack.getTextComponent(), selSpecibus.getDisplayName()), true);
-				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSpecibusIndex(selSpecibus)), (EntityPlayer) entity);
-			}
-			return true;
-		}
+		StrifeSpecibus cantFitIn = null;
 
-		for(StrifeSpecibus specibus : cap.getPortfolio())
+		if(selSpecibus != null)
 		{
-			if(specibus != null && specibus != selSpecibus && specibus.putItemStack(stack))
+			if(MSUConfig.strifeDeckMaxSize >= 0 && (selSpecibus.getKindAbstratus() != null && selSpecibus.getKindAbstratus().isStackCompatible(stack)) && selSpecibus.getContents().size() >= MSUConfig.strifeDeckMaxSize)
+			{
+				if(cantFitIn == null)
+					cantFitIn = selSpecibus;
+			}
+			else if(selSpecibus.putItemStack(stack))
 			{
 				if(entity instanceof EntityPlayer)
 				{
-					((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.assignWeapon", stack.getTextComponent(), specibus.getDisplayName()), true);
-					MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSpecibusIndex(specibus)), (EntityPlayer) entity);
+					((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.assignWeapon", stack.getTextComponent(), selSpecibus.getDisplayName()), true);
+					MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSpecibusIndex(selSpecibus)), (EntityPlayer) entity);
 				}
 				return true;
 			}
 		}
 
+		for(StrifeSpecibus specibus : cap.getPortfolio())
+		{
+			if(specibus != null && specibus != selSpecibus)
+			{
+				if(MSUConfig.strifeDeckMaxSize >= 0 && specibus.getKindAbstratus() != null && specibus.getKindAbstratus().isStackCompatible(stack) && specibus.getContents().size() >= MSUConfig.strifeDeckMaxSize)
+				{
+					if(cantFitIn == null)
+						cantFitIn = specibus;
+				}
+				else if(specibus.putItemStack(stack))
+				{
+					if(entity instanceof EntityPlayer)
+					{
+						((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.assignWeapon", stack.getTextComponent(), specibus.getDisplayName()), true);
+						MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSpecibusIndex(specibus)), (EntityPlayer) entity);
+					}
+					return true;
+				}
+			}
+		}
+
 		if(entity instanceof EntityPlayer)
-			((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.weaponMissmach", stack.getTextComponent()), true);
+		{
+			if(cantFitIn != null)
+				((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.strifeDeckFull", cantFitIn.getDisplayName()), true);
+			else ((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.weaponMissmach", stack.getTextComponent()), true);
+		}
 		return false;
 	}
 
