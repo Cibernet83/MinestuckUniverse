@@ -4,9 +4,11 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
 import com.cibernet.minestuckuniverse.client.models.armor.*;
+import com.cibernet.minestuckuniverse.client.render.RenderThrowable;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.armor.*;
 import com.cibernet.minestuckuniverse.items.properties.*;
+import com.cibernet.minestuckuniverse.items.properties.bowkind.*;
 import com.cibernet.minestuckuniverse.items.properties.clawkind.PropertyActionBuff;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyMagicDamagePrjctle;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyRocketShieldDash;
@@ -25,6 +27,7 @@ import com.mraof.minestuck.item.block.ItemTransportalizer;
 import com.mraof.minestuck.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.init.*;
@@ -85,8 +88,6 @@ public class MinestuckUniverseItems
     public static Item battery = new MSUItemBase("battery", "battery");
     public static Item strifeCard = new ItemStrifeCard("strife_card", "strifeCard");
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
-    public static Item yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
-    public static Item wizardbeardYarn = new MSUThrowableBase("wizardbeard_yarn", "wizardbeardYarn").addProperties(new PropertyMagicDamagePrjctle(6));
     public static Item whip = new ItemSound("whip", "whip", MSUSoundHandler.whipCrack);
     public static Item sbahjWhip = new ItemSound("whip_sbahj", "whipSbahj", MSUSoundHandler.whipCrock).setSecret();
     public static Item unrealAir = new ItemUnrealAir("unreal_air", "unrealAir");
@@ -177,23 +178,24 @@ public class MinestuckUniverseItems
     public static Item perfectAegis = new MSUShieldBase(800, 3, 1f, 12, "perfect_aegis", "perfectAegis");
 
     //Bowkind
-    public static Item flimsyBow = new MSUItemBase("flimsy_bow", "flimsyBow").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item energyBow = new MSUItemBase("energy_bow", "energyBow").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item infernoShot = new MSUItemBase("inferno_shot", "infernoShot").setCreativeTab(TabMinestuckUniverse.weapons);
+    public static MSUBowBase flimsyBow = new MSUBowBase(210, 3, -1.8, 1.8f, 25, 1.8f,1f, 1, false, "flimsy_bow", "flimsyBow");
+    public static MSUBowBase energyBow = (MSUBowBase) new MSUBowBase(330, 2.1f, 18, 2.1f, 1.1f, 1, true, "energy_bow", "energyBow").requireNoAmmo().addProperties(new PropertyLaserArrow());
+    public static MSUBowBase infernoShot = (MSUBowBase) new MSUBowBase(385, 2, 24, 2, 0.9f, 1, true, "inferno_shot", "infernoShot").addProperties(new PropertyFlamingArrow(10, 0.9f));
     public static Item icicleBow = new MSUItemBase("icicle_bow", "icicleBow").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item tempestBow = new MSUItemBase("tempest_bow", "tempestBow").setCreativeTab(TabMinestuckUniverse.weapons);
+    public static MSUBowBase tempestBow = (MSUBowBase) new MSUBowBase(540, 2.3f, 16, 3.1f, 1.2f, 1, true, "tempest_bow", "tempestBow").addProperties(new PropertyHookshot(0.8f, 16, true, true, true), new PropertyLaserArrow());
     public static Item shiverburnWing = new MSUItemBase("shiverburn_wing", "shiverburnWing").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item magneticHookshot = new MSUItemBase("magnetic_hookshot", "magneticHookshot").setCreativeTab(TabMinestuckUniverse.weapons);
+    public static MSUBowBase magneticHookshot = (MSUBowBase) new MSUBowBase(680, 1f, 32, 4f, 0.8f, 1, true, "magnetic_hookshot", "magneticHookshot").addProperties(new PropertyHookshot(1, 64));
     public static Item wormholePiercer = new MSUItemBase("wormhole_piercer", "wormholePiercer").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item telegravitationalWarper = new MSUItemBase("telegravitational_warper", "telegravitationalWarper").setCreativeTab(TabMinestuckUniverse.weapons);
+    public static MSUBowBase telegravitationalWarper = (MSUBowBase) new MSUBowBase(640, 3, 28, 2.9f, 0.8f, 1, true, "telegravitational_warper", "telegravitationalWarper").addProperties(new PropertyHookshot(0.4f, 16, false, false, true), new PropertyGhostArrow());
     public static Item crabbow = new MSUItemBase("crabbow", "crabbow").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item mechanicalCrossbow = new MSUItemBase("mechanical_crossbow", "mechanicalCrossbow").setCreativeTab(TabMinestuckUniverse.weapons);
+    public static Item mechanicalCrossbow = new ItemMechanicalCrossbow(385, 1,"mechanical_crossbow", "mechanicalCrossbow");
     public static Item sweetBow = new MSUItemBase("sweet_bow", "sweetBow").setCreativeTab(TabMinestuckUniverse.weapons);
     public static Item kingOfThePond = new MSUItemBase("king_of_the_pond", "kingOfThePond").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item gildedGuidance = new MSUItemBase("gilded_guidance", "gildedGuidance").setCreativeTab(TabMinestuckUniverse.weapons);
+    public static Item gildedGuidance = new MSUBowBase(1210, 3.2f, 30, 0.0f, 0, 2, true, "gilded_guidance", "gildedGuidance").requireNoAmmo().addProperties(new PropertyLaserArrow(), new PropertyGuidedArrow());
     public static Item bowOfLight = new MSUItemBase("bow_of_light", "bowOfLight").setCreativeTab(TabMinestuckUniverse.weapons);
     public static Item theChancemaker = new MSUItemBase("the_chancemaker", "theChancemaker").setCreativeTab(TabMinestuckUniverse.weapons);
     public static Item wisdomsPierce = new MSUItemBase("wisdom_pierce", "calamityBow").setCreativeTab(TabMinestuckUniverse.weapons);
+    public static Item wisdomsHookshot = new MSUItemBase("wisdom_hookshot", "calamityHookshot").setCreativeTab(TabMinestuckUniverse.weapons);
 
 
     //Hammerkind
@@ -235,19 +237,21 @@ public class MinestuckUniverseItems
     //Dicekind
 
     //Throwkind
+    public static MSUThrowableBase yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
+    public static MSUThrowableBase wizardbeardYarn = new MSUThrowableBase("wizardbeard_yarn", "wizardbeardYarn").addProperties(new PropertyMagicDamagePrjctle(6));
     public static Item dragonCharge = new ItemDragonCharge("dragon_charge", "dragonCharge");
-    public static Item throwingStar = new MSUThrowableBase(8, 0, 16, "throwing_star", "throwingStar");
-    public static Item goldenStar = new MSUThrowableBase(4, 0, 32, "golden_star", "goldenStar");
-    public static Item suitarang = new MSUThrowableBase(8, 0, 16, "suitarang", "suitarang");
-    public static Item psionicStar = new MSUThrowableBase(10, 0, 8, "psionic_star", "psionicStar");
-    public static Item boomerang = new MSUThrowableBase(10, 0, 1, "boomerang", "boomerang");
-    public static Item redHotRang = new MSUThrowableBase(12, 0, 1, "red_hot_rang", "redHotRang");
-    public static Item tornadoGlaive = new MSUThrowableBase(8, 0, 1, "tornado_glaive", "tornadoGlaive");
-    public static Item hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato");
+    public static MSUThrowableBase throwingStar = new MSUThrowableBase(8, 0, 16, "throwing_star", "throwingStar");
+    public static MSUThrowableBase goldenStar = new MSUThrowableBase(4, 0, 32, "golden_star", "goldenStar");
+    public static MSUThrowableBase suitarang = new MSUThrowableBase(8, 0, 16, "suitarang", "suitarang");
+    public static MSUThrowableBase psionicStar = new MSUThrowableBase(10, 0, 8, "psionic_star", "psionicStar").setSize(3);
+    public static MSUThrowableBase boomerang = new MSUThrowableBase(10, 0, 1, "boomerang", "boomerang");
+    public static MSUThrowableBase redHotRang = new MSUThrowableBase(12, 0, 1, "red_hot_rang", "redHotRang");
+    public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, "tornado_glaive", "tornadoGlaive");
+    public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato");
 
     //Rockkind
-    public static Item pebble = new MSUThrowableBase(0, 0, 64, "pebble", "pebble");
-    public static Item rock = new MSUThrowableBase(10, 5, 16, 5, -2.7, "rock", "rock");
+    public static MSUThrowableBase pebble = new MSUThrowableBase(0, 0, 64, "pebble", "pebble");
+    public static MSUThrowableBase rock = new MSUThrowableBase(10, 5, 16, 5, -2.7, "rock", "rock");
     public static Item bigRock = new ItemBigRock("big_rock", "bigRock");
 
     //Misc.
@@ -489,6 +493,9 @@ public class MinestuckUniverseItems
             overgrowthTransforms.put(ModBlocks.livingwood, 1, ModBlocks.livingwood, 2);
             overgrowthTransforms.put(ModBlocks.dreamwood, 1, ModBlocks.dreamwood, 2);
         }
+
+        energyBow.setArrowTexture("energy_arrow");
+        magneticHookshot.setCustomArrowTexture();
     }
 
     @SideOnly(Side.CLIENT)
@@ -511,6 +518,19 @@ public class MinestuckUniverseItems
         registerItemCustomRender(actionClaws, new MSUModelManager.DualWeaponDefinition("action_claws_drawn", "action_claws_sheathed"));
         registerItemCustomRender(candyCornClaws, new MSUModelManager.DualWeaponDefinition("candy_corn_claws_drawn", "candy_corn_claws_sheathed"));
         registerItemCustomRender(blizzardCutters, new MSUModelManager.DualWeaponDefinition("blizzard_cutters_drawn", "blizzard_cutters_sheathed"));
+
+        RenderThrowable.IRenderProperties THROW_STAR_ROTATION = ((entity, partialTicks) ->
+        {
+            GlStateManager.rotate(90, 1, 0, 0);
+            GlStateManager.rotate((entity.ticksExisted+partialTicks) * -(float)Math.PI*10f, 0, 0, 1);
+        });
+
+        throwingStar.setRenderProperties(THROW_STAR_ROTATION);
+        goldenStar.setRenderProperties(THROW_STAR_ROTATION);
+        psionicStar.setRenderProperties(THROW_STAR_ROTATION);
+        boomerang.setRenderProperties(THROW_STAR_ROTATION);
+        redHotRang.setRenderProperties(THROW_STAR_ROTATION);
+        tornadoGlaive.setRenderProperties(THROW_STAR_ROTATION);
     }
 
     private static Item registerItem(IForgeRegistry<Item> registry, Item item)

@@ -24,10 +24,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -355,8 +352,12 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
             return !unbreakable;
 
         for(WeaponProperty p : getProperties(stack))
-            if(p instanceof IEnchantableProperty && ((IEnchantableProperty) p).canEnchantWith(stack, enchantment))
-                return true;
+            if(p instanceof IEnchantableProperty)
+            {
+                Boolean bool = ((IEnchantableProperty) p).canEnchantWith(stack, enchantment);
+                if(bool != null)
+                    return bool;
+            }
 
         if(getTool() == null)
             return super.canApplyAtEnchantingTable(stack, enchantment);

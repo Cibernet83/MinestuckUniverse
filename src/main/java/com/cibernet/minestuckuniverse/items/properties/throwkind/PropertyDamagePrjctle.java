@@ -4,7 +4,7 @@ import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 
-public class PropertyDamagePrjctle implements IPropertyProjectile
+public class PropertyDamagePrjctle implements IPropertyThrowable
 {
 	float damage;
 

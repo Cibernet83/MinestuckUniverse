@@ -37,7 +37,7 @@ public class PropertyFire extends WeaponProperty implements IEnchantableProperty
 	}
 
 	@Override
-	public boolean canEnchantWith(ItemStack stack, Enchantment enchantment) {
-		return enchantment != Enchantments.FIRE_ASPECT;
+	public Boolean canEnchantWith(ItemStack stack, Enchantment enchantment) {
+		return enchantment == Enchantments.FIRE_ASPECT ? false : null;
 	}
 }

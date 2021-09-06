@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.client.render.RenderThrowable;
 import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.google.common.collect.HashMultimap;
@@ -25,6 +26,8 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +39,10 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 	protected int cooldownTime;
 	protected double attackDamage;
 	protected double attackSpeed;
+	protected float size = 1;
+
+	@SideOnly(Side.CLIENT)
+	protected RenderThrowable.IRenderProperties renderProperties;
 
 	protected final ArrayList<WeaponProperty> properties = new ArrayList<>();
 
@@ -60,7 +67,10 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 			{
 				ItemStack thrownStack = stackIn.copy();
 				thrownStack.setCount(1);
-				return new EntityMSUThrowable(worldIn, position.getX(), position.getY(), position.getZ(), thrownStack);
+				EntityMSUThrowable proj = new EntityMSUThrowable(worldIn, position.getX(), position.getY(), position.getZ(), thrownStack);
+				if(stackIn.getItem() instanceof MSUThrowableBase)
+					proj.setProjectileSize(((MSUThrowableBase)stackIn.getItem()).getSize());
+				return proj;
 			}
 		});
 	}
@@ -75,6 +85,17 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 	{
 		this(1, 0, 64, 0, 0, name, unlocName);
 		setCreativeTab(TabMinestuckUniverse.main);
+	}
+
+	public MSUThrowableBase setSize(float size)
+	{
+		this.size = size;
+		return this;
+	}
+
+	public float getSize()
+	{
+		return size;
 	}
 
 	@Override
@@ -113,6 +134,7 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 			thrownStack.setCount(1);
 
 			EntityMSUThrowable proj = new EntityMSUThrowable(worldIn, entityLiving, thrownStack);
+			proj.setProjectileSize(this.size);
 			proj.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0, 1.5F, 1.0F);
 			worldIn.spawnEntity(proj);
 		}
@@ -276,5 +298,18 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 	@Override
 	public List<WeaponProperty> getProperties() {
 		return properties;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public MSUThrowableBase setRenderProperties(RenderThrowable.IRenderProperties properties)
+	{
+		renderProperties = properties;
+		return this;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public RenderThrowable.IRenderProperties getRenderProperties()
+	{
+		return renderProperties;
 	}
 }

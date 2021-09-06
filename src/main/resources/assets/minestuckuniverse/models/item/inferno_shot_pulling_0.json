@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/inferno_shot",
+    "textures": {
+        "layer0": "minestuckuniverse:items/inferno_shot_pulling_0"
+    }
+}

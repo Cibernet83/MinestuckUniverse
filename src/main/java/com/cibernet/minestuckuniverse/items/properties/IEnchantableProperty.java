@@ -5,5 +5,5 @@ import net.minecraft.item.ItemStack;
 
 public interface IEnchantableProperty
 {
-	boolean canEnchantWith(ItemStack stack, Enchantment enchantment);
+	Boolean canEnchantWith(ItemStack stack, Enchantment enchantment);
 }

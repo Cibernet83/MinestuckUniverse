@@ -4,6 +4,8 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.items.MSUThrowableBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.weapons.ItemMechanicalCrossbow;
+import com.cibernet.minestuckuniverse.items.weapons.MSUBowBase;
 import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -41,7 +43,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus glovekind = new KindAbstratus("glove", MinestuckUniverseItems.toolGauntlet).addKeywords("glove", "gauntlet", "fist").addItemTools(getItem("thaumcraft", "caster_basic"));
 	public static KindAbstratus needlekind = new KindAbstratus("needles", MinestuckUniverseItems.toolNeedles);
 	public static KindAbstratus shieldkind = new KindAbstratus("shield").setConditional((i, itemStack) -> i.isShield(itemStack, null));
-	public static KindAbstratus bowkind = new KindAbstratus("bow").addItemClasses(ItemBow.class);
+	public static KindAbstratus bowkind = new KindAbstratus("bow").addItemClasses(ItemBow.class, MSUBowBase.class, ItemMechanicalCrossbow.class);
 	public static KindAbstratus dicekind = new KindAbstratus("dice").addItemTools(MinestuckUniverseItems.dice, MinestuckUniverseItems.fluoriteOctet);
 
 	public static KindAbstratus pistolkind = new KindAbstratus("pistol").addItemTools(getItem("botania", "managun"));

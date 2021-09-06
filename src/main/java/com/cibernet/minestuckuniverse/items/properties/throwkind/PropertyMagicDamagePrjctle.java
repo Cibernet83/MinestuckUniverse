@@ -5,7 +5,7 @@ import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 
-public class PropertyMagicDamagePrjctle extends WeaponProperty implements IPropertyProjectile
+public class PropertyMagicDamagePrjctle extends WeaponProperty implements IPropertyThrowable
 {
 	float damage;
 

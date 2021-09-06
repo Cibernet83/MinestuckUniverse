@@ -60,7 +60,7 @@ public class PropertySweep extends WeaponProperty implements IEnchantablePropert
 	}
 
 	@Override
-	public boolean canEnchantWith(ItemStack stack, Enchantment enchantment) {
-		return enchantment == Enchantments.SWEEPING;
+	public Boolean canEnchantWith(ItemStack stack, Enchantment enchantment) {
+		return enchantment == Enchantments.SWEEPING ? true : null;
 	}
 }
