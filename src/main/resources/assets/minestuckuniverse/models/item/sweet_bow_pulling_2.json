@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/sweet_bow",
+    "textures": {
+        "layer0": "minestuckuniverse:items/sweet_bow_pulling_2"
+    }
+}

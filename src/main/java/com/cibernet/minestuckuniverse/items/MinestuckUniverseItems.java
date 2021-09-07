@@ -150,6 +150,7 @@ public class MinestuckUniverseItems
     public static Item jawbreaker = new MSUWeaponBase(124, 3D, 0.4D, 6, "jawbreaker", "jawbreaker").setTool(toolGauntlet, 1, 1.6F).addProperties(new PropertyCandyWeapon());
     public static Item eldrichGauntlet = new MSUWeaponBase(124, 3D, 0.4D, 6, "eldritch_gauntlet", "eldrichGauntlet").setTool(toolGauntlet, 1, 1.6F).addProperties(new PropertyEldrichBoost());
     public static Item gauntletOfZillywenn = new MSUWeaponBase(732, 12D, -1.8D, 14, "gauntlet_of_zillywenn","gauntletOfZillywenn").setTool(toolGauntlet, 3, 4F);
+    public static Item midasGlove = new MSUWeaponBase(632, 8D, -1.8D, 14, "midas_glove","midasGlove").setTool(toolGauntlet, 3, 5F).addProperties(new PropertyGristSetter(GristType.Gold));
 
     //Needlekind
     public static Item knittingNeedles = new ItemKnittingNeedles(32,2, 1, 1, "knitting_needle", "knittingNeedle").setTool(toolNeedles, 2, 1f);
@@ -178,24 +179,26 @@ public class MinestuckUniverseItems
     public static Item perfectAegis = new MSUShieldBase(800, 3, 1f, 12, "perfect_aegis", "perfectAegis");
 
     //Bowkind
+    public static final MSUBowBase.IIsArrow REGULAR_ARROWS = stack -> stack.getItem() == Items.ARROW;
+
     public static MSUBowBase flimsyBow = new MSUBowBase(210, 3, -1.8, 1.8f, 25, 1.8f,1f, 1, false, "flimsy_bow", "flimsyBow");
     public static MSUBowBase energyBow = (MSUBowBase) new MSUBowBase(330, 2.1f, 18, 2.1f, 1.1f, 1, true, "energy_bow", "energyBow").requireNoAmmo().addProperties(new PropertyLaserArrow());
     public static MSUBowBase infernoShot = (MSUBowBase) new MSUBowBase(385, 2, 24, 2, 0.9f, 1, true, "inferno_shot", "infernoShot").addProperties(new PropertyFlamingArrow(10, 0.9f));
-    public static Item icicleBow = new MSUItemBase("icicle_bow", "icicleBow").setCreativeTab(TabMinestuckUniverse.weapons);
+    public static MSUBowBase icicleBow = (MSUBowBase) new MSUBowBase(230, 2, 30, 2, 0.7f, 1, true, "icicle_bow", "icicleBow").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyPotionArrow(new PotionEffect(MobEffects.SLOWNESS, 200, 2), 0.8f));
     public static MSUBowBase tempestBow = (MSUBowBase) new MSUBowBase(540, 2.3f, 16, 3.1f, 1.2f, 1, true, "tempest_bow", "tempestBow").addProperties(new PropertyHookshot(0.8f, 16, true, true, true), new PropertyLaserArrow());
-    public static Item shiverburnWing = new MSUItemBase("shiverburn_wing", "shiverburnWing").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static MSUBowBase magneticHookshot = (MSUBowBase) new MSUBowBase(680, 1f, 32, 4f, 0.8f, 1, true, "magnetic_hookshot", "magneticHookshot").addProperties(new PropertyHookshot(1, 64));
-    public static Item wormholePiercer = new MSUItemBase("wormhole_piercer", "wormholePiercer").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static MSUBowBase telegravitationalWarper = (MSUBowBase) new MSUBowBase(640, 3, 28, 2.9f, 0.8f, 1, true, "telegravitational_warper", "telegravitationalWarper").addProperties(new PropertyHookshot(0.4f, 16, false, false, true), new PropertyGhostArrow());
-    public static Item crabbow = new MSUItemBase("crabbow", "crabbow").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item mechanicalCrossbow = new ItemMechanicalCrossbow(385, 1,"mechanical_crossbow", "mechanicalCrossbow");
-    public static Item sweetBow = new MSUItemBase("sweet_bow", "sweetBow").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item kingOfThePond = new MSUItemBase("king_of_the_pond", "kingOfThePond").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item gildedGuidance = new MSUBowBase(1210, 3.2f, 30, 0.0f, 0, 2, true, "gilded_guidance", "gildedGuidance").requireNoAmmo().addProperties(new PropertyLaserArrow(), new PropertyGuidedArrow());
-    public static Item bowOfLight = new MSUItemBase("bow_of_light", "bowOfLight").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item theChancemaker = new MSUItemBase("the_chancemaker", "theChancemaker").setCreativeTab(TabMinestuckUniverse.weapons);
+    public static MSUBowBase shiverburnWing = (MSUBowBase) new MSUBowBase(390, 2.2f, 27, 2.2f, 0.8f, 1, true, "shiverburn_wing", "shiverburnWing").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyPotionArrow(new PotionEffect(MobEffects.SLOWNESS, 140, 2), 0.8f), new PropertyFlamingArrow(7, 0.9f));
+    public static MSUBowBase magneticHookshot = (MSUBowBase) new MSUBowBase(680, 1f, 32, 4f, 0.8f, 1, true, "magnetic_hookshot", "magneticHookshot").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyHookshot(1, 64));
+    public static MSUBowBase wormholePiercer = (MSUBowBase) new MSUBowBase(640, 1, 35, 3.5f, 0.8f, 1, true, "wormhole_piercer", "wormholePiercer").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyTeleArrows());
+    public static MSUBowBase telegravitationalWarper = (MSUBowBase) new MSUBowBase(640, 3, 28, 2.9f, 0.8f, 1, true, "telegravitational_warper", "telegravitationalWarper").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyHookshot(0.4f, 16, false, false, true), new PropertyGhostArrow());
+    public static MSUBowBase crabbow = new MSUBowBase(2048, 7, -1.8, 2.3f, 27, 1.95f, 1, 1, false, "crabbow", "crabbow");
+    public static ItemMechanicalCrossbow mechanicalCrossbow = new ItemMechanicalCrossbow(385, 1,"mechanical_crossbow", "mechanicalCrossbow");
+    public static MSUBowBase sweetBow = (MSUBowBase) new MSUBowBase(450, 1.8f, 20, 2.1f, 0.9f, 1, true, "sweet_bow", "sweetBow").addProperties(new PropertyCandyWeapon());
+    public static MSUBowBase kingOfThePond = (MSUBowBase) new MSUBowBase(890, 2, 10, 5, 1.2f, 1, true, "king_of_the_pond", "kingOfThePond").addProperties(new PropertyFlamingArrow(20, 0.65f));
+    public static MSUBowBase gildedGuidance = (MSUBowBase) new MSUBowBase(1210, 3.2f, 30, 0.0f, 0, 2, true, "gilded_guidance", "gildedGuidance").requireNoAmmo().addProperties(new PropertyLaserArrow(), new PropertyGuidedArrow());
+    public static MSUBowBase bowOfLight = (MSUBowBase) new MSUBowBase(2050, 4f, 24, 5, 0.3f, 3, true, "bow_of_light", "bowOfLight").requireNoAmmo().addProperties(new PropertyLaserArrow(), new PropertyArrowNoGravity(), new PropertyFlamingArrow(6, 0.9f), new PropertyPierce(0.1f));
+    public static MSUBowBase theChancemaker = (MSUBowBase) new MSUBowBase(1280, 1f, 16, 3, 1.3f, 2, false, "the_chancemaker", "theChancemaker").addProperties(new PropertyRandomDamage());
     public static Item wisdomsPierce = new MSUItemBase("wisdom_pierce", "calamityBow").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item wisdomsHookshot = new MSUItemBase("wisdom_hookshot", "calamityHookshot").setCreativeTab(TabMinestuckUniverse.weapons);
+    public static Item wisdomsHookshot = new MSUItemBase("wisdom_hookshot", "calamityHookshot").setCreativeTab(null);
 
 
     //Hammerkind
@@ -360,6 +363,7 @@ public class MinestuckUniverseItems
         registerItem(registry, jawbreaker);
         registerItem(registry, eldrichGauntlet);
         registerItem(registry, gauntletOfZillywenn);
+        registerItem(registry, midasGlove);
 
         registerItem(registry, clearShield);
         registerItem(registry, woodenDoorshield);
@@ -412,6 +416,7 @@ public class MinestuckUniverseItems
         registerItem(registry, bowOfLight);
         registerItem(registry, theChancemaker);
         registerItem(registry, wisdomsPierce);
+        registerItem(registry, wisdomsHookshot);
 
         registerItem(registry, loghammer);
         registerItem(registry, overgrownLoghammer);
@@ -497,7 +502,15 @@ public class MinestuckUniverseItems
         }
 
         energyBow.setArrowTexture("energy_arrow");
+        sweetBow.setCustomArrowTexture();
+        icicleBow.setCustomArrowTexture();
+        shiverburnWing.setCustomArrowTexture();
         magneticHookshot.setCustomArrowTexture();
+        tempestBow.setCustomArrowTexture();
+        wormholePiercer.setCustomArrowTexture();
+        telegravitationalWarper.setArrowTexture("gravity_arrow");
+        gildedGuidance.setCustomArrowTexture();
+        bowOfLight.setArrowTexture("light_arrow");
     }
 
     @SideOnly(Side.CLIENT)

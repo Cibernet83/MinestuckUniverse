@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/king_of_the_pond",
+    "textures": {
+        "layer0": "minestuckuniverse:items/king_of_the_pond_pulling_0"
+    }
+}

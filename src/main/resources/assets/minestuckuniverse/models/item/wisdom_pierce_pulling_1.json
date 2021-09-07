@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/wisdom_pierce",
+    "textures": {
+        "layer0": "minestuckuniverse:items/wisdom_pierce_pulling_1"
+    }
+}

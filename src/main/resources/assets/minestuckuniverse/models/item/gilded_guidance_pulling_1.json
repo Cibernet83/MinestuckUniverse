@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/gilded_guidance",
+    "textures": {
+        "layer0": "minestuckuniverse:items/gilded_guidance_pulling_1"
+    }
+}

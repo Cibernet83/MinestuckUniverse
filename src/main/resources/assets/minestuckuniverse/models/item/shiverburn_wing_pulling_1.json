@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/shiverburn_wing",
+    "textures": {
+        "layer0": "minestuckuniverse:items/shiverburn_wing_pulling_1"
+    }
+}

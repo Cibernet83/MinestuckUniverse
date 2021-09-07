@@ -67,7 +67,6 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 			{
-				System.out.println(!stack.isOnItemFrame() && entityIn == null);
 				return !stack.isOnItemFrame() && entityIn == null  ? 1.0F : 0.0F;
 			}
 		});

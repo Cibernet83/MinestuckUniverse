@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/icicle_bow",
+    "textures": {
+        "layer0": "minestuckuniverse:items/icicle_bow_pulling_1"
+    }
+}

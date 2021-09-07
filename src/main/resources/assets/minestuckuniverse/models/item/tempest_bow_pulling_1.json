@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/tempest_bow",
+    "textures": {
+        "layer0": "minestuckuniverse:items/tempest_bow_pulling_1"
+    }
+}

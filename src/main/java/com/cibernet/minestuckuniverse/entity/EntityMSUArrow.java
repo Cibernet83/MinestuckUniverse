@@ -6,7 +6,6 @@ import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.cibernet.minestuckuniverse.items.properties.bowkind.IPropertyArrow;
 import com.cibernet.minestuckuniverse.items.weapons.MSUBowBase;
 import com.google.common.base.Optional;
-import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -26,7 +25,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -170,7 +168,7 @@ public class EntityMSUArrow extends EntityArrow
 	}
 
 	@Override
-	protected void onHit(RayTraceResult raytraceResultIn)
+	public void onHit(RayTraceResult raytraceResultIn)
 	{
 		ItemStack stack = getBowStack();
 		if(stack.getItem() instanceof IPropertyWeapon)
@@ -245,6 +243,12 @@ public class EntityMSUArrow extends EntityArrow
 				}
 		}
 		return super.hasNoGravity();
+	}
+
+	@Override
+	public boolean canRenderOnFire()
+	{
+		return !getBowStack().getItem().equals(MinestuckUniverseItems.bowOfLight) && super.canRenderOnFire();
 	}
 
 	@Nullable

@@ -1,13 +1,15 @@
 package com.cibernet.minestuckuniverse.items.properties;
 
+import com.cibernet.minestuckuniverse.items.properties.bowkind.IPropertyArrow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
 import java.util.Random;
 
-public class PropertyRandomDamage extends WeaponProperty
+public class PropertyRandomDamage extends WeaponProperty implements IPropertyArrow
 {
 	protected float min;
 	protected float max;
@@ -49,10 +51,17 @@ public class PropertyRandomDamage extends WeaponProperty
 		DamageSource source = DamageSource.causeMobDamage(player);
 		if(player instanceof EntityPlayer)
 			source = DamageSource.causePlayerDamage((EntityPlayer) player);
-		
+
 		Random rand = new Random();
 		int dmg = Math.round((rand.nextFloat()*max+min)*mulitiplier);
 		target.hurtResistantTime = 0;
 		target.attackEntityFrom(source, dmg);
+	}
+
+	@Override
+	public EntityArrow customizeArrow(EntityArrow arrow, float chargeTime)
+	{
+		arrow.setDamage(arrow.getDamage() + Math.round((arrow.world.rand.nextFloat()*max+min)*mulitiplier));
+		return arrow;
 	}
 }

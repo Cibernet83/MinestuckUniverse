@@ -76,7 +76,6 @@ public class GuiStrifeSwitcher extends Gui
 		{
 			cap.setSelectedSpecibusIndex(cap.getSpecibusIndex(portfolio[0]));
 			selSpecibusIndex = cap.getSpecibusIndex(portfolio[0]);
-			System.out.println("mmm");
 		}
 
 		if(mc.player.isSneaking() && canUseAbstrataSwitcher())

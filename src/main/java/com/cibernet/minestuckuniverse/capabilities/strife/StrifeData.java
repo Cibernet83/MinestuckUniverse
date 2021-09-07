@@ -67,18 +67,12 @@ public class StrifeData implements IStrifeData
 	@Override
 	public NBTTagCompound writePortfolio(NBTTagCompound nbt, int... indexes)
 	{
-		System.out.println(indexes);
-
 		if(indexes.length > 0)
 			nbt.setBoolean("KeepPortfolio", true);
 
 		NBTTagList portfolioList = new NBTTagList();
 		for(int i = 0; i < portfolio.length; i++)
 		{
-			System.out.println(i);
-			System.out.println(indexes);
-			System.out.println(ArrayUtils.contains(indexes, i));
-
 			if((indexes.length <= 0 || ArrayUtils.contains(indexes, i)) && portfolio[i] != null)
 			{
 				NBTTagCompound spNbt = new NBTTagCompound();
@@ -130,8 +124,6 @@ public class StrifeData implements IStrifeData
 			droppedCards = nbt.getInteger("DroppedCards");
 
 		NBTTagList portfolioList = nbt.getTagList("Portfolio", 10);
-
-		System.out.println(portfolioList);
 
 		for(int i = 0; i < portfolioList.tagCount(); i++)
 		{

@@ -97,7 +97,7 @@ public class StrifeEventHandler
 			item.getItem().getTagCompound().removeTag("StrifeAssigned");
 	}
 
-	@SideOnly(Side.CLIENT)
+	@Deprecated
 	private static ItemStack updateSpecibus = ItemStack.EMPTY;
 
 	@SubscribeEvent
@@ -273,8 +273,6 @@ public class StrifeEventHandler
 	{
 		if(!MSUConfig.combatOverhaul)
 			return;
-
-		System.out.println(MSUConfig.keepPortfolioOnDeath);
 
 		IStrifeData cap = event.getEntityPlayer().getCapability(MSUCapabilities.STRIFE_DATA, null);
 
