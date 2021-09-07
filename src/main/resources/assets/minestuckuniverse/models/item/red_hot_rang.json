@@ -1,0 +1,13 @@
+{
+    "parent": "minestuckuniverse:item/boomerang",
+    "textures": {
+        "layer0": "minestuckuniverse:items/red_hot_rang"
+    },
+    "overrides":
+    [
+    	{
+    		"predicate": {"minestuckuniverse:thrown": 1},
+    		"model": "minestuckuniverse:item/red_hot_rang_flaming"
+    	}
+    ]
+}

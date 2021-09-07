@@ -8,6 +8,7 @@ import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.IPropertyThrowable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -114,7 +115,7 @@ public class EntityMSUThrowable extends EntityThrowable
         if (!this.world.isRemote)
         {
             boolean destroy = true;
-            boolean drop = true;
+            boolean drop = !(getThrower() instanceof EntityPlayer && ((EntityPlayer) getThrower()).isCreative());
             boolean isEntity = result.entityHit != null;
 
             ItemStack stack = getStack();

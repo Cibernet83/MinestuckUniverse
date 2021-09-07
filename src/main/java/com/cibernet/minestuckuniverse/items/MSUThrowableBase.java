@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.client.render.RenderThrowable;
 import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
@@ -21,6 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
@@ -29,6 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +60,17 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 
 		setMaxStackSize(stackSize);
 		setCreativeTab(TabMinestuckUniverse.weapons);
+
+
+		this.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID,"thrown"), new IItemPropertyGetter()
+		{
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+			{
+				System.out.println(!stack.isOnItemFrame() && entityIn == null);
+				return !stack.isOnItemFrame() && entityIn == null  ? 1.0F : 0.0F;
+			}
+		});
 
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BehaviorProjectileDispense()
 		{

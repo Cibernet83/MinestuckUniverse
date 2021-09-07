@@ -111,7 +111,7 @@ public class BlockArtifact extends MSUBlockBase
 		if(state.getBlock() instanceof BlockArtifact || hardness < 0)
 			return 0;
 
-		return Math.min(0.4f, 0.25f/state.getBlockHardness(worldIn, pos));
+		return Math.min(0.2f, 0.25f/state.getBlockHardness(worldIn, pos));
 	}
 
 	@SubscribeEvent

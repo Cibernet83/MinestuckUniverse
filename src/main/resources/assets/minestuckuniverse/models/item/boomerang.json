@@ -1,6 +1,18 @@
 {
-    "parent": "item/generated",
+    "parent": "item/handheld",
     "textures": {
         "layer0": "minestuckuniverse:items/boomerang"
+    },
+    "display": {
+        "thirdperson_righthand": {
+            "rotation": [ 0, -90, 0 ],
+            "translation": [ 0, 4.0, 2.5 ],
+            "scale": [ 0.75, 0.75, 0.75 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 0, 90, 0 ],
+            "translation": [ 0, 4.0, 2.5 ],
+            "scale": [ 0.75, 0.75, 0.75 ]
+        }
     }
 }

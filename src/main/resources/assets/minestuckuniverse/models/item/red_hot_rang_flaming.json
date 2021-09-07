@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/boomerang",
+    "textures": {
+        "layer0": "minestuckuniverse:items/red_hot_rang_flaming"
+    }
+}

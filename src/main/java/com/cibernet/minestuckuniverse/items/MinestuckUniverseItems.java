@@ -245,6 +245,7 @@ public class MinestuckUniverseItems
     public static MSUThrowableBase suitarang = new MSUThrowableBase(8, 0, 16, "suitarang", "suitarang");
     public static MSUThrowableBase psionicStar = new MSUThrowableBase(10, 0, 8, "psionic_star", "psionicStar").setSize(3);
     public static MSUThrowableBase boomerang = new MSUThrowableBase(10, 0, 1, "boomerang", "boomerang");
+    public static MSUThrowableBase markedBoomerang = new MSUThrowableBase(10, 0, 1, "marked_boomerang", "markedBoomerang");
     public static MSUThrowableBase redHotRang = new MSUThrowableBase(12, 0, 1, "red_hot_rang", "redHotRang");
     public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, "tornado_glaive", "tornadoGlaive");
     public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato");
@@ -444,6 +445,7 @@ public class MinestuckUniverseItems
         registerItem(registry, suitarang);
         registerItem(registry, psionicStar);
         registerItem(registry, boomerang);
+        registerItem(registry, markedBoomerang);
         registerItem(registry, redHotRang);
         registerItem(registry, hotPotato);
         registerItem(registry, dragonCharge);
@@ -529,6 +531,7 @@ public class MinestuckUniverseItems
         goldenStar.setRenderProperties(THROW_STAR_ROTATION);
         psionicStar.setRenderProperties(THROW_STAR_ROTATION);
         boomerang.setRenderProperties(THROW_STAR_ROTATION);
+        markedBoomerang.setRenderProperties(THROW_STAR_ROTATION);
         redHotRang.setRenderProperties(THROW_STAR_ROTATION);
         tornadoGlaive.setRenderProperties(THROW_STAR_ROTATION);
     }

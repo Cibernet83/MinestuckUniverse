@@ -131,7 +131,7 @@ public class MSUBowBase extends MSUWeaponBase
 					{
 						ItemArrow itemarrow = (ItemArrow)(itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.ARROW);
 
-						EntityArrow entityarrow = firesCustom ? new EntityMSUArrow(worldIn, entityplayer, itemstack, stack) : itemarrow.createArrow(worldIn, itemstack, entityplayer);
+						EntityArrow entityarrow = firesCustom ? new EntityMSUArrow(worldIn, entityplayer, itemstack.copy(), stack) : itemarrow.createArrow(worldIn, itemstack, entityplayer);
 
 						entityarrow = this.customizeArrow(entityarrow, i/(float)drawTime);
 						entityarrow.setDamage(arrowDamage);
