@@ -61,6 +61,7 @@ public abstract class MSUPacket
         ASSIGN_STRIFE(AssignStrifePacket.class),
         RETRIEVE_STRIFE(RetrieveStrifeCardPacket.class),
         SET_ACTIVE_STRIFE(SetActiveStrifePacket.class),
+        UPDATE_BEAMS(UpdateBeamDataPacket.class),
         ;
 
         Class<? extends MSUPacket> packetType;

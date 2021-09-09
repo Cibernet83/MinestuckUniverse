@@ -7,10 +7,13 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import net.minecraft.block.BlockAnvil;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
 import net.minecraftforge.fml.common.network.FMLIndexedMessageToMessageCodec;
@@ -101,5 +104,24 @@ private static class MSUPacketHandler extends SimpleChannelInboundHandler<MSUPac
     {
         channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
         channels.get(Side.SERVER).writeOutbound(packet);
+    }
+
+    public static void sendToWorld(MSUPacket packet, World world)
+    {
+        for(EntityPlayer player : world.playerEntities)
+            sendToPlayer(packet, player);
+    }
+
+    public static void sendToTracking(MSUPacket packet, Entity trackedEntity)
+    {
+        for (EntityPlayer trackingPlayer : ((WorldServer) trackedEntity.world).getEntityTracker().getTrackingPlayers(trackedEntity))
+            sendToPlayer(packet, trackingPlayer);
+    }
+
+    public static void sendToTrackingAndSelf(MSUPacket packet, Entity trackedEntity)
+    {
+        sendToTracking(packet, trackedEntity);
+        if (trackedEntity instanceof EntityPlayer)
+            sendToPlayer(packet, (EntityPlayer) trackedEntity);
     }
 }

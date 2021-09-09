@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.client.MSUFontRenderer;
 import com.cibernet.minestuckuniverse.client.MSUKeys;
+import com.cibernet.minestuckuniverse.client.RenderBeams;
 import com.cibernet.minestuckuniverse.client.render.*;
 import com.cibernet.minestuckuniverse.entity.*;
 import com.cibernet.minestuckuniverse.gui.GuiStrifeSwitcher;
@@ -41,6 +42,7 @@ public class ClientProxy extends CommonProxy
 
         MinecraftForge.EVENT_BUS.register(MSUModelManager.class);
         MinecraftForge.EVENT_BUS.register(MSURenderMachineOutline.class);
+        MinecraftForge.EVENT_BUS.register(RenderBeams.class);
         MinecraftForge.EVENT_BUS.register(GuiStrifeSwitcher.class);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHolopad.class, new RenderHologram());
     }
