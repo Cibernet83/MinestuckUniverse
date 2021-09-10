@@ -44,17 +44,16 @@ public class RenderBeams
 			Vec3d start = beam.getStartPoint(event.getPartialTicks());
 			Vec3d end = beam.getEndPoint(event.getPartialTicks());
 
-			int innerRotation = (int) (mc.world.getWorldTime() % Integer.MAX_VALUE);
 			float beamRadius = 0.05f;
 
-			float f2 = (float)end.x + 0.5f;
-			float f3 = (float)end.y + 0.5f;
-			float f4 = (float)end.z + 0.5f;
+			float f2 = (float)end.x;
+			float f3 = (float)end.y;
+			float f4 = (float)end.z;
 			double x = (double)f2 - start.x + (start.x-Beam.lerp(mc.player.prevPosX, mc.player.posX, event.getPartialTicks()));
 			double y = (double)f3 - start.y + (start.y-Beam.lerp(mc.player.prevPosY, mc.player.posY, event.getPartialTicks()));
 			double z = (double)f4 - start.z + (start.z-Beam.lerp(mc.player.prevPosZ, mc.player.posZ, event.getPartialTicks()));
 
-			renderCrystalBeams(x, y-1, z, event.getPartialTicks(), (double)f2, (double)f3, (double)f4, innerRotation, start.x, start.y, start.z, beamRadius, beam.getAlpha());
+			renderCrystalBeams(x, y-1, z, event.getPartialTicks(), (double)f2, (double)f3, (double)f4, start.x, start.y, start.z, beamRadius, beam.getAlpha());
 
 			GlStateManager.enableLighting();
 			GlStateManager.enableTexture2D();
@@ -63,7 +62,7 @@ public class RenderBeams
 	}
 
 
-	public static void renderCrystalBeams(double drawPosX, double drawPosY, double drawPosZ, float partialTicks, double endX, double endY, double endZ, int vOff, double startX, double startY, double startZ, float radius, float alpha)
+	public static void renderCrystalBeams(double drawPosX, double drawPosY, double drawPosZ, float partialTicks, double endX, double endY, double endZ, double startX, double startY, double startZ, float radius, float alpha)
 	{
 		float f = (float)(startX - endX);
 		float f1 = (float)(startY - 1.0D - endY);
@@ -72,6 +71,7 @@ public class RenderBeams
 		float f4 = MathHelper.sqrt(f * f + f1 * f1 + f2 * f2);
 		GlStateManager.pushMatrix();
 
+		float vOff = Minecraft.getMinecraft().world.getWorldTime()*-0.05f + partialTicks;
 
 		GlStateManager.enableBlend();
 
@@ -83,8 +83,8 @@ public class RenderBeams
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.disableCull();
 		GlStateManager.shadeModel(7425);
-		float f5 = 0.0F - ((float)vOff + partialTicks) * radius;
-		float f6 = f4 / 32.0F - ((float)vOff + partialTicks) * radius;
+		float f5 = 0.0F - vOff * radius;
+		float f6 = f4 / 32.0F - vOff * radius;
 		bufferbuilder.begin(5, DefaultVertexFormats.POSITION_TEX_COLOR);
 		int i = 8;
 

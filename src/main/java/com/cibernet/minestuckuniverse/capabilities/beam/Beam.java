@@ -33,6 +33,7 @@ public class Beam
 	public UUID sourceUuid;
 	private final UUID uuid;
 	private boolean isDead = false;
+	private int ageInTicks = 0;
 
 	public float damage = 10;
 	int duration = 10;
@@ -85,6 +86,14 @@ public class Beam
 
 	public void onUpdate()
 	{
+		ageInTicks++;
+
+		if(ageInTicks > 12000)
+		{
+			setDead();
+			return;
+		}
+
 		if(source == null && sourceUuid != null)
 		{
 			for (Entity entity : world.getEntities(Entity.class, (entity) -> entity.getUniqueID().equals(sourceUuid)))
@@ -100,8 +109,17 @@ public class Beam
 
 		damageCooldown = Math.max(0, damageCooldown-1);
 
-		if(length > 512 || (decayTime < duration && !releaseBeam) || (anchorToSource && !sourceStack.isEmpty() && source instanceof EntityLivingBase && !ItemStack.areItemsEqualIgnoreDurability(((EntityLivingBase) source).getActiveItemStack(), sourceStack)))
-			releaseBeam = true;
+		if(!releaseBeam)
+		{
+			if((anchorToSource && !sourceStack.isEmpty() && source instanceof EntityLivingBase && !ItemStack.areItemsEqualIgnoreDurability(((EntityLivingBase) source).getActiveItemStack(), sourceStack)))
+			{
+				if(source instanceof EntityPlayer)
+					((EntityPlayer) source).getCooldownTracker().setCooldown(sourceStack.getItem(), decayTime);
+				releaseBeam = true;
+			}
+			else if(length > 512 || (decayTime < duration && !releaseBeam))
+				releaseBeam = true;
+		}
 
 		if(source != null && anchorToSource)
 			setPositionToEntity(source);
@@ -114,8 +132,8 @@ public class Beam
 		}
 		else
 		{
-			Vec3d posVec = new Vec3d(posX, posY, posZ);
-			Vec3d nextPosVec = new Vec3d(motionX, motionY, motionZ).normalize().scale(length).add(posVec);
+			Vec3d posVec = getStartPoint(1);
+			Vec3d nextPosVec = getEndPoint(1);
 
 			Entity target = findEntityOnPath(posVec, nextPosVec);
 
@@ -140,7 +158,7 @@ public class Beam
 			target = findEntityOnPath(posVec, nextPosVec);
 			if(target != null)
 			{
-				if(damageCooldown <= 0 && damage != 0)
+				if(damageCooldown <= 0 && damage != 0 && target.hurtResistantTime <= 0)
 				{
 					if(damage < 0)
 					{
@@ -148,7 +166,7 @@ public class Beam
 							((EntityLivingBase) target).heal(damage);
 					} else target.attackEntityFrom(new EntityDamageSource(MinestuckUniverse.MODID+".beam", source).setMagicDamage(), damage);
 
-					damageCooldown = 30;
+					target.hurtResistantTime = 15;
 				}
 			}
 			else
@@ -194,6 +212,7 @@ public class Beam
 		motionY = nbt.getDouble("MotionY");
 		motionZ = nbt.getDouble("MotionZ");
 
+		ageInTicks = nbt.getInteger("Age");
 		decayTime = nbt.getInteger("DecayTime");
 		duration = nbt.getInteger("Duration");
 		damageCooldown = nbt.getInteger("DamageCooldown");
@@ -229,6 +248,7 @@ public class Beam
 		prevMotionY = motionY;
 		prevMotionZ = motionZ;
 
+		nbt.setInteger("Age", ageInTicks);
 		nbt.setInteger("DecayTime", decayTime);
 		nbt.setInteger("Duration", duration);
 		nbt.setInteger("DamageCooldown", damageCooldown);
@@ -292,7 +312,9 @@ public class Beam
 	protected Entity findEntityOnPath(Vec3d start, Vec3d end)
 	{
 		Entity entity = null;
-		List<Entity> list = this.world.getEntitiesInAABBexcluding(this.source, new AxisAlignedBB(posX, posY, posZ, posX, posY, posZ).expand(this.motionX, this.motionY, this.motionZ).grow(1.0D), BEAM_TARGETS);
+		Vec3d length = end.subtract(start);
+
+		List<Entity> list = this.world.getEntitiesInAABBexcluding(this.source, new AxisAlignedBB(start, start).expand(length.x, length.y, length.z).grow(1.0D), BEAM_TARGETS);
 		double d0 = 0.0D;
 
 		for (int i = 0; i < list.size(); ++i)

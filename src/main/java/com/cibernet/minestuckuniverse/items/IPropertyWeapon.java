@@ -29,12 +29,12 @@ public interface IPropertyWeapon<T extends Item>
 		}
 		return (T) this;
 	}
-	default boolean hasProperty(Class<WeaponProperty> propertyClass, ItemStack stack)
+	default boolean hasProperty(Class<? extends WeaponProperty> propertyClass, ItemStack stack)
 	{
 		return getProperty(propertyClass, stack) != null;
 	}
 
-	default WeaponProperty getProperty(Class<WeaponProperty> propertyClass, ItemStack stack)
+	default WeaponProperty getProperty(Class<? extends WeaponProperty> propertyClass, ItemStack stack)
 	{
 		for(WeaponProperty p : getProperties(stack))
 			if(propertyClass.isInstance(p))

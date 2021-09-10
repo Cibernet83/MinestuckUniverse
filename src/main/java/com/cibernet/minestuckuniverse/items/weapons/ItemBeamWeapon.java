@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.items.weapons;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.beam.Beam;
+import com.cibernet.minestuckuniverse.items.properties.PropertyDualWield;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import net.minecraft.entity.EntityLivingBase;
@@ -43,6 +44,9 @@ public class ItemBeamWeapon extends MSUWeaponBase
 			return sup;
 
 		ItemStack stack = playerIn.getHeldItem(handIn);
+
+		if(hasProperty(PropertyDualWield.class, stack) && (handIn != EnumHand.MAIN_HAND || !ItemStack.areItemsEqualIgnoreDurability(stack, playerIn.getHeldItemOffhand())))
+			return ActionResult.newResult(EnumActionResult.PASS, stack);
 
 		if(!worldIn.isRemote)
 		{
