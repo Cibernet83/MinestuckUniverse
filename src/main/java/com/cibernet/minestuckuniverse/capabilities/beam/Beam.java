@@ -1,21 +1,32 @@
 package com.cibernet.minestuckuniverse.capabilities.beam;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
+import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
+import com.cibernet.minestuckuniverse.items.properties.beams.IPropertyBeam;
+import com.cibernet.minestuckuniverse.items.weapons.IBeamStats;
+import com.cibernet.minestuckuniverse.items.weapons.ItemBeamBlade;
+import com.cibernet.minestuckuniverse.items.weapons.ItemBeamWeapon;
+import com.cibernet.minestuckuniverse.items.weapons.MSUBowBase;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.mraof.minestuck.block.MinestuckBlocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.math.*;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -34,6 +45,7 @@ public class Beam
 	private final UUID uuid;
 	private boolean isDead = false;
 	private int ageInTicks = 0;
+	public int color = 0xFFFFFF;
 
 	public float damage = 10;
 	int duration = 10;
@@ -63,11 +75,15 @@ public class Beam
 		this.uuid = uuid;
 	}
 
-	public Beam(EntityLivingBase source, ItemStack stack)
+	public Beam(EntityLivingBase source, ItemStack stack, float speed)
 	{
 		this(source.world, UUID.randomUUID());
 
+		motionX *= speed;
+		motionY *= speed;
+		motionZ *= speed;
 		setPositionToEntity(source);
+
 		sourceStack = stack;
 		this.source = source;
 		anchorToSource = true;
@@ -79,9 +95,11 @@ public class Beam
 		posY = source.posY+source.getEyeHeight()*0.8;
 		posZ = source.posZ;
 
-		motionX = -MathHelper.sin(source.rotationYaw * 0.017453292F) * MathHelper.cos(source.rotationPitch * 0.017453292F) + source.motionX;
+		double beamSpeed = MathHelper.sqrt(motionX*motionX + motionY*motionY + motionZ*motionZ);
+
+		motionX = -MathHelper.sin(source.rotationYaw * 0.017453292F) * MathHelper.cos(source.rotationPitch * 0.017453292F)*beamSpeed + source.motionX;
 		motionY = -MathHelper.sin(source.rotationPitch * 0.017453292F);
-		motionZ = MathHelper.cos(source.rotationYaw * 0.017453292F) * MathHelper.cos(source.rotationPitch * 0.017453292F) + source.motionZ;
+		motionZ = MathHelper.cos(source.rotationYaw * 0.017453292F) * MathHelper.cos(source.rotationPitch * 0.017453292F)*beamSpeed + source.motionZ;
 	}
 
 	public void onUpdate()
@@ -108,6 +126,14 @@ public class Beam
 		prevMotionZ = motionZ;
 
 		damageCooldown = Math.max(0, damageCooldown-1);
+
+		if(sourceStack != null && sourceStack.getItem() instanceof IPropertyWeapon)
+		{
+			List<WeaponProperty> propertyList = ((IPropertyWeapon) sourceStack.getItem()).getProperties(sourceStack);
+			for (WeaponProperty p : propertyList)
+				if(p instanceof IPropertyBeam)
+					((IPropertyBeam) p).onBeamTick(sourceStack, this);
+		}
 
 		if(!releaseBeam)
 		{
@@ -158,15 +184,26 @@ public class Beam
 			target = findEntityOnPath(posVec, nextPosVec);
 			if(target != null)
 			{
-				if(damageCooldown <= 0 && damage != 0 && target.hurtResistantTime <= 0)
+				DamageSource damageSource = new EntityDamageSource(MinestuckUniverse.MODID+".beam", source);
+
+				if(sourceStack != null && sourceStack.getItem() instanceof IPropertyWeapon)
+				{
+					List<WeaponProperty> propertyList = ((IPropertyWeapon) sourceStack.getItem()).getProperties(sourceStack);
+					for (WeaponProperty p : propertyList)
+						if(p instanceof IPropertyBeam)
+							damageSource = ((IPropertyBeam) p).onEntityImpact(sourceStack, this, target, damageSource);
+				}
+
+				if(damageSource != null && damageCooldown <= 0 && damage != 0 && target.hurtResistantTime <= 0)
 				{
 					if(damage < 0)
 					{
 						if(target instanceof EntityLivingBase)
 							((EntityLivingBase) target).heal(damage);
-					} else target.attackEntityFrom(new EntityDamageSource(MinestuckUniverse.MODID+".beam", source).setMagicDamage(), damage);
+					} else target.attackEntityFrom(damageSource, damage);
 
-					target.hurtResistantTime = 15;
+					target.hurtResistantTime = sourceStack.getItem() instanceof IBeamStats ?
+							((IBeamStats) sourceStack.getItem()).getBeamHurtTime(sourceStack) : 15;
 				}
 			}
 			else
@@ -178,7 +215,13 @@ public class Beam
 				}
 				else
 				{
-					//world.setBlockState(blockRayTrace.getBlockPos(), MinestuckBlocks.genericObject.getDefaultState());
+					if(sourceStack != null && sourceStack.getItem() instanceof IPropertyWeapon)
+					{
+						List<WeaponProperty> propertyList = ((IPropertyWeapon) sourceStack.getItem()).getProperties(sourceStack);
+						for (WeaponProperty p : propertyList)
+							if(p instanceof IPropertyBeam)
+								((IPropertyBeam) p).onBlockImpact(sourceStack, this, blockRayTrace.getBlockPos());
+					}
 				}
 			}
 
@@ -212,6 +255,7 @@ public class Beam
 		motionY = nbt.getDouble("MotionY");
 		motionZ = nbt.getDouble("MotionZ");
 
+		color = nbt.getInteger("Color");
 		ageInTicks = nbt.getInteger("Age");
 		decayTime = nbt.getInteger("DecayTime");
 		duration = nbt.getInteger("Duration");
@@ -248,6 +292,7 @@ public class Beam
 		prevMotionY = motionY;
 		prevMotionZ = motionZ;
 
+		nbt.setInteger("Color", color);
 		nbt.setInteger("Age", ageInTicks);
 		nbt.setInteger("DecayTime", decayTime);
 		nbt.setInteger("Duration", duration);
@@ -346,5 +391,33 @@ public class Beam
 	public float getAlpha()
 	{
 		return (float)decayTime/(float)duration;
+	}
+
+	public float getRadius()
+	{
+		float result = sourceStack.getItem() instanceof IBeamStats ? ((IBeamStats) sourceStack.getItem()).getBeamRadius(sourceStack) : 0.05f;
+
+
+		if(sourceStack != null && sourceStack.getItem() instanceof IPropertyWeapon)
+		{
+			List<WeaponProperty> propertyList = ((IPropertyWeapon) sourceStack.getItem()).getProperties(sourceStack);
+			for (WeaponProperty p : propertyList)
+				if(p instanceof IPropertyBeam)
+					result = ((IPropertyBeam) p).getBeamRadius(sourceStack, this, result);
+		}
+
+		return result;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	private static final ResourceLocation TEXTURE = new ResourceLocation(MinestuckUniverse.MODID, "textures/entity/projectiles/beam.png");
+	public ResourceLocation getTexture()
+	{
+		if(sourceStack.getItem() instanceof IBeamStats)
+			return ((IBeamStats) sourceStack.getItem()).getBeamTexture();
+		return TEXTURE;
 	}
 }

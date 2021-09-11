@@ -1,10 +1,12 @@
 package com.cibernet.minestuckuniverse.items.weapons;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.beam.Beam;
 import com.cibernet.minestuckuniverse.items.properties.PropertyDualWield;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -13,16 +15,33 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class ItemBeamWeapon extends MSUWeaponBase
+public class ItemBeamWeapon extends MSUWeaponBase implements IBeamStats
 {
-	public ItemBeamWeapon(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName) {
+	public float beamRadius;
+	public float beamDamage;
+	public float beamSpeed;
+	public int beamHurtTime;
+	public int beamTime;
+	protected ResourceLocation beamTexture = new ResourceLocation(MinestuckUniverse.MODID, "textures/entity/projectiles/beam.png");
+
+	public ItemBeamWeapon(int maxUses, double damageVsEntity, double weaponSpeed, float beamRadius, float beamDamage, float beamSpeed, int beamTime, int beamHurtTime, int enchantability, String name, String unlocName) {
 		super(maxUses, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
+		this.beamDamage = beamDamage;
+		this.beamRadius = beamRadius;
+		this.beamSpeed = beamSpeed;
+		this.beamHurtTime = beamHurtTime;
+		this.beamTime = beamTime;
 	}
 
-	public ItemBeamWeapon(double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName) {
-		super(damageVsEntity, weaponSpeed, enchantability, name, unlocName);
+	public ItemBeamWeapon(int maxUses, double damageVsEntity, double weaponSpeed, float beamRadius, float beamDamage, float beamSpeed, int beamTime, int enchantability, String name, String unlocName) {
+		this(maxUses, damageVsEntity, weaponSpeed, beamRadius, beamDamage, beamSpeed, beamTime,15, enchantability, name, unlocName);
+	}
+
+	public ItemBeamWeapon(int maxUses, double damageVsEntity, double weaponSpeed, float beamRadius, float beamDamage, float beamSpeed, int enchantability, String name, String unlocName) {
+		this(maxUses, damageVsEntity, weaponSpeed, beamRadius, beamDamage, beamSpeed, 72000, enchantability, name, unlocName);
 	}
 
 	@Override
@@ -50,7 +69,9 @@ public class ItemBeamWeapon extends MSUWeaponBase
 
 		if(!worldIn.isRemote)
 		{
-			Beam beam = new Beam(playerIn, stack);
+			Beam beam = new Beam(playerIn, stack, beamSpeed);
+
+			beam.damage = beamDamage;
 
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
@@ -63,4 +84,53 @@ public class ItemBeamWeapon extends MSUWeaponBase
 
 		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	{
+		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+
+		if(!worldIn.isRemote && entityIn instanceof EntityLivingBase && getMaxItemUseDuration(stack)-((EntityLivingBase) entityIn).getItemInUseCount() > beamTime &&
+				((EntityLivingBase) entityIn).getActiveItemStack().equals(stack) && stack.hasTagCompound() && stack.getTagCompound().hasUniqueId("Beam"))
+		{
+			Beam beam = worldIn.getCapability(MSUCapabilities.BEAM_DATA, null).getBeam(stack.getTagCompound().getUniqueId("Beam"));
+			if(beam != null)
+			{
+				if(entityIn instanceof EntityPlayer)
+					((EntityPlayer) entityIn).getCooldownTracker().setCooldown(stack.getItem(), beam.getDuration());
+				beam.releaseBeam();
+				for(EntityPlayer player : beam.world.playerEntities)
+					MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_BEAMS, beam.world), player);
+			}
+		}
+	}
+
+	@Override
+	public float getBeamRadius(ItemStack stack) {
+		return beamRadius;
+	}
+
+	@Override
+	public int getBeamHurtTime(ItemStack stack) {
+		return beamHurtTime;
+	}
+
+	@Override
+	public ResourceLocation getBeamTexture()
+	{
+		return beamTexture;
+	}
+
+	@Override
+	public void setBeamTexture(String fileName)
+	{
+		beamTexture = new ResourceLocation(getRegistryName().getResourceDomain(), "textures/entity/projectiles/"+fileName+".png");
+	}
+
+	@Override
+	public void setCustomBeamTexture()
+	{
+		setBeamTexture(getRegistryName().getResourcePath());
+	}
+
 }
