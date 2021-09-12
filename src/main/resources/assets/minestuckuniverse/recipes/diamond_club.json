@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " ii",
+        " ii",
+        "I  "
+    ],
+    "key": {
+        "i": {
+            "item": "minecraft:diamond"
+        },
+        "I": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:diamond_club",
+        "count": 1
+    }
+}

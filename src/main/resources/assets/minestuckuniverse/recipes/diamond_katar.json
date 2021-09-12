@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " i",
+        "I "
+    ],
+    "key": {
+        "i": {
+            "item": "minecraft:diamond"
+        },
+        "I": {
+            "item": "minecraft:leather"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:diamond_katars",
+        "count": 1
+    }
+}
