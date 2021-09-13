@@ -48,8 +48,8 @@ public class Beam
 	public int color = 0xFFFFFF;
 
 	public float damage = 10;
-	int duration = 10;
-	int decayTime = duration;
+	protected int duration = 10;
+	public int decayTime = duration;
 	protected float length = 0;
 	protected boolean releaseBeam = false;
 	protected boolean anchorToSource = false;
@@ -95,7 +95,7 @@ public class Beam
 		posY = source.posY+source.getEyeHeight()*0.8;
 		posZ = source.posZ;
 
-		double beamSpeed = MathHelper.sqrt(motionX*motionX + motionY*motionY + motionZ*motionZ);
+		double beamSpeed = 1;//MathHelper.sqrt(motionX*motionX + motionY*motionY + motionZ*motionZ);
 
 		motionX = -MathHelper.sin(source.rotationYaw * 0.017453292F) * MathHelper.cos(source.rotationPitch * 0.017453292F)*beamSpeed + source.motionX;
 		motionY = -MathHelper.sin(source.rotationPitch * 0.017453292F);
@@ -411,6 +411,11 @@ public class Beam
 
 	public int getDuration() {
 		return duration;
+	}
+	public void setDuration(int duration)
+	{
+		decayTime = (int) ((float)duration/(float)this.duration * decayTime);
+		this.duration = duration;
 	}
 
 	private static final ResourceLocation TEXTURE = new ResourceLocation(MinestuckUniverse.MODID, "textures/entity/projectiles/beam.png");

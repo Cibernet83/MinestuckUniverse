@@ -150,6 +150,7 @@ public class MinestuckUniverseItems
     public static Item jawbreaker = new MSUWeaponBase(124, 3D, 0.4D, 6, "jawbreaker", "jawbreaker").setTool(toolGauntlet, 1, 1.6F).addProperties(new PropertyCandyWeapon());
     public static Item eldrichGauntlet = new MSUWeaponBase(124, 3D, 0.4D, 6, "eldritch_gauntlet", "eldrichGauntlet").setTool(toolGauntlet, 1, 1.6F).addProperties(new PropertyEldrichBoost());
     public static Item gauntletOfZillywenn = new MSUWeaponBase(732, 12D, -1.8D, 14, "gauntlet_of_zillywenn","gauntletOfZillywenn").setTool(toolGauntlet, 3, 4F);
+    public static Item gasterBlaster = new ItemWindUpBeam(832, 10D, -1.8D, 0.05f, 25, 1, 16, 16, "gaster_blaster","gasterBlaster").setSounds(MSUSoundHandler.gasterBlasterCharge, MSUSoundHandler.gasterBlasterRelease).setTool(toolGauntlet, 6, 4F);
     public static Item midasGlove = new MSUWeaponBase(632, 8D, -1.8D, 14, "midas_glove","midasGlove").setTool(toolGauntlet, 3, 5F).addProperties(new PropertyGristSetter(GristType.Gold));
 
     //Needlekind
@@ -362,6 +363,7 @@ public class MinestuckUniverseItems
         registerItem(registry, rocketFist);
         registerItem(registry, jawbreaker);
         registerItem(registry, eldrichGauntlet);
+        registerItem(registry, gasterBlaster);
         registerItem(registry, gauntletOfZillywenn);
         registerItem(registry, midasGlove);
 
@@ -514,6 +516,7 @@ public class MinestuckUniverseItems
 
         ((IBeamStats)needlewands).setCustomBeamTexture();
         ((IBeamStats)oglogothThorn).setBeamTexture("eldrich_beam");
+        ((IBeamStats) gasterBlaster).setBeamTexture("clear_beam");
     }
 
     @SideOnly(Side.CLIENT)

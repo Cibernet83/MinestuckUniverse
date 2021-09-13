@@ -26,5 +26,19 @@
     "sounds": [
         "minestuckuniverse:item/whip_crock"
     ]
+  },
+  "item.gaster_blaster.charge": {
+    "category": "players",
+    "subtitle": "subtitle.minestuckuniverse.gasterBlaster.charge",
+    "sounds": [
+        "minestuckuniverse:item/gaster_blaster_charge"
+    ]
+  },
+  "item.gaster_blaster.release": {
+    "category": "players",
+    "subtitle": "subtitle.minestuckuniverse.gasterBlaster.release",
+    "sounds": [
+        "minestuckuniverse:item/gaster_blaster_release"
+    ]
   }
 }

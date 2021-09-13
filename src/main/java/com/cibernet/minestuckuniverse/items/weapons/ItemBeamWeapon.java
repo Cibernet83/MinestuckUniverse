@@ -94,7 +94,7 @@ public class ItemBeamWeapon extends MSUWeaponBase implements IBeamStats
 				((EntityLivingBase) entityIn).getActiveItemStack().equals(stack) && stack.hasTagCompound() && stack.getTagCompound().hasUniqueId("Beam"))
 		{
 			Beam beam = worldIn.getCapability(MSUCapabilities.BEAM_DATA, null).getBeam(stack.getTagCompound().getUniqueId("Beam"));
-			if(beam != null)
+			if(beam != null && !beam.isBeamReleased())
 			{
 				if(entityIn instanceof EntityPlayer)
 					((EntityPlayer) entityIn).getCooldownTracker().setCooldown(stack.getItem(), beam.getDuration());

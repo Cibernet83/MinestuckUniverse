@@ -15,6 +15,8 @@ public class MSUSoundHandler
 	public static SoundEvent shieldParry = new SoundEvent(new ResourceLocation(MinestuckUniverse.MODID, "item.shield_parry"));
 	public static SoundEvent whipCrack = new SoundEvent(new ResourceLocation(MinestuckUniverse.MODID, "item.whip_crack"));
 	public static SoundEvent whipCrock = new SoundEvent(new ResourceLocation(MinestuckUniverse.MODID, "item.whip_crock"));
+	public static SoundEvent gasterBlasterCharge = new SoundEvent(new ResourceLocation(MinestuckUniverse.MODID, "item.gaster_blaster.charge"));
+	public static SoundEvent gasterBlasterRelease = new SoundEvent(new ResourceLocation(MinestuckUniverse.MODID, "item.gaster_blaster.release"));
 
 	@SubscribeEvent
 	public static void registerSounds(RegistryEvent.Register<SoundEvent> event)
@@ -25,5 +27,7 @@ public class MSUSoundHandler
 		registry.register(shieldParry.setRegistryName("item.shield_parry"));
 		registry.register(whipCrack.setRegistryName("item.whip_crack"));
 		registry.register(whipCrock.setRegistryName("item.whip_crock"));
+		registry.register(gasterBlasterCharge.setRegistryName("item.gasterBlaster.charge"));
+		registry.register(gasterBlasterRelease.setRegistryName("item.gasterBlaster.release"));
 	}
 }
