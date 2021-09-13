@@ -218,6 +218,8 @@ item.stardustSmasher.tooltip=Perfect for crushing stone golems brought to life b
 item.makeshiftClaws.name=Makeshift Claws
 item.makeshiftClaws.name.plural=Makeshift Claws
 item.makeshiftClaws.tooltip=Apparently gluing some needles onto a glove is the bare minimum it takes to make a pair of claws, how convenient!
+item.diamondKatars.name=Diamond Katar
+item.diamondKatars.name.plural=Diamond Katars
 item.katars.name=Katar
 item.katars.name.plural=Katars
 item.katars.tooltip=If you think about it, katars are just claws with one big blade.
@@ -301,6 +303,8 @@ item.dynamiteStick.tooltip=Woah hey, be careful with that. Hitting something wit
 item.nightmareMace.name=Nightmare Mace
 item.nightmareMace.tooltip=This mace contains the imprisoned soul of Ng'Mhagul, it can now be more easily weaponized at the cost of some of your energy.
 item.cranialEnder.name=Cranial Ender
+item.ironClub.name=Iron Club
+item.diamondClub.name=Diamond Club
 
 item.goldCane.name=Gold Cane
 item.goldenCuestaff.name=Golden Cuestaff

@@ -215,6 +215,7 @@ public class MinestuckUniverseItems
     //Clawkind
     public static Item makeshiftClaws = new MSUWeaponBase(80, 2D, -0.5, 8, "makeshift_claws", "makeshiftClaws").setTool(toolClaws, 1, 5).addProperties(new PropertySweep(), new PropertyDualWield());
     public static Item katars = new MSUWeaponBase(124, 1.5D, -0.65, 8, "katars", "katars").setTool(toolClaws, 2, 3).addProperties(new PropertySweep(), new PropertyDualWield());
+    public static Item diamondKatars = new MSUWeaponBase(624, 2.5D, -0.65, 8, "diamond_katars", "diamondKatars").setTool(toolClaws, 2, 3).addProperties(new PropertySweep(), new PropertyDualWield());
     public static Item actionClaws = new ItemDualClaw(280, 3.0D, 0.0D, -1.5D, -1.0D, 6, "actionClaws","action_claws").setTool(toolClaws, 2, 3).addProperties(new PropertyActionBuff(200, 2.5));
     public static Item candyCornClaws = new ItemDualClaw(310, 4.0D, 0.0D, -1.5D, -1.0D, 6, "candyCornClaws","candy_corn_claws").setTool(toolClaws, 2, 3).addProperties(new PropertyCandyWeapon());
     public static Item sneakyDaggers = new ItemDualClaw(322, 3.0D, 0.0D, -1.5D, -1.0D, 7, "sneakyDaggers","sneaky_daggers").setTool(toolClaws, 2, 3);
@@ -231,6 +232,8 @@ public class MinestuckUniverseItems
     public static Item scepterOfZillywuud = new MSUWeaponBase(780, 14f, -1.2, 32, "scepter_of_zillywuud", "scepterOfZillywuud").setTool(toolCane, 4, 3);
 
     //Clubkind
+    public static Item ironClub = new MSUWeaponBase(305, 5, -2.4, 22, "iron_club", "ironClub").setTool(toolClub, 3, 2.0f).addProperties((new PropertySweep()));
+    public static Item diamondClub = new MSUWeaponBase(1861, 6, -2.4, 22, "diamond_club", "diamondClub").setTool(toolClub, 3, 2.0f).addProperties((new PropertySweep()));
     public static Item rubyContrabat = new MSUWeaponBase(185, 6.5, -2.2, 22, "ruby_contrabat", "rubyContrabat").setTool(toolClub, 3, 4.0f).addProperties(new PropertySweep(), new PropertyGristSetter(GristType.Ruby));
     public static Item homeRunBat = new MSUWeaponBase(500, 5, -3.9, 10, "home_run_bat", "homeRunBat").setTool(toolClub, 5, 2.0f).addProperties(new PropertySweep(), new PropertyKnockback(15), new PropertySoundOnHit(MSUSoundHandler.homeRunBat, 1, 1.2f));
     public static Item dynamiteStick = new MSUWeaponBase(110, 8, -2.2, 8, "dynamite_stick", "dynamiteStick").setTool(toolClub, 1, 2.0f).addProperties(new PropertySweep(), new PropertyExplode(2.5f, 1, true));
@@ -385,6 +388,7 @@ public class MinestuckUniverseItems
 
         registerItem(registry, makeshiftClaws);
         registerItem(registry, katars);
+        registerItem(registry, diamondKatars);
         registerCustomRenderedItem(registry, actionClaws);
         registerCustomRenderedItem(registry, candyCornClaws);
         registerCustomRenderedItem(registry, sneakyDaggers);
@@ -435,6 +439,8 @@ public class MinestuckUniverseItems
         registerItem(registry, battleaxeOfZillywahoo);
         registerItem(registry, battlepickOfZillydew);
 
+        registerItem(registry, diamondClub);
+        registerItem(registry, ironClub);
         registerItem(registry, rubyContrabat);
         registerItem(registry, homeRunBat);
         registerItem(registry, dynamiteStick);

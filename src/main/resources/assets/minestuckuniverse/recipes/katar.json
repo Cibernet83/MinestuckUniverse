@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " i",
+        "I "
+    ],
+    "key": {
+        "i": {
+            "item": "minecraft:iron_ingot"
+        },
+        "I": {
+            "item": "minecraft:leather"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:katars",
+        "count": 1
+    }
+}

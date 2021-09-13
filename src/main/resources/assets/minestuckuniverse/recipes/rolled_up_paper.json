@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " ii",
+        " ii",
+        " ii"
+    ],
+    "key": {
+        "i": {
+            "item": "minecraft:paper"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:rolled_up_paper",
+        "count": 1
+    }
+}
