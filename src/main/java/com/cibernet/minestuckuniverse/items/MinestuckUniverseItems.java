@@ -8,6 +8,8 @@ import com.cibernet.minestuckuniverse.client.render.RenderThrowable;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.armor.*;
 import com.cibernet.minestuckuniverse.items.properties.*;
+import com.cibernet.minestuckuniverse.items.properties.beams.PropertyMagicBeam;
+import com.cibernet.minestuckuniverse.items.properties.beams.PropertyPotionBeam;
 import com.cibernet.minestuckuniverse.items.properties.bowkind.*;
 import com.cibernet.minestuckuniverse.items.properties.clawkind.PropertyActionBuff;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyMagicDamagePrjctle;
@@ -88,6 +90,7 @@ public class MinestuckUniverseItems
     public static Item battery = new MSUItemBase("battery", "battery");
     public static Item strifeCard = new ItemStrifeCard("strife_card", "strifeCard");
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
+    public static Item laserPointer = new ItemBeamWeapon(-1, 0, 0, 0.01f, 0, 1, 1, "laser_pointer", "laserPointer").addProperties(new PropertyPotionBeam(new PotionEffect(MobEffects.BLINDNESS, 1, 0, false, false)));
     public static Item whip = new ItemSound("whip", "whip", MSUSoundHandler.whipCrack);
     public static Item sbahjWhip = new ItemSound("whip_sbahj", "whipSbahj", MSUSoundHandler.whipCrock).setSecret();
     public static Item unrealAir = new ItemUnrealAir("unreal_air", "unrealAir");
@@ -150,14 +153,14 @@ public class MinestuckUniverseItems
     public static Item jawbreaker = new MSUWeaponBase(124, 3D, 0.4D, 6, "jawbreaker", "jawbreaker").setTool(toolGauntlet, 1, 1.6F).addProperties(new PropertyCandyWeapon());
     public static Item eldrichGauntlet = new MSUWeaponBase(124, 3D, 0.4D, 6, "eldritch_gauntlet", "eldrichGauntlet").setTool(toolGauntlet, 1, 1.6F).addProperties(new PropertyEldrichBoost());
     public static Item gauntletOfZillywenn = new MSUWeaponBase(732, 12D, -1.8D, 14, "gauntlet_of_zillywenn","gauntletOfZillywenn").setTool(toolGauntlet, 3, 4F);
-    public static Item gasterBlaster = new ItemWindUpBeam(832, 10D, -1.8D, 0.05f, 25, 1, 16, 16, "gaster_blaster","gasterBlaster").setSounds(MSUSoundHandler.gasterBlasterCharge, MSUSoundHandler.gasterBlasterRelease).setTool(toolGauntlet, 6, 4F);
+    public static Item gasterBlaster = new ItemWindUpBeam(832, 10D, -1.8D, 0.05f, 10, 1, 16, 0, 16, "gaster_blaster","gasterBlaster").setSounds(MSUSoundHandler.gasterBlasterCharge, MSUSoundHandler.gasterBlasterRelease).setTool(toolGauntlet, 6, 4F).addProperties(new PropertyPotionBeam(new PotionEffect(MobEffects.WITHER, 100, 0)));
     public static Item midasGlove = new MSUWeaponBase(632, 8D, -1.8D, 14, "midas_glove","midasGlove").setTool(toolGauntlet, 3, 5F).addProperties(new PropertyGristSetter(GristType.Gold));
 
     //Needlekind
     public static Item knittingNeedles = new ItemKnittingNeedles(32,2, 1, 1, "knitting_needle", "knittingNeedle").setTool(toolNeedles, 2, 1f);
     public static Item pointySticks = new MSUWeaponBase(50,2, 1, 1, "pointy_stick", "pointyStick").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield()).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 2)).setRepairMaterial("plankWood");
     public static Item boneNeedles = new MSUWeaponBase(100,4, 0, 10, "bone_needle", "boneNeedle").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield()).setRepairMaterial("bone");
-    public static Item needlewands = new ItemBeamWeapon(250,4, 0.5, 0.05f, 10, 1, 60, "needlewand", "needlewand").setTool(toolNeedles, 3, 2f).addProperties(new PropertyDualWield());
+    public static Item needlewands = new ItemBeamWeapon(250,4, 0.5, 0.05f, 10, 1, 60, "needlewand", "needlewand").setTool(toolNeedles, 3, 2f).addProperties(new PropertyDualWield(), new PropertyMagicBeam());
     public static Item oglogothThorn = new ItemBeamWeapon(666,5.6, -0.5, 0.1f, 30, 0.7f, 5, 20, 80, "thorn_of_oglogoth", "oglogothThorn").setTool(toolNeedles, 4, 3f).addProperties(new PropertyDualWield());
     public static Item echidnaQuills = new MSUWeaponBase(5, 1, 100, "quill_of_echidna", "echidnaQuill").setTool(toolNeedles, 5, 5f).addProperties(new PropertyDualWield());
     public static Item thistlesOfZillywitch = new MSUWeaponBase(640, 7, 0.5, 14, "thistles_of_zillywitch", "thistlesOfZillywitch").setTool(toolNeedles, 3, 4f).addProperties(new PropertyDualWield());
@@ -222,6 +225,7 @@ public class MinestuckUniverseItems
     public static Item rocketKatars = new MSUWeaponBase(195, 3, -0.5, 8, "rocket_katars", "rocketKatars").setTool(toolClaws, 2, 5).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyRocketDash(3, 20, 0.3f, 2.5f));
     public static Item blizzardCutters = new ItemDualClaw(325, 4, 0,-0.5, -1, 8, "blizzardCutters", "blizzard_cutters").setTool(toolClaws, 3, 3).addProperties(new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 400, 0), false, 0.4f), new PropertyKnockback(2.2f));
     public static Item thunderbirdTalons = new MSUWeaponBase(445, 5,-0.5, 18, "thunderbird_talons", "thunderbirdTalons").setTool(toolClaws, 5, 3).setRepairMaterials(new ItemStack(MinestuckUniverseItems.battery)).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyShock(10, 3, 0.4f, true), new PropertyKnockback(1.8f));
+    public static Item archmageDaggers = new ItemBeamWeapon(830, 6,-0.5, 0.05f, 15, 1, 60, 10, 18, "archmage_daggers", "archmageDaggers").setTool(toolClaws, 5, 3).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyMagicBeam());
     public static Item katarsOfZillywhomst = new MSUWeaponBase(750, 8,-0.5, 24, "katars_of_zillywhomst", "katarsOfZillywhomst").setTool(toolClaws, 4, 3).addProperties(new PropertySweep(), new PropertyDualWield());
 
     //Canekind
@@ -319,6 +323,7 @@ public class MinestuckUniverseItems
         registerItem(registry, spaceSalt);
         registerItem(registry, strifeCard);
 
+        registerItem(registry, laserPointer);
         registerItem(registry, whip);
         registerItem(registry, sbahjWhip);
         registerItem(registry, unrealAir);
@@ -395,6 +400,7 @@ public class MinestuckUniverseItems
         registerItem(registry, rocketKatars);
         registerCustomRenderedItem(registry, blizzardCutters);
         registerItem(registry, thunderbirdTalons);
+        registerItem(registry, archmageDaggers);
         registerItem(registry, katarsOfZillywhomst);
 
         registerItem(registry, knittingNeedles);
@@ -523,6 +529,7 @@ public class MinestuckUniverseItems
         ((IBeamStats)needlewands).setCustomBeamTexture();
         ((IBeamStats)oglogothThorn).setBeamTexture("eldrich_beam");
         ((IBeamStats) gasterBlaster).setBeamTexture("clear_beam");
+        ((IBeamStats) laserPointer).setBeamTexture("laser_beam");
     }
 
     @SideOnly(Side.CLIENT)

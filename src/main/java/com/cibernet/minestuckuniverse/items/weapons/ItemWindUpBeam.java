@@ -101,6 +101,14 @@ public class ItemWindUpBeam extends MSUWeaponBase implements IBeamStats
 	}
 
 	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
+		super.onPlayerStoppedUsing(stack, worldIn, entityLiving, timeLeft);
+
+		if(!worldIn.isRemote && entityLiving instanceof EntityPlayer)
+			((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, 20);
+	}
+
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
 		ActionResult<ItemStack> sup = super.onItemRightClick(worldIn, playerIn, handIn);

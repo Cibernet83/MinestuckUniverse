@@ -95,7 +95,7 @@ public class Beam
 		posY = source.posY+source.getEyeHeight()*0.8;
 		posZ = source.posZ;
 
-		double beamSpeed = 1;//MathHelper.sqrt(motionX*motionX + motionY*motionY + motionZ*motionZ);
+		double beamSpeed = MathHelper.sqrt(motionX*motionX + motionY*motionY + motionZ*motionZ);
 
 		motionX = -MathHelper.sin(source.rotationYaw * 0.017453292F) * MathHelper.cos(source.rotationPitch * 0.017453292F)*beamSpeed + source.motionX;
 		motionY = -MathHelper.sin(source.rotationPitch * 0.017453292F);
