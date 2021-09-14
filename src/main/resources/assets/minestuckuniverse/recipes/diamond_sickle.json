@@ -1,17 +1,13 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " I ",
-        "IPI",
-        "PSP"
+        "DD ",
+        "  D",
+        " S "
     ],
     "key": {
-        "I": {
+        "D": {
             "item": "minecraft:diamond"
-        },
-        "P": {
-            "type": "forge:ore_dict",
-            "ore": "plankWood"
         },
         "S": {
             "type": "forge:ore_dict",
@@ -19,7 +15,7 @@
         }
     },
     "result": {
-        "item": "minestuckuniverse:diamond_katars",
+        "item": "minestuckuniverse:diamond_sickle",
         "count": 1
     }
 }

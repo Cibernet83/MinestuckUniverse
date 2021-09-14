@@ -1,20 +1,20 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " ii",
-        " ii",
+        "  i",
+        " I ",
         "I  "
     ],
     "key": {
         "i": {
-            "item": "minecraft:diamond"
+            "item": "minecraft:iron_block"
         },
         "I": {
-            "item": "minecraft:stick"
+            "item": "minecraft:iron_ingot"
         }
     },
     "result": {
-        "item": "minestuckuniverse:diamond_club",
+        "item": "minestuck:metal_bat",
         "count": 1
     }
 }

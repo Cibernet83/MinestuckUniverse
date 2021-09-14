@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "D",
+        "I",
+        "S"
+    ],
+    "key": {
+        "D": {
+            "item": "minecraft:diamond"
+        },
+        "I": {
+            "item": "minecraft:iron_ingot"
+        },
+        "S": {
+            "item": "minestuck:wooden_spoon"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:fancy_spoon",
+        "count": 1
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "PPP",
+        "P  ",
+        "P  "
+    ],
+    "key": {
+        "P": {
+            "type": "forge:ore_dict",
+            "ore": "plankWood"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:boomerang",
+        "count": 1
+    }
+}

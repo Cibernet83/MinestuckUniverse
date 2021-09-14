@@ -50,7 +50,7 @@ public class EntityMSUArrow extends EntityArrow
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(BOW_STACK, new ItemStack(MinestuckUniverseItems.flimsyBow));
+		dataManager.register(BOW_STACK, new ItemStack(Items.BOW));
 		dataManager.register(ARROW_STACK, new ItemStack(Items.ARROW));
 		dataManager.register(SHOOTER_UUID, Optional.absent());
 	}

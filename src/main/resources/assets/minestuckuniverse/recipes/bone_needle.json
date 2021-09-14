@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " B ",
+        "B  "
+    ],
+    "key": {
+        "B": {
+            "item": "minecraft:bone"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:bone_needle",
+        "count": 1
+    }
+}

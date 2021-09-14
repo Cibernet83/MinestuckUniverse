@@ -1,15 +1,21 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " i",
-        "I "
+        " I ",
+        "IPI",
+        "PSP"
     ],
     "key": {
-        "i": {
+        "I": {
             "item": "minecraft:iron_ingot"
         },
-        "I": {
-            "item": "minecraft:leather"
+        "P": {
+            "type": "forge:ore_dict",
+            "ore": "plankWood"
+        },
+        "S": {
+            "type": "forge:ore_dict",
+            "ore": "stickWood"
         }
     },
     "result": {

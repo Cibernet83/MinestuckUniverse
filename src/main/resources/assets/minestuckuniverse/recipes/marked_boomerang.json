@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minestuckuniverse:boomerang"
+        },
+        {
+            "item": "minecraft:dye",
+            "data": 1
+        },
+        {
+            "item": "minecraft:dye",
+            "data": 11
+        }
+    ],
+    "result": {
+        "item": "minestuckuniverse:marked_boomerang",
+        "count": 1
+    }
+}
