@@ -133,12 +133,15 @@ public class MSUBowBase extends MSUWeaponBase
 
 						EntityArrow entityarrow = firesCustom ? new EntityMSUArrow(worldIn, entityplayer, itemstack.copy(), stack) : itemarrow.createArrow(worldIn, itemstack, entityplayer);
 
-						entityarrow = this.customizeArrow(entityarrow, i/(float)drawTime);
-						entityarrow.setDamage(arrowDamage);
-						entityarrow.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * arrowVelocity, inaccuracy);
-
 						if (f == 1.0F)
 							entityarrow.setIsCritical(true);
+
+						entityarrow = this.customizeArrow(entityarrow, i/(float)drawTime);
+						if(entityarrow == null)
+							return;
+
+						entityarrow.setDamage(arrowDamage);
+						entityarrow.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * arrowVelocity, inaccuracy);
 
 						int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 
