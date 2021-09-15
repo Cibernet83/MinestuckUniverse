@@ -12,11 +12,13 @@ import com.cibernet.minestuckuniverse.items.properties.beams.PropertyMagicBeam;
 import com.cibernet.minestuckuniverse.items.properties.beams.PropertyPotionBeam;
 import com.cibernet.minestuckuniverse.items.properties.bowkind.*;
 import com.cibernet.minestuckuniverse.items.properties.clawkind.PropertyActionBuff;
+import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyDamagePrjctle;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyMagicDamagePrjctle;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyRocketShieldDash;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldEject;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldFire;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldShock;
+import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyThrowGravity;
 import com.cibernet.minestuckuniverse.items.weapons.*;
 import com.cibernet.minestuckuniverse.util.BlockMetaPair;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
@@ -247,19 +249,19 @@ public class MinestuckUniverseItems
     public static MSUThrowableBase yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
     public static MSUThrowableBase wizardbeardYarn = new MSUThrowableBase("wizardbeard_yarn", "wizardbeardYarn").addProperties(new PropertyMagicDamagePrjctle(6));
     public static Item dragonCharge = new ItemDragonCharge("dragon_charge", "dragonCharge");
-    public static MSUThrowableBase throwingStar = new MSUThrowableBase(8, 0, 16, "throwing_star", "throwingStar");
-    public static MSUThrowableBase goldenStar = new MSUThrowableBase(4, 0, 32, "golden_star", "goldenStar");
-    public static MSUThrowableBase suitarang = new MSUThrowableBase(8, 0, 16, "suitarang", "suitarang");
-    public static MSUThrowableBase psionicStar = new MSUThrowableBase(10, 0, 8, "psionic_star", "psionicStar").setSize(3);
-    public static MSUThrowableBase boomerang = new MSUThrowableBase(10, 0, 1, "boomerang", "boomerang");
-    public static MSUThrowableBase markedBoomerang = new MSUThrowableBase(10, 0, 1, "marked_boomerang", "markedBoomerang");
-    public static MSUThrowableBase redHotRang = new MSUThrowableBase(12, 0, 1, "red_hot_rang", "redHotRang");
-    public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, "tornado_glaive", "tornadoGlaive");
-    public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato");
+    public static MSUThrowableBase throwingStar = new MSUThrowableBase(8, 0, 16, "throwing_star", "throwingStar").addProperties(new PropertyDamagePrjctle(4), new PropertyThrowGravity(0.7f));
+    public static MSUThrowableBase goldenStar = new MSUThrowableBase(4, 0, 32, "golden_star", "goldenStar").addProperties(new PropertyDamagePrjctle(2), new PropertyThrowGravity(0.4f));
+    public static MSUThrowableBase suitarang = new MSUThrowableBase(8, 0, 16, "suitarang", "suitarang").addProperties(new PropertyDamagePrjctle(6), new PropertyThrowGravity(0.7f));
+    public static MSUThrowableBase psionicStar = new MSUThrowableBase(10, 0, 8, "psionic_star", "psionicStar").setSize(3).addProperties(new PropertyDamagePrjctle(12, true), new PropertyThrowGravity(0.7f));
+    public static MSUThrowableBase boomerang = new MSUThrowableBase(10, 0, 1, "boomerang", "boomerang").addProperties(new PropertyDamagePrjctle(5));
+    public static MSUThrowableBase markedBoomerang = new MSUThrowableBase(10, 0, 1, "marked_boomerang", "markedBoomerang").addProperties(new PropertyDamagePrjctle(5));
+    public static MSUThrowableBase redHotRang = new MSUThrowableBase(12, 0, 1, "red_hot_rang", "redHotRang").addProperties(new PropertyDamagePrjctle(7));
+    public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, "tornado_glaive", "tornadoGlaive").addProperties(new PropertyDamagePrjctle(8));
+    public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato").addProperties(new PropertyDamagePrjctle(10    ));
 
     //Rockkind
-    public static MSUThrowableBase pebble = new MSUThrowableBase(0, 0, 64, "pebble", "pebble");
-    public static MSUThrowableBase rock = new MSUThrowableBase(10, 5, 16, 5, -2.7, "rock", "rock");
+    public static MSUThrowableBase pebble = new MSUThrowableBase(0, 0, 64, "pebble", "pebble").addProperties(new PropertyDamagePrjctle(3), new PropertyThrowGravity(1.5f));
+    public static MSUThrowableBase rock = new MSUThrowableBase(10, 5, 16, 5, -2.7, "rock", "rock").addProperties(new PropertyDamagePrjctle(8), new PropertyThrowGravity(3f));
     public static Item bigRock = new ItemBigRock("big_rock", "bigRock");
 
     //Misc.
