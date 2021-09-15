@@ -394,4 +394,10 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     {
         return ATTACK_SPEED_MODIFIER;
     }
+
+    @Override
+    public boolean canDisableShield(ItemStack stack, ItemStack shield, EntityLivingBase entity, EntityLivingBase attacker)
+    {
+        return getToolClass() == null ? false : getToolClass().disablesShield();
+    }
 }

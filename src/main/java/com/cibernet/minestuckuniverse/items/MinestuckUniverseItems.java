@@ -76,7 +76,7 @@ public class MinestuckUniverseItems
     public static MSUToolClass toolSpork = new MSUToolClass(toolSpoon, toolFork);
 
     public static MSUToolClass toolShovel = new MSUToolClass("shovel").addEnchantments(EnumEnchantmentType.DIGGER);
-    public static MSUToolClass toolAxe = new MSUToolClass("axe").addEnchantments(EnumEnchantmentType.WEAPON, EnumEnchantmentType.DIGGER);
+    public static MSUToolClass toolAxe = new MSUToolClass("axe").addEnchantments(EnumEnchantmentType.WEAPON, EnumEnchantmentType.DIGGER).setDisablesShield();
     public static MSUToolClass toolPickaxe = new MSUToolClass("pickaxe").addEnchantments(EnumEnchantmentType.DIGGER);
 
 

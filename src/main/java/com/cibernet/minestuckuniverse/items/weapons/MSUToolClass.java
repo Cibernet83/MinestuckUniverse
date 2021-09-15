@@ -16,6 +16,7 @@ public class MSUToolClass
 	protected List<EnumEnchantmentType> enchantmentTypes = new ArrayList<>();
 	protected List<String> baseTool = new ArrayList<>();
 	protected List<MSUToolClass> parents = new ArrayList<>();
+	protected boolean disablesShield = false;
 
 	public MSUToolClass()
 	{
@@ -109,5 +110,16 @@ public class MSUToolClass
 			if(parent.isCompatibleWith(other))
 				return true;
 		return equals(other);
+	}
+
+	public MSUToolClass setDisablesShield()
+	{
+		disablesShield = true;
+		return this;
+	}
+
+	public boolean disablesShield()
+	{
+		return disablesShield;
 	}
 }
