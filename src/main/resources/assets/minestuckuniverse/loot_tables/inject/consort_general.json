@@ -1,0 +1,15 @@
+{
+    "pools": [
+        {
+            "rolls": 4,
+            "name": "items",
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minestuck:record_retro_battle",
+                    "weight": 1
+                }
+            ]
+        }
+    ]
+}

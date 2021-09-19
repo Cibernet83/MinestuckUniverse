@@ -5,7 +5,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -45,6 +47,11 @@ public abstract class WeaponProperty
 	}
 
 	public void onEntityHit(ItemStack stack, EntityLivingBase target, EntityLivingBase player)
+	{
+
+	}
+
+	public void onEmptyHit(ItemStack stack, EntityPlayer player)
 	{
 
 	}
@@ -96,5 +103,10 @@ public abstract class WeaponProperty
 	public float damageAgainstEntity(ItemStack stack, EntityLivingBase player, EntityLivingBase target, float amount)
 	{
 		return amount;
+	}
+
+	public EnumAction getItemUseAction(ItemStack stack)
+	{
+		return null;
 	}
 }

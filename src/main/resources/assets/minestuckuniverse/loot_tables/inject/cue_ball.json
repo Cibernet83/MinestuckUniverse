@@ -1,0 +1,23 @@
+{
+    "pools": [
+        {
+            "rolls": 1,
+            "name": "minestuckuniverse:cue_ball",
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minestuckuniverse:cue_ball",
+                    "weight": 1,
+                    "conditions":
+                    [
+                        {
+                            "condition": "minestuckuniverse:juju",
+                            "chance": 0.05,
+                            "juju": "minestuckuniverse:cue_ball"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

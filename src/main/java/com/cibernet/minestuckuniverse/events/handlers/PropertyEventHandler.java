@@ -1,24 +1,37 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.properties.PropertyTrueDamage;
 import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
 import com.cibernet.minestuckuniverse.items.properties.PropertyGristSetter;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
+import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
 
 public class PropertyEventHandler
@@ -27,6 +40,7 @@ public class PropertyEventHandler
 	{
 		MinecraftForge.EVENT_BUS.register(PropertyEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(PropertyGristSetter.class);
+		MinecraftForge.EVENT_BUS.register(PropertyTrueDamage.class);
 	}
 
 	@SubscribeEvent
@@ -45,7 +59,7 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onLivingHurt(LivingHurtEvent event)
 	{
-		if(event.getSource().getImmediateSource() instanceof EntityLivingBase)
+		if(!(event.getSource() instanceof CustomDamageSource) && event.getSource().getImmediateSource() instanceof EntityLivingBase)
 		{
 			ItemStack stack = ((EntityLivingBase) event.getSource().getImmediateSource()).getHeldItemMainhand();
 
@@ -56,7 +70,52 @@ public class PropertyEventHandler
 					event.setAmount(p.damageAgainstEntity(stack, (EntityLivingBase) event.getSource().getImmediateSource(), event.getEntityLiving(), event.getAmount()));
 			}
 
+			if(CUSTOM_DAMAGE.containsKey(stack.getItem()))
+			{
+				event.setCanceled(true);
+				event.getEntity().attackEntityFrom(CUSTOM_DAMAGE.get(stack.getItem()).setEntitySource(event.getSource().getImmediateSource()), event.getAmount());
+			}
 		}
+	}
+
+	public static final HashMap<Item, CustomDamageSource> CUSTOM_DAMAGE = new HashMap<Item, CustomDamageSource>()
+	{{
+		put(MinestuckItems.cactusCutlass, new CustomDamageSource("cactus"));
+		put(MinestuckUniverseItems.needlewands, (CustomDamageSource) new CustomDamageSource("magic").setDamageBypassesArmor().setMagicDamage());
+		put(MinestuckUniverseItems.oglogothThorn, (CustomDamageSource) new CustomDamageSource("magic").setDamageBypassesArmor().setMagicDamage());
+		put(MinestuckUniverseItems.archmageDaggers, (CustomDamageSource) new CustomDamageSource("magic").setDamageBypassesArmor().setMagicDamage());
+	}};
+
+	public static class CustomDamageSource extends EntityDamageSource
+	{
+		public CustomDamageSource(String damageTypeIn)
+		{
+			super(damageTypeIn, null);
+		}
+
+		public CustomDamageSource setEntitySource(Entity entitySource)
+		{
+			damageSourceEntity = entitySource;
+			return this;
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event)
+	{
+		EntityPlayer player = event.getEntityPlayer();
+
+		ItemStack stack = player.getHeldItemMainhand();
+
+		if(stack.getItem() instanceof IPropertyWeapon)
+		{
+			List<WeaponProperty> propertyList = ((IPropertyWeapon) stack.getItem()).getProperties(stack);
+			for(WeaponProperty p : propertyList)
+				p.onEmptyHit(stack, player);
+		}
+
+		MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.LEFT_CLICK_EMPTY, player));
 	}
 
 	@SubscribeEvent

@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items.weapons;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IClassedTool;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
@@ -9,10 +10,13 @@ import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.mraof.minestuck.Minestuck;
+import com.mraof.minestuck.block.MinestuckBlocks;
+import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.Entity;
@@ -22,6 +26,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
@@ -36,8 +41,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon<MSUWeaponBase>
+public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem, IPropertyWeapon<MSUWeaponBase>
 {
+    public static int slotIndex = 0;
+    private int tabSlot = 0;
     private final String registryName;
 
     protected boolean unbreakable;
@@ -46,6 +53,7 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     protected double weaponSpeed;
     protected ToolMaterial material;
     ArrayList<ItemStack> repairMaterials = new ArrayList<>();
+
 
     protected MSUToolClass tool = null;
     protected float harvestSpeed = 0;
@@ -58,7 +66,7 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
         super();
         registryName = name;
         this.setUnlocalizedName(unlocName);
-        this.setCreativeTab(registryName.split(":")[0].equals(Minestuck.MOD_ID) ? TabMinestuck.instance : TabMinestuckUniverse.weapons);
+        this.setCreativeTab(!MSUConfig.combatOverhaul && registryName.split(":")[0].equals(Minestuck.MOD_ID) ? TabMinestuck.instance : TabMinestuckUniverse.weapons);
 
         this.unbreakable = maxUses <= 0;
         this.maxStackSize = 1;
@@ -66,6 +74,26 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
         this.weaponDamage = damageVsEntity;
         this.enchantability = enchantability;
         this.weaponSpeed = weaponSpeed;
+    }
+
+    public MSUWeaponBase(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, Item parent)
+    {
+        this(maxUses, damageVsEntity, weaponSpeed, enchantability, parent.getRegistryName().toString(), parent.getUnlocalizedName().replaceFirst("item.", ""));
+    }
+
+    @Override
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
+    {
+        if(isInCreativeTab(tab))
+        {
+            if(tab == TabMinestuckUniverse.weapons)
+            {
+                while(items.size() < slotIndex)
+                    items.add(new ItemStack(MinestuckBlocks.genericObject));
+                items.set(tabSlot, new ItemStack(this));
+            }
+            else super.getSubItems(tab, items);
+        }
     }
 
     @Override
@@ -80,13 +108,16 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
-        String key = getUnlocalizedName()+".tooltip";
-        String playerName = Minecraft.getMinecraft().player == null ? "" : Minecraft.getMinecraft().player.getName();
+        if(getRegistryName() == null || !getRegistryName().getResourceDomain().equals(Minestuck.MOD_ID))
+        {
+            String key = getUnlocalizedName() + ".tooltip";
+            String playerName = Minecraft.getMinecraft().player == null ? "" : Minecraft.getMinecraft().player.getName();
 
-        if(MSUItemBase.DEDICATED_TOOLTIPS.contains(playerName) && net.minecraft.client.resources.I18n.hasKey(key+"."+playerName))
-            tooltip.add(I18n.translateToLocal(key+"."+playerName));
-        else if(net.minecraft.client.resources.I18n.hasKey(key))
-            tooltip.add(I18n.translateToLocal(key));
+            if (MSUItemBase.DEDICATED_TOOLTIPS.contains(playerName) && net.minecraft.client.resources.I18n.hasKey(key + "." + playerName))
+                tooltip.add(I18n.translateToLocal(key + "." + playerName));
+            else if (net.minecraft.client.resources.I18n.hasKey(key))
+                tooltip.add(I18n.translateToLocal(key));
+        }
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
@@ -114,11 +145,6 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
         if(OreDictionary.doesOreNameExist(oredic))
             setRepairMaterials(OreDictionary.getOres(oredic));
         return this;
-    }
-
-    public String getToolMaterialName()
-    {
-        return this.material.toString();
     }
 
     @Override
@@ -171,6 +197,19 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     public boolean isDamageable()
     {
         return !unbreakable;
+    }
+
+    @Override
+    public EnumAction getItemUseAction(ItemStack stack)
+    {
+        for(WeaponProperty p : getProperties(stack))
+        {
+            EnumAction result = p.getItemUseAction(stack);
+            if(result != null)
+                return result;
+        }
+
+        return super.getItemUseAction(stack);
     }
 
     @Override
@@ -399,5 +438,10 @@ public class MSUWeaponBase extends Item implements IClassedTool, IPropertyWeapon
     public boolean canDisableShield(ItemStack stack, ItemStack shield, EntityLivingBase entity, EntityLivingBase attacker)
     {
         return getToolClass() == null ? false : getToolClass().disablesShield();
+    }
+
+    @Override
+    public void setTabSlot() {
+        tabSlot = slotIndex++;
     }
 }

@@ -67,8 +67,8 @@ public class PropertyGristSetter extends WeaponProperty
 	{
 		if(event.getSource() instanceof EntityDamageSource && event.getSource().getTrueSource() instanceof EntityLivingBase)
 		{
-			EntityLivingBase sauce = ((EntityLivingBase) event.getSource().getTrueSource());
-			ItemStack stack = sauce.getHeldItemMainhand();
+			EntityLivingBase source = ((EntityLivingBase) event.getSource().getTrueSource());
+			ItemStack stack = source.getHeldItemMainhand();
 
 			//On frog initial hit
 			if(stack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) stack.getItem()).hasProperty(PropertyGristSetter.class, stack))

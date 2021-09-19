@@ -4,6 +4,8 @@ import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.beam.BeamData;
 import com.cibernet.minestuckuniverse.capabilities.beam.IBeamData;
+import com.cibernet.minestuckuniverse.capabilities.game.GameData;
+import com.cibernet.minestuckuniverse.capabilities.game.IGameData;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.capabilities.strife.StrifeData;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
@@ -33,6 +35,8 @@ public class MSUCapabilities
 	public static final Capability<IStrifeData> STRIFE_DATA = null;
 	@CapabilityInject(IBeamData.class)
 	public static final Capability<IBeamData> BEAM_DATA = null;
+	@CapabilityInject(IGameData.class)
+	public static final Capability<IGameData> GAME_DATA = null;
 
 	public static void registerCapabilities()
 	{
@@ -40,12 +44,16 @@ public class MSUCapabilities
 
 		CapabilityManager.INSTANCE.register(IStrifeData.class, new MSUCapabilityProvider.Storage<>(), StrifeData::new);
 		CapabilityManager.INSTANCE.register(IBeamData.class, new MSUCapabilityProvider.Storage<>(), BeamData::new);
+		CapabilityManager.INSTANCE.register(IGameData.class, new MSUCapabilityProvider.Storage<>(), GameData::new);
 	}
 
 	@SubscribeEvent
 	public static void attachWorldCap(AttachCapabilitiesEvent<World> event)
 	{
 		event.addCapability(new ResourceLocation(MinestuckUniverse.MODID, "beam_data"), new MSUCapabilityProvider<>(BEAM_DATA, event.getObject()));
+
+		if (event.getObject().provider.getDimension() == 0)
+			event.addCapability(new ResourceLocation(MinestuckUniverse.MODID, "game_data"), new MSUCapabilityProvider<>(GAME_DATA, event.getObject()));
 	}
 
 	@SubscribeEvent

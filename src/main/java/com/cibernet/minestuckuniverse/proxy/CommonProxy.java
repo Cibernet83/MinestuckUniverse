@@ -27,6 +27,7 @@ import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
 import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
+import com.cibernet.minestuckuniverse.world.storage.loot.MSULoot;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -69,6 +70,7 @@ public class CommonProxy
         MSUBannerPatterns.init();
 
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(MSULoot.class);
         MinecraftForge.EVENT_BUS.register(IDBasedAlchemyHandler.class);
         MinecraftForge.EVENT_BUS.register(BlockArtifact.class);
         PropertyEventHandler.register();
@@ -81,6 +83,7 @@ public class CommonProxy
 
         MSUChannelHandler.setupChannel();
         MSUUtils.registerDeployList();
+        MSULoot.registerLootClasses();
 
         if(MinestuckUniverse.isCarryOnLoaded)
             MinecraftForge.EVENT_BUS.register(CarryOnSupport.class);

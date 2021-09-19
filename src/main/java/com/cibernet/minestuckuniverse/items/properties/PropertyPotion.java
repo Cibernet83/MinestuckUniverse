@@ -8,13 +8,18 @@ import net.minecraft.potion.PotionEffect;
 
 public class PropertyPotion extends WeaponProperty
 {
-	public PotionEffect effect;
+	public PotionEffect[] effects;
 	public boolean onCrit;
 	public float chance;
 
 	public PropertyPotion(PotionEffect effect, boolean onCrit, float chance)
 	{
-		this.effect = effect;
+		this(onCrit, chance, effect);
+	}
+
+	public PropertyPotion(boolean onCrit, float chance, PotionEffect... effects)
+	{
+		this.effects = effects;
 		this.onCrit = onCrit;
 		this.chance = chance;
 	}
@@ -23,14 +28,20 @@ public class PropertyPotion extends WeaponProperty
 	public void onEntityHit(ItemStack stack, EntityLivingBase target, EntityLivingBase player)
 	{
 		if(!onCrit && (player.world.rand.nextFloat() <= chance) && (!(player instanceof EntityPlayer) || CommonEventHandler.getCooledAttackStrength(((EntityPlayer) player)) >= 1))
+		{
+			PotionEffect effect = effects[player.world.rand.nextInt(effects.length)];
 			target.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
+		}
 	}
 
 	@Override
 	public float onCrit(ItemStack stack, EntityPlayer player, EntityLivingBase target, float damageModifier)
 	{
 		if(onCrit && (player.world.rand.nextFloat() <= chance) && (!(player instanceof EntityPlayer) || CommonEventHandler.getCooledAttackStrength(((EntityPlayer) player)) >= 1))
+		{
+			PotionEffect effect = effects[player.world.rand.nextInt(effects.length)];
 			target.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
+		}
 		return super.onCrit(stack, player, target, damageModifier);
 	}
 }

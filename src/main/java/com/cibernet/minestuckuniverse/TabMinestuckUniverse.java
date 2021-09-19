@@ -18,6 +18,11 @@ public class TabMinestuckUniverse
     public static final CreativeTabs weapons = new CreativeTabs("minestuckUniverseWeapons")
     {
         @Override
+        public String getTabLabel() {
+            return MSUConfig.combatOverhaul ? "minestuckWeapons" : super.getTabLabel();
+        }
+
+        @Override
         public ItemStack getTabIconItem() {
             return  new ItemStack(MinestuckUniverseItems.batteryBeamBlade);
         }
