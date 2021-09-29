@@ -4,8 +4,10 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.items.MSUThrowableBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.weapons.ItemDualClaw;
 import com.cibernet.minestuckuniverse.items.weapons.ItemMechanicalCrossbow;
 import com.cibernet.minestuckuniverse.items.weapons.MSUBowBase;
+import com.mraof.minestuck.item.ItemCruxitePotion;
 import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,6 +17,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MSUKindAbstrata
 {
 	public static KindAbstratus hammerkind = new KindAbstratus("hammer", MinestuckUniverseItems.toolHammer);
@@ -22,7 +27,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus clubkind = new KindAbstratus("club", MinestuckUniverseItems.toolClub).addKeywords("mace", "club");
 	public static KindAbstratus canekind = new KindAbstratus("cane", MinestuckUniverseItems.toolCane).addKeywords("cane", "staff");
 	public static KindAbstratus sicklekind = new KindAbstratus("sickle", MinestuckUniverseItems.toolSickle).addKeywords("sickle");
-	public static KindAbstratus spoonkind = new KindAbstratus("spoon", MinestuckUniverseItems.toolSpoon).addKeywords("spoon");
+	public static KindAbstratus spoonkind = new KindAbstratus("spoon", MinestuckUniverseItems.toolSpoon).addItemTools(getItem("sbahjaddon", "the_spoon")).addKeywords("spoon");
 	public static KindAbstratus forkkind = new KindAbstratus("fork", MinestuckUniverseItems.toolFork).addKeywords("fork");
 
 	public static KindAbstratus pickaxekind = new KindAbstratus("pickaxe", MinestuckUniverseItems.toolPickaxe).addItemClasses(ItemPickaxe.class);
@@ -30,6 +35,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus shovelkind = new KindAbstratus("shovel", MinestuckUniverseItems.toolShovel).addItemClasses(ItemSpade.class);
 	public static KindAbstratus hoekind = new KindAbstratus("hoe").addItemClasses(ItemHoe.class);
 	public static KindAbstratus fshngrodkind = new KindAbstratus("fishingRod").addItemClasses(ItemFishingRod.class);
+	public static KindAbstratus potionkind = new KindAbstratus("potion").addItemClasses(ItemPotion.class, ItemCruxitePotion.class);
 	public static KindAbstratus throwkind = new KindAbstratus("projectile").addItemClasses(MSUThrowableBase.class).addItemTools(
 					MinestuckUniverseItems.dragonCharge, Items.SNOWBALL, Items.EGG, Items.ENDER_PEARL, Items.ENDER_EYE, Items.EXPERIENCE_BOTTLE, Items.SPLASH_POTION, Items.LINGERING_POTION,
 					getItem("botania", "chakram"));
@@ -67,6 +73,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus chainsawkind = new KindAbstratus("chainsaw").addKeywords("chainsaw");
 	public static KindAbstratus makeupkind = new KindAbstratus("makeup").addKeywords("lipstick", "lip_stick");
 	public static KindAbstratus umbrellakind = new KindAbstratus("umbrella").addKeywords("umbrella");
+	public static KindAbstratus broomkind = new KindAbstratus("broom").addKeywords("broom");
 	public static KindAbstratus flshlghtkind = new KindAbstratus("flashlight").addKeywords("flashlight");
 	public static KindAbstratus fncysntatkind = new KindAbstratus("fancySanta").setHidden(true);
 	public static KindAbstratus batonkind = new KindAbstratus("baton").addKeywords("baton");
@@ -104,6 +111,7 @@ public class MSUKindAbstrata
 		registry.register(shovelkind.setRegistryName("shovel"));
 		registry.register(hoekind.setRegistryName("hoe"));
 		registry.register(fshngrodkind.setRegistryName("fishing_rod"));
+		registry.register(potionkind.setRegistryName("potion"));
 		registry.register(throwkind.setRegistryName("projectile"));
 
 		registry.register(rockkind.setRegistryName("rock"));
@@ -136,6 +144,7 @@ public class MSUKindAbstrata
 		registry.register(flshlghtkind.setRegistryName("flashlight"));
 		registry.register(fncysntatkind.setRegistryName("fancy_santa"));
 		registry.register(umbrellakind.setRegistryName("umbrella"));
+		registry.register(broomkind.setRegistryName("broom"));
 		registry.register(tridentkind.setRegistryName("tridentkind"));
 		registry.register(doubleTridentkind.setRegistryName("2x3dent"));
 
@@ -145,27 +154,60 @@ public class MSUKindAbstrata
 		keykind.setHidden(keykind.getToolItems().isEmpty());
 		keykind.addItemTools(MinestuckUniverseItems.dungeonKey);
 		wandkind.setHidden(wandkind.getToolItems().isEmpty());
-		wandkind.addItemTools(MinestuckUniverseItems.staffOfOvergrowth);
+		wandkind.addItemTools(MinestuckUniverseItems.staffOfOvergrowth, MinestuckUniverseItems.needlewands);
 		knifekind.setHidden(knifekind.getToolItems().isEmpty());
 		knifekind.addItemTools(MinestuckUniverseItems.katars, MinestuckUniverseItems.rocketKatars, MinestuckUniverseItems.sneakyDaggers, MinestuckUniverseItems.blizzardCutters, MinestuckUniverseItems.katarsOfZillywhomst);
 	}
 
 	protected static void registerArsenalApi()
 	{
-		//TODO
+		doubleTridentkind.addItemTools(getItem("minestuckarsenal", "poseidons_entente"), getItem("minestuckarsenal", "imperial_fork"));
+		axekind.addItemTools(getItem("minestuckarsenal", "key_axe"), getItem("minestuckarsenal", "shadow_axe"), getItem("minestuckarsenal", "mass_deduction"),
+				getItem("minestuckarsenal", "aks"));
+		batonkind.addItemTools(getItem("minestuckarsenal", "twirling_baton"), getItem("minestuckarsenal", "conductors_baton"), getItem("minestuckarsenal", "nightstick"),
+				getItem("minestuckarsenal", "uranium_baton"), getItem("minestuckarsenal", "windwaker"), getItem("minestuckarsenal", "celestial_fulcrum"));
+		bladekind.addItemTools(getItem("minestuckarsenal", "ancestral_sword"), getItem("minestuckarsenal", "cutlass"), getItem("minestuckarsenal", "candy_sword"),
+				getItem("minestuckarsenal", "bladed_cane"), getItem("minestuckarsenal", "keyblade"));
+		broomkind.addItemTools(getItem("minestuckarsenal", "broom"));
+		canekind.addItemTools(getItem("minestuckarsenal", "horse_hitcher"), getItem("minestuckarsenal", "cuestick"), getItem("minestuckarsenal", "blindmans_directions"),
+				getItem("minestuckarsenal", "bladed_cane"), getItem("minestuckarsenal", "regicane"), getItem("minestuckarsenal", "black_staff"),
+				getItem("minestuckarsenal", "gold_staff"), getItem("minestuckarsenal", "crowbar"), getItem("minestuckarsenal", "blazing_glory"),
+				getItem("minestuckarsenal", "radioactive_staff"));
+		clawkind.addItemTools(getItem("minestuckarsenal", "nepeta_claws"), getItem("minestuckarsenal", "blue_claws"));
+		clubkind.addItemTools(getItem("minestuckarsenal", "club_of_felony"), getItem("minestuckarsenal", "wooden_bat"), getItem("minestuckarsenal", "cricket_bat"));
+		hammerkind.addItemTools(getItem("minestuckarsenal", "wrinklefucker"), getItem("minestuckarsenal", "barber_basher"));
+		hoekind.addItemTools(getItem("minestuckarsenal", "scythe"), getItem("minestuckarsenal", "eightball_scythe"));
+		needlekind.addItemTools(getItem("minestuckarsenal", "knitting_needles"), getItem("minestuckarsenal", "needle_wands"), getItem("minestuckarsenal", "thorns_of_oglogoth"),
+				getItem("minestuckarsenal", "quills_of_echidna"));
+		paperkind.addItemTools(getItem("minestuckarsenal", "paper_sword"));
+		pickaxekind.addItemTools(getItem("minestuckarsenal", "mine_and_grist"));
+		sicklekind.addItemTools(getItem("minestuckarsenal", "thorny_subject"), getItem("minestuckarsenal", "babys_first_thresher"), getItem("minestuckarsenal", "derse_reaper"),
+				getItem("minestuckarsenal", "prospit_reaper"), getItem("minestuckarsenal", "hemeoreaper"), getItem("minestuckarsenal", "ow_the_edge"));
+		tridentkind.addItemTools(getItem("minestuckarsenal", "wooden_trident"), getItem("minestuckarsenal", "silver_trident"), getItem("minestuckarsenal", "gold_trident"));
+		wandkind.addItemTools(getItem("minestuckarsenal", "needle_wands"));
+
+		ArrayList<Item> lipstickChainsaws = (ArrayList<Item>) Arrays.asList(getItem("minestuckarsenal", "lipstick_chainsaw"), getItem("minestuckarsenal", "demonbane_ragripper"));
+
+		chainsawkind.addItemTools(getItem("minestuckarsenal", "dainty_disembowler"), getItem("minestuckarsenal", "uranium_chainsaw"))
+				.setConditional((item, stack) -> item != null && lipstickChainsaws.contains(item) && ItemDualClaw.isDrawn(stack));
+		keykind.addItemTools(getItem("minestuckarsenal", "keyboard_key"), getItem("minestuckarsenal", "keyblade"), getItem("minestuckarsenal", "true_blue"),
+				getItem("minestuckarsenal", "candy_key"), getItem("minestuckarsenal", "chronolatch"), getItem("minestuckarsenal", "yaldabaoths_keyton"),
+				getItem("minestuckarsenal", "allweddol")).setConditional((item, stack) -> item != null && item == getItem("minestuckarsenal", "house_key") && !ItemDualClaw.isDrawn(stack));
+		makeupkind.setConditional((item, stack) -> item != null && lipstickChainsaws.contains(item) && !ItemDualClaw.isDrawn(stack));
 
 		sbahjkind.addItemTools(getItem("minestuckarsenal", "sbahjifier"), getItem("minestuckarsenal", "aks"));
 		lancekind.addItemTools(getItem("minestuckarsenal", "cigarette_lance"), getItem("minestuckarsenal", "jousting_lance"), getItem("minestuckarsenal", "rocketpop_lance"),
 				getItem("minestuckarsenal", "fiduspawn_lance"));
-		keykind.addItemTools(getItem("minestuckarsenal", "keyblade"), getItem("minestuckarsenal", "candy_key"), getItem("minestuckarsenal", "yaldabaoths_keyton"),
-				getItem("minestuckarsenal", "chronolatch"), getItem("minestuckarsenal", "key_axe"), getItem("minestuckarsenal", "stone_cold_key_axe"),
-				getItem("minestuckarsenal", "allweddol"));
+		pistolkind.addItemTools(getItem("minestuckarsenal", "beretta"), getItem("minestuckarsenal", "gold_beretta"), getItem("minestuckarsenal", "gunblade"),
+				getItem("minestuckarsenal", "gun_of_ghouls")).setConditional((item, stack) -> item != null && item == getItem("minestuckarsenal", "house_key") && ItemDualClaw.isDrawn(stack));
+		riflekind.addItemTools(getItem("minestuckarsenal", "hunting_rifle"), getItem("minestuckarsenal", "harpoon_gun"), getItem("minestuckarsenal", "girls_best_friend"),
+				getItem("minestuckarsenal", "green_sun_streetsweeper"), getItem("minestuckarsenal", "ahabs_crosshairs"));
 
 	}
 
 	protected static void registerVariedCommoditiesApi()
 	{
-		//TODO
+
 	}
 
 

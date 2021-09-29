@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
         modid = MinestuckUniverse.MODID,
         name = MinestuckUniverse.NAME,
         version = MinestuckUniverse.VERSION,
-        dependencies = "required-after:minestuck@[1.2.283,);",
+        dependencies = "required-after:minestuck@[1.2.300.7,);",
         guiFactory = "com.cibernet.minestuckuniverse.gui.MSUGuiFactory"
 )
 public class MinestuckUniverse
@@ -25,8 +25,6 @@ public class MinestuckUniverse
     public static final String NAME = "Minestuck Universe";
     public static final String SHORT = "MSU";
     public static final String VERSION = "@VERSION@";
-    
-    public static final CreativeTabs tab = TabMinestuckUniverse.main;
     
     @Mod.Instance("minestuckuniverse")
     public static MinestuckUniverse instance;
@@ -41,6 +39,7 @@ public class MinestuckUniverse
     public static boolean isSplatcraftLodaded;
     public static boolean isCarryOnLoaded;
     public static boolean isArsenalLoaded;
+    public static boolean isVcLoaded;
     public static boolean isMSGTLoaded;
 
     @EventHandler
@@ -54,6 +53,7 @@ public class MinestuckUniverse
         isSplatcraftLodaded = Loader.isModLoaded("splatcraft");
         isMSGTLoaded = Loader.isModLoaded("minestuckgodtier");
         isCarryOnLoaded = Loader.isModLoaded("carryon");
+        isVcLoaded = Loader.isModLoaded("variedcommodities");
 
         proxy.preInit();
     }

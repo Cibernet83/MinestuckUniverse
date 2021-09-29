@@ -457,6 +457,7 @@ kindAbstratus.axe.name=Axekind
 kindAbstratus.shovel.name=Shovelkind
 kindAbstratus.hoe.name=Hoekind
 kindAbstratus.fishingRod.name=Fshngrodkind
+kindAbstratus.potion.name=Potionkind
 kindAbstratus.rock.name=Rockkind
 kindAbstratus.paper.name=Paperkind
 kindAbstratus.shears.name=Scissorkind
