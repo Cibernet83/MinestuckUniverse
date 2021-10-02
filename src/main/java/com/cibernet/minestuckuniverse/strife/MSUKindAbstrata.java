@@ -27,8 +27,9 @@ public class MSUKindAbstrata
 	public static KindAbstratus clubkind = new KindAbstratus("club", MinestuckUniverseItems.toolClub).addKeywords("mace", "club");
 	public static KindAbstratus canekind = new KindAbstratus("cane", MinestuckUniverseItems.toolCane).addKeywords("cane", "staff");
 	public static KindAbstratus sicklekind = new KindAbstratus("sickle", MinestuckUniverseItems.toolSickle).addKeywords("sickle");
-	public static KindAbstratus spoonkind = new KindAbstratus("spoon", MinestuckUniverseItems.toolSpoon).addItemTools(getItem("sbahjaddon", "the_spoon")).addKeywords("spoon");
-	public static KindAbstratus forkkind = new KindAbstratus("fork", MinestuckUniverseItems.toolFork).addKeywords("fork");
+	public static KindAbstratus spoonkind = new KindAbstratus("spoon", MinestuckUniverseItems.toolSpoon).addItemTools(getItem("sbahjaddon", "the_spoon")).addKeywords("spoon")
+			.setConditional((item, stack) -> item == MinestuckItems.crockerSpork && MinestuckItems.crockerSpork.isSpoon(stack));
+	public static KindAbstratus forkkind = new KindAbstratus("fork", MinestuckUniverseItems.toolFork).addKeywords("fork").setConditional((item, stack) -> item == MinestuckItems.crockerSpork && !MinestuckItems.crockerSpork.isSpoon(stack));
 
 	public static KindAbstratus pickaxekind = new KindAbstratus("pickaxe", MinestuckUniverseItems.toolPickaxe).addItemClasses(ItemPickaxe.class);
 	public static KindAbstratus axekind = new KindAbstratus("axe", MinestuckUniverseItems.toolAxe).addItemClasses(ItemAxe.class);

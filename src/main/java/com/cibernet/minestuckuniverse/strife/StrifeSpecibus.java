@@ -1,10 +1,13 @@
 package com.cibernet.minestuckuniverse.strife;
 
+import com.mraof.minestuck.inventory.captchalouge.CaptchaDeckHandler;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class StrifeSpecibus
@@ -120,6 +123,21 @@ public class StrifeSpecibus
 		if(index < 0 || index >= items.size())
 			return ItemStack.EMPTY;
 		return items.get(index).copy();
+	}
+
+	public void switchKindAbstratus(KindAbstratus abstratus, EntityPlayer player)
+	{
+		if(abstratus == kindAbstratus)
+			return;
+		kindAbstratus = abstratus;
+
+		for(ItemStack stack : new ArrayList<>(getContents()))
+			if(!abstratus.isStackCompatible(stack))
+			{
+				getContents().remove(getContents().indexOf(stack));
+				if(player != null)
+					CaptchaDeckHandler.launchAnyItem(player, stack);
+			}
 	}
 
 	public LinkedList<ItemStack> getContents() {

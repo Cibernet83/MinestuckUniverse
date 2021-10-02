@@ -40,7 +40,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 
 public class StrifeEventHandler
@@ -112,15 +111,47 @@ public class StrifeEventHandler
 				cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()) : ItemStack.EMPTY;
 
 		boolean hasWeaponCheck = true;
-		if(!selectedWeapon.isEmpty())
+		if(!selectedWeapon.isEmpty() && !event.player.world.isRemote)
 		{
 			for(EnumHand hand : EnumHand.values())
 				if(isStackAssigned(event.player.getHeldItem(hand)) && event.player.getHeldItem(hand).isItemEqualIgnoreDurability(selectedWeapon))
 				{
 					ItemStack stack = event.player.getHeldItem(hand);
-					if(!ItemStack.areItemStacksEqual(stack, selectedWeapon))
+					StrifeSpecibus specibus = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];
+
+					if(!specibus.getKindAbstratus().isStackCompatible(stack))
 					{
-						cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().set(cap.getSelectedWeaponIndex(), stack);
+						if(StrifePortfolioHandler.moveSelectedWeapon(event.player, stack) == null)
+						{
+							if(cap.getSelectedWeaponIndex() >= 0 && !ItemStack.areItemStacksEqual(stack, selectedWeapon))
+								specibus.getContents().set(cap.getSelectedWeaponIndex(), stack);
+
+							if(specibus.getContents().size() <= 1)
+							{
+								KindAbstratus abstratus = StrifeEventHandler.getAbstrataList(stack, true).get(0);
+								if(abstratus == null)
+								{
+									StrifePortfolioHandler.unassignSelected(event.player);
+									stack.getTagCompound().removeTag("StrifeAssigned");
+								}
+								else if(!event.player.world.isRemote)
+								{
+									specibus.switchKindAbstratus(abstratus, event.player);
+									MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, event.player, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSelectedSpecibusIndex()), event.player);
+								}
+							}
+							else
+							{
+								StrifePortfolioHandler.unassignSelected(event.player);
+								stack.getTagCompound().removeTag("StrifeAssigned");
+							}
+						}
+						return;
+					}
+
+					if(cap.getSelectedWeaponIndex() >= 0 && !ItemStack.areItemStacksEqual(stack, selectedWeapon))
+					{
+						specibus.getContents().set(cap.getSelectedWeaponIndex(), stack);
 						selectedWeapon = stack;
 					}
 					hasWeaponCheck = false;
