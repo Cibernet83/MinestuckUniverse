@@ -18,9 +18,4 @@ public interface IPropertyShield
 	{
 		return true;
 	}
-
-	default boolean isAbilityActive(ItemStack stack, World world, EntityLivingBase player)
-	{
-		return false;
-	}
 }

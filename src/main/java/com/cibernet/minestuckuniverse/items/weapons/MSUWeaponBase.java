@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items.weapons;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IClassedTool;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
@@ -73,7 +74,8 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
         this.setMaxDamage(maxUses);
         this.weaponDamage = damageVsEntity;
         this.enchantability = enchantability;
-        this.weaponSpeed = weaponSpeed;
+
+        this.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID,"active"), (stack, worldIn, entityIn) -> isAbilityActive(stack, worldIn, entityIn) ? 1 : 0);
     }
 
     public MSUWeaponBase(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, Item parent)
@@ -332,7 +334,8 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
 
     public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
         Multimap<String, AttributeModifier> multimap = HashMultimap.create();
-        if (slot == EntityEquipmentSlot.MAINHAND) {
+        if (slot == EntityEquipmentSlot.MAINHAND)
+        {
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.getAttackDamage(stack), 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", this.getAttackSpeed(stack), 0));
         }
@@ -443,5 +446,13 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
     @Override
     public void setTabSlot() {
         tabSlot = slotIndex++;
+    }
+
+    public boolean isAbilityActive(ItemStack stack, World worldIn, EntityLivingBase entityIn)
+    {
+        for(WeaponProperty p : getProperties(stack))
+            if(p.isAbilityActive(stack, worldIn, entityIn))
+                return true;
+        return false;
     }
 }

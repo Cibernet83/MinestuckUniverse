@@ -36,7 +36,6 @@ public class MSUShieldBase extends MSUWeaponBase
 		this.parryTime = parryTimeFrame;
 
 		this.addPropertyOverride(new ResourceLocation("blocking"), (stack, worldIn, entityIn) -> entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F);
-		this.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID,"active"), (stack, worldIn, entityIn) -> isAbilityActive(stack, worldIn, entityIn) ? 1 : 0);
 
 	}
 
@@ -169,14 +168,6 @@ public class MSUShieldBase extends MSUWeaponBase
 	public void startParrying(ItemStack stack)
 	{
 		setParryTime(stack, parryTime);
-	}
-
-	public boolean isAbilityActive(ItemStack stack, World worldIn, EntityLivingBase entityIn)
-	{
-		for(WeaponProperty p : getProperties(stack))
-			if(p instanceof IPropertyShield && ((IPropertyShield) p).isAbilityActive(stack, worldIn, entityIn))
-				return true;
-		return false;
 	}
 
 	public static boolean canBlockDamageSource(EntityLivingBase entity, DamageSource damageSourceIn)

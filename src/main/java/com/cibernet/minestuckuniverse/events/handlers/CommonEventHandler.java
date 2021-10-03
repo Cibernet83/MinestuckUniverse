@@ -7,11 +7,13 @@ import com.cibernet.minestuckuniverse.items.armor.ItemPogoBoots;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyRandomDamage;
+import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.cibernet.minestuckuniverse.items.weapons.ItemBeamBlade;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.mraof.minestuck.alchemy.AlchemyRecipes;
 import com.mraof.minestuck.event.AlchemizeItemEvent;
@@ -58,7 +60,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.Sys;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -165,7 +169,6 @@ public class CommonEventHandler
 		//else if(footwear == MinestuckUniverseItems.rocketBoots && !event.player.onGround && !event.player.world.isRemote) TODO particle effects
 			//((WorldServer)event.player.world).spawnParticle(EnumParticleTypes.FLAME, event.player.posX, event.player.posY, event.player.posZ, 1, 0.1D, 0.0D, 0.1D, 0.05D);
 
-
 		if(event.player.isSpectator())
 		{
 			event.player.capabilities.isFlying = true;
@@ -182,14 +185,24 @@ public class CommonEventHandler
 				ItemStack stack = event.player.getItemStackFromSlot(slot);
 				AbstractAttributeMap attrMap = event.player.getAttributeMap();
 
-				for (Map.Entry<String, AttributeModifier> attr : stack.getAttributeModifiers(slot).entries()) {
+				Multimap<String, AttributeModifier> modifiers =  stack.getAttributeModifiers(slot);
+
+				if(stack.getItem() instanceof IPropertyWeapon)
+				{
+					List<WeaponProperty> properties = ((IPropertyWeapon) stack.getItem()).getProperties(stack);
+					for (WeaponProperty p : properties)
+						p.getAttributeModifiers(event.player, stack, modifiers);
+				}
+
+				for (Map.Entry<String, AttributeModifier> attr : modifiers.entries()) {
 					IAttributeInstance attrInstance = attrMap.getAttributeInstanceByName(attr.getKey());
 
 					if (attrInstance != null && attrInstance.hasModifier(attr.getValue()) && attrInstance.getModifier(attr.getValue().getID()).getAmount() != attr.getValue().getAmount()) {
 						attrInstance.removeModifier(attr.getValue().getID());
 						attrInstance.applyModifier(attr.getValue());
 					}
-
+					if(!attrInstance.hasModifier(attr.getValue()))
+						attrInstance.applyModifier(attr.getValue());
 				}
 			}
 
@@ -204,6 +217,19 @@ public class CommonEventHandler
 
 			if(str != currStr)
 				event.player.getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH).setBaseValue(currStr);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEquipChange(LivingEquipmentChangeEvent event)
+	{
+		if(event.getFrom().getItem() instanceof IPropertyWeapon)
+		{
+			HashMultimap<String, AttributeModifier> modifiers = HashMultimap.create();
+			List<WeaponProperty> properties = ((IPropertyWeapon) event.getFrom().getItem()).getProperties(event.getFrom());
+			for (WeaponProperty p : properties)
+				p.getAttributeModifiers(event.getEntityLiving(), event.getFrom(), modifiers);
+			event.getEntityLiving().getAttributeMap().removeAttributeModifiers(modifiers);
 		}
 	}
 

@@ -1,29 +1,54 @@
-package com.cibernet.minestuckuniverse.items.properties.shieldkind;
+package com.cibernet.minestuckuniverse.items.properties;
 
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
+import com.cibernet.minestuckuniverse.items.properties.shieldkind.IPropertyShield;
+import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-public class PropertyRocketShieldDash extends WeaponProperty implements IPropertyShield
+public class PropertyRocketBoost extends WeaponProperty
 {
 
 	float power;
 
-	public PropertyRocketShieldDash(float power)
+	public PropertyRocketBoost(float power)
 	{
 		this.power = power;
+	}
+
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
+	{
+		return (stack.getItem() instanceof MSUShieldBase) ? null : EnumAction.BOW;
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack, int duration) {
+		return Math.max(duration, 72000);
 	}
 
 	@Override
 	public boolean isAbilityActive(ItemStack stack, World world, EntityLivingBase player)
 	{
 		return stack.hasTagCompound() && stack.getTagCompound().getInteger("RocketTime") > 0;
+	}
+
+	@Override
+	public EnumActionResult onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	{
+		playerIn.setActiveHand(handIn);
+		return EnumActionResult.SUCCESS;
 	}
 
 	@Override

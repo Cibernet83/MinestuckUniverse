@@ -51,7 +51,7 @@ public class MSUBowBase extends MSUWeaponBase
 
 				if (entityIn == null)
 					return 0.0F;
-				else return !(entityIn.getActiveItemStack().getItem() instanceof MSUBowBase) ? 0.0F : (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / (float)drawTime;
+				else return !(entityIn.getActiveItemStack().getItem() instanceof MSUBowBase) ? 0.0F : (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / (float)getDrawTime(entityIn, stack);
 			}
 		});
 		this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter()
@@ -62,6 +62,15 @@ public class MSUBowBase extends MSUWeaponBase
 				return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
 			}
 		});
+	}
+
+	private int getDrawTime(EntityLivingBase entityIn, ItemStack stack)
+	{
+		int result = drawTime;
+		for(WeaponProperty p : getProperties(stack))
+			if(p instanceof IPropertyArrow)
+				result = ((IPropertyArrow)p).getDrawTime(entityIn, stack, result);
+		return result;
 	}
 
 	public MSUBowBase(int maxUses, float arrowDamage, int drawSpeed, float arrowVel, float inaccuracy,  int enchantability, boolean firesCustom, String name, String unlocName)
@@ -121,7 +130,7 @@ public class MSUBowBase extends MSUWeaponBase
 
 			if (!itemstack.isEmpty() || flag)
 			{
-				float f = getArrowVelocity(stack, i);
+				float f = getArrowVelocity(entityLiving, stack, i);
 
 				if ((double)f >= 0.1D)
 				{
@@ -136,7 +145,7 @@ public class MSUBowBase extends MSUWeaponBase
 						if (f == 1.0F)
 							entityarrow.setIsCritical(true);
 
-						entityarrow = this.customizeArrow(entityarrow, i/(float)drawTime);
+						entityarrow = this.customizeArrow(entityarrow, i/(float)getDrawTime(entityLiving, stack));
 						if(entityarrow == null)
 							return;
 
@@ -214,9 +223,9 @@ public class MSUBowBase extends MSUWeaponBase
 		return arrow;
 	}
 
-	public float getArrowVelocity(ItemStack stack, int charge)
+	public float getArrowVelocity(EntityLivingBase player, ItemStack stack, int charge)
 	{
-		float f = (float)charge / (float) drawTime;
+		float f = (float)charge / (float) getDrawTime(player, stack);
 		f = (f * f + f * 2.0F) / 3.0F;
 
 		if (f > 1.0F)

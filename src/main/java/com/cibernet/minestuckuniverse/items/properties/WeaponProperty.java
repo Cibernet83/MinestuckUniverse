@@ -1,8 +1,10 @@
 package com.cibernet.minestuckuniverse.items.properties;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -109,4 +111,11 @@ public abstract class WeaponProperty
 	{
 		return null;
 	}
+
+	public boolean isAbilityActive(ItemStack stack, World world, EntityLivingBase player)
+	{
+		return false;
+	}
+
+	public void getAttributeModifiers(EntityLivingBase player, ItemStack stack, Multimap<String, AttributeModifier> multimap) {  }
 }

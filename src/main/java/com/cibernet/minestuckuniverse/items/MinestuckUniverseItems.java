@@ -15,7 +15,7 @@ import com.cibernet.minestuckuniverse.items.properties.bowkind.*;
 import com.cibernet.minestuckuniverse.items.properties.clawkind.PropertyActionBuff;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyDamagePrjctle;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyMagicDamagePrjctle;
-import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyRocketShieldDash;
+import com.cibernet.minestuckuniverse.items.properties.PropertyRocketBoost;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldEject;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldFire;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldShock;
@@ -29,6 +29,7 @@ import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.block.BlockTransportalizer;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.MinestuckItems;
+import com.mraof.minestuck.item.TabMinestuck;
 import com.mraof.minestuck.item.block.ItemTransportalizer;
 import com.mraof.minestuck.util.Pair;
 import net.minecraft.block.Block;
@@ -37,12 +38,14 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -170,7 +173,8 @@ public class MinestuckUniverseItems
     public static Item cybersword = new MSUWeaponBase(1650, 28.8, -2.07, 32, "cybersword", "cybersword").setTool(toolSword, 5, 8F).addProperties(new PropertySweep(), new PropertyShock(15, 8, 0.5f, false), new PropertyLightning(15, 1, true, false), new PropertyLuckBasedDamage(0.1f));
     public static Item crystallineRibbitar = new MSUWeaponBase(3300, 16.4, -2.3, 24, "crystalline_ribbitar", "crystallineRibbitar").setTool(toolSword, 4, 6F).addProperties(new PropertySweep());
     public static Item quantumEntangloporter = new MSUWeaponBase(1430, 19.2, -2.3, 9, "quantum_entangloporter", "quantumEntangloporter").setTool(toolSword, 3, 2F).addProperties(new PropertySweep());
-    public static Item valorsEdge = new MSUWeaponBase(1650, 26.4, -2.07, 28, "valor_edge", "calamitySword").setTool(toolSword, 4, 4F).addProperties(new PropertySweep());
+    public static Item valorsEdge = new MSUWeaponBase(1650, 26.4, -2.07, 28, "valor_edge", "calamitySword").setTool(toolSword, 4, 4F).addProperties(new PropertySweep(), new PropertyCrowdDamage(1.2f, 4f, 128),
+            new PropertyLowHealthBoost(SharedMonsterAttributes.MOVEMENT_SPEED, "Calamity Boost", 1.2, 0.4, 0.4f, 2), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_SPEED, "Calamity Boost", 0.4, 0.2, 0.4f, 2));
 
     //Gauntletkind
     public static Item fancyGlove = new MSUWeaponBase(50, 0D, 0, 5, "fancy_glove", "fancyGlove").setTool(toolGauntlet, 0, 1);
@@ -201,7 +205,7 @@ public class MinestuckUniverseItems
     public static Item clearShield = new MSUShieldBase(180, 20, 0.25f, 5, "clear_shield", "clearShield");
     public static Item bladedShield = new MSUShieldBase(300, 7, 1.2, 10, 0.32f, 6, "bladed_shield", "bladedShield");
     public static Item shockerShell = new MSUShieldBase(480, 14, 0.3f, 8, "shocker_shell", "shockerShell").setRepairMaterials(new ItemStack(battery)).addProperties(new PropertyElectric(10, 2, 0, false), new PropertyShieldShock(5, 2, 0.1f, 10, 4, 0.8f));
-    public static Item rocketRiotShield = new MSUShieldBase(450, 6, 0.35f, 7, "rocket_riot_shield", "rocketRiotShield").addProperties(new PropertyRocketShieldDash(0.4f));
+    public static Item rocketRiotShield = new MSUShieldBase(450, 6, 0.35f, 7, "rocket_riot_shield", "rocketRiotShield").addProperties(new PropertyRocketBoost(0.4f));
     public static Item ejectorShield = new MSUShieldBase(320, 7, 0.3f, 7, "ejector_shield", "ejectorShield").addProperties(new PropertyShieldEject(4f, 15));
     public static Item firewall = new MSUShieldBase(320, 7, 0.3f, 7, "firewall", "firewall").addProperties(new PropertyShieldFire(10, 1000, 0.7f, 1f, true));
     public static Item clarityWard = new MSUShieldBase(410, 8, 0.25f, 12, "clarity_ward", "christopherShield");
@@ -230,8 +234,8 @@ public class MinestuckUniverseItems
     public static MSUBowBase gildedGuidance = (MSUBowBase) new MSUBowBase(1210, 3.2f, 30, 0.0f, 0, 2, true, "gilded_guidance", "gildedGuidance").requireNoAmmo().addProperties(new PropertyLaserArrow(), new PropertyGuidedArrow());
     public static MSUBowBase bowOfLight = (MSUBowBase) new MSUBowBase(2050, 4f, 24, 5, 0.3f, 3, true, "bow_of_light", "bowOfLight").requireNoAmmo().addProperties(new PropertyLaserArrow(), new PropertyArrowNoGravity(), new PropertyFlamingArrow(6, 0.9f), new PropertyPierce(0.1f));
     public static MSUBowBase theChancemaker = (MSUBowBase) new MSUBowBase(1280, 1f, 16, 3, 1.3f, 2, false, "the_chancemaker", "theChancemaker").addProperties(new PropertyRandomDamage());
-    public static Item wisdomsPierce = new MSUItemBase("wisdom_pierce", "calamityBow").setCreativeTab(TabMinestuckUniverse.weapons);
-    public static Item wisdomsHookshot = new MSUItemBase("wisdom_hookshot", "calamityHookshot").setCreativeTab(null);
+    public static MSUBowBase wisdomsPierce = (MSUBowBase) new MSUBowBase(1560, 3, 22, 4, 0.3f, 2, false, "wisdom_pierce", "calamityBow").addProperties(new PropertyPierce(0.4f), new PropertyLowHealthBoost(SharedMonsterAttributes.LUCK, "Calamity Boost", 2, 0.4, 0.5f, 1), new PropertyLowHealthDrawSpeed(0.5f, 0.2f));
+    public static MSUBowBase wisdomsHookshot = (MSUBowBase) new MSUBowBase(1560, 0.5f, 22, 3, 0.3f, 2, true, "wisdom_hookshot", "calamityHookshot").requireNoAmmo().addProperties(new PropertyHookshot(1, 128), new PropertyArrowNoGravity(), new PropertyLowHealthBoost(SharedMonsterAttributes.LUCK, "Calamity Boost", 2, 0.4, 0.5f, 1));
 
 
     //Hammerkind
@@ -241,7 +245,7 @@ public class MinestuckUniverseItems
     public static Item midasMallet = new MSUWeaponBase(415, 6.5D, -2.5D, 15, "midas_mallet", "midasMallet").setTool(toolHammer, 3, 2f).addProperties(new PropertyGristSetter(GristType.Gold));
     public static Item aaaNailShocker = new MSUWeaponBase(325, 7, -2.4, 10,"aaa_nail_shocker", "aaaNailShocker").setTool(toolHammer, 2, 3f).setRepairMaterials(new ItemStack(battery)).addProperties(new PropertyElectric(20, 0, 0.7f, true));
     public static Item highVoltageStormCrusher = new MSUWeaponBase(580, 10, -2.4, 18, "high_voltage_storm_crusher", "highVoltageStormCrusher").setTool(toolHammer, 4, 3.0f).addProperties(new PropertyLightning(8, 1, true, false), new PropertyElectric(60, 8, -1, false));
-    public static Item barrelsWarhammer = new MSUWeaponBase(640, 22, -2.4, 18, "barrel_warhammer", "calamityHammer").setTool(toolHammer, 4, 4.0f);
+    public static Item barrelsWarhammer = new MSUWeaponBase(640, 22, -2.4, 18, "barrel_warhammer", "calamityHammer").setTool(toolHammer, 4, 4.0f).addProperties(new PropertyRocketBoost(0.6f), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_DAMAGE, "Calamity Boost", 0.6, 0.1, 0.3f, 2));
     public static Item stardustSmasher = new MSUWeaponBase(1600, 16, -2.4, 20, "stardust_smasher", "stardustSmasher").setTool(toolHammer, 20, 8.0f).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.ARTHROPOD, 1000));
 
     //Clawkind
@@ -249,12 +253,13 @@ public class MinestuckUniverseItems
     public static Item diamondKatars = new MSUWeaponBase(624, 2.5D, -0.65, 8, "diamond_katars", "diamondKatars").setTool(toolClaws, 2, 3).addProperties(new PropertySweep(), new PropertyDualWield());
     public static Item actionClaws = new ItemDualClaw(280, 3.0D, 0.0D, -1.5D, -1.0D, 6, "actionClaws","action_claws").setTool(toolClaws, 2, 3).addProperties(new PropertyActionBuff(200, 2.5));
     public static Item candyCornClaws = new ItemDualClaw(310, 4.0D, 0.0D, -1.5D, -1.0D, 6, "candyCornClaws","candy_corn_claws").setTool(toolClaws, 2, 3).addProperties(new PropertyCandyWeapon());
-    public static Item sneakyDaggers = new ItemDualClaw(322, 3.0D, 0.0D, -1.5D, -1.0D, 7, "sneakyDaggers","sneaky_daggers").setTool(toolClaws, 2, 3);
+    public static Item sneakyDaggers = new ItemDualClaw(322, 3.0D, 0.0D, -1.5D, -1.0D, 7, "sneakyDaggers","sneaky_daggers").setTool(toolClaws, 2, 3).addProperties(new PropertySneaky(1.2f, 1.1f, 1.6f));
     public static Item rocketKatars = new MSUWeaponBase(195, 3, -0.5, 8, "rocket_katars", "rocketKatars").setTool(toolClaws, 2, 5).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyRocketDash(3, 20, 0.3f, 2.5f));
     public static Item blizzardCutters = new ItemDualClaw(325, 4, 0,-0.5, -1, 8, "blizzardCutters", "blizzard_cutters").setTool(toolClaws, 3, 3).addProperties(new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 400, 0), false, 0.4f), new PropertyKnockback(2.2f));
     public static Item thunderbirdTalons = new MSUWeaponBase(445, 5,-0.5, 18, "thunderbird_talons", "thunderbirdTalons").setTool(toolClaws, 5, 3).setRepairMaterials(new ItemStack(MinestuckUniverseItems.battery)).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyShock(10, 3, 0.4f, true), new PropertyKnockback(1.8f));
     public static Item archmageDaggers = new ItemBeamWeapon(830, 6,-0.5, 0.05f, 15, 1, 60, 10, 18, "archmage_daggers", "archmageDaggers").setTool(toolClaws, 5, 3).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyMagicBeam());
     public static Item katarsOfZillywhomst = new MSUWeaponBase(750, 8,-0.5, 24, "katars_of_zillywhomst", "katarsOfZillywhomst").setTool(toolClaws, 4, 3).addProperties(new PropertySweep(), new PropertyDualWield());
+    public static Item bladesOfTheWarrior = new MSUWeaponBase(750, 8,-0.5, 24, "blades_of_the_warrior", "christopherClaws").setTool(toolClaws, 4, 3).addProperties(new PropertySweep(), new PropertyDualWield()).setCreativeTab(null);
 
     //Canekind
     public static Item staffOfOvergrowth = new MSUWeaponBase(455, 6.0f, -1.2, 20, "staff_of_overgrowth", "staffOfOvergrowth").setTool(toolCane, 3, 2).addProperties(new PropertyBlockSwap(overgrowthTransforms, 1), new PropertyPotion(new PotionEffect(MobEffects.POISON, 400, 1), false, 0.4f));
@@ -271,7 +276,9 @@ public class MinestuckUniverseItems
             new PropertyPotion(new PotionEffect(MobEffects.BLINDNESS, 200, 0), false, 0.2f), new PropertyPotion(new PotionEffect(MobEffects.NAUSEA, 200, 0), false, 0.2f), new PropertyPotion(new PotionEffect(MobEffects.WITHER, 100, 1), true, 0.2f));
     public static Item cranialEnder = new MSUWeaponBase(345, 9, -2.2, 8, "cranial_ender", "cranialEnder").setTool(toolClub, 5, 2.0f).addProperties(new PropertySweep(), new PropertyExplode(0.5f, 0.2f, true), new PropertyPotion(new PotionEffect(MobEffects.NAUSEA, 100, 0), true, 0.7f));
 
-    //Dicekind
+    //Dicekind TODO
+    public static Item dice = new MSUItemBase("dice", "dice").setCreativeTab(TabMinestuck.instance);
+    public static Item fluoriteOctet = new MSUItemBase("fluorite_octet", "fluoriteOctet").setCreativeTab(TabMinestuck.instance);
 
     //Throwkind
     public static MSUThrowableBase yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
@@ -285,7 +292,7 @@ public class MinestuckUniverseItems
     public static MSUThrowableBase markedBoomerang = new MSUThrowableBase(10, 0, 1, "marked_boomerang", "markedBoomerang").addProperties(new PropertyDamagePrjctle(5));
     public static MSUThrowableBase redHotRang = new MSUThrowableBase(12, 0, 1, "red_hot_rang", "redHotRang").addProperties(new PropertyDamagePrjctle(7));
     public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, "tornado_glaive", "tornadoGlaive").addProperties(new PropertyDamagePrjctle(8));
-    public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato").addProperties(new PropertyDamagePrjctle(10    ));
+    public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato").addProperties(new PropertyDamagePrjctle(10));
 
     //Rockkind
     public static MSUThrowableBase pebble = new MSUThrowableBase(0, 0, 64, "pebble", "pebble").addProperties(new PropertyDamagePrjctle(3), new PropertyThrowGravity(1.5f));
@@ -325,15 +332,12 @@ public class MinestuckUniverseItems
     //Overrides
     public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCloth, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
     public static Item catclaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "catClaws",Minestuck.MOD_ID+ ":catclaws").setTool(toolClaws, 2, 1);
-    public static Item dice = new MSUItemBase("dice", "dice");
-    public static Item fluoriteOctet = new MSUItemBase("fluorite_octet", "fluoriteOctet");
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         IForgeRegistry<Item> registry = event.getRegistry();
 
-        registry.register(catclaws.setRegistryName(Minestuck.MOD_ID, "catclaws"));
         registry.register(crumplyHat.setRegistryName(Minestuck.MOD_ID, "crumply_hat"));
 	    registry.register(dice.setRegistryName(Minestuck.MOD_ID, "dice"));
 	    registry.register(fluoriteOctet.setRegistryName(Minestuck.MOD_ID, "fluorite_octet"));
@@ -406,6 +410,7 @@ public class MinestuckUniverseItems
         registerItem(registry, ironDoorshield);
         registerItem(registry, bladedShield);
         registerItem(registry, clarityWard);
+        registerItem(registry, bladesOfTheWarrior);
         registerItem(registry, shockerShell);
         registerItem(registry, windshield);
         registerItem(registry, rocketRiotShield);
@@ -419,6 +424,7 @@ public class MinestuckUniverseItems
 
         registerItem(registry, katars);
         registerItem(registry, diamondKatars);
+        registry.register(catclaws.setRegistryName(Minestuck.MOD_ID, "catclaws"));
         registerCustomRenderedItem(registry, actionClaws);
         registerCustomRenderedItem(registry, candyCornClaws);
         registerCustomRenderedItem(registry, sneakyDaggers);
@@ -566,12 +572,26 @@ public class MinestuckUniverseItems
         overgrowthTransforms.put(Blocks.LOG, 8, MinestuckBlocks.log, 8);
         overgrowthTransforms.put(Blocks.LOG, 12, MinestuckBlocks.log, 12);
 
+        wisdomsPierce.addProperties(new PropertyInnocuousDouble(wisdomsHookshot, true, false, false));
+        wisdomsHookshot.addProperties(new PropertyInnocuousDouble(wisdomsPierce, true, false, false));
+        ((MSUWeaponBase)clarityWard).addProperties(new PropertyInnocuousDouble(bladesOfTheWarrior, true, false, true));
+        ((MSUWeaponBase)bladesOfTheWarrior).addProperties(new PropertyInnocuousDouble(clarityWard, true, true, false));
+
         if(MinestuckUniverse.isBotaniaLoaded)
         {
             overgrowthTransforms.put(ModBlocks.livingrock, 1, ModBlocks.livingrock, 2);
             overgrowthTransforms.put(ModBlocks.livingwood, 1, ModBlocks.livingwood, 2);
             overgrowthTransforms.put(ModBlocks.dreamwood, 1, ModBlocks.dreamwood, 2);
         }
+
+        valorsEdge.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "awakened"),
+                ((stack, worldIn, entityIn) -> ((PropertyLowHealthBoost)((MSUWeaponBase)valorsEdge).getProperty(PropertyLowHealthBoost.class, stack)).getPropertyOverride().apply(stack, worldIn, entityIn)));
+        barrelsWarhammer.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "awakened"),
+                ((stack, worldIn, entityIn) -> ((PropertyLowHealthBoost)((MSUWeaponBase)barrelsWarhammer).getProperty(PropertyLowHealthBoost.class, stack)).getPropertyOverride().apply(stack, worldIn, entityIn)));
+        wisdomsPierce.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "awakened"),
+                ((stack, worldIn, entityIn) -> ((PropertyLowHealthBoost) wisdomsPierce.getProperty(PropertyLowHealthBoost.class, stack)).getPropertyOverride().apply(stack, worldIn, entityIn)));
+        wisdomsHookshot.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "awakened"),
+                ((stack, worldIn, entityIn) -> ((PropertyLowHealthBoost) wisdomsHookshot.getProperty(PropertyLowHealthBoost.class, stack)).getPropertyOverride().apply(stack, worldIn, entityIn)));
 
         energyBow.setArrowTexture("energy_arrow");
         sweetBow.setCustomArrowTexture();
@@ -609,6 +629,7 @@ public class MinestuckUniverseItems
         registerItemCustomRender(scarf, new MSUModelManager.DyedItemDefinition("scarf"));
         registerItemCustomRender(actionClaws, new MSUModelManager.DualWeaponDefinition("action_claws_drawn", "action_claws_sheathed"));
         registerItemCustomRender(candyCornClaws, new MSUModelManager.DualWeaponDefinition("candy_corn_claws_drawn", "candy_corn_claws_sheathed"));
+        registerItemCustomRender(sneakyDaggers, new MSUModelManager.DualWeaponDefinition("sneaky_daggers_drawn", "sneaky_daggers_sheathed"));
         registerItemCustomRender(blizzardCutters, new MSUModelManager.DualWeaponDefinition("blizzard_cutters_drawn", "blizzard_cutters_sheathed"));
 
         RenderThrowable.IRenderProperties THROW_STAR_ROTATION = ((entity, partialTicks) ->

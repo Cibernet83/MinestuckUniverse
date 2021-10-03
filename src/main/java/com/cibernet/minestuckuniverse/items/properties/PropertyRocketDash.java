@@ -31,6 +31,12 @@ public class PropertyRocketDash extends WeaponProperty
 	}
 
 	@Override
+	public boolean isAbilityActive(ItemStack stack, World world, EntityLivingBase player)
+	{
+		return stack.hasTagCompound() && stack.getTagCompound().getInteger("RocketTime") > 0;
+	}
+
+	@Override
 	public double getAttackDamage(ItemStack stack, double dmg)
 	{
 		if(stack.hasTagCompound() && stack.getTagCompound().getInteger("RocketTime") > 0)
