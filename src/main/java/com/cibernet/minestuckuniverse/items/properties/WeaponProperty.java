@@ -118,4 +118,11 @@ public abstract class WeaponProperty
 	}
 
 	public void getAttributeModifiers(EntityLivingBase player, ItemStack stack, Multimap<String, AttributeModifier> multimap) {  }
+
+	public int onDurabilityChanged(ItemStack stack, int damage) {return damage;}
+
+	public void onStopUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
+	{
+
+	}
 }

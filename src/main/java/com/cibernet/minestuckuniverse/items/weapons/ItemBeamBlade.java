@@ -57,7 +57,7 @@ public class ItemBeamBlade extends MSUWeaponBase
     @Override
     public void setDamage(ItemStack stack, int damage)
     {
-        if(!isDrawn(stack))
+        if(!isDrawn(stack) && damage > getDamage(stack))
             return;
         if(damage >= getMaxDamage(stack)+1)
             changeState(stack, false);

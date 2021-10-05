@@ -135,6 +135,8 @@ public class EntityMSUThrowable extends EntityThrowable
 
             if(destroy)
             {
+                if(stack.isItemStackDamageable())
+                    stack.damageItem(1, thrower);
                 if(drop)
                     spawnItem(posX, posY + (EnumFacing.DOWN.equals(result.sideHit) ? -0.3 : 0), posZ, 5);
                 this.setDead();

@@ -41,6 +41,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class StrifeEventHandler
 {
@@ -114,7 +115,7 @@ public class StrifeEventHandler
 		if(!selectedWeapon.isEmpty() && !event.player.world.isRemote)
 		{
 			for(EnumHand hand : EnumHand.values())
-				if(isStackAssigned(event.player.getHeldItem(hand)) && event.player.getHeldItem(hand).isItemEqualIgnoreDurability(selectedWeapon))
+				if(isStackAssigned(event.player.getHeldItem(hand)) && event.player.getHeldItem(hand).isItemEqual(selectedWeapon))
 				{
 					ItemStack stack = event.player.getHeldItem(hand);
 					StrifeSpecibus specibus = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];
@@ -128,15 +129,15 @@ public class StrifeEventHandler
 
 							if(specibus.getContents().size() <= 1)
 							{
-								KindAbstratus abstratus = StrifeEventHandler.getAbstrataList(stack, true).get(0);
-								if(abstratus == null)
+								List<KindAbstratus> abstratusList = StrifeEventHandler.getAbstrataList(stack, false);
+								if(abstratusList.isEmpty())
 								{
 									StrifePortfolioHandler.unassignSelected(event.player);
 									stack.getTagCompound().removeTag("StrifeAssigned");
 								}
 								else if(!event.player.world.isRemote)
 								{
-									specibus.switchKindAbstratus(abstratus, event.player);
+									specibus.switchKindAbstratus(abstratusList.get(0), event.player);
 									MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, event.player, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSelectedSpecibusIndex()), event.player);
 								}
 							}

@@ -121,24 +121,36 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 			return false;
 
 		Item item = stack.getItem();
+		boolean result = false;
 
 		if(item instanceof IClassedTool || item instanceof ItemTool)
 		for(MSUToolClass tc : toolClasses)
 		{
 			if((item instanceof IClassedTool && tc.isCompatibleWith(((IClassedTool) item).getToolClass())) || (item instanceof ItemTool && tc.getBaseTools().contains(((ItemTool) item).getToolMaterialName())))
-				return true;
+			{
+				result = true;
+				break;
+			}
 		}
+		if(!result)
 		for(Class<? extends Item> clzz : itemClasses)
 			if(clzz.isInstance(item))
-				return true;
+			{
+				result = true;
+				break;
+			}
+		if(!result)
 		for(Item i : toolItems)
 			if(net.minecraftforge.oredict.OreDictionary.itemMatches(new ItemStack(i), stack, false))
-				return true;
+			{
+				result = true;
+				break;
+			}
 
-		if(conditional != null && conditional.consume(stack.getItem(), stack))
-			return true;
+		if(conditional != null)
+			return conditional.consume(stack.getItem(), stack, result);
 
-		return false;
+		return result;
 	}
 
 	public String getUnlocalizedName() {
@@ -194,6 +206,6 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 
 	public static interface IAbstratusConditional
 	{
-		boolean consume(Item item, ItemStack stack);
+		boolean consume(Item item, ItemStack stack, boolean originalResult);
 	}
 }

@@ -41,6 +41,10 @@ public class MSUModelManager
     private static void ItemModels()
     {
         register(unbreakableKatana, 0, "unbreakable_katana");
+        register(caledfwlch, 0, "caledfwlch");
+        register(caledscratch, 0, "caledscratch");
+        register(royalDeringer, 0, "royal_deringer");
+        register(scarletRibbitar, 0, "scarlet_ribbitar");
 
         DualWeaponDefinition catClawsDef = new DualWeaponDefinition("catclaws_drawn", "catclaws_sheathed");
         ModelLoader.registerItemVariants(catClaws, catClawsDef.getResourceLocations());

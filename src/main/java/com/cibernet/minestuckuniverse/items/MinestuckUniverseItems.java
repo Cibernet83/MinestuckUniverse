@@ -13,13 +13,9 @@ import com.cibernet.minestuckuniverse.items.properties.beams.PropertyMagicBeam;
 import com.cibernet.minestuckuniverse.items.properties.beams.PropertyPotionBeam;
 import com.cibernet.minestuckuniverse.items.properties.bowkind.*;
 import com.cibernet.minestuckuniverse.items.properties.clawkind.PropertyActionBuff;
-import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyDamagePrjctle;
-import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyMagicDamagePrjctle;
+import com.cibernet.minestuckuniverse.items.properties.shieldkind.*;
+import com.cibernet.minestuckuniverse.items.properties.throwkind.*;
 import com.cibernet.minestuckuniverse.items.properties.PropertyRocketBoost;
-import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldEject;
-import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldFire;
-import com.cibernet.minestuckuniverse.items.properties.shieldkind.PropertyShieldShock;
-import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyThrowGravity;
 import com.cibernet.minestuckuniverse.items.weapons.*;
 import com.cibernet.minestuckuniverse.util.BlockMetaPair;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
@@ -172,7 +168,7 @@ public class MinestuckUniverseItems
     public static Item lightbringer = new MSUWeaponBase(1375, 20, -2.07, 32, "lightbringer", "lightbringer").setTool(toolSword, 4, 10F).addProperties(new PropertySweep(), new PropertyFire(4, 0.8f, true), new PropertyLuckBasedDamage(0.5f), new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
     public static Item cybersword = new MSUWeaponBase(1650, 28.8, -2.07, 32, "cybersword", "cybersword").setTool(toolSword, 5, 8F).addProperties(new PropertySweep(), new PropertyShock(15, 8, 0.5f, false), new PropertyLightning(15, 1, true, false), new PropertyLuckBasedDamage(0.1f));
     public static Item crystallineRibbitar = new MSUWeaponBase(3300, 16.4, -2.3, 24, "crystalline_ribbitar", "crystallineRibbitar").setTool(toolSword, 4, 6F).addProperties(new PropertySweep());
-    public static Item quantumEntangloporter = new MSUWeaponBase(1430, 19.2, -2.3, 9, "quantum_entangloporter", "quantumEntangloporter").setTool(toolSword, 3, 2F).addProperties(new PropertySweep());
+    public static Item quantumEntangloporter = new MSUWeaponBase(1430, 19.2, -2.3, 9, "quantum_entangloporter", "quantumEntangloporter").setTool(toolSword, 3, 2F).addProperties(new PropertySweep(), new PropertyTeleBlock(Blocks.CACTUS, 20));
     public static Item valorsEdge = new MSUWeaponBase(1650, 26.4, -2.07, 28, "valor_edge", "calamitySword").setTool(toolSword, 4, 4F).addProperties(new PropertySweep(), new PropertyCrowdDamage(1.2f, 4f, 128),
             new PropertyLowHealthBoost(SharedMonsterAttributes.MOVEMENT_SPEED, "Calamity Boost", 1.2, 0.4, 0.4f, 2), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_SPEED, "Calamity Boost", 0.4, 0.2, 0.4f, 2));
 
@@ -209,12 +205,12 @@ public class MinestuckUniverseItems
     public static Item ejectorShield = new MSUShieldBase(320, 7, 0.3f, 7, "ejector_shield", "ejectorShield").addProperties(new PropertyShieldEject(4f, 15));
     public static Item firewall = new MSUShieldBase(320, 7, 0.3f, 7, "firewall", "firewall").addProperties(new PropertyShieldFire(10, 1000, 0.7f, 1f, true));
     public static Item clarityWard = new MSUShieldBase(410, 8, 0.25f, 12, "clarity_ward", "christopherShield");
-    public static Item obsidianShield = new MSUShieldBase(2000, 0, -3, 12, 0.6f, 10, "obsidian_shield", "obsidianShield");
-    public static Item windshield = new MSUShieldBase(355, 18, 0.1f, 7, "windshield", "windshield");
-    public static Item wallOfThorns = new MSUShieldBase(440, 10, 0.3f, 7, "wall_of_thorns", "wallOfThorns");
-    public static Item nuclearNeglector = new MSUShieldBase(480, 8, 0.15f, 8, "nuclear_neglector", "nuclearNeglector");
-    public static Item livingShield = new MSUShieldBase(465, 6, 0.0f, 8, "living_shield", "livingShield");
-    public static Item perfectAegis = new MSUShieldBase(800, 3, 1f, 12, "perfect_aegis", "perfectAegis");
+    public static Item obsidianShield = new MSUShieldBase(2000, 0, -3, 12, 0.6f, 10, "obsidian_shield", "obsidianShield").addProperties(new PropertyUseOnCooled());
+    public static Item windshield = new MSUShieldBase(355, 18, 0.1f, 7, "windshield", "windshield").addProperties(new PropertyShieldKnockback(2f, true), new PropertyShieldKnockback(0.3f, false));
+    public static Item wallOfThorns = new MSUShieldBase(440, 10, 0.5f, 7, "wall_of_thorns", "wallOfThorns").addProperties(new PropertyShieldPotion(true, 0.9f, new PotionEffect(MobEffects.POISON, 400, 1)), new PropertyShieldPotion(false, 0.1f, new PotionEffect(MobEffects.POISON, 100, 0)));
+    public static Item nuclearNeglector = new MSUShieldBase(480, 8, 0.15f, 8, "nuclear_neglector", "nuclearNeglector").addProperties(new PropertyShieldPotion(true, 1, new PotionEffect(MobEffects.WITHER, 600, 2)), new PropertyShieldPotionNegative(new PotionEffect(MobEffects.WITHER, 600, 2)));
+    public static Item livingShield = new MSUShieldBase(465, 6, 0.0f, 8, "living_shield", "livingShield").addProperties(new PropertyShieldHeal(0.6f, true));
+    public static Item perfectAegis = new MSUShieldBase(800, 3, 1f, 12, "perfect_aegis", "perfectAegis").addProperties(new PropertyShieldDeflect(1, 5));
 
     //Bowkind
     public static final MSUBowBase.IIsArrow REGULAR_ARROWS = stack -> stack.getItem() == Items.ARROW;
@@ -258,7 +254,7 @@ public class MinestuckUniverseItems
     public static Item blizzardCutters = new ItemDualClaw(325, 4, 0,-0.5, -1, 8, "blizzardCutters", "blizzard_cutters").setTool(toolClaws, 3, 3).addProperties(new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 400, 0), false, 0.4f), new PropertyKnockback(2.2f));
     public static Item thunderbirdTalons = new MSUWeaponBase(445, 5,-0.5, 18, "thunderbird_talons", "thunderbirdTalons").setTool(toolClaws, 5, 3).setRepairMaterials(new ItemStack(MinestuckUniverseItems.battery)).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyShock(10, 3, 0.4f, true), new PropertyKnockback(1.8f));
     public static Item archmageDaggers = new ItemBeamWeapon(830, 6,-0.5, 0.05f, 15, 1, 60, 10, 18, "archmage_daggers", "archmageDaggers").setTool(toolClaws, 5, 3).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyMagicBeam());
-    public static Item katarsOfZillywhomst = new MSUWeaponBase(750, 8,-0.5, 24, "katars_of_zillywhomst", "katarsOfZillywhomst").setTool(toolClaws, 4, 3).addProperties(new PropertySweep(), new PropertyDualWield());
+    public static Item katarsOfZillywhomst = new ItemDualClaw(750, 8, 0,-0.5, 0, 24, "katarsOfZillywhomst", "katars_of_zillywhomst").setTool(toolClaws, 4, 3).addProperties(new PropertySweep(), new PropertyDualWield());
     public static Item bladesOfTheWarrior = new MSUWeaponBase(750, 8,-0.5, 24, "blades_of_the_warrior", "christopherClaws").setTool(toolClaws, 4, 3).addProperties(new PropertySweep(), new PropertyDualWield()).setCreativeTab(null);
 
     //Canekind
@@ -284,19 +280,19 @@ public class MinestuckUniverseItems
     public static MSUThrowableBase yarnBall = new ItemYarnBall("yarn_ball", "yarnBall");
     public static MSUThrowableBase wizardbeardYarn = new MSUThrowableBase("wizardbeard_yarn", "wizardbeardYarn").addProperties(new PropertyMagicDamagePrjctle(6));
     public static Item dragonCharge = new ItemDragonCharge("dragon_charge", "dragonCharge");
-    public static MSUThrowableBase throwingStar = new MSUThrowableBase(8, 0, 16, "throwing_star", "throwingStar").addProperties(new PropertyDamagePrjctle(4), new PropertyThrowGravity(0.7f));
-    public static MSUThrowableBase goldenStar = new MSUThrowableBase(4, 0, 32, "golden_star", "goldenStar").addProperties(new PropertyDamagePrjctle(2), new PropertyThrowGravity(0.4f));
-    public static MSUThrowableBase suitarang = new MSUThrowableBase(8, 0, 16, "suitarang", "suitarang").addProperties(new PropertyDamagePrjctle(6), new PropertyThrowGravity(0.7f));
-    public static MSUThrowableBase psionicStar = new MSUThrowableBase(10, 0, 8, "psionic_star", "psionicStar").setSize(3).addProperties(new PropertyDamagePrjctle(12, true), new PropertyThrowGravity(0.7f));
-    public static MSUThrowableBase boomerang = new MSUThrowableBase(10, 0, 1, "boomerang", "boomerang").addProperties(new PropertyDamagePrjctle(5));
-    public static MSUThrowableBase markedBoomerang = new MSUThrowableBase(10, 0, 1, "marked_boomerang", "markedBoomerang").addProperties(new PropertyDamagePrjctle(5));
-    public static MSUThrowableBase redHotRang = new MSUThrowableBase(12, 0, 1, "red_hot_rang", "redHotRang").addProperties(new PropertyDamagePrjctle(7));
-    public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, "tornado_glaive", "tornadoGlaive").addProperties(new PropertyDamagePrjctle(8));
-    public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato").addProperties(new PropertyDamagePrjctle(10));
+    public static MSUThrowableBase throwingStar = new MSUThrowableBase(8, 0, 16, "throwing_star", "throwingStar").addProperties(new PropertyDamagePrjctle(4), new PropertyThrowGravity(0.7f), new PropertyBreakableProjectile(0.7f));
+    public static MSUThrowableBase goldenStar = new MSUThrowableBase(4, 0, 32, "golden_star", "goldenStar").addProperties(new PropertyDamagePrjctle(2), new PropertyThrowGravity(0.4f), new PropertyBreakableProjectile(0.9f));
+    public static MSUThrowableBase suitarang = new MSUThrowableBase(8, 0, 16, "suitarang", "suitarang").addProperties(new PropertyDamagePrjctle(6), new PropertyThrowGravity(0.7f), new PropertyBreakableProjectile(0.5f));
+    public static MSUThrowableBase psionicStar = new MSUThrowableBase(10, 0, 8, "psionic_star", "psionicStar").setSize(3).addProperties(new PropertyDamagePrjctle(12, true), new PropertyThrowGravity(0.7f), new PropertyBreakableProjectile(0.2f));
+    public static MSUThrowableBase boomerang = new MSUThrowableBase(10, 0, 1, 1f, 2, -0.5, "boomerang", "boomerang"){{setMaxDamage(64);}}.addProperties(new PropertyDamagePrjctle(5), new PropertyThrowGravity(0.6f), new PropertyBoomerang());
+    public static MSUThrowableBase markedBoomerang = new MSUThrowableBase(10, 0, 1, 1f, 2, -0.5, "marked_boomerang", "markedBoomerang"){{setMaxDamage(64);}}.addProperties(new PropertyDamagePrjctle(5), new PropertyThrowGravity(0.6f), new PropertyBoomerang());
+    public static MSUThrowableBase redHotRang = new MSUThrowableBase(12, 0, 1, 1f, 4, -0.5, "red_hot_rang", "redHotRang"){{setMaxDamage(80);}}.addProperties(new PropertyDamagePrjctle(7), new PropertyThrowGravity(0.6f), new PropertyBoomerang(), new PropertyFirePrjctle(5, false));
+    public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, 1f, 6, -1f, "tornado_glaive", "tornadoGlaive").addProperties(new PropertyDamagePrjctle(8), new PropertyPrjctleItemPull(16, 0.5f), new PropertyBoomerang(), new PropertyThrowGravity(0.4f));
+    public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato").addProperties(new PropertyDamagePrjctle(10), new PropertyFirePrjctle(10, true));
 
     //Rockkind
     public static MSUThrowableBase pebble = new MSUThrowableBase(0, 0, 64, "pebble", "pebble").addProperties(new PropertyDamagePrjctle(3), new PropertyThrowGravity(1.5f));
-    public static MSUThrowableBase rock = new MSUThrowableBase(10, 5, 16, 5, -2.7, "rock", "rock").addProperties(new PropertyDamagePrjctle(8), new PropertyThrowGravity(3f));
+    public static MSUThrowableBase rock = new MSUThrowableBase(10, 5, 16, 1.2f, 5, -2.7, "rock", "rock").addProperties(new PropertyDamagePrjctle(8), new PropertyThrowGravity(2.5f));
     public static Item bigRock = new ItemBigRock("big_rock", "bigRock");
 
     //Misc.
@@ -432,7 +428,7 @@ public class MinestuckUniverseItems
         registerCustomRenderedItem(registry, blizzardCutters);
         registerItem(registry, thunderbirdTalons);
         registerItem(registry, archmageDaggers);
-        registerItem(registry, katarsOfZillywhomst);
+        registerCustomRenderedItem(registry, katarsOfZillywhomst);
 
         registerItem(registry, knittingNeedles);
         registerItem(registry, pointySticks);
@@ -516,11 +512,11 @@ public class MinestuckUniverseItems
             registerItem(registry, new MSUWeaponBase(550, 8, -2.3, 3, MinestuckItems.irradiatedSteakSword).setTool(toolSword, 1, 3).addProperties(new PropertyEdible(4, 0.4F, 25).setPotionEffect(0.9f, new PotionEffect(MobEffects.WITHER, 100, 1))));
             registerItem(registry, new MSUWeaponBase(825, 10.5, -2.07, 10, MinestuckItems.firePoker).setTool(toolSword, 2, 4).addProperties(new PropertyFire(30, 0.3f, false), new PropertyTipperDamage(0.8f, 1.2f, 1)));
             registerItem(registry, new MSUWeaponBase(825, 12.0, -2.3, 10, MinestuckItems.hotHandle).setTool(toolSword, 3, 3).addProperties(new PropertyFire(15, 1f, true)));
-            registerItem(registry, new MSUWeaponBase(908, 13.2, -2.3, 14, MinestuckItems.royalDeringer).setTool(toolSword, 3, 6).addProperties(/*TODO breaking weapon*/));
-            registerItem(registry, new MSUWeaponBase(1100, 16.0, -2.3, 16, MinestuckItems.caledfwlch).setTool(toolSword, 4, 8).addProperties(new PropertyTrueDamage() /*TODO breaking weapon*/));
-            registerItem(registry, new MSUWeaponBase(1375, 20.0, -2.07, 20, MinestuckItems.caledscratch).setTool(toolSword, 4, 10).addProperties(new PropertyXpMend()/*TODO breaking weapon*/));
+            registerCustomRenderedItem(registry, new MSUWeaponBase(908, 13.2, -2.3, 14, MinestuckItems.royalDeringer).setTool(toolSword, 3, 6).addProperties(new PropertyBreakableItem())).addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());
+            registerCustomRenderedItem(registry, new MSUWeaponBase(1100, 16.0, -2.3, 16, MinestuckItems.caledfwlch).setTool(toolSword, 4, 8).addProperties(new PropertyTrueDamage(), new PropertyBreakableItem())).addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());
+            registerCustomRenderedItem(registry, new MSUWeaponBase(1375, 20.0, -2.07, 20, MinestuckItems.caledscratch).setTool(toolSword, 4, 10).addProperties(new PropertyXpMend(), new PropertyBreakableItem())).addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());
             registerItem(registry, new MSUWeaponBase(1513, 20.0, -2.3, 10, MinestuckItems.doggMachete).setTool(toolSword, 4, 10).addProperties(new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 200, 0), false, 0.4f), new PropertyKnockback(0.65f)));
-            registerItem(registry, new MSUWeaponBase(1375, 22.0, -2.415, 18, MinestuckItems.scarletRibbitar).setTool(toolSword, 4, 10).addProperties(new PropertyFire(30, 0.5f, true)) /*TODO breaking weapon*/);
+            registerCustomRenderedItem(registry, new MSUWeaponBase(1375, 22.0, -2.415, 18, MinestuckItems.scarletRibbitar).setTool(toolSword, 4, 10).addProperties(new PropertyFire(30, 0.5f, true), new PropertyBreakableItem())).addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());
             registerItem(registry, new MSUWeaponBase(1210, 16.0, -2.07, 20, MinestuckItems.cobaltSabre).setTool(toolSword, 4, 8).addProperties(new PropertyFire(8, 0.8f, true), new PropertyGristSetter(GristType.Cobalt)));
             registerItem(registry, new MSUWeaponBase(3300, 33.6, -2.3, 40, MinestuckItems.zillywairCutlass).setTool(toolSword, 5, 10));
             registerItem(registry, new MSUWeaponBase(743, 12.0, -2.07, 8, MinestuckItems.regisword).setTool(toolSword, 3, 6));
@@ -631,6 +627,7 @@ public class MinestuckUniverseItems
         registerItemCustomRender(candyCornClaws, new MSUModelManager.DualWeaponDefinition("candy_corn_claws_drawn", "candy_corn_claws_sheathed"));
         registerItemCustomRender(sneakyDaggers, new MSUModelManager.DualWeaponDefinition("sneaky_daggers_drawn", "sneaky_daggers_sheathed"));
         registerItemCustomRender(blizzardCutters, new MSUModelManager.DualWeaponDefinition("blizzard_cutters_drawn", "blizzard_cutters_sheathed"));
+        registerItemCustomRender(katarsOfZillywhomst, new MSUModelManager.DualWeaponDefinition("katars_of_zillywhomst_drawn", "katars_of_zillywhomst_sheathed"));
 
         RenderThrowable.IRenderProperties THROW_STAR_ROTATION = ((entity, partialTicks) ->
         {
@@ -656,7 +653,7 @@ public class MinestuckUniverseItems
 
     private static Item registerCustomRenderedItem(IForgeRegistry<Item> registry, Item item)
     {
-        if(item instanceof ISortedTabItem)
+        if(item instanceof ISortedTabItem && item.getCreativeTab() == TabMinestuckUniverse.weapons)
             ((ISortedTabItem) item).setTabSlot();
         if(item instanceof IRegistryItem)
             ((IRegistryItem)item).setRegistryName();

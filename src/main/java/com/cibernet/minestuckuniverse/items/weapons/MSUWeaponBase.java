@@ -12,7 +12,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.block.MinestuckBlocks;
-import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -73,6 +72,7 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
         this.maxStackSize = 1;
         this.setMaxDamage(maxUses);
         this.weaponDamage = damageVsEntity;
+        this.weaponSpeed = weaponSpeed;
         this.enchantability = enchantability;
 
         this.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID,"active"), (stack, worldIn, entityIn) -> isAbilityActive(stack, worldIn, entityIn) ? 1 : 0);
@@ -163,6 +163,14 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
         return super.getIsRepairable(toRepair, repair);
     }
 
+    @Override
+    public void setDamage(ItemStack stack, int damage)
+    {
+        for(WeaponProperty p : getProperties(stack))
+            damage = p.onDurabilityChanged(stack, damage);
+        super.setDamage(stack, damage);
+    }
+
     public MSUWeaponBase(double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
     {
         this(-1, damageVsEntity, weaponSpeed, enchantability, name, unlocName);
@@ -230,13 +238,12 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase player) {
-        if (!this.unbreakable) {
-            stack.damageItem(1, player);
-        }
-
         for(WeaponProperty p : getProperties(stack))
             p.onEntityHit(stack, target, player);
 
+        if (!this.unbreakable) {
+            stack.damageItem(1, player);
+        }
 
         return true;
     }
@@ -272,6 +279,13 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
         for (WeaponProperty p : getProperties(stack))
             stack = p.onItemUseFinish(stack, worldIn, entityLiving);
         return super.onItemUseFinish(stack, worldIn, entityLiving);
+    }
+
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
+    {
+        for (WeaponProperty p : getProperties(stack))
+            p.onStopUsing(stack, worldIn, entityLiving, timeLeft);
     }
 
     @Override
@@ -325,9 +339,8 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
         if((double)state.getBlockHardness(worldIn, pos) == 0.0D)
             dmg = 0;
 
-        stack.damageItem(dmg, entityLiving);
-
         getProperties(stack).forEach(p -> p.onBlockDestroyed(stack, worldIn, state, pos, entityLiving));
+        stack.damageItem(dmg, entityLiving);
 
         return true;
     }

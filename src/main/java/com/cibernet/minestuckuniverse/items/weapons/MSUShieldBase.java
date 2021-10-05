@@ -125,7 +125,11 @@ public class MSUShieldBase extends MSUWeaponBase
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
 		if(isParrying(stack))
+		{
 			setParryTime(stack, getParryTime(stack)-1);
+			if(getParryTime(stack) <= 0)
+				stack.getTagCompound().setBoolean("Parried", false);
+		}
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
 	}
 
@@ -144,6 +148,7 @@ public class MSUShieldBase extends MSUWeaponBase
 
 		if(source.getImmediateSource() != null)
 			source.getImmediateSource().attackEntityFrom(new ParryDamageSource(stack, target), damage*parryDeflect);
+		stack.getTagCompound().setBoolean("Parried", true);
 		return true;
 	}
 

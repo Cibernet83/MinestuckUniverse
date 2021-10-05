@@ -42,6 +42,7 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 	protected int cooldownTime;
 	protected double attackDamage;
 	protected double attackSpeed;
+	protected float throwSpeed;
 	protected float size = 1;
 
 	@SideOnly(Side.CLIENT)
@@ -49,7 +50,7 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 
 	protected final ArrayList<WeaponProperty> properties = new ArrayList<>();
 
-	public MSUThrowableBase(int useDuration, int cooldownTime, int stackSize, double meleeDamage, double meleeSpeed, String name, String unlocName)
+	public MSUThrowableBase(int useDuration, int cooldownTime, int stackSize, float throwSpeed, double meleeDamage, double meleeSpeed, String name, String unlocName)
 	{
 		super(name, unlocName);
 
@@ -57,6 +58,7 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 		this.cooldownTime = cooldownTime;
 		this.attackDamage = meleeDamage;
 		this.attackSpeed = meleeSpeed;
+		this.throwSpeed = throwSpeed;
 
 		setMaxStackSize(stackSize);
 		setCreativeTab(TabMinestuckUniverse.weapons);
@@ -90,13 +92,13 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 
 	public MSUThrowableBase(int useDuration, int cooldownTime, int stackSize, String name, String unlocName)
 	{
-		this(useDuration, cooldownTime, stackSize, 0, 0, name, unlocName);
+		this(useDuration, cooldownTime, stackSize, 1.5f,  0, 0, name, unlocName);
 	}
 
 	//Throwable Material
 	public MSUThrowableBase(String name, String unlocName)
 	{
-		this(1, 0, 64, 0, 0, name, unlocName);
+		this(1, 0, 64, 0, 0, 1.5f, name, unlocName);
 		setCreativeTab(TabMinestuckUniverse.main);
 	}
 
@@ -148,7 +150,7 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 
 			EntityMSUThrowable proj = new EntityMSUThrowable(worldIn, entityLiving, thrownStack);
 			proj.setProjectileSize(this.size);
-			proj.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0, 1.5F, 1.0F);
+			proj.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0, throwSpeed, 1.0F);
 			worldIn.spawnEntity(proj);
 		}
 
