@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.util;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
+import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.alchemy.GristType;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -45,6 +46,10 @@ public class MSUModelManager
         register(caledscratch, 0, "caledscratch");
         register(royalDeringer, 0, "royal_deringer");
         register(scarletRibbitar, 0, "scarlet_ribbitar");
+        register(dDEHammerAxe, 0, "eeeeeeeeeeee");
+        ModelLoader.setCustomModelResourceLocation(crockerSpork, 0, new ModelResourceLocation(Minestuck.MOD_ID+":crocker_spoon", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(crockerFork, 0, new ModelResourceLocation(Minestuck.MOD_ID+":crocker_fork", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(clawHammer, 0, new ModelResourceLocation(Minestuck.MOD_ID+":claw_hammer_old", "inventory"));
 
         DualWeaponDefinition catClawsDef = new DualWeaponDefinition("catclaws_drawn", "catclaws_sheathed");
         ModelLoader.registerItemVariants(catClaws, catClawsDef.getResourceLocations());

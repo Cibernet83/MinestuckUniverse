@@ -1,0 +1,27 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minestuckuniverse:items/barrel_warhammer"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "minestuckuniverse:awakened": 0.2,
+                "minestuckuniverse:active": 1
+            },
+            "model": "minestuckuniverse:item/barrel_warhammer_powered_awakened"
+        },
+        {
+            "predicate": {
+                "minestuckuniverse:awakened": 0.2
+            },
+            "model": "minestuckuniverse:item/barrel_warhammer_awakened"
+        },
+        {
+            "predicate": {
+                "minestuckuniverse:active": 1
+            },
+            "model": "minestuckuniverse:item/barrel_warhammer_powered"
+        }
+    ]
+}

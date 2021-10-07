@@ -31,6 +31,10 @@ public class MSUItemBase extends Item implements IRegistryItem
         add("Nhezak");
         add("Fishwreck");
         add("Akisephila");
+        add("ZeroCraftsman");
+        add("_draconix");
+        add("Owo_XxX_owO");
+        add("carefreeDesigner");
     }};
 
     public MSUItemBase(String name, String unlocName)

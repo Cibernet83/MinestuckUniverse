@@ -38,20 +38,19 @@ public class PropertyFarmine extends WeaponProperty
 			Item drop = block.getItemDropped(blockState, new Random(0L), fortuneLevel);
 			int damageDrop = block.damageDropped(blockState);
 
-			if (stack.getItem().canHarvestBlock(blockState, stack) && playerIn instanceof EntityPlayer && !playerIn.isSneaking() && this.terminus != 1 && this.radius != 0 && (double)Math.abs(blockState.getBlockHardness(worldIn, pos)) >= 1.0E-9D)
+			if (stack.getItem().canHarvestBlock(blockState, stack) && playerIn instanceof EntityPlayer && !playerIn.isSneaking() && this.terminus != 1 && this.radius != 0 &&
+					(blockState.getBlockHardness(worldIn, pos) == 0 || (double)Math.abs(blockState.getBlockHardness(worldIn, pos)) >= 1.0E-9D))
 			{
-				if (stack.getItem().getDestroySpeed(stack, blockState) >= 0) {
+				if (stack.getItem().getDestroySpeed(stack, blockState) >= 0)
 					candidates.add(new Pair(pos, this.radius));
-				} else {
-					candidates.add(new Pair(pos, 1));
-				}
+					else candidates.add(new Pair(pos, 1));
 
 				HashSet<BlockPos> blocksToBreak = new HashSet();
 				boolean passedBreakLimit = false;
 
 				int rad;
 				while(!candidates.isEmpty()) {
-					BlockPos curr = (BlockPos)((Pair)candidates.peek()).object1;
+					BlockPos curr = (BlockPos) candidates.peek().object1;
 					rad = (Integer) candidates.poll().object2;
 					if (!blocksToBreak.contains(curr)) {
 						blocksToBreak.add(curr);

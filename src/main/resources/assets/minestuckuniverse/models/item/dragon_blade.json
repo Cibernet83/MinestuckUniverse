@@ -1,0 +1,16 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minestuckuniverse:items/dragon_blade"
+    },
+    "overrides":
+            [
+                {
+                    "predicate":
+                    {
+                        "minestuckuniverse:offhand": 1
+                    },
+                    "model": "minestuckuniverse:item/dragon_blade_offhand"
+                }
+            ]
+}

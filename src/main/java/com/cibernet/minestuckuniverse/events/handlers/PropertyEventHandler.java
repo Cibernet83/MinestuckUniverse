@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.properties.PropertyAutoSmelt;
 import com.cibernet.minestuckuniverse.items.properties.PropertyTrueDamage;
 import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
 import com.cibernet.minestuckuniverse.items.properties.PropertyGristSetter;
@@ -41,6 +42,7 @@ public class PropertyEventHandler
 		MinecraftForge.EVENT_BUS.register(PropertyEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(PropertyGristSetter.class);
 		MinecraftForge.EVENT_BUS.register(PropertyTrueDamage.class);
+		MinecraftForge.EVENT_BUS.register(PropertyAutoSmelt.class);
 	}
 
 	@SubscribeEvent

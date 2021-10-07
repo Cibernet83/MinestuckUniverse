@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/wisdom_hookshot",
+    "textures": {
+        "layer0": "minestuckuniverse:items/wisdom_hookshot_awakened_standby"
+    }
+}

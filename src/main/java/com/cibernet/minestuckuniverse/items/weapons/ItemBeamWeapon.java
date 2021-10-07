@@ -95,18 +95,30 @@ public class ItemBeamWeapon extends MSUWeaponBase implements IBeamStats
 	{
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
 
-		if(!worldIn.isRemote && entityIn instanceof EntityLivingBase && getMaxItemUseDuration(stack)-((EntityLivingBase) entityIn).getItemInUseCount() > beamTime &&
+		if(!worldIn.isRemote && entityIn instanceof EntityLivingBase &&
 				((EntityLivingBase) entityIn).getActiveItemStack().equals(stack) && stack.hasTagCompound() && stack.getTagCompound().hasUniqueId("Beam"))
 		{
-			Beam beam = worldIn.getCapability(MSUCapabilities.BEAM_DATA, null).getBeam(stack.getTagCompound().getUniqueId("Beam"));
-			if(beam != null && !beam.isBeamReleased())
+			int useTime = getMaxItemUseDuration(stack)-((EntityLivingBase) entityIn).getItemInUseCount();
+			if(useTime % 20 == 0)
 			{
-				if(entityIn instanceof EntityPlayer)
-					((EntityPlayer) entityIn).getCooldownTracker().setCooldown(stack.getItem(), beam.getDuration());
-				beam.releaseBeam();
-				for(EntityPlayer player : beam.world.playerEntities)
-					MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_BEAMS, beam.world), player);
+				if(hasProperty(PropertyDualWield.class, stack))
+					((EntityLivingBase) entityIn).getHeldItemOffhand().damageItem(1, (EntityLivingBase) entityIn);
+				stack.damageItem(1, (EntityLivingBase) entityIn);
 			}
+
+			if(useTime > beamTime)
+			{
+				Beam beam = worldIn.getCapability(MSUCapabilities.BEAM_DATA, null).getBeam(stack.getTagCompound().getUniqueId("Beam"));
+				if(beam != null && !beam.isBeamReleased())
+				{
+					if(entityIn instanceof EntityPlayer)
+						((EntityPlayer) entityIn).getCooldownTracker().setCooldown(stack.getItem(), beam.getDuration());
+					beam.releaseBeam();
+					for(EntityPlayer player : beam.world.playerEntities)
+						MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_BEAMS, beam.world), player);
+				}
+			}
+
 		}
 	}
 

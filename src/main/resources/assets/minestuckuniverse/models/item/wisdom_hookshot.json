@@ -28,6 +28,29 @@
     "overrides": [
         {
             "predicate": {
+                "pulling": 1,
+                "minestuckuniverse:awakened": 0.2
+            },
+            "model": "minestuckuniverse:item/wisdom_hookshot_awakened_pulling_0"
+        },
+        {
+            "predicate": {
+                "pulling": 1,
+                "pull": 0.65,
+                "minestuckuniverse:awakened": 0.2
+            },
+            "model": "minestuckuniverse:item/wisdom_hookshot_awakened_pulling_1"
+        },
+        {
+            "predicate": {
+                "pulling": 1,
+                "pull": 0.9,
+                "minestuckuniverse:awakened": 0.2
+            },
+            "model": "minestuckuniverse:item/wisdom_hookshot_awakened_pulling_2"
+        },
+        {
+            "predicate": {
                 "pulling": 1
             },
             "model": "minestuckuniverse:item/wisdom_hookshot_pulling_0"
@@ -45,6 +68,12 @@
                 "pull": 0.9
             },
             "model": "minestuckuniverse:item/wisdom_hookshot_pulling_2"
+        },
+        {
+            "predicate": {
+                "minestuckuniverse:awakened": 0.2
+            },
+            "model": "minestuckuniverse:item/wisdom_hookshot_awakened"
         }
     ]
 }

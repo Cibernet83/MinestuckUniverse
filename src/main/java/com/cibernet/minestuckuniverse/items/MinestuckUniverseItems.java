@@ -11,6 +11,7 @@ import com.cibernet.minestuckuniverse.items.armor.*;
 import com.cibernet.minestuckuniverse.items.properties.*;
 import com.cibernet.minestuckuniverse.items.properties.beams.PropertyMagicBeam;
 import com.cibernet.minestuckuniverse.items.properties.beams.PropertyPotionBeam;
+import com.cibernet.minestuckuniverse.items.properties.beams.PropertyRainbowBeam;
 import com.cibernet.minestuckuniverse.items.properties.bowkind.*;
 import com.cibernet.minestuckuniverse.items.properties.clawkind.PropertyActionBuff;
 import com.cibernet.minestuckuniverse.items.properties.shieldkind.*;
@@ -27,6 +28,7 @@ import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.item.TabMinestuck;
 import com.mraof.minestuck.item.block.ItemTransportalizer;
+import com.mraof.minestuck.util.MinestuckSoundHandler;
 import com.mraof.minestuck.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -39,6 +41,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -72,16 +75,18 @@ public class MinestuckUniverseItems
     public static MSUToolClass toolNeedles = new MSUToolClass(Material.CLOTH).addEnchantments(EnumEnchantmentType.WEAPON);
     public static MSUToolClass toolHammer = new MSUToolClass("pickaxe").addEnchantments(EnumEnchantmentType.WEAPON, EnumEnchantmentType.DIGGER);
     public static MSUToolClass toolClub = new MSUToolClass().addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolClaws = new MSUToolClass().addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolClaws = new MSUToolClass(Material.PLANTS, Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
     public static MSUToolClass toolCane = new MSUToolClass().addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolSickle = new MSUToolClass().addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolSpoon = new MSUToolClass().addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolFork = new MSUToolClass().addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolSpork = new MSUToolClass(toolSpoon, toolFork);
+    public static MSUToolClass toolSickle = new MSUToolClass(Material.GRASS, Material.PLANTS, Material.LEAVES).addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolSpoon = new MSUToolClass(Material.GOURD).addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolFork = new MSUToolClass(Material.GRASS).addEnchantments(EnumEnchantmentType.WEAPON);
 
     public static MSUToolClass toolShovel = new MSUToolClass("shovel").addEnchantments(EnumEnchantmentType.DIGGER);
     public static MSUToolClass toolAxe = new MSUToolClass("axe").addEnchantments(EnumEnchantmentType.WEAPON, EnumEnchantmentType.DIGGER).setDisablesShield();
     public static MSUToolClass toolPickaxe = new MSUToolClass("pickaxe").addEnchantments(EnumEnchantmentType.DIGGER);
+
+    public static MSUToolClass toolSpork = new MSUToolClass(toolSpoon, toolFork);
+    public static MSUToolClass toolHammaxe = new MSUToolClass(toolHammer, toolAxe);
 
 
     //Block Swap Property Maps
@@ -173,27 +178,30 @@ public class MinestuckUniverseItems
             new PropertyLowHealthBoost(SharedMonsterAttributes.MOVEMENT_SPEED, "Calamity Boost", 1.2, 0.4, 0.4f, 2), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_SPEED, "Calamity Boost", 0.4, 0.2, 0.4f, 2));
 
     //Gauntletkind
-    public static Item fancyGlove = new MSUWeaponBase(50, 0D, 0, 5, "fancy_glove", "fancyGlove").setTool(toolGauntlet, 0, 1);
-    public static Item spikedGlove = new MSUWeaponBase(95, 3.5D, 0.25D, 8, "spiked_glove", "spikedGlove").setTool(toolGauntlet, 1, 1.4F);
-    public static Item cobbleBasher = new MSUWeaponBase(175, 4D, -1.8D, 4, "cobble_basher","cobbleBasher").setTool(toolGauntlet, 1, 4F);
-    public static Item fluoriteGauntlet = new MSUWeaponBase(980, 7D, -0.3D,  8, "fluorite_gauntlet", "fluoriteGauntlet").setTool(toolGauntlet, 1, 2.4F);
-    public static Item goldenGenesisGauntlet = new MSUWeaponBase(1256, 11D, -0.25D, 15, "golden_genesis_gauntlet","goldenGenesisGauntlet").setTool(toolGauntlet, 1, 3F);
-    public static Item pogoFist = new MSUWeaponBase(700, 7.0D, -0.3, 8, "pogo_fist", "pogoFist").setTool(toolGauntlet, 1, 2F).addProperties(new PropertyPogo(0.55D));
-    public static Item rocketFist = new MSUWeaponBase(124, 5D, -1, 6, "rocket_powered_fist", "rocketFist").setTool(toolGauntlet, 1, 1.6F).addProperties(new PropertyRocketDash(10, 15, 0.4f, 3));
-    public static Item jawbreaker = new MSUWeaponBase(124, 3D, 0.4D, 6, "jawbreaker", "jawbreaker").setTool(toolGauntlet, 1, 1.6F).addProperties(new PropertyCandyWeapon());
-    public static Item eldrichGauntlet = new MSUWeaponBase(124, 3D, 0.4D, 6, "eldritch_gauntlet", "eldrichGauntlet").setTool(toolGauntlet, 1, 1.6F).addProperties(new PropertyEldrichBoost());
-    public static Item gauntletOfZillywenn = new MSUWeaponBase(732, 12D, -1.8D, 14, "gauntlet_of_zillywenn","gauntletOfZillywenn").setTool(toolGauntlet, 3, 4F);
-    public static Item gasterBlaster = new ItemWindUpBeam(832, 10D, -1.8D, 0.05f, 10, 1, 16, 0, 16, "gaster_blaster","gasterBlaster").setSounds(MSUSoundHandler.gasterBlasterCharge, MSUSoundHandler.gasterBlasterRelease).setTool(toolGauntlet, 6, 4F).addProperties(new PropertyPotionBeam(new PotionEffect(MobEffects.WITHER, 100, 0)));
-    public static Item midasGlove = new MSUWeaponBase(632, 8D, -1.8D, 14, "midas_glove","midasGlove").setTool(toolGauntlet, 3, 5F).addProperties(new PropertyGristSetter(GristType.Gold));
+    public static Item fancyGlove = new MSUWeaponBase(200, 0D, 0, 5, "fancy_glove", "fancyGlove").setTool(toolGauntlet, 0, 1);
+    public static Item spikedGlove = new MSUWeaponBase(289, 5.7, -0.48, 8, "spiked_glove", "spikedGlove").setTool(toolGauntlet, 1, 1.4F);
+    public static Item cobbleBasher = new MSUWeaponBase(360, 7.2, -0.66, 4, "cobble_basher","cobbleBasher").setTool(toolGauntlet, 1, 4F);
+    public static Item fluoriteGauntlet = new MSUWeaponBase(1000, 9, -0.54,  8, "fluorite_gauntlet", "fluoriteGauntlet").setTool(toolGauntlet, 4, 8).addProperties(new PropertyRandomDamage());
+    public static Item goldenGenesisGauntlet = new MSUWeaponBase(1440, 23.1, -0.48D, 15, "golden_genesis_gauntlet","goldenGenesisGauntlet").setTool(toolGauntlet, 2, 3F);
+    public static Item pogoFist = new MSUWeaponBase(600, 7.2D, -0.6, 8, "pogo_fist", "pogoFist").setTool(toolGauntlet, 2, 4F).addProperties(new PropertyPogo(0.55D));
+    public static Item rocketFist = new MSUWeaponBase(360, 7.2D, -0.54, 6, "rocket_powered_fist", "rocketFist").setTool(toolGauntlet, 2, 4F).addProperties(new PropertyRocketDash(10, 15, 0.4f, 3));
+    public static Item jawbreaker = new MSUWeaponBase(660, 6.5, -0.6D, 6, "jawbreaker", "jawbreaker").setTool(toolGauntlet, 3, 1.6F).addProperties(new PropertyCandyWeapon());
+    public static Item eldrichGauntlet = new MSUWeaponBase(1200, 9.6, -0.72, 6, "eldritch_gauntlet", "eldrichGauntlet").setTool(toolGauntlet, 3, 6).addProperties(new PropertyEldrichBoost());
+    public static Item gauntletOfZillywenn = new MSUWeaponBase(2400, 24.5, -0.78, 14, "gauntlet_of_zillywenn","gauntletOfZillywenn").setTool(toolGauntlet, 5, 8F);
+    public static Item gasterBlaster = new ItemWindUpBeam(640, 7.7, -0.66D, 0.05f, 10, 1, 16, 0, 16, "gaster_blaster","gasterBlaster").setSounds(MSUSoundHandler.gasterBlasterCharge, MSUSoundHandler.gasterBlasterRelease).setTool(toolGauntlet, 6, 4F)
+            .setTool(toolGauntlet, 4, 8).addProperties(new PropertyPotionBeam(new PotionEffect(MobEffects.WITHER, 100, 0)));
+    public static Item midasGlove = new MSUWeaponBase(800, 8.7D, -0.57D, 14, "midas_glove","midasGlove").setTool(toolGauntlet, 3, 10F).addProperties(new PropertyGristSetter(GristType.Gold));
 
     //Needlekind
-    public static Item knittingNeedles = new ItemKnittingNeedles(32,2, 1, 1, "knitting_needle", "knittingNeedle").setTool(toolNeedles, 2, 1f);
-    public static Item pointySticks = new MSUWeaponBase(50,2, 1, 1, "pointy_stick", "pointyStick").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield()).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 2)).setRepairMaterial("plankWood");
-    public static Item boneNeedles = new MSUWeaponBase(100,4, 0, 10, "bone_needle", "boneNeedle").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield()).setRepairMaterial("bone");
-    public static Item needlewands = new ItemBeamWeapon(250,4, 0.5, 0.05f, 10, 1, 60, "needlewand", "needlewand").setTool(toolNeedles, 3, 2f).addProperties(new PropertyDualWield(), new PropertyMagicBeam());
-    public static Item oglogothThorn = new ItemBeamWeapon(666,5.6, -0.5, 0.1f, 30, 0.7f, 5, 20, 80, "thorn_of_oglogoth", "oglogothThorn").setTool(toolNeedles, 4, 3f).addProperties(new PropertyDualWield());
-    public static Item echidnaQuills = new MSUWeaponBase(5, 1, 100, "quill_of_echidna", "echidnaQuill").setTool(toolNeedles, 5, 5f).addProperties(new PropertyDualWield());
-    public static Item thistlesOfZillywitch = new MSUWeaponBase(640, 7, 0.5, 14, "thistles_of_zillywitch", "thistlesOfZillywitch").setTool(toolNeedles, 3, 4f).addProperties(new PropertyDualWield());
+    public static Item knittingNeedles = new ItemKnittingNeedles(128,1.6, -0.24, 1, "knitting_needle", "knittingNeedle").setTool(toolNeedles, 2, 1f);
+    public static Item pointySticks = new MSUWeaponBase(300,3.2, -0.3, 10, "pointy_stick", "pointyStick").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield()).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 2)).setRepairMaterial("plankWood");
+    public static Item boneNeedles = new MSUWeaponBase(225,3.6, -0.3, 5, "bone_needle", "boneNeedle").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield()).setRepairMaterial("bone");
+    public static Item dragonBlades = new MSUWeaponBase(500, 7.9, -0.36, 4, "dragon_blade", "dragonBlades").setTool(toolNeedles, 2, 4).addProperties(new PropertyDualWield()).setCreativeTab(null);
+    public static Item litGlitterBeamTransistor = new ItemBeamWeapon(700,5.5, -0.3, 0.1f, 20, 1, 72000, 40, 30, "lit_glitter_beam_transistor", "litGlitterBeamTransistor").setTool(toolNeedles, 2, 4f).addProperties(new PropertyDualWield(), new PropertyRainbowBeam());
+    public static Item needlewands = new ItemBeamWeapon(488,6.5, -0.3, 0.05f, 10, 1, 60, "needlewand", "needlewand").setTool(toolNeedles, 3, 2f).addProperties(new PropertyDualWield(), new PropertyMagicBeam());
+    public static Item oglogothThorn = new ItemBeamWeapon(666,7.2, -0.3, 0.1f, 30, 0.7f, 5, 20, 80, "thorn_of_oglogoth", "oglogothThorn").setTool(toolNeedles, 4, 3f).addProperties(new PropertyDualWield());
+    public static Item echidnaQuills = new MSUWeaponBase(17.3, -0.3, 100, "quill_of_echidna", "echidnaQuill").setTool(toolNeedles, 10, 5f).addProperties(new PropertyDualWield());
+    public static Item thistlesOfZillywitch = new MSUWeaponBase(800, 9.1,  -0.3, 40, "thistles_of_zillywitch", "thistlesOfZillywitch").setTool(toolNeedles, 5, 10f).addProperties(new PropertyDualWield());
 
     //Shieldkind
     public static Item woodenDoorshield = new MSUShieldBase(340, 12, 0.3f, 5, "wooden_doorshield", "woodenDoorshield").setRepairMaterial("plankWood");
@@ -231,46 +239,46 @@ public class MinestuckUniverseItems
     public static MSUBowBase bowOfLight = (MSUBowBase) new MSUBowBase(2050, 4f, 24, 5, 0.3f, 3, true, "bow_of_light", "bowOfLight").requireNoAmmo().addProperties(new PropertyLaserArrow(), new PropertyArrowNoGravity(), new PropertyFlamingArrow(6, 0.9f), new PropertyPierce(0.1f));
     public static MSUBowBase theChancemaker = (MSUBowBase) new MSUBowBase(1280, 1f, 16, 3, 1.3f, 2, false, "the_chancemaker", "theChancemaker").addProperties(new PropertyRandomDamage());
     public static MSUBowBase wisdomsPierce = (MSUBowBase) new MSUBowBase(1560, 3, 22, 4, 0.3f, 2, false, "wisdom_pierce", "calamityBow").addProperties(new PropertyPierce(0.4f), new PropertyLowHealthBoost(SharedMonsterAttributes.LUCK, "Calamity Boost", 2, 0.4, 0.5f, 1), new PropertyLowHealthDrawSpeed(0.5f, 0.2f));
-    public static MSUBowBase wisdomsHookshot = (MSUBowBase) new MSUBowBase(1560, 0.5f, 22, 3, 0.3f, 2, true, "wisdom_hookshot", "calamityHookshot").requireNoAmmo().addProperties(new PropertyHookshot(1, 128), new PropertyArrowNoGravity(), new PropertyLowHealthBoost(SharedMonsterAttributes.LUCK, "Calamity Boost", 2, 0.4, 0.5f, 1));
+    public static MSUBowBase wisdomsHookshot = (MSUBowBase) new MSUBowBase(1560, 0.5f, 22, 3, 0.3f, 2, true, "wisdom_hookshot", "calamityHookshot").requireNoAmmo().addProperties(new PropertyHookshot(1, 128), new PropertyArrowNoGravity(), new PropertyLowHealthBoost(SharedMonsterAttributes.LUCK, "Calamity Boost", 2, 0.4, 0.5f, 1)).setCreativeTab(null);
 
 
     //Hammerkind
-    public static Item loghammer = new MSUWeaponBase(355, 7, -2.8, 7, "loghammer", "loghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial("logWood");
-    public static Item overgrownLoghammer = new MSUWeaponBase(210, 7, -2.8, 7, "overgrown_loghammer", "overgrownLoghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial("logWood").addProperties(new PropertyPlantMend());
-    public static Item glowingLoghammer = new MSUWeaponBase(310, 7, -2.8, 7, "glowing_loghammer", "glowingLoghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterials(new ItemStack(MinestuckBlocks.glowingLog)).addProperties(new PropertyPotion(new PotionEffect(MobEffects.GLOWING, 200, 0), false, 1));
-    public static Item midasMallet = new MSUWeaponBase(415, 6.5D, -2.5D, 15, "midas_mallet", "midasMallet").setTool(toolHammer, 3, 2f).addProperties(new PropertyGristSetter(GristType.Gold));
-    public static Item aaaNailShocker = new MSUWeaponBase(325, 7, -2.4, 10,"aaa_nail_shocker", "aaaNailShocker").setTool(toolHammer, 2, 3f).setRepairMaterials(new ItemStack(battery)).addProperties(new PropertyElectric(20, 0, 0.7f, true));
-    public static Item highVoltageStormCrusher = new MSUWeaponBase(580, 10, -2.4, 18, "high_voltage_storm_crusher", "highVoltageStormCrusher").setTool(toolHammer, 4, 3.0f).addProperties(new PropertyLightning(8, 1, true, false), new PropertyElectric(60, 8, -1, false));
-    public static Item barrelsWarhammer = new MSUWeaponBase(640, 22, -2.4, 18, "barrel_warhammer", "calamityHammer").setTool(toolHammer, 4, 4.0f).addProperties(new PropertyRocketBoost(0.6f), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_DAMAGE, "Calamity Boost", 0.6, 0.1, 0.3f, 2));
-    public static Item stardustSmasher = new MSUWeaponBase(1600, 16, -2.4, 20, "stardust_smasher", "stardustSmasher").setTool(toolHammer, 20, 8.0f).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.ARTHROPOD, 1000));
+    public static Item loghammer = new MSUWeaponBase(776, 12.8, -2.8, 7, "loghammer", "loghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial("logWood");
+    public static Item overgrownLoghammer = new MSUWeaponBase(575, 19.2, -2.8, 7, "overgrown_loghammer", "overgrownLoghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial("logWood").addProperties(new PropertyPlantMend());
+    public static Item glowingLoghammer = new MSUWeaponBase(906, 19.2, -2.8, 7, "glowing_loghammer", "glowingLoghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterials(new ItemStack(MinestuckBlocks.glowingLog)).addProperties(new PropertyPotion(new PotionEffect(MobEffects.GLOWING, 200, 0), false, 1));
+    public static Item midasMallet = new MSUWeaponBase(1150, 26.9D, -2.94D, 15, "midas_mallet", "midasMallet").setTool(toolHammer, 3, 2f).addProperties(new PropertyGristSetter(GristType.Gold));
+    public static Item aaaNailShocker = new MSUWeaponBase(776, 19.2, -2.52, 10,"aaa_nail_shocker", "aaaNailShocker").setTool(toolHammer, 2, 3f).setRepairMaterials(new ItemStack(battery)).addProperties(new PropertyElectric(20, 0, 0.7f, true));
+    public static Item highVoltageStormCrusher = new MSUWeaponBase(1150, 30.7, -2.8, 18, "high_voltage_storm_crusher", "highVoltageStormCrusher").setTool(toolHammer, 4, 3.0f).addProperties(new PropertyLightning(8, 1, true, false), new PropertyElectric(60, 8, -1, false));
+    public static Item barrelsWarhammer = new MSUWeaponBase(1438, 64, -2.8, 18, "barrel_warhammer", "calamityHammer").setTool(toolHammer, 4, 4.0f).addProperties(new PropertyRocketBoost(0.6f), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_DAMAGE, "Calamity Boost", 0.6, 0.1, 0.3f, 2));
+    public static Item stardustSmasher = new MSUWeaponBase(1725, 44.8, -2.8, 20, "stardust_smasher", "stardustSmasher").setTool(toolHammer, 20, 8.0f).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.ARTHROPOD, 1000));
 
     //Clawkind
-    public static Item katars = new MSUWeaponBase(124, 1.5D, -0.65, 8, "katars", "katars").setTool(toolClaws, 2, 3).addProperties(new PropertySweep(), new PropertyDualWield());
-    public static Item diamondKatars = new MSUWeaponBase(624, 2.5D, -0.65, 8, "diamond_katars", "diamondKatars").setTool(toolClaws, 2, 3).addProperties(new PropertySweep(), new PropertyDualWield());
-    public static Item actionClaws = new ItemDualClaw(280, 3.0D, 0.0D, -1.5D, -1.0D, 6, "actionClaws","action_claws").setTool(toolClaws, 2, 3).addProperties(new PropertyActionBuff(200, 2.5));
-    public static Item candyCornClaws = new ItemDualClaw(310, 4.0D, 0.0D, -1.5D, -1.0D, 6, "candyCornClaws","candy_corn_claws").setTool(toolClaws, 2, 3).addProperties(new PropertyCandyWeapon());
-    public static Item sneakyDaggers = new ItemDualClaw(322, 3.0D, 0.0D, -1.5D, -1.0D, 7, "sneakyDaggers","sneaky_daggers").setTool(toolClaws, 2, 3).addProperties(new PropertySneaky(1.2f, 1.1f, 1.6f));
-    public static Item rocketKatars = new MSUWeaponBase(195, 3, -0.5, 8, "rocket_katars", "rocketKatars").setTool(toolClaws, 2, 5).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyRocketDash(3, 20, 0.3f, 2.5f));
-    public static Item blizzardCutters = new ItemDualClaw(325, 4, 0,-0.5, -1, 8, "blizzardCutters", "blizzard_cutters").setTool(toolClaws, 3, 3).addProperties(new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 400, 0), false, 0.4f), new PropertyKnockback(2.2f));
-    public static Item thunderbirdTalons = new MSUWeaponBase(445, 5,-0.5, 18, "thunderbird_talons", "thunderbirdTalons").setTool(toolClaws, 5, 3).setRepairMaterials(new ItemStack(MinestuckUniverseItems.battery)).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyShock(10, 3, 0.4f, true), new PropertyKnockback(1.8f));
-    public static Item archmageDaggers = new ItemBeamWeapon(830, 6,-0.5, 0.05f, 15, 1, 60, 10, 18, "archmage_daggers", "archmageDaggers").setTool(toolClaws, 5, 3).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyMagicBeam());
-    public static Item katarsOfZillywhomst = new ItemDualClaw(750, 8, 0,-0.5, 0, 24, "katarsOfZillywhomst", "katars_of_zillywhomst").setTool(toolClaws, 4, 3).addProperties(new PropertySweep(), new PropertyDualWield());
-    public static Item bladesOfTheWarrior = new MSUWeaponBase(750, 8,-0.5, 24, "blades_of_the_warrior", "christopherClaws").setTool(toolClaws, 4, 3).addProperties(new PropertySweep(), new PropertyDualWield()).setCreativeTab(null);
+    public static Item katars = new MSUWeaponBase(248, 1.6, -0.65, 2, "katars", "katars").setTool(toolClaws, 2, 3).addProperties(new PropertySweep(), new PropertyDualWield());
+    public static Item diamondKatars = new MSUWeaponBase(900, 2.5, -0.65, 6, "diamond_katars", "diamondKatars").setTool(toolClaws, 2, 3).addProperties(new PropertySweep(), new PropertyDualWield());
+    public static Item actionClaws = new ItemDualClaw(608, 3.9D, 0.0D, -0.55D, -0.0D, 6, "actionClaws","action_claws").setTool(toolClaws, 2, 3).addProperties(new PropertyActionBuff(200, 2.5));
+    public static Item candyCornClaws = new ItemDualClaw(743, 4.8, 0.0D, -0.65D, -0.0D, 6, "candyCornClaws","candy_corn_claws").setTool(toolClaws, 2, 3).addProperties(new PropertyCandyWeapon());
+    public static Item sneakyDaggers = new ItemDualClaw(900, 5.5, 0.0D, -0.61D, -0.0D, 7, "sneakyDaggers","sneaky_daggers").setTool(toolClaws, 2, 3).addProperties(new PropertySneaky(1.2f, 1.1f, 1.6f));
+    public static Item rocketKatars = new MSUWeaponBase(585, 6.4, -0.6, 8, "rocket_katars", "rocketKatars").setTool(toolClaws, 2, 5).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyRocketDash(3, 20, 0.3f, 2.5f));
+    public static Item blizzardCutters = new ItemDualClaw(810, 6.4, 0,-0.65, 0, 8, "blizzardCutters", "blizzard_cutters").setTool(toolClaws, 3, 3).addProperties(new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 400, 0), false, 0.4f), new PropertyKnockback(2.2f));
+    public static Item thunderbirdTalons = new MSUWeaponBase(1125, 8.8,-0.65, 18, "thunderbird_talons", "thunderbirdTalons").setTool(toolClaws, 5, 3).setRepairMaterials(new ItemStack(MinestuckUniverseItems.battery)).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyShock(10, 3, 0.4f, true), new PropertyKnockback(1.8f));
+    public static Item archmageDaggers = new ItemBeamWeapon(1350, 9.6,-0.68, 0.05f, 15, 1, 60, 10, 18, "archmage_daggers", "archmageDaggers").setTool(toolClaws, 5, 3).addProperties(new PropertySweep(), new PropertyDualWield(), new PropertyMagicBeam());
+    public static Item katarsOfZillywhomst = new ItemDualClaw(2700, 15.3, 0,-0.65, 0, 40, "katarsOfZillywhomst", "katars_of_zillywhomst").setTool(toolClaws, 5, 10).addProperties(new PropertySweep(), new PropertyDualWield());
+    public static Item bladesOfTheWarrior = new MSUWeaponBase(1080, 6.4,-0.65, 24, "blades_of_the_warrior", "christopherClaws").setTool(toolClaws, 4, 3).addProperties(new PropertySweep(), new PropertyDualWield()).setCreativeTab(null);
 
     //Canekind
-    public static Item staffOfOvergrowth = new MSUWeaponBase(455, 6.0f, -1.2, 20, "staff_of_overgrowth", "staffOfOvergrowth").setTool(toolCane, 3, 2).addProperties(new PropertyBlockSwap(overgrowthTransforms, 1), new PropertyPotion(new PotionEffect(MobEffects.POISON, 400, 1), false, 0.4f));
-    public static Item atomicIrradiator = new MSUWeaponBase(455, 6.0f, -1.2, 20, "atomic_irradiator", "atomicIrradiator").setTool(toolCane,3, 3).addProperties(new PropertyPotion(new PotionEffect(MobEffects.WITHER, 400, 1), true, 0.6f), new PropertyGristSetter(GristType.Uranium));
-    public static Item goldCane = new MSUWeaponBase(340, 6.0f, -1.2, 18, "gold_cane", "goldCane").setTool(toolCane, 2, 5).setRepairMaterial("ingotGold");
-    public static Item goldenCuestaff = new MSUWeaponBase(780, 10f, -1.2, 32, "golden_cuestaff", "goldenCuestaff").setTool(toolCane, 2, 6);
-    public static Item scepterOfZillywuud = new MSUWeaponBase(780, 14f, -1.2, 32, "scepter_of_zillywuud", "scepterOfZillywuud").setTool(toolCane, 4, 3);
+    public static Item staffOfOvergrowth = new MSUWeaponBase(1040, 14.4, -2, 20, "staff_of_overgrowth", "staffOfOvergrowth").setTool(toolCane, 3, 2).addProperties(new PropertyBlockSwap(overgrowthTransforms, 1), new PropertyPotion(new PotionEffect(MobEffects.POISON, 400, 1), false, 0.4f));
+    public static Item atomicIrradiator = new MSUWeaponBase(900, 18, -2, 20, "atomic_irradiator", "atomicIrradiator").setTool(toolCane,3, 3).addProperties(new PropertyPotion(new PotionEffect(MobEffects.WITHER, 400, 1), true, 0.6f), new PropertyGristSetter(GristType.Uranium));
+    public static Item goldCane = new MSUWeaponBase(600, 12, -2, 18, "gold_cane", "goldCane").setTool(toolCane, 2, 5).setRepairMaterial("ingotGold");
+    public static Item goldenCuestaff = new MSUWeaponBase(1000, 20, -2, 32, "golden_cuestaff", "goldenCuestaff").setTool(toolCane, 2, 6);
+    public static Item scepterOfZillywuud = new MSUWeaponBase(2400, 43.2, -2, 32, "scepter_of_zillywuud", "scepterOfZillywuud").setTool(toolCane, 5, 10);
 
     //Clubkind
-    public static Item rubyContrabat = new MSUWeaponBase(185, 6.5, -2.2, 22, "ruby_contrabat", "rubyContrabat").setTool(toolClub, 3, 4.0f).addProperties(new PropertySweep(), new PropertyGristSetter(GristType.Ruby), new PropertyProjectileDeflect(1, 10));
-    public static Item homeRunBat = new MSUWeaponBase(500, 5, -3.9, 10, "home_run_bat", "homeRunBat").setTool(toolClub, 5, 2.0f).addProperties(new PropertySweep(), new PropertyKnockback(15), new PropertySoundOnHit(MSUSoundHandler.homeRunBat, 1, 1.2f));
-    public static Item dynamiteStick = new MSUWeaponBase(110, 8, -2.2, 8, "dynamite_stick", "dynamiteStick").setTool(toolClub, 1, 2.0f).addProperties(new PropertySweep(), new PropertyExplode(2.5f, 1, true));
-    public static Item nightmareMace = new MSUWeaponBase(295, 6, -2.2, 8, "nightmare_mace", "nightmareMace").setTool(toolClub, 3, 3.0f).addProperties(new PropertySweep(), new PropertyHungry(3, 4, true),
+    public static Item rubyContrabat = new MSUWeaponBase(1200, 14.1, -1.98, 22, "ruby_contrabat", "rubyContrabat").setTool(toolClub, 3, 4.0f).addProperties(new PropertySweep(), new PropertyGristSetter(GristType.Ruby), new PropertyProjectileDeflect(0.5f, 4));
+    public static Item homeRunBat = new MSUWeaponBase(3240, 16.9, -3.9, 10, "home_run_bat", "homeRunBat").setTool(toolClub, 5, 2.0f).addProperties(new PropertySweep(), new PropertyKnockback(15), new PropertySoundOnHit(MSUSoundHandler.homeRunBat, 1, 1.2f), new PropertyProjectileDeflect(1, 10));
+    public static Item dynamiteStick = new MSUWeaponBase(1050, 17.6, -2.2, 8, "dynamite_stick", "dynamiteStick").setTool(toolClub, 1, 2.0f).addProperties(new PropertySweep(), new PropertyExplode(2.5f, 1, true), new PropertyProjectileDeflect(0.6f, 4));
+    public static Item nightmareMace = new MSUWeaponBase(1200, 14.1, -2.09, 8, "nightmare_mace", "nightmareMace").setTool(toolClub, 3, 3.0f).addProperties(new PropertySweep(), new PropertyHungry(3, 4, true), new PropertyProjectileDeflect(0.3f, 8),
             new PropertyPotion(new PotionEffect(MobEffects.BLINDNESS, 200, 0), false, 0.2f), new PropertyPotion(new PotionEffect(MobEffects.NAUSEA, 200, 0), false, 0.2f), new PropertyPotion(new PotionEffect(MobEffects.WITHER, 100, 1), true, 0.2f));
-    public static Item cranialEnder = new MSUWeaponBase(345, 9, -2.2, 8, "cranial_ender", "cranialEnder").setTool(toolClub, 5, 2.0f).addProperties(new PropertySweep(), new PropertyExplode(0.5f, 0.2f, true), new PropertyPotion(new PotionEffect(MobEffects.NAUSEA, 100, 0), true, 0.7f));
+    public static Item cranialEnder = new MSUWeaponBase(1800, 17.6, -2.2, 8, "cranial_ender", "cranialEnder").setTool(toolClub, 5, 2.0f).addProperties(new PropertySweep(), new PropertyExplode(0.5f, 0.2f, true), new PropertyPotion(new PotionEffect(MobEffects.NAUSEA, 100, 0), true, 0.7f), new PropertyProjectileDeflect(0.6f, 3));
 
     //Dicekind TODO
     public static Item dice = new MSUItemBase("dice", "dice").setCreativeTab(TabMinestuck.instance);
@@ -296,16 +304,17 @@ public class MinestuckUniverseItems
     public static Item bigRock = new ItemBigRock("big_rock", "bigRock");
 
     //Misc.
-    public static Item diamondSickle = new MSUWeaponBase(620, 7, -2.2, 32, "diamond_sickle", "diamondSickle").setTool(toolSickle, 3, 4).addProperties(new PropertySweep(3));
-    public static Item hereticusAurum = new MSUWeaponBase(620, 7, -2.2, 32, "hereticus_aurum", "hereticusAurum").setTool(toolSickle, 5, 4).addProperties(new PropertySweep(3));
-    public static Item gravediggerShovel = new MSUWeaponBase(185, 6, -3, 8, "gravedigger_shovel", "gravediggerShovel").setTool(toolShovel, 3, 4).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
-    public static Item fancySpoon = new MSUWeaponBase(484, 7, -2.3, 4, "fancy_spoon", "fancySpoon").setTool(toolSpoon, 3, 3);
-    public static Item quartzFork = new MSUWeaponBase(484, 7, -2.3, 4, "quartz_fork", "quartzFork").setTool(toolFork, 3, 3);
-    public static Item battlesporkOfZillywut = new MSUWeaponBase(769, 12, -2.3, 24, "battlespork_of_zillywut", "battlesporkOfZillywut").setTool(toolSpork, 10, 3);
-    public static Item battleaxeOfZillywahoo = new MSUWeaponBase(780, 17, -3, 24, "battleaxe_of_zillywahoo", "battleaxeOfZillywahoo").setTool(toolAxe, 10, 3);
-    public static Item battlepickOfZillydew = new MSUWeaponBase(780, 16, -2.8, 24, "battlepick_of_zillydew", "battlepickOfZillydew").setTool(toolPickaxe, 10, 3);
+    public static Item diamondSickle = new MSUWeaponBase(1650, 5.5, -2.4, 32, "diamond_sickle", "diamondSickle").setTool(toolSickle, 3, 4).addProperties(new PropertySweep(3), new PropertyFarmine(2, 500));
+    public static Item hereticusAurum = new MSUWeaponBase(110, 15.9, -2.16, 32, "hereticus_aurum", "hereticusAurum").setTool(toolSickle, 5, 4).addProperties(new PropertySweep(3), new PropertyFarmine(5, 500));
+    public static Item gravediggerShovel = new MSUWeaponBase(720, 16, -3, 8, "gravedigger_shovel", "gravediggerShovel").setTool(toolShovel, 3, 4).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
+    public static Item fancySpoon = new MSUWeaponBase(1200, 4.5, -2.2, 4, "fancy_spoon", "fancySpoon").setTool(toolSpoon, 3, 3);
+    public static Item quartzFork = new MSUWeaponBase(405, 9.1, -2.2, 4, "quartz_fork", "quartzFork").setTool(toolFork, 3, 3).addProperties(new PropertyTipperDamage(0.6f, 1.3f, 0.8f));
+    public static Item crockerFork = new MSUWeaponBase(600, 11.5, -2.2, 6, "crocker_fork", "crockerFork").setTool(toolFork, 4, 8).addProperties(new PropertyTipperDamage(0.6f, 1.3f, 0.8f)).setCreativeTab(null);
+    public static Item battlesporkOfZillywut = new MSUWeaponBase(3150, 37.9, -2.2, 40, "battlespork_of_zillywut", "battlesporkOfZillywut").setTool(toolSpork, 5, 10);
+    public static Item battleaxeOfZillywahoo = new MSUWeaponBase(3000, 86.4, -3, 40, "battleaxe_of_zillywahoo", "battleaxeOfZillywahoo").setTool(toolAxe, 5, 10);
+    public static Item battlepickOfZillydew = new MSUWeaponBase(780, 16, -2.8, 40, "battlepick_of_zillydew", "battlepickOfZillydew").setTool(toolPickaxe, 5, 10);
     public static Item rolledUpPaper = new MSUWeaponBase(200, 3, 0, 1, "rolled_up_paper", "rolledUpPaper");
-    public static Item yesterdaysNews = new MSUWeaponBase(350, 7, 0, 1, "yesterdays_news", "yesterdaysNews").addProperties(new PropertyPotion(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 1), false, 0.5f), new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 200, 1), false, 0.5f), new PropertyFire(3, 0.7f, true));
+    public static Item yesterdaysNews = new MSUWeaponBase(450, 7, 0, 1, "yesterdays_news", "yesterdaysNews").addProperties(new PropertyPotion(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 1), false, 0.5f), new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 200, 1), false, 0.5f), new PropertyFire(3, 0.7f, true));
 
     //Armor
     public static MSUArmorBase diverHelmet = new ItemDiverHelmet(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
@@ -327,7 +336,7 @@ public class MinestuckUniverseItems
 
     //Overrides
     public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCloth, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
-    public static Item catclaws = new ItemDualClaw(500, 4.0D, 1.0D, -1.5D, -1.0D, 6, "catClaws",Minestuck.MOD_ID+ ":catclaws").setTool(toolClaws, 2, 1);
+    public static Item catclaws = new ItemDualClaw(450, 2.9, -0.65, -1.5D, -1.0D, 6, "catClaws",Minestuck.MOD_ID+ ":catclaws").setTool(toolClaws, 2, 1);
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -433,6 +442,7 @@ public class MinestuckUniverseItems
         registerItem(registry, knittingNeedles);
         registerItem(registry, pointySticks);
         registerItem(registry, boneNeedles);
+        registerItem(registry, litGlitterBeamTransistor);
         registerItem(registry, needlewands);
         registerItem(registry, oglogothThorn);
         registerItem(registry, echidnaQuills);
@@ -456,6 +466,30 @@ public class MinestuckUniverseItems
         registerItem(registry, wisdomsPierce);
         registerItem(registry, wisdomsHookshot);
 
+        if(MSUConfig.combatOverhaul)
+        {
+            registerCustomRenderedItem(registry, new MSUWeaponBase(259, 6.4, -2.52, 1, MinestuckItems.clawHammer).setTool(toolHammer, 1, 2));
+            registerItem(registry, new MSUWeaponBase(575, 12.8, -2.8, 3, MinestuckItems.sledgeHammer).setTool(toolHammer, 2, 4));
+            registerItem(registry, new MSUWeaponBase(575, 12.8, -2.8, 2, MinestuckItems.blacksmithHammer).setTool(toolHammer, 1, 6));
+            registerItem(registry, new MSUWeaponBase(863, 19.2, -2.8, 4, MinestuckItems.pogoHammer).setTool(toolHammer, 2, 4).addProperties(new PropertyPogo(0.7)));
+            registerItem(registry, new MSUWeaponBase(1610, 51.2, -3.64, 4, MinestuckItems.telescopicSassacrusher).setTool(toolHammer, 8, 2).addProperties(new PropertyFarmine(100, 128)));
+            registerItem(registry, new MSUWeaponBase(776, 19.2, -2.52, 4, MinestuckItems.regiHammer).setTool(toolHammer, 3, 6));
+            registerItem(registry, new MSUWeaponBase(1725, 32, -2.66, 8, MinestuckItems.fearNoAnvil)
+            {{
+                if(MinestuckUniverse.isMSGTLoaded)
+                    addProperties(new PropertyPotion(true, 0.1f, new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("minestuckgodtier","time_stop")), 20, 0)));
+            }}.setTool(toolHammer, 3, 10).addProperties(new PropertyPotion(false, 0.5f, new PotionEffect(MobEffects.SLOWNESS, 400, 1), new PotionEffect(MobEffects.MINING_FATIGUE, 400, 2))));
+            registerItem(registry, new MSUWeaponBase(1265, 25.6, -2.8, 4, MinestuckItems.meltMasher).setTool(toolHammer, 4, 8).addProperties(new PropertyAutoSmelt(), new PropertyFarmine(8, 5), new PropertyFire(4, 1, false)));
+            registerItem(registry, new MSUWeaponBase(3450, 69.1, -2.94, 40, MinestuckItems.zillyhooHammer).setTool(toolHammer, 5, 10));
+            registerItem(registry, new MSUWeaponBase(2588, 49.9, -2.8, 60, MinestuckItems.scarletZillyhoo).setTool(toolHammer, 5, 10).addProperties(new PropertyFire(10, 0.8f, true)));
+            registerItem(registry, new MSUWeaponBase(3019, 20, -2.66, 20, MinestuckItems.popamaticVrillyhoo).setTool(toolHammer, 5, 12).addProperties(new PropertyRandomDamage(0, 7, 8)));
+            registerItem(registry, new MSUWeaponBase(1725, 32, -2.8, 8, MinestuckItems.mwrthwl).setTool(toolHammer, 4, 8).addProperties(new PropertyTrueDamage()));
+            registerItem(registry, new MSUWeaponBase(1290, 28.8, -2.9, 4, MinestuckItems.qPHammerAxe).setTool(toolHammaxe, 4, 6).addProperties(new PropertyPogo(0.6), new PropertyFarmine(25, 64)));
+            registerItem(registry, new MSUWeaponBase(1209, 43.2, -3, 8, MinestuckItems.qFHammerAxe).setTool(toolHammaxe, 4, 8).setRepairMaterials(new ItemStack(MinestuckItems.rawUranium)).addProperties(new PropertyPogo(0.7), new PropertyFarmine(25, 32), new PropertyPotion(true, 0.5f, new PotionEffect(MobEffects.WITHER, 200, 2))));
+            registerItem(registry, new MSUWeaponBase(1725, 38.4, -2.8, 12, MinestuckItems.qEHammerAxe).setTool(toolHammer, 4, 6).addProperties(new PropertyPogo(0.8), new PropertyFarmine(25, 8)));
+            registerCustomRenderedItem(registry, new MSUWeaponBase(1724, 38.4, -2.8, 12, MinestuckItems.dDEHammerAxe).setTool(toolHammer, 0, 6).addProperties(new PropertyPogo(1), new PropertySoundOnHit(MinestuckSoundHandler.soundScreech, 1F, 1.5F)));
+        }
+
         registerItem(registry, loghammer);
         registerItem(registry, overgrownLoghammer);
         registerItem(registry, glowingLoghammer);
@@ -465,20 +499,84 @@ public class MinestuckUniverseItems
         registerItem(registry, barrelsWarhammer);
         registerItem(registry, stardustSmasher);
 
-        registerItem(registry, gravediggerShovel);
+        if(MSUConfig.combatOverhaul)
+        {
+            registerItem(registry, new MSUWeaponBase(275, 3.6, -2.4, 1, MinestuckItems.sickle).setTool(toolSickle, 1, 2).addProperties(new PropertySweep(2), new PropertyFarmine(1, 500)));
+            registerItem(registry, new MSUWeaponBase(990, 11.9, -2.4, 10, MinestuckItems.homesSmellYaLater).setTool(toolSickle, 2, 3).addProperties(new PropertySweep(3f), new PropertyFarmine(2, 500)));
+            registerItem(registry, new MSUWeaponBase(880, 17.3, -2.64, 6, MinestuckItems.fudgeSickle).setTool(toolSickle, 2, 2).addProperties(new PropertySweep(2.5f), new PropertyEdible(6, 1, 10)));
+            registerItem(registry, new MSUWeaponBase(908, 10.8, -2.4, 5, MinestuckItems.candySickle).setTool(toolSickle, 3, 4).addProperties(new PropertySweep(3), new PropertyFarmine(2, 500), new PropertyCandyWeapon()));
+            registerItem(registry, new MSUWeaponBase(743, 10.8, -2.16, 8, MinestuckItems.regiSickle).setTool(toolSickle, 3, 4).addProperties(new PropertySweep(3), new PropertyFarmine(3, 500)));
+            registerItem(registry, new MSUWeaponBase(1375, 23.5, -2.64, 8, MinestuckItems.clawSickle).setTool(toolSickle, 3, 3).addProperties(new PropertySweep(5), new PropertyFarmine(2, 500)));
+            registerItem(registry, new MSUWeaponBase(1650, 23.5, -2.4, 12, MinestuckItems.clawOfNrubyiglith).setTool(toolSickle, 4, 3).addProperties(new PropertySweep(3.5f), new PropertyWhisperingTerror(0.15f)));
+        }
         registerItem(registry, diamondSickle);
         registerItem(registry, hereticusAurum);
+
+        if(MSUConfig.combatOverhaul)
+        {
+            registerItem(registry, new MSUWeaponBase(300, 3.2, -2.2, 1, MinestuckItems.woodenSpoon).setTool(toolSpoon, 0, 2));
+            registerItem(registry, new MSUWeaponBase(600, 6.4, -1.98, 8, MinestuckItems.silverSpoon).setTool(toolSpoon, 2, 4));
+            registerCustomRenderedItem(registry, new MSUWeaponBase(900, 9.6, -2.2, 6, MinestuckItems.crockerSpork.getRegistryName().toString(), "crockerSpoon").setTool(toolSpoon, 4, 8));
+        }
+        registerCustomRenderedItem(registry, crockerFork);
         registerItem(registry, fancySpoon);
+        if(MSUConfig.combatOverhaul)
+        {
+            registerItem(registry, new MSUWeaponBase(225, 3.9, -2.2, 1, MinestuckItems.fork).setTool(toolFork, 0, 2));
+            registerItem(registry, new MSUWeaponBase(1080, 18.3, -2.42, 10, MinestuckItems.skaiaFork).setTool(toolFork, 3, 6).addProperties(new PropertyTipperDamage(0.6f, 1.3f, 0.8f)));
+        }
         registerItem(registry, quartzFork);
+        if(MSUConfig.combatOverhaul)
+        {
+            registerItem(registry, new MSUWeaponBase(525, 7.1, -2.2, 8, MinestuckItems.spork).setTool(toolSpork, 2, 4));
+            registerItem(registry, new MSUWeaponBase(788, 9.5, -1.98, 8, MinestuckItems.goldenSpork).setTool(toolSpork, 1, 8));
+        }
         registerItem(registry, battlesporkOfZillywut);
+
+        if(MSUConfig.combatOverhaul)
+        {
+            registerItem(registry, new MSUWeaponBase(500, 16, -2.85, 2, MinestuckItems.copseCrusher).setTool(toolAxe, 4, 4).addProperties(new PropertyFarmine(100, 64)));
+            registerItem(registry, new MSUWeaponBase(600, 32, -3.15, 5, MinestuckItems.battleaxe).setTool(toolAxe, 3, 2));
+            registerItem(registry, new MSUWeaponBase(750, 24, -3, 1, MinestuckItems.batleacks).setTool(toolAxe, 2, 2).addProperties(new PropertySlippery()));
+            registerItem(registry, new MSUWeaponBase(750, 26.4, -3.03, 8, MinestuckItems.blacksmithBane).setTool(toolAxe, 3, 3));
+            registerItem(registry, new MSUWeaponBase(675, 24, -3, 7, MinestuckItems.scraxe).setTool(toolAxe, 3, 5).addProperties(new PropertySoundOnHit(SoundEvents.BLOCK_NOTE_GUITAR, ((stack, target, player) -> (-player.rotationPitch+90)/90f), ((stack, target, player) -> 3f))));
+            registerItem(registry, new MSUWeaponBase(750, 28, -3, 9, MinestuckItems.hephaestusLumber).setTool(toolAxe, 4, 3).addProperties(new PropertyAutoSmelt(), new PropertyFarmine(100, 32), new PropertyFire(20, 1, true), new PropertyFire(2, 1, false)));
+            registerItem(registry, new MSUWeaponBase(1000, 32, -2.7, 10, MinestuckItems.rubyCroak).setTool(toolAxe, 3, 3).addProperties(new PropertyFire(10, 0.8f, false)));
+        }
+
         registerItem(registry, battleaxeOfZillywahoo);
         registerItem(registry, battlepickOfZillydew);
+        registerItem(registry, gravediggerShovel);
 
+        if(MSUConfig.combatOverhaul)
+        {
+            registerItem(registry, new MSUWeaponBase(270, 3.5, -2.2, 1, MinestuckItems.deuceClub).setTool(toolClub, 0, 1).addProperties(new PropertyProjectileDeflect(0.1f, 1)));
+            registerItem(registry, new MSUWeaponBase(720, 7.1, -2.42, 4, MinestuckItems.metalBat).setTool(toolClub, 2, 4).addProperties(new PropertyProjectileDeflect(0.25f, 2)));
+            registerItem(registry, new MSUWeaponBase(900, 10, -2.2, 6, MinestuckItems.pogoClub).setTool(toolClub, 2, 6).addProperties(new PropertyProjectileDeflect(0.4f, 1.5f), new PropertyPogo(0.5f)));
+            registerItem(registry, new MSUWeaponBase(900, 11.1, -2.2, 6, MinestuckItems.spikedClub).setTool(toolClub, 3, 3).addProperties(new PropertyProjectileDeflect(0.15f, 1.5f)));
+            registerItem(registry, new MSUWeaponBase(1320, 11.2, -2.2, 6, MinestuckItems.nightClub).setTool(toolClub, 3, 3).addProperties(new PropertyProjectileDeflect(0.2f, 3), new PropertyDaytimeDamage(false, 1.4f)));
+        }
         registerItem(registry, rubyContrabat);
-        registerItem(registry, homeRunBat);
         registerItem(registry, dynamiteStick);
         registerItem(registry, nightmareMace);
         registerItem(registry, cranialEnder);
+        registerItem(registry, homeRunBat);
+
+        if(MSUConfig.combatOverhaul)
+        {
+            registerItem(registry, new MSUWeaponBase(200, 4, -2, 1, MinestuckItems.cane).setTool(toolCane, 0, 1));
+            registerItem(registry, new MSUWeaponBase(480, 8, -2, 3, MinestuckItems.ironCane).setTool(toolCane, 1, 2));
+            registerItem(registry, new MSUWeaponBase(660, 13.2, -2, 3, MinestuckItems.spearCane).setTool(toolCane, 2, 3).addProperties(new PropertyTipperDamage(0.9f, 1.1f, 1)));
+            registerItem(registry, new MSUWeaponBase(540, 12, -2, 2, MinestuckItems.paradisesPortabello).setTool(toolCane, 2, 2).addProperties(new PropertyEdible(4, 2, 5)));
+            registerItem(registry, new MSUWeaponBase(540, 12, -1.8, 5, MinestuckItems.regiCane).setTool(toolCane, 3, 4).addProperties(new PropertyTipperDamage(0.8f, 1.1f, 1)));
+            registerItem(registry, new MSUWeaponBase(1000, 24, -2, 7, MinestuckItems.dragonCane).setTool(toolCane, 4, 3));
+        }
+        registerItem(registry, dragonBlades);
+        if(MSUConfig.combatOverhaul)
+        {
+            registerItem(registry, new MSUWeaponBase(600, 12, -2, 5, MinestuckItems.pogoCane).setTool(toolCane, 2, 4).addProperties(new PropertyPogo(0.6)));
+            registerItem(registry, new MSUWeaponBase(-1, 6.4, -2, 5, MinestuckItems.upStick).setTool(toolCane, 1, 3).addProperties(new PropertyPotion(true, 1, new PotionEffect(MobEffects.WITHER, 20, 2))));
+        }
 
         registerItem(registry, staffOfOvergrowth);
         registerItem(registry, atomicIrradiator);
@@ -572,6 +670,14 @@ public class MinestuckUniverseItems
         wisdomsHookshot.addProperties(new PropertyInnocuousDouble(wisdomsPierce, true, false, false));
         ((MSUWeaponBase)clarityWard).addProperties(new PropertyInnocuousDouble(bladesOfTheWarrior, true, false, true));
         ((MSUWeaponBase)bladesOfTheWarrior).addProperties(new PropertyInnocuousDouble(clarityWard, true, true, false));
+        ((MSUWeaponBase)dragonBlades).addProperties(new PropertyInnocuousDouble(Item.REGISTRY.getObject(new ResourceLocation(Minestuck.MOD_ID, "dragon_cane")), false, true, false));
+        ((MSUWeaponBase)crockerFork).addProperties(new PropertyInnocuousDouble(Item.REGISTRY.getObject(new ResourceLocation(Minestuck.MOD_ID, "crocker_spork")), false, false, false));
+
+        if(MSUConfig.combatOverhaul)
+        {
+            ((MSUWeaponBase)Item.REGISTRY.getObject(new ResourceLocation(Minestuck.MOD_ID, "dragon_cane"))).addProperties(new PropertyInnocuousDouble(dragonBlades, false, false, true));
+            ((MSUWeaponBase)Item.REGISTRY.getObject(new ResourceLocation(Minestuck.MOD_ID, "crocker_spork"))).addProperties(new PropertyInnocuousDouble(crockerFork, false, false, false));
+        }
 
         if(MinestuckUniverse.isBotaniaLoaded)
         {
@@ -588,6 +694,7 @@ public class MinestuckUniverseItems
                 ((stack, worldIn, entityIn) -> ((PropertyLowHealthBoost) wisdomsPierce.getProperty(PropertyLowHealthBoost.class, stack)).getPropertyOverride().apply(stack, worldIn, entityIn)));
         wisdomsHookshot.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "awakened"),
                 ((stack, worldIn, entityIn) -> ((PropertyLowHealthBoost) wisdomsHookshot.getProperty(PropertyLowHealthBoost.class, stack)).getPropertyOverride().apply(stack, worldIn, entityIn)));
+        dragonBlades.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "offhand"), ((stack, worldIn, entityIn) -> entityIn != null && entityIn.getHeldItemOffhand().equals(stack) ? 1 : 0));
 
         energyBow.setArrowTexture("energy_arrow");
         sweetBow.setCustomArrowTexture();
@@ -599,10 +706,12 @@ public class MinestuckUniverseItems
         telegravitationalWarper.setArrowTexture("gravity_arrow");
         gildedGuidance.setCustomArrowTexture();
         bowOfLight.setArrowTexture("light_arrow");
+        wisdomsHookshot.setArrowTexture("energy_arrow");
 
         ((IBeamStats)needlewands).setCustomBeamTexture();
         ((IBeamStats)oglogothThorn).setBeamTexture("eldrich_beam");
         ((IBeamStats) gasterBlaster).setBeamTexture("clear_beam");
+        ((IBeamStats) litGlitterBeamTransistor).setBeamTexture("clear_beam");
         ((IBeamStats) laserPointer).setBeamTexture("laser_beam");
     }
 

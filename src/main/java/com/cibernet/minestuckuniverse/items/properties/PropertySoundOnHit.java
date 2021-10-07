@@ -32,7 +32,7 @@ public class PropertySoundOnHit extends WeaponProperty
 		player.world.playSound(null, player.posX, player.posY, player.posZ, sound, SoundCategory.PLAYERS, volume.consume(stack, target, player), pitch.consume(stack, target, player));
 	}
 
-	interface Value
+	public interface Value
 	{
 		float consume(ItemStack stack, EntityLivingBase target, EntityLivingBase player);
 	}
