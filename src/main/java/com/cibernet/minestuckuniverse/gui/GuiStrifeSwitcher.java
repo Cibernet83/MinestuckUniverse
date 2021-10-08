@@ -52,31 +52,38 @@ public class GuiStrifeSwitcher extends Gui
 
 		IStrifeData cap = mc.player.getCapability(MSUCapabilities.STRIFE_DATA, null);
 
-		if(strifeDown != MSUKeys.strifeKey.isKeyDown())
-		{
-			strifeDown = MSUKeys.strifeKey.isKeyDown();
-			if(!strifeDown)
-			{
-				showSwitcher = false;
-				EnumHand hand = StrifeEventHandler.isStackAssigned(mc.player.getHeldItemOffhand()) ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND;
-				MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, mc.player, UpdateStrifeDataPacket.UpdateType.INDEXES));
-				if(!(mc.player.isSneaking() && canUseAbstrataSwitcher()))
-					MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.RETRIEVE_STRIFE, cap.getSelectedWeaponIndex(), false, hand));
-			}
-		}
-
-		int selSpecibusIndex = Math.max(0, cap.getSelectedSpecibusIndex());
+		int selSpecibusIndex = cap.getSelectedSpecibusIndex();
 		int selWeaponIndex = cap.getSelectedWeaponIndex();
 		StrifeSpecibus[] portfolio =  cap.getNonEmptyPortfolio();
-
-		if(portfolio.length <= 0)
-			return;
 
 		if(canUseAbstrataSwitcher() && (cap.getPortfolio()[selSpecibusIndex] == null || (!cap.getPortfolio()[selSpecibusIndex].getKindAbstratus().isFist() && cap.getPortfolio()[selSpecibusIndex].getContents().isEmpty())))
 		{
 			cap.setSelectedSpecibusIndex(cap.getSpecibusIndex(portfolio[0]));
 			selSpecibusIndex = cap.getSpecibusIndex(portfolio[0]);
 		}
+
+		if(strifeDown != MSUKeys.strifeKey.isKeyDown())
+		{
+			strifeDown = MSUKeys.strifeKey.isKeyDown();
+			if(!strifeDown)
+			{
+				showSwitcher = false;
+
+				if(selSpecibusIndex >= 0)
+				{
+					EnumHand hand = StrifeEventHandler.isStackAssigned(mc.player.getHeldItemOffhand()) ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND;
+					MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, mc.player, UpdateStrifeDataPacket.UpdateType.INDEXES));
+					if(!(mc.player.isSneaking() && canUseAbstrataSwitcher()))
+						MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.RETRIEVE_STRIFE, cap.getSelectedWeaponIndex(), false, hand));
+				}
+			}
+		}
+
+		if(portfolio.length <= 0)
+			return;
+
+		if(selSpecibusIndex  < 0)
+			return;
 
 		if(mc.player.isSneaking() && canUseAbstrataSwitcher())
 		{

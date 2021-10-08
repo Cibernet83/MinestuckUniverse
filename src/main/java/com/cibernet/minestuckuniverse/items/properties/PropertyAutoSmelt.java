@@ -13,6 +13,9 @@ public class PropertyAutoSmelt extends WeaponProperty
 	@SubscribeEvent
 	public static void onHarvestDrops(BlockEvent.HarvestDropsEvent event)
 	{
+		if(event.getHarvester() == null)
+			return;
+
 		ItemStack tool = event.getHarvester().getHeldItemMainhand();
 		if(tool.getItem() instanceof IPropertyWeapon && tool.canHarvestBlock(event.getState()) && ((IPropertyWeapon) tool.getItem()).hasProperty(PropertyAutoSmelt.class, tool))
 		{

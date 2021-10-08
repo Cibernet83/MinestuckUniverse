@@ -162,7 +162,7 @@ public class StrifeEventHandler
 		if(!selectedWeapon.isEmpty() && !event.player.world.isRemote)
 		{
 			for(EnumHand hand : EnumHand.values())
-				if(isStackAssigned(event.player.getHeldItem(hand)) && event.player.getHeldItem(hand).isItemEqual(selectedWeapon))
+				if(isStackAssigned(event.player.getHeldItem(hand)) && event.player.getHeldItem(hand).isItemEqualIgnoreDurability(selectedWeapon))
 				{
 					ItemStack stack = event.player.getHeldItem(hand);
 					StrifeSpecibus specibus = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];

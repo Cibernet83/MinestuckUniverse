@@ -158,6 +158,13 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 				result = true;
 				break;
 			}
+		if(!result)
+			for(String str : keywords)
+				if(stack.getItem().getRegistryName().getResourcePath().contains(str))
+				{
+					result = true;
+					break;
+				}
 
 		if(conditional != null)
 			return conditional.consume(stack.getItem(), stack, result);
