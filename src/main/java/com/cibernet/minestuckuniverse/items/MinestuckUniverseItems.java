@@ -295,7 +295,7 @@ public class MinestuckUniverseItems
     public static MSUThrowableBase boomerang = new MSUThrowableBase(10, 0, 1, 1f, 2, -0.5, "boomerang", "boomerang"){{setMaxDamage(64);}}.addProperties(new PropertyDamagePrjctle(5), new PropertyThrowGravity(0.6f), new PropertyBoomerang());
     public static MSUThrowableBase markedBoomerang = new MSUThrowableBase(10, 0, 1, 1f, 2, -0.5, "marked_boomerang", "markedBoomerang"){{setMaxDamage(64);}}.addProperties(new PropertyDamagePrjctle(5), new PropertyThrowGravity(0.6f), new PropertyBoomerang());
     public static MSUThrowableBase redHotRang = new MSUThrowableBase(12, 0, 1, 1f, 4, -0.5, "red_hot_rang", "redHotRang"){{setMaxDamage(80);}}.addProperties(new PropertyDamagePrjctle(7), new PropertyThrowGravity(0.6f), new PropertyBoomerang(), new PropertyFirePrjctle(5, false));
-    public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, 1f, 6, -1f, "tornado_glaive", "tornadoGlaive").addProperties(new PropertyDamagePrjctle(8), new PropertyPrjctleItemPull(16, 0.5f), new PropertyBoomerang(), new PropertyThrowGravity(0.4f));
+    public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, 1f, 6, -1f, "tornado_glaive", "tornadoGlaive"){{setMaxDamage(550);}}.setSize(2).addProperties(new PropertyDamagePrjctle(8), new PropertyPrjctleItemPull(16, 0.5f), new PropertyBoomerang(), new PropertyThrowGravity(0.4f));
     public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato").addProperties(new PropertyDamagePrjctle(10), new PropertyFirePrjctle(10, true));
 
     //Rockkind

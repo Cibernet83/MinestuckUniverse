@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "minestuckuniverse:items/barrel_warhammer_awakened"
+        "layer0": "minestuckuniverse:items/barrels_warhammer_awakened"
     }
 }
