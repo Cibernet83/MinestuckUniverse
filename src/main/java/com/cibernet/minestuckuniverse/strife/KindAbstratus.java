@@ -27,6 +27,7 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 	protected String unlocName;
 	protected boolean hidden = false;
 	protected boolean isFist = false;
+	protected boolean preventRightClick = false;
 
 	protected final ArrayList<MSUToolClass> toolClasses = new ArrayList<>();
 	protected final ArrayList<Class<? extends Item>> itemClasses = new ArrayList<>();
@@ -55,8 +56,19 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 		return isFist;
 	}
 
-	public KindAbstratus setFist(boolean hidden) {
-		this.isFist = hidden;
+	public KindAbstratus setFist(boolean isFist) {
+		this.isFist = isFist;
+		return this;
+	}
+
+	public boolean preventsRightClick()
+	{
+		return preventRightClick;
+	}
+
+	public KindAbstratus setPreventRightClick(boolean prevents)
+	{
+		this.preventRightClick = prevents;
 		return this;
 	}
 

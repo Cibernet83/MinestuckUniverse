@@ -2,7 +2,6 @@ package com.cibernet.minestuckuniverse.strife;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
-import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.MSUThrowableBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyBreakableItem;
@@ -39,7 +38,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus hoekind = new KindAbstratus("hoe").addItemClasses(ItemHoe.class);
 	public static KindAbstratus fshngrodkind = new KindAbstratus("fishingRod").addItemClasses(ItemFishingRod.class);
 	public static KindAbstratus potionkind = new KindAbstratus("potion").addItemClasses(ItemPotion.class, ItemCruxitePotion.class);
-	public static KindAbstratus throwkind = new KindAbstratus("projectile").addItemClasses(MSUThrowableBase.class).addItemTools(
+	public static KindAbstratus throwkind = new KindAbstratus("projectile").setPreventRightClick(true).addItemClasses(MSUThrowableBase.class).addItemTools(
 					MinestuckUniverseItems.dragonCharge, Items.SNOWBALL, Items.EGG, Items.ENDER_PEARL, Items.ENDER_EYE, Items.EXPERIENCE_BOTTLE, Items.SPLASH_POTION, Items.LINGERING_POTION,
 					getItem("botania", "chakram"));
 
@@ -52,11 +51,11 @@ public class MSUKindAbstrata
 	public static KindAbstratus glovekind = new KindAbstratus("glove", MinestuckUniverseItems.toolGauntlet).addKeywords("glove", "gauntlet", "fist").addItemTools(getItem("thaumcraft", "caster_basic"));
 	public static KindAbstratus needlekind = new KindAbstratus("needles", MinestuckUniverseItems.toolNeedles);
 	public static KindAbstratus shieldkind = new KindAbstratus("shield").setConditional((i, itemStack, res) -> res || i.isShield(itemStack, null));
-	public static KindAbstratus bowkind = new KindAbstratus("bow").addItemClasses(ItemBow.class, MSUBowBase.class, ItemMechanicalCrossbow.class).setConditional(((item, stack, res) -> res && !PropertyBreakableItem.isBroken(item, stack)));
+	public static KindAbstratus bowkind = new KindAbstratus("bow").setPreventRightClick(true).addItemClasses(ItemBow.class, MSUBowBase.class, ItemMechanicalCrossbow.class).setConditional(((item, stack, res) -> res && !PropertyBreakableItem.isBroken(item, stack)));
 	public static KindAbstratus dicekind = new KindAbstratus("dice").addItemTools(MinestuckUniverseItems.dice, MinestuckUniverseItems.fluoriteOctet);
 
-	public static KindAbstratus pistolkind = new KindAbstratus("pistol").addItemTools(getItem("botania", "managun"));
-	public static KindAbstratus riflekind = new KindAbstratus("rifle");
+	public static KindAbstratus pistolkind = new KindAbstratus("pistol").setPreventRightClick(true).addItemTools(getItem("botania", "managun"));
+	public static KindAbstratus riflekind = new KindAbstratus("rifle").setPreventRightClick(true);
 
 	public static KindAbstratus fistkind = new KindAbstratus("fist").setFist(true);
 	public static KindAbstratus jokerkind = new KindAbstratus("joker").setConditional((i, stack, res) -> res || !stack.isEmpty()).setHidden(true);

@@ -22,7 +22,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -33,6 +36,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -45,9 +49,6 @@ import java.util.List;
 
 public class StrifeEventHandler
 {
-
-	//TODO config
-
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void onGuiOpen(GuiOpenEvent event)
@@ -88,6 +89,52 @@ public class StrifeEventHandler
 
 		if(!isStackAssigned(stack))
 			event.setCanceled(true);
+	}
+
+	public static final List<Item> USABLE_ASSIGNED_ONLY = new ArrayList<Item>()
+	{{
+		add(MinestuckUniverseItems.needlewands);
+		add(MinestuckUniverseItems.oglogothThorn);
+		add(MinestuckUniverseItems.litGlitterBeamTransistor);
+		add(MinestuckUniverseItems.archmageDaggers);
+		add(MinestuckUniverseItems.gasterBlaster);
+	}};
+	public static final List<Item> FORCED_USABLE_UNASSIGNED = new ArrayList<Item>()
+	{{
+		add(MSUKindAbstrata.getItem("botania", "managun"));
+		add(Items.EGG);
+		add(Items.SNOWBALL);
+		add(Items.ENDER_EYE);
+		add(Items.ENDER_PEARL);
+		add(Items.EXPERIENCE_BOTTLE);
+		add(Items.POTIONITEM);
+	}};
+
+	@SubscribeEvent
+	public static void onItemInteract(PlayerInteractEvent.RightClickItem event)
+	{
+		if(!MSUConfig.combatOverhaul ||  !MSUConfig.preventUnallocatedWeaponsUse)
+			return;
+
+		ItemStack stack = event.getItemStack();
+		if(FORCED_USABLE_UNASSIGNED.contains(stack.getItem()) || (stack.hasTagCompound() && stack.getTagCompound().getBoolean("StrifeAssigned")))
+			return;
+
+		if(USABLE_ASSIGNED_ONLY.contains(stack.getItem()))
+		{
+			event.setCancellationResult(EnumActionResult.PASS);
+			event.setCanceled(true);
+			return;
+		}
+
+		for(KindAbstratus abstratus : getAbstrataList(stack, false))
+			if(abstratus.preventsRightClick())
+			{
+				event.setCancellationResult(EnumActionResult.PASS);
+				event.setCanceled(true);
+				return;
+			}
+
 	}
 
 	@SubscribeEvent
