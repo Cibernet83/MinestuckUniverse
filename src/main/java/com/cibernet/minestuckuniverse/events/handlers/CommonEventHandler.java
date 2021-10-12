@@ -71,107 +71,11 @@ import java.util.UUID;
 
 public class CommonEventHandler
 {
-
-	@SubscribeEvent
-	public static void onEntityHurt(LivingDamageEvent event)
-	{
-		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem().equals(MinestuckUniverseItems.spikedHelmet))
-		{
-			if(event.getEntityLiving().world.rand.nextInt(2) == 0 && event.getSource().getImmediateSource() != null)
-				event.getSource().getImmediateSource().attackEntityFrom(DamageSource.causeThornsDamage(event.getEntityLiving()), 4);
-		}
-		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem().equals(MinestuckUniverseItems.wizardHat) && event.getSource().isMagicDamage())
-		{
-			event.setAmount(event.getAmount()*0.5f);
-			event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).damageItem(1, event.getEntityLiving());
-		}
-		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem().equals(MinestuckUniverseItems.archmageHat) && event.getSource().isMagicDamage())
-		{
-			event.setAmount(event.getAmount()*0.2f);
-			event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).damageItem(1, event.getEntityLiving());
-		}
-	}
-
-	@SubscribeEvent
-	public static void onFall(LivingFallEvent event)
-	{
-		Item footwear = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem();
-		if (footwear instanceof ItemPogoBoots) {
-			EntityLivingBase entity = event.getEntityLiving();
-			ItemPogoBoots item = (ItemPogoBoots) event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem();
-
-			if (!entity.isSneaking())
-			{
-				double motion = Math.min(10, Math.sqrt(event.getDistance())*0.3)*item.power;
-
-				if(motion > 0.115)
-				{
-					entity.motionY = motion;
-					entity.motionX *= 1.5f;
-					entity.motionZ /= 1.5f;
-
-					entity.velocityChanged = true;
-					entity.isAirBorne = true;
-					entity.onGround = false;
-					entity.fallDistance = 0;
-					event.setDamageMultiplier(0);
-				}
-
-				if (item.isSolar() && entity.motionY > item.power*1.2f)
-					entity.setFire(5);
-				}
-		}
-		else if(footwear == MinestuckUniverseItems.rocketBoots)
-			event.setDamageMultiplier(event.getDamageMultiplier()*0.4f);
-	}
-
-	@SubscribeEvent
-	public static void onJump(LivingEvent.LivingJumpEvent event)
-	{
-		EntityLivingBase entity = event.getEntityLiving();
-		Item footwear = entity.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem();
-
-		if (footwear instanceof ItemPogoBoots)
-		{
-			ItemPogoBoots item = (ItemPogoBoots) event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem();
-
-			if (!entity.isSneaking())
-				entity.motionY *= 0.25 + item.power;
-		}
-		else if(footwear == MinestuckUniverseItems.windWalkers)
-			entity.motionY *= 2f;
-	}
-
 	public static final IAttribute COOLED_ATTACK_STRENGTH = new RangedAttribute(null, MinestuckUniverse.MODID+".cooledAttackStrength", 0, 0, 1).setDescription("Cooled Attack Strength");
-
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public static void onInputUpdate(InputUpdateEvent event)
-	{
-		ItemStack footwear = event.getEntityPlayer().getItemStackFromSlot(EntityEquipmentSlot.FEET);
-		if(!event.getEntityPlayer().isElytraFlying() && event.getMovementInput().jump && footwear.getItem() == MinestuckUniverseItems.rocketBoots)
-		{
-			event.getEntityPlayer().moveRelative(event.getMovementInput().moveStrafe*0.5f, 1, event.getMovementInput().moveForward*0.5f, 0.165f);
-		}
-	}
 
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
-		Item footwear = event.player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem();
-		if(footwear == MinestuckUniverseItems.airJordans || footwear == MinestuckUniverseItems.cobaltJordans)
-			event.player.onGround = true;
-		else if(footwear == MinestuckUniverseItems.windWalkers)
-		{
-			event.player.motionY *= 0.65 +0.3 * Math.max(0, Math.min(1, event.player.motionY*50f));
-			event.player.fallDistance = 0;
-			if(!event.player.world.isRemote && !event.player.onGround && event.player.motionY < 0)
-				((WorldServer)event.player.world).spawnParticle(EnumParticleTypes.CLOUD, event.player.posX, event.player.posY, event.player.posZ, 1, 0.25D, 0.1D, 0.25D, 0.05D);
-
-		}
-		//else if(footwear == MinestuckUniverseItems.rocketBoots && !event.player.onGround && !event.player.world.isRemote) TODO particle effects
-			//((WorldServer)event.player.world).spawnParticle(EnumParticleTypes.FLAME, event.player.posX, event.player.posY, event.player.posZ, 1, 0.1D, 0.0D, 0.1D, 0.05D);
-
 		if(event.player.isSpectator())
 		{
 			event.player.capabilities.isFlying = true;

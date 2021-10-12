@@ -63,6 +63,7 @@ public abstract class MSUPacket
         SET_ACTIVE_STRIFE(SetActiveStrifePacket.class),
         UPDATE_BEAMS(UpdateBeamDataPacket.class),
         LEFT_CLICK_EMPTY(LeftClickEmptyPacket.class),
+        ROCKET_BOOTS(RocketBootsPacket.class),
         ;
 
         Class<? extends MSUPacket> packetType;

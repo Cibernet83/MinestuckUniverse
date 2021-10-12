@@ -4,10 +4,7 @@ import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
-import com.cibernet.minestuckuniverse.events.handlers.CommonEventHandler;
-import com.cibernet.minestuckuniverse.events.handlers.IDBasedAlchemyHandler;
-import com.cibernet.minestuckuniverse.events.handlers.PropertyEventHandler;
-import com.cibernet.minestuckuniverse.events.handlers.StrifeEventHandler;
+import com.cibernet.minestuckuniverse.events.handlers.*;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
@@ -70,6 +67,7 @@ public class CommonProxy
         MSUBannerPatterns.init();
 
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(ArmorEventHandler.class);
         MinecraftForge.EVENT_BUS.register(MSULoot.class);
         MinecraftForge.EVENT_BUS.register(IDBasedAlchemyHandler.class);
         MinecraftForge.EVENT_BUS.register(BlockArtifact.class);
