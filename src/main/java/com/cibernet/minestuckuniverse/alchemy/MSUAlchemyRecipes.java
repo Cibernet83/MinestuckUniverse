@@ -125,6 +125,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(unrealAir), new GristSet(new GristType[] {Build}, new int[] {0}));
         GristRegistry.addGristConversion(new ItemStack(whip), new GristSet(new GristType[] {Iodine, Build}, new int[] {14, 8}));
         GristRegistry.addGristConversion(new ItemStack(sbahjWhip), new GristSet(new GristType[] {Iodine, Build, Artifact}, new int[] {10, 10, -10}));
+        GristRegistry.addGristConversion(new ItemStack(laserPointer), new GristSet(new GristType[] {Mercury, Ruby}, new int[] {8, 10}));
 
         if(MSUCalendarUtil.isChristmas())
             GristRegistry.addGristConversion(new ItemStack(sbahjTree), new GristSet(new GristType[] {}, new int[] {}));

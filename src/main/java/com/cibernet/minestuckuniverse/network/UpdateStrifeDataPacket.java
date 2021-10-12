@@ -37,8 +37,6 @@ public class UpdateStrifeDataPacket extends MSUPacket
 					specibi[i] = (int)args[i+2];
 
 				nbt = cap.writePortfolio(new NBTTagCompound(), specibi);
-				System.out.println(nbt);
-				new Throwable().printStackTrace();
 				break;
 			case INDEXES: nbt = cap.writeSelectedIndexes(new NBTTagCompound()); break;
 			case DROPPED_CARDS: nbt = cap.writeDroppedCards(new NBTTagCompound()); break;
