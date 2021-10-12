@@ -90,9 +90,14 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
         {
             if(tab == TabMinestuckUniverse.weapons)
             {
-                while(items.size() < slotIndex)
-                    items.add(new ItemStack(MinestuckBlocks.genericObject));
-                items.set(tabSlot, new ItemStack(this));
+                if(items.isEmpty())
+                    items.add(new ItemStack(this));
+                else
+                {
+                    while(items.size() < slotIndex)
+                        items.add(ItemStack.EMPTY);
+                    items.set(tabSlot, new ItemStack(this));
+                }
             }
             else super.getSubItems(tab, items);
         }

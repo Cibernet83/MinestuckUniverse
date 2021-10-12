@@ -56,10 +56,13 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.Sys;
 
 import java.util.List;
@@ -411,6 +414,16 @@ public class CommonEventHandler
 	}
 
 	@SubscribeEvent
+	public static void onBlockDrops(BlockEvent.HarvestDropsEvent event)
+	{
+		//pebbles
+		if(!new ItemStack(event.getState().getBlock()).isEmpty() && ArrayUtils.contains(OreDictionary.getOreIDs(new ItemStack(event.getState().getBlock())), OreDictionary.getOreID("dirt")) &&
+			event.getHarvester() != null && event.getHarvester().getHeldItemMainhand().isEmpty() && event.getHarvester().getRNG().nextFloat() < 0.4f)
+				event.getDrops().add(new ItemStack(MinestuckUniverseItems.pebble, event.getHarvester().getRNG().nextInt(4)));
+
+	}
+
+	@SubscribeEvent
 	public static void onRightClickEmpty(PlayerInteractEvent.RightClickItem event)
 	{
 		if(event.getItemStack().getItem() == Items.PAPER && event.getItemStack().getCount() == 1)
@@ -479,5 +492,7 @@ public class CommonEventHandler
 	{
 		if(event.getResultItem().getItem() instanceof ItemBeamBlade)
 			ItemBeamBlade.changeState(event.getResultItem(), false);
+		else if(event.getResultItem().getItem() == MinestuckUniverseItems.suitarang)
+			event.getResultItem().setCount(event.getResultItem().getCount()*4);
 	}
 }

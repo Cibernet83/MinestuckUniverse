@@ -37,6 +37,8 @@ public class UpdateStrifeDataPacket extends MSUPacket
 					specibi[i] = (int)args[i+2];
 
 				nbt = cap.writePortfolio(new NBTTagCompound(), specibi);
+				System.out.println(nbt);
+				new Throwable().printStackTrace();
 				break;
 			case INDEXES: nbt = cap.writeSelectedIndexes(new NBTTagCompound()); break;
 			case DROPPED_CARDS: nbt = cap.writeDroppedCards(new NBTTagCompound()); break;
@@ -75,6 +77,7 @@ public class UpdateStrifeDataPacket extends MSUPacket
 				if(StrifeEventHandler.isStackAssigned(entity.getHeldItem(hand)) &&
 						cap.getPortfolio().length <= 0 || cap.getSelectedSpecibusIndex() < 0 || cap.getSelectedWeaponIndex() < 0
 						|| cap.getPortfolio()[cap.getSelectedSpecibusIndex()] == null || cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().isEmpty()
+						|| cap.getSelectedWeaponIndex() >= cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().size()
 						|| !ItemStack.areItemStacksEqual(cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()), entity.getHeldItem(hand)))
 				{
 					entity.setHeldItem(hand, ItemStack.EMPTY);

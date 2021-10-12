@@ -7,6 +7,7 @@ import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class PropertyBreakableItem extends WeaponProperty
@@ -14,6 +15,12 @@ public class PropertyBreakableItem extends WeaponProperty
 	public static boolean isBroken(Item item, ItemStack stack)
 	{
 		return item instanceof IPropertyWeapon && ((IPropertyWeapon)item).hasProperty(PropertyBreakableItem.class, stack) && stack.isItemStackDamageable() && stack.getItemDamage() >= stack.getMaxDamage();
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack stack, String name)
+	{
+		return I18n.translateToLocalFormatted("property.item.broken", super.getItemStackDisplayName(stack, name));
 	}
 
 	@Override

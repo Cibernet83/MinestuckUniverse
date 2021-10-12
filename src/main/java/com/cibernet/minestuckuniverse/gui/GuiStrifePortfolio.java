@@ -179,7 +179,10 @@ public class GuiStrifePortfolio extends GuiPlayerStats
 				if(Mouse.isButtonDown(1))
 				{
 					if(!mousePressed)
+					{
+						StrifePortfolioHandler.retrieveCard(mc.player, i);
 						MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.RETRIEVE_STRIFE, i));
+					}
 					mousePressed = true;
 				}
 				else if(Mouse.isButtonDown(0))

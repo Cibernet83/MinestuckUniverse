@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " i ",
+        "iIi",
+        " i "
+    ],
+    "key": {
+        "I": {
+            "item": "minecraft:iron_ingot"
+        },
+        "i": {
+            "item": "minecraft:iron_nugget"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:throwing_star",
+        "count": 8
+    }
+}

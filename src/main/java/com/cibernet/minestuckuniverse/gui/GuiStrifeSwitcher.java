@@ -168,14 +168,14 @@ public class GuiStrifeSwitcher extends Gui
 								i = j;
 								break;
 							}
-						i = (int) ((i + Math.signum(event.getDwheel()) + nonNullPortfolio.length) % nonNullPortfolio.length);
+						i = (int) ((i + Math.signum(-event.getDwheel()) + nonNullPortfolio.length) % nonNullPortfolio.length);
 						cap.setSelectedSpecibusIndex(cap.getSpecibusIndex(nonNullPortfolio[i]));
 					}
 				}
 				else if(cap.getSelectedSpecibusIndex() >= 0 && cap.getPortfolio()[cap.getSelectedSpecibusIndex()] != null)
 				{
 					int deckSize = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().size();
-					cap.setSelectedWeaponIndex((int) ((cap.getSelectedWeaponIndex()+Math.signum(event.getDwheel())+deckSize)%deckSize));
+					cap.setSelectedWeaponIndex((int) ((cap.getSelectedWeaponIndex()+Math.signum(-event.getDwheel())+deckSize)%deckSize));
 				}
 
 			}

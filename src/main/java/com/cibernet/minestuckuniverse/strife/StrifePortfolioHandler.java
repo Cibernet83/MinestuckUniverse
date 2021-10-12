@@ -171,7 +171,11 @@ public class StrifePortfolioHandler
 			return false;
 
 		if(stack.hasTagCompound())
+		{
 			stack.getTagCompound().removeTag("StrifeAssigned");
+			if(stack.getTagCompound().hasNoTags())
+				stack.setTagCompound(null);
+		}
 
 		IStrifeData cap = entity.getCapability(MSUCapabilities.STRIFE_DATA, null);
 
@@ -262,7 +266,7 @@ public class StrifePortfolioHandler
 		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
 		ItemStack card = ItemStrifeCard.injectStrifeSpecibus(cap.removeSpecibus(index), new ItemStack(MinestuckUniverseItems.strifeCard));
 
-		if(!(player instanceof EntityPlayer) || !((EntityPlayer) player).addItemStackToInventory(card))
+		if(!player.world.isRemote && (!(player instanceof EntityPlayer) || !((EntityPlayer) player).addItemStackToInventory(card)))
 			player.entityDropItem(card, player.getEyeHeight());
 	}
 
@@ -285,7 +289,7 @@ public class StrifePortfolioHandler
 				player.setHeldItem(hand, ItemStack.EMPTY);
 				cap.setArmed(false);
 			}
-			else
+			else if(!stack.isEmpty())
 			{
 				player.setHeldItem(hand, stack);
 				cap.setArmed(true);
@@ -309,9 +313,9 @@ public class StrifePortfolioHandler
 			cap.setSelectedWeaponIndex(0);
 		cap.setArmed(false);
 		if(player instanceof  EntityPlayer)
+		{
 			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.INDEXES), (EntityPlayer) player);
-
-		if(player instanceof  EntityPlayer)
 			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSelectedSpecibusIndex()), (EntityPlayer) player);
+		}
 	}
 }
