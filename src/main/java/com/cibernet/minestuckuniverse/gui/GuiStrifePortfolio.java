@@ -251,7 +251,7 @@ public class GuiStrifePortfolio extends GuiPlayerStats
 		String displayName = specibus.getDisplayNameForCard();
 
 		int txOffset = mc.fontRenderer.getStringWidth(displayName);
-		List<ItemStack> items = specibus.getContents();
+		List<StrifeSpecibus.PairedStack> items = specibus.getContents();
 		int totalItems = items.size();
 
 		int x = (int) ((xOffset+cardX)) - (index == selectedCard ? 5 : 0);
@@ -279,7 +279,7 @@ public class GuiStrifePortfolio extends GuiPlayerStats
 
 		int deckxpos = (int) (94 - 23*(Math.min(items.size(),5)/2f));
 		int n = 0;
-		for(ItemStack i : items)
+		for(StrifeSpecibus.PairedStack i : items)
 		{
 			int ixoff = (int)(deckxpos + (n%5)*(23)) - (int)(n/5f);
 			int iyoff = 193 - (int)(n/5f)*2;
@@ -287,7 +287,7 @@ public class GuiStrifePortfolio extends GuiPlayerStats
 			mc.getTextureManager().bindTexture(icons);
 			drawTexturedModalRect(x/scale + ixoff, y/scale + iyoff, 0, 122, 21, 26);
 			if(n >= items.size()-5)
-				drawItemStack(i, (int)(x/scale) + ixoff+2, (int)(y/scale) + iyoff+4, i.getDisplayName());
+				drawItemStack(i.getSingleStack(), (int)(x/scale) + ixoff+2, (int)(y/scale) + iyoff+4, !i.hasPair() ? i.getSingleStack().getDisplayName() : (i.mainStack.getDisplayName() + " | " + i.offStack.getDisplayName()));
 			n++;
 		}
 

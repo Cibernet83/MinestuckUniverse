@@ -155,62 +155,71 @@ public class StrifeEventHandler
 			return;
 
 		IStrifeData cap = event.player.getCapability(MSUCapabilities.STRIFE_DATA, null);
-		ItemStack selectedWeapon = cap.isArmed() && cap.getPortfolio().length > 0 && cap.getSelectedSpecibusIndex() >= 0 && cap.getSelectedWeaponIndex() >= 0
+
+		ItemStack selectedMain = ItemStack.EMPTY;
+		ItemStack selectedOff = ItemStack.EMPTY;
+
+		if(cap.isArmed() && cap.getPortfolio().length > 0 && cap.getSelectedSpecibusIndex() >= 0 && cap.getSelectedWeaponIndex() >= 0
 				&& cap.getPortfolio()[cap.getSelectedSpecibusIndex()] != null && !cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().isEmpty()
-				&& cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().size() > cap.getSelectedWeaponIndex() ?
-				cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()) : ItemStack.EMPTY;
+				&& cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().size() > cap.getSelectedWeaponIndex())
+		{
+			selectedMain = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()).mainStack;
+			selectedOff = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()).offStack;
+		}
 
 		boolean hasWeaponCheck = true;
-		if(!selectedWeapon.isEmpty() && !event.player.world.isRemote)
+		if(!(selectedMain.isEmpty() || selectedOff.isEmpty()) && !event.player.world.isRemote)
 		{
-			for(EnumHand hand : EnumHand.values())
-				if(isStackAssigned(event.player.getHeldItem(hand)) && event.player.getHeldItem(hand).isItemEqualIgnoreDurability(selectedWeapon))
-				{
-					ItemStack stack = event.player.getHeldItem(hand);
-					StrifeSpecibus specibus = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];
-
-					if(!specibus.getKindAbstratus().isStackCompatible(stack))
+			for(EnumHand pairSide : EnumHand.values())
+			{
+				ItemStack selectedWeapon = pairSide == EnumHand.MAIN_HAND ? selectedMain : selectedOff;
+				for(EnumHand hand : EnumHand.values())
+					if(isStackAssigned(event.player.getHeldItem(hand)) && event.player.getHeldItem(hand).isItemEqualIgnoreDurability(selectedWeapon))
 					{
-						if(StrifePortfolioHandler.moveSelectedWeapon(event.player, stack) == null)
-						{
-							if(cap.getSelectedWeaponIndex() >= 0 && !ItemStack.areItemStacksEqual(stack, selectedWeapon))
-								specibus.getContents().set(cap.getSelectedWeaponIndex(), stack);
+						ItemStack stack = event.player.getHeldItem(hand);
+						StrifeSpecibus specibus = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];
 
-							if(specibus.getContents().size() <= 1)
+						if(!specibus.getKindAbstratus().isStackCompatible(stack))
+						{
+							if(StrifePortfolioHandler.moveSelectedWeapon(event.player, stack) == null)
 							{
-								List<KindAbstratus> abstratusList = StrifeEventHandler.getAbstrataList(stack, false);
-								if(abstratusList.isEmpty())
+								if(cap.getSelectedWeaponIndex() >= 0 && !ItemStack.areItemStacksEqual(stack, selectedWeapon))
+									specibus.updatePairEntry(cap.getSelectedWeaponIndex(), stack, pairSide);
+
+								if(specibus.getContents().size() <= 1)
+								{
+									List<KindAbstratus> abstratusList = StrifeEventHandler.getAbstrataList(stack, false);
+									if(abstratusList.isEmpty())
+									{
+										StrifePortfolioHandler.unassignSelected(event.player);
+										stack.getTagCompound().removeTag("StrifeAssigned");
+										if(stack.getTagCompound().hasNoTags())
+											stack.setTagCompound(null);
+									}
+									else if(!event.player.world.isRemote)
+									{
+										specibus.switchKindAbstratus(abstratusList.get(0), event.player);
+										MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, event.player, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSelectedSpecibusIndex()), event.player);
+									}
+								}
+								else
 								{
 									StrifePortfolioHandler.unassignSelected(event.player);
 									stack.getTagCompound().removeTag("StrifeAssigned");
 									if(stack.getTagCompound().hasNoTags())
 										stack.setTagCompound(null);
 								}
-								else if(!event.player.world.isRemote)
-								{
-									specibus.switchKindAbstratus(abstratusList.get(0), event.player);
-									MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, event.player, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSelectedSpecibusIndex()), event.player);
-								}
 							}
-							else
-							{
-								StrifePortfolioHandler.unassignSelected(event.player);
-								stack.getTagCompound().removeTag("StrifeAssigned");
-								if(stack.getTagCompound().hasNoTags())
-									stack.setTagCompound(null);
-							}
+							return;
 						}
-						return;
-					}
 
-					if(cap.getSelectedWeaponIndex() >= 0 && !ItemStack.areItemStacksEqual(stack, selectedWeapon))
-					{
-						specibus.getContents().set(cap.getSelectedWeaponIndex(), stack);
-						selectedWeapon = stack;
+						if(cap.getSelectedWeaponIndex() >= 0 && !ItemStack.areItemStacksEqual(stack, selectedWeapon))
+							specibus.updatePairEntry(cap.getSelectedWeaponIndex(), stack, pairSide);
+						hasWeaponCheck = false;
+						break;
 					}
-					hasWeaponCheck = false;
-					break;
-				}
+			}
+
 		}
 
 		if(cap.isArmed() && (cap.getSelectedSpecibusIndex() < 0 || cap.getPortfolio()[cap.getSelectedSpecibusIndex()] == null))
@@ -247,6 +256,8 @@ public class StrifeEventHandler
 			return;
 
 		NonNullList<ItemStack> mainInv = event.player.inventory.mainInventory;
+		boolean unassigned = false;
+
 		for(int i = 0; i < mainInv.size(); i++)
 		{
 			if(i == event.player.inventory.currentItem)
@@ -255,7 +266,7 @@ public class StrifeEventHandler
 			ItemStack stack = mainInv.get(i);
 			if(isStackAssigned(stack))
 			{
-				if(ItemStack.areItemStacksEqual(stack, selectedWeapon))
+				if(!unassigned && (ItemStack.areItemStacksEqual(stack, selectedMain) || ItemStack.areItemStacksEqual(stack, selectedOff)))
 				{
 					event.player.inventory.setInventorySlotContents(i, ItemStack.EMPTY);
 					cap.setArmed(false);
@@ -263,6 +274,7 @@ public class StrifeEventHandler
 				}
 				else
 				{
+					unassigned = true;
 					stack.getTagCompound().removeTag("StrifeAssigned");
 					if(stack.getTagCompound().hasNoTags())
 						stack.setTagCompound(null);
@@ -272,7 +284,7 @@ public class StrifeEventHandler
 			}
 		}
 
-		if(!selectedWeapon.isEmpty() && hasWeaponCheck)
+		if(!(selectedMain.isEmpty() || selectedOff.isEmpty()) && hasWeaponCheck)
 		{
 			StrifePortfolioHandler.unassignSelected(event.player);
 			cap.setArmed(false);
@@ -312,7 +324,7 @@ public class StrifeEventHandler
 				if(!abstrata.isEmpty())
 				{
 					StrifeSpecibus specibus = new StrifeSpecibus(abstrata.get(source.world.rand.nextInt(abstrata.size())));
-					specibus.putItemStack(item.getItem());
+					specibus.putItemStack(item.getItem(), ItemStack.EMPTY);
 					item.setItem(ItemStrifeCard.injectStrifeSpecibus(specibus, new ItemStack(MinestuckUniverseItems.strifeCard)));
 					cap.setDroppedCards(cap.getDroppedCards()+1);
 					droppedCard = true;
@@ -361,22 +373,50 @@ public class StrifeEventHandler
 
 		IStrifeData cap = event.getEntityPlayer().getCapability(MSUCapabilities.STRIFE_DATA, null);
 
-		ItemStack selectedWeapon = !MSUConfig.keepPortfolioOnDeath && cap.isArmed() && cap.getPortfolio().length > 0 && cap.getSelectedSpecibusIndex() >= 0 && cap.getSelectedWeaponIndex() >= 0
-				&& cap.getPortfolio()[cap.getSelectedSpecibusIndex()] != null && !cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().isEmpty() ?
-				cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()) : ItemStack.EMPTY;
+		ItemStack selectedMain = ItemStack.EMPTY;
+		ItemStack selectedOff = ItemStack.EMPTY;
 
-		if(!selectedWeapon.isEmpty())
+		if(!MSUConfig.keepPortfolioOnDeath && cap.isArmed() && cap.getPortfolio().length > 0 && cap.getSelectedSpecibusIndex() >= 0 && cap.getSelectedWeaponIndex() >= 0
+				&& cap.getPortfolio()[cap.getSelectedSpecibusIndex()] != null && !cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().isEmpty())
 		{
-			boolean selectedDropped = false;
+			selectedMain = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()).mainStack;
+			selectedOff = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()).offStack;
+		}
+
+		if(!(selectedMain.isEmpty() || selectedOff.isEmpty()))
+		{
+			boolean mainDropped = false;
+			boolean offDropped = false;
 			for(EntityItem item : event.getDrops())
-				if(ItemStack.areItemStacksEqual(item.getItem(), selectedWeapon))
-				{
-					selectedDropped = true;
+			{
+				if(!mainDropped && ItemStack.areItemStacksEqual(item.getItem(), selectedMain))
+					mainDropped = true;
+				if(!offDropped && ItemStack.areItemStacksEqual(item.getItem(), selectedOff))
+					offDropped = true;
+				if(offDropped && mainDropped)
 					break;
-				}
-			if(!selectedDropped)
+			}
+			if(!offDropped || !mainDropped)
 				StrifePortfolioHandler.unassignSelected(event.getEntityPlayer());
 
+			if(!(offDropped && mainDropped))
+				for(EntityItem item : event.getDrops())
+				{
+					if(!offDropped && ItemStack.areItemStacksEqual(item.getItem(), selectedMain))
+					{
+						item.getItem().getTagCompound().removeTag("StrifeAssigned");
+						if(item.getItem().getTagCompound().hasNoTags())
+							item.getItem().setTagCompound(null);
+						break;
+					}
+					if(!mainDropped && ItemStack.areItemStacksEqual(item.getItem(), selectedOff))
+					{
+						item.getItem().getTagCompound().removeTag("StrifeAssigned");
+						if(item.getItem().getTagCompound().hasNoTags())
+							item.getItem().setTagCompound(null);
+						break;
+					}
+				}
 		}
 
 		event.getDrops().removeIf(item -> isStackAssigned(item.getItem()));

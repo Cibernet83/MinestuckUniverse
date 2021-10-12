@@ -119,26 +119,26 @@ public class GuiStrifeSwitcher extends Gui
 			if(selSpecibus == null)
 				return;
 
-			LinkedList<ItemStack> strifeDeck = selSpecibus.getContents();
+			LinkedList<StrifeSpecibus.PairedStack> strifeDeck = selSpecibus.getContents();
 
 			if(!strifeDeck.isEmpty())
 			{
 				int toDisplay = (int) Math.min(5, Math.ceil((strifeDeck.size()-1)/2f)*2);
 				for(int i = -(toDisplay/2); i <= (toDisplay/2); i++)
 				{
-					ItemStack stack = strifeDeck.get((i + strifeDeck.size() + selWeaponIndex) % strifeDeck.size());
-					if(stack == null)
+					StrifeSpecibus.PairedStack pair = strifeDeck.get((i + strifeDeck.size() + selWeaponIndex) % strifeDeck.size());
+					if(pair == null)
 						continue;
 
 					if(i == 0)
 					{
 						mc.getTextureManager().bindTexture(WIDGETS);
 						drawScaledCustomSizeModalRect(18*i + screenWidth/2 -11, screenHeight*3/4 -3, 112, 0, 22, 22, 22, 22, 256, 256);
-						String str = stack.getDisplayName();
+						String str = pair.getDisplayName();
 						mc.fontRenderer.drawString(str, screenWidth/2 - mc.fontRenderer.getStringWidth(str)/2, screenHeight*3/4 - 14, 0x00AB54, true);
 					}
 
-					renderItem(mc, 20*i + screenWidth/2 -8, screenHeight*3/4, event.renderTickTime, mc.player, stack);
+					renderItem(mc, 20*i + screenWidth/2 -8, screenHeight*3/4, event.renderTickTime, mc.player, pair.getSingleStack());
 				}
 			}
 		}

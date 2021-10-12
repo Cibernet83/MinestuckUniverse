@@ -49,8 +49,13 @@ public class ItemStrifeCard extends MSUItemBase
 				int size = specibus.getContents().size(), remaining = size;
 				for(int i = 0; i < Math.min(size,5); i++)
 				{
-					ItemStack itemstack = specibus.getContents().get(i);
-					tooltip.add(String.format("%s x%d", itemstack.getDisplayName(), itemstack.getCount()));
+					StrifeSpecibus.PairedStack pair = specibus.getContents().get(i);
+					ItemStack itemstack = pair.getSingleStack();
+					ItemStack offStack = pair.getSingleOppositeStack();
+
+					if(!offStack.isEmpty())
+						tooltip.add(String.format("%s x%d | %s x%d", itemstack.getDisplayName(), itemstack.getCount(), offStack.getDisplayName(), offStack.getCount()));
+					else tooltip.add(String.format("%s x%d", itemstack.getDisplayName(), itemstack.getCount()));
 					remaining--;
 				}
 

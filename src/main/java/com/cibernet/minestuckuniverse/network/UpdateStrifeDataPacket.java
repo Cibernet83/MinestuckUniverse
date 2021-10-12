@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.network;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.events.handlers.StrifeEventHandler;
+import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -75,11 +76,28 @@ public class UpdateStrifeDataPacket extends MSUPacket
 				if(StrifeEventHandler.isStackAssigned(entity.getHeldItem(hand)) &&
 						cap.getPortfolio().length <= 0 || cap.getSelectedSpecibusIndex() < 0 || cap.getSelectedWeaponIndex() < 0
 						|| cap.getPortfolio()[cap.getSelectedSpecibusIndex()] == null || cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().isEmpty()
-						|| cap.getSelectedWeaponIndex() >= cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().size()
-						|| !ItemStack.areItemStacksEqual(cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()), entity.getHeldItem(hand)))
+						|| cap.getSelectedWeaponIndex() >= cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().size())
 				{
 					entity.setHeldItem(hand, ItemStack.EMPTY);
 					cap.setArmed(false);
+				} else
+				{
+					StrifeSpecibus.PairedStack pair = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex());
+					boolean mainUnarmed = false;
+					boolean offUnarmed = false;
+
+					if(StrifeEventHandler.isStackAssigned(entity.getHeldItemMainhand()) && !pair.mainStack.isEmpty() && !ItemStack.areItemsEqual(pair.mainStack, entity.getHeldItemMainhand()))
+					{
+						entity.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+						mainUnarmed = true;
+					}
+					if(StrifeEventHandler.isStackAssigned(entity.getHeldItemOffhand()) && !pair.mainStack.isEmpty() && !ItemStack.areItemsEqual(pair.mainStack, entity.getHeldItemOffhand()))
+					{
+						entity.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
+						offUnarmed = true;
+					}
+					if(offUnarmed && mainUnarmed)
+						cap.setArmed(false);
 				}
 			}
 		}

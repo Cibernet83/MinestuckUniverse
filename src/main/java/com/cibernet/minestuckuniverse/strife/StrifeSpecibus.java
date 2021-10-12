@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.LinkedList;
 
 public class StrifeSpecibus
 {
-	protected final LinkedList<ItemStack> items = new LinkedList<>();
+	protected final LinkedList<PairedStack> items = new LinkedList<>();
 	protected KindAbstratus kindAbstratus;
 	protected String customName = "";
 
@@ -42,9 +43,15 @@ public class StrifeSpecibus
 
 			for(int i = 0; i < inv.tagCount(); i++)
 			{
-				ItemStack stack = new ItemStack(inv.getCompoundTagAt(i));
-				if(!stack.isEmpty())
-					items.add(stack);
+				NBTTagCompound stackNbt = inv.getCompoundTagAt(i);
+				if(stackNbt.hasKey("MainStack") || stackNbt.hasKey("OffStack"))
+					items.add(new PairedStack(new ItemStack(stackNbt.getCompoundTag("MainStack")), new ItemStack(stackNbt.getCompoundTag("OffStack"))));
+				else
+				{
+					ItemStack stack = new ItemStack(stackNbt);
+					if(!stack.isEmpty())
+						items.add(new PairedStack(stack, ItemStack.EMPTY));
+				}
 			}
 		}
 
@@ -62,8 +69,18 @@ public class StrifeSpecibus
 
 			NBTTagList inv = new NBTTagList();
 
-			for(ItemStack stack : items)
-				inv.appendTag(stack.writeToNBT(new NBTTagCompound()));
+			for(PairedStack pair : items)
+			{
+				if(pair.offStack.isEmpty() || pair.mainStack.isEmpty())
+					inv.appendTag((pair.mainStack.isEmpty() ? pair.offStack : pair.mainStack).writeToNBT(new NBTTagCompound()));
+				else
+				{
+					NBTTagCompound pairNBT = new NBTTagCompound();
+					pairNBT.setTag("MainStack", pair.mainStack.writeToNBT(new NBTTagCompound()));
+					pairNBT.setTag("OffStack", pair.offStack.writeToNBT(new NBTTagCompound()));
+					inv.appendTag(pairNBT);
+				}
+			}
 
 			nbt.setTag("Contents", inv);
 		}
@@ -73,14 +90,14 @@ public class StrifeSpecibus
 		return nbt;
 	}
 
-	public boolean putItemStack(ItemStack stack)
+	public boolean putItemStack(ItemStack stack, ItemStack offStack)
 	{
-		return putItemStack(stack, -1);
+		return putItemStack(stack, offStack, -1);
 	}
 
-	public boolean putItemStack(ItemStack stack, int slot)
+	public boolean putItemStack(ItemStack stack, ItemStack offStack, int slot)
 	{
-		if (stack.isEmpty() || kindAbstratus == null || !kindAbstratus.isStackCompatible(stack))
+		if (stack.isEmpty() || kindAbstratus == null || !kindAbstratus.isStackCompatible(stack) || (!offStack.isEmpty() && !kindAbstratus.isStackCompatible(offStack)))
 			return false;
 
 		boolean prevAssigned = stack.hasTagCompound() && stack.getTagCompound().getBoolean("StrifeAssigned");
@@ -90,17 +107,10 @@ public class StrifeSpecibus
 		if(!prevAssigned)
 		{
 			if(slot == -1)
-				items.add(stack);
-			else items.add(slot, stack);
+				items.add(new PairedStack(stack, offStack));
+			else items.add(slot, new PairedStack(stack, offStack));
 		}
 		return true;
-	}
-
-	public boolean unassign(ItemStack stack)
-	{
-		if(!items.contains(stack))
-			return false;
-		return unassign(items.indexOf(stack));
 	}
 
 	public boolean unassign(int index)
@@ -111,17 +121,10 @@ public class StrifeSpecibus
 		return true;
 	}
 
-	public ItemStack retrieveStack(ItemStack stack)
-	{
-		if(!items.contains(stack))
-			return ItemStack.EMPTY;
-		return retrieveStack(items.indexOf(stack));
-	}
-
-	public ItemStack retrieveStack(int index)
+	public PairedStack retrieveStack(int index)
 	{
 		if(index < 0 || index >= items.size())
-			return ItemStack.EMPTY;
+			return PairedStack.EMPTY;
 		return items.get(index).copy();
 	}
 
@@ -131,17 +134,28 @@ public class StrifeSpecibus
 			return;
 		kindAbstratus = abstratus;
 
-		for(ItemStack stack : new ArrayList<>(getContents()))
-			if(!abstratus.isStackCompatible(stack))
+		for(PairedStack stack : new ArrayList<>(getContents()))
+			if(!abstratus.isStackCompatible(stack.mainStack))
 			{
 				getContents().remove(getContents().indexOf(stack));
 				if(player != null)
-					CaptchaDeckHandler.launchAnyItem(player, stack);
+				{
+					CaptchaDeckHandler.launchAnyItem(player, stack.mainStack);
+					CaptchaDeckHandler.launchAnyItem(player, stack.offStack);
+				}
 			}
 	}
 
-	public LinkedList<ItemStack> getContents() {
+	public LinkedList<PairedStack> getContents() {
 		return items;
+	}
+
+	public void updatePairEntry(int index, ItemStack stack, EnumHand side)
+	{
+		PairedStack pair = getContents().get(index);
+		if(side == EnumHand.MAIN_HAND)
+			pair.mainStack = stack;
+		else pair.offStack = stack;
 	}
 
 	public KindAbstratus getKindAbstratus() {
@@ -185,5 +199,43 @@ public class StrifeSpecibus
 			name = name.substring(0, 9) + "...";
 
 		return name;
+	}
+
+	public static class PairedStack
+	{
+		public ItemStack mainStack;
+		public ItemStack offStack;
+
+		public static final PairedStack EMPTY = new PairedStack(ItemStack.EMPTY, ItemStack.EMPTY);
+
+		public PairedStack(ItemStack mainStack, ItemStack offStack)
+		{
+			this.mainStack = mainStack;
+			this.offStack = offStack;
+		}
+
+		public ItemStack getSingleStack()
+		{
+			return mainStack.isEmpty() ? offStack : mainStack;
+		}
+
+		public boolean hasPair()
+		{
+			return !mainStack.isEmpty() && !offStack.isEmpty();
+		}
+
+		public ItemStack getSingleOppositeStack()
+		{
+			return !mainStack.isEmpty() ? offStack : mainStack;
+		}
+
+		public PairedStack copy()
+		{
+			return new PairedStack(mainStack.copy(), offStack.copy());
+		}
+
+		public String getDisplayName() {
+			return !hasPair() ? getSingleStack().getDisplayName() : (mainStack.getDisplayName() + " | " + offStack.getDisplayName());
+		}
 	}
 }

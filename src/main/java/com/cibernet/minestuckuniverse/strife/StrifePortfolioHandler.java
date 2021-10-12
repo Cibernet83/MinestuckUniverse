@@ -6,11 +6,14 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.capabilities.strife.StrifeData;
 import com.cibernet.minestuckuniverse.events.handlers.StrifeEventHandler;
+import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.properties.PropertyDualWield;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.network.UpdateStrifeDataPacket;
+import com.mraof.minestuck.inventory.captchalouge.CaptchaDeckHandler;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,9 +34,9 @@ public class StrifePortfolioHandler
 		return entity.getCapability(MSUCapabilities.STRIFE_DATA, null).isPortfolioEmpty();
 	}
 
-	public static boolean addWeapon(EntityLivingBase entity, ItemStack stack)
+	public static boolean addWeapon(EntityLivingBase entity, ItemStack stack, ItemStack offStack)
 	{
-		return addWeapon(entity, stack, true);
+		return addWeapon(entity, stack, offStack, true);
 	}
 
 	public static StrifeSpecibus moveSelectedWeapon(EntityLivingBase entity, ItemStack stack)
@@ -56,10 +59,12 @@ public class StrifePortfolioHandler
 		}
 		else if(!stack.isEmpty() && selSpecibus.kindAbstratus != null && selSpecibus.kindAbstratus.isStackCompatible(stack))
 		{
+			StrifeSpecibus.PairedStack pair = new StrifeSpecibus.PairedStack(stack, ItemStack.EMPTY);
+
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
 			stack.getTagCompound().setBoolean("StrifeAssigned", true);
-			selSpecibus.getContents().add(stack);
+			selSpecibus.getContents().add(pair);
 
 			int prevSelectedSpecibus = cap.getSelectedSpecibusIndex();
 			selSpecibus.unassign(cap.getSelectedWeaponIndex());
@@ -85,7 +90,7 @@ public class StrifePortfolioHandler
 					if(!stack.hasTagCompound())
 						stack.setTagCompound(new NBTTagCompound());
 					stack.getTagCompound().setBoolean("StrifeAssigned", true);
-					specibus.getContents().add(stack);
+					specibus.getContents().add(new StrifeSpecibus.PairedStack(stack, ItemStack.EMPTY));
 
 					int prevSelectedSpecibus = cap.getSelectedSpecibusIndex();
 					selSpecibus.unassign(cap.getSelectedWeaponIndex());
@@ -103,7 +108,7 @@ public class StrifePortfolioHandler
 		return null;
 	}
 
-	public static boolean addWeapon(EntityLivingBase entity, ItemStack stack, boolean sendStatusMessage)
+	public static boolean addWeapon(EntityLivingBase entity, ItemStack stack, ItemStack offStack, boolean sendStatusMessage)
 	{
 		if(entity.world.isRemote || !entity.hasCapability(MSUCapabilities.STRIFE_DATA, null))
 			return false;
@@ -121,7 +126,17 @@ public class StrifePortfolioHandler
 				if(cantFitIn == null)
 					cantFitIn = selSpecibus;
 			}
-			else if(selSpecibus.putItemStack(stack))
+			else if(selSpecibus.putItemStack(stack, offStack))
+			{
+				if(entity instanceof EntityPlayer)
+				{
+					if(sendStatusMessage)
+						((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.assignWeaponPair", stack.getTextComponent(), offStack.getTextComponent(), selSpecibus.getDisplayName()), true);
+					MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSpecibusIndex(selSpecibus)), (EntityPlayer) entity);
+				}
+				return true;
+			}
+			else if(selSpecibus.putItemStack(stack, ItemStack.EMPTY))
 			{
 				if(entity instanceof EntityPlayer)
 				{
@@ -142,7 +157,17 @@ public class StrifePortfolioHandler
 					if(cantFitIn == null)
 						cantFitIn = specibus;
 				}
-				else if(specibus.putItemStack(stack))
+				else if(specibus.putItemStack(stack, offStack))
+				{
+					if(entity instanceof EntityPlayer)
+					{
+						if(sendStatusMessage)
+							((EntityPlayer) entity).sendStatusMessage(new TextComponentTranslation("status.strife.assignWeaponPair", stack.getTextComponent(), offStack.getTextComponent(), specibus.getDisplayName()), true);
+						MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSpecibusIndex(specibus)), (EntityPlayer) entity);
+					}
+					return true;
+				}
+				else if(specibus.putItemStack(stack, ItemStack.EMPTY))
 				{
 					if(entity instanceof EntityPlayer)
 					{
@@ -165,7 +190,7 @@ public class StrifePortfolioHandler
 	}
 
 	@Deprecated
-	public static boolean addWeapontoSlot(EntityLivingBase entity, ItemStack stack, int slot)
+	public static boolean addWeapontoSlot(EntityLivingBase entity, ItemStack stack, ItemStack offStack, int slot)
 	{
 		if(entity.world.isRemote || !entity.hasCapability(MSUCapabilities.STRIFE_DATA, null))
 			return false;
@@ -181,7 +206,7 @@ public class StrifePortfolioHandler
 
 		for(StrifeSpecibus specibus : cap.getPortfolio())
 		{
-			if(specibus != null && specibus.putItemStack(stack, slot))
+			if(specibus != null && specibus.putItemStack(stack, offStack, slot))
 			{
 				if(entity instanceof EntityPlayer)
 					MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, entity, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSpecibusIndex(specibus)), (EntityPlayer) entity);
@@ -243,9 +268,14 @@ public class StrifePortfolioHandler
 		}
 		else
 		{
-			if(addWeapon(player, stack))
+			ItemStack offStack = ItemStack.EMPTY;
+			if(stack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon)stack.getItem()).hasProperty(PropertyDualWield.class, stack))
+				offStack = player.getHeldItem(hand == EnumHand.OFF_HAND ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND);
+			if(addWeapon(player, stack, offStack))
 			{
-				player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+				player.setHeldItem(hand, ItemStack.EMPTY);
+				if(!offStack.isEmpty())
+					player.setHeldItem(hand == EnumHand.OFF_HAND ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND, ItemStack.EMPTY);
 				player.inventory.markDirty();
 			}
 		}
@@ -277,22 +307,28 @@ public class StrifePortfolioHandler
 
 		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
 
-		ItemStack stack = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].retrieveStack(cap.getSelectedWeaponIndex());
+		StrifeSpecibus.PairedStack pair = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].retrieveStack(cap.getSelectedWeaponIndex());
 
 		if(player.getHeldItem(hand).isEmpty() || StrifeEventHandler.isStackAssigned(player.getHeldItem(hand)))
 		{
 			if(StrifeEventHandler.isStackAssigned(player.getHeldItem(hand)) &&
 					cap.getPortfolio().length > 0 && cap.getSelectedSpecibusIndex() >= 0 && cap.getSelectedWeaponIndex() >= 0
 					&& cap.getPortfolio()[cap.getSelectedSpecibusIndex()] != null && !cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().isEmpty()
-					&& ItemStack.areItemStacksEqual(cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()), player.getHeldItem(hand)))
+					&& ItemStack.areItemStacksEqual(cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex()).mainStack, player.getHeldItem(hand)))
 			{
 				player.setHeldItem(hand, ItemStack.EMPTY);
 				cap.setArmed(false);
 			}
-			else if(!stack.isEmpty())
+			else if(!pair.mainStack.isEmpty())
 			{
-				player.setHeldItem(hand, stack);
+				player.setHeldItem(hand, pair.mainStack);
 				cap.setArmed(true);
+				if(!pair.offStack.isEmpty())
+				{
+					if(player.getHeldItem(hand == EnumHand.OFF_HAND ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND).isEmpty())
+						player.setHeldItem(hand == EnumHand.OFF_HAND ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND, pair.offStack);
+					else if(player instanceof EntityPlayer) CaptchaDeckHandler.launchAnyItem((EntityPlayer) player, pair.offStack);
+				}
 			}
 			if(player instanceof  EntityPlayer)
 				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.INDEXES), (EntityPlayer) player);

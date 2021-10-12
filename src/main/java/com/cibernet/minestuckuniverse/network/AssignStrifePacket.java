@@ -20,6 +20,7 @@ public class AssignStrifePacket extends MSUPacket
 	StrifeSpecibus specibus;
 
 	ItemStack stack;
+	ItemStack offStack;
 	int slot;
 
 	@Override
@@ -30,7 +31,8 @@ public class AssignStrifePacket extends MSUPacket
 		if(args[0] instanceof ItemStack)
 		{
 			ByteBufUtils.writeItemStack(data, (ItemStack) args[0]);
-			data.writeInt((Integer) args[1]);
+			data.writeInt((Integer) args[args[1] instanceof ItemStack ? 2 : 1]);
+			ByteBufUtils.writeItemStack(data,(args[1] instanceof ItemStack) ? (ItemStack) args[1] : ItemStack.EMPTY);
 			return this;
 		}
 
@@ -49,6 +51,7 @@ public class AssignStrifePacket extends MSUPacket
 		{
 			stack = ByteBufUtils.readItemStack(data);
 			slot = data.readInt();
+			offStack = ByteBufUtils.readItemStack(data);
 			return this;
 		}
 
@@ -67,7 +70,7 @@ public class AssignStrifePacket extends MSUPacket
 
 		if(stack != null)
 		{
-			StrifePortfolioHandler.addWeapontoSlot(player, stack, slot);
+			StrifePortfolioHandler.addWeapontoSlot(player, stack, offStack, slot);
 			return;
 		}
 
