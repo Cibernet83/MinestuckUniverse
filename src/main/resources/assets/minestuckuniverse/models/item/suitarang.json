@@ -1,0 +1,20 @@
+{
+    "parent": "minestuckuniverse:item/throwing_star",
+    "textures": {
+        "layer0": "minestuckuniverse:items/suitarang_hearts"
+    },
+    "overrides": [
+        {
+            "predicate": {"minestuckuniverse:variant":  1},
+            "model": "minestuckuniverse:item/suitarang_spades"
+        },
+        {
+            "predicate": {"minestuckuniverse:variant":  2},
+            "model": "minestuckuniverse:item/suitarang_diamonds"
+        },
+        {
+            "predicate": {"minestuckuniverse:variant":  3},
+            "model": "minestuckuniverse:item/suitarang_clubs"
+        }
+    ]
+}

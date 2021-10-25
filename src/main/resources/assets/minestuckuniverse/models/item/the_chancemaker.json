@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "minestuckuniverse:items/the_chancemaker_standby"
+        "layer0": "minestuckuniverse:items/chancemaker_standby"
     },
     "display": {
         "thirdperson_righthand": {

@@ -1,0 +1,22 @@
+{
+    "type": "forge:ore_shaped",
+    "pattern": [
+        " o ",
+        "oOo",
+        " o "
+    ],
+    "key": {
+        "o": {
+            "item": "minecraft:dye",
+            "data": 0
+        },
+        "O": {
+            "item": "minecraft:quartz_block",
+            "data": 0
+        }
+    },
+    "result": {
+        "item": "minestuck:dice",
+        "count": 1
+    }
+}

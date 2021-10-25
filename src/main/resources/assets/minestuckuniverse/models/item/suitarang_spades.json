@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:item/suitarang",
+    "textures": {
+        "layer0": "minestuckuniverse:items/suitarang_spades"
+    }
+}

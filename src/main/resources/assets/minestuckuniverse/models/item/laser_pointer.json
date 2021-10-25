@@ -1,0 +1,18 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minestuckuniverse:items/laser_pointer"
+    },
+    "display": {
+        "thirdperson_righthand": {
+            "rotation": [ 0, -90, 55 ],
+            "translation": [ 0, 1.4, 2 ],
+            "scale": [ 0.5, 0.5, 0.5 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 0, 90, -55 ],
+            "translation": [ 0, 1.4, 2 ],
+            "scale": [ 0.5, 0.5, 0.5 ]
+        }
+    }
+}

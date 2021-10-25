@@ -20,7 +20,8 @@ public class PropertyBreakableItem extends WeaponProperty
 	@Override
 	public String getItemStackDisplayName(ItemStack stack, String name)
 	{
-		return I18n.translateToLocalFormatted("property.item.broken", super.getItemStackDisplayName(stack, name));
+		return stack.getItemDamage() >= stack.getMaxDamage() ?
+				I18n.translateToLocalFormatted("property.item.broken", super.getItemStackDisplayName(stack, name)) : name;
 	}
 
 	@Override

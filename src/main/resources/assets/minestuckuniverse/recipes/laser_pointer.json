@@ -1,0 +1,26 @@
+{
+    "type": "forge:ore_shaped",
+    "pattern": [
+        " or",
+        "oOo",
+        "bo "
+    ],
+    "key": {
+        "o": {
+            "item": "minecraft:iron_ingot"
+        },
+        "O": {
+            "item": "minestuckuniverse:battery"
+        },
+        "b": {
+            "item": "minecraft:stone_button"
+        },
+        "r": {
+            "item": "minecraft:redstone_torch"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:laser_pointer",
+        "count": 1
+    }
+}

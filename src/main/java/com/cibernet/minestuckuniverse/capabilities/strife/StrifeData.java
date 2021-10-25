@@ -145,7 +145,7 @@ public class StrifeData implements IStrifeData
 		for(StrifeSpecibus sp : portfolio)
 			if(sp == null)
 				return false;
-		return false;
+		return true;
 	}
 
 	@Override
@@ -239,7 +239,8 @@ public class StrifeData implements IStrifeData
 	{
 		if(!(owner instanceof EntityPlayer) || owner instanceof FakePlayer)
 			return false;
-		return droppedCards < Math.min(5, MinestuckPlayerData.getData((EntityPlayer) owner).echeladder.getRung()/6);
+		System.out.println("e");
+		return droppedCards < Math.max(5, MinestuckPlayerData.getData((EntityPlayer) owner).echeladder.getRung()/6);
 	}
 
 	@Override

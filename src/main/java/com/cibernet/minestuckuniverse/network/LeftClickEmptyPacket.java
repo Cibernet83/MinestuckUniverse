@@ -1,10 +1,14 @@
 package com.cibernet.minestuckuniverse.network;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
+import com.cibernet.minestuckuniverse.events.WeaponAssignedEvent;
+import com.cibernet.minestuckuniverse.events.handlers.StrifeEventHandler;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.EnumSet;
@@ -28,8 +32,12 @@ public class LeftClickEmptyPacket extends MSUPacket
 	public void execute(EntityPlayer player)
 	{
 		ItemStack stack = player.getHeldItemMainhand();
+		boolean checkAssigned = MSUConfig.combatOverhaul && MSUConfig.restrictedStrife;
+		WeaponAssignedEvent event = new WeaponAssignedEvent(player, stack);
+		MinecraftForge.EVENT_BUS.post(event);
 
-		if(stack.getItem() instanceof IPropertyWeapon)
+		if(stack.getItem() instanceof IPropertyWeapon &&
+				!(checkAssigned || (checkAssigned && StrifeEventHandler.isStackAssigned(stack) && event.getCheckResult())))
 		{
 			List<WeaponProperty> propertyList = ((IPropertyWeapon) stack.getItem()).getProperties(stack);
 			for(WeaponProperty p : propertyList)

@@ -45,10 +45,7 @@ public class MSUKeys
 			if(player.getHeldItemMainhand().isEmpty() || StrifeEventHandler.isStackAssigned(player.getHeldItemMainhand()) || StrifeEventHandler.isStackAssigned(player.getHeldItemOffhand()))
 				GuiStrifeSwitcher.showSwitcher = true;
 			else if(!player.getHeldItemMainhand().isEmpty())
-			{
-				System.out.println("assign!");
 				MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.ASSIGN_STRIFE, EnumHand.MAIN_HAND));
-			}
 		}
 	}
 

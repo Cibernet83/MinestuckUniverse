@@ -103,7 +103,8 @@ public class EntityRock extends EntityLivingBase
 		if(Math.abs(posX-motionCalcX) > 0.1 || Math.abs(motionY) > 0.1 || Math.abs(posZ-motionCalcZ) > 0.1)
 		{
 			for(Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getCollisionBoundingBox().contract(0 , 1, 0)))
-				entity.attackEntityFrom(ROCK_DAMAGE, 20);
+				if(!getPassengers().contains(entity))
+					entity.attackEntityFrom(ROCK_DAMAGE, 20);
 
 			for(int x = (int)getCollisionBoundingBox().minX; x < getCollisionBoundingBox().maxX; x++)
 				for(int z = (int)getCollisionBoundingBox().minZ; z < getCollisionBoundingBox().maxZ; z++)

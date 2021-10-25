@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.client.render.RenderThrowable;
 import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
+import com.cibernet.minestuckuniverse.items.properties.throwkind.IPropertyThrowable;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import javafx.scene.control.Tab;
@@ -125,6 +126,8 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
+		if(playerIn.isSneaking() && handIn == EnumHand.MAIN_HAND && !playerIn.getHeldItemOffhand().isEmpty())
+			return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
 
 		for (WeaponProperty p : getProperties(playerIn.getHeldItem(handIn)))
 		{
@@ -143,13 +146,18 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 		for (WeaponProperty p : getProperties(stack))
 			stack = p.onItemUseFinish(stack, worldIn, entityLiving);
 
+		ItemStack thrownStack = stack.copy();
+		thrownStack.setCount(1);
+
+		EntityMSUThrowable proj = new EntityMSUThrowable(worldIn, entityLiving, thrownStack);
+		proj.setProjectileSize(this.size);
+
+		for(WeaponProperty p : getProperties(stack))
+			if(p instanceof IPropertyThrowable && !((IPropertyThrowable) p).onProjectileThrow(proj, entityLiving, stack))
+				return stack;
+
 		if (!worldIn.isRemote)
 		{
-			ItemStack thrownStack = stack.copy();
-			thrownStack.setCount(1);
-
-			EntityMSUThrowable proj = new EntityMSUThrowable(worldIn, entityLiving, thrownStack);
-			proj.setProjectileSize(this.size);
 			proj.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0, throwSpeed, 1.0F);
 			worldIn.spawnEntity(proj);
 		}

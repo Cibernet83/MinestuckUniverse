@@ -3,6 +3,8 @@ package com.cibernet.minestuckuniverse.items.armor;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
+import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
+import com.cibernet.minestuckuniverse.items.weapons.MSUWeaponBase;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.client.model.ModelBiped;
@@ -14,14 +16,18 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MSUArmorBase extends ItemArmor implements IRegistryItem
 {
     private final String registryName;
     private ModelBiped model;
+    ArrayList<ItemStack> repairMaterials = new ArrayList<>();
 
     public MSUArmorBase(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String unlocName, String registryName)
     {
@@ -91,6 +97,38 @@ public class MSUArmorBase extends ItemArmor implements IRegistryItem
         }
 
         return null;
+    }
+
+
+    public MSUArmorBase setRepairMaterials(ItemStack... stacks)
+    {
+        for(ItemStack i : stacks)
+            repairMaterials.add(i);
+        return this;
+    }
+
+    public MSUArmorBase setRepairMaterials(Collection<ItemStack> stacks)
+    {
+        repairMaterials.addAll(stacks);
+        return this;
+    }
+
+    public MSUArmorBase setRepairMaterial(String oredic)
+    {
+        if(OreDictionary.doesOreNameExist(oredic))
+            setRepairMaterials(OreDictionary.getOres(oredic));
+        return this;
+    }
+
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
+    {
+
+        for(ItemStack mat : repairMaterials)
+            if (!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
+
+        return super.getIsRepairable(toRepair, repair);
     }
 
     @Override

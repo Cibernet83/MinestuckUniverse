@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.events.handlers;
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
+import com.cibernet.minestuckuniverse.events.WeaponAssignedEvent;
 import com.cibernet.minestuckuniverse.gui.GuiStrifePortfolio;
 import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
@@ -30,6 +31,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -68,7 +70,7 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onPlayerAttack(LivingAttackEvent event)
 	{
-		if(!MSUConfig.combatOverhaul ||  !MSUConfig.preventUnallocatedWeaponsUse ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer))
+		if(!MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer))
 			return;
 
 		EntityLivingBase source = (EntityLivingBase) event.getSource().getImmediateSource();
@@ -87,7 +89,9 @@ public class StrifeEventHandler
 			event.setCanceled(true);
 		}
 
-		if(!isStackAssigned(stack))
+		WeaponAssignedEvent checkEvent = new WeaponAssignedEvent(event.getEntityLiving(), stack);
+		MinecraftForge.EVENT_BUS.post(checkEvent);
+		if(!isStackAssigned(stack) && checkEvent.getCheckResult())
 			event.setCanceled(true);
 	}
 
@@ -114,11 +118,14 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onItemInteract(PlayerInteractEvent.RightClickItem event)
 	{
-		if(!MSUConfig.combatOverhaul ||  !MSUConfig.preventUnallocatedWeaponsUse)
+		if(!MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife)
 			return;
 
 		ItemStack stack = event.getItemStack();
-		if(FORCED_USABLE_UNASSIGNED.contains(stack.getItem()) || (stack.hasTagCompound() && stack.getTagCompound().getBoolean("StrifeAssigned")))
+		WeaponAssignedEvent checkEvent = new WeaponAssignedEvent(event.getEntityPlayer(), stack);
+		MinecraftForge.EVENT_BUS.post(checkEvent);
+
+		if(FORCED_USABLE_UNASSIGNED.contains(stack.getItem()) || (isStackAssigned(stack) && checkEvent.getCheckResult()))
 			return;
 
 		if(USABLE_ASSIGNED_ONLY.contains(stack.getItem()))
@@ -303,7 +310,7 @@ public class StrifeEventHandler
 		EntityPlayer source = (EntityPlayer) event.getSource().getTrueSource();
 		IStrifeData cap = source.getCapability(MSUCapabilities.STRIFE_DATA, null);
 
-		if(cap.canDropCards() && source.world.rand.nextFloat() < 0.02f*event.getLootingLevel())
+		if(cap.canDropCards() && source.world.rand.nextFloat() < (cap.getDroppedCards() <= 0  && event.getEntityLiving() instanceof EntityUnderling ? 0.05f : 0.02f)*(event.getLootingLevel()+1))
 		{
 			boolean droppedCard = false;
 			for(EntityItem item : event.getDrops())

@@ -20,7 +20,7 @@ public class MSUItemBase extends Item implements IRegistryItem
 {
 
     final String registryName;
-    boolean isSecret = false;
+    protected boolean isSecret = false;
 
     public static final ArrayList<String> DEDICATED_TOOLTIPS = new ArrayList<String>()
     {{
@@ -68,11 +68,16 @@ public class MSUItemBase extends Item implements IRegistryItem
     {
         String key = getUnlocalizedName()+".tooltip";
         String playerName = Minecraft.getMinecraft().player == null ? "" : Minecraft.getMinecraft().player.getName();
+        String str = "";
 
         if(DEDICATED_TOOLTIPS.contains(playerName) && net.minecraft.client.resources.I18n.hasKey(key+"."+playerName))
-                tooltip.add(I18n.translateToLocal(key+"."+playerName));
+                str = (I18n.translateToLocal(key+"."+playerName));
         else if(net.minecraft.client.resources.I18n.hasKey(key))
-            tooltip.add(I18n.translateToLocal(key));
+            str = (I18n.translateToLocal(key));
+
+        if(!str.isEmpty() && !tooltip.contains(str))
+            tooltip.add(str);
+
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 

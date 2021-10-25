@@ -1,6 +1,6 @@
 {
     "parent": "minestuckuniverse:item/the_chancemaker",
     "textures": {
-        "layer0": "minestuckuniverse:items/the_chancemaker_pulling_2"
+        "layer0": "minestuckuniverse:items/chancemaker_pulling_2"
     }
 }

@@ -16,7 +16,10 @@ import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.mraof.minestuck.alchemy.AlchemyRecipes;
+import com.mraof.minestuck.alchemy.GristSet;
+import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.event.AlchemizeItemEvent;
+import com.mraof.minestuck.event.UnderlingSpoilsEvent;
 import com.mraof.minestuck.item.ItemCaptcharoidCamera;
 import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.network.skaianet.SburbHandler;
@@ -396,7 +399,12 @@ public class CommonEventHandler
 	{
 		if(event.getResultItem().getItem() instanceof ItemBeamBlade)
 			ItemBeamBlade.changeState(event.getResultItem(), false);
-		else if(event.getResultItem().getItem() == MinestuckUniverseItems.suitarang)
-			event.getResultItem().setCount(event.getResultItem().getCount()*4);
+	}
+
+	@SubscribeEvent
+	public static void onUnderlingDrops(UnderlingSpoilsEvent event)
+	{
+		if(event.getUnderling().getRNG().nextFloat() <= 0.001f)
+			event.getSpoils().addGrist(new GristSet(GristType.Zillium, 1));
 	}
 }

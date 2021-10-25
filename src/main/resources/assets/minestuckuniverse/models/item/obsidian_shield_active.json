@@ -1,0 +1,47 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"parent": "minestuckuniverse:item/obsidian_shield",
+	"textures": {
+		"0": "minestuckuniverse:models/crying_obsidian_shield",
+		"1": "minestuckuniverse:models/obsidian_shield_frame",
+		"particle": "minestuckuniverse:models/crying_obsidian_shield"
+	},
+	"elements": [
+		{
+			"from": [7, 13, 3],
+			"to": [9, 19, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [15.5, 0, 16, 3], "texture": "#0"},
+				"east": {"uv": [13, 0, 16, 3], "texture": "#0"},
+				"south": {"uv": [13, 0, 13.5, 3], "texture": "#0"},
+				"west": {"uv": [13, 3, 16, 6], "texture": "#0"},
+				"up": {"uv": [13, 0, 16, 0.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [13, 2.5, 16, 3], "rotation": 270, "texture": "#0"}
+			}
+		}, 
+		{
+			"name": "door5",
+			"from": [0, 0, 0.25],
+			"to": [16, 32, 2.75],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 16], "texture": "#0"},
+				"south": {"uv": [8, 0, 0, 16], "texture": "#0"}
+			}
+		}, 
+		{
+			"name": "door5",
+			"from": [0, 0, 0],
+			"to": [16, 32, 3],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 16], "texture": "#1"},
+				"east": {"uv": [9.5, 0, 11, 16], "texture": "#1"},
+				"south": {"uv": [8, 0, 0, 16], "texture": "#1"},
+				"west": {"uv": [8, 0, 9.5, 16], "texture": "#1"},
+				"up": {"uv": [14.5, 8, 16, 16], "rotation": 90, "texture": "#1"},
+				"down": {"uv": [14.5, 8, 16, 16], "rotation": 90, "texture": "#1"}
+			}
+		}
+	]
+}

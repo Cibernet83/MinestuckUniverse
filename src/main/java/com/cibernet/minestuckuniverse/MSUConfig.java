@@ -21,7 +21,7 @@ public class MSUConfig
 
 	//Strife
 	public static boolean combatOverhaul;
-	public static boolean preventUnallocatedWeaponsUse;
+	public static boolean restrictedStrife;
 	public static boolean keepPortfolioOnDeath;
 	public static int abstrataSwitcherRung;
 	public static int strifeDeckMaxSize;
@@ -53,8 +53,8 @@ public class MSUConfig
 		baseZillystoneLuck = config.get("General", "baseZillystoneLuck", -2, "Determines a player's base luck when chiseling a block of Zillystone.")
 				.setLanguageKey("config.minestuckuniverse.general.baseZillystoneLuck").getInt();
 
-		preventUnallocatedWeaponsUse = config.get("Strife", "preventUnallocatedWeaponsUse", false, "Determines whether you can attack while holding unallocated weapons or not.")
-				.setLanguageKey("config.minestuckuniverse.strife.preventUnallocatedWeaponsUse").getBoolean();
+		restrictedStrife = config.get("Strife", "restrictedStrife", false, "Prevents players from attacking without an allocated weapon in their main hand. It also restricts the use of certain items such as bows.")
+				.setLanguageKey("config.minestuckuniverse.strife.restrictedStrife").getBoolean();
 		keepPortfolioOnDeath = config.get("Strife", "keepPortfolioOnDeath", false, "Determines whether the player drops their Strife Portfolio after dying or not.")
 				.setLanguageKey("config.minestuckuniverse.strife.keepPortfolioOnDeath").getBoolean();
 		strifeCardMobDrops = config.get("Strife", "strifeCardMobDrops", true, "Allows certain mobs to have a chance at dropping Strife Specibus Cards allocated to whatever item they're holding.")

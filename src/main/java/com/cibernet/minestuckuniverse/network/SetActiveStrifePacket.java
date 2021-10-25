@@ -3,8 +3,12 @@ package com.cibernet.minestuckuniverse.network;
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
+import com.cibernet.minestuckuniverse.events.handlers.StrifeEventHandler;
+import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.EnumSet;
@@ -38,7 +42,15 @@ public class SetActiveStrifePacket extends MSUPacket
 
 		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
 		if(isSpecibus)
+		{
 			cap.setSelectedSpecibusIndex(index);
+			cap.setArmed(false);
+
+			if(StrifeEventHandler.isStackAssigned(player.getHeldItemMainhand()))
+				player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+			if(StrifeEventHandler.isStackAssigned(player.getHeldItemOffhand()))
+				player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
+		}
 		else cap.setSelectedWeaponIndex(index);
 
 		MSUChannelHandler.sendToPlayer(makePacket(Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.INDEXES), player);

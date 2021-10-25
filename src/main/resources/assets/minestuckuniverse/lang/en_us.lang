@@ -522,6 +522,16 @@ death.attack.minestuckuniverse.bloodSword=%s bled to death
 death.attack.minestuckuniverse.unrealDamage=%s didn't get the ruler
 death.attack.minestuckuniverse.rock=%s was squished under a rock
 
+death.attack.minestuckuniverse.sbahj=%s doesn't know what a jpeg is
+death.attack.minestuckuniverse.cactus=%s was prickled to death by %s
+death.attack.minestuckuniverse.cactus.item=%s was prickled to death by %s using %s
+death.attack.minestuckuniverse.magic=%s was killed by %s's magic
+death.attack.minestuckuniverse.magic.item=%s was killed by %s's magic using %s
+death.attack.minestuckuniverse.beam=%s was disintegrated by %s's beam
+death.attack.minestuckuniverse.beam.item=%s was disintegrated by %s's %s
+death.attack.minestuckuniverse.rainbow=%s couldn't handle the rainbow
+death.attack.minestuckuniverse.sans=%s had a bad time
+
 item.banner.msu_light.black=Black Light Symbol
 item.banner.msu_light.red=Red Light Symbol
 item.banner.msu_light.green=Green Light Symbol
@@ -780,7 +790,7 @@ config.minestuckuniverse.general.baseZillystoneLuck=Zillystone Base Luck
 config.minestuckuniverse.general.IDAlchemy=ID-Based Alchemy
 
 config.minestuckuniverse.strife.combatOverhaul=Combat Overhaul
-config.minestuckuniverse.strife.preventUnallocatedWeaponsUse=Prevent Unallocated Weapon Use
+config.minestuckuniverse.strife.restrictedStrife=Restricted Strife
 config.minestuckuniverse.strife.keepPortfolioOnDeath=Keep Strife Portfolio On Death
 config.minestuckuniverse.strife.strifeCardMobDrops=Mobs Drop Strife Cards
 config.minestuckuniverse.strife.strifeDeckMaxSize=Strife Deck Weapon Limit

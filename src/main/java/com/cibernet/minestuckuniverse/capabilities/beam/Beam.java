@@ -186,11 +186,17 @@ public class Beam
 			target = findEntityOnPath(posVec, nextPosVec);
 			if(target != null)
 			{
-				DamageSource damageSource = new EntityDamageSource(MinestuckUniverse.MODID+".beam", source);
+				String damageName = "beam";
+
+				List<WeaponProperty> propertyList = ((IPropertyWeapon) sourceStack.getItem()).getProperties(sourceStack);
+				for (WeaponProperty p : propertyList)
+					if(p instanceof IPropertyBeam)
+						damageName = ((IPropertyBeam) p).beamDamageName(this, sourceStack, damageName);
+
+				DamageSource damageSource = new EntityDamageSource(MinestuckUniverse.MODID+"."+damageName, source);
 
 				if(sourceStack != null && sourceStack.getItem() instanceof IPropertyWeapon)
 				{
-					List<WeaponProperty> propertyList = ((IPropertyWeapon) sourceStack.getItem()).getProperties(sourceStack);
 					for (WeaponProperty p : propertyList)
 						if(p instanceof IPropertyBeam)
 							damageSource = ((IPropertyBeam) p).onEntityImpact(sourceStack, this, target, damageSource);
@@ -361,7 +367,7 @@ public class Beam
 		Entity entity = null;
 		Vec3d length = end.subtract(start);
 
-		List<Entity> list = this.world.getEntitiesInAABBexcluding(this.source, new AxisAlignedBB(start, start).expand(length.x, length.y, length.z).grow(1.0D), BEAM_TARGETS);
+		List<Entity> list = this.world.getEntitiesInAABBexcluding(this.source, new AxisAlignedBB(start.x, start.y, start.z, start.x, start.y, start.z).expand(length.x, length.y, length.z).grow(1.0D), BEAM_TARGETS);
 		double d0 = 0.0D;
 
 		for (int i = 0; i < list.size(); ++i)

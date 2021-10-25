@@ -1,9 +1,11 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyAutoSmelt;
 import com.cibernet.minestuckuniverse.items.properties.PropertyTrueDamage;
+import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyVariableItem;
 import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
 import com.cibernet.minestuckuniverse.items.properties.PropertyGristSetter;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
@@ -22,6 +24,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -43,6 +48,7 @@ public class PropertyEventHandler
 		MinecraftForge.EVENT_BUS.register(PropertyGristSetter.class);
 		MinecraftForge.EVENT_BUS.register(PropertyTrueDamage.class);
 		MinecraftForge.EVENT_BUS.register(PropertyAutoSmelt.class);
+		MinecraftForge.EVENT_BUS.register(PropertyVariableItem.class);
 	}
 
 	@SubscribeEvent
@@ -61,7 +67,7 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onLivingHurt(LivingHurtEvent event)
 	{
-		if(!(event.getSource() instanceof CustomDamageSource) && event.getSource().getImmediateSource() instanceof EntityLivingBase)
+		if(!(event.getSource() instanceof CustomDamageSource) && event.getSource().getImmediateSource() instanceof EntityLivingBase && event.getSource().getDamageType() == "player")
 		{
 			ItemStack stack = ((EntityLivingBase) event.getSource().getImmediateSource()).getHeldItemMainhand();
 
@@ -70,12 +76,6 @@ public class PropertyEventHandler
 				List<WeaponProperty> propertyList = ((IPropertyWeapon) stack.getItem()).getProperties(stack);
 				for(WeaponProperty p : propertyList)
 					event.setAmount(p.damageAgainstEntity(stack, (EntityLivingBase) event.getSource().getImmediateSource(), event.getEntityLiving(), event.getAmount()));
-			}
-
-			if(CUSTOM_DAMAGE.containsKey(stack.getItem()))
-			{
-				event.setCanceled(true);
-				event.getEntity().attackEntityFrom(CUSTOM_DAMAGE.get(stack.getItem()).setEntitySource(event.getSource().getImmediateSource()), event.getAmount());
 			}
 		}
 	}
@@ -86,6 +86,10 @@ public class PropertyEventHandler
 		put(MinestuckUniverseItems.needlewands, (CustomDamageSource) new CustomDamageSource("magic").setDamageBypassesArmor().setMagicDamage());
 		put(MinestuckUniverseItems.oglogothThorn, (CustomDamageSource) new CustomDamageSource("magic").setDamageBypassesArmor().setMagicDamage());
 		put(MinestuckUniverseItems.archmageDaggers, (CustomDamageSource) new CustomDamageSource("magic").setDamageBypassesArmor().setMagicDamage());
+		put(MinestuckUniverseItems.gasterBlaster, new CustomDamageSource("sans"));
+		put(MinestuckUniverseItems.sbahjWhip, new CustomDamageSource("sbahj"));
+		put(MinestuckItems.sord, new CustomDamageSource("sbahj"));
+		put(MinestuckItems.batleacks, new CustomDamageSource("sbahj"));
 	}};
 
 	public static class CustomDamageSource extends EntityDamageSource
@@ -100,6 +104,15 @@ public class PropertyEventHandler
 			damageSourceEntity = entitySource;
 			return this;
 		}
+
+		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
+		{
+			ItemStack itemstack = this.damageSourceEntity instanceof EntityLivingBase ? ((EntityLivingBase)this.damageSourceEntity).getHeldItemMainhand() : ItemStack.EMPTY;
+			String s = "death.attack." + MinestuckUniverse.MODID + "." + this.damageType;
+			String s1 = s + ".item";
+			return !itemstack.isEmpty() && itemstack.hasDisplayName() && I18n.canTranslate(s1) ? new TextComponentTranslation(s1, new Object[] {entityLivingBaseIn.getDisplayName(), this.damageSourceEntity.getDisplayName(), itemstack.getTextComponent()}) : new TextComponentTranslation(s, new Object[] {entityLivingBaseIn.getDisplayName(), this.damageSourceEntity.getDisplayName()});
+		}
+
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -107,22 +120,23 @@ public class PropertyEventHandler
 	public static void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-
-		ItemStack stack = player.getHeldItemMainhand();
-
-		if(stack.getItem() instanceof IPropertyWeapon)
-		{
-			List<WeaponProperty> propertyList = ((IPropertyWeapon) stack.getItem()).getProperties(stack);
-			for(WeaponProperty p : propertyList)
-				p.onEmptyHit(stack, player);
-		}
-
 		MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.LEFT_CLICK_EMPTY, player));
 	}
 
 	@SubscribeEvent
 	public static void onAttack(LivingAttackEvent event)
 	{
+		if(!(event.getSource() instanceof CustomDamageSource) && event.getSource().getImmediateSource() instanceof EntityLivingBase && event.getSource().getDamageType() == "player")
+		{
+			ItemStack stack = ((EntityLivingBase) event.getSource().getImmediateSource()).getHeldItemMainhand();
+
+			if(CUSTOM_DAMAGE.containsKey(stack.getItem()))
+			{
+				event.setCanceled(true);
+				event.getEntity().attackEntityFrom(CUSTOM_DAMAGE.get(stack.getItem()).setEntitySource(event.getSource().getImmediateSource()), event.getAmount());
+			}
+		}
+
 		if(!event.getEntityLiving().isEntityInvulnerable(event.getSource()) && !event.getEntity().world.isRemote)
 		{
 			ItemStack stack = event.getEntityLiving().getActiveItemStack();

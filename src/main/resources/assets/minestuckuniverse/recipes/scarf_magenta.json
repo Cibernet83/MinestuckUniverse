@@ -1,0 +1,21 @@
+{
+    "type": "minestuckuniverse:knitting",
+    "pattern": [
+        "###",
+        " k#",
+        "  #"
+    ],
+    "key": {
+        "k": {
+            "item": "minestuckuniverse:knitting_needle"
+        },
+        "#": {
+            "item": "minestuckuniverse:yarn_ball",
+            "data": 13
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:scarf",
+        "data": 13
+    }
+}

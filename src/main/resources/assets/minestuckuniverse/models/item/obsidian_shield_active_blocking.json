@@ -1,0 +1,23 @@
+{
+	"parent": "minestuckuniverse:item/obsidian_shield_active",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [45, -45, 0],
+			"translation": [1, -9.75, -3]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [45, -45, 0],
+			"translation": [1, -9.75, -3]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 0, 5],
+			"translation": [-3.5, -14.25, 4],
+			"scale": [1.25, 1.25, 1.25]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 0, 5],
+			"translation": [-3.5, -15, 5.25],
+			"scale": [1.25, 1.25, 1.25]
+		}
+	}
+}

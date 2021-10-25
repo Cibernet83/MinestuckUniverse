@@ -18,6 +18,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -68,6 +69,20 @@ public class MSUAlchemyRecipes
     
     public static void registerVanilla()
     {
+        //OreDictionary entries
+        OreDictionary.registerOre("record", MinestuckItems.recordDanceStab);
+        OreDictionary.registerOre("record", MinestuckItems.recordEmissaryOfDance);
+        OreDictionary.registerOre("record", MinestuckItems.recordRetroBattle);
+
+        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.clawSickle), new GristSet(new GristType[] {Build, Iodine, Artifact}, new int[] {5000, 4000, 1}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.dragonCane), new GristSet(new GristType[] {Rust, Ruby, Mercury}, new int[] {200, 400, 300}));
+
+        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.royalDeringer), new GristSet(new GristType[]{GristType.Build, GristType.Gold, GristType.Garnet, GristType.Diamond}, new int[]{1000, 2400, 20, 350}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.caledfwlch), new GristSet(new GristType[]{GristType.Build, GristType.Chalk, GristType.Gold, GristType.Zillium}, new int[]{5000, 10000, 200, 1}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.caledscratch), new GristSet(new GristType[]{GristType.Build, GristType.Chalk, GristType.Garnet, GristType.Uranium}, new int[]{2500, 3500, 1500, 1550}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.scarletRibbitar), new GristSet(new GristType[]{GristType.Build, GristType.Ruby, GristType.Quartz, GristType.Diamond, GristType.Zillium}, new int[]{3000, 4000, 2000, 1000, 2000}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.doggMachete), new GristSet(new GristType[]{GristType.Build, GristType.Cobalt, GristType.Chalk, GristType.Shale, GristType.Diamond}, new int[]{1000, 1000, 2500, 500, 100}));
+
         GristRegistry.addGristConversion(new ItemStack(MinestuckItems.scarletZillyhoo) , new GristSet(new GristType[] {Build, Zillium, Ruby, Quartz, Diamond}, new int[] {1200, 800, 600, 30, 15}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckItems.zillyhooHammer) , new GristSet(Zillium, 1000));
         GristRegistry.addGristConversion(new ItemStack(MinestuckItems.zillywairCutlass) , new GristSet(Zillium, 1000));
@@ -104,7 +119,8 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(wizardHat), new GristSet(new GristType[] {Build, Amethyst}, new int[] {10, 8}));
         GristRegistry.addGristConversion(new ItemStack(cozySweater), new GristSet(new GristType[] {Build, Garnet}, new int[] {10, 8}));
         GristRegistry.addGristConversion(new ItemStack(archmageHat), new GristSet(new GristType[] {Build, Amethyst, Cobalt, Garnet}, new int[] {10, 800, 800, 800}));
-        GristRegistry.addGristConversion(new ItemStack(airJordans), new GristSet(new GristType[] {Build, Chalk}, new int[] {10, 8}));
+        GristRegistry.addGristConversion(new ItemStack(bunnySlippers), new GristSet(new GristType[] {Build, Chalk}, new int[] {10, 8}));
+        GristRegistry.addGristConversion(new ItemStack(cruxtruderHat), new GristSet(new GristType[] {Build}, new int[] {100}));
 
         GristRegistry.addGristConversion(new ItemStack(rubberBoots), new GristSet(new GristType[] {Build, Shale}, new int[] {10, 20}));
         GristRegistry.addGristConversion(new ItemStack(moonShoes), new GristSet(new GristType[] {Build, Shale}, new int[] {20, 10}));
@@ -150,11 +166,6 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(lightbringer), new GristSet(new GristType[] {Gold, Tar, Sulfur, Diamond}, new int[] {3400, 1200, 800, 22}));
         GristRegistry.addGristConversion(new ItemStack(cybersword), new GristSet(new GristType[] {Gold, Cobalt, Uranium, Diamond}, new int[] {4400, 8030, 8, 220}));
         GristRegistry.addGristConversion(new ItemStack(valorsEdge), new GristSet(new GristType[] {Diamond, Ruby, Uranium, Gold}, new int[] {8400, 200, 200, 800}));
-        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.royalDeringer), new GristSet(new GristType[]{GristType.Build, GristType.Gold, GristType.Garnet, GristType.Diamond}, new int[]{1000, 2400, 20, 350}));
-        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.caledfwlch), new GristSet(new GristType[]{GristType.Build, GristType.Chalk, GristType.Gold, GristType.Zillium}, new int[]{5000, 10000, 200, 1}));
-        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.caledscratch), new GristSet(new GristType[]{GristType.Build, GristType.Chalk, GristType.Garnet, GristType.Uranium}, new int[]{2500, 3500, 1500, 1550}));
-        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.scarletRibbitar), new GristSet(new GristType[]{GristType.Build, GristType.Ruby, GristType.Quartz, GristType.Diamond, GristType.Zillium}, new int[]{3000, 4000, 2000, 1000, 2000}));
-        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.doggMachete), new GristSet(new GristType[]{GristType.Build, GristType.Cobalt, GristType.Chalk, GristType.Shale, GristType.Diamond}, new int[]{1000, 1000, 2500, 500, 100}));
 
         GristRegistry.addGristConversion(new ItemStack(loghammer), new GristSet(new GristType[] {Build}, new int[] {24}));
         GristRegistry.addGristConversion(new ItemStack(overgrownLoghammer), new GristSet(new GristType[] {Build, Amber}, new int[] {48, 16}));
@@ -167,9 +178,13 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(MinestuckItems.mwrthwl), new GristSet(new GristType[]{GristType.Build, GristType.Chalk, GristType.Gold, GristType.Zillium}, new int[]{2000, 12000, 200, 1}));
 
         GristRegistry.addGristConversion(new ItemStack(hereticusAurum), new GristSet(new GristType[] {Build, Gold, Amethyst}, new int[] {210, 2000, 256}));
-        GristRegistry.addGristConversion(new ItemStack(MinestuckItems.clawSickle), new GristSet(new GristType[] {Build, Iodine, Artifact}, new int[] {5000, 4000, 1}));
 
-        GristRegistry.addGristConversion(new ItemStack(dragonCharge), new GristSet(new GristType[] {Rust, Ruby, Mercury}, new int[] {200, 400, 300}));
+        GristRegistry.addGristConversion(new ItemStack(rubyContrabat), new GristSet(new GristType[] {Ruby, Diamond, Quartz, Build}, new int[] {800, 30, 15, 1400}));
+        GristRegistry.addGristConversion(new ItemStack(dynamiteStick), new GristSet(new GristType[] {Sulfur, Chalk, Build}, new int[] {400, 320, 800}));
+        GristRegistry.addGristConversion(new ItemStack(nightmareMace), new GristSet(new GristType[] {Amethyst, Shale, Caulk, Tar}, new int[] {6000, 4000, 4000, 6000}));
+        GristRegistry.addGristConversion(new ItemStack(cranialEnder), new GristSet(new GristType[] {Amethyst, Cobalt, Uranium, Mercury, Tar, Diamond}, new int[] {6800, 4020, 300, 540, 210, 4}));
+        GristRegistry.addGristConversion(new ItemStack(homeRunBat), new GristSet(new GristType[] {Ruby, Gold, Garnet, Artifact}, new int[] {4500, 8000, 4500, 1}));
+
         GristRegistry.addGristConversion(new ItemStack(goldCane), new GristSet(new GristType[] {Gold, Build}, new int[] {20, 16}));
         GristRegistry.addGristConversion(new ItemStack(staffOfOvergrowth), new GristSet(new GristType[] {Iodine, Ruby, Amber}, new int[] {540, 800, 240}));
         GristRegistry.addGristConversion(new ItemStack(atomicIrradiator), new GristSet(new GristType[] {Uranium, Build}, new int[] {200, 2000}));
@@ -250,10 +265,11 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(markedBoomerang), new GristSet(Build, 10));
         GristRegistry.addGristConversion(new ItemStack(redHotRang), new GristSet(new GristType[] {Build, Sulfur, Tar}, new int[] {200, 40, 20}));
         GristRegistry.addGristConversion(new ItemStack(goldenStar), new GristSet(Gold, 1));
-        GristRegistry.addGristConversion(new ItemStack(suitarang), new GristSet(new GristType[] {Build, Tar}, new int[] {20, 4}));
+        GristRegistry.addGristConversion(new ItemStack(suitarang), new GristSet(new GristType[] {Build, Tar}, new int[] {5, 1}));
         GristRegistry.addGristConversion(new ItemStack(psionicStar), new GristSet(new GristType[] {Build, Amethyst}, new int[] {20, 4}));
         GristRegistry.addGristConversion(new ItemStack(hotPotato), new GristSet(new GristType[] {Amber, Tar}, new int[] {20, 200}));
         GristRegistry.addGristConversion(new ItemStack(dragonCharge), new GristSet(new GristType[] {Ruby, Sulfur, Tar}, new int[] {200, 800, 450}));
+        GristRegistry.addGristConversion(new ItemStack(tornadoGlaive), new GristSet(new GristType[] {Cobalt, Gold, Quartz, Uranium}, new int[] {260, 120, 30, 2}));
 
         if(MinestuckUniverse.isArsenalLoaded)
         {
@@ -287,6 +303,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(Items.FISH, 1, 3), new ItemStack(Items.IRON_HELMET), MODE_AND, true, false, new ItemStack(diverHelmet));
         CombinationRegistry.addCombination(new ItemStack(diverHelmet), new ItemStack(knittingNeedles), MODE_OR, false, false, new ItemStack(spikedHelmet));
         CombinationRegistry.addCombination(new ItemStack(Items.LEATHER_HELMET), new ItemStack(MinestuckItems.itemFrog, 1, 1), MODE_OR, false, true, new ItemStack(frogHat));
+        CombinationRegistry.addCombination(new ItemStack(Items.IRON_HELMET), new ItemStack(MinestuckBlocks.cruxtruderLid), MODE_OR, false, true, new ItemStack(cruxtruderHat));
         CombinationRegistry.addCombination(new ItemStack(Items.SLIME_BALL), new ItemStack(Items.LEATHER_BOOTS), MODE_AND, new ItemStack(rubberBoots));
         CombinationRegistry.addCombination(new ItemStack(moonShoes), new ItemStack(sun), MODE_AND, new ItemStack(sunShoes));
         CombinationRegistry.addCombination(new ItemStack(rubberBoots), new ItemStack(yarnBall, 1, 14), MODE_AND, new ItemStack(airJordans));
@@ -386,6 +403,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(knittingNeedles), new ItemStack(Items.BONE), MODE_OR, false, false, new ItemStack(boneNeedles));
         CombinationRegistry.addCombination(new ItemStack(knittingNeedles), new ItemStack(wizardStatue), MODE_OR, false, false, new ItemStack(needlewands));
         CombinationRegistry.addCombination(new ItemStack(needlewands), new ItemStack(MinestuckItems.grimoire), MODE_AND, false, false, new ItemStack(oglogothThorn));
+        CombinationRegistry.addCombination(new ItemStack(laserPointer), new ItemStack(MinestuckItems.minestuckBucket, 1, 3), MODE_OR, false, true, new ItemStack(litGlitterBeamTransistor));
         CombinationRegistry.addCombination(new ItemStack(knittingNeedles), new ItemStack(zillyStone), MODE_AND, false, false, new ItemStack(thistlesOfZillywitch));
 
         //clawkind

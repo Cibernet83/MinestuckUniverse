@@ -41,11 +41,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem, IPropertyWeapon<MSUWeaponBase>
+public class MSUWeaponBase extends MSUItemBase implements IClassedTool, ISortedTabItem, IPropertyWeapon<MSUWeaponBase>
 {
     public static int slotIndex = 0;
     private int tabSlot = 0;
-    private final String registryName;
 
     protected boolean unbreakable;
     protected double weaponDamage;
@@ -63,10 +62,8 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
 
     public MSUWeaponBase(int maxUses, double damageVsEntity, double weaponSpeed, int enchantability, String name, String unlocName)
     {
-        super();
-        registryName = name;
-        this.setUnlocalizedName(unlocName);
-        this.setCreativeTab(!MSUConfig.combatOverhaul && registryName.split(":")[0].equals(Minestuck.MOD_ID) ? TabMinestuck.instance : TabMinestuckUniverse.weapons);
+        super(name, unlocName);
+        this.setCreativeTab(!MSUConfig.combatOverhaul && name.split(":")[0].equals(Minestuck.MOD_ID) ? TabMinestuck.instance : TabMinestuckUniverse.weapons);
 
         this.unbreakable = maxUses <= 0;
         this.maxStackSize = 1;
@@ -86,7 +83,7 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
     {
-        if(isInCreativeTab(tab))
+        if(!isSecret && isInCreativeTab(tab))
         {
             if(tab == TabMinestuckUniverse.weapons)
             {
@@ -110,22 +107,6 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
         for(WeaponProperty p : getProperties(stack))
             name = p.getItemStackDisplayName(stack, name);
         return name;
-    }
-
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
-        if(getRegistryName() == null || !getRegistryName().getResourceDomain().equals(Minestuck.MOD_ID))
-        {
-            String key = getUnlocalizedName() + ".tooltip";
-            String playerName = Minecraft.getMinecraft().player == null ? "" : Minecraft.getMinecraft().player.getName();
-
-            if (MSUItemBase.DEDICATED_TOOLTIPS.contains(playerName) && net.minecraft.client.resources.I18n.hasKey(key + "." + playerName))
-                tooltip.add(I18n.translateToLocal(key + "." + playerName));
-            else if (net.minecraft.client.resources.I18n.hasKey(key))
-                tooltip.add(I18n.translateToLocal(key));
-        }
-        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     public MSUWeaponBase setMaterial(Item.ToolMaterial material)
@@ -434,11 +415,6 @@ public class MSUWeaponBase extends Item implements IClassedTool, ISortedTabItem,
     @Override
     public MSUToolClass getToolClass() {
         return tool;
-    }
-
-    @Override
-    public void setRegistryName() {
-        setRegistryName(registryName);
     }
 
     @Override

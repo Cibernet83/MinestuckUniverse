@@ -53,7 +53,11 @@ public class ItemGhost extends MSUItemBase
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {}
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
+    {
+        if(items.isEmpty())
+            super.getSubItems(tab, items);
+    }
 
     static class BlockEntry implements Comparable<BlockEntry>
     {
