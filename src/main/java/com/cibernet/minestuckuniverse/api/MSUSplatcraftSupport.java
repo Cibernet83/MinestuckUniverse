@@ -57,7 +57,6 @@ public class MSUSplatcraftSupport
 		addColor("CRUXITE_FUCSHIA",7798844, MapColor.LIGHT_BLUE, "cruxiteFucshia");
 
 		RecipesInkwellVat.addRecipe((ItemFilter) MinestuckUniverseItems.splatcraftCruxiteFilter, cruxiteColors.toArray(new InkColors[21]));
-		RecipesInkwellVat.addRecipe(SplatCraftItems.filterCreative, cruxiteColors.toArray(new InkColors[21]));
 		GameRegistry.addShapelessRecipe(new ResourceLocation(MinestuckUniverse.MODID, "splatcraft_cruxite_filter"), null, new ItemStack(MinestuckUniverseItems.splatcraftCruxiteFilter),
 				Ingredient.fromItem(SplatCraftItems.filterEmpty), Ingredient.fromItem(MinestuckItems.rawCruxite), Ingredient.fromItem(MinestuckItems.rawUranium));
 

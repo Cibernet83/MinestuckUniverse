@@ -46,6 +46,8 @@ import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
@@ -712,7 +714,8 @@ public class MinestuckUniverseItems
         wisdomsHookshot.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "awakened"),
                 ((stack, worldIn, entityIn) -> ((PropertyLowHealthBoost) wisdomsHookshot.getProperty(PropertyLowHealthBoost.class, stack)).getPropertyOverride().apply(stack, worldIn, entityIn)));
         dragonBlades.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "offhand"), ((stack, worldIn, entityIn) -> entityIn != null && entityIn.getHeldItemOffhand().equals(stack) ? 1 : 0));
-        bladesOfTheWarrior.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "offhand"), ((stack, worldIn, entityIn) -> entityIn != null && entityIn.getHeldItemOffhand().equals(stack) ? 1 : 0));
+        bladesOfTheWarrior.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "left"), ((stack, worldIn, entityIn) -> entityIn != null &&
+                entityIn.getHeldItem(entityIn.getPrimaryHand() == EnumHandSide.LEFT ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND).equals(stack) ? 1 : 0));
 
         energyBow.setArrowTexture("energy_arrow");
         sweetBow.setCustomArrowTexture();

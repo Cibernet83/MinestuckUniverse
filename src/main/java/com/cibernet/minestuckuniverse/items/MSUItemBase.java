@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.mraof.minestuck.Minestuck;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -72,7 +73,7 @@ public class MSUItemBase extends Item implements IRegistryItem
 
         if(DEDICATED_TOOLTIPS.contains(playerName) && net.minecraft.client.resources.I18n.hasKey(key+"."+playerName))
                 str = (I18n.translateToLocal(key+"."+playerName));
-        else if(net.minecraft.client.resources.I18n.hasKey(key))
+        else if(net.minecraft.client.resources.I18n.hasKey(key) && stack.getItem().getRegistryName().getResourceDomain() != Minestuck.MOD_ID)
             str = (I18n.translateToLocal(key));
 
         if(!str.isEmpty() && !tooltip.contains(str))

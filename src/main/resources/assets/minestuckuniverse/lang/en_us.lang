@@ -508,12 +508,12 @@ effect.minestuckuniverse.flight=Skybound
 effect.minestuckuniverse.disableFlight=Earthbound
 effect.minestuckuniverse.disableBuilding=Creative Shock
 
-subtitle.minestuckuniverse.homeRunBat=Home Run!
-subtitle.minestuckuniverse.shieldParry=Shield parried
-subtitle.minestuckuniverse.whipCrack=Whip cracks
-subtitle.minestuckuniverse.whipCrock=§n§ocrock.
-subtitle.minestuckuniverse.gasterBlaster.charge=Beam Charging
-subtitle.minestuckuniverse.gasterBlaster.release=Beam Released
+subtitle.minestuckuniverse.home_run_bat=Home Run!
+subtitle.minestuckuniverse.shield_parry=Shield parried
+subtitle.minestuckuniverse.whip_crack=Whip cracks
+subtitle.minestuckuniverse.whip_crock=§n§ocrock.
+subtitle.minestuckuniverse.gaster_blaster.charge=Beam Charging
+subtitle.minestuckuniverse.gaster_blaster.release=Beam Released
 
 death.attack.minestuckuniverse.shock=%s was zapped to death by %s
 death.attack.minestuckuniverse.shock.item=%s was zapped to death by %s using %s

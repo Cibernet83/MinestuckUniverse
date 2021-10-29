@@ -1,42 +1,44 @@
 {
   "item.home_run_bat": {
     "category": "players",
-    "subtitle": "subtitle.minestuckuniverse.homeRunBat",
+    "subtitle": "subtitle.minestuckuniverse.home_run_bat",
     "sounds": [
         "minestuckuniverse:item/home_run_bat"
     ]
   },
   "item.shield_parry": {
     "category": "players",
-    "subtitle": "subtitle.minestuckuniverse.shieldParry",
+    "subtitle": "subtitle.minestuckuniverse.shield_parry",
     "sounds": [
-        "minestuckuniverse:item/shield_parry"
+        "minestuckuniverse:item/shield_parry1",
+        "minestuckuniverse:item/shield_parry2",
+        "minestuckuniverse:item/shield_parry3"
     ]
   },
   "item.whip_crack": {
     "category": "players",
-    "subtitle": "subtitle.minestuckuniverse.whipCrack",
+    "subtitle": "subtitle.minestuckuniverse.whip_crack",
     "sounds": [
         "minestuckuniverse:item/whip_crack"
     ]
   },
   "item.whip_crock": {
     "category": "players",
-    "subtitle": "subtitle.minestuckuniverse.whipCrock",
+    "subtitle": "subtitle.minestuckuniverse.whip_crock",
     "sounds": [
         "minestuckuniverse:item/whip_crock"
     ]
   },
   "item.gaster_blaster.charge": {
     "category": "players",
-    "subtitle": "subtitle.minestuckuniverse.gasterBlaster.charge",
+    "subtitle": "subtitle.minestuckuniverse.gaster_blaster.charge",
     "sounds": [
         "minestuckuniverse:item/gaster_blaster_charge"
     ]
   },
   "item.gaster_blaster.release": {
     "category": "players",
-    "subtitle": "subtitle.minestuckuniverse.gasterBlaster.release",
+    "subtitle": "subtitle.minestuckuniverse.gaster_blaster.release",
     "sounds": [
         "minestuckuniverse:item/gaster_blaster_release"
     ]

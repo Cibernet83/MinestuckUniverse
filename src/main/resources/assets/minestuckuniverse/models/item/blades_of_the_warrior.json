@@ -229,5 +229,15 @@
 				14
 			]
 		}
-	]
+	],
+	"overrides":
+            [
+                {
+                    "predicate":
+                    {
+                        "minestuckuniverse:left": 1
+                    },
+                    "model": "minestuckuniverse:item/blades_of_the_warrior_left"
+                }
+            ]
 }

@@ -27,7 +27,7 @@ public class MSUSoundHandler
 		registry.register(shieldParry.setRegistryName("item.shield_parry"));
 		registry.register(whipCrack.setRegistryName("item.whip_crack"));
 		registry.register(whipCrock.setRegistryName("item.whip_crock"));
-		registry.register(gasterBlasterCharge.setRegistryName("item.gasterBlaster.charge"));
-		registry.register(gasterBlasterRelease.setRegistryName("item.gasterBlaster.release"));
+		registry.register(gasterBlasterCharge.setRegistryName("item.gaster_blaster.charge"));
+		registry.register(gasterBlasterRelease.setRegistryName("item.gaster_blaster.release"));
 	}
 }

@@ -23,6 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -163,7 +164,8 @@ public class PropertyEventHandler
 						((EntityLivingBase)entity).knockBack(event.getEntityLiving(), 0.5F, event.getEntityLiving().posX - entity.posX, event.getEntityLiving().posZ - entity.posZ);
 				}
 
-				event.getEntityLiving().playSound(MSUSoundHandler.shieldParry, 1.0F, 0.8F + event.getEntity().world.rand.nextFloat() * 0.4F);
+				EntityLivingBase player = event.getEntityLiving();
+				player.world.playSound(null, player.posX, player.posY, player.posZ, MSUSoundHandler.shieldParry, SoundCategory.PLAYERS, 1.0F, 0.8F + event.getEntity().world.rand.nextFloat() * 0.4F);
 				event.setCanceled(true);
 			}
 		}
