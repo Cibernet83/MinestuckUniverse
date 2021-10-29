@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
+import com.cibernet.minestuckuniverse.api.MSUSplatcraftSupport;
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
@@ -92,6 +93,12 @@ public class CommonProxy
         if(MinestuckUniverse.isBotaniaLoaded)
             BotaniaSupport.generateGristCosts();
         MinestuckUniverseItems.setPostInitVariables();
+
+        if(MinestuckUniverse.isSplatcraftLodaded)
+        {
+            MinecraftForge.EVENT_BUS.register(MSUSplatcraftSupport.class);
+            MSUSplatcraftSupport.registerColors();
+        }
     }
 
     public void serverStarted()

@@ -22,6 +22,7 @@ import com.cibernet.minestuckuniverse.items.weapons.*;
 import com.cibernet.minestuckuniverse.util.BlockMetaPair;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
+import com.cibernet.splatcraft.items.ItemFilter;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.block.BlockTransportalizer;
@@ -340,6 +341,13 @@ public class MinestuckUniverseItems
     public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCloth, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
     public static Item catclaws = new ItemDualClaw(450, 2.9, -0.65, -1.5D, -1.0D, 6, "catClaws",Minestuck.MOD_ID+ ":catclaws").setTool(toolClaws, 2, 1);
 
+    //Support
+    public static Item splatcraftCruxiteFilter = new MSUItemBase("cruxite_filter", "cruxiteFilter"){
+        @Override
+        public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        }
+    };
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
@@ -653,6 +661,10 @@ public class MinestuckUniverseItems
         //Blocks
         registerItemBlocks(registry);
 
+        //Support
+        if(MinestuckUniverse.isSplatcraftLodaded)
+            splatcraftCruxiteFilter = new ItemFilter("cruxiteFilter", "cruxite_filter", false).setCreativeTab(TabMinestuckUniverse.main);
+        registerItem(registry, splatcraftCruxiteFilter);
     }
 
     public static void setPostInitVariables()
@@ -701,8 +713,6 @@ public class MinestuckUniverseItems
                 ((stack, worldIn, entityIn) -> ((PropertyLowHealthBoost) wisdomsHookshot.getProperty(PropertyLowHealthBoost.class, stack)).getPropertyOverride().apply(stack, worldIn, entityIn)));
         dragonBlades.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "offhand"), ((stack, worldIn, entityIn) -> entityIn != null && entityIn.getHeldItemOffhand().equals(stack) ? 1 : 0));
         bladesOfTheWarrior.addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "offhand"), ((stack, worldIn, entityIn) -> entityIn != null && entityIn.getHeldItemOffhand().equals(stack) ? 1 : 0));
-
-        MinecraftServer
 
         energyBow.setArrowTexture("energy_arrow");
         sweetBow.setCustomArrowTexture();
