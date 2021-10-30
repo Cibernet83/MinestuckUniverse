@@ -184,6 +184,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(nightmareMace), new GristSet(new GristType[] {Amethyst, Shale, Caulk, Tar}, new int[] {6000, 4000, 4000, 6000}));
         GristRegistry.addGristConversion(new ItemStack(cranialEnder), new GristSet(new GristType[] {Amethyst, Cobalt, Uranium, Mercury, Tar, Diamond}, new int[] {6800, 4020, 300, 540, 210, 4}));
         GristRegistry.addGristConversion(new ItemStack(homeRunBat), new GristSet(new GristType[] {Ruby, Gold, Garnet, Artifact}, new int[] {4500, 8000, 4500, 1}));
+        GristRegistry.addGristConversion(new ItemStack(homeRunBat), new GristSet(new GristType[] {Cobalt, Chalk, Amethyst, Artifact}, new int[] {4500, 8000, 4500, 100}));
 
         GristRegistry.addGristConversion(new ItemStack(goldCane), new GristSet(new GristType[] {Gold, Build}, new int[] {20, 16}));
         GristRegistry.addGristConversion(new ItemStack(staffOfOvergrowth), new GristSet(new GristType[] {Iodine, Ruby, Amber}, new int[] {540, 800, 240}));
@@ -468,6 +469,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.nightClub), new ItemStack(MinestuckItems.itemFrog, 1, 2), MODE_AND, false, true, new ItemStack(rubyContrabat));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.spikedClub), new ItemStack(eldrichGauntlet), MODE_AND, false, false, new ItemStack(nightmareMace));
         CombinationRegistry.addCombination(new ItemStack(nightmareMace), new ItemStack(Items.END_CRYSTAL), MODE_AND, false, false, new ItemStack(cranialEnder));
+        CombinationRegistry.addCombination(new ItemStack(homeRunBat), new ItemStack(MinestuckItems.boondollars), MODE_AND, false, false, new ItemStack(badaBat));
 
         //canekind
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.spearCane), new ItemStack(Blocks.SKULL, 1, 5), MODE_AND, false, true, new ItemStack(MinestuckItems.dragonCane));

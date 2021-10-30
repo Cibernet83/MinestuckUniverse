@@ -284,6 +284,7 @@ public class MinestuckUniverseItems
     public static Item nightmareMace = new MSUWeaponBase(1200, 14.1, -2.09, 8, "nightmare_mace", "nightmareMace").setTool(toolClub, 3, 3.0f).addProperties(new PropertySweep(), new PropertyHungry(3, 4, true), new PropertyProjectileDeflect(0.3f, 8),
             new PropertyPotion(new PotionEffect(MobEffects.BLINDNESS, 200, 0), false, 0.2f), new PropertyPotion(new PotionEffect(MobEffects.NAUSEA, 200, 0), false, 0.2f), new PropertyPotion(new PotionEffect(MobEffects.WITHER, 100, 1), true, 0.2f));
     public static Item cranialEnder = new MSUWeaponBase(1800, 17.6, -2.2, 8, "cranial_ender", "cranialEnder").setTool(toolClub, 5, 2.0f).addProperties(new PropertySweep(), new PropertyExplode(0.5f, 0.2f, true), new PropertyPotion(new PotionEffect(MobEffects.NAUSEA, 100, 0), true, 0.7f), new PropertyProjectileDeflect(0.6f, 3));
+    public static Item badaBat = new MSUWeaponBase(8035, 15.9, -3.9, 10, "batadamadaba", "badaBat").setTool(toolClub, 5, 14.0f).addProperties(new PropertySweep(), new PropertyKnockback(15), new PropertySoundOnHit(MSUSoundHandler.homeRunBat, 1, 0.9f), new PropertyProjectileDeflect(1, 10)).setCreativeTab(null);
 
     //Dicekind TODO
     public static Item dice = new MSUItemBase("dice", "dice").setCreativeTab(TabMinestuck.instance);
@@ -618,6 +619,7 @@ public class MinestuckUniverseItems
         registerItem(registry, nightmareMace);
         registerItem(registry, cranialEnder);
         registerItem(registry, homeRunBat);
+        registerItem(registry, badaBat);
 
         if(MSUConfig.combatOverhaul)
         {
