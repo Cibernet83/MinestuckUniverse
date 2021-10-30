@@ -25,13 +25,13 @@ public class PropertyTeleBlock extends WeaponProperty
 		for(float y = 0; y < radius; y = (y*-1)- (((y == 0) ? 1f : Math.signum(y))*0.5f))
 			for(float z = 0; z < radius; z = (z*-1)- (((z == 0) ? 1f : Math.signum(z))*0.5f))
 			{
-				BlockPos pos = new BlockPos(x, y, z);
+				BlockPos pos = new BlockPos(x + player.posX, y + player.posY, z + player.posZ);
 				if(player.world.getBlockState(pos).getBlock() == targetBlock)
 				{
 					target.motionX = 0;
 					target.motionY = 0;
 					target.motionZ = 0;
-					Teleport.localTeleport(target, null, pos.getX()+0.5, pos.getY()+1, pos.getZ()+0.5);
+					Teleport.localTeleport(target, null, pos.getX()+0.5, pos.getY(), pos.getZ()+0.5);
 					return super.onCrit(stack, player, target, damageModifier);
 				}
 			}
