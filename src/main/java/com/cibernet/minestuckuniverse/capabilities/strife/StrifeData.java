@@ -239,7 +239,6 @@ public class StrifeData implements IStrifeData
 	{
 		if(!(owner instanceof EntityPlayer) || owner instanceof FakePlayer)
 			return false;
-		System.out.println("e");
 		return droppedCards < Math.max(5, MinestuckPlayerData.getData((EntityPlayer) owner).echeladder.getRung()/6);
 	}
 

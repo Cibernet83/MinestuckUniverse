@@ -199,14 +199,14 @@ public class MinestuckUniverseItems
 
     //Needlekind
     public static Item knittingNeedles = new ItemKnittingNeedles(128,1.6, -0.24, 1, "knitting_needle", "knittingNeedle").setTool(toolNeedles, 2, 1f);
-    public static Item pointySticks = new MSUWeaponBase(300,3.2, -0.3, 10, "pointy_stick", "pointyStick").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield()).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 2)).setRepairMaterial("plankWood");
-    public static Item boneNeedles = new MSUWeaponBase(225,3.6, -0.3, 5, "bone_needle", "boneNeedle").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield()).setRepairMaterial("bone");
-    public static Item dragonBlades = new MSUWeaponBase(500, 7.9, -0.36, 4, "dragon_blade", "dragonBlades").setTool(toolNeedles, 2, 4).addProperties(new PropertyDualWield()).setCreativeTab(null);
-    public static Item litGlitterBeamTransistor = new ItemBeamWeapon(700,5.5, -0.3, 0.1f, 20, 1, 72000, 40, 30, "lit_glitter_beam_transistor", "litGlitterBeamTransistor").setTool(toolNeedles, 2, 4f).addProperties(new PropertyDualWield(), new PropertyRainbowBeam(), new PropertyBeamDeathMessage("rainbow"));
-    public static Item needlewands = new ItemBeamWeapon(488,6.5, -0.3, 0.05f, 10, 1, 60, "needlewand", "needlewand").setTool(toolNeedles, 3, 2f).addProperties(new PropertyDualWield(), new PropertyMagicBeam(), new PropertyBeamDeathMessage("magic"));
-    public static Item oglogothThorn = new ItemBeamWeapon(666,7.2, -0.3, 0.1f, 30, 0.7f, 5, 20, 80, "thorn_of_oglogoth", "oglogothThorn").setTool(toolNeedles, 4, 3f).addProperties(new PropertyDualWield());
-    public static Item echidnaQuills = new MSUWeaponBase(17.3, -0.3, 100, "quill_of_echidna", "echidnaQuill").setTool(toolNeedles, 10, 5f).addProperties(new PropertyDualWield());
-    public static Item thistlesOfZillywitch = new MSUWeaponBase(800, 9.1,  -0.3, 40, "thistles_of_zillywitch", "thistlesOfZillywitch").setTool(toolNeedles, 5, 10f).addProperties(new PropertyDualWield());
+    public static Item pointySticks = new MSUWeaponBase(300,3.2, -0.3, 10, "pointy_stick", "pointyStick").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield()).addProperties(new PropertyTipperDamage(0.9f, 1.1f, 0), new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 2)).setRepairMaterial("plankWood");
+    public static Item boneNeedles = new MSUWeaponBase(225,3.6, -0.3, 5, "bone_needle", "boneNeedle").setTool(toolNeedles, 1, 1f).addProperties(new PropertyTipperDamage(0.7f, 1.25f, 0), new PropertyDualWield()).setRepairMaterial("bone");
+    public static Item dragonBlades = new MSUWeaponBase(500, 7.9, -0.36, 4, "dragon_blade", "dragonBlades").setTool(toolNeedles, 2, 4).addProperties(new PropertyDualWield(), new PropertyTipperDamage(0.8f, 1.3f, 0.1f)).setCreativeTab(null);
+    public static Item litGlitterBeamTransistor = new ItemBeamWeapon(700,5.5, -0.3, 0.1f, 20, 1, 72000, 40, 30, "lit_glitter_beam_transistor", "litGlitterBeamTransistor").setTool(toolNeedles, 2, 4f).addProperties(new PropertyDualWield(), new PropertyTipperDamage(0.9f, 1.1f, 0), new PropertyRainbowBeam(), new PropertyBeamDeathMessage("rainbow"));
+    public static Item needlewands = new ItemBeamWeapon(488,6.5, -0.3, 0.05f, 10, 1, 60, "needlewand", "needlewand").setTool(toolNeedles, 3, 2f).addProperties(new PropertyDualWield(), new PropertyTipperDamage(0.95f, 1.15f, 0), new PropertyMagicBeam(), new PropertyBeamDeathMessage("magic"));
+    public static Item oglogothThorn = new ItemBeamWeapon(666,7.2, -0.3, 0.1f, 30, 0.7f, 5, 20, 80, "thorn_of_oglogoth", "oglogothThorn").setTool(toolNeedles, 4, 3f).addProperties(new PropertyDualWield(), new PropertyTipperDamage(0.6f, 1.6f, 0.12f));
+    public static Item echidnaQuills = new MSUWeaponBase(17.3, -0.3, 100, "quill_of_echidna", "echidnaQuill").setTool(toolNeedles, 10, 5f).addProperties(new PropertyDualWield(), new PropertyTipperDamage(1f, 1.2f, 0));
+    public static Item thistlesOfZillywitch = new MSUWeaponBase(800, 9.1,  -0.3, 40, "thistles_of_zillywitch", "thistlesOfZillywitch").setTool(toolNeedles, 5, 10f).addProperties(new PropertyDualWield(), new PropertyTipperDamage(0.9f, 1.3f, 0));
 
     //Shieldkind
     public static Item woodenDoorshield = new MSUShieldBase(340, 12, 0.3f, 5, "wooden_doorshield", "woodenDoorshield").setRepairMaterial("plankWood");
@@ -234,8 +234,8 @@ public class MinestuckUniverseItems
     public static MSUBowBase tempestBow = (MSUBowBase) new MSUBowBase(540, 2.3f, 16, 3.1f, 1.2f, 1, true, "tempest_bow", "tempestBow").addProperties(new PropertyHookshot(0.8f, 16, true, true, true), new PropertyLaserArrow());
     public static MSUBowBase shiverburnWing = (MSUBowBase) new MSUBowBase(390, 2.2f, 27, 2.2f, 0.8f, 1, true, "shiverburn_wing", "shiverburnWing").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyPotionArrow(new PotionEffect(MobEffects.SLOWNESS, 140, 2), 0.8f), new PropertyFlamingArrow(7, 0.9f));
     public static MSUBowBase magneticHookshot = (MSUBowBase) new MSUBowBase(680, 1f, 32, 4f, 0.8f, 1, true, "magnetic_hookshot", "magneticHookshot").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyHookshot(1, 64));
-    public static MSUBowBase wormholePiercer = (MSUBowBase) new MSUBowBase(640, 1, 35, 3.5f, 0.8f, 1, true, "wormhole_piercer", "wormholePiercer").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyTeleArrows());
-    public static MSUBowBase telegravitationalWarper = (MSUBowBase) new MSUBowBase(640, 3, 28, 2.9f, 0.8f, 1, true, "telegravitational_warper", "telegravitationalWarper").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyHookshot(0.4f, 16, false, false, true), new PropertyGhostArrow());
+    public static MSUBowBase wormholePiercer = (MSUBowBase) new MSUBowBase(640, 1, 35, 3.5f, 0.8f, 1, true, "wormhole_piercer", "wormholePiercer").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyTeleArrows(), new PropertyLaserArrow());
+    public static MSUBowBase telegravitationalWarper = (MSUBowBase) new MSUBowBase(640, 3, 28, 2.9f, 0.8f, 1, true, "telegravitational_warper", "telegravitationalWarper").setArrowCheck(REGULAR_ARROWS).addProperties(new PropertyHookshot(0.4f, 16, false, false, true), new PropertyLaserArrow(), new PropertyGhostArrow());
     public static MSUBowBase crabbow = new MSUBowBase(2048, 7, -1.8, 2.3f, 27, 1.95f, 1, 1, false, "crabbow", "crabbow");
     public static ItemMechanicalCrossbow mechanicalCrossbow = new ItemMechanicalCrossbow(385, 1,"mechanical_crossbow", "mechanicalCrossbow");
     public static MSUBowBase sweetBow = (MSUBowBase) new MSUBowBase(450, 1.8f, 20, 2.1f, 0.9f, 1, true, "sweet_bow", "sweetBow").addProperties(new PropertyCandyWeapon());

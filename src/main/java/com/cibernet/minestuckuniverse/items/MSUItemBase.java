@@ -73,10 +73,10 @@ public class MSUItemBase extends Item implements IRegistryItem
 
         if(DEDICATED_TOOLTIPS.contains(playerName) && net.minecraft.client.resources.I18n.hasKey(key+"."+playerName))
                 str = (I18n.translateToLocal(key+"."+playerName));
-        else if(net.minecraft.client.resources.I18n.hasKey(key) && stack.getItem().getRegistryName().getResourceDomain() != Minestuck.MOD_ID)
+        else if(net.minecraft.client.resources.I18n.hasKey(key) && !stack.getItem().getRegistryName().getResourceDomain().equals(Minestuck.MOD_ID))
             str = (I18n.translateToLocal(key));
 
-        if(!str.isEmpty() && !tooltip.contains(str))
+        if(!str.isEmpty())
             tooltip.add(str);
 
         super.addInformation(stack, worldIn, tooltip, flagIn);

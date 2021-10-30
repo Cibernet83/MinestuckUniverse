@@ -125,8 +125,6 @@ public class Beam
 		prevMotionY = motionY;
 		prevMotionZ = motionZ;
 
-		//System.out.println(motionX + " " + motionY + " " + motionZ);
-
 		damageCooldown = Math.max(0, damageCooldown-1);
 
 		if(sourceStack != null && sourceStack.getItem() instanceof IPropertyWeapon)

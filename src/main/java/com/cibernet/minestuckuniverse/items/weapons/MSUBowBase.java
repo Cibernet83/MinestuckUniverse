@@ -4,15 +4,20 @@ import com.cibernet.minestuckuniverse.entity.EntityMSUArrow;
 import com.cibernet.minestuckuniverse.items.properties.IEnchantableProperty;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.cibernet.minestuckuniverse.items.properties.bowkind.IPropertyArrow;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
@@ -187,6 +192,22 @@ public class MSUBowBase extends MSUWeaponBase
 				}
 			}
 		}
+	}
+
+	@Override
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+		Multimap<String, AttributeModifier> multimap = HashMultimap.create();
+		if (slot == EntityEquipmentSlot.MAINHAND)
+		{
+			double dmg = this.getAttackDamage(stack);
+			double spd = this.getAttackSpeed(stack);
+			if(dmg != 0)
+				multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", dmg, 0));
+			if(spd != 0)
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", spd, 0));
+		}
+
+		return multimap;
 	}
 
 	@Override

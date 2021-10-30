@@ -49,7 +49,7 @@
 				"blocking": 1,
 				"minestuckuniverse:active": 1
 			},
-			"model": "minestuckuniverse:item/obsidian_shield_blocking_active"
+			"model": "minestuckuniverse:item/obsidian_shield_active_blocking"
 		},
 		{
 			"predicate": {

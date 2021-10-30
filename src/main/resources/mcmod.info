@@ -8,8 +8,8 @@
   "url": "",
   "updateUrl": "",
   "authorList": ["Cibernet"],
-  "credits": "The Minestuck Dev Team, for being really cool. :D",
-  "logoFile": "/msu_banner.png",
+  "credits": "Coders: Cibernet\nTexture Artists: Ishumire, Addie, AnarchoVera, Cibernet\nModelers: Ishumire, Doro, Cibernet\nSpecial Thanks to: The Minestuck Dev Team, for being really cool. :D",
+  "logoFile": "msu_banner.png",
   "screenshots": [],
   "dependencies": ["Minestuck ver. 1.12.2-1.4.300.7"]
 }
