@@ -5,8 +5,10 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.events.WeaponAssignedEvent;
 import com.cibernet.minestuckuniverse.gui.GuiStrifePortfolio;
+import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyVariableItem;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.network.UpdateStrifeDataPacket;
@@ -26,6 +28,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -35,10 +38,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -143,6 +143,47 @@ public class StrifeEventHandler
 				return;
 			}
 
+	}
+
+	@SubscribeEvent
+	public static void onItemPickup(EntityItemPickupEvent event)
+	{
+		ItemStack stack = event.getItem().getItem();
+		ItemStack mainStack = event.getEntityPlayer().getHeldItemMainhand();
+		ItemStack offStack = event.getEntityPlayer().getHeldItemOffhand();
+
+		if(isStackAssigned(mainStack) && stack.getItem() == mainStack.getItem() && mainStack.getCount() < mainStack.getMaxStackSize())
+		{
+			NBTTagCompound copyNbt = stack.copy().getTagCompound();
+			if(copyNbt == null) copyNbt = new NBTTagCompound();
+			copyNbt.setBoolean("StrifeAssigned", true);
+			if(mainStack.getTagCompound().equals(copyNbt))
+			{
+				if(!stack.hasTagCompound())
+					stack.setTagCompound(new NBTTagCompound());
+				stack.getTagCompound().setBoolean("StrifeAssigned", true);
+			}
+		} else if(isStackAssigned(offStack) && stack.getItem() == offStack.getItem() && offStack.getCount() < offStack.getMaxStackSize())
+		{
+			NBTTagCompound copyNbt = stack.copy().getTagCompound();
+			if(copyNbt == null) copyNbt = new NBTTagCompound();
+			copyNbt.setBoolean("StrifeAssigned", true);
+			if(offStack.getTagCompound().equals(copyNbt))
+			{
+				if(!stack.hasTagCompound())
+					stack.setTagCompound(new NBTTagCompound());
+				stack.getTagCompound().setBoolean("StrifeAssigned", true);
+			}
+		}
+
+		/*
+		if(stack.hasTagCompound())
+		{
+			stack.getTagCompound().removeTag("Variant");
+			if(stack.getTagCompound().hasNoTags())
+				stack.setTagCompound(null);
+		}
+		*/
 	}
 
 	@SubscribeEvent
