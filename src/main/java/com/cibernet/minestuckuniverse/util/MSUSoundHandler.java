@@ -12,6 +12,7 @@ public class MSUSoundHandler
 	public static final MSUSoundHandler instance = new MSUSoundHandler();
 	
 	public static SoundEvent homeRunBat = new SoundEvent(new ResourceLocation(MinestuckUniverse.MODID, "item.home_run_bat"));
+	public static SoundEvent bada = new SoundEvent(new ResourceLocation(MinestuckUniverse.MODID, "item.bada"));
 	public static SoundEvent shieldParry = new SoundEvent(new ResourceLocation(MinestuckUniverse.MODID, "item.shield_parry"));
 	public static SoundEvent whipCrack = new SoundEvent(new ResourceLocation(MinestuckUniverse.MODID, "item.whip_crack"));
 	public static SoundEvent whipCrock = new SoundEvent(new ResourceLocation(MinestuckUniverse.MODID, "item.whip_crock"));
@@ -24,6 +25,7 @@ public class MSUSoundHandler
 		IForgeRegistry<SoundEvent> registry = event.getRegistry();
 		
 		registry.register(homeRunBat.setRegistryName("item.home_run_bat"));
+		registry.register(bada.setRegistryName("item.bada1"));
 		registry.register(shieldParry.setRegistryName("item.shield_parry"));
 		registry.register(whipCrack.setRegistryName("item.whip_crack"));
 		registry.register(whipCrock.setRegistryName("item.whip_crock"));

@@ -3,7 +3,14 @@
     "category": "players",
     "subtitle": "subtitle.minestuckuniverse.home_run_bat",
     "sounds": [
-        "minestuckuniverse:item/home_run_bat"
+      "minestuckuniverse:item/home_run_bat"
+    ]
+  },
+  "item.bada": {
+    "category": "players",
+    "sounds": [
+      "minestuckuniverse:item/bada1",
+      "minestuckuniverse:item/bada2"
     ]
   },
   "item.shield_parry": {
