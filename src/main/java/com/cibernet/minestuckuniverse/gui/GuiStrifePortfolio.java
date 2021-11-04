@@ -8,6 +8,7 @@ import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.strife.KindAbstratus;
 import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
+import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.client.gui.playerStats.GuiPlayerStats;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -78,6 +79,12 @@ public class GuiStrifePortfolio extends GuiPlayerStats
 
 		portfolio = StrifePortfolioHandler.getPortfolio(mc.player);
 		activeSpecibus = mc.player.getCapability(MSUCapabilities.STRIFE_DATA, null).getSelectedSpecibusIndex();
+
+		if(MinestuckConfig.dataCheckerAccess)
+		{
+			mc.getTextureManager().bindTexture(icons);
+			drawTexturedModalRect(xOffset+198, yOffset, 112, 32, 28, 35);
+		}
 
 		int i;
 

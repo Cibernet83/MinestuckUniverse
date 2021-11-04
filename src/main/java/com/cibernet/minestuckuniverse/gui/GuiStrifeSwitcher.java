@@ -58,8 +58,8 @@ public class GuiStrifeSwitcher extends Gui
 
 		if(canUseAbstrataSwitcher() && (cap.getPortfolio()[selSpecibusIndex] == null || (!cap.getPortfolio()[selSpecibusIndex].getKindAbstratus().isFist() && cap.getPortfolio()[selSpecibusIndex].getContents().isEmpty())))
 		{
-			cap.setSelectedSpecibusIndex(cap.getSpecibusIndex(portfolio[0]));
-			selSpecibusIndex = cap.getSpecibusIndex(portfolio[0]);
+			selSpecibusIndex = portfolio.length <= 0 ? -1 : cap.getSpecibusIndex(portfolio[0]);
+			cap.setSelectedSpecibusIndex(selSpecibusIndex);
 		}
 
 		if(strifeDown != MSUKeys.strifeKey.isKeyDown())
