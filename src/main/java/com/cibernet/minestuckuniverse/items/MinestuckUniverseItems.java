@@ -310,10 +310,10 @@ public class MinestuckUniverseItems
     public static Item diamondSickle = new MSUWeaponBase(1650, 5.5, -2.4, 32, "diamond_sickle", "diamondSickle").setTool(toolSickle, 3, 4).addProperties(new PropertySweep(3), new PropertyFarmine(2, 500));
     public static Item hereticusAurum = new MSUWeaponBase(110, 15.9, -2.16, 32, "hereticus_aurum", "hereticusAurum").setTool(toolSickle, 5, 4).addProperties(new PropertySweep(3), new PropertyFarmine(5, 500));
     public static Item gravediggerShovel = new MSUWeaponBase(720, 16, -3, 8, "gravedigger_shovel", "gravediggerShovel").setTool(toolShovel, 3, 4).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
-    public static Item fancySpoon = new MSUWeaponBase(1200, 4.5, -2.2, 4, "fancy_spoon", "fancySpoon").setTool(toolSpoon, 3, 3);
-    public static Item quartzFork = new MSUWeaponBase(405, 9.1, -2.2, 4, "quartz_fork", "quartzFork").setTool(toolFork, 3, 3).addProperties(new PropertyTipperDamage(0.6f, 1.3f, 0.8f));
-    public static Item crockerFork = new MSUWeaponBase(600, 11.5, -2.2, 6, "crocker_fork", "crockerFork").setTool(toolFork, 4, 8).addProperties(new PropertyTipperDamage(0.6f, 1.3f, 0.8f)).setCreativeTab(null);
-    public static Item battlesporkOfZillywut = new MSUWeaponBase(3150, 37.9, -2.2, 40, "battlespork_of_zillywut", "battlesporkOfZillywut").setTool(toolSpork, 5, 10);
+    public static Item fancySpoon = new MSUWeaponBase(1200, 4.5, -2, 4, "fancy_spoon", "fancySpoon").setTool(toolSpoon, 3, 3).addProperties(new PropertyHungerSpeed(1.2f));
+    public static Item quartzFork = new MSUWeaponBase(405, 9.1, -2, 4, "quartz_fork", "quartzFork").setTool(toolFork, 3, 3).addProperties(new PropertyTipperDamage(0.6f, 1.3f, 0.8f), new PropertyHungerSpeed(1.2f));
+    public static Item crockerFork = new MSUWeaponBase(600, 11.5, -2, 6, "crocker_fork", "crockerFork").setTool(toolFork, 4, 8).addProperties(new PropertyTipperDamage(0.6f, 1.3f, 0.8f), new PropertyHungerSpeed(1.2f)).setCreativeTab(null);
+    public static Item battlesporkOfZillywut = new MSUWeaponBase(3150, 37.9, -2, 40, "battlespork_of_zillywut", "battlesporkOfZillywut").setTool(toolSpork, 5, 10).addProperties(new PropertyHungerSpeed(1.2f));
     public static Item battleaxeOfZillywahoo = new MSUWeaponBase(3000, 86.4, -3, 40, "battleaxe_of_zillywahoo", "battleaxeOfZillywahoo").setTool(toolAxe, 5, 10);
     public static Item battlepickOfZillydew = new MSUWeaponBase(780, 16, -2.8, 40, "battlepick_of_zillydew", "battlepickOfZillydew").setTool(toolPickaxe, 5, 10);
     public static Item rolledUpPaper = new MSUWeaponBase(200, 3, 0, 1, "rolled_up_paper", "rolledUpPaper");
@@ -569,22 +569,22 @@ public class MinestuckUniverseItems
 
         if(MSUConfig.combatOverhaul)
         {
-            MinestuckItems.woodenSpoon = registerItem(registry, new MSUWeaponBase(300, 3.2, -2.2, 1, MinestuckItems.woodenSpoon).setTool(toolSpoon, 0, 2));
-            MinestuckItems.silverSpoon = registerItem(registry, new MSUWeaponBase(600, 6.4, -1.98, 8, MinestuckItems.silverSpoon).setTool(toolSpoon, 2, 4));
-            registerCustomRenderedItem(registry, new MSUWeaponBase(900, 9.6, -2.2, 6, MinestuckItems.crockerSpork.getRegistryName().toString(), "crockerSpoon").setTool(toolSpoon, 4, 8));
+            MinestuckItems.woodenSpoon = registerItem(registry, new MSUWeaponBase(300, 3.2, -2, 1, MinestuckItems.woodenSpoon).setTool(toolSpoon, 0, 2).addProperties(new PropertyHungerSpeed(1.2f)));
+            MinestuckItems.silverSpoon = registerItem(registry, new MSUWeaponBase(600, 6.4, -1.88, 8, MinestuckItems.silverSpoon).setTool(toolSpoon, 2, 4).addProperties(new PropertyHungerSpeed(1.1f)));
+            registerCustomRenderedItem(registry, new MSUWeaponBase(900, 9.6, -2.2, 6, MinestuckItems.crockerSpork.getRegistryName().toString(), "crockerSpoon").setTool(toolSpoon, 4, 8).addProperties(new PropertyHungerSpeed(1.2f)));
         }
         registerCustomRenderedItem(registry, crockerFork);
         registerItem(registry, fancySpoon);
         if(MSUConfig.combatOverhaul)
         {
-            MinestuckItems.fork = registerItem(registry, new MSUWeaponBase(225, 3.9, -2.2, 1, MinestuckItems.fork).setTool(toolFork, 0, 2));
-            MinestuckItems.skaiaFork = registerItem(registry, new MSUWeaponBase(1080, 18.3, -2.42, 10, MinestuckItems.skaiaFork).setTool(toolFork, 3, 6).addProperties(new PropertyTipperDamage(0.6f, 1.3f, 0.8f)));
+            MinestuckItems.fork = registerItem(registry, new MSUWeaponBase(225, 3.9, -2.2, 1, MinestuckItems.fork).setTool(toolFork, 0, 2).addProperties(new PropertyHungerSpeed(1.2f)));
+            MinestuckItems.skaiaFork = registerItem(registry, new MSUWeaponBase(1080, 18.3, -2.42, 10, MinestuckItems.skaiaFork).setTool(toolFork, 3, 6).addProperties(new PropertyTipperDamage(0.6f, 1.3f, 0.8f)).addProperties(new PropertyHungerSpeed(1.25f)));
         }
         registerItem(registry, quartzFork);
         if(MSUConfig.combatOverhaul)
         {
-            MinestuckItems.spork = registerItem(registry, new MSUWeaponBase(525, 7.1, -2.2, 8, MinestuckItems.spork).setTool(toolSpork, 2, 4));
-            MinestuckItems.goldenSpork = registerItem(registry, new MSUWeaponBase(788, 9.5, -1.98, 8, MinestuckItems.goldenSpork).setTool(toolSpork, 1, 8));
+            MinestuckItems.spork = registerItem(registry, new MSUWeaponBase(525, 7.1, -2.2, 8, MinestuckItems.spork).setTool(toolSpork, 2, 4).addProperties(new PropertyHungerSpeed(1.2f)));
+            MinestuckItems.goldenSpork = registerItem(registry, new MSUWeaponBase(788, 9.5, -1.98, 8, MinestuckItems.goldenSpork).setTool(toolSpork, 1, 8).addProperties(new PropertyHungerSpeed(1.3f)));
         }
         registerItem(registry, battlesporkOfZillywut);
 
