@@ -22,15 +22,7 @@ public class PropertyTeleArrows extends WeaponProperty implements IPropertyArrow
 				{
 					net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(entityplayermp, arrow.posX, arrow.posY, arrow.posZ, 5.0F);
 					if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event))
-					{ // Don't indent to lower patch size
-						if (arrow.world.rand.nextFloat() < 0.05F && arrow.world.getGameRules().getBoolean("doMobSpawning"))
-						{
-							EntityEndermite entityendermite = new EntityEndermite(arrow.world);
-							entityendermite.setSpawnedByPlayer(true);
-							entityendermite.setLocationAndAngles(entityplayermp.posX, entityplayermp.posY, entityplayermp.posZ, entityplayermp.rotationYaw, entityplayermp.rotationPitch);
-							arrow.world.spawnEntity(entityendermite);
-						}
-
+					{
 						if (entityplayermp.isRiding())
 							entityplayermp.dismountRidingEntity();
 
