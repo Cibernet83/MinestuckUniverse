@@ -8,6 +8,7 @@ import com.cibernet.minestuckuniverse.items.weapons.MSUBowBase;
 import com.google.common.base.Optional;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
@@ -225,6 +226,20 @@ public class EntityMSUArrow extends EntityArrow
 		{
 			PotionEffect potioneffect = new PotionEffect(MobEffects.GLOWING, 200, 0);
 			living.addPotionEffect(potioneffect);
+		}
+	}
+
+	@Override
+	public void onCollideWithPlayer(EntityPlayer entityIn)
+	{
+		super.onCollideWithPlayer(entityIn);
+		if (getArrowStack().isEmpty() && !this.world.isRemote && this.inGround && this.arrowShake <= 0)
+		{
+			if (this.pickupStatus == EntityArrow.PickupStatus.ALLOWED || this.pickupStatus == EntityArrow.PickupStatus.CREATIVE_ONLY && entityIn.capabilities.isCreativeMode)
+			{
+				entityIn.onItemPickup(this, 1);
+				this.setDead();
+			}
 		}
 	}
 

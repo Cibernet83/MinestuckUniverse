@@ -24,6 +24,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.Sys;
 
 import javax.annotation.Nullable;
 
@@ -139,7 +140,7 @@ public class MSUBowBase extends MSUWeaponBase
 
 				if ((double)f >= 0.1D)
 				{
-					boolean flag1 = !requiresAmmo() || entityplayer.capabilities.isCreativeMode || (itemstack.getItem() instanceof ItemArrow && ((ItemArrow) itemstack.getItem()).isInfinite(itemstack, stack, entityplayer));
+					boolean flag1 = entityplayer.capabilities.isCreativeMode || (itemstack.getItem() instanceof ItemArrow && ((ItemArrow) itemstack.getItem()).isInfinite(itemstack, stack, entityplayer));
 
 					if (!worldIn.isRemote)
 					{
@@ -172,15 +173,18 @@ public class MSUBowBase extends MSUWeaponBase
 
 						stack.damageItem(1, entityplayer);
 
-						if (flag1 || entityplayer.capabilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW))
+						if ((flag1 && requiresAmmo()) || entityplayer.capabilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW))
+						{
+							System.out.println("AA");
 							entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+						}
 
 						worldIn.spawnEntity(entityarrow);
 					}
 
 					worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
-					if (!itemstack.isEmpty() && !flag1 && !entityplayer.capabilities.isCreativeMode)
+					if (!itemstack.isEmpty() && !(!requiresAmmo() || flag1) && !entityplayer.capabilities.isCreativeMode)
 					{
 						itemstack.shrink(1);
 
