@@ -61,6 +61,7 @@
         },
         {
             "predicate": {
+                "minestuckuniverse:awakened": 0.2,
                 "pulling": 1,
                 "pull": 0.65
             },
@@ -68,6 +69,7 @@
         },
         {
             "predicate": {
+                "minestuckuniverse:awakened": 0.2,
                 "pulling": 1,
                 "pull": 0.9
             },
