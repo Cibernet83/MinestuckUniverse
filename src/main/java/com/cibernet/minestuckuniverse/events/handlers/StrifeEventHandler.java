@@ -326,6 +326,7 @@ public class StrifeEventHandler
 			cap.setArmed(false);
 		}
 
+		//unlock abstrata switcher
 		boolean unlockSwitcher = MinestuckPlayerData.getData(event.player).echeladder.getRung() >= MSUConfig.abstrataSwitcherRung;
 		if(cap.abstrataSwitcherUnlocked() != unlockSwitcher)
 		{
@@ -345,7 +346,7 @@ public class StrifeEventHandler
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onMobDrops(LivingDropsEvent event)
 	{
-		if(!MSUConfig.strifeCardMobDrops || !(event.getEntityLiving() instanceof IMob) || event instanceof PlayerDropsEvent || !event.isRecentlyHit() || !(event.getSource().getTrueSource() instanceof EntityPlayer) || event.getSource().getTrueSource() instanceof FakePlayer)
+		if(!(event.getEntityLiving() instanceof IMob) || event instanceof PlayerDropsEvent || !event.isRecentlyHit() || !(event.getSource().getTrueSource() instanceof EntityPlayer) || event.getSource().getTrueSource() instanceof FakePlayer)
 			return;
 
 		EntityPlayer source = (EntityPlayer) event.getSource().getTrueSource();

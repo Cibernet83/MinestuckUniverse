@@ -162,6 +162,10 @@ public class MSUWeaponBase extends MSUItemBase implements IClassedTool, ISortedT
     public double getAttackDamage(ItemStack stack)
     {
         double dmg = weaponDamage;
+        double base = Math.floor(16 * (4d+weaponSpeed)/8d)/2d;
+
+        if(dmg > base)
+            dmg = Math.round(((dmg-base)*MSUConfig.weaponAttackMultiplier)*2)/2f+base;
 
         for(WeaponProperty p : getProperties(stack))
             dmg = p.getAttackDamage(stack,dmg);

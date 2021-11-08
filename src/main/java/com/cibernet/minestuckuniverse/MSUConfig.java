@@ -25,7 +25,8 @@ public class MSUConfig
 	public static boolean keepPortfolioOnDeath;
 	public static int abstrataSwitcherRung;
 	public static int strifeDeckMaxSize;
-	public static boolean strifeCardMobDrops;
+	public static int strifeCardMobDrops;
+	public static double weaponAttackMultiplier;
 
 	public static void load(File file, Side sideIn)
 	{
@@ -57,12 +58,14 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.strife.restrictedStrife").getBoolean();
 		keepPortfolioOnDeath = config.get("Strife", "keepPortfolioOnDeath", false, "Determines whether the player drops their Strife Portfolio after dying or not.")
 				.setLanguageKey("config.minestuckuniverse.strife.keepPortfolioOnDeath").getBoolean();
-		strifeCardMobDrops = config.get("Strife", "strifeCardMobDrops", true, "Allows certain mobs to have a chance at dropping Strife Specibus Cards allocated to whatever item they're holding.")
-				.setLanguageKey("config.minestuckuniverse.strife.strifeCardMobDrops").getBoolean();
+		strifeCardMobDrops = config.get("Strife", "strifeCardMobDrops", 5, "Some mobs have a chance at dropping Strife Specibus Cards allocated to whatever item they're holding when killed by a player. This config determines how many cards each player can get from this method at most.")
+				.setLanguageKey("config.minestuckuniverse.strife.strifeCardMobDrops").getInt();
 		strifeDeckMaxSize = config.get("Strife", "strifeDeckMaxSize", 20, "Determines the max amount of weapons that can fit inside a single Strife Deck, set this to -1 to remove the limit.").setMinValue(-1)
 				.setLanguageKey("config.minestuckuniverse.strife.strifeDeckMaxSize").getInt();
 		abstrataSwitcherRung = config.get("Strife", "abstrataSwitcherRung", 17, "Determines the rung needed to unlock the Strife Specibus Quick Switcher. Set it to -1 to let all players use it, or " + Echeladder.RUNG_COUNT + " to completely disable it.").setMinValue(-1).setMaxValue(Echeladder.RUNG_COUNT)
 				.setLanguageKey("config.minestuckuniverse.strife.abstrataSwitcherRung").getInt();
+		weaponAttackMultiplier = config.get("Strife", "weaponAttackMultiplier", 0.2, "Allows players to tweak how much damage Minestuck and Minestuck Universe weapons do as a percentage.").setMinValue(0).setMaxValue(1)
+				.setLanguageKey("config.minestuckuniverse.strife.abstrataSwitcherRung").getDouble();
 
 
 	}

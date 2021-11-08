@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.capabilities.strife;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.strife.KindAbstratus;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
 import com.mraof.minestuck.util.Echeladder;
@@ -239,7 +240,7 @@ public class StrifeData implements IStrifeData
 	{
 		if(!(owner instanceof EntityPlayer) || owner instanceof FakePlayer)
 			return false;
-		return droppedCards < Math.max(5, MinestuckPlayerData.getData((EntityPlayer) owner).echeladder.getRung()/6);
+		return droppedCards < Math.max(MSUConfig.strifeCardMobDrops, MinestuckPlayerData.getData((EntityPlayer) owner).echeladder.getRung()/6);
 	}
 
 	@Override
