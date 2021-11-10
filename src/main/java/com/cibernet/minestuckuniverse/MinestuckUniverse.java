@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
         modid = MinestuckUniverse.MODID,
         name = MinestuckUniverse.NAME,
         version = MinestuckUniverse.VERSION,
-        dependencies = "required-after:minestuck@[1.2.300.7,);",
+        dependencies = "required-after:minestuck@[1.4.301,);",
         guiFactory = "com.cibernet.minestuckuniverse.gui.MSUGuiFactory"
 )
 public class MinestuckUniverse
