@@ -27,6 +27,7 @@ public class StrifeData implements IStrifeData
 	protected boolean isArmed = false;
 
 	protected int droppedCards = 0;
+	protected int prevSelSlot = 0;
 
 	protected boolean abstrataSwitcherUnlocked = false;
 	protected boolean strifeEnabled = false;
@@ -275,6 +276,17 @@ public class StrifeData implements IStrifeData
 	public void setArmed(boolean armed)
 	{
 		isArmed = armed;
+	}
+
+	@Override
+	public int getPrevSelSlot() {
+		return prevSelSlot;
+	}
+
+	@Override
+	public void setPrevSelSlot(int slot)
+	{
+		prevSelSlot = slot;
 	}
 
 	@Override

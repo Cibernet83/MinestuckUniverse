@@ -305,8 +305,9 @@ public class StrifePortfolioHandler
 			return;
 
 		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
+		int sel = cap.getSelectedSpecibusIndex();
 
-		StrifeSpecibus selSpecibus = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];
+		StrifeSpecibus selSpecibus = cap.getPortfolio()[sel];
 		selSpecibus.unassign(cap.getSelectedWeaponIndex());
 
 		if(cap.getSelectedWeaponIndex() >= selSpecibus.getContents().size())
@@ -315,7 +316,7 @@ public class StrifePortfolioHandler
 		if(player instanceof  EntityPlayer)
 		{
 			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.INDEXES), (EntityPlayer) player);
-			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, cap.getSelectedSpecibusIndex()), (EntityPlayer) player);
+			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.PORTFOLIO, sel), (EntityPlayer) player);
 		}
 	}
 }

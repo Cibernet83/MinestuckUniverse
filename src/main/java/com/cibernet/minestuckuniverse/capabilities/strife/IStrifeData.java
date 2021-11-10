@@ -34,6 +34,9 @@ public interface IStrifeData extends IMSUCapabilityBase<EntityLivingBase>
 	boolean isArmed();
 	void setArmed(boolean armed);
 
+	int getPrevSelSlot();
+	void setPrevSelSlot(int slot);
+
 	StrifeSpecibus[] getNonEmptyPortfolio();
 	int getSpecibusIndex(StrifeSpecibus specibus);
 
