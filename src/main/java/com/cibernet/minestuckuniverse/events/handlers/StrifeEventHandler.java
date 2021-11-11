@@ -5,10 +5,8 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.events.WeaponAssignedEvent;
 import com.cibernet.minestuckuniverse.gui.GuiStrifePortfolio;
-import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
-import com.cibernet.minestuckuniverse.items.properties.throwkind.PropertyVariableItem;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.network.UpdateStrifeDataPacket;
@@ -45,10 +43,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.Sys;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -223,7 +219,15 @@ public class StrifeEventHandler
 			try
 			{
 				weapon = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().get(cap.getSelectedWeaponIndex());
-			} catch (Throwable t) {t.printStackTrace(); return;}
+			} catch (Throwable t)
+			{
+				if(!player.world.isRemote)
+				{
+					cap.setArmed(false);
+					MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.INDEXES), player);
+				}
+				return;
+			}
 
 			boolean weaponHeld = false;
 			boolean hasWeapon = false;
@@ -259,6 +263,7 @@ public class StrifeEventHandler
 						else if(StrifePortfolioHandler.moveSelectedWeapon(player, stack) == null)
 						{
 							List<KindAbstratus> abstratusList = StrifeEventHandler.getAbstrataList(stack, false);
+							abstratusList.sort(KindAbstratus::compareTo);
 							if(specibus.getContents().size() <= 1)
 							{
 								specibus.getContents().set(cap.getSelectedWeaponIndex(), stack);

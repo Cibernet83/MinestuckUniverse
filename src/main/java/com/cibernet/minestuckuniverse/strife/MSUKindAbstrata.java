@@ -29,7 +29,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus canekind = new KindAbstratus("cane", MinestuckUniverseItems.toolCane).addKeywords("cane", "staff");
 	public static KindAbstratus sicklekind = new KindAbstratus("sickle", MinestuckUniverseItems.toolSickle).addKeywords("sickle");
 	public static KindAbstratus spoonkind = new KindAbstratus("spoon", MinestuckUniverseItems.toolSpoon).addItemTools(getItem("sbahjaddon", "the_spoon")).addKeywords("spoon")
-			.setConditional((item, stack, res) -> item == MinestuckItems.crockerSpork && MinestuckItems.crockerSpork.isSpoon(stack));
+			.setConditional((item, stack, res) -> res || item == MinestuckItems.crockerSpork && MinestuckItems.crockerSpork.isSpoon(stack));
 	public static KindAbstratus forkkind = new KindAbstratus("fork", MinestuckUniverseItems.toolFork).addKeywords("fork").setConditional((item, stack, res) -> res || item == MinestuckItems.crockerSpork && !MinestuckItems.crockerSpork.isSpoon(stack));
 
 	public static KindAbstratus pickaxekind = new KindAbstratus("pickaxe", MinestuckUniverseItems.toolPickaxe).addItemClasses(ItemPickaxe.class);
@@ -42,11 +42,6 @@ public class MSUKindAbstrata
 					MinestuckUniverseItems.dragonCharge, Items.SNOWBALL, Items.EGG, Items.ENDER_PEARL, Items.ENDER_EYE, Items.EXPERIENCE_BOTTLE, Items.SPLASH_POTION, Items.LINGERING_POTION,
 					getItem("botania", "chakram"));
 
-	public static KindAbstratus rockkind = new KindAbstratus("rock").addKeywords("rock").addItemTools(MinestuckUniverseItems.pebble, MinestuckUniverseItems.rock, MinestuckUniverseItems.bigRock,
-			Item.getItemFromBlock(Blocks.COBBLESTONE), Item.getItemFromBlock(Blocks.STONE), Item.getItemFromBlock(Blocks.MOSSY_COBBLESTONE));
-	public static KindAbstratus paperkind = new KindAbstratus("paper").addKeywords("paper").addItemTools(Items.PAPER, Items.MAP, Items.FILLED_MAP, MinestuckUniverseItems.rolledUpPaper, MinestuckUniverseItems.yesterdaysNews);
-	public static KindAbstratus scissorkind = new KindAbstratus("shears").addKeywords("scissor").addItemClasses(ItemShears.class);
-
 	public static KindAbstratus clawkind = new KindAbstratus("claw", MinestuckUniverseItems.toolClaws).addKeywords("katar");
 	public static KindAbstratus glovekind = new KindAbstratus("glove", MinestuckUniverseItems.toolGauntlet).addKeywords("glove", "gauntlet", "fist").addItemTools(getItem("thaumcraft", "caster_basic"));
 	public static KindAbstratus needlekind = new KindAbstratus("needles", MinestuckUniverseItems.toolNeedles);
@@ -56,15 +51,6 @@ public class MSUKindAbstrata
 
 	public static KindAbstratus pistolkind = new KindAbstratus("pistol").setPreventRightClick(true).addItemTools(getItem("botania", "managun"));
 	public static KindAbstratus riflekind = new KindAbstratus("rifle").setPreventRightClick(true);
-
-	public static KindAbstratus fistkind = new KindAbstratus("fist").setFist(true);
-	public static KindAbstratus jokerkind = new KindAbstratus("joker").setConditional((i, stack, res) -> res || !stack.isEmpty()).setHidden(true);
-	public static KindAbstratus sbahjkind = new KindAbstratus("sbahj")
-			.addItemTools(MinestuckUniverseItems.sbahjWhip, MinestuckUniverseItems.unrealAir, MinestuckItems.batleacks, MinestuckItems.sord, MinestuckItems.sbahjPoster,
-					Item.getItemFromBlock(MinestuckUniverseBlocks.sbahjBedrock), Item.getItemFromBlock(MinestuckUniverseBlocks.sbahjTree))
-			.setConditional((i, stack, res) -> i.getRegistryName().getResourcePath().equals("sbahjaddon")).setHidden(true);
-	public static KindAbstratus bunnykind = new KindAbstratus("bunny").addKeywords("bunny", "rabbit", "hare")
-			.addItemTools(MinestuckUniverseItems.bunnySlippers, Items.RABBIT, Items.COOKED_RABBIT, Items.RABBIT_FOOT, Items.RABBIT_HIDE, Items.RABBIT_STEW).setHidden(true);
 
 	public static KindAbstratus halfBladekind = new KindAbstratus("halfSword", MinestuckUniverseItems.toolSword).addKeywords("sword", "blade").setConditional(((item, stack, res) -> res && PropertyBreakableItem.isBroken(item, stack))).setHidden(true);
 	public static KindAbstratus halfBowkind = new KindAbstratus("halfBow").setConditional(((item, stack, res) -> res && PropertyBreakableItem.isBroken(item, stack) && bowkind.isStackCompatible(stack))).setHidden(true);
@@ -98,6 +84,20 @@ public class MSUKindAbstrata
 			getItem("chisel", "offsettool"), getItem("customnpcs", "npcwand"), getItem("cyclicmagic", "cyclic_wand_build"), getItem("cyclicmagic", "tool_swap"),
 			getItem("cyclicmagic", "tool_swap_match"), getItem("cyclicmagic", "tool_push"), getItem("roots", "staff"));
 
+	public static KindAbstratus rockkind = new KindAbstratus("rock").addKeywords("rock").addItemTools(MinestuckUniverseItems.pebble, MinestuckUniverseItems.rock, MinestuckUniverseItems.bigRock,
+			Item.getItemFromBlock(Blocks.COBBLESTONE), Item.getItemFromBlock(Blocks.STONE), Item.getItemFromBlock(Blocks.MOSSY_COBBLESTONE));
+	public static KindAbstratus paperkind = new KindAbstratus("paper").addKeywords("paper").addItemTools(Items.PAPER, Items.MAP, Items.FILLED_MAP, MinestuckUniverseItems.rolledUpPaper, MinestuckUniverseItems.yesterdaysNews);
+	public static KindAbstratus scissorkind = new KindAbstratus("shears").addKeywords("scissor").addItemClasses(ItemShears.class);
+
+	public static KindAbstratus fistkind = new KindAbstratus("fist").setFist(true);
+	public static KindAbstratus jokerkind = new KindAbstratus("joker").setConditional((i, stack, res) -> res || !stack.isEmpty()).setHidden(true);
+	public static KindAbstratus sbahjkind = new KindAbstratus("sbahj")
+			.addItemTools(MinestuckUniverseItems.sbahjWhip, MinestuckUniverseItems.unrealAir, MinestuckItems.batleacks, MinestuckItems.sord, MinestuckItems.sbahjPoster,
+					Item.getItemFromBlock(MinestuckUniverseBlocks.sbahjBedrock), Item.getItemFromBlock(MinestuckUniverseBlocks.sbahjTree))
+			.setConditional((i, stack, res) -> i.getRegistryName().getResourcePath().equals("sbahjaddon")).setHidden(true);
+	public static KindAbstratus bunnykind = new KindAbstratus("bunny").addKeywords("bunny", "rabbit", "hare")
+			.addItemTools(MinestuckUniverseItems.bunnySlippers, Items.RABBIT, Items.COOKED_RABBIT, Items.RABBIT_FOOT, Items.RABBIT_HIDE, Items.RABBIT_STEW).setHidden(true);
+
 	@SubscribeEvent
 	public static void register(RegistryEvent.Register<KindAbstratus> event)
 	{
@@ -120,10 +120,6 @@ public class MSUKindAbstrata
 		registry.register(potionkind.setRegistryName("potion"));
 		registry.register(throwkind.setRegistryName("projectile"));
 
-		registry.register(rockkind.setRegistryName("rock"));
-		registry.register(paperkind.setRegistryName("paper"));
-		registry.register(scissorkind.setRegistryName("shears"));
-
 		registry.register(clawkind.setRegistryName("claw"));
 		registry.register(glovekind.setRegistryName("gauntlet"));
 		registry.register(needlekind.setRegistryName("needles"));
@@ -133,11 +129,6 @@ public class MSUKindAbstrata
 		registry.register(dicekind.setRegistryName("dice"));
 		registry.register(pistolkind.setRegistryName("pistol"));
 		registry.register(riflekind.setRegistryName("rifle"));
-
-		registry.register(fistkind.setRegistryName("fist"));
-		registry.register(jokerkind.setRegistryName("joker"));
-		registry.register(sbahjkind.setRegistryName("sbahj"));
-		registry.register(bunnykind.setRegistryName("bunny"));
 
 		registry.register(wandkind.setRegistryName("wand"));
 		registry.register(keykind.setRegistryName("key"));
@@ -154,6 +145,15 @@ public class MSUKindAbstrata
 		registry.register(broomkind.setRegistryName("broom"));
 		registry.register(tridentkind.setRegistryName("tridentkind"));
 		registry.register(doubleTridentkind.setRegistryName("2x3dent"));
+
+		registry.register(rockkind.setRegistryName("rock"));
+		registry.register(paperkind.setRegistryName("paper"));
+		registry.register(scissorkind.setRegistryName("shears"));
+
+		registry.register(fistkind.setRegistryName("fist"));
+		registry.register(jokerkind.setRegistryName("joker"));
+		registry.register(sbahjkind.setRegistryName("sbahj"));
+		registry.register(bunnykind.setRegistryName("bunny"));
 
 		if(MinestuckUniverse.isArsenalLoaded)
 			registerArsenalApi();

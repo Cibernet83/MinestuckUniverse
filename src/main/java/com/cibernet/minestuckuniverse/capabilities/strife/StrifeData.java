@@ -190,7 +190,13 @@ public class StrifeData implements IStrifeData
 			return null;
 		StrifeSpecibus result = portfolio[index];
 		portfolio[index] = null;
-		setSelectedSpecibusIndex(-1);
+
+		if(getSelectedSpecibusIndex() == index)
+		{
+			setSelectedSpecibusIndex(-1);
+			setArmed(false);
+		}
+
 		return result;
 	}
 
