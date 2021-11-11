@@ -264,6 +264,12 @@ public class StrifePortfolioHandler
 			return;
 
 		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
+
+		if(cap.isArmed() && cap.getSelectedSpecibusIndex() == index)
+			for(EnumHand hand : EnumHand.values())
+				if(StrifeEventHandler.isStackAssigned(player.getHeldItem(hand)))
+					player.setHeldItem(hand, ItemStack.EMPTY);
+
 		ItemStack card = ItemStrifeCard.injectStrifeSpecibus(cap.removeSpecibus(index), new ItemStack(MinestuckUniverseItems.strifeCard));
 
 		if(!player.world.isRemote && (!(player instanceof EntityPlayer) || !((EntityPlayer) player).addItemStackToInventory(card)))
@@ -277,7 +283,11 @@ public class StrifePortfolioHandler
 
 		IStrifeData cap = player.getCapability(MSUCapabilities.STRIFE_DATA, null);
 
-		ItemStack stack = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].retrieveStack(cap.getSelectedWeaponIndex());
+
+		ItemStack stack = ItemStack.EMPTY;
+
+		try
+		{ stack = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].retrieveStack(cap.getSelectedWeaponIndex()); } catch (Throwable t) {}
 
 		if(player.getHeldItem(hand).isEmpty() || StrifeEventHandler.isStackAssigned(player.getHeldItem(hand)))
 		{

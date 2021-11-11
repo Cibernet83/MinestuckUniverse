@@ -22,21 +22,24 @@ public class PropertyShieldPotion extends WeaponProperty implements IPropertyShi
 	@Override
 	public void onHitWhileShielding(ItemStack stack, EntityLivingBase player, DamageSource source, float damage, boolean blocked)
 	{
-
+		if(!(source.getImmediateSource() instanceof EntityLivingBase))
+			return;
 		if(blocked && !onParry && (player.world.rand.nextFloat() <= chance))
 		{
 			PotionEffect effect = effects[player.world.rand.nextInt(effects.length)];
-			player.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
+			((EntityLivingBase) source.getImmediateSource()).addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
 		}
 	}
 
 	@Override
 	public boolean onShieldParry(ItemStack stack, EntityLivingBase player, DamageSource source, float damage)
 	{
+		if(!(source.getImmediateSource() instanceof EntityLivingBase))
+			return true;
 		if(onParry && (player.world.rand.nextFloat() <= chance))
 		{
 			PotionEffect effect = effects[player.world.rand.nextInt(effects.length)];
-			player.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
+			((EntityLivingBase) source.getImmediateSource()).addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
 		}
 		return true;
 	}

@@ -217,8 +217,8 @@ public class MinestuckUniverseItems
     public static Item clarityWard = new MSUShieldBase(410, 8, 0.25f, 12, "clarity_ward", "christopherShield");
     public static Item obsidianShield = new MSUShieldBase(2000, 0, -3, 12, 0.6f, 10, "obsidian_shield", "obsidianShield").addProperties(new PropertyUseOnCooled(), new PropertyVisualParry());
     public static Item windshield = new MSUShieldBase(355, 18, 0.1f, 7, "windshield", "windshield").addProperties(new PropertyShieldKnockback(2f, true), new PropertyShieldKnockback(0.3f, false));
-    public static Item wallOfThorns = new MSUShieldBase(440, 10, 0.5f, 7, "wall_of_thorns", "wallOfThorns").addProperties(new PropertyShieldPotion(true, 0.9f, new PotionEffect(MobEffects.POISON, 400, 1)), new PropertyShieldPotion(false, 0.1f, new PotionEffect(MobEffects.POISON, 100, 0)));
-    public static Item nuclearNeglector = new MSUShieldBase(480, 8, 0.15f, 8, "nuclear_neglector", "nuclearNeglector").addProperties(new PropertyShieldPotion(true, 1, new PotionEffect(MobEffects.WITHER, 600, 2)), new PropertyShieldPotionNegative(new PotionEffect(MobEffects.WITHER, 600, 2)));
+    public static Item wallOfThorns = new MSUShieldBase(440, 10, 0.5f, 7, "wall_of_thorns", "wallOfThorns").addProperties(new PropertyShieldPotion(true, 1f, new PotionEffect(MobEffects.POISON, 400, 1)), new PropertyShieldPotion(false, 0.1f, new PotionEffect(MobEffects.POISON, 100, 0)));
+    public static Item nuclearNeglector = new MSUShieldBase(480, 8, 0.15f, 8, "nuclear_neglector", "nuclearNeglector").addProperties(new PropertyShieldPotionNegative(new PotionEffect(MobEffects.WITHER, 60, 2)), new PropertyShieldPotion(true, 1, new PotionEffect(MobEffects.WITHER, 600, 2)));
     public static Item livingShield = new MSUShieldBase(465, 6, 0.0f, 8, "living_shield", "livingShield").addProperties(new PropertyShieldHeal(0.6f, true));
     public static Item perfectAegis = new MSUShieldBase(800, 3, 1f, 12, "perfect_aegis", "perfectAegis").addProperties(new PropertyShieldDeflect(1, 5));
 
