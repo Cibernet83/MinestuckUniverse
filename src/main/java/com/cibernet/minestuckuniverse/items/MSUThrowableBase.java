@@ -99,7 +99,7 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 	//Throwable Material
 	public MSUThrowableBase(String name, String unlocName)
 	{
-		this(1, 0, 64, 0, 0, 1.5f, name, unlocName);
+		this(1, 0, 64, 1.5f, 0, 1.5f, name, unlocName);
 		setCreativeTab(TabMinestuckUniverse.main);
 	}
 
