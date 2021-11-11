@@ -138,7 +138,7 @@ public class PropertyEventHandler
 			}
 		}
 
-		if(!event.getEntityLiving().isEntityInvulnerable(event.getSource()) && !event.getEntity().world.isRemote)
+		if(!event.getEntityLiving().isEntityInvulnerable(event.getSource()) && !event.getEntity().world.isRemote && !event.getSource().isUnblockable())
 		{
 			ItemStack stack = event.getEntityLiving().getActiveItemStack();
 
