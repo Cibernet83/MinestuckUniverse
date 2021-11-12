@@ -45,7 +45,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.*;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
@@ -218,9 +217,10 @@ public class MinestuckUniverseItems
     public static Item obsidianShield = new MSUShieldBase(2000, 0, -3, 12, 0.6f, 10, "obsidian_shield", "obsidianShield").addProperties(new PropertyUseOnCooled(), new PropertyVisualParry());
     public static Item windshield = new MSUShieldBase(355, 18, 0.1f, 7, "windshield", "windshield").addProperties(new PropertyShieldKnockback(2f, true), new PropertyShieldKnockback(0.3f, false));
     public static Item wallOfThorns = new MSUShieldBase(440, 10, 0.5f, 7, "wall_of_thorns", "wallOfThorns").addProperties(new PropertyShieldPotion(true, 1f, new PotionEffect(MobEffects.POISON, 400, 1)), new PropertyShieldPotion(false, 0.1f, new PotionEffect(MobEffects.POISON, 100, 0)));
+    public static Item hardRindHarvest = new MSUShieldBase(320, 7, 0.4f, 6, "hard_rind_harvest", "hardRindHarvest").addProperties(new PropertyEdible(2, 0.4f, 5).setPotionEffect(0.1f, new PotionEffect(MobEffects.INSTANT_HEALTH, 1, 0)));
     public static Item nuclearNeglector = new MSUShieldBase(480, 8, 0.15f, 8, "nuclear_neglector", "nuclearNeglector").addProperties(new PropertyShieldPotionNegative(new PotionEffect(MobEffects.WITHER, 60, 2)), new PropertyShieldPotion(true, 1, new PotionEffect(MobEffects.WITHER, 600, 2)));
     public static Item livingShield = new MSUShieldBase(465, 6, 0.0f, 8, "living_shield", "livingShield").addProperties(new PropertyShieldHeal(0.6f, true));
-    public static Item perfectAegis = new MSUShieldBase(800, 3, 1f, 12, "perfect_aegis", "perfectAegis").addProperties(new PropertyShieldDeflect(1, 5));
+    public static Item perfectAegis = new MSUShieldBase(800, 3, 1f, 12, "perfect_aegis", "perfectAegis").addProperties(new PropertyShieldDeflect(1, 5), new PropertyVisualParry());
 
     //Bowkind
     public static final MSUBowBase.IIsArrow REGULAR_ARROWS = stack -> stack.getItem() == Items.ARROW;
@@ -511,6 +511,7 @@ public class MinestuckUniverseItems
         registerItem(registry, firewall);
         registerItem(registry, obsidianShield);
         registerItem(registry, wallOfThorns);
+        registerItem(registry, hardRindHarvest);
         registerItem(registry, livingShield);
         registerItem(registry, nuclearNeglector);
         registerItem(registry, perfectAegis);

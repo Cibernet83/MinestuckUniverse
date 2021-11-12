@@ -1,27 +1,36 @@
 package com.cibernet.minestuckuniverse.items.properties;
 
+import com.cibernet.minestuckuniverse.items.properties.shieldkind.IPropertyShield;
+import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import scala.actors.threadpool.Arrays;
 
-public class PropertyEdible extends WeaponProperty
+import java.util.ArrayList;
+import java.util.List;
+
+public class PropertyEdible extends WeaponProperty implements IPropertyShield
 {
 	int amount;
 	float saturation;
 	int damageTaken;
-	IConsumableEffect effect;
+	ArrayList<IConsumableEffect> effects = new ArrayList<>();
 
-	public PropertyEdible(int amount, float saturation, int damageTaken, IConsumableEffect effect)
+	public PropertyEdible(int amount, float saturation, int damageTaken, IConsumableEffect... effects)
 	{
 		this.amount = amount;
 		this.saturation = saturation;
 		this.damageTaken = damageTaken;
-		this.effect = effect;
+		this.effects.addAll(Arrays.asList(effects));
 	}
 	public PropertyEdible(int amount, float saturation, int damageTaken)
 	{
@@ -30,11 +39,10 @@ public class PropertyEdible extends WeaponProperty
 
 	public PropertyEdible setPotionEffect(float chance, PotionEffect... effects)
 	{
-		effect = ((stack, player) ->
-		{
-			effect.consume(stack, player);
 
-			if(player.world.rand.nextFloat() <= chance)
+		this.effects.add ((stack, player) ->
+		{
+			if(!player.world.isRemote && player.world.rand.nextFloat() <= chance)
 			{
 				PotionEffect potion = effects[player.world.rand.nextInt(effects.length)];
 				player.addPotionEffect(new PotionEffect(potion.getPotion(), potion.getDuration(), potion.getAmplifier(), potion.getIsAmbient(), potion.doesShowParticles()));
@@ -44,21 +52,62 @@ public class PropertyEdible extends WeaponProperty
 	}
 
 	@Override
+	public boolean isShielding(ItemStack stack, EntityLivingBase player)
+	{
+		return !stack.hasTagCompound() || !stack.getTagCompound().getBoolean("Eat");
+	}
+
+	@Override
 	public EnumAction getItemUseAction(ItemStack stack)
 	{
+		if(stack.getItem() instanceof MSUShieldBase && stack.hasTagCompound() && !stack.getTagCompound().getBoolean("Eat"))
+			return super.getItemUseAction(stack);
 		return EnumAction.EAT;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack, int duration) {
+	public int getMaxItemUseDuration(ItemStack stack, int duration)
+	{
+		if(stack.hasTagCompound() && stack.getTagCompound().getBoolean("Eat"))
+			return 32;
 		return Math.max(duration, 32);
+	}
+
+	@Override
+	public EnumActionResult onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	{
+		ItemStack stack = playerIn.getHeldItem(handIn);
+
+		if(stack.getItem() instanceof MSUShieldBase || stack.getItem().isShield(stack, playerIn))
+		{
+			boolean shouldEat = playerIn.isSneaking() && playerIn.getFoodStats().needFood();
+
+			if(!stack.hasTagCompound())
+				stack.setTagCompound(new NBTTagCompound());
+			stack.getTagCompound().setBoolean("Eat", shouldEat);
+
+			if(shouldEat)
+			{
+				playerIn.setActiveHand(handIn);
+				return EnumActionResult.SUCCESS;
+			}
+
+			return super.onItemRightClick(worldIn, playerIn, handIn);
+		}
+
+		playerIn.setActiveHand(handIn);
+		return EnumActionResult.SUCCESS;
 	}
 
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
 	{
+		if(stack.getItem().isShield(stack, entityLiving) && !stack.getTagCompound().getBoolean("Eat"))
+			return stack;
+
 		stack.damageItem(this.damageTaken, entityLiving);
-		effect.consume(stack, entityLiving);
+		for(IConsumableEffect effect : effects)
+			effect.consume(stack, entityLiving);
 		if (entityLiving instanceof EntityPlayer)
 		{
 			EntityPlayer entityplayer = (EntityPlayer)entityLiving;

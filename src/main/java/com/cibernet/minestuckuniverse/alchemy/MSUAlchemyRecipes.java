@@ -260,6 +260,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(obsidianShield), new GristSet(new GristType[] {Build, Rust, Tar, Cobalt}, new int[] {3000, 1000, 500, 500}));
         GristRegistry.addGristConversion(new ItemStack(wallOfThorns), new GristSet(new GristType[] {Amber, Gold, Ruby}, new int[] {1000, 200, 435}));
         GristRegistry.addGristConversion(new ItemStack(livingShield), new GristSet(new GristType[] {Amber, Gold, Ruby, Diamond}, new int[] {1100, 2000, 800, 4}));
+        GristRegistry.addGristConversion(new ItemStack(hardRindHarvest), new GristSet(new GristType[] {Amber, Gold, Caulk}, new int[] {800, 500, 800}));
         GristRegistry.addGristConversion(new ItemStack(nuclearNeglector), new GristSet(new GristType[] {Uranium, Rust, Shale}, new int[] {4500, 432, 800}));
         GristRegistry.addGristConversion(new ItemStack(perfectAegis), new GristSet(new GristType[] {Cobalt, Uranium, Gold, Zillium}, new int[] {8000, 6000, 4500, 1}));
 
@@ -435,7 +436,8 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(Items.FEATHER), new ItemStack(clearShield), MODE_AND, false, false, new ItemStack(windshield));
         CombinationRegistry.addCombination(new ItemStack(woodenDoorshield), new ItemStack(Blocks.DOUBLE_PLANT, 1, 4), MODE_AND, false, true, new ItemStack(wallOfThorns));
         CombinationRegistry.addCombination(new ItemStack(wallOfThorns), new ItemStack(MinestuckBlocks.uraniumBlock), MODE_OR, false, false, new ItemStack(nuclearNeglector));
-        CombinationRegistry.addCombination(new ItemStack(wallOfThorns), new ItemStack(Items.SPECKLED_MELON), MODE_OR, false, false, new ItemStack(livingShield));
+        CombinationRegistry.addCombination(new ItemStack(wallOfThorns), new ItemStack(Items.SPECKLED_MELON), MODE_OR, false, false, new ItemStack(hardRindHarvest));
+        CombinationRegistry.addCombination(new ItemStack(wallOfThorns), new ItemStack(Items.SPECKLED_MELON), MODE_AND, false, false, new ItemStack(livingShield));
         CombinationRegistry.addCombination(new ItemStack(nuclearNeglector), new ItemStack(moon), MODE_AND, false, false, new ItemStack(perfectAegis));
 
         //bowkind

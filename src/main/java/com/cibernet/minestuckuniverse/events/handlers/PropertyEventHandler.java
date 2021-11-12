@@ -142,7 +142,7 @@ public class PropertyEventHandler
 		{
 			ItemStack stack = event.getEntityLiving().getActiveItemStack();
 
-			if(stack.getItem() instanceof MSUShieldBase && (!(event.getEntityLiving() instanceof EntityPlayer) || !((EntityPlayer) event.getEntityLiving()).getCooldownTracker().hasCooldown(stack.getItem())))
+			if(stack.getItem().isShield(stack, event.getEntityLiving()) && stack.getItem() instanceof MSUShieldBase && (!(event.getEntityLiving() instanceof EntityPlayer) || !((EntityPlayer) event.getEntityLiving()).getCooldownTracker().hasCooldown(stack.getItem())))
 				((MSUShieldBase) stack.getItem()).onHitWhileShielding(stack, event.getEntityLiving(), event.getSource(), event.getAmount(), MSUShieldBase.canBlockDamageSource(event.getEntityLiving(), event.getSource()));
 
 			stack = event.getEntityLiving().getHeldItemMainhand().getItem() instanceof MSUShieldBase ? event.getEntityLiving().getHeldItemMainhand()

@@ -18,4 +18,9 @@ public interface IPropertyShield
 	{
 		return true;
 	}
+
+	default boolean isShielding(ItemStack stack, EntityLivingBase player)
+	{
+		return true;
+	}
 }

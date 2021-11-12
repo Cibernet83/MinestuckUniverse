@@ -35,7 +35,7 @@ public class MSUShieldBase extends MSUWeaponBase
 		this.parryDeflect = parryDamageDeflect;
 		this.parryTime = parryTimeFrame;
 
-		this.addPropertyOverride(new ResourceLocation("blocking"), (stack, worldIn, entityIn) -> entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F);
+		this.addPropertyOverride(new ResourceLocation("blocking"), (stack, worldIn, entityIn) -> entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack && isShield(stack, entityIn) ? 1.0F : 0.0F);
 
 	}
 
@@ -47,6 +47,12 @@ public class MSUShieldBase extends MSUWeaponBase
 	@Override
 	public boolean isShield(ItemStack stack, @Nullable EntityLivingBase entity)
 	{
+		for(WeaponProperty p : getProperties(stack))
+		{
+			if(p instanceof IPropertyShield && !((IPropertyShield) p).isShielding(stack, entity))
+				return false;
+		}
+
 		return true;
 	}
 
@@ -61,6 +67,13 @@ public class MSUShieldBase extends MSUWeaponBase
 
 	public EnumAction getItemUseAction(ItemStack stack)
 	{
+		for(WeaponProperty p : getProperties(stack))
+		{
+			EnumAction result = p.getItemUseAction(stack);
+			if(result != null)
+				return result;
+		}
+
 		return EnumAction.BLOCK;
 	}
 
@@ -88,7 +101,7 @@ public class MSUShieldBase extends MSUWeaponBase
 	{
 		entityLiving.resetActiveHand();
 
-		if(!(entityLiving instanceof EntityPlayer) || !((EntityPlayer) entityLiving).getCooldownTracker().hasCooldown(stack.getItem()))
+		if(isShield(stack, entityLiving) && (!(entityLiving instanceof EntityPlayer) || !((EntityPlayer) entityLiving).getCooldownTracker().hasCooldown(stack.getItem())))
 			startParrying(stack);
 		super.onPlayerStoppedUsing(stack, worldIn, entityLiving, timeLeft);
 	}
