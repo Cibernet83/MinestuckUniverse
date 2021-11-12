@@ -85,12 +85,17 @@ public class StrifeEventHandler
 				if(selStrife != null && selStrife.isAssigned() && selStrife.getKindAbstratus().isFist())
 					return;
 			}
-			event.setCanceled(true);
+			WeaponAssignedEvent checkEvent = new WeaponAssignedEvent(source, stack, false);
+			MinecraftForge.EVENT_BUS.post(checkEvent);
+			if(!checkEvent.getCheckResult())
+				event.setCanceled(true);
+			return;
 		}
 
-		WeaponAssignedEvent checkEvent = new WeaponAssignedEvent(event.getEntityLiving(), stack);
+		boolean isAssigned = isStackAssigned(stack);
+		WeaponAssignedEvent checkEvent = new WeaponAssignedEvent(source, stack, isAssigned);
 		MinecraftForge.EVENT_BUS.post(checkEvent);
-		if(!isStackAssigned(stack) && checkEvent.getCheckResult())
+		if(!checkEvent.getCheckResult())
 			event.setCanceled(true);
 	}
 
@@ -121,26 +126,27 @@ public class StrifeEventHandler
 			return;
 
 		ItemStack stack = event.getItemStack();
-		WeaponAssignedEvent checkEvent = new WeaponAssignedEvent(event.getEntityPlayer(), stack);
-		MinecraftForge.EVENT_BUS.post(checkEvent);
+		boolean canUse = true;
 
-		if(FORCED_USABLE_UNASSIGNED.contains(stack.getItem()) || (isStackAssigned(stack) && checkEvent.getCheckResult()))
-			return;
-
-		if(USABLE_ASSIGNED_ONLY.contains(stack.getItem()))
+		if(FORCED_USABLE_UNASSIGNED.contains(stack.getItem()) || isStackAssigned(stack))
+			canUse = true;
+		else if(USABLE_ASSIGNED_ONLY.contains(stack.getItem()))
 		{
 			event.setCancellationResult(EnumActionResult.PASS);
-			event.setCanceled(true);
-			return;
+			canUse = false;
 		}
-
-		for(KindAbstratus abstratus : getAbstrataList(stack, false))
+		else for(KindAbstratus abstratus : getAbstrataList(stack, false))
 			if(abstratus.preventsRightClick())
 			{
 				event.setCancellationResult(EnumActionResult.PASS);
-				event.setCanceled(true);
-				return;
+				canUse = false;
 			}
+
+		WeaponAssignedEvent checkEvent = new WeaponAssignedEvent(event.getEntityPlayer(), stack, canUse);
+		MinecraftForge.EVENT_BUS.post(checkEvent);
+		canUse = checkEvent.getCheckResult();
+		if(!canUse)
+			event.setCanceled(true);
 
 	}
 

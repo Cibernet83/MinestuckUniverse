@@ -33,11 +33,15 @@ public class LeftClickEmptyPacket extends MSUPacket
 	{
 		ItemStack stack = player.getHeldItemMainhand();
 		boolean checkAssigned = MSUConfig.combatOverhaul && MSUConfig.restrictedStrife;
-		WeaponAssignedEvent event = new WeaponAssignedEvent(player, stack);
-		MinecraftForge.EVENT_BUS.post(event);
 
-		if(stack.getItem() instanceof IPropertyWeapon &&
-				!(checkAssigned || (checkAssigned && StrifeEventHandler.isStackAssigned(stack) && event.getCheckResult())))
+		if(checkAssigned)
+		{
+			WeaponAssignedEvent event = new WeaponAssignedEvent(player, stack, StrifeEventHandler.isStackAssigned(stack));
+			MinecraftForge.EVENT_BUS.post(event);
+			checkAssigned = !event.getCheckResult();
+		}
+
+		if(stack.getItem() instanceof IPropertyWeapon && !checkAssigned)
 		{
 			List<WeaponProperty> propertyList = ((IPropertyWeapon) stack.getItem()).getProperties(stack);
 			for(WeaponProperty p : propertyList)

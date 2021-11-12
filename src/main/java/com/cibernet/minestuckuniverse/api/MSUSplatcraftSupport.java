@@ -39,7 +39,7 @@ public class MSUSplatcraftSupport
 		addColor("CRUXITE_ORCHID",11876058, MapColor.LIGHT_BLUE, "cruxiteOrchid");
 		addColor("CRUXITE_RED",14681863, MapColor.LIGHT_BLUE, "cruxiteRed");
 		addColor("CRUXITE_GREEN",4901157, MapColor.LIGHT_BLUE, "cruxiteGreen");
-		addColor("CRUXITE_CYAN",'헲', MapColor.LIGHT_BLUE, "cruxiteCyan");
+		addColor("CRUXITE_CYAN",54770, MapColor.LIGHT_BLUE, "cruxiteCyan");
 		addColor("CRUXITE_PINK",16740338, MapColor.LIGHT_BLUE, "cruxitePink");
 		addColor("CRUXITE_ORANGE",15901696, MapColor.LIGHT_BLUE, "cruxiteOrange");
 		addColor("CRUXITE_EMERALD",2069504, MapColor.LIGHT_BLUE, "cruxiteEmerald");
@@ -48,8 +48,8 @@ public class MSUSplatcraftSupport
 		addColor("CRUXITE_GOLD",10592512, MapColor.LIGHT_BLUE, "cruxiteGold");
 		addColor("CRUXITE_IRON",6447714, MapColor.LIGHT_BLUE, "cruxiteIron");
 		addColor("CRUXITE_OLIVE",4285952, MapColor.LIGHT_BLUE, "cruxiteOlive");
-		addColor("CRUXITE_JADE",'腁', MapColor.LIGHT_BLUE, "cruxiteJade");
-		addColor("CRUXITE_TEAL",'节', MapColor.LIGHT_BLUE, "cruxiteTeal");
+		addColor("CRUXITE_JADE",33089, MapColor.LIGHT_BLUE, "cruxiteJade");
+		addColor("CRUXITE_TEAL",33410, MapColor.LIGHT_BLUE, "cruxiteTeal");
 		addColor("CRUXITE_COBALT",22146, MapColor.LIGHT_BLUE, "cruxiteCobalt");
 		addColor("CRUXITE_INDIGO",86, MapColor.LIGHT_BLUE, "cruxiteIndigo");
 		addColor("CRUXITE_PURPLE",2818135, MapColor.LIGHT_BLUE, "cruxitePurple");

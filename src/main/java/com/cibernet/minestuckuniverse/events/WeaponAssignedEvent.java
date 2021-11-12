@@ -13,12 +13,13 @@ public class WeaponAssignedEvent extends Event
 {
 	final EntityLivingBase player;
 	final ItemStack stack;
-	boolean result = true;
+	boolean result;
 
-	public WeaponAssignedEvent(EntityLivingBase player, ItemStack stack)
+	public WeaponAssignedEvent(EntityLivingBase player, ItemStack stack, boolean result)
 	{
 		this.player = player;
 		this.stack = stack;
+		this.result = result;
 	}
 
 	public EntityLivingBase getPlayer() {
