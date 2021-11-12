@@ -138,7 +138,7 @@ public class PropertyEventHandler
 			}
 		}
 
-		if(!event.getEntityLiving().isEntityInvulnerable(event.getSource()) && !event.getEntity().world.isRemote && !event.getSource().isUnblockable())
+		if(!event.getEntityLiving().isEntityInvulnerable(event.getSource()) && !event.getEntity().world.isRemote)
 		{
 			ItemStack stack = event.getEntityLiving().getActiveItemStack();
 
@@ -153,7 +153,7 @@ public class PropertyEventHandler
 			if(event.getEntityLiving() instanceof EntityPlayer)
 				isStunned = ((EntityPlayer) event.getEntityLiving()).getCooldownTracker().hasCooldown(stack.getItem());
 
-			if(!stack.isEmpty() && !isStunned && ((MSUShieldBase)stack.getItem()).isParrying(stack) && ((MSUShieldBase)stack.getItem()).onShieldParry(stack, event.getEntityLiving(), event.getSource(), event.getAmount()))
+			if(!stack.isEmpty() && !isStunned && !event.getSource().isUnblockable() && ((MSUShieldBase)stack.getItem()).isParrying(stack) && ((MSUShieldBase)stack.getItem()).onShieldParry(stack, event.getEntityLiving(), event.getSource(), event.getAmount()))
 			{
 				if (!event.getSource().isProjectile())
 				{
