@@ -13,10 +13,9 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class PropertyEdible extends WeaponProperty implements IPropertyShield
 {
