@@ -327,46 +327,16 @@ public class StrifePortfolioHandler
 			{
 				cap.setArmed(false);
 				player.setHeldItem(StrifeEventHandler.isStackAssigned(player.getHeldItemOffhand()) ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, ItemStack.EMPTY);
+				if(player instanceof EntityPlayer)
+					((EntityPlayer)player).inventory.markDirty();
 			}
-			else
-			{
-				StrifeSpecibus selSpecibus = cap.getPortfolio()[specibusIndex];
-				selSpecibus.unassign(weaponIndex);
-				if(weaponIndex >= selSpecibus.getContents().size())
-					cap.setSelectedWeaponIndex(0);
-			}
-		}
-
-		ItemStack offhand = player.getHeldItemOffhand();
-		if(offhand.isEmpty() || addWeapon(player, offhand))
-		{
-			player.setHeldItem(EnumHand.OFF_HAND, stack);
-			if(player instanceof EntityPlayer)
-				((EntityPlayer)player).inventory.markDirty();
-		}
-		else player.entityDropItem(stack, player.getEyeHeight());
-
-		/*
-		ItemStack stack = ItemStack.EMPTY;
-		ItemStack offhand = player.getHeldItemOffhand();
-
-		try
-		{ stack = cap.getPortfolio()[specibusIndex].retrieveStack(weaponIndex); } catch (Throwable t) {}
-		if(!stack.isEmpty())
-		{
-			if(cap.isArmed() && cap.getSelectedSpecibusIndex() == specibusIndex && cap.getSelectedWeaponIndex() == weaponIndex)
-			{
-				cap.setArmed(false);
-				if(ItemStack.areItemStacksEqual(player.getHeldItemMainhand(), cap.getPortfolio()[specibusIndex].getContents().get(weaponIndex)))
-					player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
-			}
-
 			StrifeSpecibus selSpecibus = cap.getPortfolio()[specibusIndex];
 			selSpecibus.unassign(weaponIndex);
 			if(weaponIndex >= selSpecibus.getContents().size())
 				cap.setSelectedWeaponIndex(0);
 		}
 
+		ItemStack offhand = player.getHeldItemOffhand();
 		if(offhand.isEmpty() || addWeapon(player, offhand))
 		{
 			player.setHeldItem(EnumHand.OFF_HAND, stack);
@@ -374,7 +344,6 @@ public class StrifePortfolioHandler
 				((EntityPlayer)player).inventory.markDirty();
 		}
 		else player.entityDropItem(stack, player.getEyeHeight());
-		*/
 
 		if(player instanceof  EntityPlayer)
 			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.INDEXES), (EntityPlayer) player);

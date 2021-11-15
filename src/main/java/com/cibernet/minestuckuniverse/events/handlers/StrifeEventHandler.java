@@ -192,7 +192,7 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
-		if(event.phase == TickEvent.Phase.END)
+		if(event.phase == TickEvent.Phase.END || event.player.world.isRemote)
 			return;
 
 		IStrifeData cap = event.player.getCapability(MSUCapabilities.STRIFE_DATA, null);
@@ -237,21 +237,21 @@ public class StrifeEventHandler
 
 			boolean weaponHeld = false;
 			boolean hasWeapon = false;
-			for(EnumHand hand : EnumHand.values())
+			//for(EnumHand hand : EnumHand.values())
 			{
-				if(ItemStack.areItemStacksEqual(player.getHeldItem(hand), weapon))
+				if(ItemStack.areItemStacksEqual(player.getHeldItem(EnumHand.MAIN_HAND), weapon))
 				{
 					hasWeapon = true;
 					weaponHeld = true;
-					break;
+					//break;
 				}
 			}
 
 			//innocuous double
 			if(player.inventory.currentItem == cap.getPrevSelSlot() && !weaponHeld && player.openContainer instanceof ContainerPlayer)
-				for(EnumHand hand : EnumHand.values())
+				//for(EnumHand hand : EnumHand.values())
 				{
-					ItemStack stack = player.getHeldItem(hand);
+					ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
 					if(!stack.isEmpty())
 					{
 						StrifeSpecibus specibus = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];
@@ -265,6 +265,7 @@ public class StrifeEventHandler
 							weapon = stack;
 							weaponHeld = true;
 							hasWeapon = true;
+							System.out.println("e");
 						}
 						else if(StrifePortfolioHandler.moveSelectedWeapon(player, stack) == null)
 						{
@@ -279,6 +280,7 @@ public class StrifeEventHandler
 								weapon = stack;
 								weaponHeld = true;
 								hasWeapon = true;
+								System.out.println("a");
 
 								specibus.switchKindAbstratus(abstratusList.get(0), player);
 								if(!player.world.isRemote)
@@ -303,10 +305,28 @@ public class StrifeEventHandler
 							weaponHeld = true;
 							hasWeapon = true;
 						}
-						break;
+						//break;
 					}
 
 				}
+
+			ItemStack offhandStack = player.getHeldItemOffhand();
+			if(isStackAssigned(offhandStack))
+			{
+				if(!hasWeapon && ItemStack.areItemStacksEqual(weapon, offhandStack))
+				{
+					hasWeapon = true;
+					player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
+					System.out.println("baba");
+				}
+				else
+				{
+					offhandStack.getTagCompound().removeTag("StrifeAssigned");
+					if(offhandStack.getTagCompound().hasNoTags())
+						offhandStack.setTagCompound(null);
+					System.out.println("beebee " + hasWeapon);
+				}
+			}
 
 			for(ItemStack stack : player.inventory.mainInventory)
 			{
@@ -335,9 +355,6 @@ public class StrifeEventHandler
 					}
 				}
 			}
-
-			if(!cap.isArmed() && isStackAssigned(player.getHeldItemOffhand()))
-				player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
 
 			ItemStack cursorStack = player.inventory.getItemStack();
 			if(isStackAssigned(cursorStack))

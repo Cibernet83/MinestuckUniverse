@@ -89,8 +89,8 @@ public class GuiStrifeSwitcher extends Gui
 					EnumHand hand = StrifeEventHandler.isStackAssigned(mc.player.getHeldItemOffhand()) ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND;
 					if(!offhandMode)
 					{
-						cap.setSelectedWeaponIndex(selWeapon);
-						cap.setSelectedSpecibusIndex(selSpecibus);
+						cap.setSelectedWeaponIndex(selWeaponIndex);
+						cap.setSelectedSpecibusIndex(selSpecibusIndex);
 						MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, mc.player, UpdateStrifeDataPacket.UpdateType.INDEXES));
 					}
 					if(!(mc.player.isSneaking() && canUseAbstrataSwitcher()))
@@ -163,6 +163,14 @@ public class GuiStrifeSwitcher extends Gui
 						drawScaledCustomSizeModalRect( screenWidth/2 -11, screenHeight*3/4 -3, offhandMode ? 134 : 112, 0, 22, 22, 22, 22, 256, 256);
 						String str = stack.getDisplayName();
 						mc.fontRenderer.drawString(str, screenWidth/2 - mc.fontRenderer.getStringWidth(str)/2, screenHeight*3/4 - 14, 0x00AB54, true);
+					}
+
+					if(cap.isArmed() && offhandMode && index == cap.getSelectedWeaponIndex())
+					{
+						System.out.println(i);
+						GlStateManager.color(1,1,1);
+						mc.getTextureManager().bindTexture(WIDGETS);
+						drawScaledCustomSizeModalRect(i*20+ screenWidth/2 -11, screenHeight*3/4 -3, 156, 0, 22, 22, 22, 22, 256, 256);
 					}
 
 					renderItem(mc, 20*i + screenWidth/2 -8, screenHeight*3/4, event.renderTickTime, mc.player, stack);

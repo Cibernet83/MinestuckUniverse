@@ -419,6 +419,8 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(katars), new ItemStack(Items.FIREWORKS), MODE_AND, false, false, new ItemStack(rocketKatars));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.candy, 1, 0), new ItemStack(catclaws), MODE_OR, true, false, new ItemStack(catclaws));
         CombinationRegistry.addCombination(new ItemStack(zillyStone), new ItemStack(catclaws), MODE_OR, false, false, new ItemStack(katarsOfZillywhomst));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.clawSickle), new ItemStack(MinestuckItems.grimoire), MODE_AND, false, false, new ItemStack(MinestuckItems.clawOfNrubyiglith));
+        removeCombination(new ItemStack(MinestuckItems.catClaws), new ItemStack(MinestuckItems.grimoire), MODE_AND, false, true);
 
         //shieldkind
         CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Blocks.OAK_DOOR), MODE_OR, false, false, new ItemStack(woodenDoorshield));
