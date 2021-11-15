@@ -8,6 +8,7 @@ import com.cibernet.minestuckuniverse.items.properties.PropertyBreakableItem;
 import com.cibernet.minestuckuniverse.items.weapons.ItemDualClaw;
 import com.cibernet.minestuckuniverse.items.weapons.ItemMechanicalCrossbow;
 import com.cibernet.minestuckuniverse.items.weapons.MSUBowBase;
+import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
 import com.mraof.minestuck.item.ItemCruxitePotion;
 import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.init.Blocks;
@@ -45,7 +46,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus clawkind = new KindAbstratus("claw", MinestuckUniverseItems.toolClaws).addKeywords("katar");
 	public static KindAbstratus glovekind = new KindAbstratus("glove", MinestuckUniverseItems.toolGauntlet).addKeywords("glove", "gauntlet", "fist").addItemTools(getItem("thaumcraft", "caster_basic"));
 	public static KindAbstratus needlekind = new KindAbstratus("needles", MinestuckUniverseItems.toolNeedles);
-	public static KindAbstratus shieldkind = new KindAbstratus("shield").setConditional((i, itemStack, res) -> res || i.isShield(itemStack, null));
+	public static KindAbstratus shieldkind = new KindAbstratus("shield").addItemClasses(ItemShield.class, MSUShieldBase.class).setConditional((i, itemStack, res) -> res || i.isShield(itemStack, null));
 	public static KindAbstratus bowkind = new KindAbstratus("bow").setPreventRightClick(true).addItemClasses(ItemBow.class, MSUBowBase.class, ItemMechanicalCrossbow.class).setConditional(((item, stack, res) -> res && !PropertyBreakableItem.isBroken(item, stack)));
 	public static KindAbstratus dicekind = new KindAbstratus("dice").addItemTools(MinestuckUniverseItems.dice, MinestuckUniverseItems.fluoriteOctet);
 

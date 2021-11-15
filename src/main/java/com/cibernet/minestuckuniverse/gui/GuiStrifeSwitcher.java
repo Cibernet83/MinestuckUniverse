@@ -25,6 +25,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.Sys;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -37,7 +38,11 @@ public class GuiStrifeSwitcher extends Gui
 	private static final String iconsLoc = "textures/gui/strife_specibus/icons/";
 
 	public static boolean showSwitcher = false;
+	public static boolean offhandMode = false;
 	private static boolean strifeDown;
+
+	public static int selSpecibus = -1;
+	public static int selWeapon = 0;
 
 	@SubscribeEvent
 	public static void renderEvent(TickEvent.RenderTickEvent event)
@@ -52,19 +57,29 @@ public class GuiStrifeSwitcher extends Gui
 
 		IStrifeData cap = mc.player.getCapability(MSUCapabilities.STRIFE_DATA, null);
 
-		int selSpecibusIndex = cap.getSelectedSpecibusIndex();
-		int selWeaponIndex = cap.getSelectedWeaponIndex();
+		boolean isDown = offhandMode ? MSUKeys.swapOffhandStrifeKey.isKeyDown() : MSUKeys.strifeKey.isKeyDown();
+
+		if(isDown != strifeDown && isDown)
+		{
+			selSpecibus = cap.getSelectedSpecibusIndex();
+			selWeapon = cap.getSelectedWeaponIndex();
+		}
+
+		int selSpecibusIndex = selSpecibus;
+		int selWeaponIndex = selWeapon;
 		StrifeSpecibus[] portfolio =  cap.getNonEmptyPortfolio();
 
-		if(canUseAbstrataSwitcher() && (cap.getPortfolio()[selSpecibusIndex] == null || (!cap.getPortfolio()[selSpecibusIndex].getKindAbstratus().isFist() && cap.getPortfolio()[selSpecibusIndex].getContents().isEmpty())))
+		if(canUseAbstrataSwitcher() && (selSpecibusIndex < 0 || selSpecibusIndex > cap.getPortfolio().length ||
+				cap.getPortfolio()[selSpecibusIndex] == null || (!cap.getPortfolio()[selSpecibusIndex].getKindAbstratus().isFist() && cap.getPortfolio()[selSpecibusIndex].getContents().isEmpty())))
 		{
 			selSpecibusIndex = portfolio.length <= 0 ? -1 : cap.getSpecibusIndex(portfolio[0]);
 			cap.setSelectedSpecibusIndex(selSpecibusIndex);
 		}
 
-		if(strifeDown != MSUKeys.strifeKey.isKeyDown())
+
+		if(isDown != strifeDown)
 		{
-			strifeDown = MSUKeys.strifeKey.isKeyDown();
+			strifeDown = isDown;
 			if(!strifeDown)
 			{
 				showSwitcher = false;
@@ -72,9 +87,18 @@ public class GuiStrifeSwitcher extends Gui
 				if(selSpecibusIndex >= 0)
 				{
 					EnumHand hand = StrifeEventHandler.isStackAssigned(mc.player.getHeldItemOffhand()) ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND;
-					MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, mc.player, UpdateStrifeDataPacket.UpdateType.INDEXES));
+					if(!offhandMode)
+					{
+						cap.setSelectedWeaponIndex(selWeapon);
+						cap.setSelectedSpecibusIndex(selSpecibus);
+						MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, mc.player, UpdateStrifeDataPacket.UpdateType.INDEXES));
+					}
 					if(!(mc.player.isSneaking() && canUseAbstrataSwitcher()))
-						MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.RETRIEVE_STRIFE, cap.getSelectedWeaponIndex(), false, hand));
+					{
+						if(offhandMode)
+							MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.SWAP_OFFHAND_STRIFE, selSpecibus, selWeapon));
+						else MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.RETRIEVE_STRIFE, cap.getSelectedWeaponIndex(), false, hand));
+					}
 				}
 			}
 		}
@@ -92,7 +116,8 @@ public class GuiStrifeSwitcher extends Gui
 				int toDisplay = (int) Math.min(5, Math.ceil((portfolio.length-1)/2f)*2);
 				for(int i = -(toDisplay/2); i <= (toDisplay/2); i++)
 				{
-					StrifeSpecibus specibus = portfolio[(i + portfolio.length + Arrays.asList(portfolio).indexOf(cap.getPortfolio()[selSpecibusIndex])) % portfolio.length];
+					int index = (i + portfolio.length + Arrays.asList(portfolio).indexOf(cap.getPortfolio()[selSpecibusIndex])) % portfolio.length;
+					StrifeSpecibus specibus = portfolio[index];
 					if(specibus == null || specibus.getKindAbstratus() == null)
 						continue;
 
@@ -107,6 +132,7 @@ public class GuiStrifeSwitcher extends Gui
 					ResourceLocation loc = specibus.getKindAbstratus().getRegistryName();
 					mc.getTextureManager().bindTexture(new ResourceLocation(loc.getResourceDomain(), iconsLoc+loc.getResourcePath()+".png"));
 					drawScaledCustomSizeModalRect(20*i + screenWidth/2 -8, screenHeight*3/4, 0, 0, 16, 16, 16, 16, 16, 16);
+
 				}
 			}
 		}
@@ -126,14 +152,15 @@ public class GuiStrifeSwitcher extends Gui
 				int toDisplay = (int) Math.min(5, Math.ceil((strifeDeck.size()-1)/2f)*2);
 				for(int i = -(toDisplay/2); i <= (toDisplay/2); i++)
 				{
-					ItemStack stack = strifeDeck.get((i + strifeDeck.size() + selWeaponIndex) % strifeDeck.size());
+					int index = (i + strifeDeck.size() + selWeaponIndex) % strifeDeck.size();
+					ItemStack stack = strifeDeck.get(index);
 					if(stack == null)
 						continue;
 
 					if(i == 0)
 					{
 						mc.getTextureManager().bindTexture(WIDGETS);
-						drawScaledCustomSizeModalRect(18*i + screenWidth/2 -11, screenHeight*3/4 -3, 112, 0, 22, 22, 22, 22, 256, 256);
+						drawScaledCustomSizeModalRect( screenWidth/2 -11, screenHeight*3/4 -3, offhandMode ? 134 : 112, 0, 22, 22, 22, 22, 256, 256);
 						String str = stack.getDisplayName();
 						mc.fontRenderer.drawString(str, screenWidth/2 - mc.fontRenderer.getStringWidth(str)/2, screenHeight*3/4 - 14, 0x00AB54, true);
 					}
@@ -147,7 +174,7 @@ public class GuiStrifeSwitcher extends Gui
 	@SubscribeEvent
 	public static void scrollEvent(MouseEvent event)
 	{
-		if(MSUKeys.strifeKey.isKeyDown() && Minecraft.getMinecraft().player != null)
+		if(showSwitcher && Minecraft.getMinecraft().player != null)
 		{
 			IStrifeData cap = Minecraft.getMinecraft().player.getCapability(MSUCapabilities.STRIFE_DATA, null);
 			StrifeSpecibus[] nonNullPortfolio = cap.getNonEmptyPortfolio();
@@ -156,11 +183,11 @@ public class GuiStrifeSwitcher extends Gui
 			{
 				if(Minecraft.getMinecraft().player.isSneaking() && canUseAbstrataSwitcher())
 				{
-					if(cap.getSelectedSpecibusIndex() < 0 || cap.getPortfolio()[cap.getSelectedSpecibusIndex()] == null)
-						cap.setSelectedSpecibusIndex(0);
+					if(selSpecibus < 0 || cap.getPortfolio()[selSpecibus] == null)
+						selSpecibus = 0;
 					else
 					{
-						StrifeSpecibus selectedSpecibus = cap.getPortfolio()[cap.getSelectedSpecibusIndex()];
+						StrifeSpecibus selectedSpecibus = cap.getPortfolio()[selSpecibus];
 						int i = 0;
 						for(int j = 0; j < nonNullPortfolio.length; j++)
 							if(nonNullPortfolio[j] == selectedSpecibus)
@@ -169,18 +196,15 @@ public class GuiStrifeSwitcher extends Gui
 								break;
 							}
 						i = (int) ((i + Math.signum(-event.getDwheel()) + nonNullPortfolio.length) % nonNullPortfolio.length);
-						cap.setSelectedSpecibusIndex(cap.getSpecibusIndex(nonNullPortfolio[i]));
+						selSpecibus = (cap.getSpecibusIndex(nonNullPortfolio[i]));
 					}
 				}
-				else if(cap.getSelectedSpecibusIndex() >= 0 && cap.getPortfolio()[cap.getSelectedSpecibusIndex()] != null)
+				else if(selSpecibus >= 0 && cap.getPortfolio()[selSpecibus] != null)
 				{
-					int deckSize = cap.getPortfolio()[cap.getSelectedSpecibusIndex()].getContents().size();
-					cap.setSelectedWeaponIndex((int) ((cap.getSelectedWeaponIndex()+Math.signum(-event.getDwheel())+deckSize)%deckSize));
+					int deckSize = cap.getPortfolio()[selSpecibus].getContents().size();
+					selWeapon = ((int) ((selWeapon+Math.signum(-event.getDwheel())+deckSize)%deckSize));
 				}
-
 			}
-
-
 
 			event.setCanceled(true);
 		}

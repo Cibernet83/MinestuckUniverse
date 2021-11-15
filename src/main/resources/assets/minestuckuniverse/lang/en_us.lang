@@ -790,6 +790,7 @@ status.strife.weaponMissmach=Your %s doesn't fit inside any of your Strife Speci
 strife.item.allocated=§2[Strife Allocated]
 
 key.minestuckuniverse.strife=Strife Allocate/Retrieve
+key.minestuckuniverse.swapOffhandStrife=Swap Offhand Item with Strife Deck
 
 config.minestuckuniverse.general.zillystoneYields=Zillystone Luck Modifier
 config.minestuckuniverse.general.baseZillystoneLuck=Zillystone Base Luck

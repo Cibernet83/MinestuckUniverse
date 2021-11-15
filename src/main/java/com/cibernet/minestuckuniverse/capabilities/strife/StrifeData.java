@@ -263,8 +263,11 @@ public class StrifeData implements IStrifeData
 	@Override
 	public void setSelectedSpecibusIndex(int index)
 	{
-		selWeapon = 0;
-		selSpecibus = index;
+		if(selSpecibus != index)
+		{
+			selWeapon = 0;
+			selSpecibus = index;
+		}
 	}
 
 	@Override

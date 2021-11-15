@@ -136,11 +136,11 @@ public class StrifeEventHandler
 			canUse = false;
 		}
 		else for(KindAbstratus abstratus : getAbstrataList(stack, false))
-			if(abstratus.preventsRightClick())
-			{
-				event.setCancellationResult(EnumActionResult.PASS);
-				canUse = false;
-			}
+				if(abstratus.preventsRightClick())
+				{
+					event.setCancellationResult(EnumActionResult.PASS);
+					canUse = false;
+				}
 
 		WeaponAssignedEvent checkEvent = new WeaponAssignedEvent(event.getEntityPlayer(), stack, canUse);
 		MinecraftForge.EVENT_BUS.post(checkEvent);
@@ -270,7 +270,7 @@ public class StrifeEventHandler
 						{
 							List<KindAbstratus> abstratusList = StrifeEventHandler.getAbstrataList(stack, false);
 							abstratusList.sort(KindAbstratus::compareTo);
-							if(specibus.getContents().size() <= 1)
+							if(!abstratusList.isEmpty() && specibus.getContents().size() <= 1)
 							{
 								specibus.getContents().set(cap.getSelectedWeaponIndex(), stack);
 								if(!stack.hasTagCompound())
@@ -312,7 +312,12 @@ public class StrifeEventHandler
 			{
 				int slot = player.inventory.getSlotFor(stack);
 				if(slot == player.inventory.currentItem)
+				{
+					if(!cap.isArmed() && isStackAssigned(stack))
+						player.inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
+
 					continue;
+				}
 
 				if(isStackAssigned(stack))
 				{
@@ -320,6 +325,7 @@ public class StrifeEventHandler
 					{
 						hasWeapon = true;
 						player.inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
+						player.inventory.markDirty();
 					}
 					else
 					{
@@ -329,6 +335,9 @@ public class StrifeEventHandler
 					}
 				}
 			}
+
+			if(!cap.isArmed() && isStackAssigned(player.getHeldItemOffhand()))
+				player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
 
 			ItemStack cursorStack = player.inventory.getItemStack();
 			if(isStackAssigned(cursorStack))
