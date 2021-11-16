@@ -36,7 +36,6 @@ public class SwapOffhandStrifePacket extends MSUPacket
 		if(!MSUConfig.combatOverhaul)
 			return;
 
-		System.out.println("Specibus: " + specibusIndex + " Weapon: " + weaponIndex);
 		StrifePortfolioHandler.swapOffhandWeapon(player, specibusIndex, weaponIndex);
 		MSUChannelHandler.sendToPlayer(makePacket(Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.PORTFOLIO), player);
 	}

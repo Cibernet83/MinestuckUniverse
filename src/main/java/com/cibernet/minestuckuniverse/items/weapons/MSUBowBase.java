@@ -174,10 +174,7 @@ public class MSUBowBase extends MSUWeaponBase
 						stack.damageItem(1, entityplayer);
 
 						if ((flag1 && requiresAmmo()) || entityplayer.capabilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW))
-						{
-							System.out.println("AA");
 							entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
-						}
 
 						worldIn.spawnEntity(entityarrow);
 					}

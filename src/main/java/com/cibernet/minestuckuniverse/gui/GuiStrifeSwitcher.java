@@ -167,7 +167,6 @@ public class GuiStrifeSwitcher extends Gui
 
 					if(cap.isArmed() && offhandMode && index == cap.getSelectedWeaponIndex())
 					{
-						System.out.println(i);
 						GlStateManager.color(1,1,1);
 						mc.getTextureManager().bindTexture(WIDGETS);
 						drawScaledCustomSizeModalRect(i*20+ screenWidth/2 -11, screenHeight*3/4 -3, 156, 0, 22, 22, 22, 22, 256, 256);

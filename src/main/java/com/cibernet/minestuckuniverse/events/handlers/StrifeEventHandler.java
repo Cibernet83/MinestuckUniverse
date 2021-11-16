@@ -265,7 +265,6 @@ public class StrifeEventHandler
 							weapon = stack;
 							weaponHeld = true;
 							hasWeapon = true;
-							System.out.println("e");
 						}
 						else if(StrifePortfolioHandler.moveSelectedWeapon(player, stack) == null)
 						{
@@ -280,7 +279,6 @@ public class StrifeEventHandler
 								weapon = stack;
 								weaponHeld = true;
 								hasWeapon = true;
-								System.out.println("a");
 
 								specibus.switchKindAbstratus(abstratusList.get(0), player);
 								if(!player.world.isRemote)
@@ -317,14 +315,12 @@ public class StrifeEventHandler
 				{
 					hasWeapon = true;
 					player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
-					System.out.println("baba");
 				}
 				else
 				{
 					offhandStack.getTagCompound().removeTag("StrifeAssigned");
 					if(offhandStack.getTagCompound().hasNoTags())
 						offhandStack.setTagCompound(null);
-					System.out.println("beebee " + hasWeapon);
 				}
 			}
 

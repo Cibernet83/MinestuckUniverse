@@ -9,6 +9,7 @@ import com.cibernet.minestuckuniverse.util.MSUCalendarUtil;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.*;
 import com.mraof.minestuck.block.MinestuckBlocks;
+import com.mraof.minestuck.entity.consort.ConsortRewardHandler;
 import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.util.Debug;
 import net.minecraft.block.Block;
@@ -65,6 +66,7 @@ public class MSUAlchemyRecipes
         if(MinestuckUniverse.isSplatcraftLodaded) registerSplatcraft();
         if(!MinestuckUniverse.isArsenalLoaded) registerArsenalFallback();
 
+        ConsortRewardHandler.registerPrice(new ItemStack(MinestuckItems.candy, 1, 21), 500, 600);
     }
     
     public static void registerVanilla()
