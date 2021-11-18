@@ -248,11 +248,11 @@ public class MinestuckUniverseItems
     public static Item loghammer = new MSUWeaponBase(776, 12.8, -2.8, 7, "loghammer", "loghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial("logWood");
     public static Item overgrownLoghammer = new MSUWeaponBase(575, 19.2, -2.8, 7, "overgrown_loghammer", "overgrownLoghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterial("logWood").addProperties(new PropertyPlantMend());
     public static Item glowingLoghammer = new MSUWeaponBase(906, 19.2, -2.8, 7, "glowing_loghammer", "glowingLoghammer").setTool(toolHammer, 0, 3.0f).setRepairMaterials(new ItemStack(MinestuckBlocks.glowingLog)).addProperties(new PropertyPotion(new PotionEffect(MobEffects.GLOWING, 200, 0), false, 1));
-    public static Item midasMallet = new MSUWeaponBase(1150, 26.9D, -2.94D, 15, "midas_mallet", "midasMallet").setTool(toolHammer, 3, 2f).addProperties(new PropertyGristSetter(GristType.Gold));
+    public static Item midasMallet = new MSUWeaponBase(1150, 26.9D, -2.94D, 15, "midas_mallet", "midasMallet").setTool(toolHammer, 3, 2f).addProperties(new PropertyGristSetter(GristType.Gold), new PropertyVMotionDamage(1.6f, 3));
     public static Item aaaNailShocker = new MSUWeaponBase(776, 19.2, -2.52, 10,"aaa_nail_shocker", "aaaNailShocker").setTool(toolHammer, 2, 3f).setRepairMaterials(new ItemStack(battery)).addProperties(new PropertyElectric(20, 0, 0.7f, true));
-    public static Item highVoltageStormCrusher = new MSUWeaponBase(1150, 30.7, -2.8, 18, "high_voltage_storm_crusher", "highVoltageStormCrusher").setTool(toolHammer, 4, 3.0f).addProperties(new PropertyLightning(8, 1, true, false), new PropertyElectric(60, 8, -1, false));
-    public static Item barrelsWarhammer = new MSUWeaponBase(1438, 64, -2.8, 18, "barrel_warhammer", "calamityHammer").setTool(toolHammer, 4, 4.0f).addProperties(new PropertyRocketBoost(0.6f), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_DAMAGE, "Calamity Boost", 0.6, 0.1, 0.3f, 2));
-    public static Item stardustSmasher = new MSUWeaponBase(1725, 44.8, -2.8, 20, "stardust_smasher", "stardustSmasher").setTool(toolHammer, 20, 8.0f).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.ARTHROPOD, 1000));
+    public static Item highVoltageStormCrusher = new MSUWeaponBase(1150, 30.7, -2.8, 18, "high_voltage_storm_crusher", "highVoltageStormCrusher").setTool(toolHammer, 4, 3.0f).addProperties(new PropertyLightning(8, 1, true, false), new PropertyElectric(60, 8, -1, false), new PropertyVMotionDamage(1.6f, 3));
+    public static Item barrelsWarhammer = new MSUWeaponBase(1438, 64, -2.8, 18, "barrel_warhammer", "calamityHammer").setTool(toolHammer, 4, 4.0f).addProperties(new PropertyRocketBoost(0.6f), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_DAMAGE, "Calamity Boost", 0.6, 0.1, 0.3f, 2), new PropertyVMotionDamage(1.6f, 3), new PropertyVMotionDamage(1.6f, 3));
+    public static Item stardustSmasher = new MSUWeaponBase(1725, 44.8, -2.8, 20, "stardust_smasher", "stardustSmasher").setTool(toolHammer, 20, 8.0f).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.ARTHROPOD, 1000), new PropertyVMotionDamage(1.6f, 3));
 
     //Clawkind
     public static Item katars = new MSUWeaponBase(248, 1.6, -0.65, 2, "katars", "katars").setTool(toolClaws, 2, 3).addProperties(new PropertySweep(), new PropertyDualWield());
@@ -410,21 +410,21 @@ public class MinestuckUniverseItems
 
         if(MSUConfig.combatOverhaul)
         {
-            MinestuckItems.clawHammer = registerCustomRenderedItem(registry, new MSUWeaponBase(259, 6.4, -2.52, 1, MinestuckItems.clawHammer).setTool(toolHammer, 1, 2));
+            MinestuckItems.clawHammer = registerCustomRenderedItem(registry, new MSUWeaponBase(259, 6.4, -2.52, 1, MinestuckItems.clawHammer).setTool(toolHammer, 1, 2).addProperties(new PropertyVMotionDamage(1.6f, 3)));
             MinestuckItems.sledgeHammer = registerItem(registry, new MSUWeaponBase(575, 12.8, -2.8, 3, MinestuckItems.sledgeHammer).setTool(toolHammer, 2, 4));
             MinestuckItems.blacksmithHammer = registerItem(registry, new MSUWeaponBase(575, 12.8, -2.8, 2, MinestuckItems.blacksmithHammer).setTool(toolHammer, 1, 6));
-            MinestuckItems.pogoHammer = registerItem(registry, new MSUWeaponBase(863, 19.2, -2.8, 4, MinestuckItems.pogoHammer).setTool(toolHammer, 2, 4).addProperties(new PropertyPogo(0.7)));
-            MinestuckItems.telescopicSassacrusher = registerItem(registry, new MSUWeaponBase(1610, 51.2, -3.64, 4, MinestuckItems.telescopicSassacrusher).setTool(toolHammer, 8, 2).addProperties(new PropertyFarmine(100, 128)));
+            MinestuckItems.pogoHammer = registerItem(registry, new MSUWeaponBase(863, 19.2, -2.8, 4, MinestuckItems.pogoHammer).setTool(toolHammer, 2, 4).addProperties(new PropertyPogo(0.7), new PropertyVMotionDamage(2f, 4)));
+            MinestuckItems.telescopicSassacrusher = registerItem(registry, new MSUWeaponBase(1610, 51.2, -3.64, 4, MinestuckItems.telescopicSassacrusher).setTool(toolHammer, 8, 2).addProperties(new PropertyFarmine(100, 128), new PropertyVMotionDamage(1.8f, 10)));
             MinestuckItems.regiHammer = registerItem(registry, new MSUWeaponBase(776, 19.2, -2.52, 4, MinestuckItems.regiHammer).setTool(toolHammer, 3, 6));
-            MinestuckItems.fearNoAnvil = registerItem(registry, new MSUWeaponBase(1725, 32, -2.66, 8, MinestuckItems.fearNoAnvil)
+            MinestuckItems.fearNoAnvil = registerCustomRenderedItem(registry, new MSUWeaponBase(1725, 32, -2.66, 8, MinestuckItems.fearNoAnvil)
             {{
                 if(MinestuckUniverse.isMSGTLoaded)
                     addProperties(new PropertyPotion(true, 0.1f, new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("minestuckgodtier","time_stop")), 20, 0)));
-            }}.setTool(toolHammer, 3, 10).addProperties(new PropertyPotion(false, 0.5f, new PotionEffect(MobEffects.SLOWNESS, 400, 1), new PotionEffect(MobEffects.MINING_FATIGUE, 400, 2))));
+            }}.setTool(toolHammer, 3, 10).addProperties(new PropertyPotion(false, 0.5f, new PotionEffect(MobEffects.SLOWNESS, 400, 1), new PotionEffect(MobEffects.MINING_FATIGUE, 400, 2)), new PropertyVMotionDamage(1.6f, 3)));
             MinestuckItems.meltMasher = registerItem(registry, new MSUWeaponBase(1265, 25.6, -2.8, 4, MinestuckItems.meltMasher).setTool(toolHammer, 4, 8).addProperties(new PropertyAutoSmelt(), new PropertyFarmine(8, 5), new PropertyFire(4, 1, false)));
             MinestuckItems.zillyhooHammer = registerItem(registry, new MSUWeaponBase(3450, 69.1, -2.94, 40, MinestuckItems.zillyhooHammer).setTool(toolHammer, 5, 10));
             MinestuckItems.scarletZillyhoo = registerItem(registry, new MSUWeaponBase(2588, 49.9, -2.8, 60, MinestuckItems.scarletZillyhoo).setTool(toolHammer, 5, 10).addProperties(new PropertyFire(10, 0.8f, true)));
-            MinestuckItems.popamaticVrillyhoo = registerItem(registry, new MSUWeaponBase(3019, 20, -2.66, 20, MinestuckItems.popamaticVrillyhoo).setTool(toolHammer, 5, 12).addProperties(new PropertyRandomDamage(0, 7, 8)));
+            MinestuckItems.popamaticVrillyhoo = registerItem(registry, new MSUWeaponBase(3019, 20, -2.66, 20, MinestuckItems.popamaticVrillyhoo).setTool(toolHammer, 5, 12).addProperties(new PropertyRandomDamage(0, 7, 4)));
             MinestuckItems.mwrthwl = registerItem(registry, new MSUWeaponBase(1725, 32, -2.8, 8, MinestuckItems.mwrthwl).setTool(toolHammer, 4, 8).addProperties(new PropertyTrueDamage()));
             MinestuckItems.qPHammerAxe = registerItem(registry, new MSUWeaponBase(1290, 28.8, -2.9, 4, MinestuckItems.qPHammerAxe).setTool(toolHammaxe, 4, 6).addProperties(new PropertyPogo(0.6), new PropertyFarmine(25, 64)));
             MinestuckItems.qFHammerAxe = registerItem(registry, new MSUWeaponBase(1209, 43.2, -3, 8, MinestuckItems.qFHammerAxe).setTool(toolHammaxe, 4, 8).setRepairMaterials(new ItemStack(MinestuckItems.rawUranium)).addProperties(new PropertyPogo(0.7), new PropertyFarmine(25, 32), new PropertyPotion(true, 0.5f, new PotionEffect(MobEffects.WITHER, 200, 2))));
