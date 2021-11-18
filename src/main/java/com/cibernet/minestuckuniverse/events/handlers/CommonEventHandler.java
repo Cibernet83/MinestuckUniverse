@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
@@ -9,6 +10,7 @@ import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyRandomDamage;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.cibernet.minestuckuniverse.items.weapons.ItemBeamBlade;
+import com.cibernet.minestuckuniverse.items.weapons.MSUWeaponBase;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
@@ -231,22 +233,40 @@ public class CommonEventHandler
 
 					if (event.getEntityPlayer() != null)
 					{
-						if (isRandom && attributemodifier.getID().equals(UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF")))
+						if(attributemodifier.getID().equals(UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF")))
 						{
 							d0 = d0 + event.getEntityPlayer().getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
 							d0 = d0 + (double) EnchantmentHelper.getModifierForCreature(stack, EnumCreatureAttribute.UNDEFINED);
 							double d1;
-
 							if (attributemodifier.getOperation() != 1 && attributemodifier.getOperation() != 2)
 								d1 = d0;
 							else d1 = d0 * 100.0D;
 
-							String attackString = (" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), ItemStack.DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
-							String newAttackString = (" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), (ItemStack.DECIMALFORMAT.format(d1) + "-" + ItemStack.DECIMALFORMAT.format(d1+randValue)), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+							String attackString = (" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), ItemStack.DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + entry.getKey())));
 
-							if(event.getToolTip().contains(attackString))
-								event.getToolTip().set(event.getToolTip().indexOf(attackString), newAttackString);
-							else event.getToolTip().add(newAttackString);
+							if (isRandom)
+							{
+								String newAttackString = (" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), (ItemStack.DECIMALFORMAT.format(d1) + "-" + ItemStack.DECIMALFORMAT.format(d1+randValue)), I18n.translateToLocal("attribute.name." + entry.getKey())));
+
+								if(event.getToolTip().contains(attackString))
+									event.getToolTip().set(event.getToolTip().indexOf(attackString), newAttackString);
+								else event.getToolTip().add(newAttackString);
+								attackString = newAttackString;
+							}
+
+							if(MinestuckDimensionHandler.isLandDimension(event.getEntityPlayer().world.provider.getDimension()) && stack.getItem() instanceof MSUWeaponBase && event.getToolTip().contains(attackString))
+							{
+								d0 = ((MSUWeaponBase)stack.getItem()).getUnmodifiedAttackDamage(stack);
+								if (attributemodifier.getOperation() != 1 && attributemodifier.getOperation() != 2)
+									d1 = d0;
+								else d1 = d0 * 100.0D;
+
+								String newAttackString;
+								if(isRandom)
+									newAttackString = (" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), (ItemStack.DECIMALFORMAT.format(d1) + "-" + ItemStack.DECIMALFORMAT.format(d1+randValue)), I18n.translateToLocal("attribute.name.underling.attackDamage")));
+								else newAttackString = (" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), (ItemStack.DECIMALFORMAT.format(d1)), I18n.translateToLocal("attribute.name.underling.attackDamage")));
+								event.getToolTip().add(event.getToolTip().indexOf(attackString)+1, newAttackString);
+							}
 						}
 					}
 

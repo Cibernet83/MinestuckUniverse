@@ -173,6 +173,16 @@ public class MSUWeaponBase extends MSUItemBase implements IClassedTool, ISortedT
         return dmg;
     }
 
+    public double getUnmodifiedAttackDamage(ItemStack stack)
+    {
+        double dmg = weaponDamage;
+
+        for(WeaponProperty p : getProperties(stack))
+            dmg = p.getAttackDamage(stack,dmg);
+
+        return dmg;
+    }
+
     public double getAttackSpeed(ItemStack stack)
     {
         double spd = weaponSpeed;

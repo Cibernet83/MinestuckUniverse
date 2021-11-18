@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.events.WeaponAssignedEvent;
 import com.cibernet.minestuckuniverse.gui.GuiStrifePortfolio;
 import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.weapons.MSUWeaponBase;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.network.UpdateStrifeDataPacket;
@@ -20,6 +21,9 @@ import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,6 +40,7 @@ import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -64,6 +69,33 @@ public class StrifeEventHandler
 	{
 		if(isStackAssigned(event.getItemStack()))
 			event.getToolTip().add(1, I18n.format("strife.item.allocated"));
+	}
+
+	@SubscribeEvent
+	public static void setUnderlingDamage(LivingDamageEvent event)
+	{
+		EntityLivingBase source = (EntityLivingBase) event.getSource().getImmediateSource();
+		if(source == null)
+			return;
+
+		ItemStack stack = source.getHeldItemMainhand();
+
+		//bypass MSUConfig.weaponAttackMultiplier against underlings
+		if(event.getEntityLiving() instanceof EntityUnderling && stack.getItem() instanceof MSUWeaponBase)
+		{
+			IAttributeInstance dmgAttr = source.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+			AttributeModifier weaponMod = dmgAttr.getModifier(MSUWeaponBase.getAttackDamageUUID());
+			double dmg = ((MSUWeaponBase) stack.getItem()).getUnmodifiedAttackDamage(stack);
+
+			if(weaponMod != null && weaponMod.getAmount() != dmg)
+			{
+				dmgAttr.removeModifier(MSUWeaponBase.getAttackDamageUUID());
+				dmgAttr.applyModifier(new AttributeModifier(MSUWeaponBase.getAttackDamageUUID(), "Weapon modifier", dmg, 0));
+
+				event.getEntityLiving().attackEntityFrom(event.getSource(), (float) dmgAttr.getAttributeValue());
+				event.setCanceled(true);
+			}
+		}
 	}
 
 	@SubscribeEvent
@@ -97,6 +129,9 @@ public class StrifeEventHandler
 		MinecraftForge.EVENT_BUS.post(checkEvent);
 		if(!checkEvent.getCheckResult())
 			event.setCanceled(true);
+
+		if(event.isCanceled())
+			return;
 	}
 
 	public static final List<Item> USABLE_ASSIGNED_ONLY = new ArrayList<Item>()
@@ -192,15 +227,18 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
-		if(event.phase == TickEvent.Phase.END || event.player.world.isRemote)
+		if(event.phase == TickEvent.Phase.END)
 			return;
 
 		IStrifeData cap = event.player.getCapability(MSUCapabilities.STRIFE_DATA, null);
 		checkArmed(event.player);
 
+		if(event.player.world.isRemote)
+			return;
+
 		//unlock abstrata switcher
 		boolean unlockSwitcher = MinestuckPlayerData.getData(event.player).echeladder.getRung() >= MSUConfig.abstrataSwitcherRung;
-		if(cap.abstrataSwitcherUnlocked() != unlockSwitcher)
+		if(!event.player.world.isRemote && cap.abstrataSwitcherUnlocked() != unlockSwitcher)
 		{
 			cap.unlockAbstrataSwitcher(unlockSwitcher);
 			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, event.player, UpdateStrifeDataPacket.UpdateType.CONFIG), event.player);
@@ -247,8 +285,10 @@ public class StrifeEventHandler
 				}
 			}
 
-			//innocuous double
-			if(player.inventory.currentItem == cap.getPrevSelSlot() && !weaponHeld && player.openContainer instanceof ContainerPlayer)
+			if(!player.world.isRemote)
+			{
+				//innocuous double
+				if(player.inventory.currentItem == cap.getPrevSelSlot() && !weaponHeld && player.openContainer instanceof ContainerPlayer)
 				//for(EnumHand hand : EnumHand.values())
 				{
 					ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
@@ -308,46 +348,47 @@ public class StrifeEventHandler
 
 				}
 
-			ItemStack offhandStack = player.getHeldItemOffhand();
-			if(isStackAssigned(offhandStack))
-			{
-				if(!hasWeapon && ItemStack.areItemStacksEqual(weapon, offhandStack))
+				ItemStack offhandStack = player.getHeldItemOffhand();
+				if(isStackAssigned(offhandStack))
 				{
-					hasWeapon = true;
-					player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
-				}
-				else
-				{
-					offhandStack.getTagCompound().removeTag("StrifeAssigned");
-					if(offhandStack.getTagCompound().hasNoTags())
-						offhandStack.setTagCompound(null);
-				}
-			}
-
-			for(ItemStack stack : player.inventory.mainInventory)
-			{
-				int slot = player.inventory.getSlotFor(stack);
-				if(slot == player.inventory.currentItem)
-				{
-					if(!cap.isArmed() && isStackAssigned(stack))
-						player.inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
-
-					continue;
-				}
-
-				if(isStackAssigned(stack))
-				{
-					if(!hasWeapon && ItemStack.areItemStacksEqual(weapon, stack))
+					if(!hasWeapon && ItemStack.areItemStacksEqual(weapon, offhandStack))
 					{
 						hasWeapon = true;
-						player.inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
-						player.inventory.markDirty();
+						player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
 					}
 					else
 					{
-						stack.getTagCompound().removeTag("StrifeAssigned");
-						if(stack.getTagCompound().hasNoTags())
-							stack.setTagCompound(null);
+						offhandStack.getTagCompound().removeTag("StrifeAssigned");
+						if(offhandStack.getTagCompound().hasNoTags())
+							offhandStack.setTagCompound(null);
+					}
+				}
+
+				for(ItemStack stack : player.inventory.mainInventory)
+				{
+					int slot = player.inventory.getSlotFor(stack);
+					if(slot == player.inventory.currentItem)
+					{
+						if(!cap.isArmed() && isStackAssigned(stack))
+							player.inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
+
+						continue;
+					}
+
+					if(isStackAssigned(stack))
+					{
+						if(!hasWeapon && ItemStack.areItemStacksEqual(weapon, stack))
+						{
+							hasWeapon = true;
+							player.inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
+							player.inventory.markDirty();
+						}
+						else
+						{
+							stack.getTagCompound().removeTag("StrifeAssigned");
+							if(stack.getTagCompound().hasNoTags())
+								stack.setTagCompound(null);
+						}
 					}
 				}
 			}
@@ -368,7 +409,7 @@ public class StrifeEventHandler
 				}
 			}
 
-			if(!weaponHeld)
+			if(!player.world.isRemote && !weaponHeld)
 			{
 				if(!hasWeapon)
 					StrifePortfolioHandler.unassignSelected(player);

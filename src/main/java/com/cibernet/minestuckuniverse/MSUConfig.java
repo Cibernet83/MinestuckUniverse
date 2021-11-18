@@ -64,7 +64,7 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.strife.strifeDeckMaxSize").getInt();
 		abstrataSwitcherRung = config.get("Strife", "abstrataSwitcherRung", 17, "Determines the rung needed to unlock the Strife Specibus Quick Switcher. Set it to -1 to let all players use it, or " + Echeladder.RUNG_COUNT + " to completely disable it.").setMinValue(-1).setMaxValue(Echeladder.RUNG_COUNT)
 				.setLanguageKey("config.minestuckuniverse.strife.abstrataSwitcherRung").getInt();
-		weaponAttackMultiplier = config.get("Strife", "weaponAttackMultiplier", 0.15, "Allows players to tweak how much damage Minestuck and Minestuck Universe weapons do as a percentage.").setMinValue(0).setMaxValue(1)
+		weaponAttackMultiplier = config.get("Strife", "weaponAttackMultiplier", 0.15, "Allows players to tweak how much damage Minestuck and Minestuck Universe weapons do as a percentage against entities that aren't Underlings.").setMinValue(0).setMaxValue(1)
 				.setLanguageKey("config.minestuckuniverse.strife.weaponAttackMultiplier").getDouble();
 
 
