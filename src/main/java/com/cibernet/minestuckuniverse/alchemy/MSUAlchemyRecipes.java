@@ -399,8 +399,8 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(Items.FIREWORKS), new ItemStack(spikedGlove), MODE_AND, false, false, new ItemStack(rocketFist));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.grimoire), new ItemStack(spikedGlove), MODE_AND, false, false, new ItemStack(eldrichGauntlet));
         CombinationRegistry.addCombination(Marble.getCandyItem(), new ItemStack(cobbleBasher), MODE_OR, true, false, new ItemStack(jawbreaker));
-        CombinationRegistry.addCombination(new ItemStack(goldenGenesisGauntlet), new ItemStack(midasMallet), MODE_AND, true, false, new ItemStack(midasGlove));
-        CombinationRegistry.addCombination(new ItemStack(fancyGlove), new ItemStack(zillyStone), MODE_AND, true, false, new ItemStack(gauntletOfZillywenn));
+        CombinationRegistry.addCombination(new ItemStack(goldenGenesisGauntlet), new ItemStack(midasMallet), MODE_AND, false, false, new ItemStack(midasGlove));
+        CombinationRegistry.addCombination(new ItemStack(fancyGlove), new ItemStack(zillyStone), MODE_AND, false, false, new ItemStack(gauntletOfZillywenn));
 
         //needlekind
         CombinationRegistry.addCombination(new ItemStack(Items.FLINT), new ItemStack(Items.STICK), MODE_AND, false, false, new ItemStack(pointySticks));
@@ -503,9 +503,9 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(battery), new ItemStack(Blocks.REDSTONE_TORCH), MODE_AND, new ItemStack(laserPointer));
         CombinationRegistry.addCombination(new ItemStack(Items.IRON_SHOVEL), new ItemStack(Items.ROTTEN_FLESH), MODE_AND, new ItemStack(gravediggerShovel));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.fearNoAnvil), new ItemStack(rolledUpPaper), MODE_AND, new ItemStack(yesterdaysNews));
-        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.spork), new ItemStack(zillyStone), MODE_AND, true, false, new ItemStack(battlesporkOfZillywut));
-        CombinationRegistry.addCombination(new ItemStack(Items.IRON_PICKAXE), new ItemStack(zillyStone), MODE_AND, true, false, new ItemStack(battlepickOfZillydew));
-        CombinationRegistry.addCombination(new ItemStack(Items.IRON_AXE), new ItemStack(zillyStone), MODE_AND, true, false, new ItemStack(battleaxeOfZillywahoo));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.spork), new ItemStack(zillyStone), MODE_AND, false, false, new ItemStack(battlesporkOfZillywut));
+        CombinationRegistry.addCombination(new ItemStack(Items.IRON_PICKAXE), new ItemStack(zillyStone), MODE_AND, false, false, new ItemStack(battlepickOfZillydew));
+        CombinationRegistry.addCombination(new ItemStack(Items.IRON_AXE), new ItemStack(zillyStone), MODE_AND, false, false, new ItemStack(battleaxeOfZillywahoo));
 
         //ghost items
         CombinationRegistry.addCombination(new ItemStack(endPortal), new ItemStack(MinestuckBlocks.chessboard), MODE_OR, false, false, new ItemStack(MinestuckBlocks.skaiaPortal));
