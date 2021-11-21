@@ -74,9 +74,9 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void setUnderlingDamage(LivingDamageEvent event)
 	{
-		EntityLivingBase source = (EntityLivingBase) event.getSource().getImmediateSource();
-		if(source == null)
+		if(!(event.getSource().getImmediateSource() instanceof EntityLivingBase))
 			return;
+		EntityLivingBase source = (EntityLivingBase) event.getSource().getImmediateSource();
 
 		ItemStack stack = source.getHeldItemMainhand();
 
@@ -145,6 +145,7 @@ public class StrifeEventHandler
 	public static final List<Item> FORCED_USABLE_UNASSIGNED = new ArrayList<Item>()
 	{{
 		add(MSUKindAbstrata.getItem("botania", "managun"));
+		add(MSUKindAbstrata.getItem("bibliocraft", "bibliodrill"));
 		add(Items.EGG);
 		add(Items.SNOWBALL);
 		add(Items.ENDER_EYE);
@@ -285,6 +286,22 @@ public class StrifeEventHandler
 				}
 			}
 
+			ItemStack offhandStack = player.getHeldItemOffhand();
+			if(isStackAssigned(offhandStack))
+			{
+				if(!hasWeapon && ItemStack.areItemStacksEqual(weapon, offhandStack))
+				{
+					hasWeapon = true;
+					player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
+				}
+				else
+				{
+					offhandStack.getTagCompound().removeTag("StrifeAssigned");
+					if(offhandStack.getTagCompound().hasNoTags())
+						offhandStack.setTagCompound(null);
+				}
+			}
+
 			if(!player.world.isRemote)
 			{
 				//innocuous double
@@ -326,7 +343,7 @@ public class StrifeEventHandler
 							}
 							else
 							{
-								StrifePortfolioHandler.unassignSelected(player);
+								//StrifePortfolioHandler.unassignSelected(player);
 								if(stack.hasTagCompound())
 								{
 									stack.getTagCompound().removeTag("StrifeAssigned");
@@ -346,22 +363,6 @@ public class StrifeEventHandler
 						//break;
 					}
 
-				}
-
-				ItemStack offhandStack = player.getHeldItemOffhand();
-				if(isStackAssigned(offhandStack))
-				{
-					if(!hasWeapon && ItemStack.areItemStacksEqual(weapon, offhandStack))
-					{
-						hasWeapon = true;
-						player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
-					}
-					else
-					{
-						offhandStack.getTagCompound().removeTag("StrifeAssigned");
-						if(offhandStack.getTagCompound().hasNoTags())
-							offhandStack.setTagCompound(null);
-					}
 				}
 
 				for(ItemStack stack : player.inventory.mainInventory)
@@ -447,7 +448,7 @@ public class StrifeEventHandler
 		EntityPlayer source = (EntityPlayer) event.getSource().getTrueSource();
 		IStrifeData cap = source.getCapability(MSUCapabilities.STRIFE_DATA, null);
 
-		if(cap.canDropCards() && source.world.rand.nextFloat() < (cap.getDroppedCards() <= 0  && event.getEntityLiving() instanceof EntityUnderling ? 0.05f : 0.02f)*(event.getLootingLevel()+1))
+		if(cap.canDropCards() && source.world.rand.nextFloat() < (cap.getDroppedCards() <= 0  && event.getEntityLiving() instanceof EntityUnderling ? 0.05f : 0.01f)*(event.getLootingLevel()+1))
 		{
 			boolean droppedCard = false;
 			for(EntityItem item : event.getDrops())

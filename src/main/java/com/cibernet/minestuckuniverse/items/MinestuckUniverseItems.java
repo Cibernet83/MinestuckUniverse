@@ -175,7 +175,7 @@ public class MinestuckUniverseItems
     public static Item cybersword = new MSUWeaponBase(1650, 28.8, -2.07, 32, "cybersword", "cybersword").setTool(toolSword, 5, 8F).addProperties(new PropertySweep(), new PropertyShock(15, 8, 0.5f, false), new PropertyLightning(15, 1, true, false), new PropertyLuckBasedDamage(0.1f)).setCreativeTab(null);
     public static Item crystallineRibbitar = new MSUWeaponBase(3300, 16.4, -2.3, 24, "crystalline_ribbitar", "crystallineRibbitar").setTool(toolSword, 4, 6F).addProperties(new PropertySweep());
     public static Item quantumEntangloporter = new MSUWeaponBase(1430, 19.2, -2.3, 9, "quantum_entangloporter", "quantumEntangloporter").setTool(toolSword, 3, 2F).addProperties(new PropertySweep(), new PropertyTeleBlock(Blocks.CACTUS, 20));
-    public static Item valorsEdge = new MSUWeaponBase(1650, 26.4, -2.07, 28, "valor_edge", "calamitySword").setTool(toolSword, 4, 4F).addProperties(new PropertySweep(), new PropertyCrowdDamage(1.2f, 4f, 128),
+    public static Item valorsEdge = new MSUWeaponBase(1650, 26.4, -2.07, 28, "valor_edge", "calamitySword").setTool(toolSword, 4, 4F).addProperties(new PropertySweep(), new PropertyCrowdDamage(0.3f, 3f, 20),
             new PropertyLowHealthBoost(SharedMonsterAttributes.MOVEMENT_SPEED, "Calamity Boost", 1.2, 0.4, 0.4f, 2), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_SPEED, "Calamity Boost", 0.4, 0.2, 0.4f, 2));
 
     //Gauntletkind

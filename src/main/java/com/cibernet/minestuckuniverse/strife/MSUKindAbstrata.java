@@ -24,34 +24,38 @@ import java.util.Arrays;
 
 public class MSUKindAbstrata
 {
-	public static KindAbstratus hammerkind = new KindAbstratus("hammer", MinestuckUniverseItems.toolHammer);
-	public static KindAbstratus bladekind = new KindAbstratus("sword", MinestuckUniverseItems.toolSword).addKeywords("sword").setConditional(((item, stack, res) -> res && !PropertyBreakableItem.isBroken(item, stack)));
+	public static KindAbstratus hammerkind = new KindAbstratus("hammer", MinestuckUniverseItems.toolHammer).addKeywords("hammer").addItemTools(getItem("ic2", "forge_hammer"));
+	public static KindAbstratus bladekind = new KindAbstratus("sword", MinestuckUniverseItems.toolSword).addKeywords("sword", "katana", "kukiri", "saber", "rapier", "excalibur").setConditional(((item, stack, res) -> res && !PropertyBreakableItem.isBroken(item, stack))).addItemTools(
+			getItem("ic2", "nano_saber"), getItem("rats", "pirat_cutlass")
+	);
 	public static KindAbstratus clubkind = new KindAbstratus("club", MinestuckUniverseItems.toolClub).addKeywords("mace", "club");
 	public static KindAbstratus canekind = new KindAbstratus("cane", MinestuckUniverseItems.toolCane).addKeywords("cane", "staff");
-	public static KindAbstratus sicklekind = new KindAbstratus("sickle", MinestuckUniverseItems.toolSickle).addKeywords("sickle");
+	public static KindAbstratus sicklekind = new KindAbstratus("sickle", MinestuckUniverseItems.toolSickle).addKeywords("sickle", "scythe");
 	public static KindAbstratus spoonkind = new KindAbstratus("spoon", MinestuckUniverseItems.toolSpoon).addItemTools(getItem("sbahjaddon", "the_spoon")).addKeywords("spoon")
 			.setConditional((item, stack, res) -> res || item == MinestuckItems.crockerSpork && MinestuckItems.crockerSpork.isSpoon(stack));
 	public static KindAbstratus forkkind = new KindAbstratus("fork", MinestuckUniverseItems.toolFork).addKeywords("fork").setConditional((item, stack, res) -> res || item == MinestuckItems.crockerSpork && !MinestuckItems.crockerSpork.isSpoon(stack));
 
 	public static KindAbstratus pickaxekind = new KindAbstratus("pickaxe", MinestuckUniverseItems.toolPickaxe).addItemClasses(ItemPickaxe.class);
-	public static KindAbstratus axekind = new KindAbstratus("axe", MinestuckUniverseItems.toolAxe).addItemClasses(ItemAxe.class);
+	public static KindAbstratus axekind = new KindAbstratus("axe", MinestuckUniverseItems.toolAxe).addKeywords("battleaxe", "halberd").addItemClasses(ItemAxe.class).addItemTools(getItem("mowziesmobs", "wrought_axe"));
 	public static KindAbstratus shovelkind = new KindAbstratus("shovel", MinestuckUniverseItems.toolShovel).addItemClasses(ItemSpade.class);
-	public static KindAbstratus hoekind = new KindAbstratus("hoe").addItemClasses(ItemHoe.class);
+	public static KindAbstratus hoekind = new KindAbstratus("hoe").addItemClasses(ItemHoe.class).addItemTools(getItem("rats", "plague_scythe"), getItem("ic2", "electric_hoe"));
 	public static KindAbstratus fshngrodkind = new KindAbstratus("fishingRod").addItemClasses(ItemFishingRod.class);
 	public static KindAbstratus potionkind = new KindAbstratus("potion").addItemClasses(ItemPotion.class, ItemCruxitePotion.class);
-	public static KindAbstratus throwkind = new KindAbstratus("projectile").setPreventRightClick(true).addItemClasses(MSUThrowableBase.class).addItemTools(
+	public static KindAbstratus throwkind = new KindAbstratus("projectile").setPreventRightClick(true).addKeywords("shuriken").addItemClasses(MSUThrowableBase.class).addItemTools(
 					MinestuckUniverseItems.dragonCharge, Items.SNOWBALL, Items.EGG, Items.ENDER_PEARL, Items.ENDER_EYE, Items.EXPERIENCE_BOTTLE, Items.SPLASH_POTION, Items.LINGERING_POTION,
 					getItem("botania", "chakram"));
 
 	public static KindAbstratus clawkind = new KindAbstratus("claw", MinestuckUniverseItems.toolClaws).addKeywords("katar");
 	public static KindAbstratus glovekind = new KindAbstratus("glove", MinestuckUniverseItems.toolGauntlet).addKeywords("glove", "gauntlet", "fist").addItemTools(getItem("thaumcraft", "caster_basic"));
-	public static KindAbstratus needlekind = new KindAbstratus("needles", MinestuckUniverseItems.toolNeedles);
+	public static KindAbstratus needlekind = new KindAbstratus("needles", MinestuckUniverseItems.toolNeedles).addKeywords("needle");
 	public static KindAbstratus shieldkind = new KindAbstratus("shield").addItemClasses(ItemShield.class, MSUShieldBase.class).setConditional((i, itemStack, res) -> res || i.isShield(itemStack, null));
-	public static KindAbstratus bowkind = new KindAbstratus("bow").setPreventRightClick(true).addItemClasses(ItemBow.class, MSUBowBase.class, ItemMechanicalCrossbow.class).setConditional(((item, stack, res) -> res && !PropertyBreakableItem.isBroken(item, stack)));
+	public static KindAbstratus bowkind = new KindAbstratus("bow").setPreventRightClick(true).addItemClasses(ItemBow.class, MSUBowBase.class, ItemMechanicalCrossbow.class).setConditional(((item, stack, res) -> res && !PropertyBreakableItem.isBroken(item, stack))).addItemTools(
+			getItem("botania", "livingwood_bow"), getItem("botania", "crystal_bow")
+	);
 	public static KindAbstratus dicekind = new KindAbstratus("dice").addItemTools(MinestuckUniverseItems.dice, MinestuckUniverseItems.fluoriteOctet);
 
-	public static KindAbstratus pistolkind = new KindAbstratus("pistol").setPreventRightClick(true).addItemTools(getItem("botania", "managun"));
-	public static KindAbstratus riflekind = new KindAbstratus("rifle").setPreventRightClick(true);
+	public static KindAbstratus pistolkind = new KindAbstratus("pistol").setPreventRightClick(true).addItemTools(getItem("botania", "managun"), getItem("bibliocraft", "bibliodrill"), getItem("immersiveengineering", "revolver"));
+	public static KindAbstratus riflekind = new KindAbstratus("rifle").setPreventRightClick(true).addItemTools(getItem("immersiveengineering", "railgun"), getItem("immersiveengineering", "chemthrower"), getItem("ic2", "mining_laser"));
 
 	public static KindAbstratus halfBladekind = new KindAbstratus("halfSword", MinestuckUniverseItems.toolSword).addKeywords("sword", "blade").setConditional(((item, stack, res) -> res && PropertyBreakableItem.isBroken(item, stack))).setHidden(true);
 	public static KindAbstratus halfBowkind = new KindAbstratus("halfBow").setConditional(((item, stack, res) -> res && PropertyBreakableItem.isBroken(item, stack) && bowkind.isStackCompatible(stack))).setHidden(true);
@@ -60,17 +64,22 @@ public class MSUKindAbstrata
 	public static KindAbstratus tridentkind = new KindAbstratus("trident").addKeywords("trident");
 	public static KindAbstratus doubleTridentkind = new KindAbstratus("2x3dent");
 	public static KindAbstratus lancekind = new KindAbstratus("lance").addKeywords("lance");
-	public static KindAbstratus spearkind = new KindAbstratus("spear").addKeywords("spear");
-	public static KindAbstratus drillkind = new KindAbstratus("drill").addItemTools(getItem("actuallyadditions", "item_drill"), getItem("industrialforegoing", "infinity_drill"));
-	public static KindAbstratus chainsawkind = new KindAbstratus("chainsaw").addKeywords("chainsaw");
+	public static KindAbstratus spearkind = new KindAbstratus("spear").addKeywords("spear").addItemTools(getItem("mowziesmobs", "spear"));
+	public static KindAbstratus drillkind = new KindAbstratus("drill").addItemTools(getItem("actuallyadditions", "item_drill"), getItem("industrialforegoing", "infinity_drill"),
+			getItem("ic2", "drill"), getItem("ic2", "diamond_drill"), getItem("ic2", "iridium_drill"));
+	public static KindAbstratus chainsawkind = new KindAbstratus("chainsaw").addKeywords("chainsaw").addItemTools(getItem("ic2", "chainsaw"));
 	public static KindAbstratus makeupkind = new KindAbstratus("makeup").addKeywords("lipstick", "lip_stick");
 	public static KindAbstratus umbrellakind = new KindAbstratus("umbrella").addKeywords("umbrella");
 	public static KindAbstratus broomkind = new KindAbstratus("broom").addKeywords("broom");
-	public static KindAbstratus flshlghtkind = new KindAbstratus("flashlight").addKeywords("flashlight");
+	public static KindAbstratus flshlghtkind = new KindAbstratus("flashlight").addKeywords("flashlight", "laser_pointer", "laserpointer");
 	public static KindAbstratus fncysntatkind = new KindAbstratus("fancySanta").setHidden(true);
 	public static KindAbstratus batonkind = new KindAbstratus("baton").addKeywords("baton");
-	public static KindAbstratus knifekind = new KindAbstratus("knife").addKeywords("knife", "dagger", "katar").addItemTools(getItem("actiallyadditions", "item_knife"), getItem("cfm", "item_knife"),
+	public static KindAbstratus wrenchkind = new KindAbstratus("wrench").addKeywords("wrench").addKeywords("wrench").addItemTools(getItem("ic2", "wrench"), getItem("openblocks", "wrench"), getItem("ic2", "wrench_new")
+			, getItem("openblocks", "wrench"), getItem("refinedstorage", "wrench"), getItem("chiselsandbits", "wrench_wood"), getItem("actuallyadditions", "item_laser_wrench"),
+			getItem("vending", "vendingmachinewrench"), getItem("ic2", "electric_wrench"), getItem("morphtool", "tool"));
+	public static KindAbstratus knifekind = new KindAbstratus("knife").addKeywords("knife", "dagger", "katar", "knive", "kunai", "sai").addItemTools(getItem("actuallyadditions", "item_knife"), getItem("cfm", "item_knife"),
 			getItem("mysticalworld", "amethyst_knife"), getItem("mysticalworld", "copper_knife"), getItem("mysticalworld", "silver_knife"), getItem("mysticalworld", "wood_knife"),
+			getItem("mowziesmobs","naga_fang_dagger"),
 			getItem("mysticalworld", "stone_knife"), getItem("mysticalworld", "iron_knife"), getItem("mysticalworld", "diamond_knife"), getItem("mysticalworld", "gold_knife"));
 	public static KindAbstratus keykind = new KindAbstratus("key").addItemTools(getItem("locks", "key"), getItem("locks", "key_blank"),
 			getItem("locks", "key_ring"), getItem("locks", "master_key"),
@@ -83,7 +92,7 @@ public class MSUKindAbstrata
 			getItem("armourers_workshop", "item.wand-of-style"), getItem("betterbuilderswands", "wandstone"), getItem("betterbuilderswands", "wandstone"),
 			getItem("betterbuilderswands", "wandiron"), getItem("betterbuilderswands", "wanddiamond"), getItem("betterbuilderswands", "wandunbreakable"),
 			getItem("chisel", "offsettool"), getItem("customnpcs", "npcwand"), getItem("cyclicmagic", "cyclic_wand_build"), getItem("cyclicmagic", "tool_swap"),
-			getItem("cyclicmagic", "tool_swap_match"), getItem("cyclicmagic", "tool_push"), getItem("roots", "staff"));
+			getItem("cyclicmagic", "tool_swap_match"), getItem("cyclicmagic", "tool_push"), getItem("roots", "staff"), getItem("rats", "cheese_stick"), getItem("rats", "radius_stick"));
 
 	public static KindAbstratus rockkind = new KindAbstratus("rock").addKeywords("rock").addItemTools(MinestuckUniverseItems.pebble, MinestuckUniverseItems.rock, MinestuckUniverseItems.bigRock,
 			Item.getItemFromBlock(Blocks.COBBLESTONE), Item.getItemFromBlock(Blocks.STONE), Item.getItemFromBlock(Blocks.MOSSY_COBBLESTONE));
@@ -131,6 +140,7 @@ public class MSUKindAbstrata
 		registry.register(pistolkind.setRegistryName("pistol"));
 		registry.register(riflekind.setRegistryName("rifle"));
 
+		registry.register(wrenchkind.setRegistryName("wrench"));
 		registry.register(wandkind.setRegistryName("wand"));
 		registry.register(keykind.setRegistryName("key"));
 		registry.register(lancekind.setRegistryName("lance"));
@@ -158,11 +168,14 @@ public class MSUKindAbstrata
 
 		if(MinestuckUniverse.isArsenalLoaded)
 			registerArsenalApi();
+		if(MinestuckUniverse.isVcLoaded)
+			registerVariedCommoditiesApi();
 
 		keykind.setHidden(keykind.getToolItems().isEmpty());
 		keykind.addItemTools(MinestuckUniverseItems.dungeonKey);
 		wandkind.setHidden(wandkind.getToolItems().isEmpty());
 		wandkind.addItemTools(MinestuckUniverseItems.staffOfOvergrowth, MinestuckUniverseItems.needlewands);
+
 		knifekind.setHidden(knifekind.getToolItems().isEmpty());
 		knifekind.addItemTools(MinestuckUniverseItems.katars, MinestuckUniverseItems.rocketKatars, MinestuckUniverseItems.sneakyDaggers, MinestuckUniverseItems.blizzardCutters, MinestuckUniverseItems.katarsOfZillywhomst);
 	}
@@ -213,8 +226,31 @@ public class MSUKindAbstrata
 
 	}
 
+
 	protected static void registerVariedCommoditiesApi()
 	{
+		bladekind.addItemTools(getItem("variedcommodities", "wooden_glaive"), getItem("variedcommodities", "iron_glaive"), getItem("variedcommodities", "golden_glaive"),
+				getItem("variedcommodities", "diamond_glaive"), getItem("variedcommodities", "bronze_glaive"), getItem("variedcommodities", "emerald_glaive"),
+				getItem("variedcommodities", "demonic_glaive"), getItem("variedcommodities", "frost_glaive"), getItem("variedcommodities", "mithril_glaive"));
+		bowkind.addItemTools(getItem("variedcommodities", "crossbow"), getItem("variedcommodities", "slingshot"));
+		canekind.addItemTools(getItem("variedcommodities", "golf_club"), getItem("variedcommodities", "hockey_stick"), getItem("variedcommodities", "crowbar"),
+				getItem("variedcommodities", "bo_staff"));
+		chainsawkind.addItemTools(getItem("variedcommodities", "chainsaw_gun"));
+		clawkind.addItemTools(getItem("variedcommodities", "ninja_claw"), getItem("variedcommodities", "steel_claw"), getItem("variedcommodities", "bear_claw"),
+				getItem("variedcommodities", "katar"));
+		clubkind.addItemTools(getItem("variedcommodities", "baseball_bat"), getItem("variedcommodities", "lead_pipe"), getItem("variedcommodities", "macuahuitl"));
+		knifekind.addItemTools(getItem("variedcommodities", "cleaver"), getItem("variedcommodities", "broken_bottle"));
+		pistolkind.addItemTools(getItem("variedcommodities", "wooden_gun"), getItem("variedcommodities", "stone_gun"), getItem("variedcommodities", "iron_gun"),
+				getItem("variedcommodities", "golden_gun"), getItem("variedcommodities", "diamond_gun"), getItem("variedcommodities", "bronze_gun"),
+				getItem("variedcommodities", "emerald_gun"));
+		riflekind.addItemTools(getItem("variedcommodities", "machine_gun"), getItem("variedcommodities", "musket"));
+		throwkind.addItemTools(getItem("variedcommodities", "kunai"), getItem("variedcommodities", "kunai_reversed"));
+		spearkind.addItemTools(getItem("variedcommodities", "wooden_spear"));
+		tridentkind.addItemTools(getItem("variedcommodities", "wooden_trident"));
+		wandkind.addItemTools(getItem("variedcommodities", "wooden_staff"), getItem("variedcommodities", "stone_staff"), getItem("variedcommodities", "iron_staff"),
+				getItem("variedcommodities", "golden_staff"), getItem("variedcommodities", "diamond_staff"), getItem("variedcommodities", "bronze_staff"),
+				getItem("variedcommodities", "emerald_staff"), getItem("variedcommodities", "demonic_staff"), getItem("variedcommodities", "frost_staff"),
+				getItem("variedcommodities", "mithril_staff"), getItem("variedcommodities", "elemental_staff"));
 
 	}
 

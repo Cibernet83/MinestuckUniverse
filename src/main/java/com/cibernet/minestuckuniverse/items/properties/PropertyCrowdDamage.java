@@ -23,6 +23,8 @@ public class PropertyCrowdDamage extends WeaponProperty
 
 		for(EntityLivingBase entity : player.world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(crowdRadius)))
 		{
+			if(entity == player)
+				continue;
 			if((buffPerEntity < 1 && buff <= maxBuff) || (buffPerEntity >= 1 && buff >= maxBuff))
 			{
 				buff = maxBuff;
@@ -31,6 +33,6 @@ public class PropertyCrowdDamage extends WeaponProperty
 			buff += buffPerEntity;
 		}
 
-		return amount * buff;
+		return amount * (buff+1);
 	}
 }
