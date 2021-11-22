@@ -27,6 +27,7 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.item.Item;
@@ -69,6 +70,15 @@ public class StrifeEventHandler
 	{
 		if(isStackAssigned(event.getItemStack()))
 			event.getToolTip().add(1, I18n.format("strife.item.allocated"));
+
+		if(Minecraft.getMinecraft().gameSettings.advancedItemTooltips)
+		{
+			String str = "";
+			for(KindAbstratus abstratus : getAbstrataList(event.getItemStack(), false))
+				str += abstratus.getLocalizedName().toLowerCase() + ", ";
+			if(!str.isEmpty())
+				event.getToolTip().add(I18n.format("strife.item.abstrataList", str.trim().substring(0, str.lastIndexOf(','))));
+		}
 	}
 
 	@SubscribeEvent
@@ -367,7 +377,7 @@ public class StrifeEventHandler
 
 				for(ItemStack stack : player.inventory.mainInventory)
 				{
-					int slot = player.inventory.getSlotFor(stack);
+					int slot = getSlotFor(player.inventory, stack);
 					if(slot == player.inventory.currentItem)
 					{
 						if(!cap.isArmed() && isStackAssigned(stack))
@@ -541,5 +551,23 @@ public class StrifeEventHandler
 	public static void onPlayerRespawn(PlayerEvent.Clone event)
 	{
 		event.getEntity().getCapability(MSUCapabilities.STRIFE_DATA, null).readFromNBT(event.getOriginal().getCapability(MSUCapabilities.STRIFE_DATA, null).writeToNBT());
+	}
+
+	public static int getSlotFor(InventoryPlayer inv, ItemStack stack)
+	{
+		for (int i = 0; i < inv.mainInventory.size(); ++i)
+		{
+			if (!inv.mainInventory.get(i).isEmpty() && stackEqualExact(stack, inv.mainInventory.get(i)))
+			{
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	private static boolean stackEqualExact(ItemStack stack1, ItemStack stack2)
+	{
+		return stack1.getItem() == stack2.getItem() && (!stack1.getHasSubtypes() || stack1.getMetadata() == stack2.getMetadata()) && ItemStack.areItemStackTagsEqual(stack1, stack2);
 	}
 }
