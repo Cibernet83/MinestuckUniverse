@@ -94,7 +94,7 @@ public class MSUKindAbstrata
 			getItem("chisel", "offsettool"), getItem("customnpcs", "npcwand"), getItem("cyclicmagic", "cyclic_wand_build"), getItem("cyclicmagic", "tool_swap"),
 			getItem("cyclicmagic", "tool_swap_match"), getItem("cyclicmagic", "tool_push"), getItem("roots", "staff"), getItem("rats", "cheese_stick"), getItem("rats", "radius_stick"));
 
-	public static KindAbstratus rockkind = new KindAbstratus("rock").addKeywords("rock").addItemTools(MinestuckUniverseItems.pebble, MinestuckUniverseItems.rock, MinestuckUniverseItems.bigRock,
+	public static KindAbstratus rockkind = new KindAbstratus("rock").addItemTools(MinestuckUniverseItems.pebble, MinestuckUniverseItems.rock, MinestuckUniverseItems.bigRock,
 			Item.getItemFromBlock(Blocks.COBBLESTONE), Item.getItemFromBlock(Blocks.STONE), Item.getItemFromBlock(Blocks.MOSSY_COBBLESTONE));
 	public static KindAbstratus paperkind = new KindAbstratus("paper").addKeywords("paper").addItemTools(Items.PAPER, Items.MAP, Items.FILLED_MAP, MinestuckUniverseItems.rolledUpPaper, MinestuckUniverseItems.yesterdaysNews);
 	public static KindAbstratus scissorkind = new KindAbstratus("shears").addKeywords("scissor").addItemClasses(ItemShears.class);
@@ -207,7 +207,9 @@ public class MSUKindAbstrata
 		tridentkind.addItemTools(getItem("minestuckarsenal", "wooden_trident"), getItem("minestuckarsenal", "silver_trident"), getItem("minestuckarsenal", "gold_trident"));
 		wandkind.addItemTools(getItem("minestuckarsenal", "needle_wands"));
 
-		ArrayList<Item> lipstickChainsaws = (ArrayList<Item>) Arrays.asList(getItem("minestuckarsenal", "lipstick_chainsaw"), getItem("minestuckarsenal", "demonbane_ragripper"));
+		ArrayList<Item> lipstickChainsaws = new ArrayList<>();
+		for(Item i : new Item[]{getItem("minestuckarsenal", "lipstick_chainsaw"), getItem("minestuckarsenal", "demonbane_ragripper")})
+			lipstickChainsaws.add(i);
 
 		chainsawkind.addItemTools(getItem("minestuckarsenal", "dainty_disembowler"), getItem("minestuckarsenal", "uranium_chainsaw"))
 				.setConditional((item, stack, res) -> item != null && lipstickChainsaws.contains(item) && ItemDualClaw.isDrawn(stack));
