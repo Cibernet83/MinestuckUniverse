@@ -27,7 +27,7 @@ public class PropertyPotion extends WeaponProperty
 	@Override
 	public void onEntityHit(ItemStack stack, EntityLivingBase target, EntityLivingBase player)
 	{
-		if(!onCrit && (player.world.rand.nextFloat() <= chance) && (!(player instanceof EntityPlayer) || CommonEventHandler.getCooledAttackStrength(((EntityPlayer) player)) >= 1))
+		if(!player.world.isRemote && !onCrit && (player.world.rand.nextFloat() <= chance) && (!(player instanceof EntityPlayer) || CommonEventHandler.getCooledAttackStrength(((EntityPlayer) player)) >= 1))
 		{
 			PotionEffect effect = effects[player.world.rand.nextInt(effects.length)];
 			target.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
@@ -37,7 +37,7 @@ public class PropertyPotion extends WeaponProperty
 	@Override
 	public float onCrit(ItemStack stack, EntityPlayer player, EntityLivingBase target, float damageModifier)
 	{
-		if(onCrit && (player.world.rand.nextFloat() <= chance) && (!(player instanceof EntityPlayer) || CommonEventHandler.getCooledAttackStrength(((EntityPlayer) player)) >= 1))
+		if(!player.world.isRemote && onCrit && (player.world.rand.nextFloat() <= chance) && (!(player instanceof EntityPlayer) || CommonEventHandler.getCooledAttackStrength(player) >= 1))
 		{
 			PotionEffect effect = effects[player.world.rand.nextInt(effects.length)];
 			target.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));

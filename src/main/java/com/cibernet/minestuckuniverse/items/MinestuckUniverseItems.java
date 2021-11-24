@@ -417,11 +417,7 @@ public class MinestuckUniverseItems
             MinestuckItems.pogoHammer = registerItem(registry, new MSUWeaponBase(863, 19.2, -2.8, 4, MinestuckItems.pogoHammer).setTool(toolHammer, 2, 4).addProperties(new PropertyPogo(0.7), new PropertyVMotionDamage(2f, 4)));
             MinestuckItems.telescopicSassacrusher = registerItem(registry, new MSUWeaponBase(1610, 51.2, -3.64, 4, MinestuckItems.telescopicSassacrusher).setTool(toolHammer, 8, 2).addProperties(new PropertyFarmine(100, 128), new PropertyVMotionDamage(1.8f, 10)));
             MinestuckItems.regiHammer = registerItem(registry, new MSUWeaponBase(776, 19.2, -2.52, 4, MinestuckItems.regiHammer).setTool(toolHammer, 3, 6));
-            MinestuckItems.fearNoAnvil = registerCustomRenderedItem(registry, new MSUWeaponBase(1725, 32, -2.66, 8, MinestuckItems.fearNoAnvil)
-            {{
-                if(MinestuckUniverse.isMSGTLoaded)
-                    addProperties(new PropertyPotion(true, 0.1f, new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("minestuckgodtier","time_stop")), 20, 0)));
-            }}.setTool(toolHammer, 3, 10).addProperties(new PropertyPotion(false, 0.5f, new PotionEffect(MobEffects.SLOWNESS, 400, 1), new PotionEffect(MobEffects.MINING_FATIGUE, 400, 2)), new PropertyVMotionDamage(1.6f, 3)));
+            MinestuckItems.fearNoAnvil = registerCustomRenderedItem(registry, new MSUWeaponBase(1725, 32, -2.66, 8, MinestuckItems.fearNoAnvil).setTool(toolHammer, 3, 10).addProperties(new PropertyPotion(false, 0.5f, new PotionEffect(MobEffects.SLOWNESS, 400, 1), new PotionEffect(MobEffects.MINING_FATIGUE, 400, 2)), new PropertyVMotionDamage(1.6f, 3)));
             MinestuckItems.meltMasher = registerItem(registry, new MSUWeaponBase(1265, 25.6, -2.8, 4, MinestuckItems.meltMasher).setTool(toolHammer, 4, 8).addProperties(new PropertyAutoSmelt(), new PropertyFarmine(8, 5), new PropertyFire(4, 1, false)));
             MinestuckItems.zillyhooHammer = registerItem(registry, new MSUWeaponBase(3450, 69.1, -2.94, 40, MinestuckItems.zillyhooHammer).setTool(toolHammer, 5, 10));
             MinestuckItems.scarletZillyhoo = registerItem(registry, new MSUWeaponBase(2588, 49.9, -2.8, 60, MinestuckItems.scarletZillyhoo).setTool(toolHammer, 5, 10).addProperties(new PropertyFire(10, 0.8f, true)));
@@ -683,6 +679,11 @@ public class MinestuckUniverseItems
         overgrowthTransforms. put(Blocks.LOG, 4, MinestuckBlocks.log, 0);
         overgrowthTransforms.put(Blocks.LOG, 8, MinestuckBlocks.log, 8);
         overgrowthTransforms.put(Blocks.LOG, 12, MinestuckBlocks.log, 12);
+
+
+        if(MinestuckUniverse.isMSGTLoaded && MinestuckItems.fearNoAnvil instanceof MSUWeaponBase)
+            ((MSUWeaponBase)MinestuckItems.fearNoAnvil)
+                    .addProperties(new PropertyPotion(true, 0.1f, new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("minestuckgodtier","time_stop")), 20, 0)));
 
         wisdomsPierce.addProperties(new PropertyInnocuousDouble(wisdomsHookshot, true, false, false));
         wisdomsHookshot.addProperties(new PropertyInnocuousDouble(wisdomsPierce, true, false, false));
