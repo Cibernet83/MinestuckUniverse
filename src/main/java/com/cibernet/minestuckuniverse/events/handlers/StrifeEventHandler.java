@@ -301,8 +301,13 @@ public class StrifeEventHandler
 			{
 				if(!hasWeapon && ItemStack.areItemStacksEqual(weapon, offhandStack))
 				{
-					hasWeapon = true;
 					player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
+					if(!player.world.isRemote)
+					{
+						cap.setArmed(false);
+						MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.INDEXES), player);
+					}
+					return;
 				}
 				else
 				{
