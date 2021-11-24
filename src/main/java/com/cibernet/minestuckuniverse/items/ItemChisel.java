@@ -27,17 +27,19 @@ public class ItemChisel extends MSUItemBase
 	}
 	
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if(worldIn.getBlockState(pos).getBlock().equals(MinestuckUniverseBlocks.zillyStone) && !worldIn.isRemote)
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+
+		if(worldIn.getBlockState(pos).getBlock().equals(MinestuckUniverseBlocks.zillyStone) )
 		{
-			float luck = player.getLuck() + MSUConfig.baseZillystoneLuck;
-			int val = 1;
+			if (!worldIn.isRemote)
+			{
+				float luck = (player.getLuck() + MSUConfig.baseZillystoneLuck) * (float)MSUConfig.zillystoneYields;
+				float rand = itemRand.nextFloat()*luck;
+				float val = Math.round(1+(rand));
 
-			val += itemRand.nextFloat()*luck*MSUConfig.zillystoneYields;
-
-			InventoryHelper.spawnItemStack(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(MinestuckUniverseItems.zillystoneShard, val));
-			player.getHeldItem(hand).damageItem(1, player);
+				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MinestuckUniverseItems.zillystoneShard, (int) val));
+				player.getHeldItem(hand).damageItem(1, player);
+			}
 			return EnumActionResult.SUCCESS;
 		}
 		else return EnumActionResult.PASS;
