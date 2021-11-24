@@ -16,6 +16,7 @@ public class MSUConfig
 	private static Side side;
 
 	public static double zillystoneYields;
+	public static double gristDropsMultiplier;
 	public static int baseZillystoneLuck;
 	public static boolean IDAlchemy;
 
@@ -53,6 +54,8 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.general.zillystoneYields").getDouble();
 		baseZillystoneLuck = config.get("General", "baseZillystoneLuck", -2, "Determines a player's base luck when chiseling a block of Zillystone.")
 				.setLanguageKey("config.minestuckuniverse.general.baseZillystoneLuck").getInt();
+		gristDropsMultiplier = config.get("General", "gristDropsMultiplier", 1, "Determines how much grist is dropped from Underlings.")
+				.setLanguageKey("config.minestuckuniverse.general.gristDropsMultiplier").getDouble();
 
 		restrictedStrife = config.get("Strife", "restrictedStrife", false, "Prevents players from attacking without an allocated weapon in their main hand. It also restricts the use of certain items such as bows.")
 				.setLanguageKey("config.minestuckuniverse.strife.restrictedStrife").getBoolean();

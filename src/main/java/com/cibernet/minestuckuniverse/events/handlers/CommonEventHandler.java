@@ -424,6 +424,8 @@ public class CommonEventHandler
 	@SubscribeEvent
 	public static void onUnderlingDrops(UnderlingSpoilsEvent event)
 	{
+		event.getSpoils().scaleGrist((float) MSUConfig.gristDropsMultiplier);
+
 		if(event.getUnderling().getRNG().nextFloat() <= 0.001f)
 			event.getSpoils().addGrist(new GristSet(GristType.Zillium, 1));
 	}
