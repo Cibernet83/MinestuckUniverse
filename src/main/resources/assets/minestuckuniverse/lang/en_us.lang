@@ -797,6 +797,7 @@ key.minestuckuniverse.swapOffhandStrife=Swap Offhand Item with Strife Deck
 config.minestuckuniverse.general.zillystoneYields=Zillystone Luck Modifier
 config.minestuckuniverse.general.baseZillystoneLuck=Zillystone Base Luck
 config.minestuckuniverse.general.IDAlchemy=ID-Based Alchemy
+config.minestuckuniverse.general.gristDropsMultiplier=Underling Grist Drops Multiplier
 
 config.minestuckuniverse.strife.combatOverhaul=Combat Overhaul
 config.minestuckuniverse.strife.restrictedStrife=Restricted Strife
