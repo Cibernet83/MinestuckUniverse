@@ -27,7 +27,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus hammerkind = new KindAbstratus("hammer", MinestuckUniverseItems.toolHammer).addKeywords("hammer").addItemTools(getItem("ic2", "forge_hammer"));
 	public static KindAbstratus bladekind = new KindAbstratus("sword", MinestuckUniverseItems.toolSword).addKeywords("sword", "katana", "kukiri", "saber", "rapier", "excalibur").setConditional(((item, stack, res) -> res && !PropertyBreakableItem.isBroken(item, stack))).addItemTools(
 			getItem("ic2", "nano_saber"), getItem("rats", "pirat_cutlass")
-	);
+	).setConditional((item, stack, originalResult) -> originalResult && !stack.getItem().getRegistryName().getResourceDomain().equals("bibliocraft")); //blep temp fix
 	public static KindAbstratus clubkind = new KindAbstratus("club", MinestuckUniverseItems.toolClub).addKeywords("mace", "club");
 	public static KindAbstratus canekind = new KindAbstratus("cane", MinestuckUniverseItems.toolCane);
 	public static KindAbstratus sicklekind = new KindAbstratus("sickle", MinestuckUniverseItems.toolSickle).addKeywords("sickle", "scythe");
