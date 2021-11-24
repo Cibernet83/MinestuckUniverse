@@ -48,6 +48,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -71,23 +73,23 @@ public class MinestuckUniverseItems
     public static ItemArmor.ArmorMaterial materialCloth = EnumHelper.addArmorMaterial("CLOTH", MinestuckUniverse.MODID+":cloth", -1, new int[] {0, 0, 0, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
 
     //Tool Classes
-    public static MSUToolClass toolSword = new MSUToolClass(Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolGauntlet = new MSUToolClass(Material.GLASS, Material.ICE, Material.PACKED_ICE).addEnchantments(Enchantments.SILK_TOUCH, Enchantments.FIRE_ASPECT, Enchantments.LOOTING, MSUEnchantments.SUPERPUNCH);
-    public static MSUToolClass toolNeedles = new MSUToolClass(Material.CLOTH).addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolHammer = new MSUToolClass("pickaxe").addEnchantments(EnumEnchantmentType.WEAPON, EnumEnchantmentType.DIGGER);
-    public static MSUToolClass toolClub = new MSUToolClass().addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolClaws = new MSUToolClass(Material.PLANTS, Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolCane = new MSUToolClass().addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolSickle = new MSUToolClass(Material.GRASS, Material.PLANTS, Material.LEAVES).addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolSpoon = new MSUToolClass(Material.GOURD).addEnchantments(EnumEnchantmentType.WEAPON);
-    public static MSUToolClass toolFork = new MSUToolClass(Material.GRASS).addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolSword = new MSUToolClass("sword", Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolGauntlet = new MSUToolClass("gauntlet", Material.GLASS, Material.ICE, Material.PACKED_ICE).addEnchantments(Enchantments.SILK_TOUCH, Enchantments.FIRE_ASPECT, Enchantments.LOOTING, MSUEnchantments.SUPERPUNCH);
+    public static MSUToolClass toolNeedles = new MSUToolClass("needle", Material.CLOTH).addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolHammer = new MSUToolClass("pickaxe", "pickaxe").addEnchantments(EnumEnchantmentType.WEAPON, EnumEnchantmentType.DIGGER);
+    public static MSUToolClass toolClub = new MSUToolClass("club").addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolClaws = new MSUToolClass("claws", Material.PLANTS, Material.WEB).addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolCane = new MSUToolClass("cane").addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolSickle = new MSUToolClass("sickle", Material.GRASS, Material.PLANTS, Material.LEAVES).addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolSpoon = new MSUToolClass("spoon", Material.GOURD).addEnchantments(EnumEnchantmentType.WEAPON);
+    public static MSUToolClass toolFork = new MSUToolClass("fork", Material.GRASS).addEnchantments(EnumEnchantmentType.WEAPON);
 
-    public static MSUToolClass toolShovel = new MSUToolClass("shovel").addEnchantments(EnumEnchantmentType.DIGGER);
-    public static MSUToolClass toolAxe = new MSUToolClass("axe").addEnchantments(EnumEnchantmentType.WEAPON, EnumEnchantmentType.DIGGER).setDisablesShield();
-    public static MSUToolClass toolPickaxe = new MSUToolClass("pickaxe").addEnchantments(EnumEnchantmentType.DIGGER);
+    public static MSUToolClass toolShovel = new MSUToolClass("shovel", "shovel").addEnchantments(EnumEnchantmentType.DIGGER);
+    public static MSUToolClass toolAxe = new MSUToolClass("axe", "axe").addEnchantments(EnumEnchantmentType.WEAPON, EnumEnchantmentType.DIGGER).setDisablesShield();
+    public static MSUToolClass toolPickaxe = new MSUToolClass("pickaxe", "pickaxe").addEnchantments(EnumEnchantmentType.DIGGER);
 
-    public static MSUToolClass toolSpork = new MSUToolClass(toolSpoon, toolFork);
-    public static MSUToolClass toolHammaxe = new MSUToolClass(toolHammer, toolAxe);
+    public static MSUToolClass toolSpork = new MSUToolClass("spork", toolSpoon, toolFork);
+    public static MSUToolClass toolHammaxe = new MSUToolClass("hammaxe", toolHammer, toolAxe);
 
 
     //Block Swap Property Maps
@@ -406,7 +408,6 @@ public class MinestuckUniverseItems
         registerItem(registry, returnMedallion);
         registerItem(registry, teleportMedallion);
         registerItem(registry, skaianMedallion);
-
 
         if(MSUConfig.combatOverhaul)
         {

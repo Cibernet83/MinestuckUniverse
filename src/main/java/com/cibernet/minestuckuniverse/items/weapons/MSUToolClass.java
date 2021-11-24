@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.items.weapons;
 
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
@@ -15,27 +16,32 @@ public class MSUToolClass
 	protected List<Enchantment> enchantments = new ArrayList<>();
 	protected List<EnumEnchantmentType> enchantmentTypes = new ArrayList<>();
 	protected List<String> baseTool = new ArrayList<>();
-	protected List<MSUToolClass> parents = new ArrayList<>();
+	public List<MSUToolClass> parents = new ArrayList<>();
 	protected boolean disablesShield = false;
+	public final String name;
 
-	public MSUToolClass()
+	public MSUToolClass(String name)
 	{
+		this.name = name;
 	}
 
-	public MSUToolClass(String... baseTools)
+	public MSUToolClass(String name, String... baseTools)
 	{
+		this(name);
 		for(String baseTool : baseTools)
 			this.baseTool.add(baseTool);
 	}
 	
-	public MSUToolClass(Material... materials)
+	public MSUToolClass(String name, Material... materials)
 	{
+		this(name);
 		for(Material mat : materials)
 			harvestMaterials.add(mat);
 	}
 	
-	public MSUToolClass(MSUToolClass... classCombo)
+	public MSUToolClass(String name, MSUToolClass... classCombo)
 	{
+		this(name);
 		for(MSUToolClass cls : classCombo)
 		{
 			harvestMaterials.addAll(cls.harvestMaterials);
@@ -106,8 +112,11 @@ public class MSUToolClass
 
 	public boolean isCompatibleWith(MSUToolClass other)
 	{
-		for(MSUToolClass parent : parents)
-			if(parent.isCompatibleWith(other))
+		if(other == null)
+			return false;
+
+		for(MSUToolClass parent : other.parents)
+			if(parent.isCompatibleWith(this))
 				return true;
 		return equals(other);
 	}
@@ -121,5 +130,10 @@ public class MSUToolClass
 	public boolean disablesShield()
 	{
 		return disablesShield;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 }
