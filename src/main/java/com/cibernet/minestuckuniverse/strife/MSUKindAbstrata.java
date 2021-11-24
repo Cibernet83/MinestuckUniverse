@@ -104,7 +104,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus sbahjkind = new KindAbstratus("sbahj")
 			.addItemTools(MinestuckUniverseItems.sbahjWhip, MinestuckUniverseItems.unrealAir, MinestuckItems.batleacks, MinestuckItems.sord, MinestuckItems.sbahjPoster,
 					Item.getItemFromBlock(MinestuckUniverseBlocks.sbahjBedrock), Item.getItemFromBlock(MinestuckUniverseBlocks.sbahjTree))
-			.setConditional((i, stack, res) -> i.getRegistryName().getResourcePath().equals("sbahjaddon")).setHidden(true);
+			.setConditional((i, stack, res) -> res || i.getRegistryName().getResourcePath().equals("sbahjaddon")).setHidden(true);
 	public static KindAbstratus bunnykind = new KindAbstratus("bunny").addKeywords("bunny", "rabbit", "hare")
 			.addItemTools(MinestuckUniverseItems.bunnySlippers, Items.RABBIT, Items.COOKED_RABBIT, Items.RABBIT_FOOT, Items.RABBIT_HIDE, Items.RABBIT_STEW).setHidden(true);
 
