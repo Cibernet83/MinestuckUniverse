@@ -48,9 +48,14 @@ public class MSUModelManager
         register(royalDeringer, 0, "royal_deringer");
         register(scarletRibbitar, 0, "scarlet_ribbitar");
         register(dDEHammerAxe, 0, "eeeeeeeeeeee");
-        if(MinestuckConfig.oldItemModels)
-            register(fearNoAnvil);
-        else register(fearNoAnvil, 0, "fear_no_anvil");
+
+        if(!MinestuckUniverse.isArsenalLoaded)
+        {
+            if(MinestuckConfig.oldItemModels)
+                register(fearNoAnvil);
+            else register(fearNoAnvil, 0, "fear_no_anvil");
+        }
+
         register(grimoire, 0, "grimoire");
         ModelLoader.setCustomModelResourceLocation(crockerSpork, 0, new ModelResourceLocation(Minestuck.MOD_ID+":crocker_spoon", "inventory"));
         ModelLoader.setCustomModelResourceLocation(crockerFork, 0, new ModelResourceLocation(Minestuck.MOD_ID+":crocker_fork", "inventory"));
@@ -95,7 +100,7 @@ public class MSUModelManager
     @SideOnly(Side.CLIENT)
     private static void register(Item item)
     {
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(Item.REGISTRY.getNameForObject(item), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
 
     @SideOnly(Side.CLIENT)
