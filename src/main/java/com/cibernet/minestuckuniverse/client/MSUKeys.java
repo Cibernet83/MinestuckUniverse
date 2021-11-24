@@ -58,7 +58,7 @@ public class MSUKeys
 				GuiStrifeSwitcher.offhandMode = offhandMode;
 				if(offhandMode || (player.getHeldItemMainhand().isEmpty() || StrifeEventHandler.isStackAssigned(player.getHeldItemMainhand()) || StrifeEventHandler.isStackAssigned(player.getHeldItemOffhand())))
 					GuiStrifeSwitcher.showSwitcher = true;
-				else if(!player.getHeldItemMainhand().isEmpty())
+				else if(!player.getHeldItemMainhand().isEmpty() && !player.getCapability(MSUCapabilities.STRIFE_DATA, null).isArmed())
 				{
 					MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.ASSIGN_STRIFE, EnumHand.MAIN_HAND));
 				}
