@@ -29,7 +29,7 @@ public class MSUKindAbstrata
 			getItem("ic2", "nano_saber"), getItem("rats", "pirat_cutlass")
 	);
 	public static KindAbstratus clubkind = new KindAbstratus("club", MinestuckUniverseItems.toolClub).addKeywords("mace", "club");
-	public static KindAbstratus canekind = new KindAbstratus("cane", MinestuckUniverseItems.toolCane).addKeywords("cane", "staff");
+	public static KindAbstratus canekind = new KindAbstratus("cane", MinestuckUniverseItems.toolCane);
 	public static KindAbstratus sicklekind = new KindAbstratus("sickle", MinestuckUniverseItems.toolSickle).addKeywords("sickle", "scythe");
 	public static KindAbstratus spoonkind = new KindAbstratus("spoon", MinestuckUniverseItems.toolSpoon).addItemTools(getItem("sbahjaddon", "the_spoon")).addKeywords("spoon")
 			.setConditional((item, stack, res) -> res || item == MinestuckItems.crockerSpork && MinestuckItems.crockerSpork.isSpoon(stack));
