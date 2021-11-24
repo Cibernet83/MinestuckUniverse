@@ -41,6 +41,14 @@ public class MinestuckUniverse
     public static boolean isArsenalLoaded;
     public static boolean isVcLoaded;
     public static boolean isMSGTLoaded;
+    public static boolean isMekanismLoaded;
+    public static boolean isCyclicLoaded;
+    public static boolean isBOPLoaded;
+    public static boolean isChiselLoaded;
+    public static boolean isVampirismLoaded;
+    public static boolean isMysticalWorldLoaded;
+    public static boolean isIndustrialForegoingLoaded;
+    public static boolean isFutureMcLoaded;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -54,6 +62,14 @@ public class MinestuckUniverse
         isMSGTLoaded = Loader.isModLoaded("minestuckgodtier");
         isCarryOnLoaded = Loader.isModLoaded("carryon");
         isVcLoaded = Loader.isModLoaded("variedcommodities");
+        isMekanismLoaded = Loader.isModLoaded("mekanism");
+        isCyclicLoaded = Loader.isModLoaded("cyclicmagic");
+        isChiselLoaded = Loader.isModLoaded("chisel");
+        isBOPLoaded = Loader.isModLoaded("biomesoplenty");
+        isVampirismLoaded = Loader.isModLoaded("vampirism");
+        isMysticalWorldLoaded = Loader.isModLoaded("mysticalworld");
+        isIndustrialForegoingLoaded = Loader.isModLoaded("industrialforegoing");
+        isFutureMcLoaded = Loader.isModLoaded("futuremc");
 
         proxy.preInit();
     }

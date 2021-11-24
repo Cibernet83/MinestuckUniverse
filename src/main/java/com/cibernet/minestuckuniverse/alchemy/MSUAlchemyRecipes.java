@@ -19,6 +19,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -65,6 +66,27 @@ public class MSUAlchemyRecipes
         if(MinestuckUniverse.isBotaniaLoaded) registerBotania();
         if(MinestuckUniverse.isSplatcraftLodaded) registerSplatcraft();
         if(!MinestuckUniverse.isArsenalLoaded) registerArsenalFallback();
+        if(MinestuckUniverse.isChiselLoaded) registerChiselRecipes();
+        if(MinestuckUniverse.isMysticalWorldLoaded) registerMysticalWorldRecipes();
+        if(MinestuckUniverse.isBOPLoaded) registerBOPRecipes();
+        if(MinestuckUniverse.isFutureMcLoaded) registerFutureMcRecipes();
+
+        if(MinestuckUniverse.isMekanismLoaded)
+            GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("mekanism", "ingot")), 1, 1), true, new GristSet(new GristType[] {Mercury, Rust}, new int[] {8, 12}));
+        if(MinestuckUniverse.isCyclicLoaded)
+        {
+            GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cyclicmagic", "crystalized_amber"))), false, new GristSet(new GristType[] {Amber}, new int[] {20}));
+            GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cyclicmagic", "crystalized_obsidian"))), false, new GristSet(new GristType[] {Tar, Cobalt, Amber, Diamond}, new int[] {40, 20, 40, 8}));
+        }
+        if(MinestuckUniverse.isVampirismLoaded)
+        {
+            GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("vampirism", "blood_bottle"))), false, new GristSet(new GristType[] {Garnet, Iodine}, new int[] {16, 16}));
+            GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("vampirism", "vampire_blood_bottle"))), false, new GristSet(new GristType[] {Garnet, Iodine, Ruby}, new int[] {20, 8, 4}));
+            GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("vampirism", "vampirism_flower"))), false, new GristSet(new GristType[] {Iodine, Shale, Garnet}, new int[] {2, 4, 2}));
+        }
+        if(MinestuckUniverse.isIndustrialForegoingLoaded)
+            GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("industrialforegoing", "plastic"))), false, new GristSet(new GristType[] {Build, Quartz}, new int[] {500, 1}));
+
 
         ConsortRewardHandler.registerPrice(new ItemStack(MinestuckItems.candy, 1, 21), 500, 600);
     }
@@ -75,6 +97,8 @@ public class MSUAlchemyRecipes
         OreDictionary.registerOre("record", MinestuckItems.recordDanceStab);
         OreDictionary.registerOre("record", MinestuckItems.recordEmissaryOfDance);
         OreDictionary.registerOre("record", MinestuckItems.recordRetroBattle);
+
+        GristRegistry.addGristConversion(new ItemStack(Blocks.SLIME_BLOCK), new GristSet(new GristType[] {Caulk}, new int[] {72}));
 
         GristRegistry.addGristConversion(new ItemStack(MinestuckItems.clawSickle), new GristSet(new GristType[] {Build, Iodine, Artifact}, new int[] {5000, 4000, 1}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckItems.dragonCane), new GristSet(new GristType[] {Rust, Ruby, Mercury}, new int[] {200, 400, 300}));
@@ -309,6 +333,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(Items.LEATHER_HELMET), new ItemStack(MinestuckItems.itemFrog, 1, 1), MODE_OR, false, true, new ItemStack(frogHat));
         CombinationRegistry.addCombination(new ItemStack(Items.IRON_HELMET), new ItemStack(MinestuckBlocks.cruxtruderLid), MODE_OR, false, true, new ItemStack(cruxtruderHat));
         CombinationRegistry.addCombination(new ItemStack(Items.SLIME_BALL), new ItemStack(Items.LEATHER_BOOTS), MODE_AND, new ItemStack(rubberBoots));
+        CombinationRegistry.addCombination(new ItemStack(Items.SLIME_BALL), new ItemStack(Items.LEATHER_BOOTS), MODE_OR, new ItemStack(moonShoes));
         CombinationRegistry.addCombination(new ItemStack(moonShoes), new ItemStack(sun), MODE_AND, new ItemStack(sunShoes));
         CombinationRegistry.addCombination(new ItemStack(rubberBoots), new ItemStack(yarnBall, 1, 14), MODE_AND, new ItemStack(airJordans));
         CombinationRegistry.addCombination(new ItemStack(rubberBoots), new ItemStack(yarnBall, 1, 4), MODE_AND, new ItemStack(cobaltJordans));
@@ -419,7 +444,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(battery), new ItemStack(blizzardCutters), MODE_AND, false, false, new ItemStack(thunderbirdTalons));
         CombinationRegistry.addCombination(new ItemStack(bladesOfTheWarrior), new ItemStack(archmageHat), MODE_OR, false, false, new ItemStack(archmageDaggers));
         CombinationRegistry.addCombination(new ItemStack(katars), new ItemStack(Items.FIREWORKS), MODE_AND, false, false, new ItemStack(rocketKatars));
-        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.candy, 1, 0), new ItemStack(catclaws), MODE_OR, true, false, new ItemStack(catclaws));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.candy, 1, 0), new ItemStack(catclaws), MODE_OR, true, false, new ItemStack(candyCornClaws));
         CombinationRegistry.addCombination(new ItemStack(zillyStone), new ItemStack(catclaws), MODE_OR, false, false, new ItemStack(katarsOfZillywhomst));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.clawSickle), new ItemStack(MinestuckItems.grimoire), MODE_AND, false, false, new ItemStack(MinestuckItems.clawOfNrubyiglith));
         removeCombination(new ItemStack(MinestuckItems.catClaws), new ItemStack(MinestuckItems.grimoire), MODE_AND, false, true);
@@ -807,5 +832,221 @@ public class MSUAlchemyRecipes
             CombinationRegistry.getAllConversions().remove(Arrays.asList(input1, damage1, input2, damage2, mode));
         else CombinationRegistry.getAllConversions().remove(Arrays.asList(input2, damage2, input1, damage1, mode));
 
+    }
+
+
+    private static final void registerMysticalWorldRecipes()
+    {
+        String modid = "mysticalworld";
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "amethyst_gem"))), false, new GristSet(new GristType[] {Amethyst}, new int[] {18}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "mud_block"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "carapace"))), false, new GristSet(new GristType[] {Shale, Iodine}, new int[] {8, 5}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "venison"))), false, new GristSet(new GristType[] {Iodine}, new int[] {12}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "cooked_venison"))), false, new GristSet(new GristType[] {Tar, Iodine}, new int[] {1, 12}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "antlers"))), false, new GristSet(new GristType[] {Chalk, Build}, new int[] {12, 2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "pelt"))), false, new GristSet(new GristType[] {Chalk, Iodine}, new int[] {3, 3}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "raw_squid"))), false, new GristSet(new GristType[] {Cobalt, Iodine}, new int[] {1, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "cooked_squid"))), false, new GristSet(new GristType[] {Tar, Iodine}, new int[] {1, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "aubergine"))), false, new GristSet(new GristType[] {Amethyst, Amber}, new int[] {2, 2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "cooked_aubergine"))), false, new GristSet(new GristType[] {Amethyst, Amber, Tar}, new int[] {2, 2, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "silk_cocoon"))), false, new GristSet(new GristType[] {Chalk}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "silk_thread"))), false, new GristSet(new GristType[] {Chalk}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "gall_apple"))), false, new GristSet(new GristType[] {Shale, Iodine}, new int[] {2, 2}));
+    }
+
+    private static final void registerChiselRecipes()
+    {
+        String modid = "chisel";
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "planks-oak"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "planks-birch"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "planks-spruce"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "planks-jungle"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "planks-acacia"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "planks-dark-oak"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "marble"))), false, new GristSet(new GristType[] {Build, Marble}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "marble1"))), false, new GristSet(new GristType[] {Build, Marble}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "marble2"))), false, new GristSet(new GristType[] {Build, Marble}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "marblepillar"))), false, new GristSet(new GristType[] {Build, Marble}, new int[] {1, 1}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "glass"))), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "stonebrick"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "cobblestone"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "cobblestone1"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(modid, "cobblestone2"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+    }
+
+    private static final void registerBOPRecipes()
+    {
+        //dirt
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "grass")), 1, 0), new GristSet(new GristType[] {Build, Caulk}, new int[] {4, 3}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "grass")), 1, 1), new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "grass")), 1, 2), new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "grass")), 1, 3), new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "grass")), 1, 4), new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "grass")), 1, 5), new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "grass")), 1, 6), new GristSet(new GristType[] {Build, Tar}, new int[] {2, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "grass")), 1, 7), new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "grass")), 1, 8), new GristSet(new GristType[] {Build, Tar, Iodine, Ruby}, new int[] {2, 1, 2, 2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "dirt"))), false, new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "mudball"))), false, new GristSet(new GristType[] {Build, Cobalt}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "mud_brick"))), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+
+        //sand
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "white_sand"))), false, new GristSet(new GristType[] {Build, Chalk}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "dried_sand"))), new GristSet(new GristType[] {Build}, new int[] {1}));
+
+        //Flowers
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 0), true, new GristSet(new GristType[] {Iodine, Chalk, Tar}, new int[] {1, 6, 2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 1), true, new GristSet(new GristType[] {Iodine, Amber, Amethyst}, new int[] {2, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 2), true, new GristSet(new GristType[] {Iodine, Uranium, Tar}, new int[] {2, 2, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 3), true, new GristSet(new GristType[] {Iodine, Amber, Amethyst, Tar}, new int[] {1, 4, 4, 2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 4), true, new GristSet(new GristType[] {Iodine, Chalk, Amethyst}, new int[] {1, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 5), true, new GristSet(new GristType[] {Iodine, Garnet, Amber}, new int[] {1, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 6), true, new GristSet(new GristType[] {Iodine, Chalk, Garnet}, new int[] {1, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 7), true, new GristSet(new GristType[] {Iodine, Amethyst, Garnet}, new int[] {1, 2, 6}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 8), true, new GristSet(new GristType[] {Iodine, Amethyst, Garnet}, new int[] {1, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 9), true, new GristSet(new GristType[] {Iodine, Chalk}, new int[] {1, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 10), true, new GristSet(new GristType[] {Iodine, Caulk, Tar}, new int[] {1, 2, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 11), true, new GristSet(new GristType[] {Iodine, Ruby}, new int[] {1, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 12), true, new GristSet(new GristType[] {Iodine, Chalk, Tar}, new int[] {1, 2, 6}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 13), true, new GristSet(new GristType[] {Iodine, Chalk, Garnet}, new int[] {1, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 14), true, new GristSet(new GristType[] {Iodine, Chalk}, new int[] {1, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_0")), 1, 15), true, new GristSet(new GristType[] {Iodine, Amber, Garnet, Sulfur}, new int[] {1, 4, 4, 3}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_1")), 1, 0), true, new GristSet(new GristType[] {Iodine, Amethyst, Garnet}, new int[] {1, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_1")), 1, 1), true, new GristSet(new GristType[] {Iodine, Amber}, new int[] {1, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_1")), 1, 2), true, new GristSet(new GristType[] {Iodine, Amethyst}, new int[] {1, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_1")), 1, 3), true, new GristSet(new GristType[] {Iodine, Chalk, Garnet}, new int[] {2, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_1")), 1, 4), true, new GristSet(new GristType[] {Iodine, Chalk, Cobalt}, new int[] {2, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_1")), 1, 5), true, new GristSet(new GristType[] {Iodine, Garnet}, new int[] {2, 8}));
+
+        //Plant Things
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "log_0"))), false, new GristSet(new GristType[] {Build}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "log_1"))), false, new GristSet(new GristType[] {Build}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "log_2"))), false, new GristSet(new GristType[] {Build}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "log_3"))), false, new GristSet(new GristType[] {Build}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "log_4"))), false, new GristSet(new GristType[] {Build}, new int[] {8}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "leaves_0"))), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "leaves_1"))), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "leaves_2"))), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "leaves_3"))), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "leaves_4"))), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "leaves_5"))), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "leaves_6"))), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "sapling_0"))), false, new GristSet(new GristType[] {Build}, new int[] {16}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "sapling_1"))), false, new GristSet(new GristType[] {Build}, new int[] {16}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "sapling_2"))), false, new GristSet(new GristType[] {Build}, new int[] {16}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_0"))), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 0), new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 1), new GristSet(new GristType[] {Build, Caulk}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 2), new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 3), new GristSet(new GristType[] {Build, Iodine}, new int[] {1, 2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 4), new GristSet(new GristType[] {Build, Chalk}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 4), new GristSet(new GristType[] {Build, Chalk}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 5), new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 6), new GristSet(new GristType[] {Amber, Iodine}, new int[] {3, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 7), new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 8), new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 9), new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 10), new GristSet(new GristType[] {Garnet, Shale}, new int[] {4, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "plant_1")), 1, 11), new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "bamboo"))), new GristSet(new GristType[] {Build}, new int[] {2}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "double_plant")), 1, 0), true, new GristSet(new GristType[] {Iodine, Amethyst, Chalk}, new int[] {1, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "double_plant")), 1, 1), true, new GristSet(new GristType[] {Build, Chalk}, new int[] {2, 2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "double_plant")), 1, 2), true, new GristSet(new GristType[] {Iodine, Sulfur}, new int[] {1, 3}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "double_plant")), 1, 3), true, new GristSet(new GristType[] {Iodine, Build}, new int[] {1, 3}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "waterlily"))), false, new GristSet(new GristType[] {Amber, Iodine}, new int[] {4, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "coral"))), false, new GristSet(new GristType[] {Cobalt, Amber, Iodine}, new int[] {1, 4, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "seaweed"))), false, new GristSet(new GristType[] {Cobalt, Amber, Iodine}, new int[] {1, 4, 1}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "willow_vine"))), false, new GristSet(new GristType[] {Build, Amber}, new int[] {2, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "ivy"))), false, new GristSet(new GristType[] {Build, Amber}, new int[] {2, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "bramble_plant"))), false, new GristSet(new GristType[] {Build}, new int[] {6}));
+
+        //Mushrooms
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "mushroom")), 1, 0), true, new GristSet(new GristType[] {Iodine}, new int[] {5}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "mushroom")), 1, 1), true, new GristSet(new GristType[] {Iodine, Chalk}, new int[] {2, 3}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "mushroom")), 1, 2), true, new GristSet(new GristType[] {Iodine, Cobalt}, new int[] {2, 3}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "mushroom")), 1, 3), true, new GristSet(new GristType[] {Iodine, Uranium}, new int[] {2, 3}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "mushroom")), 1, 4), true, new GristSet(new GristType[] {Iodine}, new int[] {5}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "mushroom")), 1, 5), true, new GristSet(new GristType[] {Iodine, Shale}, new int[] {3, 2}));
+
+        //Fruit
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "berry")), 1), false, new GristSet(new GristType[] {Amber}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "pear")), 1), false, new GristSet(new GristType[] {Amber, Shale}, new int[] {3, 2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "persimmon")), 1), false, new GristSet(new GristType[] {Amber, Iodine}, new int[] {3, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "peach")), 1), false, new GristSet(new GristType[] {Amber, Caulk}, new int[] {3, 1}));
+
+        //Misc.
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "hive")), 1, 0), true, new GristSet(new GristType[] {Build}, new int[] {4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "hive")), 1, 2), true, new GristSet(new GristType[] {Build}, new int[] {4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "honeycomb")), 1), false, new GristSet(new GristType[] {Build}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "filled_honeycomb")), 1), false, new GristSet(new GristType[] {Amber, Build}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "record_wanderer")), 1), false, new GristSet(new GristType[] {Build, Caulk, Quartz, Mercury}, new int[] {15, 8, 5, 5}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "jar_filled")), 1, 0), true, new GristSet(new GristType[] {Build, Amber}, new int[] {2, 8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "jar_filled")), 1, 1), true, new GristSet(new GristType[] {Build, Sulfur, Cobalt}, new int[] {2, 4, 4}));
+
+        //Dyes
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "blue_dye")), 1), false, new GristSet(new GristType[] {Amethyst}, new int[] {4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "black_dye")), 1), false, new GristSet(new GristType[] {Tar}, new int[] {4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "brown_dye")), 1), false, new GristSet(new GristType[] {Amber, Iodine}, new int[] {1, 3}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "green_dye")), 1), false, new GristSet(new GristType[] {Amber, Iodine}, new int[] {3, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "white_dye")), 1), false, new GristSet(new GristType[] {Chalk}, new int[] {2}));
+
+        //cold blocks
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "hard_ice"))), new GristSet(new GristType[] {Build, Cobalt}, new int[] {10, 6}));
+
+        //warm blocks
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "ash"))), new GristSet(new GristType[] {Tar}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "fleshchunk"))), new GristSet(new GristType[] {Iodine, Rust}, new int[] {1, 1}));
+
+        //Gemstones
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "crystal_shard"))), new GristSet(new GristType[] {Amethyst, Tar}, new int[] {6, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "gem")), 1, 0), true, new GristSet(new GristType[] {Amethyst, Uranium}, new int[] {12, 6}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "gem")), 1, 1), true, new GristSet(new GristType[] {Ruby}, new int[] {12}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "gem")), 1, 2), true, new GristSet(new GristType[] {Mercury, Rust}, new int[] {6, 6}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "gem")), 1, 3), true, new GristSet(new GristType[] {Diamond, Amber}, new int[] {6, 6}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "gem")), 1, 4), true, new GristSet(new GristType[] {Chalk, Amethyst}, new int[] {3, 9}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "gem")), 1, 5), true, new GristSet(new GristType[] {Amethyst, Quartz}, new int[] {6, 6}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "gem")), 1, 6), true, new GristSet(new GristType[] {Cobalt}, new int[] {12}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "gem")), 1, 7), true, new GristSet(new GristType[] {Amber}, new int[] {12}));
+
+        //Alchemy Recipes
+        CombinationRegistry.addCombination(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "brown_dye"))), new ItemStack(Items.WHEAT_SEEDS), MODE_OR, false, false, new ItemStack(Items.DYE, 1, 3));
+        CombinationRegistry.addCombination(new ItemStack(Items.QUARTZ), new ItemStack(Items.DYE, 1, 4), MODE_OR, false, true, new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "gem")), 1, 5));
+        CombinationRegistry.addCombination(new ItemStack(Blocks.ICE), new ItemStack(Blocks.RED_FLOWER, 1, 1), MODE_AND, false, true, new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_1")), 1, 4));
+        CombinationRegistry.addCombination(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "sapling_1")), 1, 0), new ItemStack(Blocks.RED_FLOWER, 1, 0), MODE_OR, true, true, new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("biomesoplenty", "flower_1")), 1, 5));
+    }
+
+    private static final void registerFutureMcRecipes()
+    {
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "stripped_acacia_log"))), new GristSet(new GristType[] {Build}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "stripped_jungle_log"))), new GristSet(new GristType[] {Build}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "stripped_oak_log"))), new GristSet(new GristType[] {Build}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "stripped_birch_log"))), new GristSet(new GristType[] {Build}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "stripped_spruce_log"))), new GristSet(new GristType[] {Build}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "stripped_dark_oak_log"))), new GristSet(new GristType[] {Build}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "soul_soil"))), new GristSet(new GristType[] {Build, Caulk, Sulfur}, new int[] {4, 3, 2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "smooth_stone"))), new GristSet(new GristType[] {Build}, new int[] {2}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "smooth_sandstone"))), new GristSet(new GristType[] {Build}, new int[] {4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "smooth_red_sandstone"))), new GristSet(new GristType[] {Build}, new int[] {4}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "honey_block"))), new GristSet(new GristType[] {Amber}, new int[] {32}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "honeycomb"))), new GristSet(new GristType[] {Amber}, new int[] {4}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "bell"))), new GristSet(new GristType[] {Gold}, new int[] {500}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "lily_of_the_valley"))), new GristSet(new GristType[] {Caulk, Iodine}, new int[] {3, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "cornflower"))), new GristSet(new GristType[] {Amethyst, Iodine}, new int[] {3, 1}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "wither_rose"))), new GristSet(new GristType[] {Tar}, new int[] {8}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "bamboo"))), new GristSet(new GristType[] {Build}, new int[] {1}));
+
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "ancient_debris"))), new GristSet(new GristType[] {Build, Tar, Diamond}, new int[] {8, 18, 18}));
+        GristRegistry.addGristConversion(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("futuremc", "netherite_scrap"))), new GristSet(new GristType[] {Tar, Diamond}, new int[] {18, 18}));
     }
 }
