@@ -17,6 +17,6 @@ public class PropertyVMotionDamage extends WeaponProperty
 	@Override
 	public float damageAgainstEntity(ItemStack stack, EntityLivingBase player, EntityLivingBase target, float amount)
 	{
-		return super.damageAgainstEntity(stack, player, target, amount) * Math.max(max, (float)-Math.min(-1, (player.motionY-0.5)*multiplier));
+		return super.damageAgainstEntity(stack, player, target, amount) * Math.min(max, (float)-Math.min(-1, (player.motionY-0.5)*multiplier));
 	}
 }
