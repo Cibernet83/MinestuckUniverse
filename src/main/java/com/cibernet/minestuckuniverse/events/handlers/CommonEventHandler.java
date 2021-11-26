@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
+import com.cibernet.minestuckuniverse.items.ItemGhost;
 import com.cibernet.minestuckuniverse.items.armor.ItemPogoBoots;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
@@ -28,6 +29,7 @@ import com.mraof.minestuck.network.skaianet.SburbHandler;
 import com.mraof.minestuck.world.MinestuckDimensionHandler;
 import com.mraof.minestuck.world.lands.gen.ChunkProviderLands;
 import com.sun.javafx.geom.Vec3f;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -348,6 +350,25 @@ public class CommonEventHandler
 			event.getHarvester() != null && event.getHarvester().getHeldItemMainhand().isEmpty() && event.getHarvester().getRNG().nextFloat() < 0.4f)
 				event.getDrops().add(new ItemStack(MinestuckUniverseItems.pebble, event.getHarvester().getRNG().nextInt(4)));
 
+	}
+
+	@SubscribeEvent
+	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	{
+		if(event.getItemStack().getItem() instanceof ItemCaptcharoidCamera)
+		{
+			EntityPlayer player = event.getEntityPlayer();
+			World world = player.world;
+
+			Block block = world.getBlockState(event.getPos()).getBlock();
+			if(ItemGhost.containsKey(block))
+			{
+				player.inventory.addItemStackToInventory(AlchemyRecipes.createGhostCard(new ItemStack(ItemGhost.get(block))));
+				event.getItemStack().damageItem(1, player);
+				event.setCancellationResult(EnumActionResult.SUCCESS);
+				event.setCanceled(true);
+			}
+		}
 	}
 
 	@SubscribeEvent
