@@ -260,6 +260,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(energyBow), new GristSet(new GristType[] {Uranium, Build}, new int[] {24, 32}));
         GristRegistry.addGristConversion(new ItemStack(infernoShot), new GristSet(new GristType[] {Sulfur, Tar, Build}, new int[] {24, 16, 32}));
         GristRegistry.addGristConversion(new ItemStack(icicleBow), new GristSet(new GristType[] {Cobalt, Build}, new int[] {24, 32}));
+        GristRegistry.addGristConversion(new ItemStack(shiverburnWing), new GristSet(new GristType[] {Cobalt, Sulfur, Ruby, Build}, new int[] {24, 24, 60, 100}));
         GristRegistry.addGristConversion(new ItemStack(sweetBow), new GristSet(new GristType[] {Chalk, Amber, Iodine, Gold}, new int[] {40, 32, 32, 20}));
         GristRegistry.addGristConversion(new ItemStack(tempestBow), new GristSet(new GristType[] {Chalk, Cobalt, Quartz}, new int[] {200, 490, 40}));
         GristRegistry.addGristConversion(new ItemStack(magneticHookshot), new GristSet(new GristType[] {Uranium, Mercury, Rust}, new int[] {400, 680, 850}));
