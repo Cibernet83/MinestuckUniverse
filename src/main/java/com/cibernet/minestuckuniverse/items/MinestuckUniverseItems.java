@@ -97,6 +97,7 @@ public class MinestuckUniverseItems
 
     //Items
     public static Item spaceSalt = new ItemSpaceSalt();
+    public static Item timetable = new ItemTimetable();
     public static Item moonstone = new MSUItemBase("moonstone");
     public static Item moonstoneChisel = new ItemChisel("moonstone", 31);
     public static Item zillystoneShard = new MSUItemBase("zillystone_shard", "zillystoneShard");
@@ -109,6 +110,9 @@ public class MinestuckUniverseItems
     public static Item sbahjWhip = new ItemSound("whip_sbahj", "whipSbahj", MSUSoundHandler.whipCrock).setSecret();
     public static Item unrealAir = new ItemUnrealAir("unreal_air", "unrealAir");
 
+    public static Item tickingStopwatch = new MSUItemBase("ticking_stopwatch", "tickingStopwatch"){{
+        addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "time"), ((stack, worldIn, entityIn) -> ((System.currentTimeMillis() - Minestuck.startTime)/1000f) % 60));
+    }}.setMaxStackSize(1);
     public static Item cueBall = new MSUItemBase("cue_ball", "cueBall")
     {
         @Override
@@ -368,6 +372,8 @@ public class MinestuckUniverseItems
         registerItem(registry, wizardbeardYarn);
         registerItem(registry, spaceSalt);
         registerItem(registry, cueBall);
+        registerItem(registry, tickingStopwatch);
+        registerItem(registry, timetable);
         registerItem(registry, strifeCard);
 
         registerItem(registry, laserPointer);

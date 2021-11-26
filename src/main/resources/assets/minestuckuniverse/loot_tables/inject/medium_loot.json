@@ -1,0 +1,15 @@
+{
+    "pools": [
+        {
+            "rolls": 1,
+            "name": "items",
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minestuckuniverse:ticking_stopwatch",
+                    "weight": 1
+                }
+            ]
+        }
+    ]
+}

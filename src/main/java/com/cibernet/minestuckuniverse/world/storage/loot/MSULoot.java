@@ -18,6 +18,8 @@ public class MSULoot
 		LootConditionManager.registerCondition(new JujuLootCondition.Serializer());
 	}
 
+	private static final ResourceLocation TIME = new ResourceLocation("minestuck", "chests/medium_basic/clockwork");
+
 	@SubscribeEvent
 	public static void onLootInject(LootTableLoadEvent event)
 	{
@@ -33,6 +35,11 @@ public class MSULoot
 		{
 			LootPool inject = event.getLootTableManager().getLootTableFromLocation(new ResourceLocation(MinestuckUniverse.MODID, "inject/consort_general")).getPool("items");
 			event.getTable().getPool("items").addEntry(inject.getEntry("minestuck:record_retro_battle"));
+		}
+		else if(event.getName().equals(TIME))
+		{
+			LootPool inject = event.getLootTableManager().getLootTableFromLocation(new ResourceLocation(MinestuckUniverse.MODID, "inject/medium_loot")).getPool("items");
+			event.getTable().getPool("items").addEntry(inject.getEntry("minestuck:ticking_stopwatch"));
 		}
 	}
 }

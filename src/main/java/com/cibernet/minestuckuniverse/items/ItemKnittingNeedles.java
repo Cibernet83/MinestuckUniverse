@@ -41,6 +41,7 @@ public class ItemKnittingNeedles extends MSUWeaponBase
             }
         });
         addProperties(new PropertyDualWield());
+        setContainerItem(this);
     }
 
     @Override

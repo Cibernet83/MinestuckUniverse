@@ -313,6 +313,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(fluorite), new GristSet(new GristType[] {Cobalt, Diamond}, new int[] {20, 1}));
         GristRegistry.addGristConversion(new ItemStack(zillystoneShard), new GristSet(new GristType[] {Zillium}, new int[] {1}));
         GristRegistry.addGristConversion(new ItemStack(spaceSalt), new GristSet(new GristType[] {Uranium, Tar, Zillium}, new int[] {10, 32, 1}));
+        GristRegistry.addGristConversion(new ItemStack(timetable), new GristSet(new GristType[] {Uranium, Garnet, Rust, Zillium}, new int[] {300, 1600, 1600, 500}));
 
         GristRegistry.addGristConversion(new ItemStack(fluoriteOre), new GristSet(new GristType[] {Cobalt, Diamond, Build}, new int[] {20, 1, 4}));
     
@@ -366,6 +367,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 6), new ItemStack(MinestuckBlocks.transportalizer), MODE_AND, true, false, new ItemStack(paradoxTransportalizer));
 
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.itemFrog, 1, 6), new ItemStack(Items.GLOWSTONE_DUST), MODE_OR, true, false, new ItemStack(spaceSalt));
+        CombinationRegistry.addCombination(new ItemStack(tickingStopwatch), new ItemStack(MinestuckItems.recordDanceStab), MODE_OR, false, false, new ItemStack(timetable));
 
         //hammerkind
         CombinationRegistry.addCombination(new ItemStack(Blocks.LOG), new ItemStack(MinestuckItems.sledgeHammer), MODE_OR, new ItemStack(loghammer));
@@ -381,7 +383,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(aaaNailShocker), new ItemStack(midasMallet), MODE_AND, false, false, new ItemStack(highVoltageStormCrusher));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.scarletZillyhoo), new ItemStack(rocketFist), MODE_AND, false, false, new ItemStack(barrelsWarhammer));
         removeCombination(new ItemStack(MinestuckItems.blacksmithHammer), new ItemStack(Items.CLOCK), CombinationRegistry.Mode.MODE_OR, false, false);
-        CombinationRegistry.addCombination(new ItemStack(midasMallet), new ItemStack(Items.CLOCK), MODE_OR, new ItemStack(MinestuckItems.fearNoAnvil));
+        CombinationRegistry.addCombination(new ItemStack(midasMallet), new ItemStack(tickingStopwatch), MODE_OR, new ItemStack(MinestuckItems.fearNoAnvil));
         removeCombination(new ItemStack(MinestuckItems.fearNoAnvil), new ItemStack(Items.LAVA_BUCKET), CombinationRegistry.Mode.MODE_OR, false, false);
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.blacksmithHammer), new ItemStack(Items.LAVA_BUCKET), MODE_AND, new ItemStack(MinestuckItems.meltMasher));
 
@@ -397,7 +399,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(lightbringer), new ItemStack(lightning), CombinationRegistry.Mode.MODE_OR, false, false, new ItemStack(cybersword));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.claymore), new ItemStack(MinestuckItems.itemFrog, 1, 5), CombinationRegistry.Mode.MODE_OR, false, true, new ItemStack(MinestuckItems.royalDeringer));
         CombinationRegistry.addCombination(PropertyBreakableItem.getBrokenStack(MinestuckItems.royalDeringer), new ItemStack(cueBall), CombinationRegistry.Mode.MODE_AND, true, true, new ItemStack(MinestuckItems.caledfwlch));
-        CombinationRegistry.addCombination(PropertyBreakableItem.getBrokenStack(MinestuckItems.caledfwlch), new ItemStack(MinestuckItems.recordDanceStab), CombinationRegistry.Mode.MODE_AND, true, false, new ItemStack(MinestuckItems.caledscratch));
+        CombinationRegistry.addCombination(PropertyBreakableItem.getBrokenStack(MinestuckItems.caledfwlch), new ItemStack(timetable), CombinationRegistry.Mode.MODE_AND, true, false, new ItemStack(MinestuckItems.caledscratch));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.caledscratch), new ItemStack(Blocks.PACKED_ICE), CombinationRegistry.Mode.MODE_OR, new ItemStack(MinestuckItems.doggMachete));
 
         removeCombination(new ItemStack(Items.STONE_SWORD), new ItemStack(Items.ROTTEN_FLESH), CombinationRegistry.Mode.MODE_AND, false, true);
