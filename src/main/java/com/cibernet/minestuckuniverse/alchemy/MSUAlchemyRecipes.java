@@ -151,8 +151,8 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(rubberBoots), new GristSet(new GristType[] {Build, Shale}, new int[] {10, 20}));
         GristRegistry.addGristConversion(new ItemStack(moonShoes), new GristSet(new GristType[] {Build, Shale}, new int[] {20, 10}));
         GristRegistry.addGristConversion(new ItemStack(sunShoes), new GristSet(new GristType[] {Build, Shale, Sulfur}, new int[] {200, 100, 250}));
-        GristRegistry.addGristConversion(new ItemStack(rocketBoots), new GristSet(new GristType[] {Build, Tar, Sulfur}, new int[] {2000, 200, 80}));
-        GristRegistry.addGristConversion(new ItemStack(windWalkers), new GristSet(new GristType[] {Build, Cobalt, Uranium, Chalk}, new int[] {1200, 600, 1, 800}));
+        GristRegistry.addGristConversion(new ItemStack(rocketBoots), new GristSet(new GristType[] {Build, Tar, Sulfur}, new int[] {1600, 200, 80}));
+        GristRegistry.addGristConversion(new ItemStack(windWalkers), new GristSet(new GristType[] {Build, Cobalt, Uranium, Chalk}, new int[] {120, 60, 1, 200}));
         GristRegistry.addGristConversion(new ItemStack(airJordans), new GristSet(new GristType[] {Build, Ruby, Chalk}, new int[] {800, 600, 800}));
         GristRegistry.addGristConversion(new ItemStack(cobaltJordans), new GristSet(new GristType[] {Build, Cobalt, Chalk}, new int[] {800, 600, 800}));
 
