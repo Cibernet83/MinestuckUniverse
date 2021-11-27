@@ -535,6 +535,7 @@ public class MinestuckUniverseItems
         registerItem(registry, knittingNeedles);
         registerItem(registry, pointySticks);
         registerItem(registry, boneNeedles);
+        registerItem(registry, drumstickNeedles);
         registerItem(registry, litGlitterBeamTransistor);
         registerItem(registry, needlewands);
         registerItem(registry, oglogothThorn);

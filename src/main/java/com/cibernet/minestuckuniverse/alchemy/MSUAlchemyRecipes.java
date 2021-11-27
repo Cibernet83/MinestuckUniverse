@@ -241,6 +241,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(gauntletOfZillywenn), false, new GristSet(new GristType[] {Zillium}, new int[] {1000}));
 
         GristRegistry.addGristConversion(new ItemStack(pointySticks), false, new GristSet(new GristType[] {Build}, new int[] {12}));
+        GristRegistry.addGristConversion(new ItemStack(drumstickNeedles), false, new GristSet(new GristType[] {Build, Garnet}, new int[] {200, 10}));
         GristRegistry.addGristConversion(new ItemStack(boneNeedles), false, new GristSet(new GristType[] {Chalk}, new int[] {24}));
         GristRegistry.addGristConversion(new ItemStack(needlewands), false, new GristSet(new GristType[] {Diamond, Chalk, Garnet, Gold}, new int[] {1000, 2000, 3000, 500}));
         GristRegistry.addGristConversion(new ItemStack(oglogothThorn), false, new GristSet(new GristType[] {Iodine, Chalk, Amethyst, Gold, Tar}, new int[] {6000, 5000, 4000, 3000, 666}));
@@ -437,6 +438,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(needlewands), new ItemStack(MinestuckItems.grimoire), MODE_AND, false, false, new ItemStack(oglogothThorn));
         CombinationRegistry.addCombination(new ItemStack(laserPointer), new ItemStack(MinestuckItems.minestuckBucket, 1, 3), MODE_OR, false, true, new ItemStack(litGlitterBeamTransistor));
         CombinationRegistry.addCombination(new ItemStack(knittingNeedles), new ItemStack(zillyStone), MODE_AND, false, false, new ItemStack(thistlesOfZillywitch));
+        CombinationRegistry.addCombination(new ItemStack(pointySticks), new ItemStack(Blocks.NOTEBLOCK), MODE_OR, false, false, new ItemStack(drumstickNeedles));
 
         //clawkind
         removeCombination(new ItemStack(Blocks.IRON_BARS), new ItemStack(Items.LEATHER), CombinationRegistry.Mode.MODE_AND, false, true);

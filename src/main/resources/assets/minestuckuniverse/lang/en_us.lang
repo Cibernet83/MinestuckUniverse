@@ -383,6 +383,8 @@ item.echidnaQuill.name.plural=Quills of Echidna
 item.thistlesOfZillywitch.name=The Thistle of Zillywitch
 item.thistlesOfZillywitch.name.plural=The Thistles of Zillywitch
 item.thistlesOfZillywitch.tooltip=Flippety dippety doo bup bup shrubber double floppy mumblescurry noodlescoop pizzabubble pizzabubble mip mip mip mip mip mip
+item.drumstickNeedles.name=Drumstuck Needle
+item.drumstickNeedles.name.plural=Drumstick Needles
 
 item.flimsyBow.name=Flimsy Bow
 item.flimsyBow.tooltip=This bow seems to be more useful at hitting things than it is at firing arrows, it should at least help you work towards getting a real bow.
