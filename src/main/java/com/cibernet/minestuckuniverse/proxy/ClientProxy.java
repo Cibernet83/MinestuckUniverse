@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.proxy;
 import com.cibernet.minestuckuniverse.client.MSUFontRenderer;
 import com.cibernet.minestuckuniverse.client.MSUKeys;
 import com.cibernet.minestuckuniverse.client.RenderBeams;
+import com.cibernet.minestuckuniverse.client.layers.LayerConsortCosmetics;
 import com.cibernet.minestuckuniverse.client.render.*;
 import com.cibernet.minestuckuniverse.entity.*;
 import com.cibernet.minestuckuniverse.gui.GuiStrifeSwitcher;
@@ -65,6 +66,8 @@ public class ClientProxy extends CommonProxy
     protected static void registerRenderers()
     {
         Minecraft mc = Minecraft.getMinecraft();
+
+        LayerConsortCosmetics.addLayers();
 
         mc.getItemColors().registerItemColorHandler(new ItemBeamBlade.BladeColorHandler(), dyedBeamBlade);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) ->

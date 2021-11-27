@@ -65,6 +65,7 @@ public abstract class MSUPacket
         UPDATE_BEAMS(UpdateBeamDataPacket.class),
         LEFT_CLICK_EMPTY(LeftClickEmptyPacket.class),
         ROCKET_BOOTS(RocketBootsPacket.class),
+        UPDATE_HATS(UpdateHatsPacket.class),
         ;
 
         Class<? extends MSUPacket> packetType;
