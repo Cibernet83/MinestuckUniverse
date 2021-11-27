@@ -1,27 +1,47 @@
 package com.cibernet.minestuckuniverse.capabilities.consortCosmetics;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.mraof.minestuck.entity.EntityFrog;
+import com.mraof.minestuck.entity.consort.EntityConsort;
 import com.mraof.minestuck.item.ItemNet;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.ArrayList;
+
 public class ConsortHatsData implements IConsortHatsData
 {
 	ItemStack hat = ItemStack.EMPTY;
 	int pickupDelay = 0;
+
+	public static final ArrayList<ItemStack> HAT_SPAWN_POOL = new ArrayList<ItemStack>()
+			{{
+				add(new ItemStack(MinestuckUniverseItems.crumplyHat));
+				add(new ItemStack(MinestuckUniverseItems.wizardHat));
+				add(new ItemStack(MinestuckUniverseItems.frogHat));
+				add(new ItemStack(Items.LEATHER_HELMET));
+				add(new ItemStack(Items.CHAINMAIL_HELMET));
+			}};
+
+	@Override
+	public void setOwner(EntityLivingBase owner)
+	{
+		if(owner instanceof EntityConsort && owner.getRNG().nextFloat() < 0.05f)
+			setHeadStack(HAT_SPAWN_POOL.get(owner.getRNG().nextInt(HAT_SPAWN_POOL.size())).copy());
+	}
 
 	@Override
 	public void setHeadStack(ItemStack stack)
@@ -121,7 +141,11 @@ public class ConsortHatsData implements IConsortHatsData
 			IConsortHatsData cap = entity.getCapability(MSUCapabilities.CONSORT_HATS_DATA, null);
 
 			if(!cap.getHeadStack().isEmpty())
+			{
 				entity.world.spawnEntity(new EntityItem(entity.world, entity.posX, entity.posY+entity.height, entity.posZ, cap.getHeadStack()));
+				cap.setHeadStack(ItemStack.EMPTY);
+				MSUChannelHandler.sendToTracking(MSUPacket.makePacket(MSUPacket.Type.UPDATE_HATS, event.getEntityLiving()), event.getEntityLiving());
+			}
 		}
 	}
 

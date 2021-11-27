@@ -1,8 +1,6 @@
 package com.cibernet.minestuckuniverse.client.layers;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
-import com.cibernet.minestuckuniverse.client.models.armor.ModelCrumplyHat;
-import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.google.common.collect.Maps;
 import com.mraof.minestuck.client.model.ModelIguana;
 import com.mraof.minestuck.client.model.ModelTurtle;
@@ -112,7 +110,7 @@ public class LayerConsortCosmetics implements LayerRenderer<EntityLivingBase> {
 		armorModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, hasNeck ? netHeadYaw : 0, hasNeck ? headPitch : 0, scale);
 
 		texture = getArmorResource(entitylivingbaseIn, stack, EntityEquipmentSlot.HEAD, "overlay");
-		if(texture != null)
+		if(texture != null && (stack.getItem() instanceof ItemArmor && ((ItemArmor) stack.getItem()).hasOverlay(stack)))
 		{
 			renderer.bindTexture(texture);
 			GlStateManager.color(1,1,1);
