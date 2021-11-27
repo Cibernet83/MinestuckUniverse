@@ -17,9 +17,16 @@
     "category": "players",
     "subtitle": "subtitle.minestuckuniverse.shield_parry",
     "sounds": [
-        "minestuckuniverse:item/shield_parry1",
-        "minestuckuniverse:item/shield_parry2",
-        "minestuckuniverse:item/shield_parry3"
+      "minestuckuniverse:item/shield_parry1",
+      "minestuckuniverse:item/shield_parry2",
+      "minestuckuniverse:item/shield_parry3"
+    ]
+  },
+  "item.shock": {
+    "category": "players",
+    "subtitle": "subtitle.minestuckuniverse.shock",
+    "sounds": [
+      "minestuckuniverse:item/shock"
     ]
   },
   "item.whip_crack": {

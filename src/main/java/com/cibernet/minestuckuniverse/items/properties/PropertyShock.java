@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.events.handlers.CommonEventHandler;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
+import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.mraof.minestuck.alchemy.GristRegistry;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
@@ -84,6 +85,7 @@ public class PropertyShock extends WeaponProperty
 				}
 			}
 
+		target.playSound(MSUSoundHandler.shock, 1, Math.max(1, (target.world.rand.nextFloat() - target.world.rand.nextFloat()) * 0.2F + 1.0F));
 		if(damage > 0)
 		{
 			target.hurtResistantTime = 0;
