@@ -28,8 +28,8 @@ public class MSUJeiPlugin implements IModPlugin
 	public void register(IModRegistry registry)
 	{
 		ArrayList<AssemblyRecipeWrapper> assemblyRecipes = new ArrayList<>();
-		for(Map.Entry<String, Block> entry : MachineChasisRecipes.getRecipes().entrySet())
-			assemblyRecipes.add(new AssemblyRecipeWrapper(MachineChasisRecipes.getIngredientList(entry.getKey()), new ItemStack(entry.getValue())));
+		for(Map.Entry<String, MachineChasisRecipes.Output> entry : MachineChasisRecipes.getRecipes().entrySet())
+			assemblyRecipes.add(new AssemblyRecipeWrapper(MachineChasisRecipes.getIngredientList(entry.getKey()), entry.getValue().getStack()));
 		
 		registry.addRecipes(assemblyRecipes, assemblyRecipeCategory.getUid());
 		registry.addRecipeCatalyst(new ItemStack(MinestuckUniverseBlocks.machineChasis), assemblyRecipeCategory.getUid());

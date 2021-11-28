@@ -7,6 +7,7 @@ import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ItemStackHelper;
@@ -21,7 +22,7 @@ import java.util.TreeMap;
 
 public class MachineChasisRecipes
 {
-    protected static Hashtable<String, Block> recipes = new Hashtable<>();
+    protected static Hashtable<String, Output> recipes = new Hashtable<>();
     protected static int inputLimit = 5;
 
     public static void registerRecipes()
@@ -38,26 +39,37 @@ public class MachineChasisRecipes
                 new ItemStack(Blocks.CHEST), new ItemStack(Items.REDSTONE));
     }
     
-    public static Hashtable<String, Block> getRecipes() {return recipes;}
-    
+    public static Hashtable<String, Output> getRecipes() {return recipes;}
+
     public static boolean addRecipe(Block output, ItemStack... input)
     {
         String key = toKey(input);
         if(recipes.containsKey(key) || key.isEmpty() || key == null)
             return false;
-        recipes.put(key, output);
+        recipes.put(key, new Output(output));
 
 
         return true;
     }
 
-    public static Block getOutput(ItemStack... input)
+    public static boolean addRecipe(ItemStack output, ItemStack... input)
+    {
+        String key = toKey(input);
+        if(recipes.containsKey(key) || key.isEmpty() || key == null)
+            return false;
+        recipes.put(key, new Output(output));
+
+
+        return true;
+    }
+
+    public static Output getOutput(ItemStack... input)
     {
         String key = toKey(input);
 
         if(recipes.containsKey(key))
             return recipes.get(key);
-        return Blocks.AIR;
+        return null;
     }
 
     public static boolean recipeExists(ItemStack... input)
@@ -94,5 +106,35 @@ public class MachineChasisRecipes
         }
         return out;
     }
-    
+
+
+    public static class Output
+    {
+        Object out;
+
+        public Output(ItemStack stack)
+        {
+            out = stack;
+        }
+
+        public Output(Block block)
+        {
+            out = block;
+        }
+
+        public boolean isStack()
+        {
+            return out instanceof ItemStack;
+        }
+
+        public ItemStack getStack()
+        {
+            return isStack() ? (ItemStack) out : new ItemStack(((Block)out));
+        }
+
+        public IBlockState getBlockState()
+        {
+            return !isStack() ? ((Block)out).getDefaultState() : Blocks.AIR.getDefaultState();
+        }
+    }
 }

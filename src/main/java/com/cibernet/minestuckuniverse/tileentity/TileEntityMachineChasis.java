@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.tileentity;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -102,12 +103,23 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory, I
 
     public void assemble()
     {
-        if(canAssemble() /*&& !world.isRemote*/)
+        if(canAssemble())
         {
-            IBlockState output = MachineChasisRecipes.getOutput(invToArray()).getDefaultState();
+            MachineChasisRecipes.Output output = MachineChasisRecipes.getOutput(invToArray());
+
             clear();
             world.destroyBlock(pos, false);
-            world.setBlockState(pos, output);
+
+            if(output.isStack())
+            {
+                if(!world.isRemote)
+                {
+                    EntityItem item = new EntityItem(world, pos.getX()+0.5, pos.getY(), pos.getZ()+0.5, output.getStack());
+                    item.setDefaultPickupDelay();
+                    world.spawnEntity(item);
+                }
+            }
+            else world.setBlockState(pos, output.getBlockState());
         }
     }
 
