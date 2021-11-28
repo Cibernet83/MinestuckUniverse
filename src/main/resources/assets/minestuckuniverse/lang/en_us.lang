@@ -800,6 +800,8 @@ strife.item.abstrataList=§8§o%s
 
 key.minestuckuniverse.strife=Strife Allocate/Retrieve
 key.minestuckuniverse.swapOffhandStrife=Swap Offhand Item with Strife Deck
+key.minestuckuniverse.strifeSelectorLeft=Strife Selector Scroll Left
+key.minestuckuniverse.strifeSelectorRight=Strife Selector Scroll Right
 
 config.minestuckuniverse.general.zillystoneYields=Zillystone Luck Modifier
 config.minestuckuniverse.general.baseZillystoneLuck=Zillystone Base Luck

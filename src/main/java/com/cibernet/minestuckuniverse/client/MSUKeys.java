@@ -29,12 +29,16 @@ import org.lwjgl.input.Mouse;
 public class MSUKeys
 {
 	public static final KeyBinding strifeKey = new KeyBinding("key.minestuckuniverse.strife", Keyboard.KEY_V, "key.categories.minestuck");
+	public static final KeyBinding strifeSelectorLeftKey = new KeyBinding("key.minestuckuniverse.strifeSelectorLeft", Keyboard.KEY_NONE, "key.categories.minestuck");
+	public static final KeyBinding strifeSelectorRightKey = new KeyBinding("key.minestuckuniverse.strifeSelectorRight", Keyboard.KEY_NONE, "key.categories.minestuck");
 	public static final KeyBinding swapOffhandStrifeKey = new KeyBinding("key.minestuckuniverse.swapOffhandStrife", Keyboard.KEY_NONE, "key.categories.minestuck");
 
 	public static void register()
 	{
 		MinecraftForge.EVENT_BUS.register(MSUKeys.class);
 		ClientRegistry.registerKeyBinding(strifeKey);
+		ClientRegistry.registerKeyBinding(strifeSelectorLeftKey);
+		ClientRegistry.registerKeyBinding(strifeSelectorRightKey);
 		ClientRegistry.registerKeyBinding(swapOffhandStrifeKey);
 	}
 
