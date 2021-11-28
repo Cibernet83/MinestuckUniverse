@@ -39,7 +39,7 @@ public class MSULoot
 		else if(event.getName().equals(TIME))
 		{
 			LootPool inject = event.getLootTableManager().getLootTableFromLocation(new ResourceLocation(MinestuckUniverse.MODID, "inject/medium_loot")).getPool("items");
-			event.getTable().getPool("items").addEntry(inject.getEntry("minestuck:ticking_stopwatch"));
+			event.getTable().getPool("main").addEntry(inject.getEntry("minestuckuniverse:ticking_stopwatch"));
 		}
 	}
 }
