@@ -48,8 +48,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -60,6 +58,7 @@ import java.util.ArrayList;
 
 public class MinestuckUniverseItems
 {
+    private static final PropertySoundOnHit.Value PITCH_NOTE = ((stack, target, player) -> (-player.rotationPitch + 90) / 90f);
     public static ArrayList<Block> itemBlocks = new ArrayList<>();
 
     //Armor Materials
@@ -203,7 +202,7 @@ public class MinestuckUniverseItems
     public static Item knittingNeedles = new ItemKnittingNeedles(128,1.6, -0.24, 1, "knitting_needle", "knittingNeedle").setTool(toolNeedles, 2, 1f);
     public static Item pointySticks = new MSUWeaponBase(300,3.2, -0.3, 10, "pointy_stick", "pointyStick").setTool(toolNeedles, 1, 1f).addProperties(new PropertyDualWield()).addProperties(new PropertyTipperDamage(0.9f, 1.1f, 0), new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 2)).setRepairMaterial("plankWood");
     public static Item boneNeedles = new MSUWeaponBase(225,3.6, -0.3, 5, "bone_needle", "boneNeedle").setTool(toolNeedles, 1, 1f).addProperties(new PropertyTipperDamage(0.7f, 1.25f, 0), new PropertyDualWield()).setRepairMaterial("bone");
-    public static Item drumstickNeedles = new MSUWeaponBase(500,4, -0.3, 5, "drumstick_needles", "drumstickNeedles").setTool(toolNeedles, 2, 1f).addProperties(new PropertyTipperDamage(0.7f, 1.25f, 0), new PropertyDualWield(), new PropertySoundOnHit(SoundEvents.BLOCK_NOTE_BASEDRUM, ((stack, target, player) -> (-player.rotationPitch+90)/90f), ((stack, target, player) -> 3f)));
+    public static Item drumstickNeedles = new MSUWeaponBase(500,4, -0.3, 5, "drumstick_needles", "drumstickNeedles").setTool(toolNeedles, 2, 1f).addProperties(new PropertyTipperDamage(0.7f, 1.25f, 0), new PropertyDualWield(), new PropertySoundOnHit(SoundEvents.BLOCK_NOTE_BASEDRUM, PITCH_NOTE, ((stack, target, player) -> 3f)), new PropertySoundOnClick(new SoundEvent[] {SoundEvents.BLOCK_NOTE_BASEDRUM}, PITCH_NOTE,  ((stack, target, player) -> 3f), true));
     public static Item dragonBlades = new MSUWeaponBase(500, 7.9, -0.36, 4, "dragon_blade", "dragonBlades").setTool(toolNeedles, 2, 4).addProperties(new PropertyDualWield(), new PropertyTipperDamage(0.8f, 1.3f, 0.1f)).setCreativeTab(null);
     public static Item litGlitterBeamTransistor = new ItemBeamWeapon(700,5.5, -0.3, 0.1f, 20, 1, 72000, 40, 30, "lit_glitter_beam_transistor", "litGlitterBeamTransistor").setTool(toolNeedles, 2, 4f).addProperties(new PropertyDualWield(), new PropertyTipperDamage(0.9f, 1.1f, 0), new PropertyRainbowBeam(), new PropertyBeamDeathMessage("rainbow"));
     public static Item needlewands = new ItemBeamWeapon(488,6.5, -0.3, 0.05f, 10, 1, 60, "needlewand", "needlewand").setTool(toolNeedles, 3, 2f).addProperties(new PropertyDualWield(), new PropertyTipperDamage(0.95f, 1.15f, 0), new PropertyMagicBeam(), new PropertyBeamDeathMessage("magic"));
@@ -600,7 +599,7 @@ public class MinestuckUniverseItems
             MinestuckItems.battleaxe = registerItem(registry, new MSUWeaponBase(600, 32, -3.15, 5, MinestuckItems.battleaxe).setTool(toolAxe, 3, 2));
             MinestuckItems.batleacks = registerItem(registry, new MSUWeaponBase(750, 24, -3, 1, MinestuckItems.batleacks).setTool(toolAxe, 2, 2).addProperties(new PropertySlippery()));
             MinestuckItems.blacksmithBane = registerItem(registry, new MSUWeaponBase(750, 26.4, -3.03, 8, MinestuckItems.blacksmithBane).setTool(toolAxe, 3, 3));
-            MinestuckItems.scraxe = registerItem(registry, new MSUWeaponBase(675, 24, -3, 7, MinestuckItems.scraxe).setTool(toolAxe, 3, 5).addProperties(new PropertySoundOnHit(SoundEvents.BLOCK_NOTE_GUITAR, ((stack, target, player) -> (-player.rotationPitch+90)/90f), ((stack, target, player) -> 3f))));
+            MinestuckItems.scraxe = registerItem(registry, new MSUWeaponBase(675, 24, -3, 7, MinestuckItems.scraxe).setTool(toolAxe, 3, 5).addProperties(new PropertySoundOnHit(SoundEvents.BLOCK_NOTE_GUITAR, PITCH_NOTE, ((stack, target, player) -> 3f)), new PropertySoundOnClick(new SoundEvent[] {SoundEvents.BLOCK_NOTE_GUITAR}, PITCH_NOTE,  ((stack, target, player) -> 3f), false)));
             MinestuckItems.hephaestusLumber = registerItem(registry, new MSUWeaponBase(750, 28, -3, 9, MinestuckItems.hephaestusLumber).setTool(toolAxe, 4, 3).addProperties(new PropertyAutoSmelt(), new PropertyFarmine(100, 32), new PropertyFire(20, 1, true), new PropertyFire(2, 1, false)));
             MinestuckItems.rubyCroak = registerItem(registry, new MSUWeaponBase(1000, 32, -2.7, 10, MinestuckItems.rubyCroak).setTool(toolAxe, 3, 3).addProperties(new PropertyFire(10, 0.8f, false)));
         }
