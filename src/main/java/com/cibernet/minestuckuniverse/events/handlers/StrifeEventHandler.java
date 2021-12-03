@@ -111,7 +111,7 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onPlayerAttack(LivingAttackEvent event)
 	{
-		if(!MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer))
+		if(!MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer) || event.getSource().getImmediateSource() instanceof FakePlayer)
 			return;
 
 		EntityLivingBase source = (EntityLivingBase) event.getSource().getImmediateSource();
@@ -168,7 +168,7 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onItemInteract(PlayerInteractEvent.RightClickItem event)
 	{
-		if(!MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife)
+		if(!MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife || event.getEntityPlayer() instanceof FakePlayer)
 			return;
 
 		ItemStack stack = event.getItemStack();
