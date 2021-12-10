@@ -8,8 +8,10 @@ import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.mraof.minestuck.alchemy.GristType;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.RegistryEvent;
@@ -37,6 +39,7 @@ public class MinestuckUniverseBlocks
     public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "sbahjBedrock").setResistance(0F).setHardness(-1F);
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
     public static Block smoothIron = new MSUBlockBase(Material.IRON, "smooth_iron", "smoothIron").setHardness(3.0F);
+    public static Block bedrockStairs = new BlockMSUStairs(Blocks.BEDROCK.getDefaultState(), "bedrockStairs", "bedrock_stairs");
 
     public static Block holopad = new BlockHolopad();
 	
@@ -115,6 +118,7 @@ public class MinestuckUniverseBlocks
 
         registerBlock(registry, sbahjBedrock, true);
         registerBlock(registry, zillyStone, true);
+        registerBlock(registry, bedrockStairs, true);
 
 		registerBlock(registry, magicBlock, true);
         registerBlock(registry, smoothIron, true);
