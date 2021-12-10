@@ -22,6 +22,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -66,7 +67,7 @@ public class MSUCapabilities
 	@SubscribeEvent
 	public static void onPlayerJoinWorld(EntityJoinWorldEvent event)
 	{
-		if(event.getEntity() instanceof EntityPlayerMP)
+		if(event.getEntity() instanceof EntityPlayerMP && !(event.getEntity() instanceof FakePlayer))
 		{
 			IStrifeData cap = event.getEntity().getCapability(STRIFE_DATA, null);
 			cap.setStrifeEnabled(MSUConfig.combatOverhaul);
