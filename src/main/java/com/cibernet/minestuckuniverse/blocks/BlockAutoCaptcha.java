@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoCaptcha;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -68,7 +69,7 @@ public class BlockAutoCaptcha extends BlockContainer implements IRegistryItem
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(!worldIn.isRemote)
-			playerIn.openGui(MinestuckUniverse.instance, MSUUtils.AUTO_CAPTCHA_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(MinestuckUniverse.instance, MSUGuiHandler.AUTO_CAPTCHA_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 	

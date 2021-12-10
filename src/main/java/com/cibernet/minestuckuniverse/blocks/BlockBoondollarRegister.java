@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityBoondollarRegister;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -268,7 +269,7 @@ public class BlockBoondollarRegister extends BlockContainer implements IRegistry
             return false;
         }
         else if(playerIdentifier.equals(te.owner) && !stack.getItem().equals(Items.PAPER) && !stack.getItem().equals(MinestuckItems.boondollars))
-                playerIn.openGui(MinestuckUniverse.instance, MSUUtils.BOONDOLLAR_REGISTER_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                playerIn.openGui(MinestuckUniverse.instance, MSUGuiHandler.BOONDOLLAR_REGISTER_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 

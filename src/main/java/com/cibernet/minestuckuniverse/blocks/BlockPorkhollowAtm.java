@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -37,7 +38,7 @@ public class BlockPorkhollowAtm extends MSUBlockBase
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(worldIn.isRemote)
-			playerIn.openGui(MinestuckUniverse.instance, MSUUtils.PORKHOLLOW_ATM_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(MinestuckUniverse.instance, MSUGuiHandler.PORKHOLLOW_ATM_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 	

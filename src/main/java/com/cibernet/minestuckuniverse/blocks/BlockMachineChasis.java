@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
+import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
@@ -58,7 +59,7 @@ public class BlockMachineChasis extends MSUBlockBase implements ITileEntityProvi
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(!worldIn.isRemote)
-            playerIn.openGui(MinestuckUniverse.instance, MSUUtils.MACHINE_CHASIS_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(MinestuckUniverse.instance, MSUGuiHandler.MACHINE_CHASIS_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 

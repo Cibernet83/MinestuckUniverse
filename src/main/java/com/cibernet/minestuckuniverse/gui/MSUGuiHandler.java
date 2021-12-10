@@ -17,6 +17,12 @@ import javax.annotation.Nullable;
 
 public class MSUGuiHandler implements IGuiHandler
 {
+    public static final int MACHINE_CHASIS_GUI = 0;
+    public static final int AUTO_CAPTCHA_GUI = 1;
+    public static final int PORKHOLLOW_ATM_GUI = 2;
+    public static final int BOONDOLLAR_REGISTER_GUI = 3;
+    public static final int STRIFE_CARD_GUI = 4;
+
     @Nullable
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)

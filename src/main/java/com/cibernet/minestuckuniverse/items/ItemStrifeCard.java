@@ -81,7 +81,7 @@ public class ItemStrifeCard extends MSUItemBase
 				StrifePortfolioHandler.assignStrife(playerIn, handIn);
 			else injectStrifeSpecibus(StrifeSpecibus.empty(), stack);
 		}
-		else playerIn.openGui(MinestuckUniverse.instance, MSUUtils.STRIFE_CARD_GUI, worldIn, (int)playerIn.posX, (int)playerIn.posY, (int)playerIn.posZ);
+		else playerIn.openGui(MinestuckUniverse.instance, MSUGuiHandler.STRIFE_CARD_GUI, worldIn, (int)playerIn.posX, (int)playerIn.posY, (int)playerIn.posZ);
 
 		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 	}

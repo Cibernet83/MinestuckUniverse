@@ -47,6 +47,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(KindAbstratus.class);
         MinecraftForge.EVENT_BUS.register(MSUKindAbstrata.class);
         MinecraftForge.EVENT_BUS.register(StrifeEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(EditModeEventHandler.class);
 
         MSUEntities.registerEntities();
         MSUCapabilities.registerCapabilities();
