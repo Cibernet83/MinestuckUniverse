@@ -1,10 +1,12 @@
 package com.cibernet.minestuckuniverse.world;
 
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
+import com.cibernet.minestuckuniverse.world.decorators.AirDecoratorVein;
 import com.mraof.minestuck.block.BlockMinestuckStone;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.entity.consort.EnumConsort;
 import com.mraof.minestuck.world.lands.decorator.ILandDecorator;
+import com.mraof.minestuck.world.lands.decorator.UndergroundDecoratorVein;
 import com.mraof.minestuck.world.lands.structure.blocks.StructureBlockRegistry;
 import com.mraof.minestuck.world.lands.terrain.TerrainLandAspect;
 import net.minecraft.block.*;
@@ -49,7 +51,11 @@ public class LandAspectBedrock extends TerrainLandAspect
 	@Override
 	public List<ILandDecorator> getDecorators()
 	{
-		return new ArrayList<>();
+		ArrayList<ILandDecorator> list = new ArrayList<>();
+
+		list.add(new AirDecoratorVein(Blocks.BEDROCK.getDefaultState(), 4, 7, 128));
+
+		return list;
 	}
 
 	@Override
