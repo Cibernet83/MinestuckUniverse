@@ -73,7 +73,7 @@ public class LandAspectBedrock extends TerrainLandAspect
 	@Override
 	public String[] getNames()
 	{
-		return new String[] {"Null"};
+		return new String[] {"null"};
 	}
 
 	@Override
