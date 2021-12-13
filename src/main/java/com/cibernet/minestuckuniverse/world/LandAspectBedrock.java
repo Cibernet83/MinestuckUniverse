@@ -24,6 +24,7 @@ public class LandAspectBedrock extends TerrainLandAspect
 		registry.setBlockState("surface", Blocks.AIR.getDefaultState());
 		registry.setBlockState("upper", Blocks.AIR.getDefaultState());
 		registry.setBlockState("ground", Blocks.AIR.getDefaultState());
+		registry.setBlockState("bedrock", Blocks.AIR.getDefaultState());
 
 		registry.setBlockState("structure_primary", Blocks.BEDROCK.getDefaultState());
 		registry.setBlockState("structure_primary_decorative", Blocks.BEDROCK.getDefaultState());
@@ -72,6 +73,12 @@ public class LandAspectBedrock extends TerrainLandAspect
 	@Override
 	public String[] getNames()
 	{
-		return new String[] {"null"};
+		return new String[] {"Null"};
+	}
+
+	@Override
+	public boolean shouldGenerateMinestuckOres() // FIXME: Makes structures not generate
+	{
+		return false;
 	}
 }
