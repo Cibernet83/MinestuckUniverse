@@ -19,6 +19,7 @@ public class MSUConfig
 	public static double gristDropsMultiplier;
 	public static int baseZillystoneLuck;
 	public static boolean IDAlchemy;
+	public static boolean nullSoloSessions;
 
 	//Strife
 	public static boolean combatOverhaul;
@@ -56,6 +57,8 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.general.baseZillystoneLuck").getInt();
 		gristDropsMultiplier = config.get("General", "gristDropsMultiplier", 1, "Determines how much grist is dropped from Underlings.")
 				.setLanguageKey("config.minestuckuniverse.general.gristDropsMultiplier").getDouble();
+		nullSoloSessions = config.get("General", "nullSoloSessions", false, "Whether solo sessions should use the null title and terrain aspects.")
+				.setLanguageKey("config.minestuckuniverse.general.nullSoloSessions").getBoolean();
 
 		restrictedStrife = config.get("Strife", "restrictedStrife", false, "Prevents players from attacking without an allocated weapon in their main hand. It also restricts the use of certain items such as bows.")
 				.setLanguageKey("config.minestuckuniverse.strife.restrictedStrife").getBoolean();

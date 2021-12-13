@@ -71,6 +71,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(ArmorEventHandler.class);
         MinecraftForge.EVENT_BUS.register(MSULoot.class);
         MinecraftForge.EVENT_BUS.register(IDBasedAlchemyHandler.class);
+        MinecraftForge.EVENT_BUS.register(NullSoloSessionHandler.class);
         MinecraftForge.EVENT_BUS.register(BlockArtifact.class);
         PropertyEventHandler.register();
 
