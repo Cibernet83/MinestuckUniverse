@@ -26,6 +26,7 @@ public class MSUItemBase extends Item implements IRegistryItem
     public static final ArrayList<String> DEDICATED_TOOLTIPS = new ArrayList<String>()
     {{
         add("Cibernet");
+        add("JDubSupreme");
         add("Ishumire");
         add("Badadamadaba");
         add("ThatLameOverlord");
@@ -36,6 +37,9 @@ public class MSUItemBase extends Item implements IRegistryItem
         add("_draconix");
         add("Owo_XxX_owO");
         add("carefreeDesigner");
+        add("aridThought");
+        add("blankMushroom");
+        add("AnarchoVera");
     }};
 
     public MSUItemBase(String name, String unlocName)

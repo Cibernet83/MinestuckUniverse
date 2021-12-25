@@ -28,7 +28,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import java.util.List;
 
-public class ItemTimetable extends MSUItemBase
+public class  ItemTimetable extends MSUItemBase
 {
 	public ItemTimetable()
 	{
@@ -187,7 +187,7 @@ public class ItemTimetable extends MSUItemBase
 				ItemStack res = recipe.getCraftingResult(null);
 				if(stack.getCount() >= res.getCount() && stack.getItem() == res.getItem() && stack.getMetadata() == res.getMetadata())
 					return recipe;
-			} catch (NullPointerException e) {}
+			} catch (Throwable e) {}
 		}
 
 		return null;
