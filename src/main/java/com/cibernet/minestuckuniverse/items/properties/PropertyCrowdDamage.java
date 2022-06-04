@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items.properties;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class PropertyCrowdDamage extends WeaponProperty
@@ -23,7 +24,7 @@ public class PropertyCrowdDamage extends WeaponProperty
 
 		for(EntityLivingBase entity : player.world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(crowdRadius)))
 		{
-			if(entity == player)
+			if(entity == player || (entity instanceof EntityPlayer && ((EntityPlayer) entity).isSpectator()))
 				continue;
 			if((buffPerEntity < 1 && buff <= maxBuff) || (buffPerEntity >= 1 && buff >= maxBuff))
 			{
