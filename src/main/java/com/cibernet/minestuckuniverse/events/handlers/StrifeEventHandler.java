@@ -99,10 +99,12 @@ public class StrifeEventHandler
 
 			if(weaponMod != null && weaponMod.getAmount() != dmg)
 			{
+				double dmgScale = event.getAmount()/dmgAttr.getAttributeValue();
+
 				dmgAttr.removeModifier(MSUWeaponBase.getAttackDamageUUID());
 				dmgAttr.applyModifier(new AttributeModifier(MSUWeaponBase.getAttackDamageUUID(), "Weapon modifier", dmg, 0));
 
-				event.getEntityLiving().attackEntityFrom(event.getSource(), (float) dmgAttr.getAttributeValue());
+				event.getEntityLiving().attackEntityFrom(event.getSource(), (float) (dmgAttr.getAttributeValue() * dmgScale));
 				event.setCanceled(true);
 			}
 		}
