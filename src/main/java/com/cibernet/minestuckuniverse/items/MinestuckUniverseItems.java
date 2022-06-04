@@ -446,24 +446,24 @@ public class MinestuckUniverseItems
 
         if(MSUConfig.combatOverhaul)
         {
-            MinestuckItems.sord = registerItem(registry, new MSUWeaponBase(250, 3, -2.3, 1, MinestuckItems.sord).setTool(toolSword, 0, 0).addProperties(new PropertySlippery()));
-            MinestuckItems.cactusCutlass = registerItem(registry, new MSUWeaponBase(746, 12.7, -2.3, 5, MinestuckItems.cactusCutlass).setTool(toolSword, 1, 4));
-            MinestuckItems.beefSword = registerItem(registry, new MSUWeaponBase(550, 7.2, -2.3, 4, MinestuckItems.beefSword).setTool(toolSword, 1, 2).addProperties(new PropertyEdible(3, 0.3F, 75)));
-            MinestuckItems.steakSword = registerItem(registry, new MSUWeaponBase(550, 8, -2.3, 4, MinestuckItems.steakSword).setTool(toolSword, 1, 2).addProperties(new PropertyEdible(8, 0.8F, 50)));
-            MinestuckItems.irradiatedSteakSword = registerItem(registry, new MSUWeaponBase(550, 8, -2.3, 3, MinestuckItems.irradiatedSteakSword).setTool(toolSword, 1, 3).addProperties(new PropertyEdible(4, 0.4F, 25).setPotionEffect(0.9f, new PotionEffect(MobEffects.WITHER, 100, 1))));
-            MinestuckItems.firePoker = registerItem(registry, new MSUWeaponBase(825, 10.5, -2.07, 10, MinestuckItems.firePoker).setTool(toolSword, 2, 4).addProperties(new PropertyFire(30, 0.3f, false), new PropertyTipperDamage(0.8f, 1.2f, 1)));
-            MinestuckItems.hotHandle = registerItem(registry, new MSUWeaponBase(825, 12.0, -2.3, 10, MinestuckItems.hotHandle).setTool(toolSword, 3, 3).addProperties(new PropertyFire(15, 1f, true)));
-            MinestuckItems.royalDeringer = registerCustomRenderedItem(registry, new MSUWeaponBase(908, 13.2, -2.3, 14, MinestuckItems.royalDeringer){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 3, 6).addProperties(new PropertyBreakableItem()));
-            MinestuckItems.caledfwlch = registerCustomRenderedItem(registry, new MSUWeaponBase(1100, 16.0, -2.3, 16, MinestuckItems.caledfwlch){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 8).addProperties(new PropertyTrueDamage(), new PropertyBreakableItem()));
-            MinestuckItems.caledscratch = registerCustomRenderedItem(registry, new MSUWeaponBase(1375, 20.0, -2.07, 20, MinestuckItems.caledscratch){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 10).addProperties(new PropertyXpMend(), new PropertyBreakableItem()));
+            MinestuckItems.sord = registerItem(registry, new MSUWeaponBase(250, 3, -2.3, 1, MinestuckItems.sord).setTool(toolSword, 0, 0).addProperties(new PropertySweep(), new PropertySlippery()));
+            MinestuckItems.cactusCutlass = registerItem(registry, new MSUWeaponBase(746, 12.7, -2.3, 5, MinestuckItems.cactusCutlass).setTool(toolSword, 1, 4).addProperties(new PropertySweep()));
+            MinestuckItems.beefSword = registerItem(registry, new MSUWeaponBase(550, 7.2, -2.3, 4, MinestuckItems.beefSword).setTool(toolSword, 1, 2).addProperties(new PropertySweep(), new PropertyEdible(3, 0.3F, 75)));
+            MinestuckItems.steakSword = registerItem(registry, new MSUWeaponBase(550, 8, -2.3, 4, MinestuckItems.steakSword).setTool(toolSword, 1, 2).addProperties(new PropertySweep(), new PropertyEdible(8, 0.8F, 50)));
+            MinestuckItems.irradiatedSteakSword = registerItem(registry, new MSUWeaponBase(550, 8, -2.3, 3, MinestuckItems.irradiatedSteakSword).setTool(toolSword, 1, 3).addProperties(new PropertySweep(), new PropertyEdible(4, 0.4F, 25).setPotionEffect(0.9f, new PotionEffect(MobEffects.WITHER, 100, 1))));
+            MinestuckItems.firePoker = registerItem(registry, new MSUWeaponBase(825, 10.5, -2.07, 10, MinestuckItems.firePoker).setTool(toolSword, 2, 4).addProperties(new PropertySweep(), new PropertyFire(30, 0.3f, false), new PropertyTipperDamage(0.8f, 1.2f, 1)));
+            MinestuckItems.hotHandle = registerItem(registry, new MSUWeaponBase(825, 12.0, -2.3, 10, MinestuckItems.hotHandle).setTool(toolSword, 3, 3).addProperties(new PropertySweep(), new PropertyFire(15, 1f, true)));
+            MinestuckItems.royalDeringer = registerCustomRenderedItem(registry, new MSUWeaponBase(908, 13.2, -2.3, 14, MinestuckItems.royalDeringer){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 3, 6).addProperties(new PropertySweep(), new PropertyBreakableItem()));
+            MinestuckItems.caledfwlch = registerCustomRenderedItem(registry, new MSUWeaponBase(1100, 16.0, -2.3, 16, MinestuckItems.caledfwlch){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 8).addProperties(new PropertySweep(), new PropertyTrueDamage(), new PropertyBreakableItem()));
+            MinestuckItems.caledscratch = registerCustomRenderedItem(registry, new MSUWeaponBase(1375, 20.0, -2.07, 20, MinestuckItems.caledscratch){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 10).addProperties(new PropertySweep(), new PropertyXpMend(), new PropertyBreakableItem()));
             MinestuckItems.doggMachete = registerItem(registry, new MSUWeaponBase(1513, 20.0, -2.3, 10, MinestuckItems.doggMachete).setTool(toolSword, 4, 10).addProperties(new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 200, 0), false, 0.4f), new PropertyKnockback(0.65f)));
-            MinestuckItems.scarletRibbitar = registerCustomRenderedItem(registry, new MSUWeaponBase(1375, 22.0, -2.415, 18, MinestuckItems.scarletRibbitar){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 10).addProperties(new PropertyFire(30, 0.5f, true), new PropertyBreakableItem()));
-            MinestuckItems.cobaltSabre = registerItem(registry, new MSUWeaponBase(1210, 16.0, -2.07, 20, MinestuckItems.cobaltSabre).setTool(toolSword, 4, 8).addProperties(new PropertyFire(8, 0.8f, true), new PropertyGristSetter(GristType.Cobalt)));
-            MinestuckItems.zillywairCutlass = registerItem(registry, new MSUWeaponBase(3300, 33.6, -2.3, 40, MinestuckItems.zillywairCutlass).setTool(toolSword, 5, 10));
-            MinestuckItems.regisword = registerItem(registry, new MSUWeaponBase(743, 12.0, -2.07, 8, MinestuckItems.regisword).setTool(toolSword, 3, 6));
-            MinestuckItems.quantumSabre = registerItem(registry, new MSUWeaponBase(880, 14.4, -2.3, 10, MinestuckItems.quantumSabre).setTool(toolSword, 3, 6).addProperties(new PropertyPotion(new PotionEffect(MobEffects.WITHER, 100, 1), false, 0.6f)));
+            MinestuckItems.scarletRibbitar = registerCustomRenderedItem(registry, new MSUWeaponBase(1375, 22.0, -2.415, 18, MinestuckItems.scarletRibbitar){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 10).addProperties(new PropertySweep(), new PropertyFire(30, 0.5f, true), new PropertyBreakableItem()));
+            MinestuckItems.cobaltSabre = registerItem(registry, new MSUWeaponBase(1210, 16.0, -2.07, 20, MinestuckItems.cobaltSabre).setTool(toolSword, 4, 8).addProperties(new PropertySweep(), new PropertyFire(8, 0.8f, true), new PropertyGristSetter(GristType.Cobalt)));
+            MinestuckItems.zillywairCutlass = registerItem(registry, new MSUWeaponBase(3300, 33.6, -2.3, 40, MinestuckItems.zillywairCutlass).setTool(toolSword, 5, 10).addProperties(new PropertySweep()));
+            MinestuckItems.regisword = registerItem(registry, new MSUWeaponBase(743, 12.0, -2.07, 8, MinestuckItems.regisword).setTool(toolSword, 3, 6).addProperties(new PropertySweep()));
+            MinestuckItems.quantumSabre = registerItem(registry, new MSUWeaponBase(880, 14.4, -2.3, 10, MinestuckItems.quantumSabre).setTool(toolSword, 3, 6).addProperties(new PropertySweep(), new PropertyPotion(new PotionEffect(MobEffects.WITHER, 100, 1), false, 0.6f)));
 
-            MinestuckItems.shatterBeacon = registerItem(registry, new MSUWeaponBase(1100, 34.0, -2.3, 14, MinestuckItems.shatterBeacon).setTool(toolSword, 3, 8).addProperties(new PropertyPotion(false, 0.6f,
+            MinestuckItems.shatterBeacon = registerItem(registry, new MSUWeaponBase(1100, 34.0, -2.3, 14, MinestuckItems.shatterBeacon).setTool(toolSword, 3, 8).addProperties(new PropertySweep(), new PropertyPotion(false, 0.6f,
                     new PotionEffect(MobEffects.SPEED, 300, 0),
                     new PotionEffect(MobEffects.HASTE, 300, 0),
                     new PotionEffect(MobEffects.RESISTANCE, 300, 0),
@@ -472,8 +472,8 @@ public class MinestuckUniverseItems
                     new PotionEffect(MobEffects.REGENERATION, 300, 1)
             )));
 
-            MinestuckItems.claymore = registerItem(registry, new MSUWeaponBase(660, 18.4, -2.76, 5, MinestuckItems.claymore).setTool(toolSword, 3, 4));
-            MinestuckItems.katana = registerItem(registry, new MSUWeaponBase(650, 8, -2.3, 6, MinestuckItems.katana).setTool(toolSword, 1, 2));
+            MinestuckItems.claymore = registerItem(registry, new MSUWeaponBase(660, 18.4, -2.76, 5, MinestuckItems.claymore).setTool(toolSword, 3, 4).addProperties(new PropertySweep()));
+            MinestuckItems.katana = registerItem(registry, new MSUWeaponBase(650, 8, -2.3, 6, MinestuckItems.katana).setTool(toolSword, 1, 2).addProperties(new PropertySweep()));
         }
 
         registerCustomRenderedItem(registry, new MSUWeaponBase(5500, 16, -2.3, 12, MinestuckItems.unbreakableKatana).setTool(toolSword, 4, 6));
