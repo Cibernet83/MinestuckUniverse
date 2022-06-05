@@ -10,17 +10,20 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EntityMSUThrowable extends EntityThrowable
@@ -107,6 +110,12 @@ public class EntityMSUThrowable extends EntityThrowable
                 if (p instanceof IPropertyThrowable)
                     ((IPropertyThrowable) p).onStatusUpdate(this, id);
         }
+
+        if(id == 4)
+            for (int i = 0; i < 8; ++i)
+                this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, this.posX, this.posY, this.posZ,
+                        ((double)this.rand.nextFloat() - 0.5D) * 0.08D, ((double)this.rand.nextFloat() - 0.5D) * 0.08D, ((double)this.rand.nextFloat() - 0.5D) * 0.08D,
+                        Item.getIdFromItem(getStack().getItem()));
     }
 
     @Override
@@ -115,7 +124,6 @@ public class EntityMSUThrowable extends EntityThrowable
         if (!this.world.isRemote)
         {
             boolean destroy = true;
-            boolean drop = !(getThrower() instanceof EntityPlayer && ((EntityPlayer) getThrower()).isCreative());
             boolean isEntity = result.entityHit != null;
 
             ItemStack stack = getStack();
@@ -128,8 +136,6 @@ public class EntityMSUThrowable extends EntityThrowable
                     {
                         if(!(isEntity ? ((IPropertyThrowable) p).onEntityImpact(this, result) : ((IPropertyThrowable) p).onBlockImpact(this, result)))
                             destroy = false;
-                        if(!((IPropertyThrowable) p).dropOnImpact(this, result))
-                            drop = false;
                     }
             }
 
@@ -137,8 +143,7 @@ public class EntityMSUThrowable extends EntityThrowable
             {
                 if(stack.isItemStackDamageable())
                     stack.damageItem(1, thrower);
-                if(drop)
-                    spawnItem(posX, posY + (EnumFacing.DOWN.equals(result.sideHit) ? -0.3 : 0), posZ, 5);
+                spawnItem(posX, posY + (EnumFacing.DOWN.equals(result.sideHit) ? -0.3 : 0), posZ, 5);
                 this.setDead();
             }
         }
@@ -159,14 +164,34 @@ public class EntityMSUThrowable extends EntityThrowable
         return grav;
     }
 
-    protected EntityItem spawnItem(double x, double y, double z, int pickupDelay)
+    protected List<EntityItem> spawnItem(double x, double y, double z, int pickupDelay)
     {
-        EntityItem item = new EntityItem(world, x, y, z, getStack());
-        item.motionY = (rand.nextGaussian() * 0.05000000074505806D + 0.20000000298023224D)/2.0;
-        item.setPickupDelay(pickupDelay);
+        ArrayList<ItemStack> items = new ArrayList<>();
+        ArrayList<EntityItem> entities = new ArrayList<>();
 
-        world.spawnEntity(item);
-        return item;
+        if(!(getThrower() instanceof EntityPlayer && ((EntityPlayer) getThrower()).isCreative()))
+            items.add(getStack());
+
+        List<WeaponProperty> propertyList = ((IPropertyWeapon) getStack().getItem()).getProperties(getStack());
+        for (WeaponProperty p : propertyList)
+            if (p instanceof IPropertyThrowable)
+                ((IPropertyThrowable) p).getDroppedItems(this, items);
+
+        if(!items.contains(getStack()))
+            world.setEntityState(this, (byte) 4);
+
+        for(ItemStack i : items)
+        {
+            if(i == null)
+                continue;
+
+            EntityItem item = new EntityItem(world, x, y, z, i);
+            item.motionY = (rand.nextGaussian() * 0.05000000074505806D + 0.20000000298023224D)/2.0;
+            item.setPickupDelay(pickupDelay);
+            world.spawnEntity(item);
+            entities.add(item);
+        }
+        return entities;
     }
 
     public ItemStack getStack()

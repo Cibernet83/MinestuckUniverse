@@ -1,0 +1,7 @@
+{
+	"variants": {
+        "axis=y": { "model": "minestuckuniverse:operandi_log" },
+        "axis=z": { "model": "minestuckuniverse:operandi_log", "x": 90 },
+        "axis=x": { "model": "minestuckuniverse:operandi_log", "x": 90, "y": 90 }
+    }
+}

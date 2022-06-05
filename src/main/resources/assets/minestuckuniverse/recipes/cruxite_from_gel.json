@@ -1,0 +1,100 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#"
+    ],
+    "key": {
+        "#":
+        [
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 0
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 1
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 2
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 3
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 4
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 5
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 6
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 7
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 8
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 9
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 10
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 11
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 12
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 13
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 14
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 15
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 16
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 17
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 18
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 19
+            },
+            {
+                "item": "minestuckuniverse:cruxite_gel",
+                "data": 20
+            }
+        ]
+    },
+    "result": {
+        "item": "minestuck:raw_cruxite",
+        "count": 1,
+        "data": 0
+    }
+}

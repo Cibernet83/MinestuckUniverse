@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.api.MSUSplatcraftSupport;
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.captchalogue.MSUModi;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.events.handlers.*;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
@@ -69,6 +70,8 @@ public class CommonProxy
 
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
         MinecraftForge.EVENT_BUS.register(ArmorEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(CaptchalogueEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(SaveHandler.class);
         MinecraftForge.EVENT_BUS.register(MSULoot.class);
         MinecraftForge.EVENT_BUS.register(IDBasedAlchemyHandler.class);
         MinecraftForge.EVENT_BUS.register(NullSoloSessionHandler.class);
@@ -84,6 +87,7 @@ public class CommonProxy
         MSUChannelHandler.setupChannel();
         MSUUtils.registerDeployList();
         MSULoot.registerLootClasses();
+        MSUModi.register();
 
         if(MinestuckUniverse.isCarryOnLoaded)
             MinecraftForge.EVENT_BUS.register(CarryOnSupport.class);

@@ -13,6 +13,7 @@ import com.google.common.collect.Multimap;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -103,6 +104,14 @@ public class MSUWeaponBase extends MSUItemBase implements IClassedTool, ISortedT
         for(WeaponProperty p : getProperties(stack))
             name = p.getItemStackDisplayName(stack, name);
         return name;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+    {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        for(WeaponProperty p : getProperties(stack))
+            p.addTooltip(stack, worldIn, tooltip, flagIn);
     }
 
     public MSUWeaponBase setMaterial(Item.ToolMaterial material)

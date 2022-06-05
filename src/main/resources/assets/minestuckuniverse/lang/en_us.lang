@@ -1,6 +1,8 @@
 itemGroup.minestuckUniverse=Minestuck Universe
 itemGroup.minestuckUniverseWeapons=Minestuck Universe Weapons
 itemGroup.minestuckWeapons=Minestuck Weapons
+itemGroup.minestuckFetchModi=Minestuck Fetch Modi
+itemGroup.minestuckGodTier=Minestuck God Tier
 
 tooltip.machineOwner=Owner: %s
 tooltip.transportalizerOwner=%s's Transportalizer
@@ -416,6 +418,90 @@ item.calamityHookshot.name=Wisdom's Pierce
 item.woodenCarvedDice.name=Wooden Carved Dice
 item.woodenCarvedDice.tooltip=Probably the shittiest dice you've ever seen, all of its sides even have the same amount of dots. At least you can use it to throw it at mobs.
 
+item.wild_magic_modus.name=Wild Magic Modus
+item.backpack_modus.name=Backpack Modus
+item.weight_modus.name=Weight Modus
+item.book_modus.name=Book Modus
+item.capitalist_modus.name=Capitalist Modus
+item.mod_us.name=ModUs
+item.operandi_modus.name=Operandi Modus
+item.onion_modus.name=Onion Modus
+item.slime_modus.name=Slime Modus
+item.pop_tart_modus.name=Pop Tart Modus
+item.deck_modus.name=Deck Modus
+item.hue_modus.name=Hue Modus
+item.hue_stack_modus.name=Hue-Stack Modus
+item.chat_modus.name=Chat Modus
+item.cyclone_modus.name=Cyclone Modus
+item.energy_modus.name=Energy Modus
+item.scratch_and_sniff_modus.name=Scratch and Sniff Modus
+item.eight_ball_modus.name=Eight Ball Modus
+item.chasity_modus.name=Chastity Modus
+item.puzzle_modus.name=Puzzle Modus
+item.juju_modus.name=Juju Modus
+item.alchemodus.name=Alchemodus
+
+item.memory_modus.name=Memory Modus
+item.recipe_modus.name=Recipe Modus
+item.message_in_a_bottle_modus.name=Message in a Bottle Modus
+item.tech_hop_modus.name=Tech-Hop Modus
+item.encryption_modus.name=Encryption Modus
+item.ouija_modus.name=Ouija Modus
+item.array_modus.name=Array Modus
+item.wallet_modus.name=Wallet Modus
+item.wallet_ball_modus.name=Wallet Ball Modus
+item.bundle_modus.name=Bundle Modus
+item.cake_modus.name=Cake Modus
+item.cipher_modus.name=Cipher Modus
+item.monster_modus.name=Monster Modus
+
+item.hashchat_modus.name=Hashchat Modus
+item.sacrifice_modus.name=Sacrifice Modus
+
+item.float_stone.name=Float Stone
+item.float_stone.tooltip=Captchaloguing this somehow makes you feel lighter
+item.energy_cell.name=Energy Cell
+item.energy_cell.tooltip=This should provide enough energy to power the Energy Modus for a bit
+item.chasity_key.name=Auxilatrix Key
+item.chasity_card.name=Chastity Card
+item.pop_tart.name=Pop Tart
+item.eightBall.name=Magic 8-Ball
+item.walletBall.name=Magic Wallet-Ball
+item.magic_pop_balls.name=Magic Pop Balls
+item.captchalogue_book.name=Captchalogue Book
+item.captchalogue_book.author=Published By: %s
+item.walletEntity.name=???
+
+item.cruxite_gel.name=Cruxite Gel
+item.cruxtruder_gel.name=Bottle of %sCruxtruder Gel
+item.cruxtruder_gel.tooltip=Lets you change a Cruxtruder's dowel color output.
+item.dragon_gel.name=Dragon Gel
+item.dragon_gel.tooltip=You feel absolution coursing through this mystical gel, better not eat it!
+
+item.operandi_pickaxe.name=Operandi Pickaxe
+item.operandi_axe.name=Operandi Axe
+item.operandi_shovel.name=Operandi Shovel
+item.operandi_hoe.name=Operandi Hoe
+item.operandi_sword.name=Operandi Sword
+item.operandi_battleaxe.name=Operandi Battleaxe
+item.operandi_club.name=Operandi Club
+item.operandi_hammer.name=Operandi Hammer
+item.operandi_apple.name=Operandi Apple
+item.operandi_potion.name=Operandi Potion
+item.operandi_pop_tart.name=Operandi Pop Tart
+item.operandi_eight_ball.name=Operandi Eight Ball
+item.operandi_splash_potion.name=Operandi Splash Potion
+item.operandi_helmet.name=Operandi Helmet
+item.operandi_chestplate.name=Operandi Chestplate
+item.operandi_leggings.name=Operandi Leggings
+item.operandi_boots.name=Operandi Boots
+
+tile.operandi_block.name=Operandi Block
+tile.operandi_stone.name=Operandi Stone
+tile.operandi_glass.name=Operandi Glass
+tile.operandi_log.name=Operandi Log
+tile.hardStone.name=Hard Stone
+
 tile.woolTransportalizer.white.name=White Sleeved Transportalizer
 tile.woolTransportalizer.orange.name=Orange Sleeved Transportalizer
 tile.woolTransportalizer.magenta.name=Magenta Sleeved Transportalizer
@@ -449,6 +535,9 @@ entity.minestuck.acheron.type=%s Acheron
 entity.minestuckuniverse.throwable.name=Projectile
 entity.minestuckuniverse.unreal_air.name=Unreal Air
 entity.minestuckuniverse.rock.name=Rock
+entity.minestuckuniverse.cruxite_slime.name=Cruxite Slime
+entity.minestuckuniverse.eight_ball.name=Magic 8-Ball
+entity.EnderCrystal.name=Ender Crystal
 
 grist.vis=Vis
 grist.mana=Mana
@@ -530,6 +619,16 @@ subtitle.minestuckuniverse.whip_crock=§n§ocrock.
 subtitle.minestuckuniverse.gaster_blaster.charge=Beam Charging
 subtitle.minestuckuniverse.gaster_blaster.release=Beam Released
 
+subtitle.chat_ping=+1 notification
+subtitle.eight_ball_throw=Eight Ball flies
+subtitle.cruxtruder_fill_gel=Cruxtruder filled with gel
+subtitle.operandi_task_complete=Operandi Task Completed
+subtitle.chasity_lock=Chastity Lock clicks
+subtitle.chasity_rattle=Chastity Lock rattles
+subtitle.chasity_unlock=Key turned in Chastity Lock
+
+death.attack.minestuckuniverse.sacrifice=%s sacrificed their soul to the captchalogue gods
+
 death.attack.minestuckuniverse.shock=%s was zapped to death by %s
 death.attack.minestuckuniverse.shock.item=%s was zapped to death by %s using %s
 death.attack.minestuckuniverse.shock.self=%s doesn't know what "Caution: High Voltage" means
@@ -546,6 +645,28 @@ death.attack.minestuckuniverse.beam=%s was disintegrated by %s's beam
 death.attack.minestuckuniverse.beam.item=%s was disintegrated by %s's %s
 death.attack.minestuckuniverse.rainbow=%s couldn't handle the rainbow
 death.attack.minestuckuniverse.sans=%s had a bad time
+
+cruxite_color.0=Blue
+cruxite_color.1=Orchid
+cruxite_color.2=Red
+cruxite_color.3=Green
+cruxite_color.4=Cyan
+cruxite_color.4=Cyan
+cruxite_color.5=Pink
+cruxite_color.6=Orange
+cruxite_color.7=Emerald
+cruxite_color.8=Rust
+cruxite_color.9=Bronze
+cruxite_color.10=Gold
+cruxite_color.11=Iron
+cruxite_color.12=Olive
+cruxite_color.13=Jade
+cruxite_color.14=Teal
+cruxite_color.15=Cobalt
+cruxite_color.16=Indigo
+cruxite_color.17=Purple
+cruxite_color.18=Violet
+cruxite_color.19=Fucshia
 
 item.banner.msu_light.black=Black Light Symbol
 item.banner.msu_light.red=Red Light Symbol
@@ -786,6 +907,13 @@ gui.strifePortfolio.deck=sylladex :: strife deck
 gui.strifeSpecibus.name=Strife Portfolio
 gui.strifeCard.label=kind abstrata
 
+gui.capitalistBuyAll=Buy All
+gui.jujuLink=Find Link
+gui.jujuUnlink=Sever Link
+gui.alchemyClear=Clear Sylladex
+gui.alchemyWildcard=Wildcard: %s
+gui.bookPublish=Publish
+
 enchantment.minestuckuniverse.superpunch=Superpunch
 enchantment.minestuckuniverse.superpunch.desc=Increases the knockback strength of the weapon but increases its attack damage inversely to the enchanment level
 
@@ -799,10 +927,53 @@ status.strife.weaponMissmach=Your %s doesn't fit inside any of your Strife Speci
 strife.item.allocated=§2[Strife Allocated]
 strife.item.abstrataList=§8§o%s
 
+status.wildMagicRoll=You rolled a %s!
+status.exhausted=You're too exhausted to perform this action!
+status.capitalistBuy=You payed %s Boondollars to retrive %s
+status.capitalistBuyAll=You payed %s Boondollars to eject your sylladex
+status.capitalistDenied=You don't have enough Boondollars to retrieve %s
+status.capitalistDeniedAll=You need %s more Boondollars to eject your sylladex
+tooltip.capitalistPrice=Costs %s Boondollars to retrieve
+status.popTartEat=You feel like you bite into something odd, it's your %s!
 key.minestuckuniverse.strife=Strife Allocate/Retrieve
 key.minestuckuniverse.swapOffhandStrife=Swap Offhand Item with Strife Deck
 key.minestuckuniverse.strifeSelectorLeft=Strife Selector Scroll Left
 key.minestuckuniverse.strifeSelectorRight=Strife Selector Scroll Right
+
+status.eightBallBlind=Some Magic 8-Ball liquid went into your eyes!
+
+status.eightBallMessage.0=[It is certain.]
+status.eightBallMessage.1=[It is decidedly so.]
+status.eightBallMessage.2=[Without a doubt.]
+status.eightBallMessage.3=[Yes – definitely.]
+status.eightBallMessage.4=[You may rely on it.]
+status.eightBallMessage.5=[As I see it, yes.]
+status.eightBallMessage.6=[Most likely.]
+status.eightBallMessage.7=[Outlook good.]
+status.eightBallMessage.8=[Yes.]
+status.eightBallMessage.9=[Signs point to yes.]
+status.eightBallMessage.10=[Reply hazy, try again.]
+status.eightBallMessage.11=[Ask again later.]
+status.eightBallMessage.12=[Better not tell you now.]
+status.eightBallMessage.13=[Cannot predict now.]
+status.eightBallMessage.14=[Concentrate and ask again.]
+status.eightBallMessage.15=[Don't count on it.]
+status.eightBallMessage.16=[My reply is no.]
+status.eightBallMessage.17=[My sources say no.]
+status.eightBallMessage.18=[Outlook not so good.]
+status.eightBallMessage.19=[Very doubtful.]
+
+status.jujuModusLinkFail=The Juju Modus falied to link you to someone
+status.jujuModusLink=The Juju modus has linked you to %s
+status.jujuModusUnlink=Your link with %s has been severed
+status.jujuModusUnlinkUnknown=Your link with someone has been severed
+status.energyModusEmpty=Your Energy Modus needs recharging!
+status.energyModusFull=Your Energy Modus is fully charged
+status.energyModusNotEnough=You don't have enough charge to do that!
+status.chasityUnlock=You've unlocked a card!
+status.chasityFail=This key does not work on any of your cards
+status.chasityHideKey=An Auxilatrix Key has been hidden somewhere nearby
+status.chasityVoid=Your key was almost lost to the void!
 
 config.minestuckuniverse.general.zillystoneYields=Zillystone Luck Modifier
 config.minestuckuniverse.general.baseZillystoneLuck=Zillystone Base Luck
@@ -842,3 +1013,68 @@ color.cruxitePurple.name=Cruxite Purple
 color.cruxiteViolet.name=Cruxite Violet
 color.cruxiteFucshia.name=Cruxite Fucshia
 attribute.name.underling.attackDamage=Underling Damage
+
+book_desc.missing=[No information was provided by the author of this book.]
+book_desc.empty=This is an empty captchalogue card, you can put items in it by holding them and pressing the Captchalogue button, you can also retrieve it from your sylladex by pressing right-click.
+
+book_desc.mod_name=§9Mod: %s
+book_desc.vanilla=§9This item comes from Vanilla Minecraft
+book_desc.item_id=§9Item ID: §7%s
+
+book_desc.durability_high=This one in particular is practically brand new!
+book_desc.durability_low=This one in particular looks to be a bit damaged, you should repair it by using an anvil, or the Mending enchantment.
+
+minecraft:dirt.book_desc=One of the most abundant blocks in the overworld, Dirt covers it's surface almost entirely. It's also capable of sustaining plant life such as crops and trees.
+minecraft:log.book_desc=Where every adventure begins, Wooden logs can be crafted into 4 planks by putting them in your crafting grid, they can be obtained by punching trees, chopping them down, or stealing it from villages.
+minecraft:log2.book_desc=Where every adventure begins, Wooden logs can be crafted into 4 planks by putting them in your crafting grid, they can be obtained by punching trees, chopping them down, or stealing it from villages.
+minecraft:crafting_table.book_desc=Every player's best friend, the Crafting Table is used for creating most items in the game by creating patterns of items inside it's 3x3 grid, these patterns can be learned by consulting your Recipe Book, the Minecraft Wiki, or the Just Enough Items mod.
+minecraft:cobblestone.book_desc=Cobblestone is one of the earlier materials you'll obtain, it can be used to craft tools and several blocks, both used for building and crafting.
+minecraft:gold_block.book_desc=Crafted with 9 Gold Ingots, Blocks of Gold can be used for building Beacons or storing large amounts of Gold Ingots. R.I.P. Notch Apple.
+minecraft:fishing_rod.book_desc=The Fishing Rod, crafted with some sticks and string, can be used to catch several types of fish and underwater treasures by casting it into some water and reeling it in when its bobber starts to bob, apart from enchanting your fishing rod, fishing while its raining and under skylight can drastically improve your yields, it may also help recreate boat trips with dad.
+
+minecraft:stone.0.book_desc=One of the most abundant blocks in the overworld, stone makes up the majority of the ground below. Mining it yields cobblestone, a basic but useful resource. Stone can be made from smelting cobblestone, or by being mined with a Silk Touch pickaxe.
+minecraft:stone.1.book_desc=Granite is a variant of stone, appearing in the form of mineral veins. Useful for building.
+minecraft:stone.2.book_desc=Polished granite is made from raw granite found underground, and is a useful building resource.
+minecraft:stone.3.book_desc=Diorite is a variant of stone, appearing in the form of mineral veins. Useful for building, and for driving off certain Youtubers.
+minecraft:stone.4.book_desc=Polished diorite is made from raw diorite found underground, and is a useful building resource.
+minecraft:stone.5.book_desc=Andesite is a variant of stone, appearing in the form of mineral veins. Useful for building.
+minecraft:stone.6.book_desc=Polished andesite is made from raw andesite found underground, and is a useful building resource.
+minecraft:grass.book_desc=A common block, grass appears all over the surface of the Overworld. Grass can spread to nearby dirt blocks in the light. It can also be obtained with a Silk Touch tool, or through alchemy.
+minecraft:dirt.book_desc=One of the most abundant blocks in the overworld, Dirt covers it's surface almost entirely. It's also capable of sustaining plant life such as crops and trees.
+minecraft:dirt.1.book_desc=A variant of dirt which can not yield grass. However, it can grow saplings, mushrooms, and other vegetation under appropriate conditions.
+minecraft:dirt.2.book_desc=A variant of dirt, appearing rarely, mostly in certain taiga forests. It can be obtained with a Silk Touch tool.
+minecraft:planks.book_desc=Made from logs. Easily produced, infinitely useful.
+minecraft:sapling.book_desc=Plant to grow oak trees. Dropped from decaying oak leaves.
+minecraft:sapling.1.book_desc=Plant to grow spruce trees. Dropped from decaying spruce leaves.
+minecraft:sapling.2.book_desc=Plant to grow birch trees. Dropped from decaying birch leaves.
+minecraft:sapling.3.book_desc=Plant to grow jungle trees. Dropped from decaying jungle leaves.
+minecraft:sapling.4.book_desc=Plant to grow acacia trees. Dropped from decaying acacia leaves.
+minecraft:sapling.5.book_desc=Plant to grow dark oak trees. Dropped from decaying dark oak leaves.
+minecraft:bedrock.book_desc=Y o u ' r e  n o t  s u p p o s e d  t o  h a v e  t h i s .
+minecraft:sand.book_desc=Sand, relatively abundant, is used for sandstone, glass, and concrete powder.
+minecraft:sand.1.book_desc=The red variant of sand found in badlands.
+minecraft:gravel.book_desc=Gravel, albeit a less common soil, is used for creating concrete powder and coarse dirt.
+minecraft:gold_ore.book_desc=Gold ore is an uncommon ore, admittedly with limited use. Found below layer 34 in most biomes, or quite abundantly in mesa biomes, and requires a iron level pickaxe or better.
+minecraft:irong_ore.book_desc=Iron ore is a common find and one of the most useful ores, used for a wide range of crafting. Found below layer 68, and requires a stone level pickaxe or better.
+minecraft:coal_ore.book_desc=Coal ore is the most common and one of the most useful ores to find, used for fuel. Found below layer 132, and requires a wooden level pickaxe or better.
+minecraft:leaves.book_desc=Appears on certain types of trees. Drops saplings when broken. Obtain with shears or a Silk Touch tool.
+minecraft:leaves.0.book_desc=Appears on oak trees. Drops saplings and apples. Obtain with shears or a Silk Touch tool.
+minecraft:diamond_block.book_desc=The best way to say "I wasted my time and diamonds", the diamond block is crafted with 9 diamonds, and can be used for compact diamond storage and making a beacon. Do not use it to build houses. Diamond block houses don't make you look cool, they make you look like a jerk.
+minecraft:iron_block.book_desc=Crafted with 9 Iron Ingots, the Block of Iron can be a versatile component in Alchemy, or used to make Beacon bases, anvils, or store large amounts of Iron. It can also be used to make Iron Golems by building a vertical T-Shape out of them and putting a pumpkin on top.
+minecraft:anvil.book_desc=The Anvil, one of the handier, yet deadlier blocks in the game. Dropping this from a high distance on someone’s head will be sure to give them headache, and possibly a trip back to spawn. It can also be used to repair, rename, and apply Enchanted Books to most items, as well as used in the creation of some weapons such as the Blacksmith’s Hammer and the Blacksmith’s Bane.
+
+minestuckuniverse:wild_magic_modus.book_desc=The Wild Magic Modus, One of the more unpredictable fetch modi that exist, this modus makes you roll a d20 dice every time you try to retrieve an item, rolling a high enough number will let you do so, other than that, you’ll be granted certain effects tied to each number. This modus is suitable for people that like to rely on luck, or for adept light players that might have it in abundance.
+minestuckuniverse:weight_modus.book_desc=This modus is slightly different from the rest, as it has its own weight of sorts, with it increasing every time an item is captchalogued, reducing the user’s walking speed by a noticeable amount. However, the modus’ weight can be counteracted by captchaloguing float stones. This modus is perfect for people that don’t mind slowing down for a bit, or for those rich enough in build grist to alchemize enough float stones.
+minestuckuniverse:book_modus.book_desc=The Book Modus, one of the handier Fetch Modi there are,++ and the one you’re currently using right now! This modus stores all your cards into an alphabetically organized book, filled with boundless wisdom about most, if not some items. It’s one downside being that you can only see one card per page, making it incredibly tedious to use when storing large quantities of items. You can also get a physical copy of the book by clicking the Publish button, allowing you to share your sylladex with others, or storing your items by categories. You can then swap it out with your currently active book by simply captchaloguing it.
+minestuckuniverse:capitalist_modus.book_desc=Some people say that nothing in life is free, and the Capitalist Modus stands by that premise, it’ll allow you to retrieve any item from any slot, but at the price of some boondollars, but fear not, buying every item at once will grant you a 20% discount. Each item’s price is determined by its stack size and grist cost. This modus is mostly suitable for players with copious amounts of boons, or for any local Overlord that might be associated with capitalism.
+minestuckuniverse:mod_us.book_desc=The ModUs is practically the opposite to the capitalist modus, as it’ll let you retrieve items for free, however, you’ll have to share your Sylladex with everyone else that has this Fetch Modus. This does come with some perks, as you won’t lose your Sylladex when you die. Perfect for people that like to share their belongings, and for a certain SBURB session associated with communism.
+minestuckuniverse:operandi_modus.book_desc=The Operandi Modus gives you a special item each time you try to retrieve something from your Sylladex, you’ll then be tasked to use said item correctly, whether it’s by throwing it, eating it, or hitting something with it, to get your item back. Great for people that like doing mindless tasks.
+minestuckuniverse:onion_modus.book_desc=Like onions, this Fetch Modus has layers. The Onion Modus stores items into ring-shaped layers, with each layer having more items than the last, only allowing you to retrieve items from the top-most layer.
+minestuckuniverse:slime_modus.book_desc=The Slime Modus is shaped like a friend, then retrieving items while using it, a slime containing said item will appear in its place. You can get your item back by either killing the slime, or taming it by feeding it apples, raw chicken, cookies or carrots. These peculiar slimes will excrete a special substance known as Cruxite Gel when well fed, and will grow in size or change color when fed an enchanted golden apple or a cruxite dowel respectively. This modus is perfect for people that like having a lot of pets, or cold-hearted murderers.
+
+minestuckuniverse:cyclone_modus.book_desc=Crated with 4 Cruxite Lumps surrounding a Captchalogue Card, the Cyclone Modus arranges all of your cards in a slowly rotating, ring-like shape, only allowing you to access the top-most card in the ring. Perfect for stimulating your patience, resourcefulness, and card management.
+minestuckuniverse:energy_modus.book_desc=> The Energy Modus is one of the more versatile, yet more energy-consuming quite modus to use, or well, the only energy-consuming modus that exists. With this modus, you'll be able to captchalogue and retrieve any item at any time, as long as you have enough energy stored. The Energy Modus can be charged by captchaloguing an Energy Cell, each one corresponding to one point. Starting off your Energy Modus will only be able to hold up to 20 energy points, with it gaining more capacity as you climb your echeladder, maxing out at 100 points.
+
+minestuckuniverse:hue_modus.book_desc=The Hue Modus acts like a regular Stack Modus, this means that you’ll only be able to retrieve the first item in your sylladex, but it also sorts items by their color, the order being Red > Orange > Yellow > Green > Cyan > Blue > Magenta > Light Gray > Dark Gray > Rainbow.
+minestuckuniverse:hue_stack_modus.book_desc=The Hue-Stack modus is a step up from the Hue Modus, as it not just stores your items by color, but it also lets you retrieve the first captchalogued item from each color. This Modus is perfect for people that like to sort their skittles.
+status.alchemodus.alchemArtifact=yeah no, that's not going to happen lmao.

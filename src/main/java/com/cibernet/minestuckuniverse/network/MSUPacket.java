@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.network;
 
+import com.cibernet.minestuckuniverse.network.captchalogue.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,6 +66,18 @@ public abstract class MSUPacket
         UPDATE_BEAMS(UpdateBeamDataPacket.class),
         LEFT_CLICK_EMPTY(LeftClickEmptyPacket.class),
         ROCKET_BOOTS(RocketBootsPacket.class),
+
+
+        CHAT_MODUS_EJECT(ChatModusEjectPacket.class),
+        UPDATE_MODUS(ModusUpdatePacket.class),
+        BOOK_UPDATE_PAGE(BookModusPagePacket.class),
+        REQUEST_UPDATE_MODUS(RequestModusUpdatePacket.class),
+        JUJU_UPDATE(JujuModusPacket.class),
+        COM_UPDATE(CommunistUpdatePacket.class),
+        REQUEST_COM_UPDATE(RequestCommunistUpdatePacket.class),
+        ALCHEM_WILDCARD(AlchemyWildcardPacket.class),
+        BOOK_PUBLISH(BookPublishPacket.class),
+        WALLET_CAPTCHA(WalletCaptchaloguePacket.class),
         ;
 
         Class<? extends MSUPacket> packetType;

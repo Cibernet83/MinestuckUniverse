@@ -4,10 +4,14 @@ import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
+import com.cibernet.minestuckuniverse.captchalogue.OperandiModus;
+import com.cibernet.minestuckuniverse.captchalogue.PopTartModus;
 import com.cibernet.minestuckuniverse.client.models.armor.*;
 import com.cibernet.minestuckuniverse.client.render.RenderThrowable;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.armor.*;
+import com.cibernet.minestuckuniverse.items.captchalogue.*;
 import com.cibernet.minestuckuniverse.items.properties.*;
 import com.cibernet.minestuckuniverse.items.properties.beams.PropertyBeamDeathMessage;
 import com.cibernet.minestuckuniverse.items.properties.beams.PropertyMagicBeam;
@@ -51,6 +55,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import vazkii.botania.common.block.ModBlocks;
 
@@ -109,6 +114,19 @@ public class MinestuckUniverseItems
     public static Item sbahjWhip = new ItemSound("whip_sbahj", "whipSbahj", MSUSoundHandler.whipCrock).setSecret();
     public static Item unrealAir = new ItemUnrealAir("unreal_air", "unrealAir");
 
+    public static final Item floatStone = new MSUItemBase("float_stone").setMaxStackSize(1);
+    public static final Item energyCell = new MSUItemBase("energy_cell");
+    public static final Item captchalogueBook = new CaptchaBookItem("captchalogue_book");
+    public static final Item chasityKey = new ChasityKeyItem("chasity_key");
+
+    //Food
+    public static final Item popTart = new MSUFoodBase("pop_tart", 3, 0, false, PopTartModus.getConsumer());
+    public static final Item popBall = new MSUFoodBase("magic_pop_balls", 6, 0.4f, false, MSUFoodBase.getPopBallConsumer());
+
+    public static final Item cruxiteGel = new CruxiteItem("cruxite_gel");
+    public static final Item dragonGel = new MSUItemBase("dragon_gel");
+    public static final Item cruxtruderGel = new CruxtruderGelItem("cruxtruder_gel");
+
     public static Item tickingStopwatch = new MSUItemBase("ticking_stopwatch", "tickingStopwatch"){{
         addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "time"), ((stack, worldIn, entityIn) -> ((System.currentTimeMillis() - Minestuck.startTime)/1000f) % 60));
     }}.setMaxStackSize(1);
@@ -147,11 +165,68 @@ public class MinestuckUniverseItems
     public static Item skaia = new ItemGhost("skaia_ghost_item");
     public static Item lightning = new ItemGhost("lightning_ghost_item");
 
+    public static Item walletEntityItem = new WalletEntityItem("wallet_entity", "walletEntity");
+
+    //Operandi Items
+    public static final Item operandiPickaxe = new OperandiToolItem("operandi_pickaxe", "pickaxe", 1.0F, -2.8F, 7.0f, 3);
+    public static final Item operandiAxe = new OperandiToolItem("operandi_axe", "axe", 5.0f, -3.2F, 7.0f, 3);
+    public static final Item operandiShovel = new OperandiToolItem("operandi_shovel", "shovel", 1.5F, -3.0F, 7.0F, 3);
+    public static final Item operandiHoe = new OperandiHoeItem("operandi_hoe");
+    public static final Item operandiSword = new OperandiWeaponItem("operandi_sword", "", 4.0f, -2.4000000953674316f, 0f, 3);
+    public static final Item operandiHammer = new OperandiWeaponItem("operandi_hammer", "pickaxe", 5.0f, -2.45f, 7.0f, 4);
+    public static final Item operandiClub = new OperandiWeaponItem("operandi_club", "club", 4.0F, -2.2F, 7.0f, 5);
+    public static final Item operandiBattleaxe = new OperandiWeaponItem("operandi_battleaxe", "axe", 7.0F, -3.2F, 7.0f, 2);
+    public static final Item operandiApple = new OperandiFoodItem("operandi_apple", 4, 0.15F);
+    public static final Item operandiPotion = new OperandiFoodItem("operandi_potion", 1, 0.4f, EnumAction.DRINK);
+    public static final Item operandiPopTart = new OperandiFoodItem("operandi_pop_tart", 3, 0);
+    public static final Item operandiEightBall = new MSUThrowableBase(0, 5, 1, "operandi_eight_ball", "operandiEightBall").addProperties(new PropertyStorageProjectile(false, true), new PropertyDamagePrjctle(2)).setSecret();
+    public static final Item operandiSplashPotion = new MSUThrowableBase(0, 0, 1, "operandi_splash_potion", "operandiSplashPotion").setThrownAngle(-20).setThrownSound(SoundEvents.ENTITY_SPLASH_POTION_THROW).addProperties(new PropertyStorageProjectile(false, true)).setSecret();
+    public static final Item operandiHelmet = new OperandiArmorItem("operandi_helmet", EntityEquipmentSlot.HEAD);
+    public static final Item operandiChestplate = new OperandiArmorItem("operandi_chestplate", EntityEquipmentSlot.CHEST);
+    public static final Item operandiLeggings = new OperandiArmorItem("operandi_leggings", EntityEquipmentSlot.LEGS);
+    public static final Item operandiBoots = new OperandiArmorItem("operandi_boots", EntityEquipmentSlot.FEET);
+
+
+    public static final Item operandiBlock = new OperandiBlockItem("operandi_block", MinestuckUniverseBlocks.operandiBlock);
+    public static final Item operandiStone = new OperandiBlockItem("operandi_stone", MinestuckUniverseBlocks.operandiStone);
+    public static final Item operandiLog = new OperandiBlockItem("operandi_log", MinestuckUniverseBlocks.operandiLog);
+    public static final Item operandiGlass = new OperandiBlockItem("operandi_glass", MinestuckUniverseBlocks.operandiGlass);
+
     //Medallions
     public static Item ironMedallion = new MSUItemBase("iron_medallion", "ironMedallion").setMaxStackSize(1);
     public static Item returnMedallion = new ItemWarpMedallion("returnMedallion", "return_medallion", ItemWarpMedallion.EnumTeleportType.RETURN, 80);
     public static Item teleportMedallion = new ItemWarpMedallion("teleportMedallion", "teleport_medallion", ItemWarpMedallion.EnumTeleportType.TRANSPORTALIZER, 80);
     public static Item skaianMedallion = new ItemWarpMedallion("skaianMedallion", "skaian_medallion", ItemWarpMedallion.EnumTeleportType.SKAIA, 80);
+
+    //Fetch Modi
+    public static final Item wildMagicModus = new ModusItem("wild_magic_modus");
+    public static final Item weightModus = new ModusItem("weight_modus");
+    public static final Item bookModus = new ModusItem("book_modus");
+    public static final Item capitalistModus = new ModusItem("capitalist_modus");
+    public static final Item modUs = new ModusItem("mod_us");
+    public static final Item operandiModus = new ModusItem("operandi_modus");
+    public static final Item onionModus = new ModusItem("onion_modus");
+    public static final Item slimeModus = new ModusItem("slime_modus");
+    public static final Item popTartModus = new ModusItem("pop_tart_modus");
+    public static final Item deckModus = new ModusItem("deck_modus");
+    public static final Item hueModus = new ModusItem("hue_modus");
+    public static final Item hueStackModus = new ModusItem("hue_stack_modus");
+    public static final Item chatModus = new ModusItem("chat_modus");
+    public static final Item cycloneModus = new ModusItem("cyclone_modus");
+    public static final Item energyModus = new ModusItem("energy_modus");
+    public static final Item scratchAndSniffModus = new ModusItem("scratch_and_sniff_modus");
+    public static final Item eightBallModus = new ModusItem("eight_ball_modus");
+    public static final Item chasityModus = new ModusItem("chasity_modus");
+    public static final Item jujuModus = new ModusItem("juju_modus");
+    public static final Item alcheModus = new ModusItem("alchemodus");
+
+    public static final Item arrayModus = new ModusItem("array_modus");
+    public static final Item monsterModus = new ModusItem("monster_modus");
+    public static final Item walletModus = new ModusItem("wallet_modus");
+    public static final Item walletBallModus = new ModusItem("wallet_ball_modus");
+
+    public static final Item hashchatModus = new ModusItem("hashchat_modus");
+    public static final Item sacrificeModus = new ModusItem("sacrifice_modus");
 
     //Weapons
 
@@ -306,6 +381,8 @@ public class MinestuckUniverseItems
     public static MSUThrowableBase redHotRang = new MSUThrowableBase(12, 0, 1, 1f, 4, -0.5, "red_hot_rang", "redHotRang"){{setMaxDamage(80);}}.addProperties(new PropertyDamagePrjctle(7), new PropertyThrowGravity(0.6f), new PropertyBoomerang(), new PropertyFirePrjctle(5, false));
     public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, 1f, 6, -1f, "tornado_glaive", "tornadoGlaive"){{setMaxDamage(550);}}.setSize(2).addProperties(new PropertyDamagePrjctle(8), new PropertyPrjctleItemPull(16, 0.5f), new PropertyBoomerang(), new PropertyThrowGravity(0.4f));
     public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato").addProperties(new PropertyDamagePrjctle(10), new PropertyFirePrjctle(10, true));
+    public static MSUThrowableBase eightBall = new MSUThrowableBase(0, 5, 8, "eight_ball", "eightBall").addProperties(new PropertyStorageProjectile(false, true), new PropertyDamagePrjctle(2), new PropertyProjectileBlinding(0x0000FF));
+    public static MSUThrowableBase walletBall = new MSUThrowableBase(0, 5, 8, "wallet_ball", "walletBall").addProperties(new PropertyStorageProjectile(true, true), new PropertyDamagePrjctle(4));
 
     //Rockkind
     public static MSUThrowableBase pebble = new MSUThrowableBase(0, 0, 16, 1.4f, 0, 0, "pebble", "pebble").addProperties(new PropertyDamagePrjctle(2), new PropertyThrowGravity(1.5f));
@@ -370,6 +447,17 @@ public class MinestuckUniverseItems
         registerItem(registry, battery);
         registerItem(registry, yarnBall);
         registerItem(registry, wizardbeardYarn);
+
+        registerItem(registry, popTart);
+        registerItem(registry, popBall);
+        registerItem(registry, floatStone);
+        registerItem(registry, energyCell);
+        registerItem(registry, dragonGel);
+        registerItem(registry, captchalogueBook);
+        registerItem(registry, chasityKey);
+        registerItem(registry, cruxiteGel);
+
+        registerItem(registry, cruxtruderGel);
         registerItem(registry, spaceSalt);
         registerItem(registry, cueBall);
         registerItem(registry, tickingStopwatch);
@@ -391,6 +479,7 @@ public class MinestuckUniverseItems
         registerItem(registry, skaia);
         registerItem(registry, greenSun);
         registerItem(registry, lightning);
+        registerItem(registry, walletEntityItem);
 
         registerItem(registry, diverHelmet);
         registerItem(registry, spikedHelmet);
@@ -414,6 +503,10 @@ public class MinestuckUniverseItems
         registerItem(registry, returnMedallion);
         registerItem(registry, teleportMedallion);
         registerItem(registry, skaianMedallion);
+
+        for(Item modus : ModusItem.fetchModi)
+            if(!(modus.getRegistryName() != null && registry.containsKey(modus.getRegistryName())))
+                registerItem(registry, modus);
 
         if(MSUConfig.combatOverhaul)
         {
@@ -655,12 +748,19 @@ public class MinestuckUniverseItems
         registerItem(registry, hotPotato);
         registerItem(registry, dragonCharge);
         registerItem(registry, tornadoGlaive);
+        registerItem(registry, eightBall);
+        registerItem(registry, walletBall);
 
         registerItem(registry, pebble);
         registerItem(registry, rock);
         registerItem(registry, bigRock);
         registerItem(registry, rolledUpPaper);
         registerItem(registry, yesterdaysNews);
+
+
+        for(Item operandi : OperandiModus.itemPool)
+            if(!(operandi.getRegistryName() != null && registry.containsKey(operandi.getRegistryName())))
+                registerItem(registry, operandi);
 
         registerItem(registry, dungeonKey);
 
@@ -671,6 +771,9 @@ public class MinestuckUniverseItems
         if(MinestuckUniverse.isSplatcraftLodaded)
             splatcraftCruxiteFilter = new ItemFilter("cruxiteFilter", "cruxite_filter", false).setCreativeTab(TabMinestuckUniverse.main);
         registerItem(registry, splatcraftCruxiteFilter);
+
+        MinestuckItems.modusCard.setCreativeTab(TabMinestuckUniverse.fetchModi);
+        OreDictionary.registerOre("modus", MinestuckItems.modusCard);
     }
 
     public static void setPostInitVariables()

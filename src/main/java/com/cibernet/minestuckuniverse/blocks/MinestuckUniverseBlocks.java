@@ -1,12 +1,14 @@
 package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.MapColor;
@@ -40,6 +42,12 @@ public class MinestuckUniverseBlocks
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
     public static Block smoothIron = new MSUBlockBase(Material.IRON, "smooth_iron", "smoothIron").setHardness(3.0F);
     public static Block bedrockStairs = new BlockMSUStairs(Blocks.BEDROCK.getDefaultState(), "bedrockStairs", "bedrock_stairs");
+	public static final Block hardStone = new BlockHardStone("hard_stone", "hardStone").setCreativeTab(TabMinestuckUniverse.main);
+
+	public static final Block operandiBlock = new OperandiBlock("operandi_block", 1.0f, 0, Material.GOURD, "");
+	public static final Block operandiGlass = new OperandiGlassBlock("operandi_glass", 0.5f, 0, Material.GLASS, "");
+	public static final Block operandiStone = new OperandiBlock("operandi_stone", 3.0f, 6.5f, Material.IRON, "pickaxe");
+	public static final Block operandiLog = new OperandiLogBlock("operandi_log", 2.0f, 0, OperandiBlock.LOG, "axe");
 
     public static Block holopad = new BlockHolopad();
 	
@@ -125,9 +133,15 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, netherReactorCore, true);
 		registerBlock(registry, wizardStatue, true);
 		registerBlock(registry, sbahjTree, true);
+		registerBlock(registry, hardStone, true);
 		registerBlock(registry, fluoriteBlock, true);
 		registerBlock(registry, fluoriteOre, true);
 		registerBlock(registry, moonstoneOre, true);
+
+		registerBlock(registry, operandiBlock, false);
+		registerBlock(registry, operandiStone, false);
+		registerBlock(registry, operandiLog, false);
+		registerBlock(registry, operandiGlass, false);
 
         registerBlock(registry, holopad, true);
         

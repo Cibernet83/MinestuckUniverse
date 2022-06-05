@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "minestuckuniverse:hard_stone" },
+            { "model": "minestuckuniverse:hard_stone_mirrored" },
+            { "model": "minestuckuniverse:hard_stone", "y": 180 },
+            { "model": "minestuckuniverse:hard_stone_mirrored", "y": 180 }
+        ]
+    }
+}
