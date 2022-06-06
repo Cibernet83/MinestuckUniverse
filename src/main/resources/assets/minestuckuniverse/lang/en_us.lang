@@ -60,6 +60,7 @@ tile.autoWidget.name=Grist-o-Matic 50000
 tile.autoCaptcha.name=Captchaloguifier
 tile.autoCaptcha.tooltip=Automatically captchalogues items.
 tile.porkhollowATM.name=Porkhollow ATM
+tile.ceramicPorkhollow.name=Ceramic Porkhollow
 tile.boondollarRegister.name=Boondollar Register
 
 tile.magicBlock.name=Perfectly Magical Object
@@ -889,10 +890,9 @@ item.banner.msu_moon.magenta=Magenta Moon
 item.banner.msu_moon.orange=Orange Moon
 item.banner.msu_moon.white=White Moon
 
-gui.atm.withdraw=Withdraw
 gui.atm.go=Accept
-gui.atm.amountLabel=Value per Boondollar:
-gui.atm.nLabel=Boondollars to withdraw:
+gui.atm.amountLabel=Value:
+gui.atm.nLabel=# of Boons:
 gui.vault.amountLabel=Stored Boondollars: %s
 gui.vault.amountLabelShort=Stored Boons: %s
 gui.vault.mavLabel=Minimum Accepted Value:

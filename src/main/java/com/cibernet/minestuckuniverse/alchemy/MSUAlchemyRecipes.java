@@ -183,7 +183,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(gristHopper), new GristSet(new GristType[] {Build, Rust, Uranium}, new int[] {250, 55, 10}));
         GristRegistry.addGristConversion(new ItemStack(autoWidget), new GristSet(new GristType[] {Build, Rust, Uranium, Garnet, Zillium}, new int[] {550, 34, 24, 35, 1}));
         GristRegistry.addGristConversion(new ItemStack(autoCaptcha), new GristSet(new GristType[] {Build, Rust, Uranium, Cobalt, Ruby, Quartz}, new int[] {140, 36, 22, 16, 12, 1}));
-        GristRegistry.addGristConversion(new ItemStack(porkhollowAtm), new GristSet(new GristType[] {Build, Rust, Uranium, Iodine, Diamond}, new int[] {180, 35, 16, 18, 4}));
+        GristRegistry.addGristConversion(new ItemStack(ceramicPorkhollow), new GristSet(new GristType[] {Build, Rust, Uranium, Iodine, Diamond}, new int[] {180, 35, 16, 18, 4}));
         GristRegistry.addGristConversion(new ItemStack(boondollarRegister), new GristSet(new GristType[] {Build, Rust, Uranium, Garnet, Iodine, Quartz}, new int[] {280, 35, 20, 25, 16, 8}));
 
         GristRegistry.addGristConversion(new ItemStack(rubyRedTransportalizer), new GristSet(new GristType[] {Build, Ruby, Rust, Uranium}, new int[] {450, 100, 36, 24}));
@@ -340,10 +340,10 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.popBall), new GristSet(new GristType[] {Iodine, Amber, Shale}, new int[] {8, 5, 2}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.dragonGel), new GristSet(new GristType[] {Build, Sulfur, Uranium, Zillium}, new int[] {1010, 500, 742, 1525}));
 
-        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.operandiBlock), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
-        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.operandiStone), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
-        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.operandiLog), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
-        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.operandiGlass), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseBlocks.operandiBlock), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseBlocks.operandiStone), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseBlocks.operandiLog), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseBlocks.operandiGlass), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
 
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.cycloneModus), new GristSet(new GristType[] {Build}, new int[] {16}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.wildMagicModus), new GristSet(new GristType[] {Build, Garnet, Amethyst}, new int[] {310, 32, 65}));

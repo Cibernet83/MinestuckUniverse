@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.items.captchalogue;
 import com.cibernet.minestuckuniverse.captchalogue.OperandiModus;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
+import com.cibernet.minestuckuniverse.items.MSUItemBlock;
 import com.mraof.minestuck.item.TabMinestuck;
 import com.mraof.minestuck.tileentity.TileEntityItemStack;
 import net.minecraft.block.Block;
@@ -14,13 +15,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class OperandiBlockItem extends ItemBlock implements IRegistryItem
+public class OperandiBlockItem extends MSUItemBlock
 {
 	final String registryName;
 
 	public OperandiBlockItem(String name, Block block)
 	{
-		super(block);
+		super(block, name);
 		registryName = name;
 		
 		setUnlocalizedName(name);
@@ -41,10 +42,5 @@ public class OperandiBlockItem extends ItemBlock implements IRegistryItem
 			te.setStack(newStack);
 			return true;
 		} else return false;
-	}
-
-	@Override
-	public void setRegistryName() {
-		setRegistryName(registryName);
 	}
 }

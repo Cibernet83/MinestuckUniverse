@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.ItemGhost;
@@ -440,6 +441,8 @@ public class CommonEventHandler
 	{
 		if(event.getResultItem().getItem() instanceof ItemBeamBlade)
 			ItemBeamBlade.changeState(event.getResultItem(), false);
+		else if(event.getResultItem().getItem().equals(Item.getItemFromBlock(MinestuckUniverseBlocks.ceramicPorkhollow)))
+			event.setResultItem(new ItemStack(event.getResultItem().getItem(), event.getResultItem().getCount(), event.getDowel().getMetadata()));
 	}
 
 	@SubscribeEvent

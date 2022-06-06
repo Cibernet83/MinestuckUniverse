@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.items;
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.blocks.BlockCeramicPorkhollow;
 import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.captchalogue.OperandiModus;
@@ -52,6 +53,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -64,7 +66,7 @@ import java.util.ArrayList;
 public class MinestuckUniverseItems
 {
     private static final PropertySoundOnHit.Value PITCH_NOTE = ((stack, target, player) -> (-player.rotationPitch + 90) / 90f);
-    public static ArrayList<Block> itemBlocks = new ArrayList<>();
+    public static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
 
     //Armor Materials
     public static ItemArmor.ArmorMaterial materialDiverHelmet = EnumHelper.addArmorMaterial("DIVER_HELMET", MinestuckUniverse.MODID+":diver_helmet", 120, new int[] {0, 0, 0, 3}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
@@ -185,12 +187,6 @@ public class MinestuckUniverseItems
     public static final Item operandiChestplate = new OperandiArmorItem("operandi_chestplate", EntityEquipmentSlot.CHEST);
     public static final Item operandiLeggings = new OperandiArmorItem("operandi_leggings", EntityEquipmentSlot.LEGS);
     public static final Item operandiBoots = new OperandiArmorItem("operandi_boots", EntityEquipmentSlot.FEET);
-
-
-    public static final Item operandiBlock = new OperandiBlockItem("operandi_block", MinestuckUniverseBlocks.operandiBlock);
-    public static final Item operandiStone = new OperandiBlockItem("operandi_stone", MinestuckUniverseBlocks.operandiStone);
-    public static final Item operandiLog = new OperandiBlockItem("operandi_log", MinestuckUniverseBlocks.operandiLog);
-    public static final Item operandiGlass = new OperandiBlockItem("operandi_glass", MinestuckUniverseBlocks.operandiGlass);
 
     //Medallions
     public static Item ironMedallion = new MSUItemBase("iron_medallion", "ironMedallion").setMaxStackSize(1);
@@ -424,12 +420,16 @@ public class MinestuckUniverseItems
     public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCloth, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
     public static Item catclaws = new ItemDualClaw(450, 2.9, -0.65, -1.5D, -1.0D, 6, "catClaws",Minestuck.MOD_ID+ ":catclaws").setTool(toolClaws, 2, 1);
 
+
+
     //Support
     public static Item splatcraftCruxiteFilter = new MSUItemBase("cruxite_filter", "cruxiteFilter"){
         @Override
         public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         }
     };
+
+    public static ItemBlock ceramicPorkhollow = ((BlockCeramicPorkhollow)MinestuckUniverseBlocks.ceramicPorkhollow).getItemBlock();
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -505,7 +505,7 @@ public class MinestuckUniverseItems
         registerItem(registry, skaianMedallion);
 
         for(Item modus : ModusItem.fetchModi)
-            if(!(modus.getRegistryName() != null && registry.containsKey(modus.getRegistryName())))
+            if(modus instanceof ModusItem)
                 registerItem(registry, modus);
 
         if(MSUConfig.combatOverhaul)
@@ -759,7 +759,7 @@ public class MinestuckUniverseItems
 
 
         for(Item operandi : OperandiModus.itemPool)
-            if(!(operandi.getRegistryName() != null && registry.containsKey(operandi.getRegistryName())))
+            if(!(operandi instanceof ItemBlock) && !(operandi.getRegistryName() != null && registry.containsKey(operandi.getRegistryName())))
                 registerItem(registry, operandi);
 
         registerItem(registry, dungeonKey);
@@ -874,6 +874,10 @@ public class MinestuckUniverseItems
         registerItemCustomRender(blizzardCutters, new MSUModelManager.DualWeaponDefinition("blizzard_cutters_drawn", "blizzard_cutters_sheathed"));
         registerItemCustomRender(katarsOfZillywhomst, new MSUModelManager.DualWeaponDefinition("katars_of_zillywhomst_drawn", "katars_of_zillywhomst_sheathed"));
 
+        registerItemCustomRender(cruxiteGel, new MSUModelManager.SubtypesItemDefinition("cruxite_gel"));
+        registerItemCustomRender(cruxtruderGel, new MSUModelManager.SubtypesItemDefinition("cruxtruder_gel"));
+        registerItemCustomRender(ceramicPorkhollow, new MSUModelManager.SubtypesItemDefinition("ceramic_porkhollow"));
+
         RenderThrowable.IRenderProperties THROW_STAR_ROTATION = ((entity, partialTicks) ->
         {
             GlStateManager.rotate(90, 1, 0, 0);
@@ -916,11 +920,7 @@ public class MinestuckUniverseItems
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry)
     {
-        for(Block block : itemBlocks)
-        {
-            ItemBlock item = (block instanceof BlockCustomTransportalizer || block instanceof BlockTransportalizer)
-                    ? new ItemTransportalizer(block) : new ItemBlock(block);
+        for(ItemBlock item : itemBlocks)
             registerItem(registry, item.setRegistryName(item.getBlock().getRegistryName()));
-        }
     }
 }

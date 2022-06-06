@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.client.MSUFontRenderer;
 import com.cibernet.minestuckuniverse.client.MSUKeys;
 import com.cibernet.minestuckuniverse.client.RenderBeams;
@@ -15,15 +16,24 @@ import com.cibernet.minestuckuniverse.client.MSURenderMachineOutline;
 import com.cibernet.minestuckuniverse.client.models.ModelAcheron;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.client.renderer.BlockColorCruxite;
 import com.mraof.minestuck.client.renderer.entity.RenderEntityMinestuck;
+import com.mraof.minestuck.tileentity.TileEntityItemStack;
 import com.mraof.minestuck.util.ColorCollector;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+
+import javax.annotation.Nullable;
 
 import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.dyedBeamBlade;
 
@@ -73,11 +83,21 @@ public class ClientProxy extends CommonProxy
         mc.getItemColors().registerItemColorHandler(new ItemBeamBlade.BladeColorHandler(), dyedBeamBlade);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) ->
                         BlockColorCruxite.handleColorTint(ItemWarpMedallion.getColor(stack), tintIndex),
-                new Item[]{MinestuckUniverseItems.returnMedallion});
+                MinestuckUniverseItems.returnMedallion);
 
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) ->
                         BlockColorCruxite.handleColorTint(stack.getMetadata() == 0 ? 0x99D9EA : ColorCollector.getColor(stack.getMetadata() - 1), tintIndex),
-                new Item[]{MinestuckUniverseItems.cruxiteGel, MinestuckUniverseItems.cruxtruderGel, MinestuckUniverseItems.captchalogueBook, MinestuckUniverseItems.chasityKey});
+                MinestuckUniverseItems.cruxiteGel, MinestuckUniverseItems.cruxtruderGel, MinestuckUniverseItems.captchalogueBook, MinestuckUniverseItems.chasityKey,
+                Item.getItemFromBlock(MinestuckUniverseBlocks.ceramicPorkhollow));
+
+
+        mc.getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) -> {
+            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            if (tileEntity instanceof TileEntityItemStack)
+                return BlockColorCruxite.handleColorTint(((TileEntityItemStack)tileEntity).getStack().getMetadata() == 0 ? 0x99D9EA : ColorCollector.getColor(((TileEntityItemStack)tileEntity).getStack().getMetadata()-1), tintIndex);
+            return -1;
+        }, MinestuckUniverseBlocks.ceramicPorkhollow);
     }
+
 
 }

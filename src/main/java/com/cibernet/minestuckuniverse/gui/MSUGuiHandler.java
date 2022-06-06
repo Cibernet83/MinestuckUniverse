@@ -38,14 +38,15 @@ public class MSUGuiHandler implements IGuiHandler
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
         TileEntity te = world.getTileEntity(new BlockPos(x,y,z));
+        System.out.println(ID);
         switch(ID)
         {
             case MACHINE_CHASIS_GUI:
                 return new GuiMachineChasis(player.inventory, (TileEntityMachineChasis) te);
             case AUTO_CAPTCHA_GUI:
                 return new GuiAutoCaptcha(player.inventory, (TileEntityAutoCaptcha) te);
-            case PORKHOLLOW_ATM_GUI:
-                return new GuiPorkhollowAtm(player);
+            case CERAMIC_PORKHOLLOW_GUI:
+                return new GuiCeramicPorkhollow(player);
             case BOONDOLLAR_REGISTER_GUI:
                 return new GuiBoondollarRegister(player, (TileEntityBoondollarRegister) te);
             case STRIFE_CARD_GUI:

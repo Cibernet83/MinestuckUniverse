@@ -100,7 +100,7 @@ public class MSUModelManager
     @SideOnly(Side.CLIENT)
     private static void register(Item item)
     {
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, 0  , new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
 
     @SideOnly(Side.CLIENT)
@@ -163,6 +163,31 @@ public class MSUModelManager
         @Override
         public ModelResourceLocation getModelLocation(ItemStack stack) {
             return new ModelResourceLocation(getResourceLocations()[stack.getItemDamage()], "inventory");
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static class SubtypesItemDefinition implements CustomItemMeshDefinition
+    {
+        private String name;
+
+        public SubtypesItemDefinition(Item item) {
+            this(item.getRegistryName().getResourcePath());
+        }
+
+        public SubtypesItemDefinition(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public ResourceLocation[] getResourceLocations()
+        {
+            return new ResourceLocation[]{new ResourceLocation(MinestuckUniverse.MODID, name)};
+        }
+
+        @Override
+        public ModelResourceLocation getModelLocation(ItemStack stack) {
+            return new ModelResourceLocation(getResourceLocations()[0], "inventory");
         }
     }
 }

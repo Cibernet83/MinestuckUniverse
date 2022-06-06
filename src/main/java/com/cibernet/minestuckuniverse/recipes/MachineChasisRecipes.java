@@ -1,7 +1,7 @@
 package com.cibernet.minestuckuniverse.recipes;
 
-import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
+import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.ceramicPorkhollow;
 import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
 
 import com.mraof.minestuck.block.MinestuckBlocks;
@@ -9,7 +9,6 @@ import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -17,7 +16,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.TreeMap;
 
 public class MachineChasisRecipes
 {
@@ -32,9 +30,9 @@ public class MachineChasisRecipes
                 new ItemStack(MinestuckItems.boondollars), new ItemStack(MinestuckItems.energyCore), new ItemStack(zillystoneShard));
         addRecipe(autoCaptcha, new ItemStack(Blocks.DISPENSER), new ItemStack(MinestuckItems.captchaCard),
                 new ItemStack(moonstone), ItemStack.EMPTY, new ItemStack(MinestuckItems.energyCore));
-        addRecipe(porkhollowAtm, new ItemStack(MinestuckBlocks.blockComputerOff), new ItemStack(MinestuckItems.boondollars),
+        addRecipe(ceramicPorkhollow, new ItemStack(MinestuckBlocks.blockComputerOff), new ItemStack(MinestuckItems.boondollars),
                 new ItemStack(MinestuckItems.boondollars), new ItemStack(Items.PORKCHOP), new ItemStack(MinestuckItems.boondollars));
-        addRecipe(boondollarRegister, new ItemStack(porkhollowAtm), new ItemStack(Blocks.HOPPER), new ItemStack(Items.COMPARATOR),
+        addRecipe(boondollarRegister, new ItemStack(ceramicPorkhollow), new ItemStack(Blocks.HOPPER), new ItemStack(Items.COMPARATOR),
                 new ItemStack(Blocks.CHEST), new ItemStack(Items.REDSTONE));
     }
     
