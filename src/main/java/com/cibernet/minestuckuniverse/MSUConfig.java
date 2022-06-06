@@ -20,6 +20,7 @@ public class MSUConfig
 	public static int baseZillystoneLuck;
 	public static boolean IDAlchemy;
 	public static boolean nullSoloSessions;
+	public static boolean unstableArtifactSpread;
 
 	//Strife
 	public static boolean combatOverhaul;
@@ -59,6 +60,8 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.general.gristDropsMultiplier").getDouble();
 		nullSoloSessions = config.get("General", "nullSoloSessions", false, "Whether solo sessions should use the null title and terrain aspects.")
 				.setLanguageKey("config.minestuckuniverse.general.nullSoloSessions").getBoolean();
+		unstableArtifactSpread = config.get("General", "unstableArtifactSpread", false, "Do not enable this while playing on any world you care about if you don't know what it does.")
+				.setLanguageKey("config.minestuckuniverse.general.unstableArtifactSpread").getBoolean();
 
 		restrictedStrife = config.get("Strife", "restrictedStrife", false, "Prevents players from attacking without an allocated weapon in their main hand. It also restricts the use of certain items such as bows.")
 				.setLanguageKey("config.minestuckuniverse.strife.restrictedStrife").getBoolean();

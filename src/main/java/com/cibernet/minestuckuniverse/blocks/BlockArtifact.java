@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.mraof.minestuck.block.BlockLargeMachine;
 import com.mraof.minestuck.block.BlockSburbMachine;
 import com.mraof.minestuck.event.AlchemizeItemAlchemiterEvent;
@@ -108,7 +109,7 @@ public class BlockArtifact extends MSUBlockBase
 
 		if(state.getBlock() instanceof BlockSburbMachine || state.getBlock() instanceof BlockLargeMachine || hardness == 0)
 			return 1;
-		if(state.getBlock() instanceof BlockArtifact || hardness < 0)
+		if(!MSUConfig.unstableArtifactSpread || state.getBlock() instanceof BlockArtifact || hardness < 0)
 			return 0;
 
 		return Math.min(0.2f, 0.25f/state.getBlockHardness(worldIn, pos));
