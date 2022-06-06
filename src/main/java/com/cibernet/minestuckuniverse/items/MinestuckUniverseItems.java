@@ -774,6 +774,8 @@ public class MinestuckUniverseItems
 
         MinestuckItems.modusCard.setCreativeTab(TabMinestuckUniverse.fetchModi);
         OreDictionary.registerOre("modus", MinestuckItems.modusCard);
+        for(Item modus : ModusItem.fetchModi)
+            OreDictionary.registerOre("modus", modus);
     }
 
     public static void setPostInitVariables()

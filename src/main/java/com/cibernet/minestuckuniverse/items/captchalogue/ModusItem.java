@@ -21,7 +21,6 @@ public class ModusItem extends MSUItemBase
 		super(name);
 		setMaxStackSize(1);
 		this.setCreativeTab(TabMinestuckUniverse.fetchModi);
-		OreDictionary.registerOre("modus", this);
 		
 		fetchModi.add(this);
 	}
