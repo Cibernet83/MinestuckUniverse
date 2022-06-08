@@ -39,7 +39,8 @@ public class MSUUtils
     public static final int CERAMIC_PORKHOLLOW_GUI = 2;
     public static final int BOONDOLLAR_REGISTER_GUI = 3;
     public static final int STRIFE_CARD_GUI = 4;
-    
+    public static final int STONE_TABLET_GUI = 5;
+
     public static void registerDeployList()
     {
         DeployList.registerItem("holopad", new ItemStack(MinestuckUniverseBlocks.holopad), new GristSet(GristType.Build, MinestuckUniverse.isArsenalLoaded ? 10000 : 1000), 2);

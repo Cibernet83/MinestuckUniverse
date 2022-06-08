@@ -464,6 +464,7 @@ public class MinestuckUniverseItems
         registerItem(registry, tickingStopwatch);
         registerItem(registry, timetable);
         registerItem(registry, strifeCard);
+        MinestuckItems.stoneSlab = registerItem(registry, new ItemStoneTablet());
 
         registerItem(registry, laserPointer);
         registerItem(registry, whip);

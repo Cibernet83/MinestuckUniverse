@@ -66,6 +66,7 @@ public abstract class MSUPacket
         UPDATE_BEAMS(UpdateBeamDataPacket.class),
         LEFT_CLICK_EMPTY(LeftClickEmptyPacket.class),
         ROCKET_BOOTS(RocketBootsPacket.class),
+        STONE_TABLET_REQUEST(StoneTabletRequestPacket.class),
 
 
         CHAT_MODUS_EJECT(ChatModusEjectPacket.class),

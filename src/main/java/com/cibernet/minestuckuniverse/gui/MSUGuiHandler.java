@@ -7,8 +7,11 @@ import com.cibernet.minestuckuniverse.gui.container.ContainerMachineChasis;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoCaptcha;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityBoondollarRegister;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
+import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -50,6 +53,25 @@ public class MSUGuiHandler implements IGuiHandler
                 return new GuiBoondollarRegister(player, (TileEntityBoondollarRegister) te);
             case STRIFE_CARD_GUI:
                 return new GuiStrifeCard(player);
+            case STONE_TABLET_GUI:
+                EnumHand hand = EnumHand.OFF_HAND;
+                ItemStack stack = player.getHeldItemMainhand();
+                ItemStack tablet = new ItemStack(MinestuckItems.stoneSlab);
+                String text = "";
+                if (!stack.isItemEqual(tablet))
+                {
+                    hand = EnumHand.MAIN_HAND;
+                    if (!(stack = player.getHeldItemOffhand()).isItemEqual(tablet))
+                        return null;
+                }
+
+                if (stack.hasTagCompound())
+                {
+                    text = stack.getTagCompound().getString("text");
+                }
+
+                boolean canEdit = player.getHeldItem(hand).isItemEqual(new ItemStack(MinestuckItems.carvingTool));
+                return new GuiStoneTablet(player, player.getHeldItemMainhand(), text, canEdit);
 
         }
         return null;
