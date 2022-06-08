@@ -224,6 +224,8 @@ item.glowingLoghammer.name=Glowing Loghammer
 item.calamityHammer.name=Barrel's Warhammer
 item.stardustSmasher.name=Stardust Smasher
 item.stardustSmasher.tooltip=Perfect for crushing stone golems brought to life by void goop, or squashing nasty bugs.
+item.drummer.name=Drummer
+item.drummer.tooltip=Just your everyday handled generic pound
 
 item.makeshiftClaws.name=Makeshift Claws
 item.makeshiftClaws.name.plural=Makeshift Claws

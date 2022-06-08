@@ -330,6 +330,7 @@ public class MinestuckUniverseItems
     public static Item highVoltageStormCrusher = new MSUWeaponBase(1150, 30.7, -2.8, 18, "high_voltage_storm_crusher", "highVoltageStormCrusher").setTool(toolHammer, 4, 3.0f).addProperties(new PropertyLightning(8, 1, true, false), new PropertyElectric(60, 8, -1, false), new PropertyVMotionDamage(1.6f, 3));
     public static Item barrelsWarhammer = new MSUWeaponBase(1438, 64, -2.8, 18, "barrel_warhammer", "calamityHammer").setTool(toolHammer, 4, 4.0f).addProperties(new PropertyRocketBoost(0.6f), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_DAMAGE, "Calamity Boost", 0.6, 0.1, 0.3f, 2), new PropertyVMotionDamage(1.6f, 3), new PropertyVMotionDamage(1.6f, 3));
     public static Item stardustSmasher = new MSUWeaponBase(1725, 44.8, -2.8, 20, "stardust_smasher", "stardustSmasher").setTool(toolHammer, 20, 8.0f).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.ARTHROPOD, 1000), new PropertyVMotionDamage(1.6f, 3));
+    public static Item drummer = new MSUWeaponBase(1000, 21.8, -2.8, 10, "drummer", "drummer").setTool(toolHammer, 3, 8.0f).addProperties(new PropertySoundOnHit(SoundEvents.BLOCK_NOTE_BASEDRUM, PITCH_NOTE, ((stack, target, player) -> 3f)), new PropertyVMotionDamage(1.6f, 3));
 
     //Clawkind
     public static Item katars = new MSUWeaponBase(248, 1.6, -0.65, 2, "katars", "katars").setTool(toolClaws, 2, 3).addProperties(new PropertySweep(), new PropertyDualWield());
@@ -536,6 +537,7 @@ public class MinestuckUniverseItems
         registerItem(registry, highVoltageStormCrusher);
         registerItem(registry, barrelsWarhammer);
         registerItem(registry, stardustSmasher);
+        registerItem(registry, drummer);
 
         if(MSUConfig.combatOverhaul)
         {

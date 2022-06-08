@@ -183,7 +183,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(gristHopper), new GristSet(new GristType[] {Build, Rust, Uranium}, new int[] {250, 55, 10}));
         GristRegistry.addGristConversion(new ItemStack(autoWidget), new GristSet(new GristType[] {Build, Rust, Uranium, Garnet, Zillium}, new int[] {550, 34, 24, 35, 1}));
         GristRegistry.addGristConversion(new ItemStack(autoCaptcha), new GristSet(new GristType[] {Build, Rust, Uranium, Cobalt, Ruby, Quartz}, new int[] {140, 36, 22, 16, 12, 1}));
-        GristRegistry.addGristConversion(new ItemStack(ceramicPorkhollow), new GristSet(new GristType[] {Build, Rust, Uranium, Iodine, Diamond}, new int[] {180, 35, 16, 18, 4}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.ceramicPorkhollow), new GristSet(new GristType[] {Build, Rust, Uranium, Iodine, Diamond}, new int[] {180, 35, 16, 18, 4}));
         GristRegistry.addGristConversion(new ItemStack(boondollarRegister), new GristSet(new GristType[] {Build, Rust, Uranium, Garnet, Iodine, Quartz}, new int[] {280, 35, 20, 25, 16, 8}));
 
         GristRegistry.addGristConversion(new ItemStack(rubyRedTransportalizer), new GristSet(new GristType[] {Build, Ruby, Rust, Uranium}, new int[] {450, 100, 36, 24}));
@@ -207,6 +207,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(highVoltageStormCrusher), new GristSet(new GristType[] {Gold, Mercury, Uranium, Quartz}, new int[] {2000, 1230, 6060, 800}));
         GristRegistry.addGristConversion(new ItemStack(barrelsWarhammer), new GristSet(new GristType[] {Ruby, Diamond, Uranium, Gold}, new int[] {8400, 200, 200, 800}));
         GristRegistry.addGristConversion(new ItemStack(stardustSmasher), new GristSet(new GristType[] {Gold, Zillium, Artifact}, new int[] {5600, 10, 1}));
+        GristRegistry.addGristConversion(new ItemStack(drummer), new GristSet(new GristType[] {Build}, new int[] {400}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckItems.mwrthwl), new GristSet(new GristType[]{GristType.Build, GristType.Chalk, GristType.Gold, GristType.Zillium}, new int[]{2000, 12000, 200, 1}));
 
         GristRegistry.addGristConversion(new ItemStack(hereticusAurum), new GristSet(new GristType[] {Build, Gold, Amethyst}, new int[] {210, 2000, 256}));
@@ -437,6 +438,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(midasMallet), new ItemStack(tickingStopwatch), MODE_OR, new ItemStack(MinestuckItems.fearNoAnvil));
         removeCombination(new ItemStack(MinestuckItems.fearNoAnvil), new ItemStack(Items.LAVA_BUCKET), CombinationRegistry.Mode.MODE_OR, false, false);
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.blacksmithHammer), new ItemStack(Items.LAVA_BUCKET), MODE_AND, new ItemStack(MinestuckItems.meltMasher));
+        CombinationRegistry.addCombination(new ItemStack(drummer), new ItemStack(drumstickNeedles), MODE_AND, new ItemStack(loghammer));
 
         //bladekind
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.katana), new ItemStack(MinestuckItems.minestuckBucket, 1, 1), MODE_OR, false, true, new ItemStack(bloodKatana));
