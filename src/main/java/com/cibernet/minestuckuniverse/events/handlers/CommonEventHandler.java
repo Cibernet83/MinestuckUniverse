@@ -6,7 +6,6 @@ import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.ItemGhost;
-import com.cibernet.minestuckuniverse.items.armor.ItemPogoBoots;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyRandomDamage;
@@ -26,10 +25,11 @@ import com.mraof.minestuck.event.AlchemizeItemEvent;
 import com.mraof.minestuck.event.UnderlingSpoilsEvent;
 import com.mraof.minestuck.item.ItemCaptcharoidCamera;
 import com.mraof.minestuck.item.MinestuckItems;
-import com.mraof.minestuck.network.skaianet.SburbHandler;
+import com.mraof.minestuck.item.block.ItemAlchemiter;
+import com.mraof.minestuck.item.block.ItemCruxtruder;
+import com.mraof.minestuck.item.block.ItemPunchDesignix;
+import com.mraof.minestuck.item.block.ItemTotemLathe;
 import com.mraof.minestuck.world.MinestuckDimensionHandler;
-import com.mraof.minestuck.world.lands.gen.ChunkProviderLands;
-import com.sun.javafx.geom.Vec3f;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -44,22 +44,19 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemClock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
-import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -71,7 +68,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.Sys;
 
 import java.util.List;
 import java.util.Map;
@@ -453,4 +449,23 @@ public class CommonEventHandler
 		if(event.getUnderling().getRNG().nextFloat() <= 0.001f)
 			event.getSpoils().addGrist(new GristSet(GristType.Zillium, 1));
 	}
+
+	//fixes machines not getting consumed when placed
+	@SubscribeEvent
+	public static void onMachinePlaced(PlayerInteractEvent.RightClickBlock event)
+	{
+		Item item = event.getItemStack().getItem();
+		if(!event.getEntityPlayer().world.isRemote && (item instanceof ItemAlchemiter || item instanceof ItemPunchDesignix || item instanceof ItemCruxtruder || item instanceof ItemTotemLathe))
+		{
+			EnumActionResult result = item.onItemUse(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) event.getHitVec().x, (float)event.getHitVec().y, (float)event.getHitVec().z);
+
+			if(result == EnumActionResult.SUCCESS && !event.getEntityPlayer().isCreative())
+			{
+				event.setCanceled(true);
+				event.setCancellationResult(result);
+				event.getItemStack().shrink(1);
+			}
+		}
+	}
+
 }
