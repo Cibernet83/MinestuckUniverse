@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 public abstract class BaseModusGuiHandler extends SylladexGuiHandler
 {
 	public static final ResourceLocation MS_ICONS = new ResourceLocation(Minestuck.MOD_ID, "textures/gui/icons.png");
-	public static final ResourceLocation EXTRAS = new ResourceLocation(MinestuckUniverse.MODID, "textures/gui/icons.png");
+	public static final ResourceLocation EXTRAS = new ResourceLocation(MinestuckUniverse.MODID, "textures/gui/sylladex_icons.png");
 	
 	protected Modus modus;
 	

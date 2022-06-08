@@ -4,14 +4,21 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
 import com.cibernet.minestuckuniverse.items.MSUItemBlock;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
+import com.cibernet.minestuckuniverse.tileentity.TileEntityMachineChasis;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.block.BlockDecor;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.ItemBoondollars;
 import com.mraof.minestuck.item.MinestuckItems;
+import com.mraof.minestuck.network.skaianet.SburbConnection;
+import com.mraof.minestuck.network.skaianet.SburbHandler;
+import com.mraof.minestuck.network.skaianet.SkaianetHandler;
 import com.mraof.minestuck.tileentity.TileEntityItemStack;
 import com.mraof.minestuck.util.MinestuckPlayerData;
+import com.mraof.minestuck.world.MinestuckDimensionHandler;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -40,7 +47,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlockCeramicPorkhollow extends MSUBlockBase implements ITileEntityProvider
+public class BlockCeramicPorkhollow extends MSUBlockBase implements ITileEntityProvider, TileEntityMachineChasis.ICustomAssembly
 {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(4 / 16d, 0, 2 / 16d, 12 / 16d, 10 / 16d, 14 / 16d);
@@ -221,5 +228,23 @@ public class BlockCeramicPorkhollow extends MSUBlockBase implements ITileEntityP
 	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
 	{
 		return side == EnumFacing.UP;
+	}
+
+	@Override
+	public void onAssembly(World world, @Nullable EntityPlayer player, BlockPos pos, MachineChasisRecipes.Output output, ItemStack... input)
+	{
+		int color = 0;
+		if(player != null && MinestuckPlayerData.getData(player) != null)
+			color = MinestuckPlayerData.getData(player).color + 1;
+		else
+		{
+			SburbConnection connection = SburbHandler.getConnectionForDimension(world.provider.getDimension());
+			if(connection != null)
+				color = MinestuckPlayerData.getData(connection.getClientIdentifier()).color;
+		}
+
+				TileEntityItemStack iste = new TileEntityItemStack();
+
+		iste.setStack(new ItemStack(MinestuckUniverseItems.ceramicPorkhollow, 1, color));
 	}
 }
