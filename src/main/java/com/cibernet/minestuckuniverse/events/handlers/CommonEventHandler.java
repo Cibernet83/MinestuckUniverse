@@ -30,8 +30,10 @@ import com.mraof.minestuck.item.block.ItemCruxtruder;
 import com.mraof.minestuck.item.block.ItemPunchDesignix;
 import com.mraof.minestuck.item.block.ItemTotemLathe;
 import com.mraof.minestuck.world.MinestuckDimensionHandler;
+import com.mraof.minestuck.world.lands.title.LandAspectSilence;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,6 +54,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.sound.SoundEvent;
+import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
@@ -69,6 +73,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.ArrayUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -466,6 +471,31 @@ public class CommonEventHandler
 				event.getItemStack().shrink(1);
 			}
 		}
+	}
+
+	private static final List<ISound> sounds = new ArrayList<>();
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void onSound(SoundEvent.SoundSourceEvent event)
+	{
+		if(Minecraft.getMinecraft().world == null)
+			return;
+
+
+		int dim = Minecraft.getMinecraft().world.provider.getDimension();
+		if(MinestuckDimensionHandler.isLandDimension(dim) && MinestuckDimensionHandler.getAspects(dim).aspectTitle instanceof LandAspectSilence)
+			sounds.add(event.getSound());
+	}
+
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void stopSounds(TickEvent.ClientTickEvent event)
+	{
+		for(ISound sound : sounds)
+			Minecraft.getMinecraft().getSoundHandler().stopSound(sound);
+		sounds.clear();
 	}
 
 }
