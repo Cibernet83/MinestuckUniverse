@@ -1,7 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
-import com.cibernet.minestuckuniverse.MSUConfig;
-import com.cibernet.minestuckuniverse.api.MSUSplatcraftSupport;
+import com.cibernet.minestuckuniverse.modSupport.MSUSplatcraftSupport;
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.captchalogue.MSUModi;

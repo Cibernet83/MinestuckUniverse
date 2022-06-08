@@ -26,8 +26,6 @@ public class OuijaModus extends BaseModus
 	@Override
 	public boolean putItemStack(ItemStack stack)
 	{
-		System.out.println(stack);
-		
 		if(!stack.isEmpty())
 			return super.putItemStack(stack);
 		

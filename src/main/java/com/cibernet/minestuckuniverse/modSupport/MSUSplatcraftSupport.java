@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.api;
+package com.cibernet.minestuckuniverse.modSupport;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
