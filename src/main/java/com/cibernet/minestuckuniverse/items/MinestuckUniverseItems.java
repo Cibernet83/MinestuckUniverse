@@ -399,6 +399,9 @@ public class MinestuckUniverseItems
     public static Item rolledUpPaper = new MSUWeaponBase(200, 3, 0, 1, "rolled_up_paper", "rolledUpPaper");
     public static Item yesterdaysNews = new MSUWeaponBase(450, 7, 0, 1, "yesterdays_news", "yesterdaysNews").addProperties(new PropertyPotion(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 1), false, 0.5f), new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 200, 1), false, 0.5f), new PropertyFire(3, 0.7f, true));
 
+    @Deprecated //Use MinestuckItems.stoneSlab instead
+    private static final Item stoneTablet = new ItemStoneTablet();
+
     //Armor
     public static MSUArmorBase diverHelmet = new ItemDiverHelmet(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
     public static MSUArmorBase spikedHelmet = new MSUArmorBase(materialSpikedHelmet,0,EntityEquipmentSlot.HEAD,"spikedDiverHelmet", "spiked_diver_helmet");
@@ -464,7 +467,7 @@ public class MinestuckUniverseItems
         registerItem(registry, tickingStopwatch);
         registerItem(registry, timetable);
         registerItem(registry, strifeCard);
-        MinestuckItems.stoneSlab = registerItem(registry, new ItemStoneTablet());
+         MinestuckItems.stoneSlab = registerItem(registry, stoneTablet);
 
         registerItem(registry, laserPointer);
         registerItem(registry, whip);

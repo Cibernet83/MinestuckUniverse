@@ -31,6 +31,12 @@ public class ItemStoneTablet extends MSUItemBase
 	{
 		super("stone_slab", "stoneTablet");
 		setMaxStackSize(1);
+
+		addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "written"), ((stack, worldIn, entityIn) ->
+		{
+			NBTTagCompound nbt = stack.getTagCompound();
+			return (nbt != null && nbt.hasKey("text") && !nbt.getString("text").isEmpty()) ? 1 : 0;
+		}));
 	}
 
 	@Override
@@ -38,7 +44,7 @@ public class ItemStoneTablet extends MSUItemBase
 	{
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		BlockPos pos = playerIn.getPosition();
-		playerIn.openGui(Minestuck.instance, MSUUtils.STONE_TABLET_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
+		playerIn.openGui(MinestuckUniverse.instance, MSUUtils.STONE_TABLET_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 	}
 
@@ -52,20 +58,5 @@ public class ItemStoneTablet extends MSUItemBase
 		NBTTagCompound nbt = stack.getTagCompound();
 		if (nbt != null && nbt.hasKey("text") && !nbt.getString("text").isEmpty())
 			tooltip.add(TextFormatting.GRAY + I18n.format("item.stoneTablet.carved"));
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void registerModel()
-	{
-		ModelLoader.registerItemVariants(MinestuckItems.stoneSlab, new ResourceLocation(MinestuckUniverse.MODID, "stone_tablet"), new ResourceLocation(MinestuckUniverse.MODID, "stone_tablet_written"));
-		ModelLoader.setCustomMeshDefinition(MinestuckItems.stoneSlab, (ItemStack stack) ->
-		{
-			NBTTagCompound nbt = stack.getTagCompound();
-			String str = "stone_tablet";
-			if (nbt != null && nbt.hasKey("text") && !nbt.getString("text").isEmpty())
-				str += "_written";
-
-			return new ModelResourceLocation(new ResourceLocation(MinestuckUniverse.MODID, str), "inventory");
-		});
 	}
 }

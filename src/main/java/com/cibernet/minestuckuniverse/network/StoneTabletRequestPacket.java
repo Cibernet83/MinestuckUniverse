@@ -17,8 +17,8 @@ public class StoneTabletRequestPacket extends MSUPacket
 	@Override
 	public MSUPacket generatePacket(Object... args)
 	{
-		if (text != null)
-			ByteBufUtils.writeUTF8String(data, text);
+		if (args.length > 0 && args[0] instanceof String)
+			ByteBufUtils.writeUTF8String(data, (String) args[0]);
 		return this;
 	}
 
