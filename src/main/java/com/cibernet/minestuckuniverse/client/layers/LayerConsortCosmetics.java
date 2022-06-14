@@ -107,7 +107,7 @@ public class LayerConsortCosmetics implements LayerRenderer<EntityLivingBase>
 
 			GlStateManager.scale(size, size, size);
 
-			if(parentHead.childModels.contains(hatHead))
+			if(parentHead != null && parentHead != hatHead)
 				parentHead.postRender(0.0625F);
 			hatHead.postRender(0.0625F);
 
@@ -159,7 +159,7 @@ public class LayerConsortCosmetics implements LayerRenderer<EntityLivingBase>
 			GlStateManager.translate(0.0F, 16.0F * scale, 0.0F);
 		}
 
-		if(parentHead.childModels.contains(itemHead))
+		if(parentHead != null && parentHead != itemHead)
 			parentHead.postRender(0.0625F);
 		this.itemHead.postRender(0.0625F);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

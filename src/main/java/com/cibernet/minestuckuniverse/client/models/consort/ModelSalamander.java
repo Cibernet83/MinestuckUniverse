@@ -53,7 +53,7 @@ public class ModelSalamander extends ModelConsort {
 
 		hood = new ModelRenderer(this);
 		hood.setRotationPoint(0.0F, 6.0F, 0.0F);
-		head.addChild(hood);
+		//head.addChild(hood);
 		hood.cubeList.add(new ModelBox(hood, 26, 0, -3.0F, 0.0F, -2.0F, 6, 6, 6, 0.0F, false));
 	}
 
