@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsData;
 import com.cibernet.minestuckuniverse.modSupport.MSUSplatcraftSupport;
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
@@ -73,6 +74,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(SaveHandler.class);
         MinecraftForge.EVENT_BUS.register(MSULoot.class);
         MinecraftForge.EVENT_BUS.register(IDBasedAlchemyHandler.class);
+        MinecraftForge.EVENT_BUS.register(ConsortHatsData.class);
         MinecraftForge.EVENT_BUS.register(NullSoloSessionHandler.class);
         MinecraftForge.EVENT_BUS.register(BlockArtifact.class);
         PropertyEventHandler.register();

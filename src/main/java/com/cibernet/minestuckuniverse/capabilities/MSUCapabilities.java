@@ -4,6 +4,8 @@ import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.beam.BeamData;
 import com.cibernet.minestuckuniverse.capabilities.beam.IBeamData;
+import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsData;
+import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.IConsortHatsData;
 import com.cibernet.minestuckuniverse.capabilities.game.GameData;
 import com.cibernet.minestuckuniverse.capabilities.game.IGameData;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
@@ -11,6 +13,8 @@ import com.cibernet.minestuckuniverse.capabilities.strife.StrifeData;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.network.UpdateStrifeDataPacket;
+import com.mraof.minestuck.entity.EntityFrog;
+import com.mraof.minestuck.entity.consort.EntityConsort;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,7 +26,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -38,6 +41,8 @@ public class MSUCapabilities
 	public static final Capability<IBeamData> BEAM_DATA = null;
 	@CapabilityInject(IGameData.class)
 	public static final Capability<IGameData> GAME_DATA = null;
+	@CapabilityInject(IConsortHatsData.class)
+	public static final Capability<IConsortHatsData> CONSORT_HATS_DATA = null;
 
 	public static void registerCapabilities()
 	{
@@ -46,6 +51,7 @@ public class MSUCapabilities
 		CapabilityManager.INSTANCE.register(IStrifeData.class, new MSUCapabilityProvider.Storage<>(), StrifeData::new);
 		CapabilityManager.INSTANCE.register(IBeamData.class, new MSUCapabilityProvider.Storage<>(), BeamData::new);
 		CapabilityManager.INSTANCE.register(IGameData.class, new MSUCapabilityProvider.Storage<>(), GameData::new);
+		CapabilityManager.INSTANCE.register(IConsortHatsData.class, new MSUCapabilityProvider.Storage<>(), ConsortHatsData::new);
 	}
 
 	@SubscribeEvent
@@ -62,12 +68,15 @@ public class MSUCapabilities
 	{
 		if(event.getObject() instanceof EntityPlayer)
 			event.addCapability(new ResourceLocation(MinestuckUniverse.MODID, "strife_data"), new MSUCapabilityProvider<>(STRIFE_DATA, (EntityLivingBase) event.getObject()));
+
+		if(event.getObject() instanceof EntityConsort || event.getObject() instanceof EntityFrog)
+			event.addCapability(new ResourceLocation(MinestuckUniverse.MODID, "cosmetics"), new MSUCapabilityProvider<>(CONSORT_HATS_DATA, (EntityLivingBase) event.getObject()));
 	}
 
 	@SubscribeEvent
 	public static void onPlayerJoinWorld(EntityJoinWorldEvent event)
 	{
-		if(event.getEntity() instanceof EntityPlayerMP && !(event.getEntity() instanceof FakePlayer))
+		if(event.getEntity() instanceof EntityPlayerMP)
 		{
 			IStrifeData cap = event.getEntity().getCapability(STRIFE_DATA, null);
 			cap.setStrifeEnabled(MSUConfig.combatOverhaul);
