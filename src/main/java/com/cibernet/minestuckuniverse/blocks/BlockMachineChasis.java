@@ -93,7 +93,7 @@ public class BlockMachineChasis extends MSUBlockBase implements ITileEntityProvi
         if(worldIn.isBlockPowered(pos) && worldIn.getTileEntity(pos) instanceof TileEntityMachineChasis)
         {
             TileEntityMachineChasis te = (TileEntityMachineChasis) worldIn.getTileEntity(pos);
-            te.assemble();
+            te.assemble(worldIn, null);
         }
     }
 

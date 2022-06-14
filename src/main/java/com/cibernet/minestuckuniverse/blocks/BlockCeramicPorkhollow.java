@@ -243,8 +243,8 @@ public class BlockCeramicPorkhollow extends MSUBlockBase implements ITileEntityP
 				color = MinestuckPlayerData.getData(connection.getClientIdentifier()).color;
 		}
 
-				TileEntityItemStack iste = new TileEntityItemStack();
-
+		TileEntityItemStack iste = new TileEntityItemStack();
 		iste.setStack(new ItemStack(MinestuckUniverseItems.ceramicPorkhollow, 1, color));
+		world.setTileEntity(pos, iste);
 	}
 }
