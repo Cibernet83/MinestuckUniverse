@@ -483,6 +483,34 @@ item.cruxtruder_gel.tooltip=Lets you change a Cruxtruder's dowel color output.
 item.dragon_gel.name=Dragon Gel
 item.dragon_gel.tooltip=You feel absolution coursing through this mystical gel, better not eat it!
 
+item.gtHood.name=%s Hood
+item.gtShirt.name=%s Shirt
+item.gtPants.name=%s Pants
+item.gtShoes.name=%s Shoes
+item.gtArmorKit.name=God Tier Clothes Kit
+
+item.gtHood.hiddenExtras.rogue=Unmasked
+item.gtShirt.hiddenExtras.lord=Coat-less
+
+item.skillResetCharm.name=Charm of God Tier Descension
+item.denizenEye.name=Eye of the Denizen
+item.denizenEye.tooltip=This eye is bound to the %s
+item.sashKit.name=Kiddie Camper Handysash Sewing Kit
+item.sashKit.tooltip=This handy sewing kit lets you manage your god tier badges without needing to meditate, allowing you to toggle them on/off on the go!
+item.tomeOfTheAncients.0.name=Sealed Tome
+item.tomeOfTheAncients.tooltip=Right Click to remove seal
+item.tomeOfTheAncients.1.name=Sealed Tome
+item.tomeOfTheAncients.tooltip.deadSession=They're just the rules. You just knew what they were, and you followed them. There were consequences for breaking them.
+item.tomeOfTheAncients.2.name=Tome of the Ancients
+item.heroStoneShard.name=Hero Stone Shard of %s
+item.manipulatedMatter.name=Manupulated Matter
+item.manipulatedMatter.posSetA=Primary Focal Corner set to %s
+item.manipulatedMatter.posSetB=Secondary Focal Corner set to %s
+item.manipulatedMatter.posReset=Focal Area has been reset
+item.manipulatedMatter.tooBig=Focal Area is too big, should be at most 8x8x8
+item.manipulatedMatter.cantEdit=You cannot edit blocks here
+item.manipulatedMatter.tooltip=An entire area of blocks concentrated into a single item, something only someone with a mastery over SPACE can achieve.
+
 item.operandi_pickaxe.name=Operandi Pickaxe
 item.operandi_axe.name=Operandi Axe
 item.operandi_shovel.name=Operandi Shovel
@@ -532,6 +560,57 @@ tile.paradoxTransportalizer.name=Paradox Transportalizer
 tile.paradoxTransportalizer.tooltip=Your one-way ticket back to Earth, Make sure to pack a way back home.
 tile.platinumTransportalizer.name=Platinum Transportalizer
 
+tile.heroStone.name=Hero Stone
+tile.heroStoneChiseled.name=Chiseled Hero Stone
+tile.heroStoneWall.name=Hero Stone Wall
+tile.heroStoneGlowing.name=Glowing Hero Stone
+tile.heroStoneSpectral.name=Spectral Hero Stone
+tile.godTierClock.name=God Tier Clock
+tile.badgeInhibitor.name=Badge Inhibitor
+
+tile.glowOrb.name=Light Orb
+
+tile.prospitStone.name=Prospitian Stone
+tile.prospitSmoothstone.name=Prospitian Smooth Stone
+tile.prospitPillar.name=Prospitian Pillar
+tile.prospitBricks.name=Prospitian Bricks
+tile.prospitBricksChiseled.name=Chiseled Prospitian Bricks
+tile.prospitBricksCracked.name=Cracked Prospitian Bricks
+tile.prospitStoneWall.name=Prospitian Stone Wall
+tile.prospitBricksWall.name=Prospitian Brick Wall
+tile.prospitStoneStairs.name=Prospitian Stone Stairs
+tile.prospitBricksStairs.name=Prospitian Brick Stairs
+tile.prospitStoneSlab.name=Prospitian Stone Slab
+tile.prospitSmoothstoneSlab.name=Prospitian Smooth Stone Slab
+tile.prospitBricksSlab.name=Prospitian Brick Slab
+
+tile.derseStone.name=Dersite Stone
+tile.derseSmoothstone.name=Dersite Smooth Stone
+tile.dersePillar.name=Dersite Pillar
+tile.derseBricks.name=Dersite Bricks
+tile.derseBricksChiseled.name=Chiseled Dersite Bricks
+tile.derseBricksCracked.name=Cracked Dersite Bricks
+tile.derseStoneWall.name=Dersite Stone Wall
+tile.derseBricksWall.name=Dersite Brick Wall
+tile.derseStoneStairs.name=Dersite Stone Stairs
+tile.derseBricksStairs.name=Dersite Brick Stairs
+tile.derseStoneSlab.name=Dersite Stone Slab
+tile.derseSmoothstoneSlab.name=Dersite Smooth Stone Slab
+tile.derseBricksSlab.name=Dersite Brick Slab
+
+tile.logAspect.aspectTime.name=Time-Infused Log
+tile.logAspect.aspectSpace.name=Space-Infused Log
+tile.logAspect.aspectBreath.name=Breath-Infused Log
+tile.logAspect.aspectBlood.name=Blood-Infused Log
+tile.logAspect.aspectLight.name=Light-Infused Log
+tile.logAspect.aspectVoid.name=Void-Infused Log
+tile.logAspect.aspectHeart.name=Heart-Infused Log
+tile.logAspect.aspectMind.name=Mind-Infused Log
+tile.logAspect.aspectLife.name=Life-Infused Log
+tile.logAspect.aspectDoom.name=Doom-Infused Log
+tile.logAspect.aspectHope.name=Hope-Infused Log
+tile.logAspect.aspectRage.name=Rage-Infused Log
+
 item.candyVis.name=Vis Nerds
 item.candyMana.name=Mana Gummy Drop
 
@@ -543,6 +622,7 @@ entity.minestuckuniverse.rock.name=Rock
 entity.minestuckuniverse.cruxite_slime.name=Cruxite Slime
 entity.minestuckuniverse.eight_ball.name=Magic 8-Ball
 entity.EnderCrystal.name=Ender Crystal
+entity.minestuckuniverse:hope_golem.name=Willed Golem
 
 grist.vis=Vis
 grist.mana=Mana
@@ -599,6 +679,22 @@ kindAbstratus.bunny.name=Bunnykind
 
 container.machineChassis=Machine Assembly
 container.boondollarRegister=Boondollar Register
+container.itemVoid=§kItem Void
+
+commands.globalsay.usage=/globalsay <message>
+commands.godtier.usage=/godtier <title|reset|maxbadges|mastercontrol|lunarsway>
+commands.godtier.locate.wrongDim=Cannot find Quest Bed outside of The Medium
+commands.godtier.maxbadges.usage=/godtier maxbadges <amount> [player]
+commands.godtier.mastercontrol.usage=/godtier mastercontrol <true|false> [player]
+commands.godtier.title.success=Changed %s's title to %s of %s
+commands.godtier.reset.success=Reset %s's God Tier stats
+commands.godtier.maxbadges.success=Set %s's Max badges to %s
+commands.godtier.mastercontrol.success.on=Gave %s access to all Badges
+commands.godtier.mastercontrol.success.off=Revoked access to all Badges from %s
+commands.godtier.lunarsway.usage=/godtier lunarsway <prospit|derse>
+commands.godtier.lunarsway.prospit=Set %s's Lunar Sway to Prospit
+commands.godtier.lunarsway.derse=Set %s's Lunar Sway to Derse
+commands.localizedChat.outOfReach=%s is too far away to talk to!
 
 message.transportalizer.notOwner=This is not your transportalizer!
 message.transportalizer.notOpped=You do not have permission to use this transportalizer.
@@ -650,6 +746,18 @@ death.attack.minestuckuniverse.beam=%s was disintegrated by %s's beam
 death.attack.minestuckuniverse.beam.item=%s was disintegrated by %s's %s
 death.attack.minestuckuniverse.rainbow=%s couldn't handle the rainbow
 death.attack.minestuckuniverse.sans=%s had a bad time
+
+death.attack.minestuckuniverse.decay=%s met their Doom.
+death.attack.minestuckuniverse.bleeding=%s bled to death.
+death.attack.minestuckuniverse.princeDmg=%s fell victim to %s's wrath.
+death.attack.minestuckuniverse.vengefulOutburst=%s fell victim to %s's Rage.
+death.attack.minestuckuniverse.lifeforceLeech=%s's Life was sapped away by %s.
+death.attack.minestuckuniverse.fragmentedSoul=%s's soul was spread too thin.
+death.attack.minestuckuniverse.perseveringSpirit=%s lost grip of their soul.
+death.attack.minestuckuniverse.terminalDemise=%s met their demise.
+death.attack.minestuckuniverse.terminalDemise.external=%s met their demise to the hands of %s.
+status.heroicDeath=%s's death was Heroic.
+status.justDeath=%s's death was Just.
 
 cruxite_color.0=Blue
 cruxite_color.1=Orchid
@@ -918,6 +1026,14 @@ gui.alchemyClear=Clear Sylladex
 gui.alchemyWildcard=Wildcard: %s
 gui.bookPublish=Publish
 
+gui.badgesLeft=Badges Left: %s
+gui.showBadgeInfo=Press [LSHIFT] to show more info
+gui.masterBadgeWarning=§cYou can only unlock one Master Badge at a time!
+gui.noBadgesLeft=§cYou can't unlock any more badges!
+gui.badgeDisabled=§cClick to enable.
+gui.badgeBlocked=§cSomething is inhibiting the effect of this badge!
+gui.needXp=§cYou need at least %s experience levels to allocate Skill XP
+
 enchantment.minestuckuniverse.superpunch=Superpunch
 enchantment.minestuckuniverse.superpunch.desc=Increases the knockback strength of the weapon but increases its attack damage inversely to the enchanment level
 
@@ -939,10 +1055,15 @@ status.capitalistDenied=You don't have enough Boondollars to retrieve %s
 status.capitalistDeniedAll=You need %s more Boondollars to eject your sylladex
 tooltip.capitalistPrice=Costs %s Boondollars to retrieve
 status.popTartEat=You feel like you bite into something odd, it's your %s!
+
 key.minestuckuniverse.strife=Strife Allocate/Retrieve
 key.minestuckuniverse.swapOffhandStrife=Swap Offhand Item with Strife Deck
 key.minestuckuniverse.strifeSelectorLeft=Strife Selector Scroll Left
 key.minestuckuniverse.strifeSelectorRight=Strife Selector Scroll Right
+
+key.minestuckuniverse.aspectAction=God Tier Aspect Action
+key.minestuckuniverse.classAction=God Tier Class Action
+key.minestuckuniverse.godTierUtil=God Tier Utility Action
 
 status.eightBallBlind=Some Magic 8-Ball liquid went into your eyes!
 
@@ -979,12 +1100,43 @@ status.chasityFail=This key does not work on any of your cards
 status.chasityHideKey=An Auxilatrix Key has been hidden somewhere nearby
 status.chasityVoid=Your key was almost lost to the void!
 
+status.tome.reject=The seal in this book refuses to break
+status.tome.server=Only your Server Player can break this seal
+
+status.godTier=%s ascended to God Tier
+status.godTierMeditation.unlock=God Tier Meditation has been unlocked! Right-click the top of your Quest Bed slab to start climbing the God Tiers.
+status.godTierReject=The Quest Bed rejected your soul
+status.godTierFail=Your soul wasn't strong enough to God Tier
+status.trophySlotsRung=You now have a total of %s slots!
+status.tooExhausted=You're too exhausted to perform this action!
+status.badgeError=A glitch in the universe caused your badge to malfunction
+status.badgeEnabled=%s has been enabled
+status.badgeDisabled=%s has been disabled
+status.spatialWarp.setPoint=Warp Point set at X: %s Y: %s Z: %s
+status.spatialWarp.clearPoint=Warp Point has been cleared
+status.spatialWarp.outOfRange=Warp Point is too far away
+
+status.alignmentPrediction.heroic=Your death will be Heroic.
+status.alignmentPrediction.just=Your death will be Just.
+status.alignmentPrediction.neutral=%s will not die.
+status.alignmentPrediction.heroicSelf=Your death will be Heroic.
+status.alignmentPrediction.justSelf=Your death will be Just.
+status.alignmentPrediction.neutralSelf=You will not die.
+
+status.karma=%s's karma is at %s.
+
+status.overlordSkillLevel=%s tiers climb you shall, to claim what's yours and conquer all.
+status.overlordPvpDeath=To simply perish does not suffice, to another soul you must meet your demise.
+status.overlordAscend=%s ascended.
+
 config.minestuckuniverse.general.zillystoneYields=Zillystone Luck Modifier
 config.minestuckuniverse.general.baseZillystoneLuck=Zillystone Base Luck
 config.minestuckuniverse.general.IDAlchemy=ID-Based Alchemy
 config.minestuckuniverse.general.gristDropsMultiplier=Underling Grist Drops Multiplier
 config.minestuckuniverse.general.nullSoloSessions=Null Solo Sessions
 config.minestuckuniverse.general.unstableArtifactSpread=Unstable Artifact Spread
+config.minestuckuniverse.general.localizedChat=Localized Chat
+config.minestuckuniverse.general.multiAspectUnlocks=Multiple-Aspect Unlocks
 
 config.minestuckuniverse.strife.combatOverhaul=Combat Overhaul
 config.minestuckuniverse.strife.restrictedStrife=Restricted Strife
@@ -994,6 +1146,7 @@ config.minestuckuniverse.strife.strifeDeckMaxSize=Strife Deck Weapon Limit
 config.minestuckuniverse.strife.abstrataSwitcherRung=Strife Specibus Quick Switcher Unlock Rung
 config.minestuckuniverse.strife.weaponAttackMultiplier=Weapon Attack Factor
 config.minestuckuniverse.title=Minestuck Universe
+
 
 property.item.broken=Broken %s
 
@@ -1084,3 +1237,369 @@ minestuckuniverse:energy_modus.book_desc=> The Energy Modus is one of the more v
 minestuckuniverse:hue_modus.book_desc=The Hue Modus acts like a regular Stack Modus, this means that you’ll only be able to retrieve the first item in your sylladex, but it also sorts items by their color, the order being Red > Orange > Yellow > Green > Cyan > Blue > Magenta > Light Gray > Dark Gray > Rainbow.
 minestuckuniverse:hue_stack_modus.book_desc=The Hue-Stack modus is a step up from the Hue Modus, as it not just stores your items by color, but it also lets you retrieve the first captchalogued item from each color. This Modus is perfect for people that like to sort their skittles.
 status.alchemodus.alchemArtifact=yeah no, that's not going to happen lmao.
+
+godTierSkill.general.name=God Tier
+godTierSkill.attack.name=Attack
+godTierSkill.defense.name=Defense
+godTierSkill.speed.name=Athletics
+godTierSkill.luck.name=Luck
+
+godTierSkill.general.tooltipName=§b	God Tier %s
+godTierSkill.attack.tooltipName=§aAttack Level %s
+godTierSkill.defense.tooltipName=§aDefense Level %s
+godTierSkill.speed.tooltipName=§aAthletics Level %s
+godTierSkill.luck.tooltipName=§aLuck Level %s
+
+godTierSkill.general.tooltipDesc=§9Climb the GOD TIERS by allocating experience levels to your other SKILLS.
+godTierSkill.attack.tooltipDesc=§9+%s%% Attack Damage
+godTierSkill.defense.tooltipDesc=§9+%s Armor Toughness
+godTierSkill.defense.tooltipDesc2=§9%s%% Damage Reduction
+godTierSkill.speed.tooltipDesc=§9+%s%% Movement Speed when Sprinting
+godTierSkill.luck.tooltipDesc=§9+%s Luck
+godTierSkill.tooltipNextLevel=§a%s more levels to upgrade
+
+badge.secret.read=§9???
+badge.level.read=§9Requires God Tier %s to unlock.
+badge.giftOfGab.name=The Gift of Gab
+badge.giftOfGab.tooltip=§9The very first badge you unlock after clearing your first GOD TIER, it enables you to engage in simple, direct dialogue with others, without requiring any gimmicks to facilitate communication.
+badge.giftOfGab.unlock=§aWhy don't you have this already?
+badge.skeletonKey.name=Skeleton Key Badge
+badge.skeletonKey.unlock=§aRequires 16 Auxilatrix Keys and a Skeleton nearby to unlock.
+badge.skeletonKey.tooltip=§9This badge proves your dedication to locks, it grants you the power of the SKELETON KEY, allowing you to unlock any lock with ease, even ones that aren't shaped like traditional locks.
+badge.patchOfTheHoarder.name=Patch of the Hoarder
+badge.patchOfTheHoarder.unlock=§aRequires 256 Captchalogue Cards and 5000 Shale Grist to unlock.
+badge.patchOfTheHoarder.tooltip=§9This badge is further proof of love towards carrying items around with you. It permanently unlocks every remaining slot in your inventory.
+badge.hoardOfTheAlchemizer.name=Hoard of the Alchemizer Badge
+badge.hoardOfTheAlchemizer.tooltip=§9This badge proves your devotion towards ALCHEMY, granting you an unlimited supply of %s.
+badge.hoardOfTheAlchemizer.tooltip.any=a grist type of your choice
+badge.hoardOfTheAlchemizer.unlock=§aRequires %s of each Grist Type in the first tab to unlock.
+badge.karma.name=Medal of the Univerally Charismatic
+badge.karma.unlock=§aRequires 128 Moonstones and 8000 Gold Grist to unlock.
+badge.karma.tooltip=§9This badge proves that the universe has grown a liking towards you, giving you a better chance at triggering your conditional immortality when killed.
+badge.revenantsRetaliation.name=The Revenant's Retaliation Badge
+badge.revenantsRetaliation.tooltip=§9Unlocking this badge proves that your daring enough to bring a living Creeper to your QUEST BED, giving you the upper hand in combat by boosting your stats and hurting every other player and hostile mob upon triggering your CONDITIONAL IMORTALITY.
+badge.revenantsRetaliation.unlock=§aRequires 10000 Diamond Grist and a Creeper nearby to unlock.
+badge.effectBuff.name=Medal of the Universally Attuned
+badge.effectBuff.tooltip=§9This Badge proves your deep connection with the UNIVERSE and its components, giving your Aspect Effect a significant buff.
+badge.effectBuff.unlock=§aRequires 5000 Quartz Grist and 5 Rainbow-Eyed Frogs nearby to unlock.
+
+badge.strifeBadge.name=Medal of the Omni-Dextrous
+badge.strifeBadge.tooltip=§9This badge proves your mastery over WEAPONS and COMBAT, granting you the ability to use them without the need of your STRIE SPECIBUS.
+badge.strifeBadge.unlock=§aRequires 2 Strife Cards and 5 different LEGENDARY ZILLIUM WEAPONS to unlock
+badge.builderBadge.name=Badge of the Architecturally Adept
+badge.builderBadge.tooltip=§9This badge proves your mastery over matter and the power of BUILDING, allowing you to use certain building techniques outside of EDIT MODE.
+badge.builderBadge.unlock=§aRequires The Battlepick of Zilydew and 20k Build Grist to unlock.
+
+badge.overlord.name=World Ender's Badge
+badge.overlord.tooltip=§9You have become the bane of the universe, nothing can stop you now.
+
+badge.masterBadgeBrave.name=Badge of the Brave
+badge.masterBadgeBrave.tooltip=§9A badge suited for the brave, it grants you a %s%% chance at completely blocking most incoming attacks.
+badge.masterBadgeWise.name=Badge of the Wise
+badge.masterBadgeWise.tooltip=§9A badge suited for the wise, it grants you a %s%% chance to earn more spoils from Mobs and Underlings, while also increasing your natural Looting level by %s.
+badge.masterBadgeMighty.name=Badge of the Mighty
+badge.masterBadgeMighty.tooltip=§9A badge suited for the mighty, it grants you a %s%% chance at doubling the effectiveness of any attack.
+
+badge.class.unlock=§aRequires %s Experience Levels to unlock.
+badge.knight.name=Knight's Ward
+badge.knight.tooltip=§9Earning this badge has proven your worth as a KNIGHT, allowing you to cast a protective spell upon yourself and any living creature by pressing [%s]. Charging it allows you target all nearby living being beings at once.
+badge.sylph.name=Sylph's Mend
+badge.sylph.tooltip=§9Earning this badge has proven your worth as a SYLPH, granting you the ability to heal any living creature by looking at it and holding [%s].
+badge.thief.name=Thief's Filch
+badge.thief.tooltip=§9Earning this badge has proven your worth as a THIEF, allowing you to steal other players' aspect effects for 2 minutes by holding [%s].
+badge.prince.name=Prince's Wrath
+badge.prince.tooltip=§9Earning this badge has proven your worth as a PRINCE, letting you inflict substantial damage upon others by targeting them and pressing [%s].
+badge.witch.name=Witch's Inhibition
+badge.witch.tooltip=§9Earning this badge has proven your worth as a WITCH, granting you the ability to suppress the effects of any class or aspect related powers for a brief period of time by targeting someone and holding [%s].
+badge.mage.name=Mage's Awareness
+badge.mage.tooltip=§9Earning this badge has proven your worth as a MAGE, granting you the ability of knowing your own alignment by holding down [%s].
+badge.page.name=Page's Potential
+badge.page.tooltip=§9Earning this badge has proven your perseverance as a PAGE, giving you a major boost on all GOD TIER stats and Aspect Effect.
+badge.heir.name=Heir's Will
+badge.heir.tooltip=§9Earning this badge has proven your worth as a HEIR, allowing your aspect to protect you against any attackers when endangered.
+badge.rogue.name=Rogue's Contribution
+badge.rogue.tooltip=§9Earning this badge has proven your worth as a ROGUE, granting you the ability to share any active potion effects with any living creature by pressing [%s]. Charging it allows you to target all nearby players at once.
+badge.bard.name=Bard's Dissonance
+badge.bard.tooltip=§9Earning this badge has proven your worth as a BARD, letting you cause discourse by randomly applying a possitive or negative aspect effect upon all nearby players by pressing [%s].
+badge.maid.name=Maid's Favor
+badge.maid.tooltip=§9Earning this badge has proven your worth as a MAID, granting you the ability to enhance others' Aspect Effects by pressing [%s].
+badge.seer.name=Seer's Prediction
+badge.seer.tooltip=§9Earning this badge has proven your worth as a SEER, letting you know other GOD TIERED players' karma values by targeting them and holding down [%s].
+badge.muse.name=Muse's Requiem
+badge.muse.tooltip=§9Earning this badge has proven your worth as a MUSE, giving an amplified version of your Aspect Effect to every player with a shared or neutral alignment when having a TRUE DEATH.
+badge.lord.name=Lord's Decree
+badge.lord.tooltip=§9Earning this badge has proven your worth as a LORD, allowing you to inflict a negative version of your Aspect Effect upon all nearby players and hostile mobs.
+
+badge.aspect.unlock=§aRequires 40 Experience Levels and 96 Hero Stone Shards of %s to unlock.
+badge.aspect.unlock.aux=§aRequires 40 Experience Levels, 64 %s Shards%s and %s %s Shards to unlock.
+badge.aspect.unlock.aux.entry=, %s %s Shards
+
+badge.passiveLight.name=Lightbound's Wisdom Badge
+badge.passiveLight.tooltip=§9This badge proves your mastery over the aspect of LIGHT, allowing you to mark every player in the area with a glowing effect by pressing the [%s] key, holding the button down allows you to target every other entitiy.
+badge.activeLight.name=Storm of the Striker Badge
+badge.activeLight.tooltip=§9This badge proves your mastery over the aspect of LIGHT, granting you the ability to summon lightning upon every glowing creature and player in the world by holding down the [%s] key. tapping the button lets you mark any entity you're looking at with a glowing effect.
+badge.utilLight.name=Eternal Glow Badge
+badge.utilLight.tooltip=§9This badge proves your mastery over the aspect of LIGHT, granting you the ability to subconsiously generate Orbs of Light when standing in dark places. This can be toggled on/off by sneaking while pressing the [%s] key.
+badge.utilLight.unlock=§aRequires 200 Prismarine Crystals and 128 Hero Stone Shards of Light to unlock.
+
+badge.passiveBreath.name=Windsweeping Typhoon Badge
+badge.passiveBreath.tooltip=§9This badge proves your mastery over the aspect of BREATH, allowing you to summon wind capable of knocking most entities back by pressing [%s].
+badge.activeBreath.name=Tempesting Ascension Badge
+badge.activeBreath.tooltip=§9This badge proves your mastery over the aspect of BREATH, allowing you to summon an updraft when charging [%s], propelling you upwards while leaving a deadly lightning strike behind.
+badge.utilBreath.name=Vessel of the Wind Badge
+badge.utilBreath.tooltip=§9This badge proves your mastery over the aspect of BREATH, granting you the ability to become one with the wind by pressing [%s].
+badge.utilBreath.unlock=§aRequires 200 Feathers and 128 Hero Stone Shards of Breath to unlock.
+
+badge.activeTime.name=Temporal Recall Badge
+badge.activeTime.tooltip=§9This badge proves your mastery over the aspect of TIME, allowing you to go 5 seconds into the past by holding [%s], restoring your health and position to how they were then.
+badge.passiveTime.name=Chronofreeze Badge
+badge.passiveTime.tooltip=§9This badge proves your mastery over the aspect of TIME, allowing you to briefly Time Stop a target by pressing [%s].
+badge.utilTime.name=Flow Accelerator Badge
+badge.utilTime.tooltip=§9This badge proves your mastery over the aspect of TIME, granting you the ability to speed up any block by looking at it and pressing [%s].
+badge.utilTime.unlock=§aRequires 100 clocks and 128 Hero Stone Shards of Time to unlock.
+
+badge.passiveSpace.name=Spatial Warp Badge
+badge.passiveSpace.tooltip=§9This badge proves your mastery over the aspect of SPACE, allowing you to teleport any targeted entity by pressing [%s], crouch while pressing to summon a Teleport Focus Point.
+badge.activeSpace.name=Wormhole Trotter Badge
+badge.activeSpace.tooltip=§9This badge proves your mastery over the aspect of SPACE, allowing teleport forward by pressing [%s].
+badge.utilSpace.name=Matter Manipulator Badge
+badge.utilSpace.tooltip=§9This badge proves your mastery over the aspect of SPACE, granting you the ability to mark corners of an area by tapping [%s] and collapsing it into a single item by holding the same key. The corners defined by pressing the key are the blocks you are looking at.
+badge.utilSpace.unlock=§aRequires 200 Spatial Manipulation Dust and 128 Hero Stone Shards of Space to unlock.
+
+badge.passiveDoom.name=Withering Whisper Badge
+badge.passiveDoom.tooltip=§9This badge proves your mastery over the aspect of DOOM, allowing you to cast a deadly Decay spell upon all nearby living creatures by pressing [%s].
+badge.activeDoom.name=Terminal Demise Badge
+badge.activeDoom.tooltip=§9This badge proves your mastery over the aspect of DOOM, allowing you to instantly kill a low-level target by charging [%s], beware your health when using this badge as it may also affect you.
+badge.utilDoom.name=Chains of Despair Badge
+badge.utilDoom.tooltip=§9This badge proves your mastery over the aspect of DOOM, granting you the ability to completely disable flight for all nearby players including yourself by pressing [%s], charging this ability will also make everyone lose the power to create.
+badge.utilDoom.unlock=§aRequires 50 Wither Skeleton Skulls and 128 Hero Stone Shards of Doom to unlock.
+
+badge.passiveHeart.name=Fragmented Soul Badge
+badge.passiveHeart.tooltip=§9This badge proves your mastery over the aspect of HEART, allowing you to donate a fraction of your lifeforce to others by pressing [%s].
+badge.activeHeart.name=Persevering Spirit Badge
+badge.activeHeart.tooltip=§9This badge proves your mastery over the aspect of HEART, making you heal rather than take damage when holding down [%s] while focused.
+badge.utilHeart.name=Soul Switcher Badge
+badge.utilHeart.tooltip=§9This badge proves your mastery over the aspect of HEART, granting you the ability to switch places with any other player by holding [%s].
+badge.utilHeart.unlock=§aRequires 200 Eyes of Ender and 128 Hero Stone Shards of Heart to unlock.
+
+badge.passiveLife.name=Healing Aura Badge
+badge.passiveLife.tooltip=§9This badge proves your mastery over the aspect of LIFE, allowing you to grant regeneration to you and all nearby living creatures by holding down [%s].
+badge.activeLife.name=Lifeforce Leech Badge
+badge.activeLife.tooltip=§9This badge proves your mastery over the aspect of LIFE, allowing you to steal a target's lifeforce by pressing [%s].
+badge.utilLife.name=Mating Season Badge
+badge.utilLife.tooltip=§9This badge proves your mastery over the aspect of LIFE, granting you the ability to fertilize whatever plants you're looking at and make all nearby animals breed by holding [%s].
+badge.utilLife.unlock=§aRequires 200 Wheat and 128 Hero Stone Shards of Life to unlock.
+
+badge.passiveVoid.name=Return to Dust Badge
+badge.passiveVoid.tooltip=§9This badge proves your mastery over the aspect of VOID, allowing you to send any hostile mob or construct of SBURB back into the Void by pressing [%s].
+badge.activeVoid.name=Voidstepper's Badge
+badge.activeVoid.tooltip=§9This badge proves your mastery over the aspect of VOID, allowing you phase through walls with ease when flying at the cost of some energy. This can be toggled on/off by pressing the [%s] key.
+badge.utilVoid.name=Grasp of the Void Badge
+badge.utilVoid.tooltip=§9This badge proves your mastery over the aspect of VOID, granting you the ability you to pierce your hand through void itself and recover any lost items by pressing [%s].
+badge.utilVoid.unlock=§aRequires 200 Ender Pearls and 128 Hero Stone Shards of Void to unlock.
+
+badge.passiveBlood.name=Commander's influence Badge
+badge.passiveBlood.tooltip=§9This badge proves your mastery over the aspect of BLOOD, allowing you to inspire all living beings in the area by pressing [%s], giving them a stat boost for a short period of time.
+badge.activeBlood.name=Bleeding Edge Badge
+badge.activeBlood.tooltip=§9This badge proves your mastery over the aspect of BLOOD, giving all your hits a chance to make the target bleed.
+badge.utilBlood.name=Reformer's Reach Badge
+badge.utilBlood.tooltip=§9This badge proves your mastery over the aspect of BLOOD, making all friendly creatures follow you around and HOSTILE MOBS hate you less. This can be toggled on/off by pressing the [%s] key.
+badge.utilBlood.unlock=§aRequires 16 Buckets of Blood and 128 Hero Stone Shards of Blood to unlock.
+
+badge.passiveRage.name=Vengeful Outburst Badge
+badge.passiveRage.tooltip=§9This badge proves your mastery over the aspect of RAGE, allowing you to channel your inner fury against all nearby living creatures by pressing [%s], dealing damage according to how much time you've spent in battle.
+badge.activeRage.name=Enraged Berserk Badge
+badge.activeRage.tooltip=§9This badge proves your mastery over the aspect of RAGE, allowing you to enter a deadly BERSERK state for a brief period of time by pressing [%s].
+badge.utilRage.name=Anger Management Badge
+badge.utilRage.tooltip=§9This badge proves your mastery over the aspect of RAGE, granting you the ability to control any mob's hostility, both friendly and aggresive, by pressing [%s]. Hold down the button to affect all creatures in an area.
+badge.utilRage.unlock=§aRequires 200 Ghast Tears and 128 Hero Stone Shards of Rage to unlock.
+
+badge.passiveMind.name=Sanity Slayer Badge
+badge.passiveMind.tooltip=§9This badge proves your mastery over the aspect of MIND, allowing you briefly scramble a targeted player's mind by pressing [%s].
+badge.activeMind.name=Mindflayer's Badge
+badge.activeMind.tooltip=§9This badge proves your mastery over the aspect of MIND, allowing you to take control of any player's decissions by pressing [%s] as long as their mind is weak enough.
+badge.utilMind.name=Bringer of Justice Badge
+badge.utilMind.tooltip=§9This badge proves your mastery over the aspect of MIND, granting you the ability to reduce another player's karma by holding down [%s].
+badge.utilMind.unlock=§aRequires 200 Gold Ingots and 128 Hero Stone Shards of Mind to unlock.
+
+badge.passiveHope.name=Answered Prayers Badge
+badge.passiveHope.tooltip=§9This badge proves your mastery over the aspect of HOPE, allowing you to give you and all nearby players a random potion effect depending on their allignment compared to yours by holding down [%s].
+badge.activeHope.name=Willed Alliance Badge
+badge.activeHope.tooltip=§9This badge proves your mastery over the aspect of HOPE, allowing you to channel your beliefs into summoning a powerful ally by holding down [%s].
+badge.utilHope.name=Divine Cleansing Badge
+badge.utilHope.tooltip=§9This badge proves your mastery over the aspect of HOPE, granting you the ability to remove all potion effects from you or a targeted player by holding down [%s].
+badge.utilHope.unlock=§aRequires 16 Buckets of Milk and 128 Hero Stone Shards of Hope to unlock.
+
+
+
+godTierTitle.default=True %s
+
+godTierTitle.space.1=Quantum Entangler
+godTierTitle.space.2=Radioactive Renegade
+godTierTitle.space.3=Heisenberg’s Uncertainty
+godTierTitle.space.4=Guardian of the Galaxy
+godTierTitle.space.5=Master of Matter
+godTierTitle.space.max=Subject of Schrödinger
+godTierTitle.time.1=Time's Relative
+godTierTitle.time.3=Hourglass Flipper
+godTierTitle.time.4=Professor Paradox’s Right Hand Man
+godTierTitle.time.5=Chronoquantum Paradox Cognoscente
+godTierTitle.time.max=Temporal of Flesh
+
+godTierTitle.breath.1=Galesmate
+godTierTitle.breath.2=Breezemaster
+godTierTitle.breath.3=Wind Whisperer
+godTierTitle.breath.4=Typhoon Titan
+godTierTitle.breath.5=Hurricane Harbinger
+
+godTierTitle.blood.1=Bloodbinder Adept
+godTierTitle.blood.2=Friendship is Magic
+godTierTitle.blood.3=Teamwork Makes the Dream Work
+
+godTierTitle.light.1= Chancemaker
+godTierTitle.light.2=The Lightbringer
+godTierTitle.light.3=Bane of Darkness
+godTierTitle.light.4=Child of Lady Luck
+godTierTitle.light.5=The Darkness Comprehends You Not
+godTierTitle.light.max=Supernova Suppressor
+
+godTierTitle.void.1=Darkness Attuned
+godTierTitle.void.2=Sneaks in Their Sleep
+godTierTitle.void.3=Blackhole Hermit
+godTierTitle.void.5=Corporeal Nothingness
+
+godTierTitle.mind.1=Uses Spare Master Plans as Tissues
+godTierTitle.mind.2=Encephalon Erudite Extraordinaire
+godTierTitle.mind.3=Cerebral Alchemipractitioner Paragon Adept
+godTierTitle.mind.4=Mental Cartographer of the 5th Dimension
+godTierTitle.mind.5=Epitome Omnineural Paramalgamation
+godTierTitle.mind.max=Metaphysical Paradoxatomical Polymathematician Savant
+
+godTierTitle.heart.3=Cruxatomic Heartstopper
+
+godTierTitle.life.1= Mitosis Magician
+
+godTierTitle.doom.1=Prescription of Affliction
+godTierTitle.doom.2=Friend of Fatality
+godTierTitle.doom.3=Kiss of Death
+godTierTitle.doom.4=Cataclysm Magician
+godTierTitle.doom.5=Knowledge of Nihilism
+
+godTierTitle.hope.2=The Second Coming of Jegus
+godTierTitle.hope.3=God of Goodwill
+godTierTitle.hope.4=Right Hand of Hope
+godTierTitle.hope.5=Duty to the Divine
+
+godTierTitle.rage.1=If Revenge Had a Life
+godTierTitle.rage.2=Anger Accelerant
+godTierTitle.rage.3=Excessive Force of Nature
+godTierTitle.rage.4=Ubiquitous Negrocity
+godTierTitle.rage.5=Abhorrence Abomination Amalgam
+
+godTierTitle.knight.light.1=Knight in Radiant Armor
+godTierTitle.knight.light.3=Protector of George
+godTierTitle.knight.light.5=Multiverse Collider
+godtierTitle.knight.light.6=Stormbound Guardian
+
+
+godTierTitle.knight.space.3=Echidna’s Appointed Champion
+godTierTitle.knight.space.4=Keeper of the Cosmos
+
+godTierTitle.knight.doom.2=Keeper of the First Flame
+
+godTierTitle.page.heart.1=Speedo Enthusiast
+
+godTierTitle.lord.rage.2=More than just a PEZ Dispenser
+godTierTitle.lord.rage.3=Village Obliterator
+godTierTitle.lord.rage.4=Bedrock Berserker
+godTierTitle.lord.rage.5=Lazurt’s Legendary Wielder
+godTierTitle.lord.rage.6=Post-Scratch Session Smiter
+godTierTitle.lord.rage.7=Enraged Godhead Unleashed
+
+godTierTitle.lord.1=Lordling
+
+godTierTitle.thief.1=Thiefling
+
+godTierTitle.rogue.2=Outrobins the Hood
+
+godTierTitle.mind.6=Mentalist Mindflayer
+
+godTierTitle.1=%s Awakened
+godTierTitle.2=Godhood Freshman
+godTierTitle.3=Unstoppable Alchemancer
+godTierTitle.4=Universe Unraveler
+godTierTitle.5=Universe Unraveler 2: Die Harder
+godTierTitle.6=Aspect Acolyte
+godTierTitle.7=Godhood Graduate
+
+godTierTitle.page.8=%s’s Final Form
+
+godTierTitle.knight.time.5=Clockstopper
+
+godTierTitle.heir.breath.1=Heir Transparent
+godTierTitle.heir.breath.2=Gust of Heir
+godTierTitle.heir.breath.3=Heir Conditioning
+
+godTierTitle.maid.time.1=Time Weaver
+
+godTierTitle.muse.1=Symphonic Sympathetic
+
+godTierTitle.muse.time.3=Conductor of the Timeline
+
+godTierTitle.muse.heart.3=The Sound of Soul
+godTierTitle.muse.heart.1=Plucker of Heartstrings
+godTierTitle.muse.heart.6=Orchestator of the Sympony of Souls
+
+godTierTitle.lord.mind.5=Omniscient Overlord in Metamastery of all Mindmatter
+godTierTitle.lord.mind.4=Quantumatomic Concepts Commander
+
+godTierTitle.prince.void.4=Dealer of Death by Nothing
+godTierTitle.prince.void.max=The Last Thing You Never See
+
+godTierTitle.prince.space.1=Subatomic Gigacrusher
+godTierTitle.prince.space.3=Destroyer of Worlds
+godTierTitle.prince.space.6=Unraveler of Spacematter
+
+godTierTitle.prince.time.1=Cold-Cocker of Clocks
+godTierTitle.prince.time.2=Hour Orphaner
+godTierTitle.prince.time.3=Time Management, More Like Timp Pimp
+godTierTitle.prince.time.4=Eats Chronon Crush Cereal for Brekkie
+godTierTitle.prince.time.5=
+godTierTitle.prince.time.6=Ender of Eras
+
+godTierTitle.seer.breath.3=Eye of the Storm
+godTierTitle.seer.light.3=Eye of the Storm
+
+godTierTitle.prince.mind.1=Gray Matter Melter
+godTierTitle.prince.mind.2=Cognition Crusher
+godTierTitle.prince.mind.3=Neuron Paradox Negator
+godTierTitle.prince.mind.4=Metaphysical Master Devastator
+godTierTitle.prince.mind.5=Omniscience in Objective Obliteration
+godTierTitle.prince.mind.6=Not Just ANY Prince of Mind, THE Prince of Mind
+
+godTierTitle.thief.blood.1=Illegal Oxygen Trafficker
+
+godTierTitle.rogue.blood.1=Plasma Donation But Legitimately for Free
+
+godTierTitle.thief.3=Thievery in the Third Degree
+godTierTitle.thief.4=Light Handed of Heavy Heisting
+
+godTierTitle.maid.space.3=Keeper of Quantum Matter
+
+godTierTitle.lord.mind.2=The First Thinker
+godTierTitle.lord.mind.3=Just According to Cake
+godTierTitle.lord.mind.6=Your next line is “Oh cool, leveled up”
+godTierTitle.lord.mind.7=A Billion Calculations a Second and They’re All Wrong
+godTierTitle.lord.mind.max=Wealthier Than Scrooge McDuck
+
+godTierTitle.knight.breath.1=Blue Blur
+godTierTitle.knight.breath.2=The Fastest Thing Alive
+godTierTitle.knight.breath.3=Speed Demon
+godTierTitle.knight.breath.4=Faker
+godTierTitle.knight.breath.5=Ring Grabbing Speedster
+godTierTitle.knight.breath.max=Chaos Emerald Collector
+
+godTierTitle.time.2=Doctor What?
+godTierTitle.thief.blood.2=Hemoglobin Heathen
+
+godTierTitle.thief.light.1=Cleromancer

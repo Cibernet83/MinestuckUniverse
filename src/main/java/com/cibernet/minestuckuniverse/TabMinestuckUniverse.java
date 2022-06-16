@@ -2,9 +2,11 @@ package com.cibernet.minestuckuniverse;
 
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.godtier.ItemGodTierKit;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.item.ItemModus;
 import com.mraof.minestuck.item.MinestuckItems;
+import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -64,7 +66,7 @@ public class TabMinestuckUniverse
     {
         @Override
         public ItemStack getTabIconItem() {
-            return  new ItemStack(MinestuckUniverseBlocks.gristBlockBuild);
+            return ItemGodTierKit.generateKit(EnumClass.HEIR, null);
         }
     };
 }

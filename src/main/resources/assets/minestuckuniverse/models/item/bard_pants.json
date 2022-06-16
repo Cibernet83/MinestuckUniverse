@@ -1,0 +1,13 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/blank",
+        "layer1": "minestuckuniverse:items/pants/bard_pants",
+        "layer2": "minestuckuniverse:items/blank",
+        "layer3": "minestuckuniverse:items/blank",
+        "layer4": "minestuckuniverse:items/blank",
+        "layer5": "minestuckuniverse:items/pants/bard_codpiece",
+        "layer6": "minestuckuniverse:items/pants/bard_codpiece_highlights"
+
+    }
+}

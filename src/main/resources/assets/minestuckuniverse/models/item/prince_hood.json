@@ -1,0 +1,11 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/blank",
+        "layer1": "minestuckuniverse:items/hood/prince_hood",
+        "layer2": "minestuckuniverse:items/blank",
+        "layer3": "minestuckuniverse:items/blank",
+        "layer4": "minestuckuniverse:items/hood/prince_crown"
+
+    }
+}

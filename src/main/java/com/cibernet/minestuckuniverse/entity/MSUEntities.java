@@ -17,6 +17,8 @@ public class MSUEntities
 		registerEntity(EntityUnrealAir.class, "unreal_air");
 		registerEntity(EntityRock.class, "rock");
 		registerEntity(EntityCruxiteSlime.class, "cruxite_slime");
+		registerEntity(EntityLocatorEye.class, "denizen_eye");
+		registerEntity(EntityHopeGolem.class, "hope_golem");
 	}
 	
 	

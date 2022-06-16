@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.client;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.events.handlers.StrifeEventHandler;
 import com.cibernet.minestuckuniverse.gui.GuiStrifeSwitcher;
@@ -33,6 +34,9 @@ public class MSUKeys
 	public static final KeyBinding strifeSelectorRightKey = new KeyBinding("key.minestuckuniverse.strifeSelectorRight", Keyboard.KEY_NONE, "key.categories.minestuck");
 	public static final KeyBinding swapOffhandStrifeKey = new KeyBinding("key.minestuckuniverse.swapOffhandStrife", Keyboard.KEY_NONE, "key.categories.minestuck");
 
+	public static KeyBinding[] keyBindings;
+	private static boolean[] downs;
+
 	public static void register()
 	{
 		MinecraftForge.EVENT_BUS.register(MSUKeys.class);
@@ -40,12 +44,33 @@ public class MSUKeys
 		ClientRegistry.registerKeyBinding(strifeSelectorLeftKey);
 		ClientRegistry.registerKeyBinding(strifeSelectorRightKey);
 		ClientRegistry.registerKeyBinding(swapOffhandStrifeKey);
+
+		keyBindings = new KeyBinding[SkillKeyStates.Key.values().length];
+		downs = new boolean[SkillKeyStates.Key.values().length];
+
+		keyBindings[SkillKeyStates.Key.CLASS.ordinal()] = new KeyBinding("key.minestuckuniverse.classAction", Keyboard.KEY_J, "key.categories.minestuck");
+		keyBindings[SkillKeyStates.Key.ASPECT.ordinal()] = new KeyBinding("key.minestuckuniverse.aspectAction", Keyboard.KEY_H, "key.categories.minestuck");
+		keyBindings[SkillKeyStates.Key.UTIL.ordinal()] = new KeyBinding("key.minestuckuniverse.godTierUtil", Keyboard.KEY_K, "key.categories.minestuck");
+
+		for (KeyBinding binding : keyBindings)
+			ClientRegistry.registerKeyBinding(binding);
 	}
 
 	private static Boolean offhandMode = null;
 	@SubscribeEvent
 	public static void onInput(InputEvent event)
 	{
+		for(int i = 0; i < keyBindings.length; i++)
+		{
+			if (keyBindings[i].isKeyDown() ^ downs[i])
+			{
+				downs[i] = !downs[i];
+				MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.KEY_INPUT, i, downs[i]));
+				if(Minecraft.getMinecraft().player != null)
+					Minecraft.getMinecraft().player.getCapability(MSUCapabilities.SKILL_KEY_STATES, null).updateKeyState(SkillKeyStates.Key.values()[i], downs[i]);
+			}
+		}
+
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		if(player == null)
 			return;

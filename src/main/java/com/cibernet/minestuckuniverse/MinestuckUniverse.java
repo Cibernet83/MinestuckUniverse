@@ -1,15 +1,14 @@
 package com.cibernet.minestuckuniverse;
 
+import com.cibernet.minestuckuniverse.commands.GlobalSayCommand;
+import com.cibernet.minestuckuniverse.commands.MSGTCommand;
 import com.cibernet.minestuckuniverse.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.fml.common.event.*;
 
 
 @Mod(
@@ -40,7 +39,6 @@ public class MinestuckUniverse
     public static boolean isCarryOnLoaded;
     public static boolean isArsenalLoaded;
     public static boolean isVcLoaded;
-    public static boolean isMSGTLoaded;
     public static boolean isMekanismLoaded;
     public static boolean isCyclicLoaded;
     public static boolean isBOPLoaded;
@@ -49,6 +47,8 @@ public class MinestuckUniverse
     public static boolean isMysticalWorldLoaded;
     public static boolean isIndustrialForegoingLoaded;
     public static boolean isFutureMcLoaded;
+    public static boolean isLocksLoaded;
+    public static boolean isTrophySlotsLoaded;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -59,7 +59,6 @@ public class MinestuckUniverse
         isBotaniaLoaded = Loader.isModLoaded("botania");
         isArsenalLoaded = Loader.isModLoaded("minestuckarsenal");
         isSplatcraftLodaded = Loader.isModLoaded("splatcraft");
-        isMSGTLoaded = Loader.isModLoaded("minestuckgodtier");
         isCarryOnLoaded = Loader.isModLoaded("carryon");
         isVcLoaded = Loader.isModLoaded("variedcommodities");
         isMekanismLoaded = Loader.isModLoaded("mekanism");
@@ -70,6 +69,8 @@ public class MinestuckUniverse
         isMysticalWorldLoaded = Loader.isModLoaded("mysticalworld");
         isIndustrialForegoingLoaded = Loader.isModLoaded("industrialforegoing");
         isFutureMcLoaded = Loader.isModLoaded("futuremc");
+        isLocksLoaded = Loader.isModLoaded("locks");
+        isTrophySlotsLoaded = Loader.isModLoaded("trophyslots");
 
         proxy.preInit();
     }
@@ -90,5 +91,13 @@ public class MinestuckUniverse
     public void serverStarted(FMLServerStartedEvent event)
     {
         proxy.serverStarted();
+    }
+
+
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent event)
+    {
+        event.registerServerCommand(new MSGTCommand());
+        event.registerServerCommand(new GlobalSayCommand());
     }
 }

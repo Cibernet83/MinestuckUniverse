@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.gui;
 import static com.cibernet.minestuckuniverse.util.MSUUtils.*;
 
 import com.cibernet.minestuckuniverse.gui.container.ContainerAutoCaptcha;
+import com.cibernet.minestuckuniverse.gui.container.ContainerItemVoid;
 import com.cibernet.minestuckuniverse.gui.container.ContainerMachineChasis;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityAutoCaptcha;
 import com.cibernet.minestuckuniverse.tileentity.TileEntityBoondollarRegister;
@@ -31,7 +32,8 @@ public class MSUGuiHandler implements IGuiHandler
                 return new ContainerMachineChasis(player.inventory, (TileEntityMachineChasis) te);
             case AUTO_CAPTCHA_GUI:
                 return new ContainerAutoCaptcha(player.inventory, (TileEntityAutoCaptcha) te);
-
+            case ITEM_VOID_UI:
+                return new ContainerItemVoid(player);
         }
         return null;
     }
@@ -73,6 +75,14 @@ public class MSUGuiHandler implements IGuiHandler
                 boolean canEdit = player.getHeldItem(hand).isItemEqual(new ItemStack(MinestuckItems.carvingTool));
                 return new GuiStoneTablet(player, player.getHeldItemMainhand(), text, canEdit);
 
+            case GOD_TIER_MEDITATE_UI:
+                return new GuiGodTierMeditation(player);
+            case GOD_TIER_SASH_UI:
+                return new GuiManageBadges(player);
+            case ITEM_VOID_UI:
+                return new GuiItemVoid(player);
+            case GOD_TIER_HOARD_SELECTOR_UI:
+                return new GuiGristHoardSelector(player);
         }
         return null;
     }

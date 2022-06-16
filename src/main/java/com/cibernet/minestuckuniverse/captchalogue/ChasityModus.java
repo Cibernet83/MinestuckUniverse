@@ -1,5 +1,7 @@
 package com.cibernet.minestuckuniverse.captchalogue;
 
+import com.cibernet.minestuckuniverse.badges.MSUBadges;
+import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.entity.EntityCruxiteSlime;
 import com.cibernet.minestuckuniverse.gui.captchalogue.ChasityGuiHandler;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
@@ -129,8 +131,7 @@ public class ChasityModus extends Modus
 			}
 			return item;
 		}
-		/* TODO
-		else if(list.get(id).locked && MinestuckUniverse.isMSGTLoaded && player.getCapability(MSGTCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSGTBadges.SKELETON_KEY))
+		else if(list.get(id).locked && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.SKELETON_KEY))
 		{
 			list.get(id).locked = false;
 			if(side.isServer())
@@ -141,7 +142,7 @@ public class ChasityModus extends Modus
 			player.world.playSound(null, player.getPosition(), MSUSoundHandler.chasityUnlock, SoundCategory.PLAYERS, 0.8f, ((player.world.rand.nextFloat() - player.world.rand.nextFloat()) * 0.1F + 1.0F) * 0.95F);
 
 		}
-		*/
+
 		else player.world.playSound(null, player.getPosition(), MSUSoundHandler.chasityRattle, SoundCategory.PLAYERS, 0.8f, ((player.world.rand.nextFloat() - player.world.rand.nextFloat()) * 0.1F + 1.0F) * 0.95F);
 		
 		return ItemStack.EMPTY;
@@ -165,7 +166,7 @@ public class ChasityModus extends Modus
 		if(stack.isEmpty())
 			return false;
 		
-		if(stack.getItem().equals(MinestuckUniverseItems.chasityKey))
+		if(stack.getItem().equals(MinestuckUniverseItems.chastityKey))
 		{
 			if(!stack.hasTagCompound() || !stack.getTagCompound().hasUniqueId("CardUUID") || !stack.getTagCompound().hasUniqueId("PlayerUUID"))
 			{
@@ -252,7 +253,7 @@ public class ChasityModus extends Modus
 	
 	public void createKey(int id)
 	{
-		ItemStack key = new ItemStack(MinestuckUniverseItems.chasityKey, 1, MinestuckPlayerData.getData(player).color+1);
+		ItemStack key = new ItemStack(MinestuckUniverseItems.chastityKey, 1, MinestuckPlayerData.getData(player).color+1);
 		NBTTagCompound nbt = new NBTTagCompound();
 		
 		nbt.setUniqueId("CardUUID", list.get(id).uuid);

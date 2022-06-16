@@ -1,0 +1,9 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/blank",
+        "layer1": "minestuckuniverse:items/blank",
+        "layer2": "minestuckuniverse:items/pants/page_pants_bottom",
+        "layer3": "minestuckuniverse:items/pants/page_pants_top"
+    }
+}

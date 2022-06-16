@@ -4,7 +4,6 @@ import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockCeramicPorkhollow;
-import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.captchalogue.OperandiModus;
 import com.cibernet.minestuckuniverse.captchalogue.PopTartModus;
@@ -13,6 +12,7 @@ import com.cibernet.minestuckuniverse.client.render.RenderThrowable;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.armor.*;
 import com.cibernet.minestuckuniverse.items.captchalogue.*;
+import com.cibernet.minestuckuniverse.items.godtier.*;
 import com.cibernet.minestuckuniverse.items.properties.*;
 import com.cibernet.minestuckuniverse.items.properties.beams.PropertyBeamDeathMessage;
 import com.cibernet.minestuckuniverse.items.properties.beams.PropertyMagicBeam;
@@ -24,20 +24,18 @@ import com.cibernet.minestuckuniverse.items.properties.shieldkind.*;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.*;
 import com.cibernet.minestuckuniverse.items.properties.PropertyRocketBoost;
 import com.cibernet.minestuckuniverse.items.weapons.*;
+import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.BlockMetaPair;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.cibernet.splatcraft.items.ItemFilter;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.alchemy.GristType;
-import com.mraof.minestuck.block.BlockTransportalizer;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.item.TabMinestuck;
-import com.mraof.minestuck.item.block.ItemTransportalizer;
+import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.MinestuckSoundHandler;
-import com.mraof.minestuck.util.Pair;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.creativetab.CreativeTabs;
@@ -48,12 +46,10 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -62,6 +58,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import vazkii.botania.common.block.ModBlocks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MinestuckUniverseItems
 {
@@ -119,7 +117,7 @@ public class MinestuckUniverseItems
     public static final Item floatStone = new MSUItemBase("float_stone").setMaxStackSize(1);
     public static final Item energyCell = new MSUItemBase("energy_cell");
     public static final Item captchalogueBook = new CaptchaBookItem("captchalogue_book");
-    public static final Item chasityKey = new ChasityKeyItem("chasity_key");
+    public static final Item chastityKey = new ChasityKeyItem("chasity_key");
 
     //Food
     public static final Item popTart = new MSUFoodBase("pop_tart", 3, 0, false, PopTartModus.getConsumer());
@@ -223,6 +221,24 @@ public class MinestuckUniverseItems
 
     public static final Item hashchatModus = new ModusItem("hashchat_modus");
     public static final Item sacrificeModus = new ModusItem("sacrifice_modus");
+
+    //God Tier
+    public static final Item gtHood = new ItemGTArmor(EntityEquipmentSlot.HEAD, "gtHood", "god_tier_hood");
+    public static final Item gtShirt = new ItemGTArmor(EntityEquipmentSlot.CHEST, "gtShirt", "god_tier_shirt");
+    public static final Item gtPants = new ItemGTArmor(EntityEquipmentSlot.LEGS, "gtPants", "god_tier_pants");
+    public static final Item gtShoes = new ItemGTArmor(EntityEquipmentSlot.FEET, "gtShoes", "god_tier_shoes");
+    public static final Item gtArmorKit = new ItemGodTierKit();
+    public static final Item denizenTome = new ItemDenizenTome();
+    public static final Item denizenEye = new ItemLocatorEye("denizenEye", "denizen_eye");
+    public static final Item sashKit = new ItemSashKit("sashKit", "god_tier_sash_kit");
+    public static final Item godTierResetCharm = new ItemGodTierReseter("god_tier_reset_charm", "godTierResetCharm");
+    public static final Item manipulatedMatter = new ItemManipulatedMatter("manipulatedMatter", "manipulated_matter");
+
+    public static final Map<EnumAspect, ItemHeroStoneShard> heroStoneShards = new HashMap<EnumAspect, ItemHeroStoneShard>()
+    {{
+        for(EnumAspect aspect : EnumAspect.values())
+            put(aspect, new ItemHeroStoneShard(aspect));
+    }};
 
     //Weapons
 
@@ -458,7 +474,7 @@ public class MinestuckUniverseItems
         registerItem(registry, energyCell);
         registerItem(registry, dragonGel);
         registerItem(registry, captchalogueBook);
-        registerItem(registry, chasityKey);
+        registerItem(registry, chastityKey);
         registerItem(registry, cruxiteGel);
 
         registerItem(registry, cruxtruderGel);
@@ -521,7 +537,7 @@ public class MinestuckUniverseItems
             MinestuckItems.pogoHammer = registerItem(registry, new MSUWeaponBase(863, 19.2, -2.8, 4, MinestuckItems.pogoHammer).setTool(toolHammer, 2, 4).addProperties(new PropertyPogo(0.7), new PropertyVMotionDamage(2f, 4)));
             MinestuckItems.telescopicSassacrusher = registerItem(registry, new MSUWeaponBase(1610, 51.2, -3.64, 4, MinestuckItems.telescopicSassacrusher).setTool(toolHammer, 8, 2).addProperties(new PropertyFarmine(100, 128), new PropertyVMotionDamage(1.8f, 10)));
             MinestuckItems.regiHammer = registerItem(registry, new MSUWeaponBase(776, 19.2, -2.52, 4, MinestuckItems.regiHammer).setTool(toolHammer, 3, 6));
-            MinestuckItems.fearNoAnvil = registerCustomRenderedItem(registry, new MSUWeaponBase(1725, 32, -2.66, 8, MinestuckItems.fearNoAnvil).setTool(toolHammer, 3, 10).addProperties(new PropertyPotion(false, 0.5f, new PotionEffect(MobEffects.SLOWNESS, 400, 1), new PotionEffect(MobEffects.MINING_FATIGUE, 400, 2)), new PropertyVMotionDamage(1.6f, 3)));
+            MinestuckItems.fearNoAnvil = registerCustomRenderedItem(registry, new MSUWeaponBase(1725, 32, -2.66, 8, MinestuckItems.fearNoAnvil).setTool(toolHammer, 3, 10).addProperties(new PropertyPotion(true, 0.1f, new PotionEffect(MSUPotions.TIME_STOP, 20, 0)), new PropertyPotion(false, 0.5f, new PotionEffect(MobEffects.SLOWNESS, 400, 1), new PotionEffect(MobEffects.MINING_FATIGUE, 400, 2)), new PropertyVMotionDamage(1.6f, 3)));
             MinestuckItems.meltMasher = registerItem(registry, new MSUWeaponBase(1265, 25.6, -2.8, 4, MinestuckItems.meltMasher).setTool(toolHammer, 4, 8).addProperties(new PropertyAutoSmelt(), new PropertyFarmine(8, 5), new PropertyFire(4, 1, false)));
             MinestuckItems.zillyhooHammer = registerItem(registry, new MSUWeaponBase(3450, 69.1, -2.94, 40, MinestuckItems.zillyhooHammer).setTool(toolHammer, 5, 10));
             MinestuckItems.scarletZillyhoo = registerItem(registry, new MSUWeaponBase(2588, 49.9, -2.8, 60, MinestuckItems.scarletZillyhoo).setTool(toolHammer, 5, 10).addProperties(new PropertyFire(10, 0.8f, true)));
@@ -782,6 +798,18 @@ public class MinestuckUniverseItems
         OreDictionary.registerOre("modus", MinestuckItems.modusCard);
         for(Item modus : ModusItem.fetchModi)
             OreDictionary.registerOre("modus", modus);
+
+        registerItem(registry, gtHood);
+        registerItem(registry, gtShirt);
+        registerItem(registry, gtPants);
+        registerItem(registry, gtShoes);
+        registerItem(registry, gtArmorKit);
+        heroStoneShards.forEach((key, item) -> registerItem(registry, item));
+        registerItem(registry, denizenTome);
+        registerItem(registry, denizenEye);
+        registerItem(registry, sashKit);
+        registerItem(registry, godTierResetCharm);
+        registerItem(registry, manipulatedMatter);
     }
 
     public static void setPostInitVariables()
@@ -797,11 +825,6 @@ public class MinestuckUniverseItems
         overgrowthTransforms. put(Blocks.LOG, 4, MinestuckBlocks.log, 0);
         overgrowthTransforms.put(Blocks.LOG, 8, MinestuckBlocks.log, 8);
         overgrowthTransforms.put(Blocks.LOG, 12, MinestuckBlocks.log, 12);
-
-
-        if(MinestuckUniverse.isMSGTLoaded && MinestuckItems.fearNoAnvil instanceof MSUWeaponBase)
-            ((MSUWeaponBase)MinestuckItems.fearNoAnvil)
-                    .addProperties(new PropertyPotion(true, 0.1f, new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("minestuckgodtier","time_stop")), 20, 0)));
 
         wisdomsPierce.addProperties(new PropertyInnocuousDouble(wisdomsHookshot, true, false, false));
         wisdomsHookshot.addProperties(new PropertyInnocuousDouble(wisdomsPierce, true, false, false));
@@ -880,9 +903,15 @@ public class MinestuckUniverseItems
         registerItemCustomRender(blizzardCutters, new MSUModelManager.DualWeaponDefinition("blizzard_cutters_drawn", "blizzard_cutters_sheathed"));
         registerItemCustomRender(katarsOfZillywhomst, new MSUModelManager.DualWeaponDefinition("katars_of_zillywhomst_drawn", "katars_of_zillywhomst_sheathed"));
 
+        registerItemCustomRender(denizenTome, new MSUModelManager.SubtypesItemDefinition("denizen_tome"));
         registerItemCustomRender(cruxiteGel, new MSUModelManager.SubtypesItemDefinition("cruxite_gel"));
         registerItemCustomRender(cruxtruderGel, new MSUModelManager.SubtypesItemDefinition("cruxtruder_gel"));
         registerItemCustomRender(ceramicPorkhollow, new MSUModelManager.SubtypesItemDefinition("ceramic_porkhollow"));
+
+        registerItemCustomRender(gtHood, new MSUModelManager.GodTierArmorItemDefinition((ItemGTArmor) gtHood));
+        registerItemCustomRender(gtShirt, new MSUModelManager.GodTierArmorItemDefinition((ItemGTArmor) gtShirt));
+        registerItemCustomRender(gtPants, new MSUModelManager.GodTierArmorItemDefinition((ItemGTArmor) gtPants));
+        registerItemCustomRender(gtShoes, new MSUModelManager.GodTierArmorItemDefinition((ItemGTArmor) gtShoes));
 
         RenderThrowable.IRenderProperties THROW_STAR_ROTATION = ((entity, partialTicks) ->
         {
@@ -920,7 +949,7 @@ public class MinestuckUniverseItems
     @SideOnly(Side.CLIENT)
     private static Item registerItemCustomRender(Item item, MSUModelManager.CustomItemMeshDefinition customMesh)
     {
-        MSUModelManager.customItemModels.add(new Pair<>(item, customMesh));
+        MSUModelManager.customItemModels.put(item, customMesh);
         return item;
     }
 

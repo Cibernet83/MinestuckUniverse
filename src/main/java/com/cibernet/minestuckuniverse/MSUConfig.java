@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse;
 
 import com.mraof.minestuck.util.Echeladder;
+import io.netty.buffer.ByteBuf;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -21,6 +22,7 @@ public class MSUConfig
 	public static boolean IDAlchemy;
 	public static boolean nullSoloSessions;
 	public static boolean unstableArtifactSpread;
+	public static boolean localizedChat;
 
 	//Strife
 	public static boolean combatOverhaul;
@@ -30,6 +32,14 @@ public class MSUConfig
 	public static int strifeDeckMaxSize;
 	public static int strifeCardMobDrops;
 	public static double weaponAttackMultiplier;
+
+	//God Tier
+	public static boolean multiAspectUnlocks;
+	public static int godTierXpThreshold;
+	public static int questBedSpawnDistance;
+	public static int questBedSpawnArea;
+	public static int godTierBadgeSlots;
+	public static boolean godTierMasterControl;
 
 	public static void load(File file, Side sideIn)
 	{
@@ -52,6 +62,8 @@ public class MSUConfig
 	{
 		IDAlchemy = config.get("General", "IDAlchemy", true, "Enabling this makes the Totem Lathe and the Punch designix use Item IDs to determine a combination result if one doesn't exist already.")
 				.setLanguageKey("config.minestuckuniverse.general.IDAlchemy").getBoolean();
+		localizedChat = config.get("General", "localizedChat", false, "Enabling this makes players only be able to receive chat messages from nearby players unless Gift of Gab is enabled.")
+				.setLanguageKey("config.minestuckuniverse.general.localizedChat").getBoolean();
 		zillystoneYields = config.get("General", "zillystoneYields", 0.1, "Determines how much luck affects the amount of Zillystone Shards get dropped by a Zillystone when chiseled.")
 				.setLanguageKey("config.minestuckuniverse.general.zillystoneYields").getDouble();
 		baseZillystoneLuck = config.get("General", "baseZillystoneLuck", -2, "Determines a player's base luck when chiseling a block of Zillystone.")
@@ -77,6 +89,19 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.strife.weaponAttackMultiplier").getDouble();
 
 
+		multiAspectUnlocks = config.get("God Tier", "multiAspectUnlocks", true, "Enabling this makes certain badges require multiple kinds of Hero Stone Shards to unlock.")
+				.setLanguageKey("config.minestuckuniverse.godtier.multiAspectUnlocks").getBoolean();
+		godTierXpThreshold = config.get("God Tier", "godTierXpThreshold", 30, "Determines the minimum number of levels required to upgrade God Tier Skills")
+				.setLanguageKey("config.minestuckuniverse.godtier.godTierXpThreshold").getInt();
+		questBedSpawnDistance = config.get("God Tier", "questBedSpawnDistance", 2500, "Determines how far away the Quest Bed can spawn from the center of a player's land")
+				.setLanguageKey("config.minestuckuniverse.godtier.questBedSpawnDistance").getInt();
+		questBedSpawnArea = config.get("God Tier", "questBedSpawnArea", 2500, "Determines the size of the area of which the Quest Bed can spawn on a player's land")
+				.setLanguageKey("config.minestuckuniverse.godtier.questBedSpawnArea").getInt();
+		godTierBadgeSlots = config.get("God Tier", "godTierBadgeSlots", 7, "Determines how many Badge Slots God Tiered players start out with")
+				.setLanguageKey("config.minestuckuniverse.godtier.godTierBadgeSlots").getInt();
+		godTierMasterControl = config.get("God Tier", "godTierMasterControl", false, "Determines whether God Tiered players start with Master Control enabled, allowing them to unlock all badges regardless of their classpect")
+				.setLanguageKey("config.minestuckuniverse.godtier.godTierMasterControl").getBoolean();
+
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -89,5 +114,17 @@ public class MSUConfig
 			config.save();
 		}
 
+	}
+
+	public static void writeToBuffer(ByteBuf data)
+	{
+		data.writeBoolean(localizedChat);
+		data.writeBoolean(multiAspectUnlocks);
+	}
+
+	public static void readFromBuffer(ByteBuf data)
+	{
+		localizedChat = data.readBoolean();
+		multiAspectUnlocks = data.readBoolean();
 	}
 }

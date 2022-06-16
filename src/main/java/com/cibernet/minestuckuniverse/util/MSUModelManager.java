@@ -2,15 +2,18 @@ package com.cibernet.minestuckuniverse.util;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
+import com.cibernet.minestuckuniverse.items.godtier.ItemGTArmor;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -30,7 +33,7 @@ public class MSUModelManager
     public static List<Item> items = new ArrayList<>();
     public static List<Block> blocks = new ArrayList<>();
 
-    public static List<com.mraof.minestuck.util.Pair<Item, CustomItemMeshDefinition>> customItemModels = new ArrayList<>();
+    public static HashMap<Item, CustomItemMeshDefinition> customItemModels = new HashMap<>();
 
     @SubscribeEvent
     public static void handleModelRegistry(ModelRegistryEvent event)
@@ -66,12 +69,13 @@ public class MSUModelManager
         ModelLoader.setCustomMeshDefinition(catClaws, catClawsDef);
 
         for(Item item : items)
-            register(item);
+            if(!customItemModels.containsKey(item))
+                register(item);
 
-        for(Pair<Item, CustomItemMeshDefinition> pair : customItemModels)
+        for(Map.Entry<Item, CustomItemMeshDefinition> pair : customItemModels.entrySet())
         {
-            ModelLoader.registerItemVariants(pair.object1, pair.object2.getResourceLocations());
-            ModelLoader.setCustomMeshDefinition(pair.object1, pair.object2);
+            ModelLoader.registerItemVariants(pair.getKey(), pair.getValue().getResourceLocations());
+            ModelLoader.setCustomMeshDefinition(pair.getKey(), pair.getValue());
         }
 
         //ModelLoader.registerItemVariants(batteryBeamBlade, new ModelResourceLocation[]{new ModelResourceLocation("minestuck:catclaws_sheathed"), new ModelResourceLocation("minestuck:catclaws_drawn")});
@@ -167,13 +171,43 @@ public class MSUModelManager
     }
 
     @SideOnly(Side.CLIENT)
+    public static class GodTierArmorItemDefinition implements CustomItemMeshDefinition
+    {
+        private final String name;
+        private final ResourceLocation[] locs = new ResourceLocation[EnumClass.values().length+1];
+
+        public GodTierArmorItemDefinition(ItemGTArmor item)
+        {
+            this.name = item.getType();
+
+            locs[0] = (new ResourceLocation(MinestuckUniverse.MODID,"god_tier_"+name));
+            for(int i = 1; i < locs.length; i++)
+                locs[i] = (new ResourceLocation(MinestuckUniverse.MODID,EnumClass.values()[i-1].getDisplayName().toLowerCase()+"_"+name));
+        }
+
+        @Override
+        public ResourceLocation[] getResourceLocations() {
+            return locs;
+        }
+
+        @Override
+        public ModelResourceLocation getModelLocation(ItemStack stack)
+        {
+            NBTTagCompound nbt = stack.getTagCompound();
+
+            String name = ((ItemGTArmor)stack.getItem()).getType();
+            if(nbt == null) return new ModelResourceLocation(MinestuckUniverse.MODID+":god_"+name, "inventory");
+
+            String clss = EnumClass.getClassFromInt(nbt.getInteger("class")).getDisplayName().toLowerCase();
+            return new ModelResourceLocation(MinestuckUniverse.MODID+":"+clss+"_"+name, "inventory");
+        }
+    }
+
+
+    @SideOnly(Side.CLIENT)
     public static class SubtypesItemDefinition implements CustomItemMeshDefinition
     {
-        private String name;
-
-        public SubtypesItemDefinition(Item item) {
-            this(item.getRegistryName().getResourcePath());
-        }
+        private final String name;
 
         public SubtypesItemDefinition(String name) {
             this.name = name;

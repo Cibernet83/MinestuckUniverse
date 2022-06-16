@@ -1,0 +1,6 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "minestuckuniverse:blocks/glowing_hero_stone"
+	}
+}

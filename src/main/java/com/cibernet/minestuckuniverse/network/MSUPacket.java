@@ -80,6 +80,26 @@ public abstract class MSUPacket
         ALCHEM_WILDCARD(AlchemyWildcardPacket.class),
         BOOK_PUBLISH(BookPublishPacket.class),
         WALLET_CAPTCHA(WalletCaptchaloguePacket.class),
+
+
+        UPDATE_DATA_CLIENT(PacketUpdateGTDataFromClient.class),
+        UPDATE_DATA_SERVER(PacketUpdateGTDataFromServer.class),
+        INCREASE_XP(PacketAddSkillXp.class),
+        ATTEMPT_BADGE_UNLOCK(PacketAttemptBadgeUnlock.class),
+        TOGGLE_BADGE(PacketToggleBadge.class),
+        ADD_PLAYER_XP(PacketChangePlayerXp.class),
+        REQUEST_GRIST_HOARD(PacketRequestGristHoard.class),
+        SEND_GRIST_HOARD(PacketSendGristHoard.class),
+        UPDATE_ALL_BADGE_EFFECTS(PacketUpdateAllBadgeEffects.class),
+        SET_MOUSE_SENSITIVITY(PacketSetMouseSensitivity.class),
+        SEND_PARTICLE(PacketSendParticle.class),
+        UPDATE_BADGE_EFFECT(PacketUpdateBadgeEffect.class),
+        KEY_INPUT(PacketKeyInput.class),
+        SEND_POWER_PARTICLES(PacketSendPowerParticlesState.class),
+        MINDFLAYER_MOVEMENT_INPUT(PacketMindflayerMovementInput.class),
+        SET_CURRENT_ITEM(PacketSetCurrentItem.class),
+        EDIT_FILL_BLOCKS(PacketPlaceBlockArea.class),
+        UPDATE_CONFIG(PacketUpdateConfig.class),
         ;
 
         Class<? extends MSUPacket> packetType;

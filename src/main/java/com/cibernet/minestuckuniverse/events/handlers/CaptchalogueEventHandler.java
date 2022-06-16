@@ -87,13 +87,13 @@ public class CaptchalogueEventHandler
 		World world = event.world;
 		List<Entity> mobsWithKeysList = StreamSupport.stream(world.loadedEntityList
 				.spliterator(), false)
-				.filter(entity -> entity instanceof EntityMob && (((EntityMob) entity).getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.chasityKey) || ((EntityMob) entity).getHeldItemOffhand().getItem().equals(MinestuckUniverseItems.chasityKey)))
+				.filter(entity -> entity instanceof EntityMob && (((EntityMob) entity).getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.chastityKey) || ((EntityMob) entity).getHeldItemOffhand().getItem().equals(MinestuckUniverseItems.chastityKey)))
 				.collect(Collectors.toList());
 		for(Entity entity : mobsWithKeysList)
 		{
 
 			ItemStack stack = ((EntityMob) entity).getHeldItemMainhand();
-			if(!stack.getItem().equals(MinestuckUniverseItems.chasityKey))
+			if(!stack.getItem().equals(MinestuckUniverseItems.chastityKey))
 				stack = ((EntityMob)entity).getHeldItemOffhand();
 
 			NBTTagCompound nbt = stack.getTagCompound();

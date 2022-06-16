@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_inventory",
+    "textures": {
+        "wall": "minestuckuniverse:blocks/secondary_hero_stone"
+    }
+}

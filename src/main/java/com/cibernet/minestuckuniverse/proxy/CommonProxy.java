@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.badges.MSUBadges;
 import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsData;
 import com.cibernet.minestuckuniverse.modSupport.MSUSplatcraftSupport;
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
@@ -9,6 +10,7 @@ import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.events.handlers.*;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
+import com.cibernet.minestuckuniverse.modSupport.TrophySlotsSupport;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.strife.KindAbstratus;
 import com.cibernet.minestuckuniverse.strife.MSUKindAbstrata;
@@ -26,6 +28,7 @@ import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
 import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
+import com.cibernet.minestuckuniverse.world.gen.WorldGenHandler;
 import com.cibernet.minestuckuniverse.world.storage.loot.MSULoot;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -48,8 +51,19 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(MSUKindAbstrata.class);
         MinecraftForge.EVENT_BUS.register(StrifeEventHandler.class);
 
+
+        MinecraftForge.EVENT_BUS.register(GTEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(KarmaEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(EditModeEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(LocalChatEventHandler.class);
+
+        if(MinestuckUniverse.isTrophySlotsLoaded)
+            MinecraftForge.EVENT_BUS.register(TrophySlotsSupport.class);
+
         MSUEntities.registerEntities();
         MSUCapabilities.registerCapabilities();
+        BadgeEventHandler.registerBadgeEvents();
 
         GameRegistry.registerTileEntity(TileEntityGristHopper.class, MinestuckUniverse.MODID + ":grist_hopper");
         GameRegistry.registerTileEntity(TileEntityAutoWidget.class, MinestuckUniverse.MODID + ":auto_widget");
@@ -67,6 +81,8 @@ public class CommonProxy
     public void init()
     {
         MSUBannerPatterns.init();
+
+        MinecraftForge.EVENT_BUS.register(MSUBadges.class);
 
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
         MinecraftForge.EVENT_BUS.register(ArmorEventHandler.class);
@@ -92,6 +108,8 @@ public class CommonProxy
 
         if(MinestuckUniverse.isCarryOnLoaded)
             MinecraftForge.EVENT_BUS.register(CarryOnSupport.class);
+
+        GameRegistry.registerWorldGenerator(new WorldGenHandler(), 0);
     }
 
     public void postInit()

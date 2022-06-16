@@ -126,6 +126,15 @@ public class MSUAlchemyRecipes
 
     public static void registerMSU()
     {
+
+        for(Block block : MinestuckUniverseBlocks.chiseledHeroStones.values())
+        {
+            OreDictionary.registerOre("chiseled_hero_stone", block);
+            OreDictionary.registerOre("hero_stone", block);
+        }
+        for(Block block : MinestuckUniverseBlocks.heroStones.values())
+            OreDictionary.registerOre("hero_stone", block);
+
         GristSet magicBlockCost = new GristSet(Build, 2);
          int magicGristTotal = (
                 (MinestuckUniverse.isThaumLoaded ? 1 : 0)
@@ -368,7 +377,6 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.energyModus), new GristSet(new GristType[] {Build, Gold, Uranium}, new int[] {180, 32, 21}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.bookModus), new GristSet(new GristType[] {Build, Iodine, Chalk}, new int[] {980, 18, 26}));
 
-
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.arrayModus), new GristSet(new GristType[] {Build}, new int[] {350}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.walletModus), new GristSet(new GristType[] {Build, Iodine, Diamond, Zillium, Artifact}, new int[] {3000, 540, 20, 4050, 110}));
         GristRegistry.addGristConversion(new ItemStack(walletBallModus), new GristSet(new GristType[] {Build, Iodine, Diamond, Zillium, Artifact, Cobalt, Iodine}, new int[] {4000, 800, 40, 10000, 500, 800, 400}));
@@ -376,7 +384,16 @@ public class MSUAlchemyRecipes
 
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.hashchatModus), new GristSet(new GristType[] {Build, Garnet, Artifact}, new int[] {510, 64, 10}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.sacrificeModus), new GristSet(new GristType[] {Build, Rust, Tar}, new int[] {210, 45, 8}));
-        
+
+
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.denizenEye), new GristSet(new GristType[]{GristType.Build, GristType.Mercury, GristType.Uranium, GristType.Amethyst,
+                GristType.Diamond, GristType.Quartz, GristType.Zillium, GristType.Artifact}, new int[]{10000, 5000, 5000, 5000, 2500, 2500, 1000, 1000}));
+
+        ConsortRewardHandler.registerPrice(new ItemStack(denizenTome), 10000, 10000);
+        ConsortRewardHandler.registerPrice(new ItemStack(MinestuckItems.candy, 1, 21), 500, 600);
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.sashKit), new GristSet(new GristType[]{GristType.Build, GristType.Gold, GristType.Zillium, GristType.Artifact}, new int[] {1080, 400, 100, 100}));
+        GristRegistry.addGristConversion(new ItemStack(godTierResetCharm), new GristSet(new GristType[]{GristType.Build, GristType.Gold, GristType.Diamond, GristType.Zillium, GristType.Artifact}, new int[] {1080, 200, 200, 100, 100}));
+
         //Alchemy
         CombinationRegistry.addCombination(new ItemStack(zillystoneShard), new ItemStack(Items.SUGAR), MODE_OR, Zillium.getCandyItem());
 
@@ -671,6 +688,13 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.monsterModus), new ItemStack(MinestuckItems.minestuckBucket, 1, 1), MODE_OR, false, true, new ItemStack(MinestuckUniverseItems.sacrificeModus));
 
         CombinationRegistry.addCombination(new ItemStack(zillystoneShard), new ItemStack(MinestuckItems.modusCard), MODE_AND, true, false, new ItemStack(MinestuckUniverseItems.jujuModus));
+
+
+
+        CombinationRegistry.addCombination(new ItemStack(denizenTome, 1, 2), new ItemStack(Items.ENDER_EYE),
+                CombinationRegistry.Mode.MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.denizenEye));
+        CombinationRegistry.addCombination("chiseled_hero_stone", new ItemStack(MinestuckUniverseItems.knittingNeedles), false, CombinationRegistry.Mode.MODE_OR, new ItemStack(MinestuckUniverseItems.sashKit));
+        CombinationRegistry.addCombination("chiseled_hero_stone", new ItemStack(MinestuckUniverseItems.ironMedallion), false, CombinationRegistry.Mode.MODE_AND, new ItemStack(MinestuckUniverseItems.godTierResetCharm));
     }
     
     public static void registerSleevedTransportalizerRecipes()
