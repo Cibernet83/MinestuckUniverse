@@ -4,7 +4,10 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
+import com.cibernet.minestuckuniverse.items.godtier.ItemGodTierKit;
 import com.google.common.base.Predicates;
+import com.mojang.authlib.GameProfile;
+import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.AlchemyRecipes;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
@@ -14,10 +17,7 @@ import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.network.MinestuckChannelHandler;
 import com.mraof.minestuck.network.MinestuckPacket;
 import com.mraof.minestuck.network.PlayerDataPacket;
-import com.mraof.minestuck.util.EnumAspect;
-import com.mraof.minestuck.util.EnumClass;
-import com.mraof.minestuck.util.MinestuckPlayerData;
-import com.mraof.minestuck.util.Title;
+import com.mraof.minestuck.util.*;
 import com.sun.javafx.geom.Vec3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -28,6 +28,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.management.PlayerInteractionManager;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -35,7 +37,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -57,6 +61,7 @@ public class MSUUtils
     public static void registerDeployList()
     {
         DeployList.registerItem("holopad", new ItemStack(MinestuckUniverseBlocks.holopad), new GristSet(GristType.Build, MinestuckUniverse.isArsenalLoaded ? 10000 : 1000), 2);
+        DeployList.registerItem("gt_kit", new GristSet(GristType.Zillium, 20), 0, sburbConnection -> ItemGodTierKit.isAvailable(sburbConnection), sburbConnection -> ItemGodTierKit.generateKit(sburbConnection));
     }
     
     public static boolean compareCards(ItemStack card1, ItemStack card2, boolean ignoreStacksize)
@@ -251,5 +256,25 @@ public class MSUUtils
         player.capabilities.allowFlying = player.isCreative() || player.isSpectator();
         if(!player.capabilities.allowFlying)
             player.capabilities.isFlying = false;
+    }
+
+    public static EntityPlayer getOfflinePlayer(WorldServer world, IdentifierHandler.PlayerIdentifier identifier)
+    {
+        if(identifier.getPlayer() != null)
+            return identifier.getPlayer();
+
+        NBTTagCompound identifierNBT = ((NBTTagCompound) identifier.saveToNBT(new NBTTagCompound(), "id"));
+        GameProfile profile;
+
+        if(MinestuckConfig.useUUID)
+            profile = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerProfileCache().getProfileByUUID(identifierNBT.getUniqueId("id"));
+        else profile = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerProfileCache().getGameProfileForUsername(identifier.getUsername());
+
+        EntityPlayerMP player = new EntityPlayerMP(FMLCommonHandler.instance().getMinecraftServerInstance(), world, profile , new PlayerInteractionManager(world));
+        FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().setPlayerManager(new WorldServer[] {world});
+        player.deserializeNBT(FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerNBT(player));
+        player.mountEntityAndWakeUp();
+
+        return player;
     }
 }

@@ -1,9 +1,13 @@
 package com.cibernet.minestuckuniverse.items.godtier;
 
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
+import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.util.AspectColorHandler;
+import com.cibernet.minestuckuniverse.util.MSUUtils;
+import com.mojang.authlib.GameProfile;
+import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.network.skaianet.SburbConnection;
 import com.mraof.minestuck.network.skaianet.SkaianetHandler;
 import com.mraof.minestuck.util.*;
@@ -12,10 +16,12 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.management.PlayerInteractionManager;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -23,9 +29,12 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.UUID;
 
 public class ItemGodTierKit extends MSUItemBase
 {
@@ -167,7 +176,10 @@ public class ItemGodTierKit extends MSUItemBase
 	
 	public static boolean isAvailable(SburbConnection sburbConnection)
 	{
-		return MinestuckPlayerData.getTitle(sburbConnection.getClientIdentifier()) != null && sburbConnection.getClientIdentifier().getPlayer() != null ;//&& sburbConnection.getClientIdentifier().getPlayer().getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+		if(sburbConnection.getClientIdentifier() == null || sburbConnection.getServerIdentifier() == null || sburbConnection.getServerIdentifier().getPlayer() == null)
+			return false;
+		EntityPlayer player = MSUUtils.getOfflinePlayer((WorldServer) sburbConnection.getServerIdentifier().getPlayer().world, sburbConnection.getClientIdentifier());
+		return player != null && MinestuckPlayerData.getTitle(sburbConnection.getClientIdentifier()) != null && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
 	
 	public static ItemStack generateKit(SburbConnection sburbConnection)
