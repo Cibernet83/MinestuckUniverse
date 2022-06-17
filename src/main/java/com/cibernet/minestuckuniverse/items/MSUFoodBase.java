@@ -11,9 +11,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class MSUFoodBase extends ItemFood
+public class MSUFoodBase extends ItemFood implements IRegistryItem
 {
 	protected final FoodItemConsumer consumer;
+	private final String name;
 	
 	public MSUFoodBase(String name, int amount, float saturation, boolean isWolfFood, FoodItemConsumer consumer)
 	{
@@ -23,7 +24,7 @@ public class MSUFoodBase extends ItemFood
 		setCreativeTab(TabMinestuckUniverse.main);
 		
 		setUnlocalizedName(name);
-		setRegistryName(name);
+		this.name = name;
 	}
 	
 	public MSUFoodBase(String name, int amount, float saturation, boolean isWolfFood)
@@ -58,7 +59,12 @@ public class MSUFoodBase extends ItemFood
 			return null;
 		};
 	}
-	
+
+	@Override
+	public void setRegistryName() {
+		setRegistryName(name);
+	}
+
 	public interface FoodItemConsumer
 	{
 		ItemStack accept(ItemStack stack, World worldIn, EntityPlayer player);
