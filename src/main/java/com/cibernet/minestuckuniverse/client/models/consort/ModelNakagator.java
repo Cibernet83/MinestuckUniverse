@@ -51,9 +51,9 @@ public class ModelNakagator extends ModelConsort
 		this.setRotation(upperTail, 0.22307169437408447F, 0.0F, 0.0F);
 
 		hood = new ModelRenderer(this);
-		hood.setRotationPoint(0.0F, 6.0F, 0.0F);
+		hood.setRotationPoint(0.0F, 8.0F, 0.5F);
 		//head.addChild(hood);
-		hood.cubeList.add(new ModelBox(hood, 136, 96, -3.0F, 0.0F, -2.0F, 6, 6, 6, 0.0F, false));
+		hood.cubeList.add(new ModelBox(hood, 136, 96, -3.5F, 0.0F, -1.5F, 7, 6, 7, 0.0F, false));
 	}
 
 	/**

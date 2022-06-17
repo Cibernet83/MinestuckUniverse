@@ -26,7 +26,6 @@ import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.StringUtils;
-import vazkii.botania.client.model.armor.ModelArmor;
 
 import java.util.Map;
 import java.util.UUID;
@@ -82,7 +81,7 @@ public class LayerConsortCosmetics implements LayerRenderer<EntityLivingBase>
 
 			if (armorModel == null)
 			{
-				armorModel = new ModelArmor(EntityEquipmentSlot.HEAD);
+				armorModel = new ModelBiped();
 				armorModel.setVisible(false);
 				armorModel.bipedHead.showModel = true;
 				armorModel.bipedHeadwear.showModel = true;
@@ -144,7 +143,7 @@ public class LayerConsortCosmetics implements LayerRenderer<EntityLivingBase>
 		float size = 0;
 		for(ModelBox box : hatHead.cubeList)
 			size += (Math.abs(box.posX1-box.posX2) + Math.abs(box.posY1-box.posY2) + Math.abs(box.posZ1-box.posZ2))/3f;
-		size = size/hatHead.cubeList.size() / 8f;
+		size = size/hatHead.cubeList.size() / 8f ;
 
 		GlStateManager.translate(0.0F, 0.125F*0.7f / size * scale, 0.0F);
 		GlStateManager.scale(size, size, size);

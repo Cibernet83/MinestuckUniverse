@@ -73,7 +73,7 @@ public class ModelTurtle extends ModelConsort
 		head.addChild(nose);
 
 		hood = new ModelRenderer(this);
-		hood.setRotationPoint(0.0F, 6.0F, 0.0F);
+		hood.setRotationPoint(0.0F, 6.0F, -1.5F);
 		//head.addChild(hood);
 		hood.cubeList.add(new ModelBox(hood, 136, 96, -3.0F, 0.0F, -2.0F, 6, 6, 6, 0.0F, false));
 	}

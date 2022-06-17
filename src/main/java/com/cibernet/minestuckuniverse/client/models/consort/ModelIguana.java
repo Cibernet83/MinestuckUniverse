@@ -85,9 +85,9 @@ public class ModelIguana extends ModelConsort
 		head.addChild(shape2);
 
 		hood = new ModelRenderer(this);
-		hood.setRotationPoint(0.0F, 0.0F, 0.0F);
+		hood.setRotationPoint(0.0F, 7.5F, 0.0F);
 		//head.addChild(hood);
-		hood.cubeList.add(new ModelBox(hood, 136, 96, -3.5F, -4.0F, -2.0F, 6, 6, 6, 0.0F, false));
+		hood.cubeList.add(new ModelBox(hood, 136, 96, -4F, -4.0F, -1.0F, 7, 6, 7, 0.0F, false));
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
