@@ -169,14 +169,8 @@ public class CaptchalogueEventHandler
 
 			if(modus != null)
 			{
-				double floatstoneValue = 0;
-				double speedMod = 0;
-
-				if(modus instanceof WeightModus)
-				{
-					floatstoneValue = ((WeightModus)modus).getFloatStones()*1.5;
-					speedMod = (modus.getNonEmptyCards()-floatstoneValue) / -((WeightModus) modus).getItemCap();
-				}
+				double floatstoneValue = WeightModus.getFloatStones(modus)*1.5;
+				double speedMod = (modus.getNonEmptyCards()-floatstoneValue) / -WeightModus.getItemCap(player);
 
 				AttributeModifier WEIGHT_MODUS_SPEED = (new AttributeModifier(WEIGHT_MODUS_SPEED_UUID, "Backpack Modus speed penalty", Math.min(0, speedMod), 2)).setSaved(false);
 
@@ -184,12 +178,20 @@ public class CaptchalogueEventHandler
 				if(attributeInstance.hasModifier(WEIGHT_MODUS_SPEED))
 					attributeInstance.removeModifier(WEIGHT_MODUS_SPEED);
 
-				if(modus instanceof WeightModus)
+				if(!Minecraft.getMinecraft().isGamePaused())
 				{
-					attributeInstance.applyModifier(WEIGHT_MODUS_SPEED);
-					if(!player.capabilities.isFlying)
-						player.motionY += Math.min(0, speedMod+0.3)*(player.isInWater() || player.isElytraFlying() ? 0.07 : 0.1);
+					if(modus instanceof WeightModus)
+					{
+						attributeInstance.applyModifier(WEIGHT_MODUS_SPEED);
+						if(!player.capabilities.isFlying)
+							player.motionY += Math.min(0, speedMod+0.3)*(player.isInWater() || player.isElytraFlying() ? 0.07 : 0.1);
+					}
+					else if(!player.capabilities.isFlying && player.motionY <= 2)
+					{
+						player.motionY += (floatstoneValue/WeightModus.getItemCap(player))*(player.isInWater() || player.isElytraFlying() ? 0.07 : 0.1);
+					}
 				}
+
 			}
 			if(modus instanceof CycloneModus)
 				((CycloneModus) modus).cycle();
