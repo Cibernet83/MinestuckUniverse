@@ -9,7 +9,7 @@ import com.cibernet.minestuckuniverse.items.weapons.ItemDualClaw;
 import com.cibernet.minestuckuniverse.items.weapons.ItemMechanicalCrossbow;
 import com.cibernet.minestuckuniverse.items.weapons.MSUBowBase;
 import com.cibernet.minestuckuniverse.items.weapons.MSUShieldBase;
-import com.mraof.minestuck.item.ItemCruxitePotion;
+
 import com.mraof.minestuck.item.MinestuckItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -40,7 +40,7 @@ public class MSUKindAbstrata
 	public static KindAbstratus shovelkind = new KindAbstratus("shovel", MinestuckUniverseItems.toolShovel).addItemClasses(ItemSpade.class);
 	public static KindAbstratus hoekind = new KindAbstratus("hoe").addItemClasses(ItemHoe.class).addItemTools(getItem("rats", "plague_scythe"), getItem("ic2", "electric_hoe"));
 	public static KindAbstratus fshngrodkind = new KindAbstratus("fishingRod").addItemClasses(ItemFishingRod.class);
-	public static KindAbstratus potionkind = new KindAbstratus("potion").addItemClasses(ItemPotion.class, ItemCruxitePotion.class).addItemTools(getItem("botania", "brewvial"), getItem("botania", "brewflask"),
+	public static KindAbstratus potionkind = new KindAbstratus("potion").addItemClasses(ItemPotion.class).addItemTools(MinestuckItems.cruxitePotion, getItem("botania", "brewvial"), getItem("botania", "brewflask"),
 			getItem("botania", "incensestick"), getItem("botania", "manabottle"));
 	public static KindAbstratus throwkind = new KindAbstratus("projectile").setPreventRightClick(true).addKeywords("shuriken").addItemClasses(MSUThrowableBase.class).addItemTools(
 					MinestuckUniverseItems.dragonCharge, Items.SNOWBALL, Items.EGG, Items.ENDER_PEARL, Items.ENDER_EYE, Items.EXPERIENCE_BOTTLE, Items.SPLASH_POTION, Items.LINGERING_POTION,

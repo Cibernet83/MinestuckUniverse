@@ -333,6 +333,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(spaceSalt), new GristSet(new GristType[] {Uranium, Tar, Zillium}, new int[] {10, 32, 1}));
         GristRegistry.addGristConversion(new ItemStack(timetable), new GristSet(new GristType[] {Uranium, Garnet, Rust, Zillium}, new int[] {300, 1600, 1600, 500}));
 
+        GristRegistry.addGristConversion(new ItemStack(fluoriteBlock), new GristSet(new GristType[] {Cobalt, Diamond}, new int[] {20, 1, 4}));
         GristRegistry.addGristConversion(new ItemStack(fluoriteOre), new GristSet(new GristType[] {Cobalt, Diamond, Build}, new int[] {20, 1, 4}));
 
         GristRegistry.addGristConversion(new ItemStack(trueUnbreakableKatana) , new GristSet(Zillium, 1000));
