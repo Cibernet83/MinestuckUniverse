@@ -30,9 +30,9 @@ public class StructureQuestBed extends WorldGenerator
 	{
 		ChunkPos chunk = getQuestBedChunk(worldIn);
 
-		if(worldIn.provider.createChunkGenerator() instanceof ChunkProviderLands && position.getX()/16 == chunk.x && position.getZ()/16 == chunk.z)
+		if(worldIn.provider.createChunkGenerator() instanceof ChunkProviderLands && position.getX()/16 == chunk.x + radius/16 && position.getZ()/16 == chunk.z  + radius/16)
 		{
-			position = position.add(-2, 0, -1);
+			position = position.add(-2 - radius, 0, -1 - radius);
 
 			ChunkProviderLands landGenerator = (ChunkProviderLands) worldIn.provider.createChunkGenerator();
 			Title title = MinestuckPlayerData.getData(SburbHandler.getConnectionForDimension(worldIn.provider.getDimension()).getClientIdentifier()).title;
