@@ -115,7 +115,7 @@ public class MinestuckUniverseItems
     public static Item unrealAir = new ItemUnrealAir("unreal_air", "unrealAir");
 
     public static final Item floatStone = new MSUItemBase("float_stone").setMaxStackSize(1);
-    public static final Item energyCell = new MSUItemBase("energy_cell");
+    //public static final Item energyCell = new MSUItemBase("energy_cell");
     public static final Item captchalogueBook = new CaptchaBookItem("captchalogue_book");
     public static final Item chastityKey = new ChasityKeyItem("chasity_key");
 
@@ -471,7 +471,6 @@ public class MinestuckUniverseItems
         registerItem(registry, popTart);
         registerItem(registry, popBall);
         registerItem(registry, floatStone);
-        registerItem(registry, energyCell);
         registerItem(registry, dragonGel);
         registerItem(registry, captchalogueBook);
         registerItem(registry, chastityKey);

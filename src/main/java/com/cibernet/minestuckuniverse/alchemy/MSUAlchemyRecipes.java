@@ -347,7 +347,7 @@ public class MSUAlchemyRecipes
 
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseBlocks.hardStone), new GristSet(new GristType[] {Build}, new int[] {4}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.floatStone), new GristSet(new GristType[] {Build}, new int[] {400}));
-        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.energyCell), new GristSet(new GristType[] {Gold, Rust, Uranium}, new int[] {20, 10, 10}));
+        //GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.energyCell), new GristSet(new GristType[] {Gold, Rust, Uranium}, new int[] {20, 10, 10}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.popBall), new GristSet(new GristType[] {Iodine, Amber, Shale}, new int[] {8, 5, 2}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.dragonGel), new GristSet(new GristType[] {Build, Sulfur, Uranium, Zillium}, new int[] {1010, 500, 742, 1525}));
 
@@ -450,7 +450,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.regiHammer), new ItemStack(MinestuckItems.itemFrog, 1, 5), MODE_OR, false, true, new ItemStack(midasMallet));
         CombinationRegistry.addCombination(new ItemStack(midasMallet), new ItemStack(cueBall), MODE_AND, false, true, new ItemStack(MinestuckItems.mwrthwl));
         CombinationRegistry.addCombination(new ItemStack(battery), new ItemStack(MinestuckItems.clawHammer), MODE_AND, false, false, new ItemStack(aaaNailShocker));
-        CombinationRegistry.addCombination(new ItemStack(aaaNailShocker), new ItemStack(midasMallet), MODE_AND, false, false, new ItemStack(highVoltageStormCrusher));
+        CombinationRegistry.addCombination(new ItemStack(aaaNailShocker), new ItemStack(midasMallet), MODE_OR, false, false, new ItemStack(highVoltageStormCrusher));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.scarletZillyhoo), new ItemStack(rocketFist), MODE_AND, false, false, new ItemStack(barrelsWarhammer));
         removeCombination(new ItemStack(MinestuckItems.blacksmithHammer), new ItemStack(Items.CLOCK), CombinationRegistry.Mode.MODE_OR, false, false);
         CombinationRegistry.addCombination(new ItemStack(midasMallet), new ItemStack(tickingStopwatch), MODE_OR, new ItemStack(MinestuckItems.fearNoAnvil));
@@ -665,7 +665,7 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(Items.SLIME_BALL), new ItemStack(MinestuckItems.modusCard, 1, 5), MODE_AND,true, false, new ItemStack(MinestuckUniverseItems.slimeModus));
         CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.cycloneModus), new ItemStack(MinestuckItems.onion), MODE_OR, new ItemStack(MinestuckUniverseItems.onionModus));
         CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.cycloneModus), new ItemStack(MinestuckItems.modusCard, 1, 3), MODE_AND, new ItemStack(MinestuckUniverseItems.onionModus));
-        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.energyCell), new ItemStack(MinestuckItems.modusCard, 4), MODE_OR, false, true,  new ItemStack(MinestuckUniverseItems.energyModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.battery), new ItemStack(MinestuckItems.modusCard, 4), MODE_OR, false, true,  new ItemStack(MinestuckUniverseItems.energyModus));
         CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.weightModus), new ItemStack(MinestuckItems.energyCore), MODE_AND,  new ItemStack(MinestuckUniverseItems.energyModus));
         CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.eightBallModus), new ItemStack(MinestuckUniverseItems.popTartModus), MODE_AND, new ItemStack(MinestuckUniverseItems.operandiModus));
         CombinationRegistry.addCombination(new ItemStack(Items.REDSTONE), new ItemStack(MinestuckItems.modusCard, 1, 4), MODE_AND, new ItemStack(MinestuckUniverseItems.operandiModus));

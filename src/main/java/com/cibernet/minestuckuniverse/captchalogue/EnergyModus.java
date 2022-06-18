@@ -27,11 +27,11 @@ public class EnergyModus extends BaseModus
 		if(stack.isEmpty())
 			return false;
 		
-		if(stack.getItem().equals(MinestuckUniverseItems.energyCell))
+		if(stack.getItem().equals(MinestuckUniverseItems.battery))
 		{
 			if(charge < getMaxCharge())
 			{
-				ItemStack spare = new ItemStack(MinestuckUniverseItems.energyCell, Math.max(0, stack.getCount() - (getMaxCharge()-charge)));
+				ItemStack spare = new ItemStack(MinestuckUniverseItems.battery, Math.max(0, stack.getCount() - (getMaxCharge()-charge)));
 				
 				if(charge+stack.getCount() >= getMaxCharge()-1 && side.isServer())
 					player.sendStatusMessage(new TextComponentTranslation("status.energyModusFull"), true);
