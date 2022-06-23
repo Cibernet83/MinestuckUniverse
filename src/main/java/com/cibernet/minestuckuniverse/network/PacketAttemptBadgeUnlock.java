@@ -1,8 +1,9 @@
 package com.cibernet.minestuckuniverse.network;
 
-import com.cibernet.minestuckuniverse.badges.Badge;
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
-import com.cibernet.minestuckuniverse.badges.MasterBadge;
+import com.cibernet.minestuckuniverse.skills.Skill;
+import com.cibernet.minestuckuniverse.skills.badges.Badge;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.skills.badges.MasterBadge;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import io.netty.buffer.ByteBuf;
@@ -15,7 +16,7 @@ import java.util.EnumSet;
 
 public class PacketAttemptBadgeUnlock extends MSUPacket
 {
-    Badge badge;
+    Skill badge;
 
     @Override
     public MSUPacket generatePacket(Object... args)
@@ -27,7 +28,7 @@ public class PacketAttemptBadgeUnlock extends MSUPacket
     @Override
     public MSUPacket consumePacket(ByteBuf data)
     {
-        badge = MSUBadges.REGISTRY.getValue(new ResourceLocation(ByteBufUtils.readUTF8String(data)));
+        badge = MSUSkills.REGISTRY.getValue(new ResourceLocation(ByteBufUtils.readUTF8String(data)));
         return this;
     }
 
@@ -36,8 +37,8 @@ public class PacketAttemptBadgeUnlock extends MSUPacket
     {
         IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 
-        if(((badge instanceof MasterBadge && data.getMasterBadge() == null) || data.getBadgesLeft() > 0) && !data.hasBadge(badge) && ((player.isCreative() && data.hasMasterControl()) || badge.canUnlock(player.world, player)))
-            data.addBadge(badge, true);
+        if(((badge instanceof MasterBadge && data.getMasterBadge() == null) || data.getBadgesLeft() > 0) && !data.hasSkill(badge) && ((player.isCreative() && data.hasMasterControl()) || badge.canUnlock(player.world, player)))
+            data.addSkill(badge, true);
     }
 
     @Override

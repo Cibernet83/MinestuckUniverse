@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.util.SpaceSaltUtils;
 import com.mraof.minestuck.block.BlockSburbMachine;
@@ -37,7 +37,7 @@ public class MachineOutlineEvent
 
 
 			IBlockState state = mc.player.getEntityWorld().getBlockState(mc.objectMouseOver.getBlockPos());
-			if (mc.player.isSneaking() && mc.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.BADGE_UTIL_SPACE) && state.getBlock() instanceof BlockSburbMachine)
+			if (mc.player.isSneaking() && mc.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.SPACE_SPATIAL_MANIPULATOR) && state.getBlock() instanceof BlockSburbMachine)
 			{
 				BlockSburbMachine.MachineType type = state.getValue(BlockSburbMachine.MACHINE_TYPE);
 				EnumFacing facing = state.getValue(BlockSburbMachine.FACING);

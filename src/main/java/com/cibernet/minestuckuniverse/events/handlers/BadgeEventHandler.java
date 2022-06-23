@@ -1,18 +1,16 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.badges.BadgeBuilder;
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
-import com.cibernet.minestuckuniverse.badges.heroAspect.*;
-import com.cibernet.minestuckuniverse.badges.heroAspectUtil.*;
-import com.cibernet.minestuckuniverse.badges.heroClass.BadgeHeir;
-import com.cibernet.minestuckuniverse.badges.heroClass.BadgeMuse;
-import com.cibernet.minestuckuniverse.badges.heroClass.BadgeOverlord;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechHeir;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechMuse;
+import com.cibernet.minestuckuniverse.skills.badges.BadgeBuilder;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspectUtil.*;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.BadgeOverlord;
 import com.cibernet.minestuckuniverse.blocks.BlockDungeonDoor;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
-import com.cibernet.minestuckuniverse.capabilities.keyStates.ISkillKeyStates;
-import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.events.WeaponAssignedEvent;
 import com.cibernet.minestuckuniverse.modSupport.LocksSupport;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
@@ -83,19 +81,18 @@ public class BadgeEventHandler
 	public static void registerBadgeEvents()
 	{
 		MinecraftForge.EVENT_BUS.register(BadgeEventHandler.class);
-		MinecraftForge.EVENT_BUS.register(BadgeActiveBlood.class);
-		MinecraftForge.EVENT_BUS.register(BadgeActiveHeart.class);
-		MinecraftForge.EVENT_BUS.register(BadgeActiveMind.class);
-		MinecraftForge.EVENT_BUS.register(BadgeActiveTime.class);
-		MinecraftForge.EVENT_BUS.register(BadgeActiveVoid.class);
-		MinecraftForge.EVENT_BUS.register(BadgeUtilBlood.class);
-		MinecraftForge.EVENT_BUS.register(BadgeUtilBreath.class);
-		MinecraftForge.EVENT_BUS.register(BadgeUtilRage.class);
-		MinecraftForge.EVENT_BUS.register(BadgeUtilVoid.class);
-		MinecraftForge.EVENT_BUS.register(BadgeHeir.class);
-		MinecraftForge.EVENT_BUS.register(BadgeMuse.class);
+		MinecraftForge.EVENT_BUS.register(TechBloodBleeding.class);
+		MinecraftForge.EVENT_BUS.register(TechMindControl.class);
+		MinecraftForge.EVENT_BUS.register(TechTimeRecall.class);
+		MinecraftForge.EVENT_BUS.register(TechVoidStep.class);
+		MinecraftForge.EVENT_BUS.register(TechBloodReformer.class);
+		MinecraftForge.EVENT_BUS.register(TechBreathWindVessel.class);
+		MinecraftForge.EVENT_BUS.register(TechRageManagement.class);
+		MinecraftForge.EVENT_BUS.register(TechVoidGrasp.class);
+		MinecraftForge.EVENT_BUS.register(TechHeir.class);
+		MinecraftForge.EVENT_BUS.register(TechMuse.class);
 		MinecraftForge.EVENT_BUS.register(BadgeOverlord.class);
-		MinecraftForge.EVENT_BUS.register(BadgeUtilSpace.class);
+		MinecraftForge.EVENT_BUS.register(TechSpaceManipulator.class);
 		MinecraftForge.EVENT_BUS.register(BadgeBuilder.class);
 	}
 
@@ -108,7 +105,7 @@ public class BadgeEventHandler
 		if(cap == null)
 			return;
 
-		if(cap.isBadgeActive(MSUBadges.STRIFE_BADGE))
+		if(cap.isBadgeActive(MSUSkills.STRIFE_BADGE))
 			event.setCheckResult(true);
 	}
 
@@ -126,7 +123,7 @@ public class BadgeEventHandler
 		// Superblock
 		if(!event.getSource().isUnblockable() && targetPlayer != null)
 		{
-			if(targetData.isBadgeActive(MSUBadges.MASTER_BADGE_BRAVE) && (event.getEntity().world.rand.nextDouble()*100 < MSUBadges.MASTER_BADGE_BRAVE.getStatNumber(targetPlayer)))
+			if(targetData.isBadgeActive(MSUSkills.MASTER_BADGE_BRAVE) && (event.getEntity().world.rand.nextDouble()*100 < MSUSkills.MASTER_BADGE_BRAVE.getStatNumber(targetPlayer)))
 			{
 				MSUChannelHandler.sendToTrackingAndSelf(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, 0x0094FF, 20, targetPlayer), targetPlayer);
 				event.setAmount(0);
@@ -134,9 +131,9 @@ public class BadgeEventHandler
 		}
 
 		// Crit
-		if(sourcePlayer != null && sourceData.isBadgeActive(MSUBadges.MASTER_BADGE_MIGHTY))
+		if(sourcePlayer != null && sourceData.isBadgeActive(MSUSkills.MASTER_BADGE_MIGHTY))
 		{
-			if(event.getEntity().world.rand.nextDouble()*100 < MSUBadges.MASTER_BADGE_MIGHTY.getStatNumber(sourcePlayer))
+			if(event.getEntity().world.rand.nextDouble()*100 < MSUSkills.MASTER_BADGE_MIGHTY.getStatNumber(sourcePlayer))
 			{
 				MSUChannelHandler.sendToTrackingAndSelf(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, 0xF80000, 20, sourcePlayer), sourcePlayer);
 				event.setAmount(event.getAmount()*2);
@@ -162,14 +159,13 @@ public class BadgeEventHandler
 			IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 			EntityLivingBase entity = event.getEntityLiving();
 
-			if(data.isBadgeActive(MSUBadges.MASTER_BADGE_WISE) && (event.getEntity().world.rand.nextDouble()*100 < MSUBadges.MASTER_BADGE_WISE.getStatNumber(player)))
+			if(data.isBadgeActive(MSUSkills.MASTER_BADGE_WISE) && (event.getEntity().world.rand.nextDouble()*100 < MSUSkills.MASTER_BADGE_WISE.getStatNumber(player)))
 			{
 				MSUChannelHandler.sendToTracking(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, 0x00D54E, 20, entity.posX, entity.posY, entity.posZ), entity);
 
 				for(EntityItem item : event.getDrops())
 					item.getItem().setCount(Math.min(item.getItem().getCount()*4, item.getItem().getMaxStackSize()));
 			}
-
 		}
 	}
 
@@ -181,8 +177,8 @@ public class BadgeEventHandler
 			EntityPlayer player = (EntityPlayer) event.getDamageSource().getTrueSource();
 			IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 
-			if(data.isBadgeActive(MSUBadges.MASTER_BADGE_WISE))
-				event.setLootingLevel((int) Math.floor(event.getLootingLevel() + MSUBadges.MASTER_BADGE_WISE.getStatNumber(player)/2));
+			if(data.isBadgeActive(MSUSkills.MASTER_BADGE_WISE))
+				event.setLootingLevel((int) Math.floor(event.getLootingLevel() + MSUSkills.MASTER_BADGE_WISE.getStatNumber(player)/2));
 		}
 	}
 
@@ -198,15 +194,15 @@ public class BadgeEventHandler
 			IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 
 			if(event.getEntityLiving() instanceof EntityUnderling
-					&& data.isBadgeActive(MSUBadges.MASTER_BADGE_WISE))
+					&& data.isBadgeActive(MSUSkills.MASTER_BADGE_WISE))
 			{
 				EntityUnderling underling = (EntityUnderling) event.getEntityLiving();
 
 				if (!underling.world.isRemote)
 				{
-					GristSet grist = underling.getGristSpoils().scaleGrist(1 + MSUBadges.MASTER_BADGE_WISE.getStatNumber(player));
+					GristSet grist = underling.getGristSpoils().scaleGrist(1 + MSUSkills.MASTER_BADGE_WISE.getStatNumber(player));
 
-					if((event.getEntity().world.rand.nextDouble()*100 < MSUBadges.MASTER_BADGE_WISE.getStatNumber(player)))
+					if((event.getEntity().world.rand.nextDouble()*100 < MSUSkills.MASTER_BADGE_WISE.getStatNumber(player)))
 					{
 						grist = grist.scaleGrist(5);
 						MSUChannelHandler.sendToTracking(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, 0x00D54E, 20, underling.posX, underling.posY, underling.posZ), underling);
@@ -267,7 +263,7 @@ public class BadgeEventHandler
 		if(event.getHand() == EnumHand.OFF_HAND || !event.getItemStack().isEmpty())
 			return;
 
-		if(event.getEntityPlayer().getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.SKELETON_KEY))
+		if(event.getEntityPlayer().getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.SKELETON_KEY))
 		{
 			IBlockState state = event.getWorld().getBlockState(event.getPos());
 			Block block = state.getBlock();
@@ -374,7 +370,7 @@ public class BadgeEventHandler
 
 		// Hoard of the Alchemizer Badge
 		IGodTierData gtData = event.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
-		if(gtData.isBadgeActive(MSUBadges.HOARD_OF_THE_ALCHEMIZER) && gtData.getGristHoard() != null && !GristHelper.canAfford(MinestuckPlayerData.getGristSet(event.player), new GristSet(gtData.getGristHoard(), HOARD_THRESHOLD)))
+		if(gtData.isBadgeActive(MSUSkills.HOARD_OF_THE_ALCHEMIZER) && gtData.getGristHoard() != null && !GristHelper.canAfford(MinestuckPlayerData.getGristSet(event.player), new GristSet(gtData.getGristHoard(), HOARD_THRESHOLD)))
 		{
 			IdentifierHandler.PlayerIdentifier pid = IdentifierHandler.encode(event.player);
 			GristHelper.setGrist(pid, gtData.getGristHoard(), HOARD_THRESHOLD);
@@ -382,14 +378,16 @@ public class BadgeEventHandler
 		}
 	}
 
+	/*
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void onPlayerRightClick(PlayerInteractEvent.RightClickItem event)
 	{
 		ISkillKeyStates cap = event.getEntityPlayer().getCapability(MSUCapabilities.SKILL_KEY_STATES, null);
 
-		if(cap.getKeyState(SkillKeyStates.Key.ASPECT) != SkillKeyStates.KeyState.NONE || cap.getKeyState(SkillKeyStates.Key.CLASS) != SkillKeyStates.KeyState.NONE
-				|| cap.getKeyState(SkillKeyStates.Key.UTIL) != SkillKeyStates.KeyState.NONE)
+		if(cap.getKeyState(SkillKeyStates.Key.SECONDARY) != SkillKeyStates.KeyState.NONE || cap.getKeyState(SkillKeyStates.Key.PRIMARY) != SkillKeyStates.KeyState.NONE
+				|| cap.getKeyState(SkillKeyStates.Key.TERTIARY) != SkillKeyStates.KeyState.NONE)
 			event.setCanceled(true);
 
 	}
+	*/
 }

@@ -1,9 +1,9 @@
 package com.cibernet.minestuckuniverse.gui;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.badges.Badge;
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
-import com.cibernet.minestuckuniverse.badges.MasterBadge;
+import com.cibernet.minestuckuniverse.skills.badges.Badge;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.skills.badges.MasterBadge;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
@@ -78,13 +78,13 @@ public class GuiManageBadges extends GuiScreen
 		badges.clear();
 		masterBadges.clear();
 
-		for(Map.Entry<ResourceLocation, Badge> entry : MSUBadges.REGISTRY.getEntries())
+		for(Badge badge : Badge.BADGES)
 		{
-			if(Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).hasBadge(entry.getValue()))
+			if(Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).hasSkill(badge))
 			{
-				if (entry.getValue() instanceof MasterBadge)
-					masterBadges.add((MasterBadge) entry.getValue());
-				else badges.add(entry.getValue());
+				if (badge instanceof MasterBadge)
+					masterBadges.add((MasterBadge) badge);
+				else badges.add(badge);
 			}
 		}
 
@@ -124,7 +124,7 @@ public class GuiManageBadges extends GuiScreen
 		//fontRenderer.drawString(gtTitle, xOffset+xSize/2 - fontRenderer.getStringWidth(gtTitle)/2, yOffset+30, 0xFFFFFF);
 
 		yOffset = this.height / 2 - 22;
-		boolean isOverlord = data.isBadgeActive(MSUBadges.BADGE_OVERLORD);
+		boolean isOverlord = data.isBadgeActive(MSUSkills.BADGE_OVERLORD);
 
 		EnumAspect aspect = MinestuckPlayerData.title.getHeroAspect();
 		int mainColor = aspect == EnumAspect.SPACE ? 0xFAFAFA : mainColors.getOrDefault(aspect, 0x80FF20);
@@ -147,12 +147,12 @@ public class GuiManageBadges extends GuiScreen
 			if(badge.isReadable(player.world, player) && (data.getMasterBadge() == null || data.getMasterBadge() == badge || isOverlord))
 				mc.getTextureManager().bindTexture(badge.getTextureLocation());
 			else mc.getTextureManager().bindTexture(new ResourceLocation(badge.getRegistryName().getResourceDomain(), "textures/gui/badge_locked.png"));
-			if(!data.hasBadge(badge))
+			if(!data.hasSkill(badge))
 				GlStateManager.color(0.5f, 0.5f, 0.5f);
 			drawScaledCustomSizeModalRect(xOffset+(xSize - masterBadges.size()*22)/2  + i*22, yOffset-23, 0, 0, 256, 256, 20, 20, 256, 256);
 			GlStateManager.color(1,1,1);
 
-			if(data.hasBadge(badge) && !data.isBadgeActive(badge))
+			if(data.hasSkill(badge) && !data.isBadgeActive(badge))
 			{
 				mc.getTextureManager().bindTexture(new ResourceLocation(badge.getRegistryName().getResourceDomain(), "textures/gui/badge_disabled.png"));
 				drawScaledCustomSizeModalRect(xOffset+(xSize - masterBadges.size()*22)/2  + i*22, yOffset-23, 0, 0, 256, 256, 20, 20, 256, 256);
@@ -163,7 +163,7 @@ public class GuiManageBadges extends GuiScreen
 			Badge badge = badges.get(i);
 			if(badge.isReadable(player.world, player))
 			{
-				if(!data.hasBadge(badge))
+				if(!data.hasSkill(badge))
 					GlStateManager.color(0.5f, 0.5f, 0.5f);
 				mc.getTextureManager().bindTexture(badge.getTextureLocation());
 			}
@@ -174,7 +174,7 @@ public class GuiManageBadges extends GuiScreen
 			drawScaledCustomSizeModalRect(xOffset+(xSize - ((badges.size()+1)/rows)*22)/2  + ((i)/rows)*22, yOffset + (i%rows)*22, 0, 0, 256, 256, 20, 20, 256, 256);
 			GlStateManager.color(1,1,1);
 
-			if(data.hasBadge(badge) && !data.isBadgeActive(badge))
+			if(data.hasSkill(badge) && !data.isBadgeActive(badge))
 			{
 				mc.getTextureManager().bindTexture(new ResourceLocation(badge.getRegistryName().getResourceDomain(), "textures/gui/badge_disabled.png"));
 				drawScaledCustomSizeModalRect(xOffset+(xSize - ((badges.size()+1)/rows)*22)/2  + ((i)/rows)*22, yOffset + (i % rows) * 22, 0, 0, 256, 256, 20, 20, 256, 256);
@@ -241,7 +241,7 @@ public class GuiManageBadges extends GuiScreen
 				tooltip.add(TextFormatting.OBFUSCATED + badge.getDisplayName());
 				tooltip.add(badge.getReadRequirements());
 
-			} else if(data.hasBadge(badge))
+			} else if(data.hasSkill(badge))
 			{
 				tooltip.add(badge.getDisplayName());
 				tooltip.add(badge.getDisplayTooltip());
@@ -295,12 +295,12 @@ public class GuiManageBadges extends GuiScreen
 
 		if(hoveredBadge instanceof MasterBadge)
 		{
-			if((data.isBadgeActive(MSUBadges.BADGE_OVERLORD) || data.hasBadge(hoveredBadge) && data.getMasterBadge() != null))
+			if((data.isBadgeActive(MSUSkills.BADGE_OVERLORD) || data.hasSkill(hoveredBadge) && data.getMasterBadge() != null))
 				MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.TOGGLE_BADGE, hoveredBadge));
 		}
 		else
 		{
-			if(data.hasBadge(hoveredBadge))
+			if(data.hasSkill(hoveredBadge))
 				MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.TOGGLE_BADGE, hoveredBadge));
 		}
 	}

@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.modSupport;
 
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.mraof.minestuck.util.Echeladder;
 import com.mraof.minestuck.util.MinestuckPlayerData;
@@ -67,7 +67,7 @@ public class TrophySlotsSupport
 		Echeladder echeladder = MinestuckPlayerData.getData(player).echeladder;
 		int slots = (int) (Math.min(20, echeladder.getRung())*9/20f);
 
-		if(player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.PATCH_OF_THE_HOARDER))
+		if(player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.PATCH_OF_THE_HOARDER))
 			slots = slotInfo.getMaxSlots();
 
 		int slotsToUnlock = slots-slotInfo.getSlotsUnlocked();

@@ -1,7 +1,9 @@
 package com.cibernet.minestuckuniverse.capabilities.godTier;
 
-import com.cibernet.minestuckuniverse.badges.Badge;
-import com.cibernet.minestuckuniverse.badges.MasterBadge;
+import com.cibernet.minestuckuniverse.skills.Skill;
+import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.cibernet.minestuckuniverse.skills.badges.Badge;
+import com.cibernet.minestuckuniverse.skills.badges.MasterBadge;
 import com.cibernet.minestuckuniverse.capabilities.IMSUCapabilityBase;
 import com.cibernet.minestuckuniverse.util.EnumLunarSway;
 import com.mraof.minestuck.alchemy.GristType;
@@ -14,8 +16,9 @@ import java.util.List;
 
 public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 {
-	boolean addBadge(Badge badge, boolean sendUpdate);
-	boolean hasBadge(Badge badge);
+	boolean addSkill(Skill badge, boolean sendUpdate);
+	boolean hasSkill(Skill badge);
+
 	boolean isBadgeActive(Badge badge);
 	boolean isBadgeEnabled(Badge badge);
 	void setBadgeEnabled(Badge badge, boolean enabled);
@@ -27,6 +30,16 @@ public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 	void setMaxBadges(int maxBadges);
 	MasterBadge getMasterBadge();
 
+	Abilitech getTech(int slot);
+	int getTechSlots();
+	boolean isTechEquipped(Abilitech tech);
+	boolean isTechPassiveEnabled(Abilitech tech);
+	void equipTech(Abilitech tech, int slot);
+	void unequipTech(int slot);
+	Abilitech getSelectedTech();
+	void setSelectedTech(Abilitech tech);
+	void resetSelectedTech();
+
 	boolean isGodTier();
 	boolean canGodTier(World world);
 	void setToBaseGodTier(boolean sendUpdate);
@@ -35,14 +48,14 @@ public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 	boolean climbedTheSpire();
 	void setClimbedTheSpire(boolean v);
 
-	int getSkillLevel(GodTierData.SkillType type);
-	float getSkillXp(GodTierData.SkillType type);
-	void increaseXp(GodTierData.SkillType type, float value);
-	void resetSkill(GodTierData.SkillType type, boolean sendUpdate);
+	int getSkillLevel(GodTierData.StatType type);
+	float getSkillXp(GodTierData.StatType type);
+	void increaseXp(GodTierData.StatType type, float value);
+	void resetSkill(GodTierData.StatType type, boolean sendUpdate);
 	void resetSkills(boolean sendUpdate);
-	double getSkillAttributeLevel(GodTierData.SkillType type);
-	int getXpToNextLevel(GodTierData.SkillType type);
-	int getSkillAttributeOperationType(GodTierData.SkillType skill);
+	double getSkillAttributeLevel(GodTierData.StatType type);
+	int getXpToNextLevel(GodTierData.StatType type);
+	int getSkillAttributeOperationType(GodTierData.StatType skill);
 
 	float getTempKarma();
 	int getStaticKarma();

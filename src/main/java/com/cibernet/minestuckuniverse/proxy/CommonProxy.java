@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsData;
 import com.cibernet.minestuckuniverse.modSupport.MSUSplatcraftSupport;
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
@@ -82,7 +82,7 @@ public class CommonProxy
     {
         MSUBannerPatterns.init();
 
-        MinecraftForge.EVENT_BUS.register(MSUBadges.class);
+        MinecraftForge.EVENT_BUS.register(MSUSkills.class);
 
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
         MinecraftForge.EVENT_BUS.register(ArmorEventHandler.class);

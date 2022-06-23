@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.damage.IGodTierDamage;
@@ -76,7 +76,7 @@ public class KarmaEventHandler
 
 			if(targetData.isGodTier() && !(event.getSource() instanceof IGodTierDamage && ((IGodTierDamage) event.getSource()).isGodproof()))
 			{
-				int minKarma = targetData.isBadgeActive(MSUBadges.KARMA) ? 40 : 20;
+				int minKarma = targetData.isBadgeActive(MSUSkills.KARMA) ? 40 : 20;
 				if(totalKarma >= minKarma || totalKarma <= -minKarma)
 				{
 					if(totalKarma >= minKarma)
@@ -88,9 +88,9 @@ public class KarmaEventHandler
 				} else
 				{
 					EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-					boolean hasRevenantBadge = targetData.isBadgeActive(MSUBadges.REVENANTS_RETALIATION);
+					boolean hasRevenantBadge = targetData.isBadgeActive(MSUSkills.REVENANTS_RETALIATION);
 
-					player.addPotionEffect(new PotionEffect(MSUPotions.GOD_TIER_COMEBACK, hasRevenantBadge ? 500 : 200, targetData.isBadgeActive(MSUBadges.EFFECT_BUFF) ? 2 : 0));
+					player.addPotionEffect(new PotionEffect(MSUPotions.GOD_TIER_COMEBACK, hasRevenantBadge ? 500 : 200, targetData.isBadgeActive(MSUSkills.EFFECT_BUFF) ? 2 : 0));
 
 					((WorldServer)player.world).spawnParticle(EnumParticleTypes.TOTEM, player.posX, player.posY+0.25, player.posZ, 30, 1, 0, 0, hasRevenantBadge ? 0.8 : 0.5);
 					player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ITEM_TOTEM_USE, player.getSoundCategory(), 1.0F, 1.0F);
@@ -148,7 +148,7 @@ public class KarmaEventHandler
 		IGodTierData data = event.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 		if(data.getTempKarma() != 0)
 		{
-			data.setTempKarma(data.getTempKarma() - (1f / 2400f * (data.isBadgeActive(MSUBadges.KARMA) ? 2 : 1)) * Math.signum(data.getTempKarma()));
+			data.setTempKarma(data.getTempKarma() - (1f / 2400f * (data.isBadgeActive(MSUSkills.KARMA) ? 2 : 1)) * Math.signum(data.getTempKarma()));
 			if(data.getTempKarma() > -0.001f && data.getTempKarma() < 0.001f)
 				data.setTempKarma(0);
 		}

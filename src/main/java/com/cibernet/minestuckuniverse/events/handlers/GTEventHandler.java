@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.blocks.BlockHeroStone;
 import com.cibernet.minestuckuniverse.blocks.IGodTierBlock;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
@@ -267,9 +267,9 @@ public class GTEventHandler
 		if(c != null && c.enteredGame())
 			aspect = MinestuckPlayerData.getTitle(identifier).getHeroAspect();
 
-		int potionLevel = (int)(aspectStrength[aspect.ordinal()] * (float)(gtData.isGodTier() ? 60 : rung)) + (gtData.isBadgeActive(MSUBadges.BADGE_PAGE) ? 2 : 0);
+		int potionLevel = (int)(aspectStrength[aspect.ordinal()] * (float)(gtData.isGodTier() ? 60 : rung)) + (gtData.isBadgeActive(MSUSkills.BADGE_PAGE) ? 2 : 0);
 		HashMap<Potion, PotionEffect> appliedPotions = new HashMap<>();
-		if (gtData.isBadgeActive(MSUBadges.EFFECT_BUFF))
+		if (gtData.isBadgeActive(MSUSkills.EFFECT_BUFF))
 			switch (aspect)
 			{
 				case DOOM:
@@ -315,7 +315,7 @@ public class GTEventHandler
 			return;
 
 		IGodTierData data = event.getEntityLiving().getCapability(MSUCapabilities.GOD_TIER_DATA, null);
-		float dmgReduction = data.getSkillLevel(GodTierData.SkillType.DEFENSE) * 0.002f * (data.isBadgeActive(MSUBadges.BADGE_PAGE) ? 2 : 1);
+		float dmgReduction = data.getSkillLevel(GodTierData.StatType.DEFENSE) * 0.002f * (data.isBadgeActive(MSUSkills.BADGE_PAGE) ? 2 : 1);
 
 		if(event.getSource() instanceof CritDamageSource || event.getSource() instanceof EntityCritDamageSource)
 			dmgReduction *= 0.4;
@@ -337,10 +337,10 @@ public class GTEventHandler
 		IAttributeInstance luckAtr = player.getEntityAttribute(SharedMonsterAttributes.LUCK);
 
 
-		AttributeModifier attackMod = new AttributeModifier(GOD_TIER_ATTACK_UUID, "God Tier Attack", data.getSkillAttributeLevel(GodTierData.SkillType.ATTACK), 2).setSaved(false);
-		AttributeModifier defenseMod = new AttributeModifier(GOD_TIER_DEFENSE_UUID, "God Tier Defense", data.getSkillAttributeLevel(GodTierData.SkillType.DEFENSE), 0).setSaved(false);
-		AttributeModifier speedMod = new AttributeModifier(GOD_TIER_SPEED_UUID, "God Tier Athletics", data.getSkillAttributeLevel(GodTierData.SkillType.SPEED), 2).setSaved(false);
-		AttributeModifier luckMod = new AttributeModifier(GOD_TIER_LUCK_UUID, "God Tier Luck", data.getSkillAttributeLevel(GodTierData.SkillType.LUCK), 0).setSaved(false);
+		AttributeModifier attackMod = new AttributeModifier(GOD_TIER_ATTACK_UUID, "God Tier Attack", data.getSkillAttributeLevel(GodTierData.StatType.ATTACK), 2).setSaved(false);
+		AttributeModifier defenseMod = new AttributeModifier(GOD_TIER_DEFENSE_UUID, "God Tier Defense", data.getSkillAttributeLevel(GodTierData.StatType.DEFENSE), 0).setSaved(false);
+		AttributeModifier speedMod = new AttributeModifier(GOD_TIER_SPEED_UUID, "God Tier Athletics", data.getSkillAttributeLevel(GodTierData.StatType.SPEED), 2).setSaved(false);
+		AttributeModifier luckMod = new AttributeModifier(GOD_TIER_LUCK_UUID, "God Tier Luck", data.getSkillAttributeLevel(GodTierData.StatType.LUCK), 0).setSaved(false);
 
 		NBTTagCompound playerCaps = new NBTTagCompound();
 		player.capabilities.writeCapabilitiesToNBT(playerCaps);

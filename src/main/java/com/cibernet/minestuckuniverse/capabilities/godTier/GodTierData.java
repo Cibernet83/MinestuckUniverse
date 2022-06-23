@@ -1,15 +1,16 @@
 package com.cibernet.minestuckuniverse.capabilities.godTier;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
-import com.cibernet.minestuckuniverse.badges.Badge;
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
-import com.cibernet.minestuckuniverse.badges.MasterBadge;
-import com.cibernet.minestuckuniverse.badges.heroAspect.BadgeHeroAspect;
-import com.cibernet.minestuckuniverse.badges.heroAspectUtil.BadgeHeroAspectUtil;
-import com.cibernet.minestuckuniverse.badges.heroClass.BadgeHeroClass;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.skills.Skill;
+import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechHeroClass;
+import com.cibernet.minestuckuniverse.skills.badges.Badge;
+import com.cibernet.minestuckuniverse.skills.badges.MasterBadge;
 import com.cibernet.minestuckuniverse.util.EnumLunarSway;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.entity.consort.EnumConsort;
@@ -35,16 +36,19 @@ public class GodTierData implements IGodTierData
 	private int staticKarma = 0;
 	private float tempKarma = 0;
 
-	private final HashMap<SkillType, SkillData> godTierXp = new HashMap<SkillType, SkillData>()
+	private final HashMap<StatType, StatData> godTierXp = new HashMap<StatType, StatData>()
 	{{
-		put(SkillType.GENERAL, new SkillData(SkillType.GENERAL, 1));
-		put(SkillType.ATTACK, new SkillData(SkillType.ATTACK, 0.02));
-		put(SkillType.DEFENSE, new SkillData(SkillType.DEFENSE, 0.4));
-		put(SkillType.SPEED, new SkillData(SkillType.SPEED, 0.05));
-		put(SkillType.LUCK, new SkillData(SkillType.LUCK, 0.5));
+		put(StatType.GENERAL, new StatData(StatType.GENERAL, 1));
+		put(StatType.ATTACK, new StatData(StatType.ATTACK, 0.02));
+		put(StatType.DEFENSE, new StatData(StatType.DEFENSE, 0.4));
+		put(StatType.SPEED, new StatData(StatType.SPEED, 0.05));
+		put(StatType.LUCK, new StatData(StatType.LUCK, 0.5));
 	}};
 
-	private final TreeMap<Badge, Boolean> badges = new TreeMap<>();
+	private final TreeMap<Skill, Boolean> badges = new TreeMap<>();
+	private final Abilitech[] equippedTech = new Abilitech[3];
+	private Abilitech selectedTech = null;
+
 	private MasterBadge masterBadge = null;
 	private boolean isMasterBadgeEnabled = true;
 	private int maxBadges = MSUConfig.godTierBadgeSlots;
@@ -61,7 +65,7 @@ public class GodTierData implements IGodTierData
 	private EntityPlayer owner;
 
 	@Override
-	public boolean addBadge(Badge badge, boolean sendUpdate)
+	public boolean addSkill(Skill badge, boolean sendUpdate)
 	{
 		if(badge instanceof MasterBadge)
 		{
@@ -70,7 +74,8 @@ public class GodTierData implements IGodTierData
 			masterBadge = (MasterBadge) badge;
 			if(sendUpdate)
 				update();
-			badge.onBadgeUnlocked(owner.world, owner);
+			if(badge instanceof Badge)
+				((Badge)badge).onBadgeUnlocked(owner.world, owner);
 			return true;
 		}
 
@@ -80,36 +85,37 @@ public class GodTierData implements IGodTierData
 		badges.put(badge, true);
 		if(sendUpdate)
 			update();
-		badge.onBadgeUnlocked(owner.world, owner);
+		if(badge instanceof Badge)
+			((Badge)badge).onBadgeUnlocked(owner.world, owner);
 		return true;
 	}
 
 	@Override
-	public boolean hasBadge(Badge badge)
+	public boolean hasSkill(Skill badge)
 	{
 		if(badge instanceof MasterBadge)
-			return badge == masterBadge || (isBadgeEnabled(MSUBadges.BADGE_OVERLORD));
+			return badge == masterBadge || (isBadgeEnabled(MSUSkills.BADGE_OVERLORD));
 		return badges.containsKey(badge);
 	}
 
 	@Override
 	public boolean isBadgeActive(Badge badge)
 	{
-		if(badge instanceof MasterBadge && isBadgeActive(MSUBadges.BADGE_OVERLORD))
+		if(badge instanceof MasterBadge && isBadgeActive(MSUSkills.BADGE_OVERLORD))
 			return isBadgeEnabled(badge);
-		return !owner.isSpectator() && hasBadge(badge) && (!badge.canDisable() || (isBadgeEnabled(badge) && badge.canUse(owner.world, owner)));
+		return !owner.isSpectator() && hasSkill(badge) && (!badge.canDisable() || (isBadgeEnabled(badge) && badge.canUse(owner.world, owner)));
 	}
 
 	@Override
 	public boolean isBadgeEnabled(Badge badge)
 	{
-		return hasBadge(badge) && (badge instanceof MasterBadge ? isMasterBadgeEnabled : badges.get(badge));
+		return hasSkill(badge) && (badge instanceof MasterBadge ? isMasterBadgeEnabled : badges.get(badge));
 	}
 
 	@Override
 	public void setBadgeEnabled(Badge badge, boolean enabled)
 	{
-		if(!hasBadge(badge) || !badge.canDisable())
+		if(!hasSkill(badge) || !badge.canDisable())
 			return;
 		if(badge instanceof MasterBadge)
 			isMasterBadgeEnabled = enabled;
@@ -120,9 +126,9 @@ public class GodTierData implements IGodTierData
 	public List<Badge> getAllBadges()
 	{
 		List<Badge> result = new ArrayList<>();
-		for (Badge badge : badges.keySet())
-			if (badge != null)
-				result.add(badge);
+		for (Skill badge : badges.keySet())
+			if (badge instanceof Badge)
+				result.add((Badge) badge);
 		if (masterBadge != null)
 			result.add(masterBadge);
 		return result;
@@ -138,7 +144,12 @@ public class GodTierData implements IGodTierData
 	@Override
 	public void resetTitleBadges(boolean sendUpdate)
 	{
-		badges.keySet().removeIf((key) -> key instanceof BadgeHeroClass || key instanceof BadgeHeroAspect || key instanceof BadgeHeroAspectUtil);
+		badges.keySet().removeIf((key) -> key instanceof TechHeroClass || key instanceof TechHeroAspect);
+
+		for(int i = 0; i < getTechSlots(); i++)
+			if(!badges.containsKey(getTech(i)))
+				unequipTech(i);
+
 		if(sendUpdate) update();
 	}
 
@@ -167,9 +178,59 @@ public class GodTierData implements IGodTierData
 	}
 
 	@Override
+	public Abilitech getTech(int slot) {
+		return equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))];
+	}
+
+	@Override
+	public int getTechSlots() {
+		return equippedTech.length;
+	}
+
+	@Override
+	public boolean isTechEquipped(Abilitech tech) {
+		for(Skill t : equippedTech)
+			if(tech.equals(t))
+				return true;
+		return false;
+	}
+
+	@Override
+	public boolean isTechPassiveEnabled(Abilitech tech)
+	{
+		return isTechEquipped(tech) && badges.get(tech);
+	}
+
+	@Override
+	public void equipTech(Abilitech tech, int slot)
+	{
+		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))] = tech;
+	}
+
+	@Override
+	public void unequipTech(int slot) {
+		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))] = null;
+	}
+
+	@Override
+	public Abilitech getSelectedTech() {
+		return selectedTech == null || !isTechEquipped(selectedTech) ? null : selectedTech;
+	}
+
+	@Override
+	public void setSelectedTech(Abilitech tech) {
+		selectedTech = tech;
+	}
+
+	@Override
+	public void resetSelectedTech() {
+		selectedTech = null;
+	}
+
+	@Override
 	public boolean isGodTier()
 	{
-		return godTierXp.get(SkillType.GENERAL).level > 0;
+		return godTierXp.get(StatType.GENERAL).level > 0;
 	}
 
 	@Override
@@ -182,26 +243,26 @@ public class GodTierData implements IGodTierData
 	public void setToBaseGodTier(boolean sendUpdate)
 	{
 		resetSkills(sendUpdate);
-		godTierXp.get(SkillType.GENERAL).level = 1;
+		godTierXp.get(StatType.GENERAL).level = 1;
 		if(sendUpdate) update();
 	}
 
 	@Override
 	public String getGodTierTitle(Title title)
 	{
-		if(I18n.hasKey("godTierTitle."+title.getHeroClass().toString()+"."+title.getHeroAspect().toString()+"."+getSkillLevel(SkillType.GENERAL)))
-			return I18n.format("godTierTitle."+title.getHeroClass().toString()+"."+title.getHeroAspect().toString()+"."+getSkillLevel(SkillType.GENERAL));
+		if(I18n.hasKey("godTierTitle."+title.getHeroClass().toString()+"."+title.getHeroAspect().toString()+"."+getSkillLevel(StatType.GENERAL)))
+			return I18n.format("godTierTitle."+title.getHeroClass().toString()+"."+title.getHeroAspect().toString()+"."+getSkillLevel(StatType.GENERAL));
 
-		else if(I18n.hasKey("godTierTitle."+title.getHeroClass().toString()+"."+getSkillLevel(SkillType.GENERAL)))
-			return I18n.format("godTierTitle."+title.getHeroClass().toString()+"."+getSkillLevel(SkillType.GENERAL), title.getHeroAspect().getDisplayName());
+		else if(I18n.hasKey("godTierTitle."+title.getHeroClass().toString()+"."+getSkillLevel(StatType.GENERAL)))
+			return I18n.format("godTierTitle."+title.getHeroClass().toString()+"."+getSkillLevel(StatType.GENERAL), title.getHeroAspect().getDisplayName());
 
-		else if(I18n.hasKey("godTierTitle."+title.getHeroAspect().toString()+"."+getSkillLevel(SkillType.GENERAL)))
-			return I18n.format("godTierTitle."+title.getHeroAspect().toString()+"."+getSkillLevel(SkillType.GENERAL), title.getHeroClass().getDisplayName());
+		else if(I18n.hasKey("godTierTitle."+title.getHeroAspect().toString()+"."+getSkillLevel(StatType.GENERAL)))
+			return I18n.format("godTierTitle."+title.getHeroAspect().toString()+"."+getSkillLevel(StatType.GENERAL), title.getHeroClass().getDisplayName());
 
-		else if(I18n.hasKey("godTierTitle."+getSkillLevel(SkillType.GENERAL)))
-			return I18n.format("godTierTitle."+getSkillLevel(SkillType.GENERAL), title.getTitleName());
+		else if(I18n.hasKey("godTierTitle."+getSkillLevel(StatType.GENERAL)))
+			return I18n.format("godTierTitle."+getSkillLevel(StatType.GENERAL), title.getTitleName());
 
-		else if(getSkillLevel(SkillType.GENERAL) >= 8 && I18n.hasKey("godTierTitle."+title.getHeroAspect().toString()+".max"))
+		else if(getSkillLevel(StatType.GENERAL) >= 8 && I18n.hasKey("godTierTitle."+title.getHeroAspect().toString()+".max"))
 			return I18n.format("godTierTitle."+title.getHeroAspect().toString()+".max", title.getHeroClass().getDisplayName());
 
 		else return I18n.format("godTierTitle.default", title.getTitleName());
@@ -218,32 +279,32 @@ public class GodTierData implements IGodTierData
 	}
 
 	@Override
-	public int getSkillLevel(SkillType type)
+	public int getSkillLevel(StatType type)
 	{
 		return godTierXp.get(type).level;
 	}
 
 	@Override
-	public float getSkillXp(SkillType type)
+	public float getSkillXp(StatType type)
 	{
 		return godTierXp.get(type).xp;
 	}
 
 	@Override
-	public void increaseXp(SkillType type, float value)
+	public void increaseXp(StatType type, float value)
 	{
 		godTierXp.get(type).addXp(value, getXpToNextLevel(type));
-		if(type != SkillType.GENERAL)
-			godTierXp.get(SkillType.GENERAL).addXp(value, getXpToNextLevel(type));
+		if(type != StatType.GENERAL)
+			godTierXp.get(StatType.GENERAL).addXp(value, getXpToNextLevel(type));
 
-		if(!hasBadge(MSUBadges.GIFT_OF_GAB) && getSkillLevel(SkillType.GENERAL) > 1)
-			this.badges.put(MSUBadges.GIFT_OF_GAB, true);
+		if(!hasSkill(MSUSkills.GIFT_OF_GAB) && getSkillLevel(StatType.GENERAL) > 1)
+			this.badges.put(MSUSkills.GIFT_OF_GAB, true);
 
 		update();
 	}
 
 	@Override
-	public void resetSkill(SkillType type, boolean sendUpdate)
+	public void resetSkill(StatType type, boolean sendUpdate)
 	{
 		godTierXp.get(type).reset();
 		if(sendUpdate) update();
@@ -252,19 +313,19 @@ public class GodTierData implements IGodTierData
 	@Override
 	public void resetSkills(boolean sendUpdate)
 	{
-		for(SkillType type : SkillType.values())
+		for(StatType type : StatType.values())
 			resetSkill(type, false);
 		if(sendUpdate) update();
 	}
 
 	@Override
-	public double getSkillAttributeLevel(SkillType type)
+	public double getSkillAttributeLevel(StatType type)
 	{
-		return Math.pow(godTierXp.get(type).level, 0.765) * godTierXp.get(type).attributeMod * (isBadgeActive(MSUBadges.BADGE_PAGE) ? 2 : 1) * (isBadgeActive(MSUBadges.BADGE_OVERLORD) ? 3 : 1);
+		return Math.pow(godTierXp.get(type).level, 0.765) * godTierXp.get(type).attributeMod * (isBadgeActive(MSUSkills.BADGE_PAGE) ? 2 : 1) * (isBadgeActive(MSUSkills.BADGE_OVERLORD) ? 3 : 1);
 	}
 
 	@Override
-	public int getXpToNextLevel(SkillType type)
+	public int getXpToNextLevel(StatType type)
 	{
 		Title title = MinestuckPlayerData.getTitle(IdentifierHandler.encode(owner));
 		if(FMLCommonHandler.instance().getSide() == Side.CLIENT)
@@ -292,9 +353,9 @@ public class GodTierData implements IGodTierData
 	}
 
 	@Override
-	public int getSkillAttributeOperationType(SkillType skill)
+	public int getSkillAttributeOperationType(StatType skill)
 	{
-		return skill == SkillType.LUCK || skill == SkillType.DEFENSE ? 0 : 2;
+		return skill == StatType.LUCK || skill == StatType.DEFENSE ? 0 : 2;
 	}
 
 	@Override
@@ -400,7 +461,7 @@ public class GodTierData implements IGodTierData
 		this.staticKarma = nbt.getInteger("StaticKarma");
 		this.tempKarma = nbt.getFloat("TempKarma");
 
-		for(SkillData data : godTierXp.values())
+		for(StatData data : godTierXp.values())
 		{
 			NBTTagCompound skill = nbt.getCompoundTag(data.type.getName());
 			if(skill == null)
@@ -412,6 +473,13 @@ public class GodTierData implements IGodTierData
 
 		resetBadges();
 
+		if(nbt.hasKey("SkillSet"))
+		{
+			NBTTagCompound skillSet = nbt.getCompoundTag("SkillSet");
+			for(int i = 0; i < equippedTech.length && skillSet.hasKey(String.valueOf(i)); i++)
+				equippedTech[i] = (Abilitech) MSUSkills.REGISTRY.getValue(new ResourceLocation(skillSet.getCompoundTag(String.valueOf(i)).getString("ID")));
+		}
+
 		if(nbt.hasKey("AllBadges"))
 			masterControl = nbt.getBoolean("AllBadges");
 		if(nbt.hasKey("MaxBadges"))
@@ -421,13 +489,13 @@ public class GodTierData implements IGodTierData
 		for(int i = 0; i < maxBadges && badges.hasKey(String.valueOf(i)); i++)
 		{
 			NBTTagCompound badgeData = badges.getCompoundTag(String.valueOf(i));
-			Badge badge = MSUBadges.REGISTRY.getValue(new ResourceLocation(badgeData.getString("ID")));
+			Skill badge = MSUSkills.REGISTRY.getValue(new ResourceLocation(badgeData.getString("ID")));
 			if(badge != null)
 				this.badges.put(badge, badgeData.getBoolean("Enabled") || !badge.canDisable());
 		}
 		if(nbt.hasKey("MasterBadge"))
 		{
-			Badge badge = MSUBadges.REGISTRY.getValue(new ResourceLocation(nbt.getString("MasterBadge")));
+			Badge badge = (Badge) MSUSkills.REGISTRY.getValue(new ResourceLocation(nbt.getString("MasterBadge")));
 			if(badge instanceof MasterBadge)
 				masterBadge = (MasterBadge) badge;
 		}
@@ -446,8 +514,8 @@ public class GodTierData implements IGodTierData
 		if(nbt.getInteger("LunarSway") != -1)
 			lunarSway = EnumLunarSway.values()[nbt.getInteger("LunarSway")];
 
-		if(!hasBadge(MSUBadges.GIFT_OF_GAB) && getSkillLevel(SkillType.GENERAL) > 1)
-			this.badges.put(MSUBadges.GIFT_OF_GAB, true);
+		if(!hasSkill(MSUSkills.GIFT_OF_GAB) && getSkillLevel(StatType.GENERAL) > 1)
+			this.badges.put(MSUSkills.GIFT_OF_GAB, true);
 	}
 
 	@Override
@@ -457,19 +525,33 @@ public class GodTierData implements IGodTierData
 		nbt.setInteger("StaticKarma", staticKarma);
 		nbt.setFloat("TempKarma", tempKarma);
 
-		for(SkillData data : godTierXp.values())
+		for(StatData data : godTierXp.values())
 		{
-			NBTTagCompound skill = new NBTTagCompound();
-			skill.setInteger("Level", data.level);
-			skill.setFloat("Xp", data.xp);
-			nbt.setTag(data.type.getName(), skill);
+			NBTTagCompound stat = new NBTTagCompound();
+			stat.setInteger("Level", data.level);
+			stat.setFloat("Xp", data.xp);
+			nbt.setTag(data.type.getName(), stat);
 		}
 
-		Iterator<Map.Entry<Badge, Boolean>> iter = badges.entrySet().iterator();
+		NBTTagCompound skills = new NBTTagCompound();
+		for(int i = 0; i < equippedTech.length; i++)
+		{
+			if(equippedTech[i] == null) continue;
+			NBTTagCompound skillData = new NBTTagCompound();
+			skillData.setString("ID", equippedTech[i].getRegistryName().toString());
+			skills.setTag(String.valueOf(i), skillData);
+		}
+		nbt.setTag("SkillSet", skills);
+
+		System.out.println(MSUSkills.GIFT_OF_GAB.getRegistryName());
+
+		Iterator<Map.Entry<Skill, Boolean>> iter = badges.entrySet().iterator();
 		NBTTagCompound badges = new NBTTagCompound();
 		for(int i = 0; iter.hasNext(); i++)
 		{
-			Map.Entry<Badge, Boolean> entry = iter.next();
+			Map.Entry<Skill, Boolean> entry = iter.next();
+			if(entry.getKey() == null) continue;
+
 			NBTTagCompound badgeData = new NBTTagCompound();
 			badgeData.setString("ID", entry.getKey().getRegistryName().toString());
 			badgeData.setBoolean("Enabled", entry.getValue());
@@ -498,14 +580,14 @@ public class GodTierData implements IGodTierData
 		return nbt;
 	}
 
-	private static class SkillData
+	private static class StatData
 	{
 		int level = 0;
 		float xp = 0;
 		double attributeMod;
-		final SkillType type;
+		final StatType type;
 
-		public SkillData(SkillType type, double attributeMod)
+		public StatData(StatType type, double attributeMod)
 		{
 			this.type = type;
 			this.attributeMod = attributeMod;
@@ -528,7 +610,7 @@ public class GodTierData implements IGodTierData
 		}
 	}
 
-	public enum SkillType implements IStringSerializable
+	public enum StatType implements IStringSerializable
 	{
 		GENERAL("General"),
 		DEFENSE("Defense"),
@@ -538,7 +620,7 @@ public class GodTierData implements IGodTierData
 
 		private final String name;
 
-		SkillType(String name)
+		StatType(String name)
 		{
 			this.name = name;
 		}
@@ -547,6 +629,20 @@ public class GodTierData implements IGodTierData
 		public String getName() {
 			return name;
 		}
+	}
+
+	@SubscribeEvent
+	public static void test(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
+	{
+		IGodTierData data = event.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
+
+		data.addSkill(MSUSkills.LIFE_SONG_OF_FERTILITY, true);
+		data.addSkill(MSUSkills.GUARDIAN_HALT, true);
+		data.addSkill(MSUSkills.SPACE_SPATIAL_MANIPULATOR, true);
+
+		data.equipTech(MSUSkills.GUARDIAN_HALT, 0);
+		data.equipTech(MSUSkills.LIFE_SONG_OF_FERTILITY, 1);
+		data.equipTech(MSUSkills.SPACE_SPATIAL_MANIPULATOR, 2);
 	}
 
 	@SubscribeEvent

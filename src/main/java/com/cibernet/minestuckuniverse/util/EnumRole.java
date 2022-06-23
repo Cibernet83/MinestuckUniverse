@@ -6,7 +6,7 @@ import static com.mraof.minestuck.util.EnumClass.*;
 
 public enum EnumRole
 {
-	ACTIVE, PASSIVE;
+	ACTIVE, PASSIVE, NEUTRAL;
 
 	public static EnumRole getRoleFromClass(EnumClass heroClass)
 	{
@@ -19,6 +19,6 @@ public enum EnumRole
 				heroClass.equals(MUSE))
 			return PASSIVE;
 		else
-			return null;
+			return NEUTRAL;
 	}
 }

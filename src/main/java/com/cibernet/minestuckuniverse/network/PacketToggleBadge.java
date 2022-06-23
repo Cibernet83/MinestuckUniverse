@@ -1,7 +1,7 @@
 package com.cibernet.minestuckuniverse.network;
 
-import com.cibernet.minestuckuniverse.badges.Badge;
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
+import com.cibernet.minestuckuniverse.skills.badges.Badge;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import io.netty.buffer.ByteBuf;
@@ -31,7 +31,7 @@ public class PacketToggleBadge extends MSUPacket
     @Override
     public MSUPacket consumePacket(ByteBuf data)
     {
-        badge = MSUBadges.REGISTRY.getValue(new ResourceLocation(ByteBufUtils.readUTF8String(data)));
+        badge = (Badge) MSUSkills.REGISTRY.getValue(new ResourceLocation(ByteBufUtils.readUTF8String(data)));
         sendMessage = data.readBoolean();
         return this;
     }
@@ -40,7 +40,7 @@ public class PacketToggleBadge extends MSUPacket
     public void execute(EntityPlayer player)
     {
         IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
-        if(data.hasBadge(badge))
+        if(data.hasSkill(badge))
         {
             data.setBadgeEnabled(badge, !data.isBadgeEnabled(badge));
             data.update();

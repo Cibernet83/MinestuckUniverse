@@ -89,7 +89,7 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.strife.weaponAttackMultiplier").getDouble();
 
 
-		multiAspectUnlocks = config.get("God Tier", "multiAspectUnlocks", true, "Enabling this makes certain badges require multiple kinds of Hero Stone Shards to unlock.")
+		multiAspectUnlocks = config.get("God Tier", "multiAspectUnlocks", true, "Enabling this makes certain skills require multiple kinds of Hero Stone Shards to unlock.")
 				.setLanguageKey("config.minestuckuniverse.godtier.multiAspectUnlocks").getBoolean();
 		godTierXpThreshold = config.get("God Tier", "godTierXpThreshold", 30, "Determines the minimum number of levels required to upgrade God Tier Skills")
 				.setLanguageKey("config.minestuckuniverse.godtier.godTierXpThreshold").getInt();
@@ -99,7 +99,7 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.godtier.questBedSpawnArea").getInt();
 		godTierBadgeSlots = config.get("God Tier", "godTierBadgeSlots", 7, "Determines how many Badge Slots God Tiered players start out with")
 				.setLanguageKey("config.minestuckuniverse.godtier.godTierBadgeSlots").getInt();
-		godTierMasterControl = config.get("God Tier", "godTierMasterControl", false, "Determines whether God Tiered players start with Master Control enabled, allowing them to unlock all badges regardless of their classpect")
+		godTierMasterControl = config.get("God Tier", "godTierMasterControl", false, "Determines whether God Tiered players start with Master Control enabled, allowing them to unlock all skills regardless of their classpect")
 				.setLanguageKey("config.minestuckuniverse.godtier.godTierMasterControl").getBoolean();
 
 	}
@@ -120,11 +120,15 @@ public class MSUConfig
 	{
 		data.writeBoolean(localizedChat);
 		data.writeBoolean(multiAspectUnlocks);
+		data.writeInt(godTierXpThreshold);
+		data.writeBoolean(restrictedStrife);
 	}
 
 	public static void readFromBuffer(ByteBuf data)
 	{
 		localizedChat = data.readBoolean();
 		multiAspectUnlocks = data.readBoolean();
+		godTierXpThreshold = data.readInt();
+		restrictedStrife = data.readBoolean();
 	}
 }

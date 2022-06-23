@@ -2,9 +2,9 @@ package com.cibernet.minestuckuniverse.gui;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.badges.Badge;
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
-import com.cibernet.minestuckuniverse.badges.MasterBadge;
+import com.cibernet.minestuckuniverse.skills.badges.Badge;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.skills.badges.MasterBadge;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.GodTierData;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
@@ -82,15 +82,15 @@ public class GuiGodTierMeditation extends GuiScreen
 
 		IGodTierData data = Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 
-		for(Map.Entry<ResourceLocation, Badge> entry : MSUBadges.REGISTRY.getEntries())
+		for(Badge badge : Badge.BADGES)
 		{
 			if((data.hasMasterControl()) ||
-			   entry.getValue().canAppearOnList(player.world, player) ||
-					data.hasBadge(entry.getValue()))
+					badge.canAppearOnList(player.world, player) ||
+					data.hasSkill(badge))
 			{
-				if (entry.getValue() instanceof MasterBadge)
-					masterBadges.add((MasterBadge) entry.getValue());
-				else badges.add(entry.getValue());
+				if (badge instanceof MasterBadge)
+					masterBadges.add((MasterBadge) badge);
+				else badges.add(badge);
 			}
 
 		}
@@ -98,10 +98,10 @@ public class GuiGodTierMeditation extends GuiScreen
 		Collections.sort(badges, Comparator.comparingInt(Badge::getSortIndex));
 		Collections.sort(masterBadges, Comparator.comparingInt(Badge::getSortIndex));
 
-		if(data.hasMasterControl() && badges.contains(MSUBadges.BADGE_OVERLORD))
+		if(data.hasMasterControl() && badges.contains(MSUSkills.BADGE_OVERLORD))
 		{
-			badges.remove(MSUBadges.BADGE_OVERLORD);
-			badges.add(badges.indexOf(MSUBadges.BADGE_LORD)+1, MSUBadges.BADGE_OVERLORD);
+			badges.remove(MSUSkills.BADGE_OVERLORD);
+			badges.add(badges.indexOf(MSUSkills.LORD_DECREE)+1, MSUSkills.BADGE_OVERLORD);
 		}
 	}
 
@@ -130,12 +130,12 @@ public class GuiGodTierMeditation extends GuiScreen
 		//this.drawTexturedModalRect(xOffset, yOffset, 0, 0, xSize, ySize);
 		mc.getTextureManager().bindTexture(TEXTURES);
 
-		boolean isOverlord = data.isBadgeActive(MSUBadges.BADGE_OVERLORD);
+		boolean isOverlord = data.isBadgeActive(MSUSkills.BADGE_OVERLORD);
 
 		//General XP
-		int generalLevel = data.getSkillLevel(GodTierData.SkillType.GENERAL);
-		float generalXp = data.getSkillXp(GodTierData.SkillType.GENERAL);
-		float generalFilled = generalXp/data.getXpToNextLevel(GodTierData.SkillType.GENERAL);
+		int generalLevel = data.getSkillLevel(GodTierData.StatType.GENERAL);
+		float generalXp = data.getSkillXp(GodTierData.StatType.GENERAL);
+		float generalFilled = generalXp/data.getXpToNextLevel(GodTierData.StatType.GENERAL);
 
 		EnumAspect aspect = MinestuckPlayerData.title.getHeroAspect();
 		int mainColor = aspect == EnumAspect.SPACE ? 0xFAFAFA : mainColors.getOrDefault(aspect, 0x80FF20);
@@ -166,12 +166,12 @@ public class GuiGodTierMeditation extends GuiScreen
 			if(badge.isReadable(player.world, player) && (data.getMasterBadge() == null || data.getMasterBadge() == badge || isOverlord))
 				mc.getTextureManager().bindTexture(badge.getTextureLocation());
 			else mc.getTextureManager().bindTexture(new ResourceLocation(badge.getRegistryName().getResourceDomain(), "textures/gui/badge_locked.png"));
-			if(!data.hasBadge(badge))
+			if(!data.hasSkill(badge))
 				GlStateManager.color(0.5f, 0.5f, 0.5f);
 			drawScaledCustomSizeModalRect(xOffset+(xSize - masterBadges.size()*22)/2  + i*22, yOffset+124, 0, 0, 256, 256, 20, 20, 256, 256);
 			GlStateManager.color(1,1,1);
 
-			if(data.hasBadge(badge) && !data.isBadgeActive(badge))
+			if(data.hasSkill(badge) && !data.isBadgeActive(badge))
 			{
 				mc.getTextureManager().bindTexture(new ResourceLocation(badge.getRegistryName().getResourceDomain(), "textures/gui/badge_disabled.png"));
 				drawScaledCustomSizeModalRect(xOffset+(xSize - masterBadges.size()*22)/2  + i*22, yOffset+124, 0, 0, 256, 256, 20, 20, 256, 256);
@@ -182,7 +182,7 @@ public class GuiGodTierMeditation extends GuiScreen
 			Badge badge = badges.get(i);
 			if(badge.isReadable(player.world, player))
 			{
-				if(!data.hasBadge(badge))
+				if(!data.hasSkill(badge))
 					GlStateManager.color(0.5f, 0.5f, 0.5f);
 				mc.getTextureManager().bindTexture(badge.getTextureLocation());
 			}
@@ -193,7 +193,7 @@ public class GuiGodTierMeditation extends GuiScreen
 			drawScaledCustomSizeModalRect(xOffset+(xSize - ((badges.size()+1)/rows)*22)/2  + ((i)/rows)*22, yOffset+157 + (i%rows)*22, 0, 0, 256, 256, 20, 20, 256, 256);
 			GlStateManager.color(1,1,1);
 
-			if(data.hasBadge(badge) && !data.isBadgeActive(badge))
+			if(data.hasSkill(badge) && !data.isBadgeActive(badge))
 			{
 				mc.getTextureManager().bindTexture(new ResourceLocation(badge.getRegistryName().getResourceDomain(), "textures/gui/badge_disabled.png"));
 				drawScaledCustomSizeModalRect(xOffset+(xSize - ((badges.size()+1)/rows)*22)/2  + ((i)/rows)*22, yOffset + 157 + (i % rows) * 22, 0, 0, 256, 256, 20, 20, 256, 256);
@@ -201,9 +201,9 @@ public class GuiGodTierMeditation extends GuiScreen
 		}
 
 		//Skill XP
-		for(int i = 1; i < GodTierData.SkillType.values().length; i++)
+		for(int i = 1; i < GodTierData.StatType.values().length; i++)
 		{
-			GodTierData.SkillType skill = GodTierData.SkillType.values()[i];
+			GodTierData.StatType skill = GodTierData.StatType.values()[i];
 			int level = data.getSkillLevel(skill);
 			float xp = data.getSkillXp(skill);
 			float filled = xp/data.getXpToNextLevel(skill);
@@ -217,13 +217,13 @@ public class GuiGodTierMeditation extends GuiScreen
 			drawTexturedModalRect(skillX + 10, skillY + 6, 0, 15, (int) (77*filled), 5);
 			drawTexturedModalRect(skillX, skillY, 164 + (i*18), 0, 18, 18);
 			drawTexturedModalRect(skillX + 89, skillY, ((player.isCreative() || player.experienceLevel >= MSUConfig.godTierXpThreshold) ? isPointInRegion(mouseX, mouseY, skillX+89, skillY, 18, 18) ? (mouseClicked ? 36 : 18) : 0 : 36), 20, 18, 18);
-			renderBorderedText(skillX+9 - (fontRenderer.getStringWidth(String.valueOf(level))/2), skillY+9 - (fontRenderer.FONT_HEIGHT/2), String.valueOf(level),  data.isBadgeActive(MSUBadges.BADGE_PAGE) ? 0xFFD84C : (isOverlord ? 0xFF0000 : 0x80FF20), 0);
+			renderBorderedText(skillX+9 - (fontRenderer.getStringWidth(String.valueOf(level))/2), skillY+9 - (fontRenderer.FONT_HEIGHT/2), String.valueOf(level),  data.isBadgeActive(MSUSkills.BADGE_PAGE) ? 0xFFD84C : (isOverlord ? 0xFF0000 : 0x80FF20), 0);
 		}
 
 		//Hovering Text
-		for(int i = 1; i < GodTierData.SkillType.values().length; i++)
+		for(int i = 1; i < GodTierData.StatType.values().length; i++)
 		{
-			GodTierData.SkillType skill = GodTierData.SkillType.values()[i];
+			GodTierData.StatType skill = GodTierData.StatType.values()[i];
 			int level = data.getSkillLevel(skill);
 			float xp = data.getSkillXp(skill);
 			int skillX = xOffset + (i % 2 == 0 ? 20 : 129);
@@ -236,8 +236,8 @@ public class GuiGodTierMeditation extends GuiScreen
 
 				tooltip.add(I18n.format("godTierSkill."+skill.getName().toLowerCase()+".tooltipName", level));
 				tooltip.add(I18n.format("godTierSkill."+skill.getName().toLowerCase()+".tooltipDesc", ItemStack.DECIMALFORMAT.format(data.getSkillAttributeLevel(skill) * ((data.getSkillAttributeOperationType(skill) == 0) ? 1 : 100))));
-				if(skill.equals(GodTierData.SkillType.DEFENSE))
-					tooltip.add(I18n.format("godTierSkill.defense.tooltipDesc2", ItemStack.DECIMALFORMAT.format(level*0.2 * (data.isBadgeActive(MSUBadges.BADGE_PAGE) ? 2 : 1) * (data.isBadgeActive(MSUBadges.BADGE_OVERLORD) ? 3 : 1))));
+				if(skill.equals(GodTierData.StatType.DEFENSE))
+					tooltip.add(I18n.format("godTierSkill.defense.tooltipDesc2", ItemStack.DECIMALFORMAT.format(level*0.2 * (data.isBadgeActive(MSUSkills.BADGE_PAGE) ? 2 : 1) * (data.isBadgeActive(MSUSkills.BADGE_OVERLORD) ? 3 : 1))));
 				tooltip.add(I18n.format("godTierSkill.tooltipNextLevel", ItemStack.DECIMALFORMAT.format(data.getXpToNextLevel(skill)-xp)));
 
 				drawHoveringText(tooltip, mouseX, mouseY);
@@ -291,7 +291,7 @@ public class GuiGodTierMeditation extends GuiScreen
 				tooltip.add(TextFormatting.OBFUSCATED + badge.getDisplayName());
 				tooltip.add(badge.getReadRequirements());
 
-			} else if(data.hasBadge(badge))
+			} else if(data.hasSkill(badge))
 			{
 				tooltip.add(badge.getDisplayName());
 				tooltip.add(badge.getDisplayTooltip());
@@ -356,7 +356,7 @@ public class GuiGodTierMeditation extends GuiScreen
 			MasterBadge badge = masterBadges.get(i);
 
 			if(isPointInRegion(mouseX, mouseY, xOffset+(xSize - masterBadges.size()*22)/2  + i*22, yOffset+124, 20, 20) && badge.isReadable(player.world, player))
-				MSUChannelHandler.sendToServer(MSUPacket.makePacket((!data.isBadgeActive(MSUBadges.BADGE_OVERLORD) && !data.hasBadge(badge) && data.getMasterBadge() == null && mouseButton == 0) ? MSUPacket.Type.ATTEMPT_BADGE_UNLOCK : MSUPacket.Type.TOGGLE_BADGE, badge));
+				MSUChannelHandler.sendToServer(MSUPacket.makePacket((!data.isBadgeActive(MSUSkills.BADGE_OVERLORD) && !data.hasSkill(badge) && data.getMasterBadge() == null && mouseButton == 0) ? MSUPacket.Type.ATTEMPT_BADGE_UNLOCK : MSUPacket.Type.TOGGLE_BADGE, badge));
 
 		}
 		for(int i = 0; i < badges.size(); i++)
@@ -364,7 +364,7 @@ public class GuiGodTierMeditation extends GuiScreen
 			Badge badge = badges.get(i);
 			int rows = (int) Math.max(2, Math.ceil(badges.size()/20f));
 			if(isPointInRegion(mouseX, mouseY, xOffset+(xSize - ((badges.size()+1)/rows)*22)/2  + ((i)/rows)*22, yOffset+157 + (i%rows)*22, 20, 20) && badge.isReadable(player.world, player))
-				MSUChannelHandler.sendToServer(MSUPacket.makePacket((!data.hasBadge(badge) && mouseButton == 0) ? MSUPacket.Type.ATTEMPT_BADGE_UNLOCK : MSUPacket.Type.TOGGLE_BADGE, badge));
+				MSUChannelHandler.sendToServer(MSUPacket.makePacket((!data.hasSkill(badge) && mouseButton == 0) ? MSUPacket.Type.ATTEMPT_BADGE_UNLOCK : MSUPacket.Type.TOGGLE_BADGE, badge));
 		}
 	}
 
@@ -374,9 +374,9 @@ public class GuiGodTierMeditation extends GuiScreen
 		int yOffset = this.height / 2 - ySize/2;
 		int xOffset = this.width / 2 - xSize/2;
 
-		for(int i = 1; i < GodTierData.SkillType.values().length; i++)
+		for(int i = 1; i < GodTierData.StatType.values().length; i++)
 		{
-			GodTierData.SkillType skill = GodTierData.SkillType.values()[i];
+			GodTierData.StatType skill = GodTierData.StatType.values()[i];
 			float xp = data.getSkillXp(skill);
 
 			int skillX = xOffset + (i % 2 == 0 ? 20 : 129);

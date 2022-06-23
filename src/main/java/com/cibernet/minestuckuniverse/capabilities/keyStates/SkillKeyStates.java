@@ -1,9 +1,6 @@
 package com.cibernet.minestuckuniverse.capabilities.keyStates;
 
-import com.cibernet.minestuckuniverse.badges.Badge;
-import com.cibernet.minestuckuniverse.badges.heroAspect.BadgeHeroAspect;
-import com.cibernet.minestuckuniverse.badges.heroAspectUtil.BadgeHeroAspectUtil;
-import com.cibernet.minestuckuniverse.badges.heroClass.BadgeHeroClass;
+import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
@@ -11,8 +8,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
-import java.util.List;
 
 public class SkillKeyStates implements ISkillKeyStates
 {
@@ -94,9 +89,9 @@ public class SkillKeyStates implements ISkillKeyStates
 	}
 
 	public enum Key {
-		CLASS,
-		ASPECT,
-		UTIL
+		PRIMARY,
+		SECONDARY,
+		TERTIARY
 	}
 
 	public enum KeyState
@@ -121,25 +116,35 @@ public class SkillKeyStates implements ISkillKeyStates
 			return;
 
 		IGodTierData data = event.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
-		List<Badge> badgeList = data.getAllBadges();
+		//List<Badge> badgeList = data.getAllBadges();
 
 		IBadgeEffects badgeEffects = event.player.getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 		ISkillKeyStates keyStates = event.player.getCapability(MSUCapabilities.SKILL_KEY_STATES, null);
 
 		if(!event.player.isSpectator())
-			for(Badge badge : badgeList)
+			for(int i = 0; i < data.getTechSlots(); i++)
 			{
+				Abilitech tech = data.getTech(i);
 				boolean isActive = false;
-				if(data.isBadgeActive(badge))
-					if(badge instanceof BadgeHeroClass)
-						isActive = ((BadgeHeroClass) badge).onBadgeTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(Key.CLASS), keyStates.getKeyTime(Key.CLASS));
-					else if(badge instanceof BadgeHeroAspect)
-						isActive = ((BadgeHeroAspect) badge).onBadgeTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(Key.ASPECT), keyStates.getKeyTime(Key.ASPECT));
-					else if(badge instanceof BadgeHeroAspectUtil)
-						isActive = ((BadgeHeroAspectUtil) badge).onBadgeTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(Key.UTIL), keyStates.getKeyTime(Key.UTIL));
+
+				if(tech == null) continue;
+
+				if(tech.canUse(event.player.world, event.player))
+				{
+					if(i <= 2) tech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState((i == 0 ? Key.PRIMARY : Key.SECONDARY)), keyStates.getKeyTime(i == 0 ? Key.PRIMARY : i == 1 ? Key.SECONDARY : Key.TERTIARY));
+					else if(tech.equals(data.getSelectedTech()))
+					{
+						isActive = tech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(Key.TERTIARY), keyStates.getKeyTime(Key.TERTIARY));
+						if(keyStates.getKeyState(Key.TERTIARY).equals(KeyState.NONE))
+							data.resetSelectedTech();
+					}
+
+					if(data.isTechPassiveEnabled(tech))
+						isActive = isActive || tech.onEquippedTick(event.player.world, event.player, badgeEffects);
+				}
 
 				if (!isActive)
-					badgeEffects.stopPowerParticles(badge.getClass());
+					badgeEffects.stopPowerParticles(tech.getClass());
 			}
 
 		keyStates.tickKeyStates();

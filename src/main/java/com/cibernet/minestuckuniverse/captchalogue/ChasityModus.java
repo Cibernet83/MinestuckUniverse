@@ -1,6 +1,6 @@
 package com.cibernet.minestuckuniverse.captchalogue;
 
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.entity.EntityCruxiteSlime;
 import com.cibernet.minestuckuniverse.gui.captchalogue.ChasityGuiHandler;
@@ -131,7 +131,7 @@ public class ChasityModus extends Modus
 			}
 			return item;
 		}
-		else if(list.get(id).locked && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.SKELETON_KEY))
+		else if(list.get(id).locked && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.SKELETON_KEY))
 		{
 			list.get(id).locked = false;
 			if(side.isServer())

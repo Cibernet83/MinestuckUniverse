@@ -1,8 +1,8 @@
 package com.cibernet.minestuckuniverse.capabilities.badgeEffects;
 
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
-import com.cibernet.minestuckuniverse.badges.heroAspect.*;
-import com.cibernet.minestuckuniverse.badges.heroAspectUtil.*;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspectUtil.*;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIMindflayerTarget;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
@@ -75,12 +75,12 @@ public class BadgeEffects implements IBadgeEffects
 
 	@Override
 	public int getDecayTime() {
-		return getInt(BadgeActiveDoom.class);
+		return getInt(TechDoomDemise.class);
 	}
 
 	@Override
 	public void setDecayTime(int decayTime) {
-		setInt(BadgeActiveDoom.class, decayTime);
+		setInt(TechDoomDemise.class, decayTime);
 	}
 
 	@Override
@@ -96,37 +96,37 @@ public class BadgeEffects implements IBadgeEffects
 	@Override
 	public boolean isTimeStopped()
 	{
-		return getBoolean(BadgePassiveTime.class);
+		return getBoolean(TechTimeStop.class);
 	}
 
 	@Override
 	public void setTimeStopped(boolean timeStopped)
 	{
-		setBoolean(BadgePassiveTime.class, timeStopped);
+		setBoolean(TechTimeStop.class, timeStopped);
 	}
 
 	@Override
 	public Vec3d getWarpPoint()
 	{
-		return getVec4Position(BadgePassiveSpace.class);
+		return getVec4Position(TechSpaceTargetTele.class);
 	}
 
 	@Override
 	public int getWarpPointDim()
 	{
-		return getVec4Dimension(BadgePassiveSpace.class);
+		return getVec4Dimension(TechSpaceTargetTele.class);
 	}
 
 	@Override
 	public boolean hasWarpPoint()
 	{
-		return effects.containsKey(BadgePassiveSpace.class);
+		return effects.containsKey(TechSpaceTargetTele.class);
 	}
 
 	@Override
 	public void setWarpPoint(Vec3d warpPoint, int warpPointDim)
 	{
-		setVec4(BadgePassiveSpace.class, warpPoint, warpPointDim);
+		setVec4(TechSpaceTargetTele.class, warpPoint, warpPointDim);
 	}
 
 	@Override
@@ -138,13 +138,13 @@ public class BadgeEffects implements IBadgeEffects
 	@Override
 	public boolean isRageShifted()
 	{
-		return getBoolean(BadgeUtilRage.class);
+		return getBoolean(TechRageManagement.class);
 	}
 
 	@Override
 	public void setRageShifted(boolean rageShifted)
 	{
-		setBoolean(BadgeUtilRage.class, rageShifted);
+		setBoolean(TechRageManagement.class, rageShifted);
 	}
 
 	@Override
@@ -174,50 +174,50 @@ public class BadgeEffects implements IBadgeEffects
 	@Override
 	public void setMindflayedBy(EntityLivingBase entity)
 	{
-		setEntity(BadgeActiveMind.IsMindflayed.class, entity);
+		setEntity(TechMindControl.IsMindflayed.class, entity);
 	}
 
 	@Override
 	public EntityLivingBase getMindflayedBy()
 	{
-		return getEntity(BadgeActiveMind.IsMindflayed.class);
+		return getEntity(TechMindControl.IsMindflayed.class);
 	}
 
 
 	@Override
 	public float getMoveStrafe()
 	{
-		return getMovementInputStrafe(BadgeActiveMind.class);
+		return getMovementInputStrafe(TechMindControl.class);
 	}
 
 	@Override
 	public float getMoveForward()
 	{
-		return getMovementInputForward(BadgeActiveMind.class);
+		return getMovementInputForward(TechMindControl.class);
 	}
 
 	@Override
 	public boolean getJump()
 	{
-		return getMovementInputJump(BadgeActiveMind.class);
+		return getMovementInputJump(TechMindControl.class);
 	}
 
 	@Override
 	public boolean getSneak()
 	{
-		return getMovementInputSneak(BadgeActiveMind.class);
+		return getMovementInputSneak(TechMindControl.class);
 	}
 
 	@Override
 	public boolean hasMovement()
 	{
-		return effects.containsKey(BadgeActiveMind.class);
+		return effects.containsKey(TechMindControl.class);
 	}
 
 	@Override
 	public void setMovement(float moveStrafe, float moveForward, boolean jump, boolean sneak)
 	{
-		setMovementInput(BadgeActiveMind.class, moveStrafe, moveForward, jump, sneak);
+		setMovementInput(TechMindControl.class, moveStrafe, moveForward, jump, sneak);
 	}
 
 	@Override
@@ -228,19 +228,19 @@ public class BadgeEffects implements IBadgeEffects
 
 	@Override
 	public boolean isMindflayed() {
-		return getEntity(BadgeActiveMind.IsMindflayed.class) != null;
+		return getEntity(TechMindControl.IsMindflayed.class) != null;
 	}
 
 	@Override
 	public boolean isDoingWimdyThing()
 	{
-		return getBoolean(BadgeUtilBreath.class);
+		return getBoolean(TechBreathWindVessel.class);
 	}
 
 	@Override
 	public void setDoingWimdyThing(boolean doingWimdyThing)
 	{
-		setBoolean(BadgeUtilBreath.class, doingWimdyThing);
+		setBoolean(TechBreathWindVessel.class, doingWimdyThing);
 	}
 
 	@Override
@@ -262,78 +262,78 @@ public class BadgeEffects implements IBadgeEffects
 	@Override
 	public boolean isVoidstepping()
 	{
-		return getBoolean(BadgeActiveVoid.class) && owner.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.BADGE_ACTIVE_VOID);
+		return getBoolean(TechVoidStep.class) && owner.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.VOID_VOIDSTEP);
 	}
 
 	@Override
 	public void setVoidstepping(boolean isVoidstepping)
 	{
-		setBoolean(BadgeActiveVoid.class, isVoidstepping);
+		setBoolean(TechVoidStep.class, isVoidstepping);
 	}
 
 	@Override
 	public boolean isGlorbbing()
 	{
-		return getBoolean(BadgeUtilLight.class) && owner.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.BADGE_UTIL_LIGHT);
+		return getBoolean(TechLightAutoGlorb.class) && owner.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.LIGHT_ORB_OF_LIGHT);
 	}
 
 	@Override
 	public void setGlorbbing(boolean isGlorbbing)
 	{
-		setBoolean(BadgeUtilLight.class, isGlorbbing);
+		setBoolean(TechLightAutoGlorb.class, isGlorbbing);
 	}
 
 	@Override
 	public boolean isReforming()
 	{
-		return getBoolean(BadgeUtilBlood.class) && owner.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.BADGE_UTIL_BLOOD);
+		return getBoolean(TechBloodReformer.class) && owner.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.BLOOD_REFORMERS_REACH);
 	}
 
 	@Override
 	public void setReforming(boolean isReforming)
 	{
-		setBoolean(BadgeUtilBlood.class, isReforming);
+		setBoolean(TechBloodReformer.class, isReforming);
 	}
 
 	@Override
 	public BlockPos getManipulatedPos1()
 	{
-		return getVec4Position(BadgeUtilSpace.PosA.class) == null ? null :  new BlockPos(getVec4Position(BadgeUtilSpace.PosA.class));
+		return getVec4Position(TechSpaceManipulator.PosA.class) == null ? null :  new BlockPos(getVec4Position(TechSpaceManipulator.PosA.class));
 	}
 
 	@Override
 	public int getManipulatedPos1Dim() {
-		return getVec4Dimension(BadgeUtilSpace.PosA.class);
+		return getVec4Dimension(TechSpaceManipulator.PosA.class);
 	}
 
 	@Override
 	public void setManipulatedPos1(BlockPos pos, int dim)
 	{
-		setVec4(BadgeUtilSpace.PosA.class, pos == null ? null : new Vec3d(pos.getX(), pos.getY(), pos.getZ()), dim);
-		setBoolean(BadgeUtilSpace.class, true);
+		setVec4(TechSpaceManipulator.PosA.class, pos == null ? null : new Vec3d(pos.getX(), pos.getY(), pos.getZ()), dim);
+		setBoolean(TechSpaceManipulator.class, true);
 	}
 
 	@Override
 	public BlockPos getManipulatedPos2()
 	{
-		return getVec4Position(BadgeUtilSpace.PosB.class) == null ? null : new BlockPos(getVec4Position(BadgeUtilSpace.PosB.class));
+		return getVec4Position(TechSpaceManipulator.PosB.class) == null ? null : new BlockPos(getVec4Position(TechSpaceManipulator.PosB.class));
 	}
 
 	@Override
 	public int getManipulatedPos2Dim() {
-		return getVec4Dimension(BadgeUtilSpace.PosB.class);
+		return getVec4Dimension(TechSpaceManipulator.PosB.class);
 	}
 	@Override
 	public void setManipulatedPos2(BlockPos pos, int dim)
 	{
-		setVec4(BadgeUtilSpace.PosB.class, pos == null ? null : new Vec3d(pos.getX(), pos.getY(), pos.getZ()), dim);
-		setBoolean(BadgeUtilSpace.class, false);
+		setVec4(TechSpaceManipulator.PosB.class, pos == null ? null : new Vec3d(pos.getX(), pos.getY(), pos.getZ()), dim);
+		setBoolean(TechSpaceManipulator.class, false);
 	}
 
 	@Override
 	public boolean isManipulatingPos2()
 	{
-		return getBoolean(BadgeUtilSpace.class);
+		return getBoolean(TechSpaceManipulator.class);
 	}
 
 

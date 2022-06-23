@@ -1,7 +1,7 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
-import com.cibernet.minestuckuniverse.badges.MSUBadges;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
@@ -27,11 +27,11 @@ public class LocalChatEventHandler
 
 		World world = event.getPlayer().world;
 		EntityPlayer player = world.getPlayerEntityByUUID(event.getPlayer().getCommandSenderEntity().getUniqueID());
-		boolean canSenderGab = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.GIFT_OF_GAB);
+		boolean canSenderGab = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.GIFT_OF_GAB);
 
 		for(EntityPlayer receiver : world.getMinecraftServer().getPlayerList().getPlayers())
 		{
-			boolean canReceiverGab = receiver.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && receiver.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.GIFT_OF_GAB);
+			boolean canReceiverGab = receiver.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && receiver.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.GIFT_OF_GAB);
 
 			if(receiver == player || (canSenderGab && canReceiverGab) || (!canSenderGab && player.getDistanceSq(receiver) < 128 && player.world.provider.getDimension() == receiver.world.provider.getDimension()))
 				receiver.sendStatusMessage(event.getComponent(), false);
@@ -49,7 +49,7 @@ public class LocalChatEventHandler
 
 		World world = event.getSender().getEntityWorld();
 		EntityPlayer player = world.getPlayerEntityByUUID(event.getSender().getCommandSenderEntity().getUniqueID());
-		boolean canSenderGab = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.GIFT_OF_GAB);
+		boolean canSenderGab = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.GIFT_OF_GAB);
 
 		if(!canSenderGab && event.getCommand() instanceof CommandEmote)
 		{
@@ -66,7 +66,7 @@ public class LocalChatEventHandler
 			catch (Throwable throwable) { return; }
 
 
-			boolean canReceiverGab = receiver.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && receiver.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUBadges.GIFT_OF_GAB);
+			boolean canReceiverGab = receiver.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && receiver.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.GIFT_OF_GAB);
 
 			if(!(receiver == player || (canSenderGab && canReceiverGab) || (!canSenderGab && player.getDistanceSq(receiver) < 128 && player.world.provider.getDimension() == receiver.world.provider.getDimension())))
 			{

@@ -13,14 +13,14 @@ import java.util.UUID;
 
 public class PacketAddSkillXp extends MSUPacket
 {
-    GodTierData.SkillType skillType;
+    GodTierData.StatType skillType;
     int                   amount;
     UUID                  playerUUID;
 
     @Override
     public MSUPacket generatePacket(Object... args)
     {
-        data.writeInt(((GodTierData.SkillType)args[0]).ordinal());
+        data.writeInt(((GodTierData.StatType)args[0]).ordinal());
         data.writeInt(args.length > 2 ? (Integer) args[2] : 1);
         ByteBufUtils.writeUTF8String(data, ((EntityPlayer)args[1]).getUniqueID().toString());
         return this;
@@ -29,7 +29,7 @@ public class PacketAddSkillXp extends MSUPacket
     @Override
     public MSUPacket consumePacket(ByteBuf data)
     {
-        skillType = GodTierData.SkillType.values()[data.readInt()];
+        skillType = GodTierData.StatType.values()[data.readInt()];
         amount = data.readInt();
         playerUUID = UUID.fromString(ByteBufUtils.readUTF8String(data));
         return this;
