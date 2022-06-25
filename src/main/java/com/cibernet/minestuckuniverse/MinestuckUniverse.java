@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse;
 
 import com.cibernet.minestuckuniverse.commands.GlobalSayCommand;
 import com.cibernet.minestuckuniverse.commands.MSGTCommand;
+import com.cibernet.minestuckuniverse.commands.SkillCommand;
 import com.cibernet.minestuckuniverse.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Loader;
@@ -99,5 +100,6 @@ public class MinestuckUniverse
     {
         event.registerServerCommand(new MSGTCommand());
         event.registerServerCommand(new GlobalSayCommand());
+        event.registerServerCommand(new SkillCommand());
     }
 }

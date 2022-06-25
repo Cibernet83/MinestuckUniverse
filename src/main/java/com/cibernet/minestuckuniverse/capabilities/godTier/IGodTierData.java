@@ -17,6 +17,7 @@ import java.util.List;
 public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 {
 	boolean addSkill(Skill badge, boolean sendUpdate);
+	boolean revokeSkill(Skill badge, boolean sendUpdate);
 	boolean hasSkill(Skill badge);
 	List<Skill> getSkills();
 

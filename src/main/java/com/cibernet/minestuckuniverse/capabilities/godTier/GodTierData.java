@@ -74,8 +74,7 @@ public class GodTierData implements IGodTierData
 			masterBadge = (MasterBadge) badge;
 			if(sendUpdate)
 				update();
-			if(badge instanceof Badge)
-				((Badge)badge).onBadgeUnlocked(owner.world, owner);
+			((Badge)badge).onBadgeUnlocked(owner.world, owner);
 			return true;
 		}
 
@@ -87,6 +86,31 @@ public class GodTierData implements IGodTierData
 			update();
 		if(badge instanceof Badge)
 			((Badge)badge).onBadgeUnlocked(owner.world, owner);
+		return true;
+	}
+
+	@Override
+	public boolean revokeSkill(Skill badge, boolean sendUpdate)
+	{
+		if(badge instanceof MasterBadge)
+		{
+			if(masterBadge != badge)
+				return false;
+			masterBadge = null;
+			return true;
+		}
+		else
+		{
+			if(badge == null || !badges.containsKey(badge))
+				return false;
+			badges.remove(badge);
+
+			if(badge instanceof Abilitech && isTechEquipped((Abilitech) badge))
+				for(int i = 0; i < equippedTech.length; i++)
+					if(equippedTech[i] == badge) unequipTech(i);
+		}
+		if(sendUpdate)
+			update();
 		return true;
 	}
 
@@ -496,6 +520,8 @@ public class GodTierData implements IGodTierData
 			maxBadges = nbt.getInteger("MaxBadges");
 
 		NBTTagCompound badges = nbt.getCompoundTag("Badges");
+
+		this.badges.clear();
 		for(int i = 0; i < maxBadges && badges.hasKey(String.valueOf(i)); i++)
 		{
 			NBTTagCompound badgeData = badges.getCompoundTag(String.valueOf(i));
@@ -639,15 +665,6 @@ public class GodTierData implements IGodTierData
 		public String getName() {
 			return name;
 		}
-	}
-
-	@SubscribeEvent
-	public static void test(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
-	{
-		IGodTierData data = event.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
-
-		for(Skill s : Abilitech.ABILITECHS) data.addSkill(s, false);
-		data.update();
 	}
 
 	@SubscribeEvent
