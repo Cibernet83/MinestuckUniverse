@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.Skill;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,9 +20,10 @@ public abstract class TechHeroClass extends Abilitech
 
 	private final String name;
 	protected final EnumClass heroClass;
+	protected final EnumTechType heroRole = EnumTechType.DEFENSE;
 
 	public TechHeroClass(String name, EnumClass heroClass, int requiredLevel) {
-		super(heroClass.name().toLowerCase(), requiredLevel);
+		super(name, requiredLevel);
 		this.name = name;
 		this.heroClass = heroClass;
 		HERO_CLASS_BADGES.add(this);
@@ -31,13 +33,11 @@ public abstract class TechHeroClass extends Abilitech
 		this(name, heroClass, 5000);
 	}
 
-
 	@Override
 	public boolean canUse(World world, EntityPlayer player)
 	{
 		return !(player.isPotionActive(MSUPotions.GOD_TIER_LOCK) && player.getActivePotionEffect(MSUPotions.GOD_TIER_LOCK).getAmplifier() >= 1);
 	}
-
 
 	@Override
 	public boolean canAppearOnList(World world, EntityPlayer player)
@@ -57,5 +57,11 @@ public abstract class TechHeroClass extends Abilitech
 	public Skill setRegistryName()
 	{
 		return setRegistryName(name);
+	}
+
+	@Override
+	public String[] getTags()
+	{
+		return new String[] {"@"+heroClass.name()+"@", "@"+heroRole.name()+"@"};
 	}
 }

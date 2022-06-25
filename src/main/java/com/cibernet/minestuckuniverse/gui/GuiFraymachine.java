@@ -3,7 +3,6 @@ package com.cibernet.minestuckuniverse.gui;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
-import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.Skill;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -13,15 +12,13 @@ import com.mraof.minestuck.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec2f;
+import org.lwjgl.input.Mouse;
 
 import java.io.IOException;
 import java.util.*;
@@ -69,14 +66,16 @@ public class GuiFraymachine extends GuiScreen
 
 	private int xSize = 256;
 	private int ySize = 182;
-	private int textboxSize = 100;
+	private int textBoxWidth = 100;
+	private int textBoxHeight = 110;
 	private int maxTech = 24;
 
 	private int guiLeft;
 	private int guiTop;
 
 	private int techTab = 0;
-	private int descLineIndex = 0;
+	private float scrollPos = 0;
+	private int descLines = 0;
 
 	int selected = -1;
 	int selOffX = 0;
@@ -126,7 +125,7 @@ public class GuiFraymachine extends GuiScreen
 
 		fontRenderer.drawString("Abilitechnosynth", xOffset+124, yOffset + 18, 0xFFFFFF, true);
 
-		if(!mouseClicked) selected = -1;
+		boolean resetSel = !mouseClicked;
 
 		mc.getTextureManager().bindTexture(TEXTURES);
 		String tabLabel = techTab+1 + "/" + (tech.size()/maxTech+1);
@@ -150,7 +149,11 @@ public class GuiFraymachine extends GuiScreen
 
 			if(!mouseClicked && pointInTechSlot(x, y, mouseX, mouseY))
 			{
+				if(selected != i)
+					scrollPos = 0;
+
 				selected = i;
+				resetSel = false;
 				selOffX = x - mouseX;
 				selOffY = y - mouseY;
 			}
@@ -172,11 +175,16 @@ public class GuiFraymachine extends GuiScreen
 
 			if(!mouseClicked && pointInTechSlot(x, y, mouseX, mouseY))
 			{
+				if(selected != maxTech + i)
+					scrollPos = 0;
+
 				selected = maxTech + i;
+				resetSel = false;
 				selOffX = x - mouseX;
 				selOffY = y - mouseY;
 			}
 		}
+		if(resetSel) selected = -1;
 
 		if(selected >= 0)
 		{
@@ -185,15 +193,31 @@ public class GuiFraymachine extends GuiScreen
 
 			mc.getTextureManager().bindTexture(TEXTURES);
 			drawTexturedModalRect(x-1, y-1, 0, 202, 26, 26);
+
+			Abilitech selectedTech = (selected >= maxTech) ? data.getTechLoadout()[selected-maxTech] : tech.get(selected+techTab*maxTech);
+			String name = selectedTech.getDisplayName();
+			String description = "\n" + selectedTech.getDisplayTooltip();
+
+			for(String tag : selectedTech.getTags())
+				description = "[" + tag + "]\n" + description;
+
+			description = new String(new char[fontRenderer.listFormattedStringToWidth(name, textBoxWidth).size()]).replace('\0', '\n') + description;
+
+			descLines = Math.max(0, fontRenderer.listFormattedStringToWidth(description, textBoxWidth).size() - (textBoxHeight/fontRenderer.FONT_HEIGHT));
+
+			drawSplitString(name, xOffset + 121, yOffset + 36, textBoxWidth, textBoxHeight, 0xFFFFFF, (int) (scrollPos*descLines), true);
+			drawSplitString(description, xOffset + 121, yOffset + 36, textBoxWidth, textBoxHeight, 0xFFFFFF, (int) (scrollPos*descLines), false);
+
+			GlStateManager.color(1,1,1);
+			mc.getTextureManager().bindTexture(TEXTURES);
+			drawTexturedModalRect(xOffset+222, yOffset+35 + (int)(scrollPos*95), descLines > 0 ? 28 : 38, 241, 10, 15);
+
+		} else
+		{
+			descLines = 0;
+			mc.getTextureManager().bindTexture(TEXTURES);
+			drawTexturedModalRect(xOffset+222, yOffset+35, 40, 241, 10, 15);
 		}
-
-		String name = "Storm of the Striker";
-		String description = "[%LIGHT% - %OFFENSE%]\n%KNIGHT% of %LIGHT% does the light thingy\nKnight of Light";
-
-		description = new String(new char[fontRenderer.listFormattedStringToWidth(name, textboxSize).size()]).replace('\0', '\n') + "\n" + description;
-
-		drawSplitString(name, xOffset + 121, yOffset + 36, textboxSize, 0xFFFFFF, descLineIndex, true);
-		drawSplitString(description, xOffset + 121, yOffset + 36, textboxSize, 0xFFFFFF, descLineIndex, false);
 
 		if(mouseClicked && selected >= 0)
 		{
@@ -202,6 +226,14 @@ public class GuiFraymachine extends GuiScreen
 			mc.getTextureManager().bindTexture(new ResourceLocation(abilitech.getRegistryName().getResourceDomain(), "textures/gui/abilitechs/icons/"+abilitech.getRegistryName().getResourcePath()+".png"));
 			drawScaledCustomSizeModalRect(mouseX + selOffX, mouseY + selOffY, 0, 0, 256, 256, 24, 24, 256, 256);
 		}
+	}
+
+	@Override
+	public void handleMouseInput() throws IOException
+	{
+		super.handleMouseInput();
+		float s = Mouse.getDWheel();
+		scrollPos = Math.max(Math.min(scrollPos + 1.0F/descLines * -Math.signum(s), 1), 0);
 	}
 
 	@Override
@@ -251,9 +283,11 @@ public class GuiFraymachine extends GuiScreen
 		mouseClicked = false;
 	}
 
-	protected void drawSplitString(String str, int x, int y, int wrapWidth, int textColor, int startingLine, boolean dropShadow)
+	protected void drawSplitString(String str, int x, int y, int wrapWidth, int maxHeight, int textColor, int startingLine, boolean dropShadow)
 	{
-		List<String> splitStr = listFormattedStringToWidth(str, wrapWidth);
+		List<String> splitStr = fontRenderer.listFormattedStringToWidth(str, wrapWidth);
+
+		int yTop = y;
 
 		for(int i = startingLine; i < splitStr.size(); i++)
 		{
@@ -262,17 +296,17 @@ public class GuiFraymachine extends GuiScreen
 				String baseStr = splitStr.get(i);
 
 				for(Map.Entry<String, Pair<String, Integer>> replacement : TEXT_REPLACEMENTS.entrySet())
-					baseStr = baseStr.replace("%" + replacement.getKey() + "%", I18n.format(replacement.getValue().object1));
+					baseStr = baseStr.replace("@" + replacement.getKey() + "@", I18n.format(replacement.getValue().object1));
 				fontRenderer.drawString(baseStr, x, y, textColor, dropShadow);
 
 				for(Map.Entry<String, Pair<String, Integer>> replacement : TEXT_REPLACEMENTS.entrySet())
 				{
 					int xx = x;
-					String typeName = "%" + replacement.getKey() + "%";
+					String typeName = "@" + replacement.getKey() + "@";
 					String line = splitStr.get(i);
 
 					for(Map.Entry<String, Pair<String, Integer>> r : TEXT_REPLACEMENTS.entrySet())
-						if(r != replacement) line = line.replace("%" + r.getKey() + "%", I18n.format(r.getValue().object1));
+						if(r != replacement) line = line.replace("@" + r.getKey() + "@", I18n.format(r.getValue().object1));
 
 					for(String s : line.split("(?<="+typeName+")|(?="+typeName+")"))
 					{
@@ -286,6 +320,7 @@ public class GuiFraymachine extends GuiScreen
 				}
 			}
 			y += fontRenderer.FONT_HEIGHT;
+			if(y-yTop > Math.floor(maxHeight/fontRenderer.FONT_HEIGHT-1)*fontRenderer.FONT_HEIGHT) return;
 		}
 	}
 
@@ -344,14 +379,14 @@ public class GuiFraymachine extends GuiScreen
 		String checkStr = str;
 
 		for(Map.Entry<String, Pair<String, Integer>> replacement : TEXT_REPLACEMENTS.entrySet())
-			checkStr = checkStr.replace("%" + replacement.getKey() + "%", I18n.format(replacement.getValue().object1));
+			checkStr = checkStr.replace("@" + replacement.getKey() + "@", I18n.format(replacement.getValue().object1));
 
 		int i = sizeStringToWidth(checkStr, wrapWidth);
 
 		boolean found = false;
 		for (Map.Entry<String, Pair<String, Integer>> replacement : TEXT_REPLACEMENTS.entrySet())
 		{
-			String key = "%" + replacement.getKey() + "%";
+			String key = "@" + replacement.getKey() + "@";
 			for(int j = str.indexOf(key); j != -1; j = str.indexOf(key, j+1))
 				if(j <= i && j+key.length() > i)
 				{

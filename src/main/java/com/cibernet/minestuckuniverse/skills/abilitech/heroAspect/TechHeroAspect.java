@@ -100,13 +100,18 @@ public abstract class TechHeroAspect extends Abilitech
 	}
 
 	@Override
+	public String[] getTags()
+	{
+		return new String[] {"@"+heroAspect.name()+"@", "@"+heroRole.name()+"@"};
+	}
+
+	@Override
 	public boolean canAppearOnList(World world, EntityPlayer player)
 	{
 		if(!super.canAppearOnList(world, player))
 			return false;
 
 		EnumAspect playerAspect;
-		EnumTechType playerRole;
 
 		if(world.isRemote)
 			playerAspect = MinestuckPlayerData.title.getHeroAspect();

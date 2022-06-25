@@ -20,6 +20,8 @@ public class Abilitech extends Skill
 	public Abilitech(String name, long cost)
 	{
 		super();
+		setUnlocalizedName(name);
+
 		ABILITECHS.add(this);
 		this.cost = cost;
 		this.name = name;
@@ -27,8 +29,9 @@ public class Abilitech extends Skill
 
 	@Override
 	public String getUnlocalizedName() {
-		return unlocalizedName + ".tech";
+		return "tech." + unlocalizedName;
 	}
+	public String[] getTags() { return new String[0]; }
 
 
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time) { return false; }
