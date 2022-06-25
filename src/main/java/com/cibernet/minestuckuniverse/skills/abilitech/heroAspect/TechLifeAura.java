@@ -4,7 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class TechLifeAura extends TechHeroAspect
 {
 	public TechLifeAura(String name) {
-		super(name, EnumAspect.LIFE, EnumRole.PASSIVE, EnumAspect.LIGHT);
+		super(name, EnumAspect.LIFE, EnumTechType.DEFENSE, EnumAspect.LIGHT);
 	}
 
 	protected static final int RADIUS = 16;

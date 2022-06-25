@@ -57,6 +57,7 @@ public class MSUUtils
     public static final int GOD_TIER_SASH_UI = 7;
     public static final int ITEM_VOID_UI = 8;
     public static final int GOD_TIER_HOARD_SELECTOR_UI = 9;
+    public static final int FRAYMACHINE_UI = 10;
 
     public static void registerDeployList()
     {

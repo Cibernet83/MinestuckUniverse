@@ -4,7 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.SoulData;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +21,7 @@ public class TechTimeRecall extends TechHeroAspect
 	private static final int RECALL_TICKS = 5 * 20;
 
 	public TechTimeRecall(String name) {
-		super(name, EnumAspect.TIME, EnumRole.ACTIVE, EnumAspect.BREATH);
+		super(name, EnumAspect.TIME, EnumTechType.OFFENSE, EnumAspect.BREATH);
 	}
 
 	@Override

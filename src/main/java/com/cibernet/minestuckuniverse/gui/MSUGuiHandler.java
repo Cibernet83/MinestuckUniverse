@@ -83,6 +83,8 @@ public class MSUGuiHandler implements IGuiHandler
                 return new GuiItemVoid(player);
             case GOD_TIER_HOARD_SELECTOR_UI:
                 return new GuiGristHoardSelector(player);
+            case FRAYMACHINE_UI:
+                return new GuiFraymachine(player);
         }
         return null;
     }

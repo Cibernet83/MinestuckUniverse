@@ -5,7 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 public class TechLifeLeech extends TechHeroAspect
 {
 	public TechLifeLeech(String name) {
-		super(name, EnumAspect.LIFE, EnumRole.ACTIVE, EnumAspect.BLOOD);
+		super(name, EnumAspect.LIFE, EnumTechType.OFFENSE, EnumAspect.BLOOD);
 	}
 
 	@Override

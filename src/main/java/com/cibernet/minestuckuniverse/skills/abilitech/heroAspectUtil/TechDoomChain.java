@@ -6,12 +6,10 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -19,7 +17,7 @@ import net.minecraft.world.World;
 public class TechDoomChain extends TechHeroAspect
 {
 	public TechDoomChain(String name) {
-		super(name, EnumAspect.DOOM, EnumRole.NEUTRAL);
+		super(name, EnumAspect.DOOM, EnumTechType.UTILITY);
 	}
 
 	protected static final int RADIUS = 20;

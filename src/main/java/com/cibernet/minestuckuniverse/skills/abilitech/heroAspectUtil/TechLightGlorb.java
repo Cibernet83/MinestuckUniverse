@@ -1,22 +1,20 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspectUtil;
 
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
-import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 public class TechLightGlorb extends TechHeroAspect
 {
 	public TechLightGlorb(String name) {
-		super(name, EnumAspect.LIGHT, EnumRole.NEUTRAL);
+		super(name, EnumAspect.LIGHT, EnumTechType.UTILITY);
 	}
 
 	@Override

@@ -5,16 +5,14 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.cibernet.minestuckuniverse.util.SpaceSaltUtils;
 import com.mraof.minestuck.util.EnumAspect;
-import net.minecraft.block.IGrowable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -22,7 +20,7 @@ import net.minecraft.world.World;
 public class TechSpaceResize extends TechHeroAspect
 {
 	public TechSpaceResize(String name) {
-		super(name, EnumAspect.SPACE, EnumRole.NEUTRAL);
+		super(name, EnumAspect.SPACE, EnumTechType.UTILITY);
 	}
 
 

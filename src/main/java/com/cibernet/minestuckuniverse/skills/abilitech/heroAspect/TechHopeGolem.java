@@ -5,7 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.entity.EntityHopeGolem;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class TechHopeGolem extends TechHeroAspect
 {
 	public TechHopeGolem(String name) {
-		super(name, EnumAspect.HOPE, EnumRole.ACTIVE, EnumAspect.SPACE);
+		super(name, EnumAspect.HOPE, EnumTechType.OFFENSE, EnumAspect.SPACE);
 	}
 
 	@Override

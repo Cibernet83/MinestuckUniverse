@@ -4,7 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.damage.CritDamageSource;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 public class TechDoomDemise extends TechHeroAspect
 {
 	public TechDoomDemise(String name) {
-		super(name, EnumAspect.DOOM, EnumRole.ACTIVE);
+		super(name, EnumAspect.DOOM, EnumTechType.OFFENSE);
 	}
 
 	@Override

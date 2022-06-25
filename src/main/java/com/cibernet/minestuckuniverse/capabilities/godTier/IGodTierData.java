@@ -18,6 +18,7 @@ public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 {
 	boolean addSkill(Skill badge, boolean sendUpdate);
 	boolean hasSkill(Skill badge);
+	List<Skill> getSkills();
 
 	boolean isBadgeActive(Badge badge);
 	boolean isBadgeEnabled(Badge badge);
@@ -36,9 +37,8 @@ public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 	boolean isTechPassiveEnabled(Abilitech tech);
 	void equipTech(Abilitech tech, int slot);
 	void unequipTech(int slot);
-	Abilitech getSelectedTech();
-	void setSelectedTech(Abilitech tech);
-	void resetSelectedTech();
+	Abilitech[] getTechLoadout();
+	List<Abilitech> getAllAbilitechs();
 
 	boolean isGodTier();
 	boolean canGodTier(World world);

@@ -3,7 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,7 +17,7 @@ public class TechBreathKnockback extends TechHeroAspect
 {
     public TechBreathKnockback(String name)
     {
-        super(name, EnumAspect.BREATH, EnumRole.PASSIVE, EnumAspect.RAGE);
+        super(name, EnumAspect.BREATH, EnumTechType.DEFENSE, EnumAspect.RAGE);
     }
 
     protected static final int RADIUS = 16;

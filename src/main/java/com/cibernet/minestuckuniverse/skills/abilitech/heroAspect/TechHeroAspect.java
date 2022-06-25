@@ -1,13 +1,11 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
-import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.skills.Skill;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.client.MSUKeys;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.client.resources.I18n;
@@ -24,10 +22,10 @@ public abstract class TechHeroAspect extends Abilitech
 	public static final Collection<TechHeroAspect> HERO_ASPECT_BADGES = new ArrayList<>();
 
 	protected final EnumAspect heroAspect;
-	protected final EnumRole heroRole;
+	protected final EnumTechType heroRole;
 	protected final EnumAspect[] auxAspects;
 
-	public TechHeroAspect(String name, EnumAspect heroAspect, EnumRole heroRole, long cost, EnumAspect... auxAspects)
+	public TechHeroAspect(String name, EnumAspect heroAspect, EnumTechType heroRole, long cost, EnumAspect... auxAspects)
 	{
 		super(name, cost);
 		this.heroAspect = heroAspect;
@@ -37,7 +35,7 @@ public abstract class TechHeroAspect extends Abilitech
 		setUnlocalizedName(name);
 	}
 
-	public TechHeroAspect(String name, EnumAspect heroAspect, EnumRole heroRole, EnumAspect... auxAspects) {
+	public TechHeroAspect(String name, EnumAspect heroAspect, EnumTechType heroRole, EnumAspect... auxAspects) {
 		this(name, heroAspect, heroRole, 100000, auxAspects);
 	}
 
@@ -108,18 +106,11 @@ public abstract class TechHeroAspect extends Abilitech
 			return false;
 
 		EnumAspect playerAspect;
-		EnumRole playerRole;
+		EnumTechType playerRole;
 
 		if(world.isRemote)
-		{
 			playerAspect = MinestuckPlayerData.title.getHeroAspect();
-			playerRole = EnumRole.getRoleFromClass(MinestuckPlayerData.title.getHeroClass());
-		}
-		else
-		{
-			playerAspect = MinestuckPlayerData.getData(player).title.getHeroAspect();
-			playerRole = EnumRole.getRoleFromClass(MinestuckPlayerData.getData(player).title.getHeroClass());
-		}
+		else playerAspect = MinestuckPlayerData.getData(player).title.getHeroAspect();
 
 		return heroAspect.equals(playerAspect);// && heroRole.equals(playerRole);
 	}

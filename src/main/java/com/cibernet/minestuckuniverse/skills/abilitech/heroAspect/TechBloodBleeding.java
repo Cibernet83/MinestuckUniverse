@@ -8,7 +8,7 @@ import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
@@ -21,7 +21,7 @@ import java.util.Collections;
 public class TechBloodBleeding extends TechHeroAspect
 {
 	public TechBloodBleeding(String name) {
-		super(name, EnumAspect.BLOOD, EnumRole.ACTIVE, EnumAspect.RAGE);
+		super(name, EnumAspect.BLOOD, EnumTechType.OFFENSE, EnumAspect.RAGE);
 	}
 
 	@Override

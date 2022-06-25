@@ -1,15 +1,13 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspectUtil;
 
-import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.block.IGrowable;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -18,7 +16,7 @@ import net.minecraft.world.World;
 public class TechLifeBoneMeal extends TechHeroAspect
 {
 	public TechLifeBoneMeal(String name) {
-		super(name, EnumAspect.LIFE, EnumRole.NEUTRAL);
+		super(name, EnumAspect.LIFE, EnumTechType.UTILITY);
 	}
 
 

@@ -6,7 +6,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.Teleport;
@@ -22,7 +22,7 @@ public class TechSpaceTargetTele extends TechHeroAspect
 	private static int RANGE = 20;
 
 	public TechSpaceTargetTele(String name) {
-		super(name, EnumAspect.SPACE, EnumRole.PASSIVE, EnumAspect.MIND);
+		super(name, EnumAspect.SPACE, EnumTechType.DEFENSE, EnumAspect.MIND);
 	}
 
 	@Override

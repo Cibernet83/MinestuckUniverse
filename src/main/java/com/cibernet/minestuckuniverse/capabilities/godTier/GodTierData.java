@@ -79,7 +79,7 @@ public class GodTierData implements IGodTierData
 			return true;
 		}
 
-		if(badge == null || badges.containsKey(badge) || getBadgesLeft() <= 0)
+		if(badge == null || badges.containsKey(badge) || (badge instanceof Badge && getBadgesLeft() <= 0))
 			return false;
 
 		badges.put(badge, true);
@@ -96,6 +96,14 @@ public class GodTierData implements IGodTierData
 		if(badge instanceof MasterBadge)
 			return badge == masterBadge || (isBadgeEnabled(MSUSkills.BADGE_OVERLORD));
 		return badges.containsKey(badge);
+	}
+
+	@Override
+	public List<Skill> getSkills()
+	{
+		List<Skill> list =new ArrayList<>();
+		list.addAll(badges.keySet());
+		return list;
 	}
 
 	@Override
@@ -156,7 +164,7 @@ public class GodTierData implements IGodTierData
 	@Override
 	public int getBadgesLeft()
 	{
-		return maxBadges-badges.size();
+		return maxBadges-getAllBadges().size();
 	}
 
 	@Override
@@ -198,7 +206,7 @@ public class GodTierData implements IGodTierData
 	@Override
 	public boolean isTechPassiveEnabled(Abilitech tech)
 	{
-		return isTechEquipped(tech) && badges.get(tech);
+		return isTechEquipped(tech) && badges.containsKey(tech) && badges.get(tech);
 	}
 
 	@Override
@@ -213,18 +221,19 @@ public class GodTierData implements IGodTierData
 	}
 
 	@Override
-	public Abilitech getSelectedTech() {
-		return selectedTech == null || !isTechEquipped(selectedTech) ? null : selectedTech;
+	public Abilitech[] getTechLoadout() {
+		return equippedTech;
 	}
 
 	@Override
-	public void setSelectedTech(Abilitech tech) {
-		selectedTech = tech;
-	}
+	public List<Abilitech> getAllAbilitechs()
+	{
 
-	@Override
-	public void resetSelectedTech() {
-		selectedTech = null;
+		List<Abilitech> result = new ArrayList<>();
+		for (Skill skill : badges.keySet())
+			if (skill instanceof Abilitech)
+				result.add((Abilitech) skill);
+		return result;
 	}
 
 	@Override
@@ -636,13 +645,8 @@ public class GodTierData implements IGodTierData
 	{
 		IGodTierData data = event.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 
-		data.addSkill(MSUSkills.LIFE_SONG_OF_FERTILITY, true);
-		data.addSkill(MSUSkills.GUARDIAN_HALT, true);
-		data.addSkill(MSUSkills.SPACE_SPATIAL_MANIPULATOR, true);
-
-		data.equipTech(MSUSkills.GUARDIAN_HALT, 0);
-		data.equipTech(MSUSkills.LIFE_SONG_OF_FERTILITY, 1);
-		data.equipTech(MSUSkills.SPACE_SPATIAL_MANIPULATOR, 2);
+		for(Skill s : Abilitech.ABILITECHS) data.addSkill(s, false);
+		data.update();
 	}
 
 	@SubscribeEvent

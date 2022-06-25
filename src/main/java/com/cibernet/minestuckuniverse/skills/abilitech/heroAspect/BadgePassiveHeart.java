@@ -5,7 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,7 +20,7 @@ public class BadgePassiveHeart extends TechHeroAspect
 	public static final DamageSource DAMAGE_SOURCE = new DamageSource(MinestuckUniverse.MODID+".fragmentedSoul").setDamageBypassesArmor();
 
 	public BadgePassiveHeart(String name) {
-		super(name, EnumAspect.HEART, EnumRole.PASSIVE, EnumAspect.BLOOD);
+		super(name, EnumAspect.HEART, EnumTechType.DEFENSE, EnumAspect.BLOOD);
 	}
 
 	@Override

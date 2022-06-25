@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
+package com.cibernet.minestuckuniverse.skills.badges;
 
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;

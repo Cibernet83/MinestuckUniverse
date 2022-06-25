@@ -5,7 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.Teleport;
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class TechSpaceTele extends TechHeroAspect
 {
 	public TechSpaceTele(String name) {
-		super(name, EnumAspect.SPACE, EnumRole.ACTIVE, EnumAspect.BREATH);
+		super(name, EnumAspect.SPACE, EnumTechType.OFFENSE, EnumAspect.BREATH);
 	}
 
 	@Override

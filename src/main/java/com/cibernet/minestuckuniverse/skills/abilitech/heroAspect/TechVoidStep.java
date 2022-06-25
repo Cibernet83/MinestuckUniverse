@@ -7,7 +7,7 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +26,7 @@ public class TechVoidStep extends TechHeroAspect
 {
     public TechVoidStep(String name)
     {
-        super(name, EnumAspect.VOID, EnumRole.ACTIVE, EnumAspect.BREATH);
+        super(name, EnumAspect.VOID, EnumTechType.OFFENSE, EnumAspect.BREATH);
     }
 
     @Override

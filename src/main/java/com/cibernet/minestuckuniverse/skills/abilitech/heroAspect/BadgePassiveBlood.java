@@ -4,7 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class BadgePassiveBlood extends TechHeroAspect
 {
 	public BadgePassiveBlood(String name) {
-		super(name, EnumAspect.BLOOD, EnumRole.PASSIVE, EnumAspect.HOPE);
+		super(name, EnumAspect.BLOOD, EnumTechType.DEFENSE, EnumAspect.HOPE);
 	}
 
 	protected static final int RADIUS = 16;

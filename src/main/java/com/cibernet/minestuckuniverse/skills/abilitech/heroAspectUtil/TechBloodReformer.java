@@ -6,7 +6,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIFollowReformer;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAINearestNonReformer;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.entity.EntityListFilter;
 import com.mraof.minestuck.entity.underling.EntityUnderling;
 import com.mraof.minestuck.util.EnumAspect;
@@ -29,7 +29,7 @@ public class TechBloodReformer extends TechHeroAspect
 {
 	public TechBloodReformer(String name)
 	{
-		super(name, EnumAspect.BLOOD, EnumRole.NEUTRAL);
+		super(name, EnumAspect.BLOOD, EnumTechType.UTILITY);
 	}
 
 	@Override

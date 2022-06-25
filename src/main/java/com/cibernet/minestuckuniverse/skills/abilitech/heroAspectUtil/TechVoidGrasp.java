@@ -6,13 +6,11 @@ import com.cibernet.minestuckuniverse.capabilities.game.GameData;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
@@ -26,7 +24,7 @@ import java.util.List;
 public class TechVoidGrasp extends TechHeroAspect
 {
 	public TechVoidGrasp(String name) {
-		super(name, EnumAspect.VOID, EnumRole.NEUTRAL);
+		super(name, EnumAspect.VOID, EnumTechType.UTILITY);
 	}
 
 	@Override

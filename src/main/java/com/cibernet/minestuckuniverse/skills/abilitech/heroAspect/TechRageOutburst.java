@@ -5,7 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.damage.EntityCritDamageSource;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class TechRageOutburst extends TechHeroAspect
 {
 	public TechRageOutburst(String name) {
-		super(name, EnumAspect.RAGE, EnumRole.PASSIVE, EnumAspect.MIND);
+		super(name, EnumAspect.RAGE, EnumTechType.DEFENSE, EnumAspect.MIND);
 	}
 
 	@Override

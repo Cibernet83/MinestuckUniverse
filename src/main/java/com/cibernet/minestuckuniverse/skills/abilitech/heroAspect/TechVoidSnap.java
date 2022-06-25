@@ -4,7 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.entity.EntityMinestuck;
 import com.mraof.minestuck.util.EnumAspect;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class TechVoidSnap extends TechHeroAspect
 {
 	public TechVoidSnap(String name) {
-		super(name, EnumAspect.VOID, EnumRole.PASSIVE, EnumAspect.DOOM);
+		super(name, EnumAspect.VOID, EnumTechType.DEFENSE, EnumAspect.DOOM);
 	}
 
 	protected static final int ENERGY_USE = 2;

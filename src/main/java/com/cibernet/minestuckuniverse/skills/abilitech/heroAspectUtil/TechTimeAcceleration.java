@@ -6,7 +6,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.block.state.IBlockState;
@@ -26,7 +26,7 @@ public class TechTimeAcceleration extends TechHeroAspect
 	private static final Random random = new Random();
 
 	public TechTimeAcceleration(String name) {
-		super(name, EnumAspect.TIME, EnumRole.NEUTRAL);
+		super(name, EnumAspect.TIME, EnumTechType.UTILITY);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIAttackRageShifted;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.entity.ai.EntityAINearestAttackableTargetWithHeight;
 import com.mraof.minestuck.util.EnumAspect;
@@ -37,7 +37,7 @@ public class TechRageManagement extends TechHeroAspect
 	public static final AttributeModifier ATTACK_MOD = new AttributeModifier(UUID.fromString("a10e3486-c1dd-4a74-acfc-9be5d8bcaecc"), "rage_util_boost", 4, 0).setSaved(true);
 
 	public TechRageManagement(String name) {
-		super(name, EnumAspect.RAGE, EnumRole.NEUTRAL);
+		super(name, EnumAspect.RAGE, EnumTechType.UTILITY);
 	}
 
 	@Override

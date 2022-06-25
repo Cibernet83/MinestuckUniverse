@@ -4,7 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
@@ -18,7 +18,7 @@ import java.util.List;
 public class TechHopePrayers extends TechHeroAspect
 {
 	public TechHopePrayers(String name) {
-		super(name, EnumAspect.HOPE, EnumRole.PASSIVE, EnumAspect.LIGHT);
+		super(name, EnumAspect.HOPE, EnumTechType.DEFENSE, EnumAspect.LIGHT);
 	}
 
 	protected static final int RADIUS = 20;

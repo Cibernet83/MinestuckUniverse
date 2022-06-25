@@ -6,14 +6,12 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.cibernet.minestuckuniverse.util.SoulData;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -23,7 +21,7 @@ import java.util.Collections;
 public class TechHeartSoulSwitcher extends TechHeroAspect
 {
 	public TechHeartSoulSwitcher(String name) {
-		super(name, EnumAspect.HEART, EnumRole.NEUTRAL);
+		super(name, EnumAspect.HEART, EnumTechType.UTILITY);
 	}
 
 	@Override

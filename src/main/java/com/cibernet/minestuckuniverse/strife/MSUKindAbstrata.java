@@ -155,7 +155,7 @@ public class MSUKindAbstrata
 		registry.register(fncysntatkind.setRegistryName("fancy_santa"));
 		registry.register(umbrellakind.setRegistryName("umbrella"));
 		registry.register(broomkind.setRegistryName("broom"));
-		registry.register(tridentkind.setRegistryName("tridentkind"));
+		registry.register(tridentkind.setRegistryName("trident"));
 		registry.register(doubleTridentkind.setRegistryName("2x3dent"));
 
 		registry.register(rockkind.setRegistryName("rock"));

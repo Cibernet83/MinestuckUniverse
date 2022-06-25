@@ -5,8 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumRole;
-import com.cibernet.minestuckuniverse.util.MSUUtils;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.block.IGrowable;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -18,7 +17,7 @@ import net.minecraft.world.World;
 public class TechLifeFertility extends TechHeroAspect
 {
 	public TechLifeFertility(String name) {
-		super(name, EnumAspect.LIFE, EnumRole.NEUTRAL);
+		super(name, EnumAspect.LIFE, EnumTechType.UTILITY);
 	}
 
 	protected static final int RADIUS = 20;

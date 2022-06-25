@@ -132,12 +132,12 @@ public class SkillKeyStates implements ISkillKeyStates
 				if(tech.canUse(event.player.world, event.player))
 				{
 					if(i <= 2) tech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState((i == 0 ? Key.PRIMARY : Key.SECONDARY)), keyStates.getKeyTime(i == 0 ? Key.PRIMARY : i == 1 ? Key.SECONDARY : Key.TERTIARY));
-					else if(tech.equals(data.getSelectedTech()))
+					/*else if(tech.equals(data.getSelectedTech()))
 					{
 						isActive = tech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(Key.TERTIARY), keyStates.getKeyTime(Key.TERTIARY));
 						if(keyStates.getKeyState(Key.TERTIARY).equals(KeyState.NONE))
 							data.resetSelectedTech();
-					}
+					}*/
 
 					if(data.isTechPassiveEnabled(tech))
 						isActive = isActive || tech.onEquippedTick(event.player.world, event.player, badgeEffects);

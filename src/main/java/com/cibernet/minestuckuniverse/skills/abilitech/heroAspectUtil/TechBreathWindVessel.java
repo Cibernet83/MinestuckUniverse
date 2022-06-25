@@ -8,7 +8,7 @@ import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +31,7 @@ public class TechBreathWindVessel extends TechHeroAspect
 {
 
 	public TechBreathWindVessel(String name) {
-		super(name, EnumAspect.BREATH, EnumRole.NEUTRAL);
+		super(name, EnumAspect.BREATH, EnumTechType.UTILITY);
 	}
 
 	@Override

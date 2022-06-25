@@ -3,7 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -17,7 +17,7 @@ import java.util.List;
 public class TechBreathGale extends TechHeroAspect
 {
 	public TechBreathGale(String name) {
-		super(name, EnumAspect.BREATH, EnumRole.ACTIVE, EnumAspect.LIGHT);
+		super(name, EnumAspect.BREATH, EnumTechType.OFFENSE, EnumAspect.LIGHT);
 	}
 
 	@Override

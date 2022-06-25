@@ -57,6 +57,7 @@ public class MinestuckUniverseBlocks
 	public static final Block operandiLog = new OperandiLogBlock("operandi_log", 2.0f, 0, OperandiBlock.LOG, "axe");
 
     public static Block holopad = new BlockHolopad();
+    public static Block fraymachine = new BlockFraymachine();
 	
 	public static Block machineChasis = new BlockMachineChasis();
     public static Block gristHopper = new BlockGristHopper();
@@ -229,7 +230,8 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, operandiGlass, new OperandiBlockItem("operandi_glass", MinestuckUniverseBlocks.operandiGlass));
 
         registerBlock(registry, holopad);
-        
+        registerBlock(registry, fraymachine);
+
         registerBlock(registry, machineChasis);
 		registerBlock(registry, gristHopper);
 		registerBlock(registry, autoWidget);

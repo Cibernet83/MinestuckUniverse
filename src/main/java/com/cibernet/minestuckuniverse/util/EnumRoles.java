@@ -4,11 +4,11 @@ import com.mraof.minestuck.util.EnumClass;
 
 import static com.mraof.minestuck.util.EnumClass.*;
 
-public enum EnumRole
+public enum EnumRoles
 {
 	ACTIVE, PASSIVE, NEUTRAL;
 
-	public static EnumRole getRoleFromClass(EnumClass heroClass)
+	public static EnumRoles getRoleFromClass(EnumClass heroClass)
 	{
 		if(     heroClass.equals(THIEF)     || heroClass.equals(PRINCE) || heroClass.equals(WITCH)  ||
 				heroClass.equals(KNIGHT)    || heroClass.equals(MAGE)   || heroClass.equals(SYLPH)   ||

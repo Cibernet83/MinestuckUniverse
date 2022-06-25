@@ -5,7 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.damage.EntityCritDamageSource;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
@@ -25,7 +25,7 @@ import java.util.List;
 public class TechLightStriker extends TechHeroAspect
 {
 	public TechLightStriker(String name) {
-		super(name, EnumAspect.LIGHT, EnumRole.ACTIVE, EnumAspect.DOOM);
+		super(name, EnumAspect.LIGHT, EnumTechType.OFFENSE, EnumAspect.DOOM);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
-import com.cibernet.minestuckuniverse.util.EnumRole;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class TechDoomDecay extends TechHeroAspect
 {
 	public TechDoomDecay(String name) {
-		super(name, EnumAspect.DOOM, EnumRole.PASSIVE, EnumAspect.BLOOD);
+		super(name, EnumAspect.DOOM, EnumTechType.DEFENSE, EnumAspect.BLOOD);
 	}
 
 	protected static final int RADIUS = 16;
