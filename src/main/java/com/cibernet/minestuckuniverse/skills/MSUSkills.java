@@ -277,7 +277,7 @@ public class MSUSkills
 	};
 
 	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward");
-	public static final Abilitech GUARDIAN_HALT = new TechKnightWard("guardian_halt");
+	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt");
 	public static final Abilitech SYLPH_MEND = new TechSylph("sylph_mend");
 	public static final Abilitech PRINCE_WRATH = new TechPrince("prince_wrath");
 	public static final Abilitech WITCH_INHIBITION = new TechWitch("witch_inhibition");

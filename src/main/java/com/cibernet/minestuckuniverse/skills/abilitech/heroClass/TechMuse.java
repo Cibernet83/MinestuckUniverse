@@ -28,7 +28,7 @@ public class TechMuse extends TechHeroClass
 	}
 
 	@Override
-	public boolean onBadgeTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time) {
+	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time) {
 		return false;
 	}
 

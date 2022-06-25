@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.capabilities.keyStates;
 
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
@@ -8,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.lwjgl.Sys;
 
 public class SkillKeyStates implements ISkillKeyStates
 {
@@ -131,14 +133,22 @@ public class SkillKeyStates implements ISkillKeyStates
 
 				if(tech.canUse(event.player.world, event.player))
 				{
-					if(i <= 2) tech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState((i == 0 ? Key.PRIMARY : Key.SECONDARY)), keyStates.getKeyTime(i == 0 ? Key.PRIMARY : i == 1 ? Key.SECONDARY : Key.TERTIARY));
+					Key key;
+
+					switch (i)
+					{
+						case 1: key = Key.PRIMARY; break;
+						case 0: key = Key.SECONDARY; break;
+						default: key = Key.TERTIARY; break;
+					}
+
+					isActive = tech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(key), keyStates.getKeyTime(key));
 					/*else if(tech.equals(data.getSelectedTech()))
 					{
 						isActive = tech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(Key.TERTIARY), keyStates.getKeyTime(Key.TERTIARY));
 						if(keyStates.getKeyState(Key.TERTIARY).equals(KeyState.NONE))
 							data.resetSelectedTech();
 					}*/
-
 					if(data.isTechPassiveEnabled(tech))
 						isActive = isActive || tech.onEquippedTick(event.player.world, event.player, badgeEffects);
 				}

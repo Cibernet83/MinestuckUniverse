@@ -216,7 +216,8 @@ public class GodTierData implements IGodTierData
 	}
 
 	@Override
-	public void unequipTech(int slot) {
+	public void unequipTech(int slot)
+	{
 		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))] = null;
 	}
 

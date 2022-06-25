@@ -24,7 +24,7 @@ public class TechLord extends TechHeroClass
 	}
 
 	@Override
-	public boolean onBadgeTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
+	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
 	{
 		Title title = MinestuckPlayerData.getTitle(IdentifierHandler.encode(player));
 		boolean isOverlord = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.BADGE_OVERLORD);

@@ -40,9 +40,9 @@ public class MSUKeys
 		skillKeys = new KeyBinding[SkillKeyStates.Key.values().length];
 		downs = new boolean[SkillKeyStates.Key.values().length];
 
-		skillKeys[SkillKeyStates.Key.PRIMARY.ordinal()] = new KeyBinding("key.minestuckuniverse.classAction", Keyboard.KEY_J, "key.categories.minestuck");
-		skillKeys[SkillKeyStates.Key.SECONDARY.ordinal()] = new KeyBinding("key.minestuckuniverse.aspectAction", Keyboard.KEY_H, "key.categories.minestuck");
-		skillKeys[SkillKeyStates.Key.TERTIARY.ordinal()] = new KeyBinding("key.minestuckuniverse.godTierUtil", Keyboard.KEY_K, "key.categories.minestuck");
+		skillKeys[SkillKeyStates.Key.PRIMARY.ordinal()] = new KeyBinding("key.minestuckuniverse.abilitechPrimary", Keyboard.KEY_J, "key.categories.minestuck");
+		skillKeys[SkillKeyStates.Key.SECONDARY.ordinal()] = new KeyBinding("key.minestuckuniverse.abilitechSecondary", Keyboard.KEY_H, "key.categories.minestuck");
+		skillKeys[SkillKeyStates.Key.TERTIARY.ordinal()] = new KeyBinding("key.minestuckuniverse.abilitechTertiary", Keyboard.KEY_K, "key.categories.minestuck");
 
 		for (KeyBinding binding : skillKeys)
 			ClientRegistry.registerKeyBinding(binding);

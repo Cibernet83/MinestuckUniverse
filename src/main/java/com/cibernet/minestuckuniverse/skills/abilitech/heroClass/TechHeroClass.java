@@ -31,7 +31,6 @@ public abstract class TechHeroClass extends Abilitech
 		this(name, heroClass, 5000);
 	}
 
-	public abstract boolean onBadgeTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time);
 
 	@Override
 	public boolean canUse(World world, EntityPlayer player)

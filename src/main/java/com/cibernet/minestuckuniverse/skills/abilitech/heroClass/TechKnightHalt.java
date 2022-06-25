@@ -16,7 +16,7 @@ public class TechKnightHalt extends TechHeroClass {
 	}
 
 	@Override
-	public boolean onBadgeTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
+	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
 	{
 		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 5)
 		{
@@ -24,7 +24,7 @@ public class TechKnightHalt extends TechHeroClass {
 			return false;
 		}
 
-		if(state == SkillKeyStates.KeyState.NONE || time >= 25)
+		if(state == SkillKeyStates.KeyState.NONE || time >= 60)
 			return false;
 
 		if(time >= 20)
@@ -38,6 +38,8 @@ public class TechKnightHalt extends TechHeroClass {
 				target.motionX = 0;
 				target.motionY = 0;
 				target.motionZ = 0;
+
+
 			}
 
 			badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.BURST, EnumClass.KNIGHT, 20);

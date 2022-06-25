@@ -20,16 +20,17 @@ public class TechKnightWard extends TechHeroClass
 	}
 
 	@Override
-	public boolean onBadgeTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
+	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
 	{
+		if(state == SkillKeyStates.KeyState.NONE || time >= 45)
+			return false;
+
+
 		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 2)
 		{
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 			return false;
 		}
-
-		if(state == SkillKeyStates.KeyState.NONE || time >= 45)
-			return false;
 
 		if(time == 40)
 		{

@@ -25,7 +25,7 @@ public class TechMaid extends TechHeroClass
 	}
 
     @Override
-    public boolean onBadgeTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
+    public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
     {
 	    if(state == SkillKeyStates.KeyState.NONE || time > 40)
 		    return false;
