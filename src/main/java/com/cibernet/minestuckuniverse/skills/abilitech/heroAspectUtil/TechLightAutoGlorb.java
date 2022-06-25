@@ -42,8 +42,7 @@ public class TechLightAutoGlorb extends TechLightGlorb
 	@Override
 	public boolean onEquippedTick(World world, EntityPlayer player, IBadgeEffects badgeEffects)
 	{
-		if(((badgeEffects.isGlorbbing() &&
-				player.world.getLightFor(EnumSkyBlock.BLOCK, player.getPosition()) < 8)) &&
+		if(((player.world.getLightFor(EnumSkyBlock.BLOCK, player.getPosition()) < 8)) &&
 				   player.world.getBlockState(player.getPosition()).getMaterial() == Material.AIR)
 		{
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIGHT, 4);
