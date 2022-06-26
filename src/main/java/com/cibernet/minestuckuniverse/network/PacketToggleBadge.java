@@ -42,7 +42,7 @@ public class PacketToggleBadge extends MSUPacket
         IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
         if(data.hasSkill(badge))
         {
-            data.setBadgeEnabled(badge, !data.isBadgeEnabled(badge));
+            data.setSkillPassiveEnabled(badge, !data.isBadgeEnabled(badge));
             data.update();
 
             if(sendMessage)

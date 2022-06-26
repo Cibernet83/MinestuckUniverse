@@ -42,7 +42,7 @@ public class GuiFraymachine extends GuiScreen
 		put(EnumAspect.MIND.name(), new Pair<>("title."+EnumAspect.MIND.toString(), 0x06FFC9));
 		put(EnumAspect.DOOM.name(), new Pair<>("title."+EnumAspect.DOOM.toString(), 0x306800));
 
-		put(EnumClass.BARD.name(), new Pair<>("title."+EnumClass.KNIGHT.toString(), 0xDB5397));
+		put(EnumClass.BARD.name(), new Pair<>("title."+EnumClass.BARD.toString(), 0xDB5397));
 		put(EnumClass.HEIR.name(), new Pair<>("title."+EnumClass.HEIR.toString(), 0x6D9EEB));
 		put(EnumClass.KNIGHT.name(), new Pair<>("title."+EnumClass.KNIGHT.toString(), 0xEF7F34));
 		put(EnumClass.MAGE.name(), new Pair<>("title."+EnumClass.MAGE.toString(), 0xB55BFF));
@@ -85,6 +85,9 @@ public class GuiFraymachine extends GuiScreen
 	int clickTime = 0;
 	boolean showExtra = false;
 
+	int xOffset;
+	int yOffset;
+
 	protected final ArrayList<Abilitech> tech = new ArrayList<>();
 
 	public GuiFraymachine(EntityPlayer player)
@@ -117,8 +120,8 @@ public class GuiFraymachine extends GuiScreen
 		drawDefaultBackground();
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-		int yOffset = this.height / 2 - ySize/2;
-		int xOffset = this.width / 2 - (xSize-16)/2;
+		yOffset = this.height / 2 - ySize/2;
+		xOffset = this.width / 2 - (xSize-16)/2;
 
 		mc.getTextureManager().bindTexture(TEXTURES);
 		this.drawTexturedModalRect(xOffset, yOffset, 0, 0, xSize, ySize);
@@ -143,8 +146,11 @@ public class GuiFraymachine extends GuiScreen
 
 			if(selected != i || !mouseClicked)
 			{
+				if(!abilitech.canUse(mc.player.world, mc.player))
+					GlStateManager.color(0.5f,0.5f,0.5f);
 				mc.getTextureManager().bindTexture(new ResourceLocation(abilitech.getRegistryName().getResourceDomain(), "textures/gui/abilitechs/icons/"+abilitech.getRegistryName().getResourcePath()+".png"));
 				drawScaledCustomSizeModalRect(x, y, 0, 0, 256, 256, 24, 24, 256, 256);
+				GlStateManager.color(1,1,1);
 			}
 
 			if(!mouseClicked && pointInTechSlot(x, y, mouseX, mouseY))
@@ -169,8 +175,11 @@ public class GuiFraymachine extends GuiScreen
 
 			if(!mouseClicked || selected != maxTech+i)
 			{
+				if(!abilitech.canUse(mc.player.world, mc.player))
+					GlStateManager.color(0.5f,0.5f,0.5f);
 				mc.getTextureManager().bindTexture(new ResourceLocation(abilitech.getRegistryName().getResourceDomain(), "textures/gui/abilitechs/icons/"+abilitech.getRegistryName().getResourcePath()+".png"));
 				drawScaledCustomSizeModalRect(x, y, 0, 0, 256, 256, 24, 24, 256, 256);
+				GlStateManager.color(1,1,1);
 			}
 
 			if(!mouseClicked && pointInTechSlot(x, y, mouseX, mouseY))
@@ -216,15 +225,47 @@ public class GuiFraymachine extends GuiScreen
 		{
 			descLines = 0;
 			mc.getTextureManager().bindTexture(TEXTURES);
-			drawTexturedModalRect(xOffset+222, yOffset+35, 40, 241, 10, 15);
+			drawTexturedModalRect(xOffset+222, yOffset+35, 38, 241, 10, 15);
 		}
 
-		if(mouseClicked && selected >= 0)
+		for(int i = 0; i < data.getTechSlots(); i++)
+		{
+			Abilitech abilitech = data.getTechLoadout()[i];
+			if(abilitech == null) continue;
+
+			int x = xOffset + 120 - data.getTechSlots()*12 + i*24;
+			int y = yOffset + 153;
+
+			if((!mouseClicked || selected != maxTech+i))
+			{
+				if(abilitech.getTags().contains("@"+EnumTechType.PASSIVE+"@") && !data.isTechPassiveEnabled(abilitech))
+				{
+					mc.getTextureManager().bindTexture(TEXTURES);
+					drawTexturedModalRect(x, y, 26, 203, 24, 24);
+				}
+			}
+		}
+
+		if(selected >= 0)
 		{
 			Abilitech abilitech = selected >= maxTech ? data.getTech(selected-maxTech) : tech.get(selected+techTab*maxTech);
-			mc.getTextureManager().bindTexture(TEXTURES);
-			mc.getTextureManager().bindTexture(new ResourceLocation(abilitech.getRegistryName().getResourceDomain(), "textures/gui/abilitechs/icons/"+abilitech.getRegistryName().getResourcePath()+".png"));
-			drawScaledCustomSizeModalRect(mouseX + selOffX, mouseY + selOffY, 0, 0, 256, 256, 24, 24, 256, 256);
+
+			if(mouseClicked)
+			{
+				if(!abilitech.canUse(mc.player.world, mc.player))
+					GlStateManager.color(0.5f,0.5f,0.5f);
+				mc.getTextureManager().bindTexture(TEXTURES);
+				mc.getTextureManager().bindTexture(new ResourceLocation(abilitech.getRegistryName().getResourceDomain(), "textures/gui/abilitechs/icons/"+abilitech.getRegistryName().getResourcePath()+".png"));
+				drawScaledCustomSizeModalRect(mouseX + selOffX, mouseY + selOffY, 0, 0, 256, 256, 24, 24, 256, 256);
+				GlStateManager.color(1,1,1);
+			}
+			else
+			{
+				if(!abilitech.canUse(player.world, player))
+					drawHoveringText(I18n.format("gui.abilitechBlocked"), mouseX, mouseY);
+				else if(abilitech.getTags().contains("@"+EnumTechType.PASSIVE+"@") && !data.isTechPassiveEnabled(abilitech))
+					drawHoveringText(I18n.format("gui.abilitechDisabled"), mouseX, mouseY);
+			}
 		}
 	}
 
@@ -240,10 +281,23 @@ public class GuiFraymachine extends GuiScreen
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
 	{
 		super.mouseClicked(mouseX, mouseY, mouseButton);
-		mouseClicked = true;
 
-		int yOffset = this.height / 2 - ySize/2;
-		int xOffset = this.width / 2 - (xSize-16)/2;
+		if(mouseButton == 0)
+			mouseClicked = true;
+		else if(mouseButton == 1)
+		{
+			IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
+
+			if(!mouseClicked && selected >= maxTech)
+			{
+				Abilitech abilitech = data.getTechLoadout()[selected-maxTech];
+				if(abilitech != null)
+				{
+					data.setSkillPassiveEnabled(abilitech, !data.isTechPassiveEnabled(abilitech));
+					data.update();
+				}
+			}
+		}
 
 		if(pointInRegion(xOffset + 30, yOffset + 130, 14, 11, mouseX, mouseY) && techTab > 0)
 			techTab--;
@@ -257,8 +311,6 @@ public class GuiFraymachine extends GuiScreen
 	{
 		super.mouseReleased(mouseX, mouseY, state);
 		IGodTierData data = Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
-		int yOffset = this.height / 2 - ySize/2;
-		int xOffset = this.width / 2 - (xSize-16)/2;
 
 		if(mouseClicked && selected >= 0)
 		{
@@ -280,7 +332,8 @@ public class GuiFraymachine extends GuiScreen
 		}
 
 
-		mouseClicked = false;
+		if(state == 0)
+			mouseClicked = false;
 	}
 
 	protected void drawSplitString(String str, int x, int y, int wrapWidth, int maxHeight, int textColor, int startingLine, boolean dropShadow)

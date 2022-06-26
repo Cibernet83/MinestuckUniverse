@@ -23,7 +23,7 @@ public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 
 	boolean isBadgeActive(Badge badge);
 	boolean isBadgeEnabled(Badge badge);
-	void setBadgeEnabled(Badge badge, boolean enabled);
+	void setSkillPassiveEnabled(Skill badge, boolean enabled);
 	List<Badge> getAllBadges();
 	void resetBadges();
 	void resetTitleBadges(boolean sendUpdate);

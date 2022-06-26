@@ -145,7 +145,7 @@ public class GodTierData implements IGodTierData
 	}
 
 	@Override
-	public void setBadgeEnabled(Badge badge, boolean enabled)
+	public void setSkillPassiveEnabled(Skill badge, boolean enabled)
 	{
 		if(!hasSkill(badge) || !badge.canDisable())
 			return;

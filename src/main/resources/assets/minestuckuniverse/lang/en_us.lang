@@ -682,6 +682,8 @@ container.boondollarRegister=Boondollar Register
 container.itemVoid=§kItem Void
 
 commands.globalsay.usage=/globalsay <message>
+commands.localizedChat.outOfReach=%s is too far away to talk to!
+
 commands.godtier.usage=/godtier <title|reset|maxbadges|mastercontrol|lunarsway>
 commands.godtier.locate.wrongDim=Cannot find Quest Bed outside of The Medium
 commands.godtier.maxbadges.usage=/godtier maxbadges <amount> [player]
@@ -694,7 +696,10 @@ commands.godtier.mastercontrol.success.off=Revoked access to all Badges from %s
 commands.godtier.lunarsway.usage=/godtier lunarsway <prospit|derse>
 commands.godtier.lunarsway.prospit=Set %s's Lunar Sway to Prospit
 commands.godtier.lunarsway.derse=Set %s's Lunar Sway to Derse
-commands.localizedChat.outOfReach=%s is too far away to talk to!
+
+commands.sburbSkills.usage=/sburbSkills <grant|revoke> <skill> [player]
+commands.sburbSkills.grant.success=Successfully gave %s the %s skill
+commands.sburbSkills.revoke.success=Successfully revoked from %s the %s skill
 
 message.transportalizer.notOwner=This is not your transportalizer!
 message.transportalizer.notOpped=You do not have permission to use this transportalizer.
@@ -1033,6 +1038,8 @@ gui.noBadgesLeft=§cYou can't unlock any more badges!
 gui.badgeDisabled=§cClick to enable.
 gui.badgeBlocked=§cSomething is inhibiting the effect of this badge!
 gui.needXp=§cYou need at least %s experience levels to allocate Skill XP
+gui.abilitechDisabled=§cRight-Click to enable.
+gui.abilitechBlocked=§cSomething is inhibiting this Abilitech.
 
 enchantment.minestuckuniverse.superpunch=Superpunch
 enchantment.minestuckuniverse.superpunch.desc=Increases the knockback strength of the weapon but increases its attack damage inversely to the enchanment level
@@ -1311,6 +1318,8 @@ techType.passive=Passive
 
 tech.knight_ward.name=Knight's Ward
 tech.knight_ward.tooltip=Allows you to cast a protective spell upon yourself and any living creature. Charging it allows you target all nearby living being beings at once.
+tech.guardian_halt.name=Guardian Halt
+tech.guardian_halt.tooltip=Stops all nearby projectiles in place for a brief period of time.
 tech.sylph_mend.name=Sylph's Mend
 tech.sylph_mend.tooltip=§9Earning this tech has proven your worth as a SYLPH, granting you the ability to heal any living creature by looking at it and holding [%s].
 tech.thief_filch.name=Thief's Filch
@@ -1353,29 +1362,30 @@ tech.hardlight_bubble.tooltip=Bend light itself to create a protective dome arou
 tech.skaian_insight.name=Skaian Insight
 tech.skaian_insight.tooltip=This Abilitech allows to tap into your mastery over the aspect of @LIGHT@, granting you the luck and insight needed to find important items such as Jujus and Skaian Scrolls more easily.
 
-badge.passiveBreath.name=Windsweeping Typhoon Badge
-badge.passiveBreath.tooltip=§9This badge proves your mastery over the aspect of BREATH, allowing you to summon wind capable of knocking most entities back by pressing [%s].
-badge.activeBreath.name=Tempesting Ascension Badge
-badge.activeBreath.tooltip=§9This badge proves your mastery over the aspect of BREATH, allowing you to summon an updraft when charging [%s], propelling you upwards while leaving a deadly lightning strike behind.
-badge.utilBreath.name=Vessel of the Wind Badge
-badge.utilBreath.tooltip=§9This badge proves your mastery over the aspect of BREATH, granting you the ability to become one with the wind by pressing [%s].
-badge.utilBreath.unlock=§aRequires 200 Feathers and 128 Hero Stone Shards of Breath to unlock.
+tech.windsweeping_typhoon.name=Windsweeping Typhoon
+tech.windsweeping_typhoon.tooltip=Uses the aspect of @BREATH@ to summon intense wind that knocks most entities back.
+tech.tempesting_ascension.name=Tempesting Ascension
+tech.tempesting_ascension.tooltip=Harnesses the power found within the aspect of @BREATH@ to propel you upwards into the air, striking deadly lightning where you used to stand.
+tech.vessel_of_the_wind.name=Vessel of the Wind
+tech.vessel_of_the_wind.tooltip=Lets you become one with the wind, granting you temporary flight as well as the ability to phase to non-full blocks.
 
-badge.activeTime.name=Temporal Recall Badge
-badge.activeTime.tooltip=§9This badge proves your mastery over the aspect of TIME, allowing you to go 5 seconds into the past by holding [%s], restoring your health and position to how they were then.
-badge.passiveTime.name=Chronofreeze Badge
-badge.passiveTime.tooltip=§9This badge proves your mastery over the aspect of TIME, allowing you to briefly Time Stop a target by pressing [%s].
-badge.utilTime.name=Flow Accelerator Badge
-badge.utilTime.tooltip=§9This badge proves your mastery over the aspect of TIME, granting you the ability to speed up any block by looking at it and pressing [%s].
-badge.utilTime.unlock=§aRequires 100 clocks and 128 Hero Stone Shards of Time to unlock.
+tech.temporal_recall.name=Temporal Recall
+tech.temporal_recall.tooltip=Lets you travel through %TIME% itself, restoring your health and position to how they were 5 seconds in the past.
+tech.chronofreeze.name=Chronofreeze
+tech.chronofreeze.tooltip=Uses the aspect of %TIME% to conjure Time Stop for a short period of time upon a target, completely freezing them in place.
+tech.flow_accelerator.name=Flow Accelerator
+tech.flow_accelerator.tooltip=Speeds up whatever block you're looking at whilst being held.
 
-badge.passiveSpace.name=Spatial Warp Badge
-badge.passiveSpace.tooltip=§9This badge proves your mastery over the aspect of SPACE, allowing you to teleport any targeted entity by pressing [%s], crouch while pressing to summon a Teleport Focus Point.
-badge.activeSpace.name=Wormhole Trotter Badge
-badge.activeSpace.tooltip=§9This badge proves your mastery over the aspect of SPACE, allowing teleport forward by pressing [%s].
-badge.utilSpace.name=Matter Manipulator Badge
-badge.utilSpace.tooltip=§9This badge proves your mastery over the aspect of SPACE, granting you the ability to mark corners of an area by tapping [%s] and collapsing it into a single item by holding the same key. The corners defined by pressing the key are the blocks you are looking at.
-badge.utilSpace.unlock=§aRequires 200 Spatial Manipulation Dust and 128 Hero Stone Shards of Space to unlock.
+tech.spatial_warp.name=Spatial Warp
+tech.spatial_warp.tooltip=Crouch while pressing to summon a Teleport Focus Point. Teleports the targeted entity to your set Anchor Point, or a nearby random position if none is set.
+tech.wormhole_trotter.name=Wormhole Trotter
+tech.wormhole_trotter.tooltip=Bend @SPACE@ itself to teleport yourself forwards a couple of blocks.
+tech.anchored_wormhole.name=Anchored Wormhole
+tech.anchored_wormhole.tooltip=Crouch while pressing to summon a Teleport Focus Point. Teleports you to your set Anchor Point, or a nearby random position if none is set.
+tech.matter_manipulator.name=Matter Manipulator
+tech.matter_manipulator.tooltip=Bends @SPACE@ itself to collapse a defined area into a single item. The corners of the area are defined by pressing the key while looking at the desired block.
+tech.spatial_manipulator.name=Spatial Manipulator
+tech.spatial_manipulator.tooltip=Shrinks and enlarges certain entities and SBURB Machines, similar in function to Spatial Manipulation Dust.
 
 badge.passiveDoom.name=Withering Whisper Badge
 badge.passiveDoom.tooltip=§9This badge proves your mastery over the aspect of DOOM, allowing you to cast a deadly Decay spell upon all nearby living creatures by pressing [%s].

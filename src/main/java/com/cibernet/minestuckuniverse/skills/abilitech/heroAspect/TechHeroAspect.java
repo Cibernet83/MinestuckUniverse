@@ -1,6 +1,5 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
 
-import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.client.MSUKeys;
@@ -15,28 +14,28 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public abstract class TechHeroAspect extends Abilitech
 {
 	public static final Collection<TechHeroAspect> HERO_ASPECT_BADGES = new ArrayList<>();
 
 	protected final EnumAspect heroAspect;
-	protected final EnumTechType heroRole;
-	protected final EnumAspect[] auxAspects;
+	protected final EnumTechType[] techTypes;
 
-	public TechHeroAspect(String name, EnumAspect heroAspect, EnumTechType heroRole, long cost, EnumAspect... auxAspects)
+	public TechHeroAspect(String name, EnumAspect heroAspect, long cost, EnumTechType... techTypes)
 	{
 		super(name, cost);
 		this.heroAspect = heroAspect;
-		this.heroRole = heroRole;
-		this.auxAspects = auxAspects;
+		this.techTypes = techTypes;
 		HERO_ASPECT_BADGES.add(this);
 		setUnlocalizedName(name);
 	}
 
 	public TechHeroAspect(String name, EnumAspect heroAspect, EnumTechType heroRole, EnumAspect... auxAspects) {
-		this(name, heroAspect, heroRole, 100000, auxAspects);
+		this(name, heroAspect, 100000, heroRole);
 	}
 
 	@Override
@@ -55,6 +54,7 @@ public abstract class TechHeroAspect extends Abilitech
 		return I18n.format(getUnlocalizedName() + ".tooltip", keyName);
 	}
 
+	/*
 	@Override
 	public String getUnlockRequirements()
 	{
@@ -68,7 +68,7 @@ public abstract class TechHeroAspect extends Abilitech
 			return I18n.format("badge.aspect.unlock.aux", heroAspect.getDisplayName(), entries, auxShardAmount, auxAspects[auxAspects.length-1].getDisplayName());
 		}
 		else return I18n.format("badge.aspect.unlock", heroAspect.getDisplayName());
-	}
+	}*/
 
 	@Override
 	public boolean canUnlock(World world, EntityPlayer player)
@@ -100,9 +100,13 @@ public abstract class TechHeroAspect extends Abilitech
 	}
 
 	@Override
-	public String[] getTags()
+	public List<String> getTags()
 	{
-		return new String[] {"@"+heroAspect.name()+"@", "@"+heroRole.name()+"@"};
+		List<String > list = new ArrayList<>();
+		list.add("@"+heroAspect.name()+"@");
+		for(EnumTechType type : techTypes)
+			list.add("@"+type.name()+"@");
+		return list;
 	}
 
 	@Override

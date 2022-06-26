@@ -1,7 +1,5 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
-import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
-import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.Skill;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
@@ -12,7 +10,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public abstract class TechHeroClass extends Abilitech
 {
@@ -60,8 +60,8 @@ public abstract class TechHeroClass extends Abilitech
 	}
 
 	@Override
-	public String[] getTags()
+	public List<String> getTags()
 	{
-		return new String[] {"@"+heroClass.name()+"@", "@"+heroRole.name()+"@"};
+		return Arrays.asList( "@"+heroClass.name()+"@", "@"+heroRole.name()+"@");
 	}
 }

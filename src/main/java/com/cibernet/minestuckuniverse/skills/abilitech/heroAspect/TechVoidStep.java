@@ -26,7 +26,7 @@ public class TechVoidStep extends TechHeroAspect
 {
     public TechVoidStep(String name)
     {
-        super(name, EnumAspect.VOID, EnumTechType.OFFENSE, EnumAspect.BREATH);
+        super(name, EnumAspect.VOID, EnumTechType.PASSIVE, EnumAspect.BREATH);
     }
 
     @Override

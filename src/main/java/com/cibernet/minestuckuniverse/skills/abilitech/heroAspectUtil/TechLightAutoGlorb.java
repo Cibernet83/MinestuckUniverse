@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +15,7 @@ public class TechLightAutoGlorb extends TechLightGlorb
 {
 	public TechLightAutoGlorb(String name)
 	{
-		super(name);
+		super(name, 1000, EnumTechType.UTILITY, EnumTechType.PASSIVE);
 	}
 
 	@Override

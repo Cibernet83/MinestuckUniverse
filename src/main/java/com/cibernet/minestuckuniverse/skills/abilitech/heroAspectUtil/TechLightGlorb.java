@@ -17,6 +17,11 @@ public class TechLightGlorb extends TechHeroAspect
 		super(name, EnumAspect.LIGHT, EnumTechType.UTILITY);
 	}
 
+	public TechLightGlorb(String name, int cost, EnumTechType... types)
+	{
+		super(name, EnumAspect.LIGHT, cost, types);
+	}
+
 	@Override
 	public boolean canUse(World world, EntityPlayer player) {
 		return super.canUse(world, player) && player.capabilities.allowEdit;
