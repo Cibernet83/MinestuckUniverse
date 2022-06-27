@@ -11,6 +11,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.alchemy.GristHelper;
 import com.mraof.minestuck.alchemy.GristSet;
@@ -18,6 +19,7 @@ import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.entity.EntityFrog;
 import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.tracker.MinestuckPlayerTracker;
+import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.client.Minecraft;
@@ -279,7 +281,8 @@ public class MSUSkills
 	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward");
 	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt");
 	public static final Abilitech SYLPH_MEND = new TechSylph("sylph_mend");
-	public static final Abilitech PRINCE_WRATH = new TechPrince("prince_wrath");
+	public static final Abilitech PRINCE_WRATH = new TechPrinceSlash("prince_wrath");
+	public static final Abilitech RULING_SLASH = new TechPrinceWrath("ruling_slash");
 	public static final Abilitech WITCH_INHIBITION = new TechWitch("witch_inhibition");
 	public static final Abilitech THIEF_FILCH = new TechThief("thief_filch");
 	public static final Abilitech MAGE_AWARENESS = new TechMage("mage_awareness");
@@ -311,6 +314,7 @@ public class MSUSkills
 	public static final Abilitech LIGHT_LIGHTBOUND_WISDOM = new TechLightGlowing("lightbound_wisdom");
 	public static final Abilitech LIGHT_ORB_OF_LIGHT = new TechLightGlorb("orb_of_light");
 	public static final Abilitech LIGHT_ETERNAL_GLOW = new TechLightAutoGlorb("eternal_glow");
+	public static final Abilitech LIGHT_SKAIAN_INISHGT = new TechHeroAspect("skaian_insight", EnumAspect.LIGHT, EnumTechType.PASSIVE);
 
 	public static final Abilitech HEART_SOUL_SWITCHER = new TechHeartSoulSwitcher("soul_switcher");
 
@@ -326,6 +330,7 @@ public class MSUSkills
 
 	public static final Abilitech BLOOD_BLEEDING_EDGE = new TechBloodBleeding("bleeding_edge");
 	public static final Abilitech BLOOD_REFORMERS_REACH = new TechBloodReformer("reformers_reach");
+	public static final Abilitech BLOOD_LIFEFORCE_TRANSFUSION = new TechBloodTransfusion("lifeforce_transfusion");
 
 	public static final Abilitech VOID_VOIDSTEP = new TechVoidStep("voidstep");
 	public static final Abilitech VOID_RETURN_TO_DUST = new TechVoidSnap("return_to_dust");

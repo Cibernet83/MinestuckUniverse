@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class TechHeroAspect extends Abilitech
+public class TechHeroAspect extends Abilitech
 {
 	public static final Collection<TechHeroAspect> HERO_ASPECT_BADGES = new ArrayList<>();
 

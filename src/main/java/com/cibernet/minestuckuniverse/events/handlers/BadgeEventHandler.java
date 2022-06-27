@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.events.handlers;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechHeir;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechMuse;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechPrinceSlash;
 import com.cibernet.minestuckuniverse.skills.badges.BadgeBuilder;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
@@ -94,6 +95,7 @@ public class BadgeEventHandler
 		MinecraftForge.EVENT_BUS.register(BadgeOverlord.class);
 		MinecraftForge.EVENT_BUS.register(TechSpaceManipulator.class);
 		MinecraftForge.EVENT_BUS.register(BadgeBuilder.class);
+		MinecraftForge.EVENT_BUS.register(TechPrinceSlash.class);
 	}
 
 	@SubscribeEvent

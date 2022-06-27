@@ -15,12 +15,12 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class BadgePassiveHeart extends TechHeroAspect
+public class TechBloodTransfusion extends TechHeroAspect
 {
-	public static final DamageSource DAMAGE_SOURCE = new DamageSource(MinestuckUniverse.MODID+".fragmentedSoul").setDamageBypassesArmor();
+	public static final DamageSource DAMAGE_SOURCE = new DamageSource(MinestuckUniverse.MODID+".lifeforceTransfusion").setDamageBypassesArmor();
 
-	public BadgePassiveHeart(String name) {
-		super(name, EnumAspect.HEART, EnumTechType.DEFENSE, EnumAspect.BLOOD);
+	public TechBloodTransfusion(String name) {
+		super(name, EnumAspect.BLOOD, EnumTechType.DEFENSE, EnumAspect.HEART);
 	}
 
 	@Override

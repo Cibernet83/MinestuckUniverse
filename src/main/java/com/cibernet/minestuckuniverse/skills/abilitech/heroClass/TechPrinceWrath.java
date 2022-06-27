@@ -12,9 +12,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class TechPrince extends TechHeroClass
+public class TechPrinceWrath extends TechHeroClass
 {
-	public TechPrince(String name)
+	public TechPrinceWrath(String name)
 	{
 		super(name, EnumClass.PRINCE);
 	}

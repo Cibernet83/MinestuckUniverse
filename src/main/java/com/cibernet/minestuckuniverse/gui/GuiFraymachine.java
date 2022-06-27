@@ -263,7 +263,7 @@ public class GuiFraymachine extends GuiScreen
 			{
 				if(!abilitech.canUse(player.world, player))
 					drawHoveringText(I18n.format("gui.abilitechBlocked"), mouseX, mouseY);
-				else if(abilitech.getTags().contains("@"+EnumTechType.PASSIVE+"@") && !data.isTechPassiveEnabled(abilitech))
+				else if(selected >= maxTech && abilitech.getTags().contains("@"+EnumTechType.PASSIVE+"@") && !data.isTechPassiveEnabled(abilitech))
 					drawHoveringText(I18n.format("gui.abilitechDisabled"), mouseX, mouseY);
 			}
 		}
