@@ -55,7 +55,7 @@ public class TechVoidStep extends TechHeroAspect
             player.sendStatusMessage(new TextComponentTranslation(badgeEffects.isVoidstepping() ? "status.badgeEnabled" : "status.badgeDisabled", getDisplayComponent()), true);
         }
 
-        if(!(badgeEffects.isVoidstepping() && (player.capabilities.isFlying || badgeEffects.isDoingWimdyThing())))
+        if(!(badgeEffects.isVoidstepping()))// && (player.capabilities.isFlying || badgeEffects.isDoingWimdyThing())))
             return false;
 
         if(!player.isCreative() && player.ticksExisted % 40 == 1)
@@ -86,8 +86,8 @@ public class TechVoidStep extends TechHeroAspect
             return;
 
         EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-        player.noClip = player.noClip || (player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isVoidstepping() &&
-                                                  (player.capabilities.isFlying || player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isDoingWimdyThing()));
+        player.noClip = player.noClip || (player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isVoidstepping());
+                                                  //&& (player.capabilities.isFlying || player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isDoingWimdyThing()));
     }
 
     @SubscribeEvent
@@ -96,8 +96,8 @@ public class TechVoidStep extends TechHeroAspect
         if (!(event.getEntity() instanceof EntityPlayer))
             return;
 
-        if(event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isVoidstepping()
-                   && (((EntityPlayer) event.getEntity()).capabilities.isFlying || event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isDoingWimdyThing()))
+        if(event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isVoidstepping())
+                   //&& (((EntityPlayer) event.getEntity()).capabilities.isFlying || event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isDoingWimdyThing()))
             event.getCollisionBoxesList().clear();
     }
 
