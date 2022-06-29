@@ -34,28 +34,6 @@ public class ItemGTArmor extends MSUArmorBase
 
 	public static final ItemArmor.ArmorMaterial MATERIAL = EnumHelper.addArmorMaterial("GOD_TIER", MinestuckUniverse.MODID+":blank", -1, new int[] {0,0,0,0}, 0, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0);
 
-
-	@SideOnly(Side.CLIENT)
-	public static final HashMap<EnumClass, ModelGTAbstract> models = new HashMap<EnumClass, ModelGTAbstract>()
-	{{
-		put(EnumClass.KNIGHT, new ModelGTKnight());
-		put(EnumClass.HEIR, new ModelGTHeir());
-		put(EnumClass.WITCH, new ModelGTWitch());
-		put(EnumClass.SEER, new ModelGTSeer());
-		put(EnumClass.PAGE, new ModelGTPage());
-		put(EnumClass.MAGE, new ModelGTMage());
-		put(EnumClass.BARD, new ModelGTBard());
-		put(EnumClass.THIEF, new ModelGTThief());
-		put(EnumClass.PRINCE, new ModelGTPrince());
-		put(EnumClass.MAID, new ModelGTMaid());
-		put(EnumClass.ROGUE, new ModelGTRogue());
-		put(EnumClass.SYLPH, new ModelGTSylph());
-
-		put(EnumClass.LORD, new ModelGTLord());
-		put(EnumClass.MUSE, new ModelGTMuse());
-	}};
-
-
 	public ItemGTArmor(EntityEquipmentSlot equipmentSlotIn, String unlocName, String name)
 	{
 		super(MATERIAL, 0, equipmentSlotIn, unlocName, name);
@@ -131,7 +109,7 @@ public class ItemGTArmor extends MSUArmorBase
 		if(heroClass == null)
 			return super.getArmorModel(entityLiving, stack, armorSlot, _default);
 		
-		ModelGTAbstract model = models.get(heroClass);
+		ModelGTAbstract model = ModelGTAbstract.MODELS.get(heroClass);
 		
 		model.heroAspect = heroAspect;
 		

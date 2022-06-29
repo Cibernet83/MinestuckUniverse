@@ -21,11 +21,34 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class ModelGTAbstract extends ModelBiped
 {
+	@SideOnly(Side.CLIENT)
+	public static final HashMap<EnumClass, ModelGTAbstract> MODELS = new HashMap<EnumClass, ModelGTAbstract>()
+	{{
+		put(EnumClass.KNIGHT, new ModelGTKnight());
+		put(EnumClass.HEIR, new ModelGTHeir());
+		put(EnumClass.WITCH, new ModelGTWitch());
+		put(EnumClass.SEER, new ModelGTSeer());
+		put(EnumClass.PAGE, new ModelGTPage());
+		put(EnumClass.MAGE, new ModelGTMage());
+		put(EnumClass.BARD, new ModelGTBard());
+		put(EnumClass.THIEF, new ModelGTThief());
+		put(EnumClass.PRINCE, new ModelGTPrince());
+		put(EnumClass.MAID, new ModelGTMaid());
+		put(EnumClass.ROGUE, new ModelGTRogue());
+		put(EnumClass.SYLPH, new ModelGTSylph());
+
+		put(EnumClass.LORD, new ModelGTLord());
+		put(EnumClass.MUSE, new ModelGTMuse());
+	}};
+
 	public final EnumClass heroClass;
 	public EnumAspect heroAspect;
 	
