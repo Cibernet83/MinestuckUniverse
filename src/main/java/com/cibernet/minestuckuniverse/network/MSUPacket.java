@@ -100,6 +100,7 @@ public abstract class MSUPacket
         SET_CURRENT_ITEM(PacketSetCurrentItem.class),
         EDIT_FILL_BLOCKS(PacketPlaceBlockArea.class),
         UPDATE_CONFIG(PacketUpdateConfig.class),
+        OPEN_GUI(PacketOpenGui.class)
         ;
 
         Class<? extends MSUPacket> packetType;

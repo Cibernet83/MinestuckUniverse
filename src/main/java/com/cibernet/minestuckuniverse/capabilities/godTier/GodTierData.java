@@ -86,6 +86,15 @@ public class GodTierData implements IGodTierData
 			update();
 		if(badge instanceof Badge)
 			((Badge)badge).onBadgeUnlocked(owner.world, owner);
+
+		if(badge instanceof Abilitech)
+			for(int i = 0; i < getTechSlots(); i++)
+				if(getTech(i) == null)
+				{
+					equipTech((Abilitech) badge, i);
+					break;
+				}
+
 		return true;
 	}
 
@@ -179,7 +188,7 @@ public class GodTierData implements IGodTierData
 		badges.keySet().removeIf((key) -> key instanceof TechHeroClass || key instanceof TechHeroAspect);
 
 		for(int i = 0; i < getTechSlots(); i++)
-			if(!badges.containsKey(getTech(i)))
+			if(getTech(i) != null && !badges.containsKey(getTech(i)))
 				unequipTech(i);
 
 		if(sendUpdate) update();

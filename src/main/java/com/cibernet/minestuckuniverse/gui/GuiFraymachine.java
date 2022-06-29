@@ -82,8 +82,6 @@ public class GuiFraymachine extends GuiScreen
 	int selOffY = 0;
 
 	boolean mouseClicked = false;
-	int clickTime = 0;
-	boolean showExtra = false;
 
 	int xOffset;
 	int yOffset;
@@ -126,7 +124,7 @@ public class GuiFraymachine extends GuiScreen
 		mc.getTextureManager().bindTexture(TEXTURES);
 		this.drawTexturedModalRect(xOffset, yOffset, 0, 0, xSize, ySize);
 
-		fontRenderer.drawString("Abilitechnosynth", xOffset+124, yOffset + 18, 0xFFFFFF, true);
+		fontRenderer.drawString(I18n.format("gui.abilitechnosynth"), xOffset+124, yOffset + 18, 0xFFFFFF, true);
 
 		boolean resetSel = !mouseClicked;
 
@@ -338,6 +336,11 @@ public class GuiFraymachine extends GuiScreen
 
 	protected void drawSplitString(String str, int x, int y, int wrapWidth, int maxHeight, int textColor, int startingLine, boolean dropShadow)
 	{
+		drawSplitString(fontRenderer, str, x, y, wrapWidth, maxHeight, textColor, startingLine, dropShadow);
+	}
+
+	public static void drawSplitString(FontRenderer fontRenderer, String str, int x, int y, int wrapWidth, int maxHeight, int textColor, int startingLine, boolean dropShadow)
+	{
 		List<String> splitStr = fontRenderer.listFormattedStringToWidth(str, wrapWidth);
 
 		int yTop = y;
@@ -377,12 +380,12 @@ public class GuiFraymachine extends GuiScreen
 		}
 	}
 
-	protected boolean pointInRegion(int x, int y, int u, int v, int pointX, int pointY)
+	public static boolean pointInRegion(int x, int y, int u, int v, int pointX, int pointY)
 	{
 		return pointX >= x && pointX < x+u && pointY >= y && pointY < y+v;
 	}
 
-	protected boolean pointInTechSlot(int techX, int techY, int pointX, int pointY)
+	public static boolean pointInTechSlot(int techX, int techY, int pointX, int pointY)
 	{
 		techX += 12;
 		techY += 12;
@@ -407,14 +410,14 @@ public class GuiFraymachine extends GuiScreen
 		return (xabs/a + yabs/b <= 1);
 	}
 
-	private double distance(Vec2f a, Vec2f b)
+	private static double distance(Vec2f a, Vec2f b)
 	{
 		double d0 = a.x - b.x;
 		double d1 = a.y - b.y;
 		return (double) MathHelper.sqrt(d0 * d0 + d1 * d1);
 	}
 
-	private double dotProduct(Vec2f a, Vec2f b)
+	private static double dotProduct(Vec2f a, Vec2f b)
 	{
 		return a.x * b.x + a.y * b.y;
 	}

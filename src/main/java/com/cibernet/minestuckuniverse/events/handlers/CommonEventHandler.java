@@ -473,6 +473,7 @@ public class CommonEventHandler
 		}
 	}
 
+	/*
 	private static final List<ISound> sounds = new ArrayList<>();
 
 	@SideOnly(Side.CLIENT)
@@ -497,5 +498,5 @@ public class CommonEventHandler
 			Minecraft.getMinecraft().getSoundHandler().stopSound(sound);
 		sounds.clear();
 	}
-
+	*/
 }

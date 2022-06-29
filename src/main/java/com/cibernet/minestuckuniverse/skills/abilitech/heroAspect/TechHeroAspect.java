@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
 
+import com.cibernet.minestuckuniverse.skills.TechBoondollarCost;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.client.MSUKeys;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class TechHeroAspect extends Abilitech
+public class TechHeroAspect extends TechBoondollarCost
 {
 	public static final Collection<TechHeroAspect> HERO_ASPECT_BADGES = new ArrayList<>();
 
@@ -69,19 +70,6 @@ public class TechHeroAspect extends Abilitech
 		}
 		else return I18n.format("badge.aspect.unlock", heroAspect.getDisplayName());
 	}*/
-
-	@Override
-	public boolean canUnlock(World world, EntityPlayer player)
-	{
-		if(MinestuckPlayerData.getData(player).boondollars >= cost && findShards(player, false))
-		{
-			findShards(player, true);
-			MinestuckPlayerData.addBoondollars(player, -cost);
-			//MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.ADD_PLAYER_XP, -requiredXp), player);
-			return true;
-		}
-		return false;
-	}
 
 	protected boolean findShards(EntityPlayer player, boolean decr)
 	{

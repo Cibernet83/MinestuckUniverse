@@ -22,7 +22,7 @@ public abstract class Skill extends net.minecraftforge.registries.IForgeRegistry
 
 	public String getDisplayName()
 	{
-		return getDisplayComponent().getFormattedText();
+		return getDisplayComponent().getFormattedText().trim();
 	}
 
 	public TextComponentTranslation getDisplayComponent()
@@ -65,6 +65,10 @@ public abstract class Skill extends net.minecraftforge.registries.IForgeRegistry
 	public boolean canUnlock(World world, EntityPlayer player)
 	{
 		return true;
+	}
+
+	public void onUnlock(World world, EntityPlayer player)
+	{
 	}
 
 	public boolean canUse(World world, EntityPlayer player) { return true; }

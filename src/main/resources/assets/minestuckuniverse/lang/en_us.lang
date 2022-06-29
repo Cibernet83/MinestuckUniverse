@@ -63,6 +63,8 @@ tile.porkhollowATM.name=Porkhollow ATM
 tile.ceramicPorkhollow.name=Ceramic Porkhollow
 tile.boondollarRegister.name=Boondollar Register
 
+tile.abilitechnosynth.name=Abilitechnosynth
+
 tile.magicBlock.name=Perfectly Magical Object
 tile.uniqueObject.name=Perfectly Unique Object
 tile.artifact.name=§kArtifact
@@ -769,7 +771,6 @@ cruxite_color.1=Orchid
 cruxite_color.2=Red
 cruxite_color.3=Green
 cruxite_color.4=Cyan
-cruxite_color.4=Cyan
 cruxite_color.5=Pink
 cruxite_color.6=Orange
 cruxite_color.7=Emerald
@@ -1040,6 +1041,9 @@ gui.badgeBlocked=§cSomething is inhibiting the effect of this badge!
 gui.needXp=§cYou need at least %s experience levels to allocate Skill XP
 gui.abilitechDisabled=§cRight-Click to enable.
 gui.abilitechBlocked=§cSomething is inhibiting this Abilitech.
+gui.abilitechnosynth=Abilitechnosynth
+gui.skillShop.buy=Buy
+gui.skillShop.cantAfford=Can't Afford
 
 enchantment.minestuckuniverse.superpunch=Superpunch
 enchantment.minestuckuniverse.superpunch.desc=Increases the knockback strength of the weapon but increases its attack damage inversely to the enchanment level
@@ -1315,6 +1319,8 @@ techType.offense=Offense
 techType.defense=Defense
 techType.utility=Utility
 techType.passive=Passive
+
+tech.unlock.boondollar=%s Boondollars
 
 tech.knight_ward.name=Knight's Ward
 tech.knight_ward.tooltip=Allows you to cast a protective spell upon yourself and any living creature. Charging it allows you target all nearby living being beings at once.

@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.Skill;
+import com.cibernet.minestuckuniverse.skills.TechBoondollarCost;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
@@ -14,7 +15,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class TechHeroClass extends Abilitech
+public abstract class TechHeroClass extends TechBoondollarCost
 {
 	public static final Collection<TechHeroClass> HERO_CLASS_BADGES = new ArrayList<>();
 

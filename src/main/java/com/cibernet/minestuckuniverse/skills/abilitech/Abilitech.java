@@ -14,16 +14,14 @@ public class Abilitech extends Skill
 {
 	public static final List<Abilitech> ABILITECHS = new ArrayList<>();
 
-	protected long cost;
 	String name;
 
-	public Abilitech(String name, long cost)
+	public Abilitech(String name)
 	{
 		super();
 		setUnlocalizedName(name);
 
 		ABILITECHS.add(this);
-		this.cost = cost;
 		this.name = name;
 	}
 

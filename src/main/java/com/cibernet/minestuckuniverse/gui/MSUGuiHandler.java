@@ -68,9 +68,7 @@ public class MSUGuiHandler implements IGuiHandler
                 }
 
                 if (stack.hasTagCompound())
-                {
                     text = stack.getTagCompound().getString("text");
-                }
 
                 boolean canEdit = player.getHeldItem(hand).isItemEqual(new ItemStack(MinestuckItems.carvingTool));
                 return new GuiStoneTablet(player, player.getHeldItemMainhand(), text, canEdit);
@@ -85,6 +83,8 @@ public class MSUGuiHandler implements IGuiHandler
                 return new GuiGristHoardSelector(player);
             case FRAYMACHINE_UI:
                 return new GuiFraymachine(player);
+            case SKILL_SHOP_UI:
+                return new GuiSkillShop(player);
         }
         return null;
     }

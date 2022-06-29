@@ -16,6 +16,7 @@ import com.cibernet.minestuckuniverse.strife.KindAbstratus;
 import com.cibernet.minestuckuniverse.strife.MSUKindAbstrata;
 import com.cibernet.minestuckuniverse.tileentity.*;
 import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
+import com.cibernet.minestuckuniverse.util.MSUConsorts;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
@@ -56,6 +57,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(KarmaEventHandler.class);
         MinecraftForge.EVENT_BUS.register(EditModeEventHandler.class);
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(MSUConsorts.class);
         MinecraftForge.EVENT_BUS.register(LocalChatEventHandler.class);
 
         if(MinestuckUniverse.isTrophySlotsLoaded)
@@ -117,6 +119,8 @@ public class CommonProxy
         if(MinestuckUniverse.isBotaniaLoaded)
             BotaniaSupport.generateGristCosts();
         MinestuckUniverseItems.setPostInitVariables();
+
+        MSUConsorts.setupCustomConsortAttributes();
 
         if(MinestuckUniverse.isSplatcraftLodaded)
         {

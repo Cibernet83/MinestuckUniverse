@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
+import com.cibernet.minestuckuniverse.items.ItemFraymachine;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.captchalogue.OperandiBlockItem;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
@@ -230,7 +231,7 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, operandiGlass, new OperandiBlockItem("operandi_glass", MinestuckUniverseBlocks.operandiGlass));
 
         registerBlock(registry, holopad);
-        registerBlock(registry, fraymachine);
+        registerBlock(registry, fraymachine, new ItemFraymachine());
 
         registerBlock(registry, machineChasis);
 		registerBlock(registry, gristHopper);
