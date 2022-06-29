@@ -2,10 +2,13 @@ package com.cibernet.minestuckuniverse.world.storage.loot;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.world.storage.loot.conditions.JujuLootCondition;
+import com.cibernet.minestuckuniverse.world.storage.loot.conditions.SkaiaScrollLootCondition;
+import com.cibernet.minestuckuniverse.world.storage.loot.functions.SetRandomSkill;
 import com.mraof.minestuck.world.storage.loot.MinestuckLoot;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.conditions.LootConditionManager;
+import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -16,9 +19,12 @@ public class MSULoot
 	public static void registerLootClasses()
 	{
 		LootConditionManager.registerCondition(new JujuLootCondition.Serializer());
+		LootConditionManager.registerCondition(new SkaiaScrollLootCondition.Serializer());
+		LootFunctionManager.registerFunction(new SetRandomSkill.Serializer());
 	}
 
 	private static final ResourceLocation TIME = new ResourceLocation("minestuck", "chests/medium_basic/clockwork");
+	private static final ResourceLocation GENERAL = new ResourceLocation("minestuck", "chests/medium_basic/general");
 
 	@SubscribeEvent
 	public static void onLootInject(LootTableLoadEvent event)
@@ -40,6 +46,11 @@ public class MSULoot
 		{
 			LootPool inject = event.getLootTableManager().getLootTableFromLocation(new ResourceLocation(MinestuckUniverse.MODID, "inject/medium_loot")).getPool("items");
 			event.getTable().getPool("main").addEntry(inject.getEntry("minestuckuniverse:ticking_stopwatch"));
+		}
+		else if(event.getName().equals(GENERAL))
+		{
+			LootPool inject = event.getLootTableManager().getLootTableFromLocation(new ResourceLocation(MinestuckUniverse.MODID, "inject/medium_loot")).getPool("items");
+			event.getTable().getPool("main").addEntry(inject.getEntry("minestuckuniverse:skaian_scroll"));
 		}
 	}
 }

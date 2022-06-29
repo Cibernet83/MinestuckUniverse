@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.Sys;
 import org.lwjgl.input.Mouse;
 
 import java.io.IOException;

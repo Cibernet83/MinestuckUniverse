@@ -32,6 +32,7 @@ public class MSUConfig
 	public static int strifeDeckMaxSize;
 	public static int strifeCardMobDrops;
 	public static double weaponAttackMultiplier;
+	public static int skaiaScrollLimit;
 
 	//God Tier
 	public static boolean multiAspectUnlocks;
@@ -87,7 +88,7 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.strife.abstrataSwitcherRung").getInt();
 		weaponAttackMultiplier = config.get("Strife", "weaponAttackMultiplier", 0.15, "Allows players to tweak how much damage Minestuck and Minestuck Universe weapons do as a percentage against entities that aren't Underlings.").setMinValue(0).setMaxValue(1)
 				.setLanguageKey("config.minestuckuniverse.strife.weaponAttackMultiplier").getDouble();
-
+		skaiaScrollLimit = config.get("Strife", "skaiaScrollLimit", 2, "Determines the total number of Skaia Scrolls a player can use in total. Set to negative to ignore the limit.").setLanguageKey("config.minestuckuniverse.strife.skaiaScrollLimit").getInt();
 
 		multiAspectUnlocks = config.get("God Tier", "multiAspectUnlocks", true, "Enabling this makes certain skills require multiple kinds of Hero Stone Shards to unlock.")
 				.setLanguageKey("config.minestuckuniverse.godtier.multiAspectUnlocks").getBoolean();
@@ -122,6 +123,7 @@ public class MSUConfig
 		data.writeBoolean(multiAspectUnlocks);
 		data.writeInt(godTierXpThreshold);
 		data.writeBoolean(restrictedStrife);
+		data.writeInt(skaiaScrollLimit);
 	}
 
 	public static void readFromBuffer(ByteBuf data)
@@ -130,5 +132,6 @@ public class MSUConfig
 		multiAspectUnlocks = data.readBoolean();
 		godTierXpThreshold = data.readInt();
 		restrictedStrife = data.readBoolean();
+		skaiaScrollLimit = data.readInt();
 	}
 }

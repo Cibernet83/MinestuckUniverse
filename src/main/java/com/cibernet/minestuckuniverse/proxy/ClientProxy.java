@@ -15,6 +15,7 @@ import com.cibernet.minestuckuniverse.client.render.*;
 import com.cibernet.minestuckuniverse.entity.*;
 import com.cibernet.minestuckuniverse.events.handlers.CaptchalogueEventHandler;
 import com.cibernet.minestuckuniverse.gui.GuiStrifeSwitcher;
+import com.cibernet.minestuckuniverse.items.ItemSkaianScroll;
 import com.cibernet.minestuckuniverse.items.ItemWarpMedallion;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.godtier.ItemGodTierKit;
@@ -128,6 +129,8 @@ public class ClientProxy extends CommonProxy
                 default: return 0xFFFFFF;
             }
         }, MinestuckUniverseItems.gtArmorKit, MinestuckUniverseItems.gtHood, MinestuckUniverseItems.gtShirt, MinestuckUniverseItems.gtPants, MinestuckUniverseItems.gtShoes);
+
+        mc.getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? ItemSkaianScroll.getColor(stack) : -1, MinestuckUniverseItems.skaianScroll);
 
         RenderFrog frog = ((RenderFrog)Minecraft.getMinecraft().getRenderManager().entityRenderMap.get(EntityFrog.class));
 

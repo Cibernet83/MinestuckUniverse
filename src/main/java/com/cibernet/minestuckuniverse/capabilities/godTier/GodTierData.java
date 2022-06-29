@@ -47,7 +47,7 @@ public class GodTierData implements IGodTierData
 
 	private final TreeMap<Skill, Boolean> badges = new TreeMap<>();
 	private final Abilitech[] equippedTech = new Abilitech[3];
-	private Abilitech selectedTech = null;
+	private int scrollsUsed = 0;
 
 	private MasterBadge masterBadge = null;
 	private boolean isMasterBadgeEnabled = true;
@@ -137,6 +137,17 @@ public class GodTierData implements IGodTierData
 		List<Skill> list =new ArrayList<>();
 		list.addAll(badges.keySet());
 		return list;
+	}
+
+	@Override
+	public void addScrollsUsed()
+	{
+		scrollsUsed++;
+	}
+
+	@Override
+	public int getScrollsUsed() {
+		return scrollsUsed;
 	}
 
 	@Override
@@ -561,6 +572,9 @@ public class GodTierData implements IGodTierData
 
 		if(!hasSkill(MSUSkills.GIFT_OF_GAB) && getSkillLevel(StatType.GENERAL) > 1)
 			this.badges.put(MSUSkills.GIFT_OF_GAB, true);
+
+		if(nbt.hasKey("ScrollsUsed"))
+			scrollsUsed = nbt.getInteger("ScrollsUsed");
 	}
 
 	@Override
@@ -587,8 +601,6 @@ public class GodTierData implements IGodTierData
 			skills.setTag(String.valueOf(i), skillData);
 		}
 		nbt.setTag("SkillSet", skills);
-
-		System.out.println(MSUSkills.GIFT_OF_GAB.getRegistryName());
 
 		Iterator<Map.Entry<Skill, Boolean>> iter = badges.entrySet().iterator();
 		NBTTagCompound badges = new NBTTagCompound();
@@ -621,6 +633,8 @@ public class GodTierData implements IGodTierData
 
 		if(reset)
 			nbt.setBoolean("Reset", true);
+
+		nbt.setInteger("ScrollsUsed", scrollsUsed);
 
 		return nbt;
 	}

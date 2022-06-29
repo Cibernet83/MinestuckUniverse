@@ -20,6 +20,8 @@ public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 	boolean revokeSkill(Skill badge, boolean sendUpdate);
 	boolean hasSkill(Skill badge);
 	List<Skill> getSkills();
+	void addScrollsUsed();
+	int getScrollsUsed();
 
 	boolean isBadgeActive(Badge badge);
 	boolean isBadgeEnabled(Badge badge);

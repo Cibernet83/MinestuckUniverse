@@ -513,6 +513,12 @@ item.manipulatedMatter.tooBig=Focal Area is too big, should be at most 8x8x8
 item.manipulatedMatter.cantEdit=You cannot edit blocks here
 item.manipulatedMatter.tooltip=An entire area of blocks concentrated into a single item, something only someone with a mastery over SPACE can achieve.
 
+item.skaianScroll.name=Skaian Scroll
+item.skaianScroll.tooltip.skill=§9§o%s
+item.skaianScroll.tooltip.hasSkill=§cYou already have this Skill!
+item.skaianScroll.tooltip.skillsLeft=§a%s Skills left
+item.skaianScroll.tooltip.noSkills=§c0 Skills left
+
 item.operandi_pickaxe.name=Operandi Pickaxe
 item.operandi_axe.name=Operandi Axe
 item.operandi_shovel.name=Operandi Shovel
@@ -761,6 +767,8 @@ death.attack.minestuckuniverse.vengefulOutburst=%s fell victim to %s's Rage.
 death.attack.minestuckuniverse.lifeforceLeech=%s's Life was sapped away by %s.
 death.attack.minestuckuniverse.fragmentedSoul=%s's soul was spread too thin.
 death.attack.minestuckuniverse.perseveringSpirit=%s lost grip of their soul.
+death.attack.minestuckuniverse.lifeforceTransfusion=%s ran out of blood.
+death.attack.minestuckuniverse.lifeforceTransfusion.player=%s ran out of blood whilst fighting %s.
 death.attack.minestuckuniverse.terminalDemise=%s met their demise.
 death.attack.minestuckuniverse.terminalDemise.external=%s met their demise to the hands of %s.
 status.heroicDeath=%s's death was Heroic.
@@ -1485,8 +1493,6 @@ tech.divine_cleansing.name=Divine Cleansing
 tech.divine_cleansing.tooltip=Channels the user's @HOPE@ powers to rid the target or themself from all Potion Effects. Prevents the use of all Abilitechs for a short period of time afterwards.
 tech.hopeful_outburst.name=Hopeful Outburst
 tech.hopeful_outburst.tooltip=Releases an aura of pure, concentrated @HOPE@ that constantly damages all that are inside it, as well as slowing down nearby projectiles.
-
-
 
 godTierTitle.default=True %s
 

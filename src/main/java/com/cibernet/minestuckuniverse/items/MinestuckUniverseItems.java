@@ -108,6 +108,7 @@ public class MinestuckUniverseItems
     public static Item fluorite = new MSUItemBase("fluorite");
     public static Item battery = new MSUItemBase("battery", "battery");
     public static Item strifeCard = new ItemStrifeCard("strife_card", "strifeCard");
+    public static Item skaianScroll = new ItemSkaianScroll();
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
     public static Item laserPointer = new ItemBeamWeapon(-1, 0, 0, 0.01f, 0, 1, 1, "laser_pointer", "laserPointer").addProperties(new PropertyPotionBeam(new PotionEffect(MobEffects.BLINDNESS, 30, 0, false, false))).setRepairMaterials(new ItemStack(battery)).setCreativeTab(TabMinestuckUniverse.main);
     public static Item whip = new ItemSound("whip", "whip", MSUSoundHandler.whipCrack);
@@ -482,6 +483,7 @@ public class MinestuckUniverseItems
         registerItem(registry, tickingStopwatch);
         registerItem(registry, timetable);
         registerItem(registry, strifeCard);
+        registerItem(registry, skaianScroll);
          MinestuckItems.stoneSlab = registerItem(registry, stoneTablet);
 
         registerItem(registry, laserPointer);
