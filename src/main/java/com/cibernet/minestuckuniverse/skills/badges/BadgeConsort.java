@@ -20,6 +20,6 @@ public class BadgeConsort extends BadgeLevel
     @Override
     public ResourceLocation getTextureLocation()
     {
-        return new ResourceLocation(getRegistryName().getResourceDomain(), "textures/gui/skills/" + getRegistryName().getResourcePath() + "_" + (Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getConsortType() == null ? "salamander" : Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getConsortType().getName().toLowerCase()) + ".png");
+        return new ResourceLocation(getRegistryName().getResourceDomain(), "textures/gui/badges/" + getRegistryName().getResourcePath() + "_" + (Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getConsortType() == null ? "salamander" : Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getConsortType().getName().toLowerCase()) + ".png");
     }
 }

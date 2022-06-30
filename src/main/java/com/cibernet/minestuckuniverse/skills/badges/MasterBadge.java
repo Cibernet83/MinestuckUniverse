@@ -58,7 +58,7 @@ public class MasterBadge extends BadgeLevel
 	@SideOnly(Side.CLIENT)
 	public ResourceLocation getTextureLocation()
 	{
-		return new ResourceLocation(getRegistryName().getResourceDomain(), "textures/gui/skills/"+getRegistryName().getResourcePath() +
+		return new ResourceLocation(getRegistryName().getResourceDomain(), "textures/gui/badges/"+getRegistryName().getResourcePath() +
 																		   (Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.BADGE_OVERLORD) ? "_overlord" : "") +".png");
 	}
 }

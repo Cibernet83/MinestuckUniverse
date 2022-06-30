@@ -100,6 +100,11 @@ public class MSUSkills
 		}
 
 		@Override
+		public boolean canAppearOnList(World world, EntityPlayer player) {
+			return MinestuckUniverse.isTrophySlotsLoaded && super.canAppearOnList(world, player);
+		}
+
+		@Override
 		public boolean canDisable() {
 			return false;
 		}
@@ -362,8 +367,7 @@ public class MSUSkills
 		registry.register(GIFT_OF_GAB.setRegistryName("gift_of_gab"));
 		registry.register(SKELETON_KEY.setRegistryName("skeleton_key_badge"));
 
-		if(MinestuckUniverse.isTrophySlotsLoaded)
-			registry.register(PATCH_OF_THE_HOARDER.setRegistryName("patch_of_the_hoarder"));
+		registry.register(PATCH_OF_THE_HOARDER.setRegistryName("patch_of_the_hoarder"));
 
 		registry.register(HOARD_OF_THE_ALCHEMIZER.setRegistryName("hoard_of_the_alchemizer"));
 		registry.register(BUILDER_BADGE.setRegistryName("builder_badge"));

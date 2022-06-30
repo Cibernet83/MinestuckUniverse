@@ -180,6 +180,8 @@ public class GuiGodTierMeditation extends GuiScreen
 		for(int i = 0; i < badges.size(); i++)
 		{
 			Badge badge = badges.get(i);
+			if(badge == null) continue;
+
 			if(badge.isReadable(player.world, player))
 			{
 				if(!data.hasSkill(badge))
@@ -249,6 +251,7 @@ public class GuiGodTierMeditation extends GuiScreen
 		for(int i = 0; i < masterBadges.size(); i++)
 		{
 			MasterBadge badge = masterBadges.get(i);
+			if(badge == null) continue;
 
 			ArrayList<String> tooltip = new ArrayList<>();
 
@@ -286,6 +289,8 @@ public class GuiGodTierMeditation extends GuiScreen
 		{
 			ArrayList<String> tooltip = new ArrayList<>();
 			Badge badge = badges.get(i);
+			if(badge == null) continue;
+
 			if(!badge.isReadable(player.world, player))
 			{
 				tooltip.add(TextFormatting.OBFUSCATED + badge.getDisplayName());
@@ -354,6 +359,7 @@ public class GuiGodTierMeditation extends GuiScreen
 		for(int i = 0; i < masterBadges.size(); i++)
 		{
 			MasterBadge badge = masterBadges.get(i);
+			if(badge == null) continue;
 
 			if(isPointInRegion(mouseX, mouseY, xOffset+(xSize - masterBadges.size()*22)/2  + i*22, yOffset+124, 20, 20) && badge.isReadable(player.world, player))
 				MSUChannelHandler.sendToServer(MSUPacket.makePacket((!data.isBadgeActive(MSUSkills.BADGE_OVERLORD) && !data.hasSkill(badge) && data.getMasterBadge() == null && mouseButton == 0) ? MSUPacket.Type.ATTEMPT_BADGE_UNLOCK : MSUPacket.Type.TOGGLE_BADGE, badge));
@@ -362,6 +368,8 @@ public class GuiGodTierMeditation extends GuiScreen
 		for(int i = 0; i < badges.size(); i++)
 		{
 			Badge badge = badges.get(i);
+			if(badge == null) continue;
+
 			int rows = (int) Math.max(2, Math.ceil(badges.size()/20f));
 			if(isPointInRegion(mouseX, mouseY, xOffset+(xSize - ((badges.size()+1)/rows)*22)/2  + ((i)/rows)*22, yOffset+157 + (i%rows)*22, 20, 20) && badge.isReadable(player.world, player))
 				MSUChannelHandler.sendToServer(MSUPacket.makePacket((!data.hasSkill(badge) && mouseButton == 0) ? MSUPacket.Type.ATTEMPT_BADGE_UNLOCK : MSUPacket.Type.TOGGLE_BADGE, badge));

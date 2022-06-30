@@ -144,6 +144,8 @@ public class GuiManageBadges extends GuiScreen
 		for(int i = 0; i < masterBadges.size(); i++)
 		{
 			MasterBadge badge = masterBadges.get(i);
+			if(badge == null) continue;
+
 			if(badge.isReadable(player.world, player) && (data.getMasterBadge() == null || data.getMasterBadge() == badge || isOverlord))
 				mc.getTextureManager().bindTexture(badge.getTextureLocation());
 			else mc.getTextureManager().bindTexture(new ResourceLocation(badge.getRegistryName().getResourceDomain(), "textures/gui/badge_locked.png"));
@@ -161,6 +163,8 @@ public class GuiManageBadges extends GuiScreen
 		for(int i = 0; i < badges.size(); i++)
 		{
 			Badge badge = badges.get(i);
+			if(badge == null) continue;
+
 			if(badge.isReadable(player.world, player))
 			{
 				if(!data.hasSkill(badge))
@@ -192,6 +196,8 @@ public class GuiManageBadges extends GuiScreen
 			if(!isPointInRegion(mouseX, mouseY, xOffset+(xSize - masterBadges.size()*22)/2  + i*22, yOffset-23, 20, 20))
 				continue;
 			MasterBadge badge = masterBadges.get(i);
+			if(badge == null) continue;
+
 			hoveredBadge = badge;
 
 			ArrayList<String> tooltip = new ArrayList<>();
@@ -235,6 +241,8 @@ public class GuiManageBadges extends GuiScreen
 
 			ArrayList<String> tooltip = new ArrayList<>();
 			Badge badge = badges.get(i);
+			if(badge == null) continue;
+
 			hoveredBadge = badge;
 			if(!badge.isReadable(player.world, player))
 			{

@@ -38,7 +38,7 @@ public class Badge extends Skill
     @SideOnly(Side.CLIENT)
     public ResourceLocation getTextureLocation()
     {
-        return new ResourceLocation(getRegistryName().getResourceDomain(), "textures/gui/skills/"+getRegistryName().getResourcePath()+".png");
+        return new ResourceLocation(getRegistryName().getResourceDomain(), "textures/gui/badges/"+getRegistryName().getResourcePath()+".png");
     }
 
     public static boolean findItem(EntityPlayer player, ItemStack stack, boolean decr)
