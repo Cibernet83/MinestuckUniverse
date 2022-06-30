@@ -169,9 +169,15 @@ public class GodTierData implements IGodTierData
 	{
 		if(!hasSkill(badge) || !badge.canDisable())
 			return;
+
+		boolean sendUpdate = (badge instanceof MasterBadge ? enabled : badges.get(badge)) != enabled;
+
 		if(badge instanceof MasterBadge)
 			isMasterBadgeEnabled = enabled;
 		else badges.put(badge, enabled);
+
+		if(sendUpdate && owner != null && !owner.world.isRemote)
+			update(); //if game starts lagging, make single skill update packet
 	}
 
 	@Override

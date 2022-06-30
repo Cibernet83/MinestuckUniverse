@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.client.Minecraft;
@@ -30,32 +31,16 @@ public class TechVoidStep extends TechHeroAspect
     }
 
     @Override
-    public void onPassiveToggle(World world, EntityPlayer player, boolean active)
-    {
-        super.onEquipped(world, player);
-        player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setVoidstepping(active);
-    }
-
-    @Override
-    public void onEquipped(World world, EntityPlayer player) {
-        onPassiveToggle(world, player, player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(this));
-    }
-
-    @Override
-    public void onUnequipped(World world, EntityPlayer player) {
-        onPassiveToggle(world, player, false);
-    }
-
-    @Override
     public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
     {
+        boolean voidStepping = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(this);
         if (state == SkillKeyStates.KeyState.PRESS)
         {
-            badgeEffects.setVoidstepping(!badgeEffects.isVoidstepping());
-            player.sendStatusMessage(new TextComponentTranslation(badgeEffects.isVoidstepping() ? "status.badgeEnabled" : "status.badgeDisabled", getDisplayComponent()), true);
+            player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).setSkillPassiveEnabled(this, !voidStepping);
+            player.sendStatusMessage(new TextComponentTranslation(!voidStepping ? "status.badgeEnabled" : "status.badgeDisabled", getDisplayComponent()), true);
         }
 
-        if(!(badgeEffects.isVoidstepping()))// && (player.capabilities.isFlying || badgeEffects.isDoingWimdyThing())))
+        if(!voidStepping)// && (player.capabilities.isFlying || badgeEffects.isWindFormed())))
             return false;
 
         if(!player.isCreative() && player.ticksExisted % 40 == 1)
@@ -86,8 +71,8 @@ public class TechVoidStep extends TechHeroAspect
             return;
 
         EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-        player.noClip = player.noClip || (player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isVoidstepping());
-                                                  //&& (player.capabilities.isFlying || player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isDoingWimdyThing()));
+        player.noClip = player.noClip || (player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.VOID_VOIDSTEP));
+                                                  //&& (player.capabilities.isFlying || player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isWindFormed()));
     }
 
     @SubscribeEvent
@@ -96,8 +81,8 @@ public class TechVoidStep extends TechHeroAspect
         if (!(event.getEntity() instanceof EntityPlayer))
             return;
 
-        if(event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isVoidstepping())
-                   //&& (((EntityPlayer) event.getEntity()).capabilities.isFlying || event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isDoingWimdyThing()))
+        if(event.getEntity().getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.VOID_VOIDSTEP))
+                   //&& (((EntityPlayer) event.getEntity()).capabilities.isFlying || event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isWindFormed()))
             event.getCollisionBoxesList().clear();
     }
 
@@ -105,7 +90,7 @@ public class TechVoidStep extends TechHeroAspect
     @SideOnly(Side.CLIENT)
     public static void onPlayerPushOutOfBlocks(PlayerSPPushOutOfBlocksEvent event)
     {
-        if(event.getEntity() != null && event.getEntityPlayer().isUser() && event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isVoidstepping())
+        if(event.getEntity() != null && event.getEntityPlayer().isUser() && event.getEntity().getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.VOID_VOIDSTEP))
             event.setCanceled(true);
     }
 
@@ -113,7 +98,7 @@ public class TechVoidStep extends TechHeroAspect
     @SideOnly(Side.CLIENT)
     public static void renderBlockOverlay(RenderBlockOverlayEvent event)
     {
-        if(Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isVoidstepping())
+        if(Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.VOID_VOIDSTEP))
             event.setCanceled(true);
     }
 }

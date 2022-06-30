@@ -51,22 +51,13 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void unsetMovement();
 
 
-	boolean isDoingWimdyThing();
-	void setDoingWimdyThing(boolean doingWimdyThing);
+	boolean isWindFormed();
+	void setWindFormed(boolean doingWimdyThing);
 
 	Queue<SoulData> getTimeSoulData();
 
 	Vec3d getPrevPos();
 	void setPrevPos(Vec3d pos);
-
-	boolean isVoidstepping();
-	void setVoidstepping(boolean isVoidstepping);
-
-	boolean isGlorbbing();
-	void setGlorbbing(boolean isGlorbbing);
-
-	boolean isReforming();
-	void setReforming(boolean isReforming);
 
 	BlockPos getManipulatedPos1();
 	int getManipulatedPos1Dim();

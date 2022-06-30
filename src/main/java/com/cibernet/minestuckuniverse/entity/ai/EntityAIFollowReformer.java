@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.entity.ai;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -51,7 +52,7 @@ public class EntityAIFollowReformer extends EntityAIBase
 
 	protected boolean isTempting(EntityPlayer player)
 	{
-		return player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isReforming();
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.BLOOD_REFORMERS_REACH);
 	}
 
 	/**

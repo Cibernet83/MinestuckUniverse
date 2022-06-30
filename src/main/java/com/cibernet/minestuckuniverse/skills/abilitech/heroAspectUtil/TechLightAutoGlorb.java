@@ -19,23 +19,6 @@ public class TechLightAutoGlorb extends TechLightGlorb
 	}
 
 	@Override
-	public void onPassiveToggle(World world, EntityPlayer player, boolean active)
-	{
-		super.onEquipped(world, player);
-		player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setGlorbbing(active);
-	}
-
-	@Override
-	public void onEquipped(World world, EntityPlayer player) {
-		onPassiveToggle(world, player, player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(this));
-	}
-
-	@Override
-	public void onUnequipped(World world, EntityPlayer player) {
-		onPassiveToggle(world, player, false);
-	}
-
-	@Override
 	public boolean canUse(World world, EntityPlayer player) {
 		return super.canUse(world, player) && player.capabilities.allowEdit;
 	}

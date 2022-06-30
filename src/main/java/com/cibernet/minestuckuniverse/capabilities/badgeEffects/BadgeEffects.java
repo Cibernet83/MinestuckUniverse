@@ -233,15 +233,15 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
-	public boolean isDoingWimdyThing()
+	public boolean isWindFormed()
 	{
 		return getBoolean(TechBreathWindVessel.class);
 	}
 
 	@Override
-	public void setDoingWimdyThing(boolean doingWimdyThing)
+	public void setWindFormed(boolean doingThing)
 	{
-		setBoolean(TechBreathWindVessel.class, doingWimdyThing);
+		setBoolean(TechBreathWindVessel.class, doingThing);
 	}
 
 	@Override
@@ -258,42 +258,6 @@ public class BadgeEffects implements IBadgeEffects
 	@Override
 	public void setPrevPos(Vec3d pos) {
 		this.prevPos = pos;
-	}
-
-	@Override
-	public boolean isVoidstepping()
-	{
-		return getBoolean(TechVoidStep.class) && owner.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.VOID_VOIDSTEP);
-	}
-
-	@Override
-	public void setVoidstepping(boolean isVoidstepping)
-	{
-		setBoolean(TechVoidStep.class, isVoidstepping);
-	}
-
-	@Override
-	public boolean isGlorbbing()
-	{
-		return getBoolean(TechLightAutoGlorb.class) && owner.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.LIGHT_ORB_OF_LIGHT);
-	}
-
-	@Override
-	public void setGlorbbing(boolean isGlorbbing)
-	{
-		setBoolean(TechLightAutoGlorb.class, isGlorbbing);
-	}
-
-	@Override
-	public boolean isReforming()
-	{
-		return getBoolean(TechBloodReformer.class) && owner.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.BLOOD_REFORMERS_REACH);
-	}
-
-	@Override
-	public void setReforming(boolean isReforming)
-	{
-		setBoolean(TechBloodReformer.class, isReforming);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.entity.ai;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.google.common.base.Predicate;
 import com.mraof.minestuck.entity.ai.EntityAINearestAttackableTargetWithHeight;
 import net.minecraft.entity.Entity;
@@ -18,6 +19,6 @@ public class EntityAINearestNonReformer extends EntityAINearestAttackableTargetW
 	@Override
 	protected boolean isSuitableTarget(@Nullable EntityLivingBase target, boolean includeInvincibles)
 	{
-		return super.isSuitableTarget(target, includeInvincibles) && (target == null || !target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isReforming());
+		return super.isSuitableTarget(target, includeInvincibles) && (target == null || !target.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.BLOOD_REFORMERS_REACH));
 	}
 }
