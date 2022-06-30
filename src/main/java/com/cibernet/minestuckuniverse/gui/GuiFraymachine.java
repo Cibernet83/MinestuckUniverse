@@ -56,6 +56,12 @@ public class GuiFraymachine extends GuiScreen
 		put(EnumClass.WITCH.name(), new Pair<>("title."+EnumClass.WITCH.toString(), 0x7F7F7F));
 		put(EnumClass.LORD.name(), new Pair<>("title."+EnumClass.LORD.toString(), 0xFF0000));
 		put(EnumClass.MUSE.name(), new Pair<>("title."+EnumClass.MUSE.toString(), 0x00FF00));
+
+		put("PROSPIT", new Pair<>("lunarSway.prospit", 0xFFD800));
+		put("DERSE", new Pair<>("lunarSway.derse", 0xB200FF));
+		put("HEROIC", new Pair<>("alignment.heroic", 0xFFD800));
+		put("JUST", new Pair<>("alignment.just", 0xB200FF));
+		put("NEUTRAL", new Pair<>("alignment.neutral", 0x00FF15));
 	}};
 
 

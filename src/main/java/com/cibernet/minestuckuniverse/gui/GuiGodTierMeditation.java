@@ -186,7 +186,7 @@ public class GuiGodTierMeditation extends GuiScreen
 					GlStateManager.color(0.5f, 0.5f, 0.5f);
 				mc.getTextureManager().bindTexture(badge.getTextureLocation());
 			}
-			else mc.getTextureManager().bindTexture(new ResourceLocation(badge.getRegistryName().getResourceDomain(), "textures/gui/badge_locked.png"));
+			else mc.getTextureManager().bindTexture(new ResourceLocation(MinestuckUniverse.MODID, "textures/gui/badge_locked.png"));
 
 			int rows = (int) Math.max(2, Math.ceil(badges.size()/20f));
 
@@ -195,7 +195,7 @@ public class GuiGodTierMeditation extends GuiScreen
 
 			if(data.hasSkill(badge) && !data.isBadgeActive(badge))
 			{
-				mc.getTextureManager().bindTexture(new ResourceLocation(badge.getRegistryName().getResourceDomain(), "textures/gui/badge_disabled.png"));
+				mc.getTextureManager().bindTexture(new ResourceLocation(MinestuckUniverse.MODID, "textures/gui/badge_disabled.png"));
 				drawScaledCustomSizeModalRect(xOffset+(xSize - ((badges.size()+1)/rows)*22)/2  + ((i)/rows)*22, yOffset + 157 + (i % rows) * 22, 0, 0, 256, 256, 20, 20, 256, 256);
 			}
 		}

@@ -1,12 +1,12 @@
 package com.cibernet.minestuckuniverse.world.storage.loot.conditions;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.capabilities.game.GameData;
-import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import net.minecraft.item.Item;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootContext;
@@ -32,7 +32,8 @@ public class SkaiaScrollLootCondition implements LootCondition
 	@Override
 	public boolean testCondition(Random rand, LootContext context)
 	{
-		return (rand.nextFloat() <= chance);
+		return (rand.nextFloat() <= this.chance * (context.getKillerPlayer() != null && context.getKillerPlayer().hasCapability(MSUCapabilities.GOD_TIER_DATA, null)
+				&& context.getKillerPlayer().getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.LIGHT_SKAIAN_INISHGT) ? 5: 1));
 	}
 
 	public static class Serializer extends LootCondition.Serializer<SkaiaScrollLootCondition>

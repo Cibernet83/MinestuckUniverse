@@ -1323,6 +1323,12 @@ badge.class.unlock=§aRequires %s Experience Levels to unlock.
 badge.page.name=Page's Potential
 badge.page.tooltip=§9Earning this tech has proven your perseverance as a PAGE, giving you a major boost on all GOD TIER stats and Aspect Effect.
 
+lunarSway.prospit=Prospit
+lunarSway.derse=Derse
+alignment.heroic=Heroic
+alignment.just=Just
+alignment.neutral=Neutral
+
 techType.offense=Offense
 techType.defense=Defense
 techType.utility=Utility

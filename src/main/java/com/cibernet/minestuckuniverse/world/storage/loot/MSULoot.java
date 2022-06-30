@@ -50,7 +50,8 @@ public class MSULoot
 		else if(event.getName().equals(GENERAL))
 		{
 			LootPool inject = event.getLootTableManager().getLootTableFromLocation(new ResourceLocation(MinestuckUniverse.MODID, "inject/medium_loot")).getPool("items");
-			event.getTable().getPool("main").addEntry(inject.getEntry("minestuckuniverse:skaian_scroll"));
+			LootPool pool = event.getTable().getPool("misc");
+			pool.addEntry(inject.getEntry("minestuckuniverse:skaian_scroll"));
 		}
 	}
 }
