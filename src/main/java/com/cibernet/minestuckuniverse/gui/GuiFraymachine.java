@@ -320,7 +320,10 @@ public class GuiFraymachine extends GuiScreen
 		{
 			Abilitech sel = selected >= maxTech ? data.getTechLoadout()[selected-maxTech] : tech.get(selected+techTab*maxTech);
 			if(selected >= maxTech)
+			{
 				data.unequipTech(selected-maxTech);
+				data.update();
+			}
 
 			for(int i = 0; i < data.getTechSlots(); i++)
 			{

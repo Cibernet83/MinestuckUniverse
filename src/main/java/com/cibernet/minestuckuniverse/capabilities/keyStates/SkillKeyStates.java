@@ -11,6 +11,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.Sys;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SkillKeyStates implements ISkillKeyStates
 {
 	private KeyState[] keyStates;
@@ -123,39 +126,32 @@ public class SkillKeyStates implements ISkillKeyStates
 		IBadgeEffects badgeEffects = event.player.getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 		ISkillKeyStates keyStates = event.player.getCapability(MSUCapabilities.SKILL_KEY_STATES, null);
 
+		List<Abilitech> passives = new ArrayList<>();
+
 		if(!event.player.isSpectator())
-			for(int i = 0; i < data.getTechSlots(); i++)
+		{
+			for(Key key : Key.values())
 			{
-				Abilitech tech = data.getTech(i);
+				Abilitech abilitech = data.getTech(key.ordinal());
 				boolean isActive = false;
 
-				if(tech == null) continue;
+				if(abilitech == null) continue;
 
-				if(tech.canUse(event.player.world, event.player))
+				if(abilitech.canUse(event.player.world, event.player))
 				{
-					Key key;
+					isActive = abilitech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(key), keyStates.getKeyTime(key));
 
-					switch (i)
+					if(!passives.contains(abilitech) && data.isTechPassiveEnabled(abilitech))
 					{
-						case 1: key = Key.PRIMARY; break;
-						case 0: key = Key.SECONDARY; break;
-						default: key = Key.TERTIARY; break;
+						isActive = abilitech.onEquippedTick(event.player.world, event.player, badgeEffects) || isActive;
+						passives.add(abilitech);
 					}
-
-					isActive = tech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(key), keyStates.getKeyTime(key));
-					/*else if(tech.equals(data.getSelectedTech()))
-					{
-						isActive = tech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(Key.TERTIARY), keyStates.getKeyTime(Key.TERTIARY));
-						if(keyStates.getKeyState(Key.TERTIARY).equals(KeyState.NONE))
-							data.resetSelectedTech();
-					}*/
-					if(data.isTechPassiveEnabled(tech))
-						isActive = isActive || tech.onEquippedTick(event.player.world, event.player, badgeEffects);
 				}
 
-				if (!isActive)
-					badgeEffects.stopPowerParticles(tech.getClass());
+				if(!isActive)
+					badgeEffects.stopPowerParticles(abilitech.getClass());
 			}
+		}
 
 		keyStates.tickKeyStates();
 	}
