@@ -52,6 +52,13 @@ public class MSUKeys
 	@SubscribeEvent
 	public static void onInput(InputEvent event)
 	{
+		EntityPlayerSP player = Minecraft.getMinecraft().player;
+		if(player == null)
+			return;
+
+		if(player.hasCapability(MSUCapabilities.BADGE_EFFECTS, null) && player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isTimeStopped())
+			return;
+
 		for(int i = 0; i < skillKeys.length; i++)
 		{
 			if (skillKeys[i].isKeyDown() ^ downs[i])
@@ -62,10 +69,6 @@ public class MSUKeys
 					Minecraft.getMinecraft().player.getCapability(MSUCapabilities.SKILL_KEY_STATES, null).updateKeyState(SkillKeyStates.Key.values()[i], downs[i]);
 			}
 		}
-
-		EntityPlayerSP player = Minecraft.getMinecraft().player;
-		if(player == null)
-			return;
 
 		boolean strifeKeyDown = strifeKey.isKeyDown();
 		boolean swapStrifeKeyDown = swapOffhandStrifeKey.isKeyDown();
