@@ -10,7 +10,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 
 public class PacketSendPowerParticlesState extends MSUPacket
 {
@@ -40,12 +42,11 @@ public class PacketSendPowerParticlesState extends MSUPacket
 		{
 			data.writeBoolean(true);
 			MSUParticles.PowerParticleState state = (MSUParticles.PowerParticleState) args[stateIndex];
-			data.writeBoolean(state.type == MSUParticles.ParticleType.AURA);
-			if (state.aspect != null)
-				data.writeByte(state.aspect.ordinal());
-			else
-				data.writeByte(EnumAspect.values().length + state.clazz.ordinal());
+			data.writeByte(state.type.ordinal());
 			data.writeByte(state.count);
+			data.writeByte(state.colors.length);
+			for(int color : state.colors)
+				data.writeInt(color);
 		}
 		else
 			data.writeBoolean(false);
@@ -70,10 +71,16 @@ public class PacketSendPowerParticlesState extends MSUPacket
 
 		if (data.readBoolean())
 		{
-			boolean aura = data.readBoolean();
-			int classpect = data.readByte();
+			MSUParticles.ParticleType type = MSUParticles.ParticleType.values()[data.readByte()];
 			int count = data.readByte();
+			int[] colors = new int[data.readByte()];
 
+			for(int i = 0; i < colors.length; i++)
+				colors[i] = data.readInt();
+
+			state = new MSUParticles.PowerParticleState(type, count, colors);
+
+			/*
 			if (classpect < EnumAspect.values().length)
 				state = new MSUParticles.PowerParticleState(
 						aura ? MSUParticles.ParticleType.AURA : MSUParticles.ParticleType.BURST,
@@ -86,6 +93,7 @@ public class PacketSendPowerParticlesState extends MSUPacket
 						EnumClass.values()[classpect - EnumAspect.values().length],
 						count
 					);
+			*/
 		}
 
 		return this;

@@ -15,6 +15,7 @@ import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -436,11 +437,7 @@ public class BadgeEffects implements IBadgeEffects
 	@SideOnly(Side.CLIENT)
 	private static void spawnClientParticles(EntityLivingBase entity, MSUParticles.PowerParticleState state)
 	{
-		int[] colors;
-		if (state.aspect != null)
-			colors = MSUParticles.getAspectParticleColors(state.aspect);
-		else
-			colors = MSUParticles.getClassParticleColors(state.clazz);
+		int[] colors = state.colors;
 
 		int[] counts = new int[colors.length];
 		for (int i = 0; i < state.count; i++)
@@ -485,9 +482,17 @@ public class BadgeEffects implements IBadgeEffects
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setString("Badge", entry.getKey().getName());
 			tag.setByte("Type", (byte) entry.getValue().type.ordinal());
+
+			NBTTagList colors = new NBTTagList();
+			for(int c : entry.getValue().colors)
+				colors.appendTag(new NBTTagInt(c));
+			tag.setTag("Colors", colors);
+
+			/*
 			if(entry.getValue().aspect != null)
 				tag.setByte("Aspect", (byte) entry.getValue().aspect.ordinal());
 			else tag.setByte("Class", (byte) entry.getValue().clazz.ordinal());
+			*/
 			tag.setByte("Count", (byte) entry.getValue().count);
 			particles.appendTag(tag);
 		}
@@ -522,6 +527,24 @@ public class BadgeEffects implements IBadgeEffects
 			try
 			{
 				NBTTagCompound tag = (NBTTagCompound) tagBase;
+				int[] colors = new int[0];
+
+				if(tag.hasKey("Colors"))
+				{
+					NBTTagList list = tag.getTagList("Colors", 10);
+					colors = new int[list.tagCount()];
+					for(int i = 0; i < colors.length; i++)
+						colors[i] = list.getIntAt(i);
+				}
+
+					particleMap.put(Class.forName(tag.getString("Badge")), new MSUParticles.PowerParticleState(
+							MSUParticles.ParticleType.values()[tag.getByte("Type")],
+							tag.getByte("Count"),
+							colors
+					));
+
+
+				/*
 				if(tag.hasKey("Aspect"))
 				particleMap.put(Class.forName(tag.getString("Badge")), new MSUParticles.PowerParticleState(
 						MSUParticles.ParticleType.values()[tag.getByte("Type")],
@@ -533,7 +556,7 @@ public class BadgeEffects implements IBadgeEffects
 								MSUParticles.ParticleType.values()[tag.getByte("Type")],
 								EnumClass.values()[tag.getByte("Class")],
 						tag.getByte("Count")
-				));
+				)); */
 			}
 			catch (ClassNotFoundException e)
 			{

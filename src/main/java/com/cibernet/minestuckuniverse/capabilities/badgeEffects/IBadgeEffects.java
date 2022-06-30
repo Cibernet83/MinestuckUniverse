@@ -93,20 +93,26 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	Map<Class, MSUParticles.PowerParticleState> getPowerParticles();
 
 	default void startPowerParticles(Class badge, MSUParticles.ParticleType particleType, EnumAspect aspect, int count) {
-		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, aspect, count));
+		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, MSUParticles.getAspectParticleColors(aspect)));
 	}
 	default void startPowerParticles(Class badge, MSUParticles.ParticleType particleType, EnumClass clazz, int count) {
-		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, clazz, count));
+		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, MSUParticles.getClassParticleColors(clazz)));
+	}
+	default void startPowerParticles(Class badge, MSUParticles.ParticleType particleType, int count, int... colors) {
+		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, colors));
 	}
 	void startPowerParticles(Class badge, MSUParticles.PowerParticleState state);
 
 	void stopPowerParticles(Class badge);
 
 	default void oneshotPowerParticles(MSUParticles.ParticleType particleType, EnumAspect aspect, int count) {
-		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, aspect, count));
+		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, count, MSUParticles.getAspectParticleColors(aspect)));
 	}
 	default void oneshotPowerParticles(MSUParticles.ParticleType particleType, EnumClass clazz, int count) {
-		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, clazz, count));
+		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, count, MSUParticles.getClassParticleColors(clazz)));
+	}
+	default void oneshotPowerParticles(MSUParticles.ParticleType particleType, int count, int... colors) {
+		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, count, colors));
 	}
 	void oneshotPowerParticles(MSUParticles.PowerParticleState state);
 

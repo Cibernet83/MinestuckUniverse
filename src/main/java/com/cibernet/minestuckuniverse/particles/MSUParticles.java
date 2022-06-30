@@ -154,7 +154,7 @@ public class MSUParticles
 			new int[] {0xEF7F34}, // KNIGHT
 			new int[] {0xB55BFF}, // MAGE
 			new int[] {0x31E0AB}, // MAID
-			new int[] {}, // PAGE
+			new int[] {0xFFFF9B}, // PAGE
 			new int[] {0x7C1D1D}, // PRINCE
 			new int[] {0x39C4C6}, // ROGUE
 			new int[] {0xD670FF}, // SEER
@@ -176,22 +176,13 @@ public class MSUParticles
 	public static class PowerParticleState
 	{
 		public final ParticleType type;
-		public final EnumAspect aspect;
-		public final EnumClass clazz;
+		public final int[] colors;
 		public final int count;
 
-		public PowerParticleState(ParticleType type, EnumAspect aspect, int count)
+		public PowerParticleState(ParticleType type, int count, int... colors)
 		{
 			this.type = type;
-			this.aspect = aspect;
-			this.clazz = null;
-			this.count = count;
-		}
-		public PowerParticleState(ParticleType type, EnumClass clazz, int count)
-		{
-			this.type = type;
-			this.aspect = null;
-			this.clazz = clazz;
+			this.colors = colors;
 			this.count = count;
 		}
 
@@ -202,7 +193,7 @@ public class MSUParticles
 			if (!(obj instanceof PowerParticleState))
 				return false;
 			PowerParticleState state = (PowerParticleState) obj;
-			return this.type == state.type && this.aspect == state.aspect && this.clazz == state.clazz && this.count == state.count;
+			return this.type == state.type && this.colors.equals(state.colors) && this.count == state.count;
 		}
 	}
 }
