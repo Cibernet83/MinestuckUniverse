@@ -44,7 +44,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(new MinestuckUniverseGrist());
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
-        MinecraftForge.EVENT_BUS.register(MSUPotions.class);
+        PotionEventHandler.registerPotionEvents();
         MinecraftForge.EVENT_BUS.register(MSUEnchantments.class);
         MinecraftForge.EVENT_BUS.register(MSUSoundHandler.class);
 
