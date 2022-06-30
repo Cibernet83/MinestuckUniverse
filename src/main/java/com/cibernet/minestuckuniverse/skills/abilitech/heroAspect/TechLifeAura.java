@@ -59,7 +59,7 @@ public class TechLifeAura extends TechHeroAspect
 			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(RADIUS)))
 			{
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 10);
-				target.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 1200, 3));
+				target.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 2400, 5));
 			}
 			if (!player.isCreative())
 				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 4);

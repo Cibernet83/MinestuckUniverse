@@ -233,6 +233,26 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
+	public void setJusticeTarget(EntityLivingBase target) {
+		setEntity(TechMindKarmaHeal.class, target);
+	}
+
+	@Override
+	public EntityLivingBase getJusticeTarget() {
+		return getEntity(TechMindKarmaHeal.class);
+	}
+
+	@Override
+	public void setSoulLinkTarget(EntityLivingBase target) {
+		setEntity(TechHeartLink.class, target);
+	}
+
+	@Override
+	public EntityLivingBase getSoulLinkTarget() {
+		return getEntity(TechHeartLink.class);
+	}
+
+	@Override
 	public boolean isWindFormed()
 	{
 		return getBoolean(TechBreathWindVessel.class);

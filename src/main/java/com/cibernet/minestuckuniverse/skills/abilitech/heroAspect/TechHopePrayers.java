@@ -39,21 +39,17 @@ public class TechHopePrayers extends TechHeroAspect
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.HOPE, 10);
 
 			List<Potion> potionPoolPos = new ArrayList<>();
-			List<Potion> potionPoolNeg = new ArrayList<>();
 			Potion.REGISTRY.forEach(potion ->
 			{
-				if (potion.isBadEffect())
-					potionPoolNeg.add(potion);
-				else potionPoolPos.add(potion);
+				if (!potion.isBadEffect())
+					potionPoolPos.add(potion);
 			});
 
-			Potion negativeEffect = potionPoolNeg.get(world.rand.nextInt(potionPoolNeg.size()));
-			Potion positiveEffect = potionPoolPos.get(world.rand.nextInt(potionPoolPos.size()));
+			Potion potion = potionPoolPos.get(world.rand.nextInt(potionPoolPos.size()));
 
 			for (EntityPlayer target : world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(RADIUS), target -> target != player)) {
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.HOPE, 10);
 
-				Potion potion = Math.signum(target.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTotalKarma()) == Math.signum(player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTotalKarma()) ? positiveEffect : negativeEffect;
 				target.addPotionEffect(new PotionEffect(potion, potion.isInstant() ? 0 : 300, 2));
 			}
 

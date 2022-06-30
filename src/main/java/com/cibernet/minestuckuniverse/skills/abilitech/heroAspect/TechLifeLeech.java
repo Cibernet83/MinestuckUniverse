@@ -4,6 +4,8 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.damage.CritDamageSource;
+import com.cibernet.minestuckuniverse.damage.IGodTierDamage;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -60,7 +62,7 @@ public class TechLifeLeech extends TechHeroAspect
 		return true;
 	}
 
-	public static class LifeDamageSource extends DamageSource
+	public static class LifeDamageSource extends CritDamageSource
 	{
 		protected Entity damageSourceEntity;
 

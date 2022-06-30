@@ -38,7 +38,7 @@ public class TechDoomChain extends TechHeroAspect
 			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(RADIUS)))
 			{
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.DOOM, 10);
-				target.addPotionEffect(new PotionEffect(MSUPotions.EARTHBOUND, 1200, 0));
+				target.addPotionEffect(new PotionEffect(MSUPotions.EARTHBOUND, 1200, 1));
 			}
 
 			if (!player.isCreative())

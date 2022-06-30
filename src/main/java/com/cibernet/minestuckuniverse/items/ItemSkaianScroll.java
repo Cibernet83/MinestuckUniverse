@@ -27,10 +27,8 @@ public class ItemSkaianScroll extends MSUItemBase
 	{
 		super("skaian_scroll", "skaianScroll");
 		setMaxStackSize(1);
+		setSecret();
 	}
-
-	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) { }
 
 	public static int getColor(ItemStack stack)
 	{

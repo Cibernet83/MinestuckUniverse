@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
 
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.damage.EntityCritDamageSource;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
@@ -40,12 +41,14 @@ public class TechBreathGale extends TechHeroAspect
 				return false;
 			}
 
-			if(time < 30)
+			if(time < 20)
 				return false;
 
 			player.setSprinting(false);
 			player.capabilities.isFlying = false;
-			player.motionY = Math.min(2, Math.max(1.2f, time/30f));
+			player.motionY = Math.min(2, Math.max(2f, time/40f));
+			player.motionX = Math.sin(Math.toRadians(-player.rotationYaw))*player.motionY*0.7f;
+			player.motionZ = Math.cos(Math.toRadians(-player.rotationYaw))*player.motionY*0.7f;
 			player.velocityChanged = true;
 
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.BREATH, 40);
@@ -64,7 +67,10 @@ public class TechBreathGale extends TechHeroAspect
 			{
 				if(entity == player) continue;
 				if (!net.minecraftforge.event.ForgeEventFactory.onEntityStruckByLightning(entity, lightning))
+				{
+					entity.attackEntityFrom(new EntityCritDamageSource("lightningBolt", player), 12);
 					entity.onStruckByLightning(lightning);
+				}
 			}
 		}
 		else

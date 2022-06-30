@@ -23,6 +23,9 @@ public class TechMindKarmaHeal extends TechHeroAspect
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
 	{
+		if(state == SkillKeyStates.KeyState.RELEASED)
+			badgeEffects.setJusticeTarget(null);
+
 		if (state == SkillKeyStates.KeyState.NONE)
 			return false;
 
@@ -32,7 +35,13 @@ public class TechMindKarmaHeal extends TechHeroAspect
 			return false;
 		}
 
-		EntityLivingBase target = MSUUtils.getTargetEntity(player);
+		EntityLivingBase target = badgeEffects.getJusticeTarget();
+
+		if(target == null && MSUUtils.getTargetEntity(player) instanceof EntityPlayer)
+		{
+			target = MSUUtils.getTargetEntity(player);
+			badgeEffects.setJusticeTarget(target);
+		}
 
 		if (target instanceof EntityPlayer)
 		{
