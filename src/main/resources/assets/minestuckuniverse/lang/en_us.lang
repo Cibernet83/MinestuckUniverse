@@ -1441,7 +1441,7 @@ tech.spatial_manipulator.tooltip=Shrinks and enlarges certain entities and SBURB
 tech.withering_whisper.name=Withering Whisper
 tech.withering_whisper.tooltip=Brings forth @DOOM@ upon all nearby creatures, casting a deadly spell that incrementally withers away at their health.
 tech.terminal_demise.name=Terminal Demise
-tech.terminal_demise.tooltip=Immediately kills the target if they're health is low enough, completely bypassing their Conditional Immortality. This abilitech will also affect the user, so watch your health when using it!
+tech.terminal_demise.tooltip=Immediately kills the target if their health is low enough, completely bypassing their Conditional Immortality. This abilitech will also affect the user, so watch your health when using it!
 tech.chains_of_despair.name=Chains of Despair
 tech.chains_of_despair.tooltip=Briefly inhibits the ability to fly or jump for all nearby players, inculding the user. Charging this Abilitech inhibits the ability to create for all targets.
 tech.survivors_bind.name=Survivor's Bind
@@ -1496,12 +1496,12 @@ tech.anger_management.tooltip=Grants you the ability to control the targeted mob
 tech.raging_insanity.name=Raging Insanity
 tech.raging_insanity.tooltip=Puts all nearby creatures into a frenzied state, causing them to start attacking one another.
 
-tech.passiveMind.name=Sensory Break
-tech.passiveMind.tooltip=Scrambles the target's mind for a short period of time, reversing their controls whilst in effect.
-tech.activeMind.name=Mindflayer's Spell
-tech.activeMind.tooltip=§9This badge proves your mastery over the aspect of MIND, allowing you to take control of any player's decissions by pressing [%s] as long as their mind is weak enough.
-tech.utilMind.name=Godhood's Justice
-tech.utilMind.tooltip=Gradually heals the targeted player's Karma.
+tech.sensory_break.name=Sensory Break
+tech.sensory_break.tooltip=Scrambles the target's mind for a short period of time, reversing their controls whilst in effect.
+tech.mindflayers_spell.name=Mindflayer's Spell
+tech.mindflayers_spell.tooltip=§9This badge proves your mastery over the aspect of MIND, allowing you to take control of any player's decissions by pressing [%s] as long as their mind is weak enough.
+tech.godhoods_justice.name=Godhood's Justice
+tech.godhoods_justice.tooltip=Gradually heals the targeted player's Karma.
 
 tech.answered_prayers.name=Answered Prayers
 tech.answered_prayers.tooltip=Blesses all nearby players and passive creatures with a possitive Potion Effect.

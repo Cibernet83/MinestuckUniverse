@@ -105,7 +105,7 @@ public class ItemGTArmor extends MSUArmorBase
 	{
 		EnumClass heroClass = getHeroClass(stack);
 		EnumAspect heroAspect = getHeroAspect(stack);
-		
+
 		if(heroClass == null)
 			return super.getArmorModel(entityLiving, stack, armorSlot, _default);
 		

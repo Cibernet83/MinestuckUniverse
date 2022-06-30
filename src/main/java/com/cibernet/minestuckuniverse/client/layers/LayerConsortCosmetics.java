@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.client.layers;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.client.models.armor.godtier.ModelGTAbstract;
 import com.google.common.collect.Maps;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
@@ -115,7 +116,10 @@ public class LayerConsortCosmetics implements LayerRenderer<EntityLivingBase>
 			//armorModel.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0F, entitylivingbaseIn);
 
 			armorModel.setRotationAngles(0, 0, 0, 0, 0, scale, entitylivingbaseIn);
-			armorModel.bipedHead.render(scale);
+
+			if(armorModel instanceof ModelGTAbstract)
+				((ModelGTAbstract)armorModel).renderHead(scale);
+			else armorModel.bipedHead.render(scale);
 
 			//armorModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 

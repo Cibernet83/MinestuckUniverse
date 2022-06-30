@@ -197,7 +197,7 @@ public abstract class ModelGTAbstract extends ModelBiped
 	{
 	}
 	
-	private void renderHead(float scale)
+	public void renderHead(float scale)
 	{
 		AspectColorHandler.AspectColor[] colorSet = AspectColorHandler.getAspectColorSet(heroAspect);
 		
