@@ -725,6 +725,17 @@ effect.minestuckuniverse.flight=Skybound
 effect.minestuckuniverse.disableFlight=Earthbound
 effect.minestuckuniverse.disableBuilding=Creative Shock
 
+effect.minestuckuniverse.godtierLock=Hero Lock
+effect.minestuckuniverse.godtierComeback=Universe's Blessing
+effect.minestuckuniverse.timeStop=Time Stop
+effect.minestuckuniverse.voidConceal=True Concealment
+effect.minestuckuniverse.decay=Decay
+effect.minestuckuniverse.decayproof=Decayproof
+effect.minestuckuniverse.mindConfusion=Mental Crash
+effect.minestuckuniverse.mindFortitude=Mental Fortitude
+effect.minestuckuniverse.rageBerserk=Berserk
+effect.minestuckuniverse.bleeding=Bleeding
+
 subtitle.minestuckuniverse.home_run_bat=Home Run!
 subtitle.minestuckuniverse.shield_parry=Shield parried
 subtitle.minestuckuniverse.shock=Bzzzt
@@ -1080,9 +1091,10 @@ key.minestuckuniverse.swapOffhandStrife=Swap Offhand Item with Strife Deck
 key.minestuckuniverse.strifeSelectorLeft=Strife Selector Scroll Left
 key.minestuckuniverse.strifeSelectorRight=Strife Selector Scroll Right
 
-key.minestuckuniverse.aspectAction=God Tier Aspect Action
-key.minestuckuniverse.classAction=God Tier Class Action
-key.minestuckuniverse.godTierUtil=God Tier Utility Action
+key.minestuckuniverse.abilitechPrimary=Abilitech #1
+key.minestuckuniverse.abilitechSecondary=Abilitech #2
+key.minestuckuniverse.abilitechTertiary=Abilitech #3
+key.minestuckuniverse.toggleAbilitech=Toggle Passive Abilitech
 
 status.eightBallBlind=Some Magic 8-Ball liquid went into your eyes!
 
