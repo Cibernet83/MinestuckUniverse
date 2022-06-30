@@ -5,7 +5,6 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.skills.badges.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspectUtil.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.*;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;

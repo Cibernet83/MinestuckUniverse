@@ -1,8 +1,6 @@
 package com.cibernet.minestuckuniverse.capabilities.badgeEffects;
 
-import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspectUtil.*;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIMindflayerTarget;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
@@ -10,8 +8,6 @@ import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.PotionConceal;
 import com.cibernet.minestuckuniverse.util.SoulData;
-import com.mraof.minestuck.util.EnumAspect;
-import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

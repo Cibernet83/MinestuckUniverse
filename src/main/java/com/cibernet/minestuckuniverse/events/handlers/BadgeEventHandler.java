@@ -7,7 +7,6 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechPrinceSlash
 import com.cibernet.minestuckuniverse.skills.badges.BadgeBuilder;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspectUtil.*;
 import com.cibernet.minestuckuniverse.skills.badges.BadgeOverlord;
 import com.cibernet.minestuckuniverse.blocks.BlockDungeonDoor;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;

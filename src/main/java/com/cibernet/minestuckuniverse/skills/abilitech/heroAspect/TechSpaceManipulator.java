@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.skills.abilitech.heroAspectUtil;
+package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
 
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
@@ -6,7 +6,6 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.items.ItemManipulatedMatter;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
