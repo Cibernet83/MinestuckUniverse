@@ -8,13 +8,11 @@ import com.cibernet.minestuckuniverse.skills.Skill;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,9 +29,12 @@ public class ItemSkaianScroll extends MSUItemBase
 		setMaxStackSize(1);
 	}
 
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) { }
+
 	public static int getColor(ItemStack stack)
 	{
-		return hasSkill(stack) ? getSkill(stack).getColor() : -1;
+		return hasSkill(stack) ? getSkill(stack).getColor() : 0x77FFEC;
 	}
 
 	public static ItemStack storeRandomSkill(ItemStack stack, Random rand)

@@ -90,5 +90,5 @@ public abstract class Skill extends net.minecraftforge.registries.IForgeRegistry
 		return getRegistryName() == null ? "MISSING REGISTRY for " + super.toString() : getRegistryName().toString();
 	}
 
-	public int getColor() { return 0xFFFFFF; }
+	public int getColor() { return 0x77FFEC; }
 }

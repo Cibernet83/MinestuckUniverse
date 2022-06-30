@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
+import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.Skill;
 import com.cibernet.minestuckuniverse.skills.TechBoondollarCost;
@@ -64,5 +65,10 @@ public abstract class TechHeroClass extends TechBoondollarCost
 	public List<String> getTags()
 	{
 		return Arrays.asList( "@"+heroClass.name()+"@", "@"+heroRole.name()+"@");
+	}
+
+	@Override
+	public int getColor() {
+		return MSUParticles.getClassParticleColors(heroClass)[0];
 	}
 }
