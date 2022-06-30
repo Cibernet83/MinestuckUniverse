@@ -57,10 +57,13 @@ public class PotionTimeStop extends PotionMouseSensitivityAdjusterBase
 			if (!entity.world.isRemote || MSUUtils.isClientPlayer(entity))
 				event.setCanceled(true);
 
-			if (entity.hurtTime > 0)
-				--entity.hurtTime;
-			if (entity.hurtResistantTime > 0 && !(entity instanceof EntityPlayerMP))
-				--entity.hurtResistantTime;
+			if(entity.getActivePotionEffect(MSUPotions.TIME_STOP).getAmplifier() > 0) //not accessible in survival, but i'm keeping it in bc it's funny
+			{
+				if (entity.hurtTime > 0)
+					--entity.hurtTime;
+				if (entity.hurtResistantTime > 0 && !(entity instanceof EntityPlayerMP))
+					--entity.hurtResistantTime;
+			}
 
 			if (entity.world.isRemote)
 			{
