@@ -419,6 +419,8 @@ public class BadgeEffects implements IBadgeEffects
 	{
 		int[] colors = state.colors;
 
+		if(colors.length <= 0) return;
+
 		int[] counts = new int[colors.length];
 		for (int i = 0; i < state.count; i++)
 			counts[i % counts.length]++;
