@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.PotionConceal;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechSeerDodge;
 import com.cibernet.minestuckuniverse.util.SoulData;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTBase;
@@ -393,6 +394,22 @@ public class BadgeEffects implements IBadgeEffects
 	@Override
 	public void setEditDragging(boolean v) {
 		isEditDragging = v;
+	}
+
+	@Override
+	public int getForesightCooldown() {
+		return getInt(TechSeerDodge.class);
+	}
+
+	@Override
+	public void setForesightCooldown(int v)
+	{
+		setInt(TechSeerDodge.class, v);
+	}
+
+	@Override
+	public boolean isForesightOnCooldown() {
+		return getForesightCooldown() > 0;
 	}
 
 	@Override

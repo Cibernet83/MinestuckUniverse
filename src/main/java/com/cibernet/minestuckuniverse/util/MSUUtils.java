@@ -198,7 +198,7 @@ public class MSUUtils
 
     public static EntityLivingBase getTargetEntity(EntityPlayer player)
     {
-        return getTargetEntity(player, 10);
+        return getTargetEntity(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
     }
 
     public static EntityLivingBase getTargetEntity(EntityPlayer player, double blockReachDistance)
@@ -209,7 +209,7 @@ public class MSUUtils
 
     public static BlockPos getTargetBlock(EntityPlayer player)
     {
-        return getTargetBlock(player, 10);
+        return getTargetBlock(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
     }
 
     public static BlockPos getTargetBlock(EntityPlayer player, double blockReachDistance)

@@ -3,14 +3,17 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
+import com.cibernet.minestuckuniverse.skills.badges.Badge;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.cibernet.minestuckuniverse.util.SpaceSaltUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
@@ -76,5 +79,12 @@ public class TechSpaceResize extends TechHeroAspect
 		}
 
 		return false;
+	}
+
+
+	@Override
+	public boolean canAppearOnList(World world, EntityPlayer player)
+	{
+		return super.canAppearOnList(world, player) && Badge.findItem(player, new ItemStack(MinestuckUniverseItems.spaceSalt), false, true);
 	}
 }

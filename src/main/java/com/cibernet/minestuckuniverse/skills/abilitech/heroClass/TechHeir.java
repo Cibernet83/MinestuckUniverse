@@ -15,6 +15,8 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import static com.mraof.minestuck.util.MinestuckPlayerData.title;
+
 public class TechHeir extends TechHeroClass
 {
 	public TechHeir(String name)
@@ -58,6 +60,21 @@ public class TechHeir extends TechHeroClass
 			return;
 
 		doHeirThings((EntityPlayer) event.getEntityLiving(), (EntityLivingBase) event.getSource().getTrueSource(), event.getAmount());
+
+		if(event.getSource().getImmediateSource() instanceof EntityPlayer)
+		{
+			EntityPlayer source = (EntityPlayer) event.getSource().getImmediateSource();
+			Title sourceTitle = MinestuckPlayerData.getTitle(IdentifierHandler.encode(source));
+			Title targetTitle = event.getEntityLiving() instanceof EntityPlayer ? MinestuckPlayerData.getTitle(IdentifierHandler.encode((EntityPlayer) event.getEntityLiving())) : null;
+
+			if((sourceTitle != null || targetTitle != null) && source.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.UNIVERSAL_REVERSE) &&
+					(source.world.rand.nextFloat() < Math.max(0.1f, (source.getHealth()-source.getMaxHealth())*0.65f * (source.getLuck()/4f-0.2f))))
+			{
+				PotionEffect effect = BadgeEventHandler.NEGATIVE_EFFECTS.get(targetTitle == null ? sourceTitle.getHeroAspect() : targetTitle.getHeroAspect());
+				event.getEntityLiving().addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration(), effect.getAmplifier()));
+				event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.HEIR, 3);
+			}
+		}
 	}
 
 	@SubscribeEvent

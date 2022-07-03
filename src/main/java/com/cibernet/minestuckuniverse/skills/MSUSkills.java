@@ -285,6 +285,7 @@ public class MSUSkills
 	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward");
 	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt");
 	public static final Abilitech SYLPH_MEND = new TechSylph("sylph_mend");
+	public static final Abilitech HEROIC_RESTORATION = new TechSylphCounterLock("heroic_restoration");
 	public static final Abilitech PRINCE_WRATH = new TechPrinceSlash("prince_wrath");
 	public static final Abilitech RULING_SLASH = new TechPrinceWrath("ruling_slash");
 	public static final Abilitech WITCH_INHIBITION = new TechWitch("witch_inhibition");
@@ -292,10 +293,12 @@ public class MSUSkills
 	public static final Abilitech MAGE_AWARENESS = new TechMage("mage_awareness");
 
 	public static final Abilitech SEER_PREDICTION = new TechSeer("seer_prediction");
+	public static final Abilitech FORESIGHT_DODGE = new TechSeerDodge("foresight_dodge");
 	public static final Abilitech ROGUE_CONTRIBUTION = new TechRogue("rogue_contribution");
 	public static final Abilitech BARD_DISSONANCE = new TechBard("bard_dissonance");
 	public static final Abilitech MAID_FAVOR = new TechMaid("maid_favor");
 	public static final Abilitech HEIR_WILL = new TechHeir("heir_will");
+	public static final Abilitech UNIVERSAL_REVERSE = new TechHeir("universal_reverse");
 
 	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem");
 	public static final Abilitech LORD_DECREE = new TechLord("lord_decree");
@@ -309,6 +312,7 @@ public class MSUSkills
 	public static final Abilitech TIME_TEMPORAL_RECALL = new TechTimeRecall("temporal_recall");
 	public static final Abilitech TIME_CHRONOFREEZE = new TechTimeStop("chronofreeze");
 	public static final Abilitech TIME_FLOW_ACCELERATOR = new TechTimeAcceleration("flow_accelerator");
+	public static final Abilitech TIME_RAPID_REWIND = new TechTimeTables("rapid_rewind");
 
 	public static final Abilitech BREATH_TEMPESTING_ASCENSION = new TechBreathGale("tempesting_ascension");
 	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon");
@@ -327,6 +331,7 @@ public class MSUSkills
 	public static final Abilitech DOOM_TERMINAL_DEMISE = new TechDoomDemise("terminal_demise");
 	public static final Abilitech DOOM_WITHERING_WHISPER = new TechDoomDecay("withering_whisper");
 	public static final Abilitech DOOM_CHAINS_OF_DESPAIR = new TechDoomChain("chains_of_despair");
+	public static final Abilitech DOOM_SURVIVORS_BIND = new TechDoomBind("survivors_bind");
 
 	public static final Abilitech LIFE_LIFEFORCE_LEECH = new TechLifeLeech("lifeforce_leech");
 	public static final Abilitech LIFE_HEALING_AURA = new TechLifeAura("healing_aura");

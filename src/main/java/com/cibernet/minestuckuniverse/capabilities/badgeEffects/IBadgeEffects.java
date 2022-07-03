@@ -89,6 +89,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	boolean isEditDragging();
 	void setEditDragging(boolean v);
 
+	int getForesightCooldown();
+	void setForesightCooldown(int v);
+	boolean isForesightOnCooldown();
 
 	// ----- Particles
 	Map<Class, MSUParticles.PowerParticleState> getPowerParticles();

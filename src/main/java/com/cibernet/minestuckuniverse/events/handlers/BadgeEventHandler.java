@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechHeir;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechMuse;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechPrinceSlash;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechSeerDodge;
 import com.cibernet.minestuckuniverse.skills.badges.BadgeBuilder;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
@@ -96,6 +97,8 @@ public class BadgeEventHandler
 		MinecraftForge.EVENT_BUS.register(BadgeBuilder.class);
 		MinecraftForge.EVENT_BUS.register(TechPrinceSlash.class);
 		MinecraftForge.EVENT_BUS.register(TechSoulStun.class);
+		MinecraftForge.EVENT_BUS.register(TechDoomBind.class);
+		MinecraftForge.EVENT_BUS.register(TechSeerDodge.class);
 	}
 
 	@SubscribeEvent
