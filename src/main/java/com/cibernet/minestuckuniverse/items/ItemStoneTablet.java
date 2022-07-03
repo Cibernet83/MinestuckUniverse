@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.item.MinestuckItems;
+import com.mraof.minestuck.item.TabMinestuck;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -29,9 +30,9 @@ public class ItemStoneTablet extends MSUItemBase
 
 	public ItemStoneTablet()
 	{
-		super("stone_slab", "stoneTablet");
+		super("minestuck:stone_slab", "stoneTablet");
 		setMaxStackSize(1);
-
+		setCreativeTab(TabMinestuck.instance);
 		addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "written"), ((stack, worldIn, entityIn) ->
 		{
 			NBTTagCompound nbt = stack.getTagCompound();

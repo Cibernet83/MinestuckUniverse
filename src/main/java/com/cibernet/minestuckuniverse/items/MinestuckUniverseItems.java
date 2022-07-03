@@ -484,7 +484,7 @@ public class MinestuckUniverseItems
         registerItem(registry, timetable);
         registerItem(registry, strifeCard);
         registerItem(registry, skaianScroll);
-         MinestuckItems.stoneSlab = registerItem(registry, stoneTablet);
+         MinestuckItems.stoneSlab = registerCustomRenderedItem(registry, stoneTablet);
 
         registerItem(registry, laserPointer);
         registerItem(registry, whip);

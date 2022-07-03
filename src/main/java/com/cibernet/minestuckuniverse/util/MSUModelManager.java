@@ -51,6 +51,7 @@ public class MSUModelManager
         register(royalDeringer, 0, "royal_deringer");
         register(scarletRibbitar, 0, "scarlet_ribbitar");
         register(dDEHammerAxe, 0, "eeeeeeeeeeee");
+        register(stoneSlab, 0, "stone_slab");
 
         if(!MinestuckUniverse.isArsenalLoaded)
         {
