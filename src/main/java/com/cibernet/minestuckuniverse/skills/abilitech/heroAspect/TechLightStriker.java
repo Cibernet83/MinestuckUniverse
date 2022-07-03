@@ -54,9 +54,17 @@ public class TechLightStriker extends TechHeroAspect
 		}
 
 		if(time > 13)
-			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.LIGHT, 20);
+		{
+			if(player.getName().equals("Cibernet"))
+				badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, 20, 0x1ACCEF, 0x1CFFE0);
+			else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.LIGHT, 20);
+		}
 		else
-			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIGHT, 10);
+		{
+			if(player.getName().equals("Cibernet"))
+				badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, 10, 0x1ACCEF, 0x1CFFE0);
+			else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIGHT, 10);
+		}
 
 		if(time == 15)
 		{
@@ -79,7 +87,10 @@ public class TechLightStriker extends TechHeroAspect
 						entity.onStruckByLightning(lightning);
 					}
 
-				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.LIGHT, 10);
+				if(player.getName().equals("Cibernet"))
+					target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, 10, 0x1ACCEF, 0x1CFFE0);
+				else target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.LIGHT, 10);
+
 				target.removePotionEffect(MobEffects.GLOWING);
 			}
 			if (!player.isCreative())

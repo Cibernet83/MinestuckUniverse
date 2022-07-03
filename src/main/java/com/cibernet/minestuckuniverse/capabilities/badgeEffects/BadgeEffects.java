@@ -229,6 +229,26 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
+	public EntityLivingBase getSoulShockTarget() {
+		return getEntity(TechSoulStun.Target.class);
+	}
+
+	@Override
+	public void setSoulShockTarget(EntityLivingBase target) {
+		setEntity(TechSoulStun.Target.class, target);
+	}
+
+	@Override
+	public boolean isSoulShocked() {
+		return getBoolean(TechSoulStun.class);
+	}
+
+	@Override
+	public void setSoulShocked(boolean v) {
+		setBoolean(TechSoulStun.class, v);
+	}
+
+	@Override
 	public void setJusticeTarget(EntityLivingBase target) {
 		setEntity(TechMindKarmaHeal.class, target);
 	}

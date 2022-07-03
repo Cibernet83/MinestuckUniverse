@@ -42,6 +42,11 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	EntityLivingBase getMindflayedBy();
 	boolean isMindflayed();
 
+	EntityLivingBase getSoulShockTarget();
+	void setSoulShockTarget(EntityLivingBase target);
+	boolean isSoulShocked();
+	void setSoulShocked(boolean v);
+
 	void setJusticeTarget(EntityLivingBase target);
 	EntityLivingBase getJusticeTarget();
 	void setSoulLinkTarget(EntityLivingBase target);

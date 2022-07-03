@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
@@ -57,7 +58,7 @@ public class PotionTimeStop extends PotionMouseSensitivityAdjusterBase
 			if (!entity.world.isRemote || MSUUtils.isClientPlayer(entity))
 				event.setCanceled(true);
 
-			if(entity.getActivePotionEffect(MSUPotions.TIME_STOP).getAmplifier() > 0) //not accessible in survival, but i'm keeping it in bc it's funny
+			if(!(entity instanceof EntityPlayer) || (entity.isPotionActive(MSUPotions.TIME_STOP) && entity.getActivePotionEffect(MSUPotions.TIME_STOP).getAmplifier() > 0)) //not accessible in survival, but i'm keeping it in bc it's funny
 			{
 				if (entity.hurtTime > 0)
 					--entity.hurtTime;

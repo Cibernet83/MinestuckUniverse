@@ -38,8 +38,7 @@ public class TechKnightHalt extends TechHeroClass {
 				target.motionX = 0;
 				target.motionY = 0;
 				target.motionZ = 0;
-
-
+				target.velocityChanged = true;
 			}
 
 			badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.BURST, EnumClass.KNIGHT, 20);

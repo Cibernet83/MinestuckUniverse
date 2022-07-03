@@ -95,6 +95,7 @@ public class BadgeEventHandler
 		MinecraftForge.EVENT_BUS.register(TechSpaceManipulator.class);
 		MinecraftForge.EVENT_BUS.register(BadgeBuilder.class);
 		MinecraftForge.EVENT_BUS.register(TechPrinceSlash.class);
+		MinecraftForge.EVENT_BUS.register(TechSoulStun.class);
 	}
 
 	@SubscribeEvent

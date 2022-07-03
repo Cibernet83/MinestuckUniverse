@@ -313,6 +313,7 @@ public class MSUSkills
 	public static final Abilitech BREATH_TEMPESTING_ASCENSION = new TechBreathGale("tempesting_ascension");
 	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon");
 	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind");
+	public static final Abilitech BREATH_SPACE_VERTIGO_BLOCK = new TechBreathSpaceFallProof("vertigo_block", 5000);
 
 	public static final Abilitech LIGHT_STORM_OF_THE_STRIKER = new TechLightStriker("storm_of_the_striker");
 	public static final Abilitech LIGHT_LIGHTBOUND_WISDOM = new TechLightGlowing("lightbound_wisdom");
@@ -321,6 +322,7 @@ public class MSUSkills
 	public static final Abilitech LIGHT_SKAIAN_INISHGT = new TechHeroAspect("skaian_insight", EnumAspect.LIGHT, EnumTechType.PASSIVE);
 
 	public static final Abilitech HEART_SOUL_SWITCHER = new TechHeartSoulSwitcher("soul_switcher");
+	public static final Abilitech HEART_SOUL_SHOCK = new TechSoulStun("soul_shock");
 
 	public static final Abilitech DOOM_TERMINAL_DEMISE = new TechDoomDemise("terminal_demise");
 	public static final Abilitech DOOM_WITHERING_WHISPER = new TechDoomDecay("withering_whisper");
@@ -339,6 +341,7 @@ public class MSUSkills
 	public static final Abilitech VOID_VOIDSTEP = new TechVoidStep("voidstep");
 	public static final Abilitech VOID_RETURN_TO_DUST = new TechVoidSnap("return_to_dust");
 	public static final Abilitech VOID_GRASP_OF_THE_VOID = new TechVoidGrasp("grasp_of_the_void");
+	public static final Abilitech VOID_VACUUM_SIPHON = new TechVoidVacuum("vacuum_siphon");
 
 	public static final Abilitech RAGE_ENRAGED_BERSERK = new TechRageBerserk("enraged_berserk");
 	public static final Abilitech RAGE_VENGEFUL_OUTBURST = new TechRageOutburst("vengeful_outburst");
