@@ -56,11 +56,10 @@ public class TechLifeFertility extends TechHeroAspect
 				BlockPos targetPos = new BlockPos(player.posX+x, player.posY+y, player.posZ+z);
 				if(targetPos != null && world.getBlockState(targetPos).getBlock() instanceof IGrowable)
 				{
-					IGrowable growable = (IGrowable) world.getBlockState(targetPos).getBlock();
-					if(growable.canGrow(world, targetPos, world.getBlockState(targetPos), world.isRemote))
+					if(((IGrowable) world.getBlockState(targetPos).getBlock()).canGrow(world, targetPos, world.getBlockState(targetPos), world.isRemote))
 					{
-						//for(int i = 0; i < 3; i++)
-							growable.grow(world, world.rand, targetPos, world.getBlockState(targetPos));
+						for(int i = 0; i < 3; i++)
+							((IGrowable) world.getBlockState(targetPos).getBlock()).grow(world, world.rand, targetPos, world.getBlockState(targetPos));
 
 						if(!world.isRemote)
 							world.playEvent(2005, targetPos, 0);

@@ -119,6 +119,7 @@ public class MinestuckUniverseBlocks
 
 
 	public static final Block glorb = new BlockGlorb();
+	public static final Block chloroball = new BlockChloroball();
 
 	public static final Block prospitStone = new BlockLunarStone(MapColor.YELLOW, "prospitStone", "prospit_stone");
 	public static final Block prospitSmoothstone = new BlockLunarStone(MapColor.YELLOW, "prospitSmoothstone", "prospit_smoothstone");
@@ -290,7 +291,8 @@ public class MinestuckUniverseBlocks
 			registerBlock(registry, gristBlockMana);
 
 	    registerBlock(registry, glorb, null);
-	    
+	    registerBlock(registry, chloroball, null);
+
 	    registerBlock(registry, prospitStone);
 	    registerBlock(registry, prospitSmoothstone);
 	    registerBlock(registry, prospitBricks);

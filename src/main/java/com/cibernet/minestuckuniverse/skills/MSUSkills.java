@@ -329,6 +329,7 @@ public class MSUSkills
 	public static final Abilitech HEART_SOUL_SHOCK = new TechSoulStun("soul_shock");
 
 	public static final Abilitech DOOM_TERMINAL_DEMISE = new TechDoomDemise("terminal_demise");
+	public static final Abilitech DOOM_DEATHS_SHROUD = new TechDoomDemiseAoE("deaths_shroud");
 	public static final Abilitech DOOM_WITHERING_WHISPER = new TechDoomDecay("withering_whisper");
 	public static final Abilitech DOOM_CHAINS_OF_DESPAIR = new TechDoomChain("chains_of_despair");
 	public static final Abilitech DOOM_SURVIVORS_BIND = new TechDoomBind("survivors_bind");
@@ -336,7 +337,7 @@ public class MSUSkills
 	public static final Abilitech LIFE_LIFEFORCE_LEECH = new TechLifeLeech("lifeforce_leech");
 	public static final Abilitech LIFE_HEALING_AURA = new TechLifeAura("healing_aura");
 	public static final Abilitech LIFE_MATING_SEASON = new TechLifeBreed("mating_season");
-	public static final Abilitech LIFE_GREEN_THUMBS = new TechLifeBoneMeal("green_thumbs");
+	public static final Abilitech LIFE_CHLOROBALL = new TechLifeChloroball("chloroball");
 	public static final Abilitech LIFE_SONG_OF_FERTILITY = new TechLifeFertility("song_of_fertility");
 
 	public static final Abilitech BLOOD_BLEEDING_EDGE = new TechBloodBleeding("bleeding_edge");
