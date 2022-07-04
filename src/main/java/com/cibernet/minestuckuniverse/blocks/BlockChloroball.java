@@ -112,18 +112,20 @@ public class BlockChloroball extends MSUBlockBase
 
         for(int x = -RADIUS; x <= RADIUS; x++)for(int y = RADIUS; y >= -RADIUS; y--)for(int z = -RADIUS; z <= RADIUS; z++)
         {
-            BlockPos targetPos = availablePos.get(rand.nextInt(availablePos.size()));
+            BlockPos targetPos = new BlockPos(pos.getX()+x, pos.getY()+y, pos.getZ()+z);
             if(targetPos != null && world.getBlockState(targetPos).getBlock() instanceof IGrowable)
                 availablePos.add(targetPos);
         }
 
-        while(count < 10 && rand.nextFloat() < 1f/(count+1f))
+        while(count > 0 && count < 3 && rand.nextFloat() < 1f/(count+1f))
         {
             BlockPos targetPos = availablePos.get(rand.nextInt(availablePos.size()));
             if(((IGrowable) world.getBlockState(targetPos).getBlock()).canGrow(world, targetPos, world.getBlockState(targetPos), world.isRemote))
             {
                 for(int i = 0; i < 3; i++)
-                    ((IGrowable) world.getBlockState(targetPos).getBlock()).grow(world, world.rand, targetPos, world.getBlockState(targetPos));
+                    if(world.getBlockState(pos).getBlock() instanceof IGrowable)
+                        ((IGrowable) world.getBlockState(targetPos).getBlock()).grow(world, world.rand, targetPos, world.getBlockState(targetPos));
+                    else break;
 
                 world.playEvent(2005, targetPos, 0);
             }
