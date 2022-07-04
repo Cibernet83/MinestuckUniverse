@@ -536,8 +536,8 @@ public class GodTierData implements IGodTierData
 		if(nbt.hasKey("SkillSet"))
 		{
 			NBTTagCompound skillSet = nbt.getCompoundTag("SkillSet");
-			for(int i = 0; i < equippedTech.length && skillSet.hasKey(String.valueOf(i)); i++)
-				equippedTech[i] = (Abilitech) MSUSkills.REGISTRY.getValue(new ResourceLocation(skillSet.getCompoundTag(String.valueOf(i)).getString("ID")));
+			for(int i = 0; i < equippedTech.length; i++)
+				equippedTech[i] = skillSet.hasKey(String.valueOf(i)) ? (Abilitech) MSUSkills.REGISTRY.getValue(new ResourceLocation(skillSet.getCompoundTag(String.valueOf(i)).getString("ID"))) : null;
 		}
 
 		if(nbt.hasKey("AllBadges"))
@@ -548,7 +548,7 @@ public class GodTierData implements IGodTierData
 		NBTTagCompound badges = nbt.getCompoundTag("Badges");
 
 		this.badges.clear();
-		for(int i = 0; i < maxBadges && badges.hasKey(String.valueOf(i)); i++)
+		for(int i = 0; badges.hasKey(String.valueOf(i)); i++)
 		{
 			NBTTagCompound badgeData = badges.getCompoundTag(String.valueOf(i));
 			Skill badge = MSUSkills.REGISTRY.getValue(new ResourceLocation(badgeData.getString("ID")));

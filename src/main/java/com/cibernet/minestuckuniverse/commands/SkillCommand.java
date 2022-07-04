@@ -49,7 +49,7 @@ public class SkillCommand extends CommandBase
 				notifyCommandListener(sender, this, 0, "commands.sburbSkills.grant.success", target.getDisplayName(), skill.getDisplayComponent());
 				break;
 			case "revoke":
-					data.revokeSkill(skill, false);
+					data.revokeSkill(skill, true);
 				notifyCommandListener(sender, this, 0, "commands.sburbSkills.revoke.success", target.getDisplayName(), skill.getDisplayComponent());
 				break;
 		}
