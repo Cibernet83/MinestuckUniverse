@@ -524,8 +524,8 @@ public class MSUAlchemyRecipes
         removeCombination(new ItemStack(MinestuckItems.catClaws), new ItemStack(MinestuckItems.grimoire), MODE_AND, false, true);
 
         //shieldkind
-        CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Blocks.OAK_DOOR), MODE_OR, false, false, new ItemStack(woodenDoorshield));
-        CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Blocks.IRON_DOOR), MODE_OR, false, false, new ItemStack(ironDoorshield));
+        CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Items.OAK_DOOR), MODE_OR, false, false, new ItemStack(woodenDoorshield));
+        CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Items.IRON_DOOR), MODE_OR, false, false, new ItemStack(ironDoorshield));
         CombinationRegistry.addCombination(new ItemStack(Items.IRON_INGOT), new ItemStack(woodenDoorshield), MODE_AND, false, false, new ItemStack(ironDoorshield));
         CombinationRegistry.addCombination(new ItemStack(Items.FIREWORKS), new ItemStack(ironDoorshield), MODE_AND, false, false, new ItemStack(rocketRiotShield));
         CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Items.IRON_SWORD), MODE_OR, false, false, new ItemStack(bladedShield));
