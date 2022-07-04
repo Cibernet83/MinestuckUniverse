@@ -8,7 +8,6 @@ import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.IPropertyThrowable;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import javafx.scene.control.Tab;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;

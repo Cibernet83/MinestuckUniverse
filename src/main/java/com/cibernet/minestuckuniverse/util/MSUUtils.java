@@ -5,7 +5,6 @@ import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.items.ItemFraymachine;
-import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.godtier.ItemGodTierKit;
 import com.google.common.base.Predicates;
 import com.mojang.authlib.GameProfile;
@@ -20,7 +19,6 @@ import com.mraof.minestuck.network.MinestuckChannelHandler;
 import com.mraof.minestuck.network.MinestuckPacket;
 import com.mraof.minestuck.network.PlayerDataPacket;
 import com.mraof.minestuck.util.*;
-import com.sun.javafx.geom.Vec3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetworkPlayerInfo;
@@ -116,15 +114,6 @@ public class MSUUtils
     }
 
     public static final int TARGET_REACH = 10;
-
-    public static Vec3f getRGBVecFromHex(int hex)
-    {
-        float r = (float) ((hex & 16711680) >> 16) / 255f;
-        float g = (float) ((hex & 65280) >> 8) / 255f;
-        float b = (float) ((hex & 255) >> 0) / 255f;
-
-        return new Vec3f(r, g, b);
-    }
 
     public static RayTraceResult rayTraceBlocks(Entity entity, double blockReachDistance)
     {
