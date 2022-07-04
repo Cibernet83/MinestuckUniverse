@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.entity.EntityBubble;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsData;
 import com.cibernet.minestuckuniverse.modSupport.MSUSplatcraftSupport;
@@ -58,6 +59,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(EditModeEventHandler.class);
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
         MinecraftForge.EVENT_BUS.register(MSUConsorts.class);
+        MinecraftForge.EVENT_BUS.register(EntityBubble.class);
         MinecraftForge.EVENT_BUS.register(LocalChatEventHandler.class);
 
         if(MinestuckUniverse.isTrophySlotsLoaded)

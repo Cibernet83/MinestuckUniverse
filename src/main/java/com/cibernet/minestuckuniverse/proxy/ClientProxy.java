@@ -62,6 +62,7 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityUnrealAir.class, RenderUnrealAir::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityRock.class, RenderRock::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCruxiteSlime.class, RenderCruxiteSlime::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityBubble.class, RenderBubble::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHopeGolem.class, (manager) -> new RenderHopeGolem(manager));
         RenderingRegistry.registerEntityRenderingHandler(EntityLocatorEye.class, (manager) -> new RenderSnowball<>(manager, MinestuckUniverseItems.denizenEye, Minecraft.getMinecraft().getRenderItem()));
 
