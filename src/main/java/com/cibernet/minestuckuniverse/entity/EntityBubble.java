@@ -53,13 +53,18 @@ public class EntityBubble extends Entity
 
 	}
 
-	/*
+	@Override
+	public boolean shouldRenderInPass(int pass)
+	{
+		return pass == 1;
+	}
+
 	@Nullable
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox() {
 		return canEnter() ? null : getEntityBoundingBox();
 	}
-	*/
+	
 	public float getSize()
 	{
 		return dataManager.get(SIZE);
