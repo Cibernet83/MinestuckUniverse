@@ -3,10 +3,12 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
+import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -17,17 +19,21 @@ public class TechSeerDodge extends TechHeroClass
 		super(name, EnumClass.SEER);
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onLivingAttack(LivingAttackEvent event)
 	{
 		IGodTierData data = event.getEntityLiving().getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 		IBadgeEffects effects = event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 
-		if(!effects.isForesightOnCooldown() && data.isTechPassiveEnabled(MSUSkills.FORESIGHT_DODGE))
+		if(data != null && data.isTechPassiveEnabled(MSUSkills.FORESIGHT_DODGE) && effects != null && !effects.isForesightOnCooldown())
 		{
 			EntityLivingBase entity = event.getEntityLiving();
 
-			effects.setForesightCooldown(6000);
+			if(event.getEntityLiving().world.isRemote)
+			{
+				effects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.SEER, 20);
+				effects.setForesightCooldown(6000);
+			}
 			event.setCanceled(true);
 
 			entity.moveRelative(0, (float)Math.cos((entity.rotationPitch+90)*Math.PI/180f), (float)Math.sin((entity.rotationPitch+90)*Math.PI/180f), 3);
@@ -38,7 +44,7 @@ public class TechSeerDodge extends TechHeroClass
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
-		if(event.phase == TickEvent.Phase.START)
+		if(event.phase == TickEvent.Phase.START || event.player.world.isRemote)
 			return;
 
 		if(MSUSkills.FORESIGHT_DODGE.canUse(event.player.world, event.player) &&
