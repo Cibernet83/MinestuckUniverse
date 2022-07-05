@@ -104,10 +104,10 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	Map<Class, MSUParticles.PowerParticleState> getPowerParticles();
 
 	default void startPowerParticles(Class badge, MSUParticles.ParticleType particleType, EnumAspect aspect, int count) {
-		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, MSUParticles.getAspectParticleColors(aspect)));
+		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, BadgeEffects.getAspectParticleColors(aspect)));
 	}
 	default void startPowerParticles(Class badge, MSUParticles.ParticleType particleType, EnumClass clazz, int count) {
-		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, MSUParticles.getClassParticleColors(clazz)));
+		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, BadgeEffects.getClassParticleColors(clazz)));
 	}
 	default void startPowerParticles(Class badge, MSUParticles.ParticleType particleType, int count, int... colors) {
 		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, colors));
@@ -117,12 +117,14 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void stopPowerParticles(Class badge);
 
 	default void oneshotPowerParticles(MSUParticles.ParticleType particleType, EnumAspect aspect, int count) {
-		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, count, MSUParticles.getAspectParticleColors(aspect)));
+		System.out.println(BadgeEffects.getAspectParticleColors(aspect));
+		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, count, BadgeEffects.getAspectParticleColors(aspect)));
 	}
 	default void oneshotPowerParticles(MSUParticles.ParticleType particleType, EnumClass clazz, int count) {
-		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, count, MSUParticles.getClassParticleColors(clazz)));
+		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, count, BadgeEffects.getClassParticleColors(clazz)));
 	}
-	default void oneshotPowerParticles(MSUParticles.ParticleType particleType, int count, int... colors) {
+	default void oneshotPowerParticles(MSUParticles.ParticleType particleType, int count, int... colors)
+	{
 		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, count, colors));
 	}
 	void oneshotPowerParticles(MSUParticles.PowerParticleState state);
@@ -131,4 +133,5 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void setOwner(EntityLivingBase entity);
 
 	void receive(String key, IBadgeEffect value);
+
 }

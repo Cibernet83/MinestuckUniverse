@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
+import com.cibernet.minestuckuniverse.capabilities.badgeEffects.BadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.Skill;
@@ -69,6 +70,6 @@ public abstract class TechHeroClass extends TechBoondollarCost
 
 	@Override
 	public int getColor() {
-		return MSUParticles.getClassParticleColors(heroClass)[0];
+		return BadgeEffects.getClassParticleColors(heroClass)[0];
 	}
 }
