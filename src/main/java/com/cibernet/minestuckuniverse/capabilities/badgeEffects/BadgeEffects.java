@@ -475,7 +475,6 @@ public class BadgeEffects implements IBadgeEffects
 			spawnClientParticles(owner, state);
 	}
 
-	@SideOnly(Side.CLIENT)
 	private static void spawnClientParticles(EntityLivingBase entity, MSUParticles.PowerParticleState state)
 	{
 		int[] colors = state.colors;
