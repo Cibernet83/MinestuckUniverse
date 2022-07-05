@@ -36,7 +36,7 @@ public class TechLightBubble extends TechHeroAspect
 
 		if(bubble == null)
 		{
-			bubble = new EntityBubble(world, 3, player.getName().equals("Cibernet") ? 0x66FFBA : 0xF4ECB7, 100, false, false);
+			bubble = new EntityBubble(world, 3, player.getName().equals("Cibernet") ? 0x66FFBA : 0xF4ECB7, 100, false, false, false);
 			bubble.setPosition(player.posX, player.posY-0.05, player.posZ);
 			world.spawnEntity(bubble);
 			badgeEffects.setActiveBubble(bubble);

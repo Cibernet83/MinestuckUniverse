@@ -36,7 +36,7 @@ public class TechBloodBubble extends TechHeroAspect
 
 		if(bubble == null)
 		{
-			bubble = new EntityBubble(world, 3, 0xB71015, 25, false, true);
+			bubble = new EntityBubble(world, 3, 0xB71015, 25, false, true, false);
 			bubble.setPosition(player.posX, player.posY-0.05, player.posZ);
 			world.spawnEntity(bubble);
 			badgeEffects.setActiveBubble(bubble);

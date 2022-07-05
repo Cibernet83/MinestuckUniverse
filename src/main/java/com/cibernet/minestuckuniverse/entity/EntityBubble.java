@@ -9,6 +9,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.GetCollisionBoxesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import javax.annotation.Nullable;
 
 import com.mraof.minestuck.util.Debug;
+import com.mraof.minestuck.util.Teleport;
 
 public class EntityBubble extends Entity
 {
@@ -24,6 +26,7 @@ public class EntityBubble extends Entity
 	private static final DataParameter<Integer> LIFESPAN = EntityDataManager.createKey(EntityBubble.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> CAN_ENTER = EntityDataManager.createKey(EntityBubble.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> CAN_EXIT = EntityDataManager.createKey(EntityBubble.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> ENSNARE = EntityDataManager.createKey(EntityBubble.class, DataSerializers.BOOLEAN);
 	
 	private static HashMap<EntityBubble, ArrayList<Entity>> stuck = new HashMap<>();
 
@@ -33,7 +36,7 @@ public class EntityBubble extends Entity
 		setSize(3, 3);
 	}
 
-	public EntityBubble(World world, float size, int color, int lifespan, boolean canEnter, boolean canExit)
+	public EntityBubble(World world, float size, int color, int lifespan, boolean canEnter, boolean canExit, boolean ensnare)
 	{
 		this(world);
 
@@ -42,6 +45,7 @@ public class EntityBubble extends Entity
 		setLifespan(lifespan);
 		setCanEnter(canEnter);
 		setCanExit(canEnter);
+		setEnsnare(ensnare);
 	}
 
 	//Dragon Bubble: 0x00FF7F
@@ -58,6 +62,7 @@ public class EntityBubble extends Entity
 		dataManager.register(LIFESPAN, 20);
 		dataManager.register(CAN_EXIT, false);
 		dataManager.register(CAN_ENTER, true);
+		dataManager.register(ENSNARE, false);
 	}
 
 	@Override
@@ -85,6 +90,8 @@ public class EntityBubble extends Entity
 			setCanEnter(compound.getBoolean("CanEnter"));
 		if(compound.hasKey("CanExit"))
 			setCanEnter(compound.getBoolean("CanExit"));
+		if(compound.hasKey("Ensnare"))
+			setEnsnare(compound.getBoolean("Ensnare"));
 	}
 
 	@Override
@@ -95,6 +102,7 @@ public class EntityBubble extends Entity
 		compound.setInteger("Lifespan", getLifespan());
 		compound.setBoolean("CanEnter", canEnter());
 		compound.setBoolean("CanExit", canExit());
+		compound.setBoolean("Ensnare", getEnsnare());
 	}
 
 	@Override
@@ -159,6 +167,16 @@ public class EntityBubble extends Entity
 	{
 		dataManager.set(LIFESPAN, v);
 	}
+	
+	public Boolean getEnsnare()
+	{
+		return dataManager.get(ENSNARE);
+	}
+	
+	public void setEnsnare(boolean v)
+	{
+		dataManager.set(ENSNARE, v);
+	}
 
 	@Override
 	public boolean isRidingSameEntity(Entity entityIn)
@@ -172,11 +190,40 @@ public class EntityBubble extends Entity
 	}
 
 	@SubscribeEvent
+	public static void removeStuckBubble(TickEvent.WorldTickEvent event)
+	{
+		ArrayList<Entity> teleported = new ArrayList<>();
+		for(int i = 0; i < stuck.keySet().size(); i++)
+		{
+			EntityBubble bub = (EntityBubble) stuck.keySet().toArray()[i];
+			if(stuck.get(bub) == null || stuck.get(bub).isEmpty())
+			{
+				stuck.remove(bub);
+				continue;
+			}
+			
+			AxisAlignedBB aabb = bub.getEntityBoundingBox();
+			for(int j = 0; j < stuck.get(bub).size(); j++)
+			{
+				Entity entity = stuck.get(bub).get(j);
+				if(bub.getEnsnare() && !teleported.contains(entity) && !(entity instanceof EntityBubble) && !bub.getEntityBoundingBox().intersects(entity.getEntityBoundingBox()))
+				{
+					teleported.add(entity);
+					Teleport.teleportEntity(entity, bub.dimension, null, Math.max(aabb.minX + entity.width/2, Math.min(entity.posX, aabb.maxX - entity.width/2)), Math.max(aabb.minY, Math.min(entity.posY, aabb.maxY - entity.height)), Math.max(aabb.minZ + entity.width/2, Math.min(entity.posZ, aabb.maxZ - entity.width/2)));
+				}
+				else if(!bub.getEnsnare() && !(entity instanceof EntityBubble) && !bub.getEntityBoundingBox().intersects(entity.getEntityBoundingBox()))
+					stuck.get(bub).remove(entity);
+			}
+		}
+	}
+	
+	@SubscribeEvent
 	public static void onGetCollisionBoxes(GetCollisionBoxesEvent event)
 	{
 		Entity entity = event.getEntity();
-		if(entity != null && !(entity instanceof EntityBubble) && entity.world != null && event.getAabb() != null )
+		if(entity != null && !(entity instanceof EntityBubble) && entity.world != null && event.getAabb() != null)
 		{
+			
 			for(EntityBubble bubble : entity.world.getEntitiesWithinAABB(EntityBubble.class, event.getAabb()))
 			{
 				AxisAlignedBB aabb = bubble.getEntityBoundingBox();

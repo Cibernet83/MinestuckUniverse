@@ -45,7 +45,7 @@ public class TechVoidDoomBubble extends TechHeroAspect
 
 		if(bubble == null)
 		{
-			bubble = new EntityBubble(world, trace.entityHit == null ? 4 : Math.max(trace.entityHit.width, trace.entityHit.height)+1, 0x181633, 25, true, false);
+			bubble = new EntityBubble(world, trace.entityHit == null ? 4 : Math.max(trace.entityHit.width, trace.entityHit.height)+1, 0x181633, 25, true, false, true);
 
 			if(trace.entityHit != null)
 				bubble.setPosition(trace.entityHit.posX, trace.entityHit.posY-0.05, trace.entityHit.posZ);
