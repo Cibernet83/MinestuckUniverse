@@ -56,6 +56,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void setSoulLinkTarget(EntityLivingBase target);
 	EntityLivingBase getSoulLinkTarget();
 
+	void setHoping(boolean v);
+	boolean isHoping();
+
 	float getMoveStrafe();
 	float getMoveForward();
 	boolean getJump();

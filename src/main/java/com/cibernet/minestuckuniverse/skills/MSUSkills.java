@@ -363,6 +363,7 @@ public class MSUSkills
 	public static final Abilitech HOPE_WILLED_ALLIANCE = new TechHopeGolem("willed_alliance");
 	public static final Abilitech HOPE_ANSWERED_PRAYERS = new TechHopePrayers("answered_prayers");
 	public static final Abilitech HOPE_DIVINE_CLEANSING = new TechHopeCleansing("divine_cleansing");
+	public static final Abilitech HOPE_HOPEFUL_OUTBURST = new TechHopeyShit("hopeful_outburst");
 
 	public static final Badge BADGE_PAGE = new BadgePage();
 	public static final Badge BADGE_OVERLORD = new BadgeOverlord();

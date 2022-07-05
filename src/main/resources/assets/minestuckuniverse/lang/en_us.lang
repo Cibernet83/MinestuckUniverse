@@ -772,7 +772,9 @@ death.attack.minestuckuniverse.rainbow=%s couldn't handle the rainbow
 death.attack.minestuckuniverse.sans=%s had a bad time
 
 death.attack.minestuckuniverse.decay=%s met their Doom.
+death.attack.minestuckuniverse.decay.player=%s met their Doom whilst fighting %s.
 death.attack.minestuckuniverse.bleeding=%s bled to death.
+death.attack.minestuckuniverse.bleeding.player=%s bled to death whilst fighting %s.
 death.attack.minestuckuniverse.princeDmg=%s fell victim to %s's wrath.
 death.attack.minestuckuniverse.vengefulOutburst=%s fell victim to %s's Rage.
 death.attack.minestuckuniverse.lifeforceLeech=%s's Life was sapped away by %s.
@@ -782,6 +784,8 @@ death.attack.minestuckuniverse.lifeforceTransfusion=%s ran out of blood.
 death.attack.minestuckuniverse.lifeforceTransfusion.player=%s ran out of blood whilst fighting %s.
 death.attack.minestuckuniverse.terminalDemise=%s met their demise.
 death.attack.minestuckuniverse.terminalDemise.external=%s met their demise to the hands of %s.
+death.attack.minestuckuniverse.hopefulOutburst=%s failed %s's vibe check.
+
 status.heroicDeath=%s's death was Heroic.
 status.justDeath=%s's death was Just.
 
@@ -1497,7 +1501,7 @@ tech.bleeding_edge.tooltip=Gives all your melee hits a chance to inflict Bleedin
 tech.reformers_reach.name=Reformer's Reach
 tech.reformers_reach.tooltip=Utilizing the power of @BLOOD@, this Abilitech makes all passive mobs fall to your influence, and hostile mobs much less likely to target you.
 tech.haemodome.name=Haemodome
-tech.haemobubble.tooltip=Use the power of %BLOOD% to create a protective dome around you and your allies, shielding you from projectiles, other Abilitechs, as well as preventing anyone from coming in, but not out.
+tech.haemodome.tooltip=Use the power of %BLOOD% to create a protective dome around you and your allies, shielding you from projectiles, other Abilitechs, as well as preventing anyone from coming in, but not out.
 tech.lifeforce_transfusion.name=Lifeforce Transfusion
 tech.lifeforce_transfusion.tooltip=Lets you donate some of your health to the targeted entity, making you take damage whilst healing them. If the target is already fully healed, their max health will be increased for a short period of time.
 
@@ -1697,3 +1701,19 @@ godTierTitle.time.2=Doctor What?
 godTierTitle.thief.blood.2=Hemoglobin Heathen
 
 godTierTitle.thief.light.1=Cleromancer
+
+status.hopey.tallyHo=§eTALLY HO
+status.hopey.gadzooks=§eGADZOOKS
+status.hopey.boyHowdy=§eBOY HOWDY
+status.hopey.holyToledo=§eHOLY TOLEDO
+status.hopey.landSakesAlive=§eLAND SAKES ALIVE
+status.hopey.helloNurse=§eHELLO NURSE
+status.hopey.byGum=§eBY GUM
+status.hopey.ayChihuahua=§eAY CHIHUAHUA
+status.hopey.bobUncle=§eBOB'S YOUR UNCLE
+status.hopey.sockItToMe=§eSOCK IT TO ME
+status.hopey.shiverMeTimbers=§eSHIVER ME TIMBERS
+status.hopey.winOneForTheGipper=§eWIN ONE FOR THE GIPPER
+status.hopey.jumpinJehosaPhat=§eJUMPIN' JEHOSA PHAT
+status.hopey.shuckyDarn=§eSHUCKY DARN
+status.hopey.fiddleFaddle=§eFIDDLE FADDLE

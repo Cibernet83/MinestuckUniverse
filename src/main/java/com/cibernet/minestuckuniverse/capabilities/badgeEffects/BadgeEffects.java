@@ -284,6 +284,16 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
+	public void setHoping(boolean v) {
+		setBoolean(TechHopeyShit.class, v);
+	}
+
+	@Override
+	public boolean isHoping() {
+		return getBoolean(TechHopeyShit.class);
+	}
+
+	@Override
 	public boolean isWindFormed()
 	{
 		return getBoolean(TechBreathWindVessel.class);
