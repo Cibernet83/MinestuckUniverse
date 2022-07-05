@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
 
+import com.cibernet.minestuckuniverse.capabilities.badgeEffects.BadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.TechBoondollarCost;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
@@ -115,6 +116,6 @@ public class TechHeroAspect extends TechBoondollarCost
 
 	@Override
 	public int getColor() {
-		return heroAspect == EnumAspect.SPACE ? 0x202020 : MSUParticles.getAspectParticleColors(heroAspect)[0];
+		return heroAspect == EnumAspect.SPACE ? 0x202020 : BadgeEffects.getAspectParticleColors(heroAspect)[0];
 	}
 }

@@ -135,44 +135,6 @@ public class MSUParticles
 		BURST
 	}
 
-	private static int[][] particleColors = new int[][] {
-			new int[] {0xB71015, 0x3E1601}, // BLOOD
-			new int[] {0x47E2FA, 0x4379E6}, // BREATH
-			new int[] {0x306800, 0x111111}, // DOOM
-			new int[] {0xBD1864, 0x55142A}, // HEART
-			new int[] {0xFFDE55, 0xFDFEFF}, // HOPE
-			new int[] {0x72EB34, 0xA49787}, // LIFE
-			new int[] {0xF6FA4E, 0xF0840C}, // LIGHT
-			new int[] {0x06FFC9, 0x00923D}, // MIND
-			new int[] {0x9C4DAC, 0x520C61}, // RAGE
-			new int[] {0x4BEC13}, // SPACE
-			new int[] {0xFF2106, 0xB70D0E}, // TIME
-			new int[] {0x104EA2, 0x001856}, // VOID
-
-			new int[] {0xDB5397}, // BARD
-			new int[] {0x6D9EEB}, // HEIR
-			new int[] {0xEF7F34}, // KNIGHT
-			new int[] {0xB55BFF}, // MAGE
-			new int[] {0x31E0AB}, // MAID
-			new int[] {0xFFFF9B}, // PAGE
-			new int[] {0x7C1D1D}, // PRINCE
-			new int[] {0x39C4C6}, // ROGUE
-			new int[] {0xD670FF}, // SEER
-			new int[] {0xFF8377}, // SYLPH
-			new int[] {0x996543}, // THIEF
-			new int[] {0x7F7F7F}, // WITCH
-			new int[] {0xFF0000}, // LORD
-			new int[] {0x00FF00}, // MUSE
-	};
-	public static int[] getAspectParticleColors(EnumAspect aspect)
-	{
-		return particleColors[aspect.ordinal()];
-	}
-	public static int[] getClassParticleColors(EnumClass aspect)
-	{
-		return particleColors[EnumAspect.values().length + aspect.ordinal()];
-	}
-
 	public static class PowerParticleState
 	{
 		public final ParticleType type;
