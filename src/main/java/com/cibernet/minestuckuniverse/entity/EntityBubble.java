@@ -44,7 +44,7 @@ public class EntityBubble extends Entity
 		setColor(color);
 		setLifespan(lifespan);
 		setCanEnter(canEnter);
-		setCanExit(canEnter);
+		setCanExit(canExit);
 		setEnsnare(ensnare);
 	}
 
