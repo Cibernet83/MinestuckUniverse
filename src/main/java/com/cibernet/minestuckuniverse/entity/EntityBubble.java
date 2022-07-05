@@ -196,7 +196,7 @@ public class EntityBubble extends Entity
 		for(int i = 0; i < stuck.keySet().size(); i++)
 		{
 			EntityBubble bub = (EntityBubble) stuck.keySet().toArray()[i];
-			if(stuck.get(bub) == null || stuck.get(bub).isEmpty())
+			if(bub.isDead || stuck.get(bub) == null || stuck.get(bub).isEmpty())
 			{
 				stuck.remove(bub);
 				continue;
