@@ -26,7 +26,7 @@ public class RenderBubble extends Render<EntityBubble>
 	public void doRender(EntityBubble entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 
-		float size = entity.getSize()*2f;
+		float size = entity.getBubbleSize()*2f;
 		int color = entity.getColor();
 
 		GlStateManager.pushMatrix();
@@ -41,7 +41,7 @@ public class RenderBubble extends Render<EntityBubble>
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.scale(-size, -size, size);
 		this.bindEntityTexture(entity);
-		GlStateManager.color((float) (Math.floor(color / (256*256))/255f), (float) ((Math.floor(color / 256) % 256)/255f), (color % 256)/255f, 1f);
+		GlStateManager.color((float) (Math.floor(color / (256*256))/255f), (float) ((Math.floor(color / 256) % 256)/255f), (color % 256)/255f, Math.min(1, entity.ticksExisted/20f) * entity.getLifespan() < 0 ? 1 : Math.min(1, entity.getLifespan()/10f));
 		MODEL.render(entity, 0.0F, 0.0F, 0.0F, 0, 0, 0.03125F);
 
 		GlStateManager.disableNormalize();

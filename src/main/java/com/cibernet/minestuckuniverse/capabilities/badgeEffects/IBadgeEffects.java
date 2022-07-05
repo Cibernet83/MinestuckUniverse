@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.capabilities.badgeEffects;
 
 import com.cibernet.minestuckuniverse.capabilities.IMSUCapabilityBase;
+import com.cibernet.minestuckuniverse.entity.EntityBubble;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.util.SoulData;
 import com.mraof.minestuck.util.EnumAspect;
@@ -35,6 +36,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void setRageShifted(boolean rageShifted);
 	void cleanRageShift();
 	boolean isRageShiftDirty();
+
+	EntityBubble getActiveBubble();
+	void setActiveBubble(EntityBubble bubble);
 
 	EntityLivingBase getMindflayerEntity();
 	void setMindflayerEntity(EntityLivingBase entity);

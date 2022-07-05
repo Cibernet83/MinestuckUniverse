@@ -323,6 +323,7 @@ public class MSUSkills
 	public static final Abilitech LIGHT_LIGHTBOUND_WISDOM = new TechLightGlowing("lightbound_wisdom");
 	public static final Abilitech LIGHT_ORB_OF_LIGHT = new TechLightGlorb("orb_of_light");
 	public static final Abilitech LIGHT_ETERNAL_GLOW = new TechLightAutoGlorb("eternal_glow");
+	public static final Abilitech LIGHT_HARDLIGHT_BUBBLE = new TechLightBubble("hardlight_bubble");
 	public static final Abilitech LIGHT_SKAIAN_INISHGT = new TechHeroAspect("skaian_insight", EnumAspect.LIGHT, EnumTechType.PASSIVE);
 
 	public static final Abilitech HEART_SOUL_SWITCHER = new TechHeartSoulSwitcher("soul_switcher");
@@ -333,6 +334,7 @@ public class MSUSkills
 	public static final Abilitech DOOM_WITHERING_WHISPER = new TechDoomDecay("withering_whisper");
 	public static final Abilitech DOOM_CHAINS_OF_DESPAIR = new TechDoomChain("chains_of_despair");
 	public static final Abilitech DOOM_SURVIVORS_BIND = new TechDoomBind("survivors_bind");
+	public static final Abilitech DOOM_VOID_ABYSS_CAGE = new TechVoidDoomBubble("abyss_cage");
 
 	public static final Abilitech LIFE_LIFEFORCE_LEECH = new TechLifeLeech("lifeforce_leech");
 	public static final Abilitech LIFE_HEALING_AURA = new TechLifeAura("healing_aura");
@@ -343,6 +345,7 @@ public class MSUSkills
 	public static final Abilitech BLOOD_BLEEDING_EDGE = new TechBloodBleeding("bleeding_edge");
 	public static final Abilitech BLOOD_REFORMERS_REACH = new TechBloodReformer("reformers_reach");
 	public static final Abilitech BLOOD_LIFEFORCE_TRANSFUSION = new TechBloodTransfusion("lifeforce_transfusion");
+	public static final Abilitech BLOOD_HAEMODOME = new TechBloodBubble("haemodome");
 
 	public static final Abilitech VOID_VOIDSTEP = new TechVoidStep("voidstep");
 	public static final Abilitech VOID_RETURN_TO_DUST = new TechVoidSnap("return_to_dust");
