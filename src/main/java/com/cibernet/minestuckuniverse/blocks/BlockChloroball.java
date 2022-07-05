@@ -117,7 +117,7 @@ public class BlockChloroball extends MSUBlockBase
                 availablePos.add(targetPos);
         }
 
-        while(count > 0 && count < 3 && rand.nextFloat() < 1f/(count+1f))
+        while(availablePos.size() > 0 && count < 3 && rand.nextFloat() < 1f/(count+1f))
         {
             BlockPos targetPos = availablePos.get(rand.nextInt(availablePos.size()));
             if(((IGrowable) world.getBlockState(targetPos).getBlock()).canGrow(world, targetPos, world.getBlockState(targetPos), world.isRemote))
