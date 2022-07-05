@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.capabilities.badgeEffects;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.Vec3d;
@@ -308,17 +309,17 @@ public interface IBadgeEffect
 		public IBadgeEffect initialize(World world)
 		{
 			if (uuid == null)
-				return new EntityEffect((EntityLivingBase) world.getEntityByID(id));
+				return new EntityEffect(world.getEntityByID(id));
 			else
-				return new EntityEffect(world.getEntities(EntityLivingBase.class, (entity) -> entity.getUniqueID().equals(uuid)).get(0));
+				return new EntityEffect(world.getEntities(Entity.class, (entity) -> entity.getUniqueID().equals(uuid)).get(0));
 		}
 	}
 
-	class EntityEffect implements IBadgeEffect
+	class EntityLivingEffect implements IBadgeEffect
 	{
 		public final EntityLivingBase value;
 
-		public EntityEffect(EntityLivingBase value)
+		public EntityLivingEffect(EntityLivingBase value)
 		{
 			this.value = value;
 		}
@@ -340,9 +341,43 @@ public interface IBadgeEffect
 		@Override
 		public boolean equals(Object obj)
 		{
-			if (!(obj instanceof EntityEffect))
+			if (!(obj instanceof EntityLivingEffect))
 				return false;
-			EntityEffect effect = (EntityEffect) obj;
+			EntityLivingEffect effect = (EntityLivingEffect) obj;
+
+			return this.value.equals(effect.value);
+		}
+	}
+
+	class EntityEffect implements IBadgeEffect
+	{
+		public final Entity value;
+
+		public EntityEffect(Entity value)
+		{
+			this.value = value;
+		}
+
+		@Override
+		public void serialize(NBTTagCompound tag)
+		{
+			tag.setByte("BadgeEffectType", (byte) BadgeEffectType.ENTITY.ordinal());
+			tag.setString("UUID", value.getUniqueID().toString());
+		}
+
+		@Override
+		public void serialize(ByteBuf data)
+		{
+			data.writeByte(BadgeEffectType.ENTITY.ordinal());
+			data.writeInt(value.getEntityId());
+		}
+
+		@Override
+		public boolean equals(Object obj)
+		{
+			if (!(obj instanceof EntityLivingEffect))
+				return false;
+			EntityLivingEffect effect = (EntityLivingEffect) obj;
 
 			return this.value.equals(effect.value);
 		}

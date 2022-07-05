@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.capabilities.badgeEffects;
 
+import com.cibernet.minestuckuniverse.entity.EntityBubble;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIMindflayerTarget;
@@ -9,6 +10,7 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.PotionConceal;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechSeerDodge;
 import com.cibernet.minestuckuniverse.util.SoulData;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -158,27 +160,39 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
+	public EntityBubble getActiveBubble()
+	{
+		return (EntityBubble) getEntity(TechLightBubble.class);
+	}
+
+	@Override
+	public void setActiveBubble(EntityBubble bubble)
+	{
+		setEntity(TechLightBubble.class, bubble);
+	}
+
+	@Override
 	public EntityLivingBase getMindflayerEntity()
 	{
-		return getEntity(EntityAIMindflayerTarget.class); // huehuehue not a badge class
+		return getLivingEntity(EntityAIMindflayerTarget.class); // huehuehue not a badge class
 	}
 
 	@Override
 	public void setMindflayerEntity(EntityLivingBase entity)
 	{
-		setEntity(EntityAIMindflayerTarget.class, entity);
+		setLivingEntity(EntityAIMindflayerTarget.class, entity);
 	}
 
 	@Override
 	public void setMindflayedBy(EntityLivingBase entity)
 	{
-		setEntity(TechMindControl.IsMindflayed.class, entity);
+		setLivingEntity(TechMindControl.IsMindflayed.class, entity);
 	}
 
 	@Override
 	public EntityLivingBase getMindflayedBy()
 	{
-		return getEntity(TechMindControl.IsMindflayed.class);
+		return getLivingEntity(TechMindControl.IsMindflayed.class);
 	}
 
 
@@ -226,17 +240,17 @@ public class BadgeEffects implements IBadgeEffects
 
 	@Override
 	public boolean isMindflayed() {
-		return getEntity(TechMindControl.IsMindflayed.class) != null;
+		return getLivingEntity(TechMindControl.IsMindflayed.class) != null;
 	}
 
 	@Override
 	public EntityLivingBase getSoulShockTarget() {
-		return getEntity(TechSoulStun.Target.class);
+		return getLivingEntity(TechSoulStun.Target.class);
 	}
 
 	@Override
 	public void setSoulShockTarget(EntityLivingBase target) {
-		setEntity(TechSoulStun.Target.class, target);
+		setLivingEntity(TechSoulStun.Target.class, target);
 	}
 
 	@Override
@@ -251,22 +265,22 @@ public class BadgeEffects implements IBadgeEffects
 
 	@Override
 	public void setJusticeTarget(EntityLivingBase target) {
-		setEntity(TechMindKarmaHeal.class, target);
+		setLivingEntity(TechMindKarmaHeal.class, target);
 	}
 
 	@Override
 	public EntityLivingBase getJusticeTarget() {
-		return getEntity(TechMindKarmaHeal.class);
+		return getLivingEntity(TechMindKarmaHeal.class);
 	}
 
 	@Override
 	public void setSoulLinkTarget(EntityLivingBase target) {
-		setEntity(TechHeartLink.class, target);
+		setLivingEntity(TechHeartLink.class, target);
 	}
 
 	@Override
 	public EntityLivingBase getSoulLinkTarget() {
-		return getEntity(TechHeartLink.class);
+		return getLivingEntity(TechHeartLink.class);
 	}
 
 	@Override
@@ -670,11 +684,23 @@ public class BadgeEffects implements IBadgeEffects
 			effects.put(badge, new IBadgeEffect.MovementInputEffect(moveStrafe, moveForward, jump, sneak));
 	}
 
-	private EntityLivingBase getEntity(Class badge) {
+	private EntityLivingBase getLivingEntity(Class badge) {
+		return effects.containsKey(badge) ? ((IBadgeEffect.EntityLivingEffect) effects.get(badge)).value : null;
+	}
+
+	private void setLivingEntity(Class badge, EntityLivingBase entity)
+	{
+		if (entity == null)
+			effects.remove(badge);
+		else
+			effects.put(badge, new IBadgeEffect.EntityLivingEffect(entity));
+	}
+
+	private Entity getEntity(Class badge) {
 		return effects.containsKey(badge) ? ((IBadgeEffect.EntityEffect) effects.get(badge)).value : null;
 	}
 
-	private void setEntity(Class badge, EntityLivingBase entity)
+	private void setEntity(Class badge, Entity entity)
 	{
 		if (entity == null)
 			effects.remove(badge);

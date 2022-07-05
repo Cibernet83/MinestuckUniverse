@@ -6,10 +6,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.GetCollisionBoxesEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nullable;
 
@@ -17,6 +14,7 @@ public class EntityBubble extends Entity
 {
 	private static final DataParameter<Float> SIZE = EntityDataManager.createKey(EntityBubble.class, DataSerializers.FLOAT);
 	private static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityBubble.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> LIFESPAN = EntityDataManager.createKey(EntityBubble.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> CAN_ENTER = EntityDataManager.createKey(EntityBubble.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> CAN_EXIT = EntityDataManager.createKey(EntityBubble.class, DataSerializers.BOOLEAN);
 
@@ -24,6 +22,17 @@ public class EntityBubble extends Entity
 	{
 		super(worldIn);
 		setSize(3, 3);
+	}
+
+	public EntityBubble(World world, float size, int color, int lifespan, boolean canEnter, boolean canExit)
+	{
+		this(world);
+
+		setBubbleSize(size);
+		setColor(color);
+		setLifespan(lifespan);
+		setCanEnter(canEnter);
+		setCanExit(canEnter);
 	}
 
 	//Dragon Bubble: 0x00FF7F
@@ -37,20 +46,46 @@ public class EntityBubble extends Entity
 	{
 		dataManager.register(SIZE, 3f);
 		dataManager.register(COLOR, 0xFDB1E8);
+		dataManager.register(LIFESPAN, 20);
 		dataManager.register(CAN_EXIT, false);
 		dataManager.register(CAN_ENTER, true);
 	}
 
 	@Override
+	public void onEntityUpdate()
+	{
+		super.onEntityUpdate();
+
+		if(getLifespan() > 0)
+			setLifespan(getLifespan()-1);
+
+		if(getLifespan() == 0)
+			setDead();
+	}
+
+	@Override
 	protected void readEntityFromNBT(NBTTagCompound compound)
 	{
-
+		if(compound.hasKey("Size"))
+			setBubbleSize(compound.getFloat("Size"));
+		if(compound.hasKey("Color"))
+			setColor(compound.getInteger("Color"));
+		if(compound.hasKey("Lifespan"))
+			setLifespan(compound.getInteger("Lifespan"));
+		if(compound.hasKey("CanEnter"))
+			setCanEnter(compound.getBoolean("CanEnter"));
+		if(compound.hasKey("CanExit"))
+			setCanEnter(compound.getBoolean("CanExit"));
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound compound)
 	{
-
+		compound.setFloat("Size", getBubbleSize());
+		compound.setInteger("Color", getColor());
+		compound.setInteger("Lifespan", getLifespan());
+		compound.setBoolean("CanEnter", canEnter());
+		compound.setBoolean("CanExit", canExit());
 	}
 
 	@Override
@@ -64,10 +99,18 @@ public class EntityBubble extends Entity
 	public AxisAlignedBB getCollisionBoundingBox() {
 		return canEnter() ? null : getEntityBoundingBox();
 	}
-	
-	public float getSize()
+
+	public float getBubbleSize()
 	{
 		return dataManager.get(SIZE);
+	}
+
+	public void setBubbleSize(float v)
+	{
+		dataManager.set(SIZE, v);
+
+		this.setSize(v, v);
+		this.setPosition(this.posX, this.posY, this.posZ);
 	}
 
 	public boolean canEnter()
@@ -75,9 +118,38 @@ public class EntityBubble extends Entity
 		return dataManager.get(CAN_ENTER);
 	}
 
+	public void setCanEnter(boolean v)
+	{
+		dataManager.set(CAN_ENTER, v);
+	}
+
 	public boolean canExit()
 	{
 		return dataManager.get(CAN_EXIT);
+	}
+
+	public void setCanExit(boolean v)
+	{
+		dataManager.set(CAN_EXIT, v);
+	}
+
+	public int getColor() {
+		return dataManager.get(COLOR);
+	}
+
+	public void setColor(int v)
+	{
+		dataManager.set(COLOR, v);
+	}
+
+	public int getLifespan()
+	{
+		return dataManager.get(LIFESPAN);
+	}
+
+	public void setLifespan(int v)
+	{
+		dataManager.set(LIFESPAN, v);
 	}
 
 	@Override
@@ -118,7 +190,4 @@ public class EntityBubble extends Entity
 	}
 	*/
 
-	public int getColor() {
-		return dataManager.get(COLOR);
-	}
 }
