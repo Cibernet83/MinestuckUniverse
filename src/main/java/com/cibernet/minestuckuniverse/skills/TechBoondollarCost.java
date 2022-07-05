@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.skills;
 
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechDoomBind;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -14,6 +15,7 @@ public class TechBoondollarCost extends Abilitech
 	{
 		super(name);
 		//TODO: set this back to cost
+
 		this.cost = 1;
 	}
 
@@ -26,12 +28,14 @@ public class TechBoondollarCost extends Abilitech
 	@Override
 	public boolean canUnlock(World world, EntityPlayer player)
 	{
-		return (MinestuckPlayerData.getData(player).boondollars >= cost);
+		return ((world.isRemote ? MinestuckPlayerData.boondollars : MinestuckPlayerData.getData(player).boondollars) >= cost);
 	}
 
 	@Override
 	public void onUnlock(World world, EntityPlayer player)
 	{
-		MinestuckPlayerData.addBoondollars(player, -cost);
+		if(player.world.isRemote)
+			MinestuckPlayerData.boondollars -= cost;
+		else MinestuckPlayerData.addBoondollars(player, -cost);
 	}
 }
