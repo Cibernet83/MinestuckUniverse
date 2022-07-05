@@ -82,8 +82,6 @@ public class TechSoulStun extends TechHeroAspect
 		event.player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setSoulShocked(false);
 	}
 
-	private static final GuiSoulStun GUI = new GuiSoulStun();
-
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public static void onClientTick(TickEvent.ClientTickEvent event)
@@ -102,7 +100,7 @@ public class TechSoulStun extends TechHeroAspect
 				}
 			}
 			else if(!(Minecraft.getMinecraft().currentScreen instanceof GuiIngameMenu))
-				Minecraft.getMinecraft().currentScreen = GUI;
+				Minecraft.getMinecraft().currentScreen = new GuiSoulStun();
 		} else if(Minecraft.getMinecraft().currentScreen instanceof GuiSoulStun)
 		{
 			Minecraft.getMinecraft().currentScreen.onGuiClosed();
