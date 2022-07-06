@@ -44,7 +44,7 @@ public class TechBloodBubble extends TechHeroAspect
 
 		bubble.setLifespan(bubble.getLifespan()+1);
 
-		if(time % 20 == 0)
+		if(!player.isCreative() && time % 20 == 0)
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);
 
 		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.BLOOD,2);

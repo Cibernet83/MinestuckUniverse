@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
+import com.cibernet.minestuckuniverse.events.handlers.GTEventHandler;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -20,7 +21,7 @@ public class TechDoomBind extends TechHeroAspect
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onLivingDamage(LivingDamageEvent event)
 	{
-		if(event.getEntityLiving().world.isRemote && event.getSource() instanceof TechDoomDemise.DoomDamageSource)
+		if(event.getEntityLiving().world.isRemote || !(GTEventHandler.BLOCKABLE_UNBLOCKABLES.contains(event.getSource()) || event.getSource().isMagicDamage() || !event.getSource().isUnblockable()))
 			return;
 
 		IGodTierData data = event.getEntityLiving().getCapability(MSUCapabilities.GOD_TIER_DATA, null);

@@ -72,9 +72,9 @@ public class GodTierData implements IGodTierData
 			if(masterBadge != null)
 				return false;
 			masterBadge = (MasterBadge) badge;
+			((Badge)badge).onBadgeUnlocked(owner.world, owner); //used to be after update but doing it like that messed stuff up down therevvv so it might mess up things here
 			if(sendUpdate)
 				update();
-			((Badge)badge).onBadgeUnlocked(owner.world, owner);
 			return true;
 		}
 
@@ -82,8 +82,6 @@ public class GodTierData implements IGodTierData
 			return false;
 
 		badges.put(badge, true);
-		if(sendUpdate)
-			update();
 		if(badge instanceof Badge)
 			((Badge)badge).onBadgeUnlocked(owner.world, owner);
 
@@ -94,7 +92,9 @@ public class GodTierData implements IGodTierData
 					equipTech((Abilitech) badge, i);
 					break;
 				}
-
+		
+		if(sendUpdate)
+			update();
 		return true;
 	}
 
@@ -116,7 +116,8 @@ public class GodTierData implements IGodTierData
 
 			if(badge instanceof Abilitech && isTechEquipped((Abilitech) badge))
 				for(int i = 0; i < equippedTech.length; i++)
-					if(equippedTech[i] == badge) unequipTech(i);
+					if(equippedTech[i] == badge)
+							unequipTech(i);
 		}
 		if(sendUpdate)
 			update();
@@ -263,11 +264,13 @@ public class GodTierData implements IGodTierData
 	public void equipTech(Abilitech tech, int slot)
 	{
 		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))] = tech;
+		tech.onEquipped(owner.world, owner);
 	}
 
 	@Override
 	public void unequipTech(int slot)
 	{
+		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))].onUnequipped(owner.world, owner);
 		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))] = null;
 	}
 

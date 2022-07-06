@@ -44,7 +44,7 @@ public class TechLightBubble extends TechHeroAspect
 
 		bubble.setLifespan(bubble.getLifespan()+1);
 
-		if(time % 20 == 0)
+		if(!player.isCreative() && time % 20 == 0)
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);
 
 		if(player.getName().equals("Cibernet"))

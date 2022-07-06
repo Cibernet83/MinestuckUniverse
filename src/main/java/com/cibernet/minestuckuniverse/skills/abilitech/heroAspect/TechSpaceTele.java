@@ -34,7 +34,7 @@ public class TechSpaceTele extends TechHeroAspect
 			return false;
 		}
 
-		int reach = player.getFoodStats().getFoodLevel() * 2;
+		int reach = Math.max(player.getFoodStats().getFoodLevel() * 2, 0);
 		RayTraceResult target = MSUUtils.getMouseOver(player, reach);
 
 		if(target == null)
@@ -58,7 +58,7 @@ public class TechSpaceTele extends TechHeroAspect
 		double distance = player.getDistance(pos.getX(), pos.getY(), pos.getZ());
 
 		if(!player.isCreative())
-			player.getFoodStats().setFoodLevel((int) Math.max(0, player.getFoodStats().getFoodLevel()-Math.floor(distance)));
+			player.getFoodStats().setFoodLevel((int) Math.max(0, player.getFoodStats().getFoodLevel()- (Math.floor(distance)/6) ));
 
 
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.SPACE, 10);
