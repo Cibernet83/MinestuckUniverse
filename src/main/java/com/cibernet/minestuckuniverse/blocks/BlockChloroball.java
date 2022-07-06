@@ -107,7 +107,11 @@ public class BlockChloroball extends MSUBlockBase
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if(world.isRemote) return;
+        if(world.isRemote)
+        {
+            MSUParticles.spawnAuraParticles(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0x72EB34, 8);
+            return;
+        }
         int count = 0;
         List<BlockPos> availablePos = new ArrayList<>();
 
@@ -135,15 +139,12 @@ public class BlockChloroball extends MSUBlockBase
             count++;
 
         }
-
-        if(count > 0)
-            MSUParticles.spawnAuraParticles(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0x72EB34, 8);
     }
 
     @Override
     public int tickRate(World worldIn)
     {
-        return super.tickRate(worldIn);
+        return 5;
     }
 
     @SideOnly(Side.CLIENT)

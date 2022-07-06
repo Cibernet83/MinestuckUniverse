@@ -1488,9 +1488,9 @@ tech.soul_shock.tooltip=Holds the target's soul hostage for as long as the Abili
 
 tech.healing_aura.name=Healing Aura
 tech.healing_aura.tooltip=Grants Regeneration to the target and all nearby creatures for a brief period of time.
-tech.lifeforce_leech.name=Lifeforce Leech Badge
+tech.lifeforce_leech.name=Lifeforce Leech
 tech.lifeforce_leech.tooltip=Gradually steals some of the target's lifeforce for as long as it's in use, damaging them whilst healing the user.
-tech.mating_season.name=Mating Season Badge
+tech.mating_season.name=Mating Season
 tech.mating_season.tooltip=Puts all nearby animals into a breeding mood.
 tech.green_thumbs.name=Green Thumbs
 tech.green_thumbs.tooltip=Fertilizes the block your currently looking at, replicating the effects of Bone Meal.
@@ -1512,7 +1512,7 @@ tech.vacuum_siphon.tooltip=Creates negative space right where you're standing, p
 tech.abyss_cage.name=Abyss Cage
 tech.abyss_cage.tooltip=Creates an ensnaring bubble around the target, allowing anyone to come in, but preventing them from coming out. The bubble shields anyone inside it from projectiles and other Abilitechs.
 
-tech.bleeding_edge.name=Bleeding Edge Badge
+tech.bleeding_edge.name=Bleeding Edge
 tech.bleeding_edge.tooltip=Gives all your melee hits a chance to inflict Bleeding upon the target while active. Chance is determined by your Luck.
 tech.reformers_reach.name=Reformer's Reach
 tech.reformers_reach.tooltip=Utilizing the power of @BLOOD@, this Abilitech makes all passive mobs fall to your influence, and hostile mobs much less likely to target you.

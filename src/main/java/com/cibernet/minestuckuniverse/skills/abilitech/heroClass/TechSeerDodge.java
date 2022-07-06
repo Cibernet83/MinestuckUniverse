@@ -35,7 +35,7 @@ public class TechSeerDodge extends TechHeroClass
         }
         return true;
 	}
-	
+
 	//TODO: maybe make it so that client's last dodge is also set to world time
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onLivingAttack(LivingAttackEvent event)
