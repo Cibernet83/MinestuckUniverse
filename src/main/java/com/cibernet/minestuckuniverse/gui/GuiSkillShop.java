@@ -3,6 +3,8 @@ package com.cibernet.minestuckuniverse.gui;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.mraof.minestuck.client.gui.playerStats.GuiPlayerStats;
 import com.mraof.minestuck.util.MinestuckPlayerData;
@@ -61,7 +63,7 @@ public class GuiSkillShop extends GuiScreen
 
 		IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 		for(Abilitech abilitech : Abilitech.ABILITECHS)
-			if((!data.hasSkill(abilitech) && abilitech.canAppearOnList(player.world, player)) || data.hasMasterControl())
+			if((!data.hasSkill(abilitech) && (abilitech.canAppearOnList(player.world, player)) || data.hasMasterControl()))
 				availableTech.add(abilitech);
 	}
 
@@ -152,7 +154,8 @@ public class GuiSkillShop extends GuiScreen
 		{
 			Abilitech abilitech = availableTech.get(selectedTech);
 			abilitech.onUnlock(player.world, player);
-			player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).addSkill(abilitech, true);
+			player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).addSkill(abilitech, false);
+			MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.ATTEMPT_BADGE_UNLOCK, abilitech));
 
 			availableTech.remove(selectedTech);
 			if(selectedTech >= availableTech.size())

@@ -58,7 +58,7 @@ public class TechLifeFertility extends TechHeroAspect
 				{
 					if(((IGrowable) world.getBlockState(targetPos).getBlock()).canGrow(world, targetPos, world.getBlockState(targetPos), world.isRemote))
 					{
-						for(int i = 0; i < 3; i++)
+						//for(int i = 0; i < 3; i++)
 							((IGrowable) world.getBlockState(targetPos).getBlock()).grow(world, world.rand, targetPos, world.getBlockState(targetPos));
 
 						if(!world.isRemote)

@@ -315,40 +315,6 @@ public interface IBadgeEffect
 		}
 	}
 
-	class EntityLivingEffect implements IBadgeEffect
-	{
-		public final EntityLivingBase value;
-
-		public EntityLivingEffect(EntityLivingBase value)
-		{
-			this.value = value;
-		}
-
-		@Override
-		public void serialize(NBTTagCompound tag)
-		{
-			tag.setByte("BadgeEffectType", (byte) BadgeEffectType.ENTITY.ordinal());
-			tag.setString("UUID", value.getUniqueID().toString());
-		}
-
-		@Override
-		public void serialize(ByteBuf data)
-		{
-			data.writeByte(BadgeEffectType.ENTITY.ordinal());
-			data.writeInt(value.getEntityId());
-		}
-
-		@Override
-		public boolean equals(Object obj)
-		{
-			if (!(obj instanceof EntityLivingEffect))
-				return false;
-			EntityLivingEffect effect = (EntityLivingEffect) obj;
-
-			return this.value.equals(effect.value);
-		}
-	}
-
 	class EntityEffect implements IBadgeEffect
 	{
 		public final Entity value;
@@ -375,11 +341,16 @@ public interface IBadgeEffect
 		@Override
 		public boolean equals(Object obj)
 		{
-			if (!(obj instanceof EntityLivingEffect))
+			if (!(obj instanceof EntityEffect))
 				return false;
-			EntityLivingEffect effect = (EntityLivingEffect) obj;
+			EntityEffect effect = (EntityEffect) obj;
 
 			return this.value.equals(effect.value);
+		}
+
+		public EntityLivingBase getLiving()
+		{
+			return value instanceof EntityLivingBase ? (EntityLivingBase) value : null;
 		}
 	}
 }
