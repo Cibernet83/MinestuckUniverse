@@ -49,7 +49,7 @@ public class TechBloodBubble extends TechHeroAspect
 
 		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.BLOOD,2);
 
-		return super.onUseTick(world, player, badgeEffects, state, time);
+		return true;
 	}
 
 }

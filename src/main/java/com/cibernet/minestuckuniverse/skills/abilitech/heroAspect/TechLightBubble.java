@@ -51,7 +51,7 @@ public class TechLightBubble extends TechHeroAspect
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA,2, 0x00FF7F);
 		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIGHT,2);
 
-		return super.onUseTick(world, player, badgeEffects, state, time);
+		return true;
 	}
 
 }

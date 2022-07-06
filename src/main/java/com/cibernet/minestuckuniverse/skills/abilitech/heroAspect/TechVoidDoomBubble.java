@@ -61,7 +61,7 @@ public class TechVoidDoomBubble extends TechHeroAspect
 
 		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA,2, 0x001856, 0x1C1C1C);
 
-		return super.onUseTick(world, player, badgeEffects, state, time);
+		return true;
 	}
 
 

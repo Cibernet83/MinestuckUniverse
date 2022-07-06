@@ -101,8 +101,7 @@ public class TechTimeTables extends TechHeroAspect
 
 		if((event.isCanceled() || target != null))
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
-
-		return super.onUseTick(world, player, badgeEffects, state, time);
+		return true;
 	}
 
 	@Override
