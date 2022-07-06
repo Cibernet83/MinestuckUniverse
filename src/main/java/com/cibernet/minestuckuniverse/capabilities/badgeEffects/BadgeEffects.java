@@ -423,19 +423,14 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
-	public int getForesightCooldown() {
+	public int getLastSeerDodge() {
 		return getInt(TechSeerDodge.class);
 	}
 
 	@Override
-	public void setForesightCooldown(int v)
+	public void setLastSeerDodge(int v)
 	{
 		setInt(TechSeerDodge.class, v);
-	}
-
-	@Override
-	public boolean isForesightOnCooldown() {
-		return getForesightCooldown() > 0;
 	}
 
 	@Override

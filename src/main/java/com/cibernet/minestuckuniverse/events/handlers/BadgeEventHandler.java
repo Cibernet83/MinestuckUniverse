@@ -100,6 +100,7 @@ public class BadgeEventHandler
 		MinecraftForge.EVENT_BUS.register(TechDoomBind.class);
 		MinecraftForge.EVENT_BUS.register(TechSeerDodge.class);
 		MinecraftForge.EVENT_BUS.register(TechHopeyShit.class);
+		MinecraftForge.EVENT_BUS.register(TechBreathSpaceFallProof.class);
 	}
 
 	@SubscribeEvent

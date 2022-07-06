@@ -96,9 +96,8 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	boolean isEditDragging();
 	void setEditDragging(boolean v);
 
-	int getForesightCooldown();
-	void setForesightCooldown(int v);
-	boolean isForesightOnCooldown();
+	int getLastSeerDodge();
+	void setLastSeerDodge(int v);
 
 	// ----- Particles
 	Map<Class, MSUParticles.PowerParticleState> getPowerParticles();
@@ -107,6 +106,7 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, BadgeEffects.getAspectParticleColors(aspect)));
 	}
 	default void startPowerParticles(Class badge, MSUParticles.ParticleType particleType, EnumClass clazz, int count) {
+		System.out.println(BadgeEffects.getClassParticleColors(clazz));
 		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, BadgeEffects.getClassParticleColors(clazz)));
 	}
 	default void startPowerParticles(Class badge, MSUParticles.ParticleType particleType, int count, int... colors) {
@@ -117,7 +117,6 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void stopPowerParticles(Class badge);
 
 	default void oneshotPowerParticles(MSUParticles.ParticleType particleType, EnumAspect aspect, int count) {
-		System.out.println(BadgeEffects.getAspectParticleColors(aspect));
 		oneshotPowerParticles(new MSUParticles.PowerParticleState(particleType, count, BadgeEffects.getAspectParticleColors(aspect)));
 	}
 	default void oneshotPowerParticles(MSUParticles.ParticleType particleType, EnumClass clazz, int count) {

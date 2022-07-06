@@ -300,7 +300,7 @@ public class GTEventHandler
 		return appliedPotions;
 	}
 
-	private static final ArrayList<DamageSource> BLOCKABLE_UNBLOCKABLES = new ArrayList<DamageSource>()
+	public static final ArrayList<DamageSource> BLOCKABLE_UNBLOCKABLES = new ArrayList<DamageSource>()
 	{{
 		add(DamageSource.FLY_INTO_WALL);
 		add(DamageSource.GENERIC);

@@ -286,8 +286,8 @@ public class MSUSkills
 	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt");
 	public static final Abilitech SYLPH_MEND = new TechSylph("sylph_mend");
 	public static final Abilitech HEROIC_RESTORATION = new TechSylphCounterLock("heroic_restoration");
-	public static final Abilitech PRINCE_WRATH = new TechPrinceSlash("prince_wrath");
-	public static final Abilitech RULING_SLASH = new TechPrinceWrath("ruling_slash");
+	public static final Abilitech PRINCE_WRATH = new TechPrinceWrath("prince_wrath");
+	public static final Abilitech RULING_SLASH = new TechPrinceSlash("ruling_slash");
 	public static final Abilitech WITCH_INHIBITION = new TechWitch("witch_inhibition");
 	public static final Abilitech THIEF_FILCH = new TechThief("thief_filch");
 	public static final Abilitech MAGE_AWARENESS = new TechMage("mage_awareness");
