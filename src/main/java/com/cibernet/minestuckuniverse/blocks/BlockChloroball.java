@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.blocks;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechLifeFertility;
 import com.mraof.minestuck.util.EnumAspect;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -120,12 +121,14 @@ public class BlockChloroball extends MSUBlockBase
         while(availablePos.size() > 0 && count < 3 && rand.nextFloat() < 1f/(count+1f))
         {
             BlockPos targetPos = availablePos.get(rand.nextInt(availablePos.size()));
-            if(((IGrowable) world.getBlockState(targetPos).getBlock()).canGrow(world, targetPos, world.getBlockState(targetPos), world.isRemote))
+            if(((IGrowable) world.getBlockState(targetPos).getBlock()).canGrow(world, targetPos, world.getBlockState(targetPos), false))
             {
                 for(int i = 0; i < 3; i++)
-                    if(world.getBlockState(pos).getBlock() instanceof IGrowable)
+                {
+                    if(world.getBlockState(targetPos).getBlock() instanceof IGrowable)
                         ((IGrowable) world.getBlockState(targetPos).getBlock()).grow(world, world.rand, targetPos, world.getBlockState(targetPos));
                     else break;
+                }
 
                 world.playEvent(2005, targetPos, 0);
             }
