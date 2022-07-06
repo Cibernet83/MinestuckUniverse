@@ -32,11 +32,11 @@ public class Abilitech extends Skill
 	public List<String> getTags() { return new ArrayList<>(); }
 
 
-	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time) { return false; }
-	public boolean onEquippedTick(World world, EntityPlayer player, IBadgeEffects badgeEffects) { return false; }
+	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time) { return false; }
+	public boolean onPassiveTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot) { return false; }
 
-	public void onEquipped(World world, EntityPlayer player) {}
-	public void onUnequipped(World world, EntityPlayer player) {}
+	public void onEquipped(World world, EntityPlayer player, int techSlot) {}
+	public void onUnequipped(World world, EntityPlayer player, int techSlot) {}
 	public void onPassiveToggle(World world, EntityPlayer player, boolean active) {}
 
 	public Skill setRegistryName()

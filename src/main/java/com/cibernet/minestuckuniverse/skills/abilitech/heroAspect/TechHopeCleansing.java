@@ -21,7 +21,7 @@ public class TechHopeCleansing extends TechHeroAspect
 	protected static final int ENERGY_USE = 4;
 
 	@Override
-	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
+	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
 		if(!state.equals(SkillKeyStates.KeyState.PRESS))
 			return false;

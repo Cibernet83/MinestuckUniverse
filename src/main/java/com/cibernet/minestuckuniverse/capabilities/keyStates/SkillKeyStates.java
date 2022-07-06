@@ -139,11 +139,11 @@ public class SkillKeyStates implements ISkillKeyStates
 
 				if(abilitech.canUse(event.player.world, event.player))
 				{
-					isActive = abilitech.onUseTick(event.player.world, event.player, badgeEffects, keyStates.getKeyState(key), keyStates.getKeyTime(key));
+					isActive = abilitech.onUseTick(event.player.world, event.player, badgeEffects, key.ordinal(), keyStates.getKeyState(key), keyStates.getKeyTime(key));
 
 					if(!passives.contains(abilitech) && data.isTechPassiveEnabled(abilitech))
 					{
-						isActive = abilitech.onEquippedTick(event.player.world, event.player, badgeEffects) || isActive;
+						isActive = abilitech.onPassiveTick(event.player.world, event.player, badgeEffects, key.ordinal()) || isActive;
 						passives.add(abilitech);
 					}
 				}

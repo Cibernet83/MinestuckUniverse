@@ -23,7 +23,7 @@ public class TechLightAutoGlorb extends TechLightGlorb
 	}
 
 	@Override
-	public boolean onEquippedTick(World world, EntityPlayer player, IBadgeEffects badgeEffects)
+	public boolean onPassiveTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot)
 	{
 		if(((player.world.getLightFor(EnumSkyBlock.BLOCK, player.getPosition()) < 8)) &&
 				   player.world.getBlockState(player.getPosition()).getMaterial() == Material.AIR)

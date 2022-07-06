@@ -33,7 +33,7 @@ public class TechBloodReformer extends TechHeroAspect
 	}
 
 	@Override
-	public boolean onEquippedTick(World world, EntityPlayer player, IBadgeEffects badgeEffects)
+	public boolean onPassiveTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot)
 	{
 		/*
 		if(state == SkillKeyStates.KeyState.PRESS)

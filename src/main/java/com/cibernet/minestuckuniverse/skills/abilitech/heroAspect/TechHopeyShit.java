@@ -31,7 +31,7 @@ public class TechHopeyShit extends TechHeroAspect
 	}
 
 	@Override
-	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
+	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
 		if(badgeEffects.isHoping() == (state != SkillKeyStates.KeyState.NONE))
 			badgeEffects.setHoping(state != SkillKeyStates.KeyState.NONE);

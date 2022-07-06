@@ -21,7 +21,7 @@ public class TechLifeBreed extends TechHeroAspect
 	protected static final int RADIUS = 8;
 
 	@Override
-	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
+	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
 		if(state.equals(SkillKeyStates.KeyState.NONE) || time >= 16)
 			return false;
