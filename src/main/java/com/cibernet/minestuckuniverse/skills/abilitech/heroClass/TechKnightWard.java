@@ -20,7 +20,7 @@ public class TechKnightWard extends TechHeroClass
 	}
 
 	@Override
-	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
+	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
 		if(state == SkillKeyStates.KeyState.NONE || time >= 45)
 			return false;

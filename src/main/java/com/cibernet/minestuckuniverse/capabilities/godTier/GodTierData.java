@@ -264,13 +264,13 @@ public class GodTierData implements IGodTierData
 	public void equipTech(Abilitech tech, int slot)
 	{
 		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))] = tech;
-		tech.onEquipped(owner.world, owner);
+		tech.onEquipped(owner.world, owner, Math.min(equippedTech.length-1, Math.max(0, slot)));
 	}
 
 	@Override
 	public void unequipTech(int slot)
 	{
-		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))].onUnequipped(owner.world, owner);
+		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))].onUnequipped(owner.world, owner, Math.min(equippedTech.length-1, Math.max(0, slot)));
 		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))] = null;
 	}
 

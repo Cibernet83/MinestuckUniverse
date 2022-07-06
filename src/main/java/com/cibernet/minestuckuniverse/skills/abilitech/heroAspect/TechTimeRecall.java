@@ -25,7 +25,7 @@ public class TechTimeRecall extends TechHeroAspect
 	}
 
 	@Override
-	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, SkillKeyStates.KeyState state, int time)
+	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
 		Queue<SoulData> soulData = badgeEffects.getTimeSoulData();
 
