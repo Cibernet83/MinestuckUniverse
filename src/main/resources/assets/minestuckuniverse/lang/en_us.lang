@@ -1363,44 +1363,58 @@ tech.knight_ward.name=Knight's Ward
 tech.knight_ward.tooltip=Allows you to cast a protective spell upon yourself and any living creature. Charging it allows you target all nearby living being beings at once.
 tech.guardian_halt.name=Guardian Halt
 tech.guardian_halt.tooltip=Stops all nearby projectiles in place for a brief period of time.
+
 tech.sylph_mend.name=Sylph's Mend
 tech.sylph_mend.tooltip=Uses some of your own hunger to heal any living creature, as well as replenish other player's energy.
 tech.heroic_restoration.name=Heroic Restoration
 tech.heroic_restoration.tooltip=Speeds up the duration of Effects that negatively impact Abilitechs and God Tier powers for the target.
+
 tech.thief_filch.name=Thief's Filch
 tech.thief_filch.tooltip=Allows you to steal the target's Aspect Effects, applying them to you and disabling theirs.
 tech.hermes_dash.name=Hermes Dash
 tech.hermes_dash.tooltip=Performs a quick dash in the direction the user is walking towards, or facing if they're standing still.
+
 tech.prince_wrath.name=Prince's Wrath
 tech.prince_wrath.tooltip=Inflicts substantial damage upon the target. Damage can be increased by charging the Abilitech for longer.
 tech.ruling_slash.name=Ruling Slash
 tech.ruling_slash.tooltip=Greatly multiplies the damage dealt by melee attacks against players with the same aspect as you as long as it's active.
+
 tech.witch_inhibition.name=Witch's Inhibition
 tech.witch_inhibition.tooltip=Suppresses the target's Aspect Effects, as well as any Abilitechs associated to Class or Aspect for a short period of time.
 tech.wicked_trap.name=Wicked Trap
 tech.wicked_trap.tooltip=Creates an aura directly where the user is looking that inflicts a negative version of their Aspect Effect upon targets for as long as they're inside it.
+
 tech.mage_awareness.name=Mage's Awareness
 tech.mage_awareness.tooltip=Taps into your inner knowledge as a @MAGE@, granting you the ability to determine your Karmic Alignment. If your alignment is not neutral, your next death will not trigger your Conditional Immortality.
+
 tech.heir_will.name=Heir's Will
 tech.heir_will.tooltip=Equipping this Abilitech gives you a passive chance to inflict a negative version of your Aspect Effect upon any attackers. The chance of this Abilitech firing is determined by your level of Luck.
 tech.universal_reverse.name=Universal Reverse
 tech.universal_reverse.tooltip=Equipping this Abilitech gives you a passive chance to inflict a negative version of the target's Aspect Effect when attacking, or your own negative Aspect effect if theirs is unavailable. The chance of this Abilitech firing is determined by your level of Luck.
+
 tech.rogue_contribution.name=Rogue's Contribution
 tech.rogue_contribution.tooltip=Allows you to replicate any Potion Effects you currently have upon the target. Charging this Abilitech causes it to affect all nearby players.
 tech.roguelike_adaptability.name=Roguelike Adaptability
 tech.roguelike_adaptability.tooltip=Casts the target's first available equipped Abilitech.
+
 tech.bard_dissonance.name=Bard's Dissonance
 tech.bard_dissonance.tooltip=Causes discourse by randomly applying a possitive or negative aspect effect upon all nearby players, like any true @BARD@ would.
 tech.magic_metronome.name=Magic Metronome
 tech.magic_metronome.tooltip=Attunes the user with the chaotic energy of the Universe, allowing them to cast any random Abilitech. The user's hunger bar is completely depleted after use.
+
 tech.maid_favor.name=Maid's Favor
 tech.maid_favor.tooltip=Allows you to enhance the target's Aspect Effect, or share yours with them if thairs can't be improved.
+tech.irraidant_servitude.name=Irradiant Servitude
+tech.irraidant_servitude.tooltip=Grants all friendly creatures and players your Aspect Effect when standing close to you.
+
 tech.seer_prediction.name=Seer's Prediction
 tech.seer_prediction.tooltip=Taps into your knowledge of the universe around you as a @SEER@, allowing you to determine the target's exact Karma value. Player Karma determines a wide variety of factors, such as the effects of some Abilitechs, as well as whether your Conditional Immortality will trigger.
 tech.foresight_dodge.name=Foresight Dodge
 tech.foresight_dodge.tooltip=Makes you instinctively dodge any attacks eveey few minutes, completely negating any damage taken as well as moving you in the direction you're facing. Can be toggled on/off by using the Abilitech.
+
 tech.muse_requiem.name=Muse's Requiem
 tech.muse_requiem.tooltip=Taps into the full potential of your role as a @MUSE@, giving an amplified version of your Aspect Effect to every player with a shared or neutral alignment when having a TRUE DEATH.
+
 tech.lord_decree.name=Lord's Decree
 tech.lord_decree.tooltip=Taps into the full potential of your role as a @LORD@, allowing you to inflict a negative version of your Aspect Effect upon all nearby players and hostile mobs.
 
@@ -1433,7 +1447,7 @@ tech.vertigo_block.tooltip=Completely negates fall damage while this Abilitech i
 tech.temporal_recall.name=Temporal Recall
 tech.temporal_recall.tooltip=Lets you travel through %TIME% itself, restoring your health and position to how they were 5 seconds in the past.
 tech.chronofreeze.name=Chronofreeze
-tech.chronofreeze.tooltip=Uses the aspect of %TIME% to conjure Time Stop for a short period of time upon a target, completely freezing them in place.
+tech.chronofreeze.tooltip=Uses the aspect of @TIME@ to conjure Time Stop for a short period of time upon a target, completely freezing them in place.
 tech.flow_accelerator.name=Flow Accelerator
 tech.flow_accelerator.tooltip=Speeds up whatever block you're looking at whilst being held.
 tech.rapid_rewind.name=Rapid Rewind
@@ -1449,6 +1463,8 @@ tech.matter_manipulator.name=Matter Manipulator
 tech.matter_manipulator.tooltip=Bends @SPACE@ itself to collapse a defined area into a single item. The corners of the area are defined by pressing the key while looking at the desired block.
 tech.spatial_manipulator.name=Spatial Manipulator
 tech.spatial_manipulator.tooltip=Shrinks and enlarges certain entities and SBURB Machines, similar in function to Spatial Manipulation Dust.
+tech.kinetic_grab.name=Kinetic Grab
+tech.kinetic_grab.tooltip=Allows you to grab hold of any non-living entities, pulling them into the direction you're facing.
 
 tech.withering_whisper.name=Withering Whisper
 tech.withering_whisper.tooltip=Brings forth @DOOM@ upon all nearby creatures, casting a deadly spell that incrementally withers away at their health.
@@ -1517,9 +1533,13 @@ tech.raging_insanity.tooltip=Puts all nearby creatures into a frenzied state, ca
 tech.sensory_break.name=Sensory Break
 tech.sensory_break.tooltip=Scrambles the target's mind for a short period of time, reversing their controls whilst in effect.
 tech.mindflayers_spell.name=Mindflayer's Spell
-tech.mindflayers_spell.tooltip=§9This badge proves your mastery over the aspect of MIND, allowing you to take control of any player's decissions by pressing [%s] as long as their mind is weak enough.
+tech.mindflayers_spell.tooltip=Allows you to take control of any player or living creature's @MIND@, as long as it has one or isn't fortified enough.
 tech.godhoods_justice.name=Godhood's Justice
 tech.godhoods_justice.tooltip=Gradually heals the targeted player's Karma.
+tech.calculated_strike.name=Calculated Strike
+tech.calculated_strike.tooltip=Sees through all possible outcomes in order to increase the damage of your next attack.
+tech.illusory_cloak.name=Illusory Cloak
+tech.illusory_cloak.tooltip=Casts an illusion upon all players, disguising you as the targeted creature, player or block until cast again.
 
 tech.answered_prayers.name=Answered Prayers
 tech.answered_prayers.tooltip=Blesses all nearby players and passive creatures with a possitive Potion Effect.
