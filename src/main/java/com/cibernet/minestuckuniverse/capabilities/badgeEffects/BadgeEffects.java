@@ -696,8 +696,9 @@ public class BadgeEffects implements IBadgeEffects
 			effects.put(badge, new IBadgeEffect.MovementInputEffect(moveStrafe, moveForward, jump, sneak));
 	}
 
-	private EntityLivingBase getLivingEntity(Class badge) {
-		return effects.containsKey(badge) ? ((IBadgeEffect.EntityLivingEffect) effects.get(badge)).value : null;
+	private EntityLivingBase getLivingEntity(Class badge)
+	{
+		return effects.containsKey(badge) ? ((IBadgeEffect.EntityEffect) effects.get(badge)).getLiving() : null;
 	}
 
 	private void setLivingEntity(Class badge, EntityLivingBase entity)
@@ -705,7 +706,7 @@ public class BadgeEffects implements IBadgeEffects
 		if (entity == null)
 			effects.remove(badge);
 		else
-			effects.put(badge, new IBadgeEffect.EntityLivingEffect(entity));
+			effects.put(badge, new IBadgeEffect.EntityEffect(entity));
 	}
 
 	private Entity getEntity(Class badge) {

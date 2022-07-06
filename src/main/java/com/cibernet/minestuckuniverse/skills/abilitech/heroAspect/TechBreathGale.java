@@ -41,12 +41,12 @@ public class TechBreathGale extends TechHeroAspect
 				return false;
 			}
 
-			if(time < 20)
+			if(time < 10)
 				return false;
 
 			player.setSprinting(false);
 			player.capabilities.isFlying = false;
-			player.motionY = Math.min(2, Math.max(2f, time/40f));
+			player.motionY = Math.min(1, Math.max(2f, time/20f));
 			player.motionX = Math.sin(Math.toRadians(-player.rotationYaw))*player.motionY*0.7f;
 			player.motionZ = Math.cos(Math.toRadians(-player.rotationYaw))*player.motionY*0.7f;
 			player.velocityChanged = true;
@@ -54,7 +54,7 @@ public class TechBreathGale extends TechHeroAspect
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.BREATH, 40);
 
 			if(!player.isCreative())
-				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-2);
+				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-(int)(player.motionY*2));
 
 			EntityLightningBolt lightning = new EntityLightningBolt(world, player.posX, player.posY-1d, player.posZ, true);
 			world.spawnEntity(lightning);
@@ -75,9 +75,6 @@ public class TechBreathGale extends TechHeroAspect
 		}
 		else
 		{
-			if(time % 10 == 0 && !player.isCreative())
-				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);
-
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.BREATH, time < 30 ? 2 : 8);
 		}
 

@@ -22,7 +22,7 @@ public class PacketAttemptBadgeUnlock extends MSUPacket
     @Override
     public MSUPacket generatePacket(Object... args)
     {
-        ByteBufUtils.writeUTF8String(data, ((Badge)args[0]).getRegistryName().toString());
+        ByteBufUtils.writeUTF8String(data, ((Skill)args[0]).getRegistryName().toString());
         return this;
     }
 
