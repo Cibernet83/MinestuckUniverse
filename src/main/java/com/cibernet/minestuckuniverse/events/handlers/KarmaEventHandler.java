@@ -148,7 +148,7 @@ public class KarmaEventHandler
 		IGodTierData data = event.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 		if(data.getTempKarma() != 0)
 		{
-			data.setTempKarma(data.getTempKarma() - (1f / 2400f * (data.isBadgeActive(MSUSkills.KARMA) ? 2 : 1)) * Math.signum(data.getTempKarma()));
+			data.setTempKarma(data.getTempKarma() - (1f / 1200f * (data.isBadgeActive(MSUSkills.KARMA) ? 2 : 1) * (data.isTechPassiveEnabled(MSUSkills.MIND_GODHOODS_JUSTICE) ? 2 : 1)) * Math.signum(data.getTempKarma()));
 			if(data.getTempKarma() > -0.001f && data.getTempKarma() < 0.001f)
 				data.setTempKarma(0);
 		}
