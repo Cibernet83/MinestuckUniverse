@@ -134,7 +134,7 @@ public class SkillKeyStates implements ISkillKeyStates
 			Abilitech abilitech = data.getTech(key.ordinal());
 			boolean isActive = false;
 
-			if(!event.player.isSpectator())
+			if(!event.player.isSpectator() && !event.player.isDead && !badgeEffects.isTimeStopped() && !badgeEffects.isSoulShocked())
 			{
 				if(abilitech == null) continue;
 	
