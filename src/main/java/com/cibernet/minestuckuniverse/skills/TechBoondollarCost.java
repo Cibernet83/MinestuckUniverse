@@ -1,7 +1,6 @@
 package com.cibernet.minestuckuniverse.skills;
 
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechDoomBind;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;

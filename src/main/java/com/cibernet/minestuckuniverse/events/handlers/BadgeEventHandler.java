@@ -1,13 +1,25 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBleeding;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodReformer;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathSpaceFallProof;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathWindVessel;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.TechDoomBind;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceManipulator;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeRecall;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.voidAspect.TechVoidGrasp;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.voidAspect.TechVoidStep;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechHeir;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechMuse;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechPrinceSlash;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechSeerDodge;
 import com.cibernet.minestuckuniverse.skills.badges.BadgeBuilder;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
 import com.cibernet.minestuckuniverse.skills.badges.BadgeOverlord;
 import com.cibernet.minestuckuniverse.blocks.BlockDungeonDoor;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;

@@ -1,13 +1,21 @@
 package com.cibernet.minestuckuniverse.capabilities.badgeEffects;
 
-import com.cibernet.minestuckuniverse.entity.EntityBubble;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIMindflayerTarget;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.PotionConceal;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathWindVessel;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.TechDoomDemise;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartLink;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceManipulator;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceTargetTele;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeStop;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechSeerDodge;
 import com.cibernet.minestuckuniverse.util.SoulData;
 import com.mraof.minestuck.util.EnumAspect;

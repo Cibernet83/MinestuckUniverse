@@ -1,9 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechLifeFertility;
-import com.mraof.minestuck.util.EnumAspect;
-import net.minecraft.block.BlockGrass;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
