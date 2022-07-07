@@ -7,6 +7,8 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
+
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -38,7 +40,7 @@ public class TechVoidDoomBubble extends TechHeroAspect
 		if(trace.getBlockPos() == null && trace.entityHit == null)
 			return false;
 
-		EntityBubble bubble = badgeEffects.getActiveBubble();
+		EntityBubble bubble = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityBubble) badgeEffects.getTether(techSlot) : null;
 
 		if(bubble != null && bubble.isDead)
 			bubble = null;
@@ -51,7 +53,7 @@ public class TechVoidDoomBubble extends TechHeroAspect
 				bubble.setPosition(trace.entityHit.posX, trace.entityHit.posY-0.05, trace.entityHit.posZ);
 			else bubble.setPosition(trace.getBlockPos().getX(), trace.getBlockPos().getY()-0.05, trace.getBlockPos().getZ());
 			world.spawnEntity(bubble);
-			badgeEffects.setActiveBubble(bubble);
+			badgeEffects.setTether(bubble, techSlot);
 		}
 
 		bubble.setLifespan(bubble.getLifespan()+1);

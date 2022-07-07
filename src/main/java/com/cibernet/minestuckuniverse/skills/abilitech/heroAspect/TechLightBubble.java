@@ -6,6 +6,8 @@ import com.cibernet.minestuckuniverse.entity.EntityBubble;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
+
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -29,7 +31,7 @@ public class TechLightBubble extends TechHeroAspect
 			return false;
 		}
 
-		EntityBubble bubble = badgeEffects.getActiveBubble();
+		EntityBubble bubble = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityBubble) badgeEffects.getTether(techSlot) : null;
 
 		if(bubble != null && bubble.isDead)
 			bubble = null;
@@ -39,7 +41,7 @@ public class TechLightBubble extends TechHeroAspect
 			bubble = new EntityBubble(world, 3, player.getName().equals("Cibernet") ? 0x66FFBA : 0xF4ECB7, 100, false, false, false);
 			bubble.setPosition(player.posX, player.posY-0.05, player.posZ);
 			world.spawnEntity(bubble);
-			badgeEffects.setActiveBubble(bubble);
+			badgeEffects.setTether(bubble, techSlot);
 		}
 
 		bubble.setLifespan(bubble.getLifespan()+1);
