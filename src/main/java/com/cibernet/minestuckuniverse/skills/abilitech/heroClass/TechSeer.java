@@ -41,7 +41,7 @@ public class TechSeer extends TechHeroClass
 				player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 				return false;
 			}
-			if((time % 30) == 0)
+			if((time % 20) == 0)
 				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);
 		}
 
@@ -57,7 +57,7 @@ public class TechSeer extends TechHeroClass
 		MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, time > 15 ? alignmentColor : 0xD670FF, 5, target), player);
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumClass.SEER, 1);
 
-		if(time > 200)
+		if(time > 100)
 			player.sendStatusMessage(new TextComponentTranslation("status.karma", ((EntityPlayer) target).getDisplayNameString(), karma)
 					                         .setStyle(new Style().setColor(karma >= minKarma ? TextFormatting.GOLD : karma <= -minKarma ? TextFormatting.DARK_PURPLE : TextFormatting.GREEN)), true);
 

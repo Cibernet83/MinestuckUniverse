@@ -3,11 +3,15 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
+import com.cibernet.minestuckuniverse.entity.EntityHopeGolem;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -48,10 +52,14 @@ public class TechHopePrayers extends TechHeroAspect
 
 			Potion potion = potionPoolPos.get(world.rand.nextInt(potionPoolPos.size()));
 
-			for (EntityPlayer target : world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(RADIUS), target -> target != player)) {
+			for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(RADIUS), target -> target != player && !(target instanceof IMob) && !target.isSpectator()))
+			{
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.HOPE, 10);
 
 				target.addPotionEffect(new PotionEffect(potion, potion.isInstant() ? 0 : 300, 2));
+
+				if(target instanceof EntityHopeGolem && ((EntityHopeGolem) target).getOwner().equals(player))
+					((EntityHopeGolem) target).setHopeTicks(((EntityHopeGolem) target).getHopeTicks() + 100);
 			}
 
 			if (!player.isCreative())
