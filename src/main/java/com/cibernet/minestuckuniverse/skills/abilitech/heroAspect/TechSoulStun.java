@@ -32,7 +32,7 @@ public class TechSoulStun extends TechHeroAspect
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
 		EntityLivingBase target = state == SkillKeyStates.KeyState.NONE ? null : MSUUtils.getTargetEntity(player);
-		EntityLivingBase oldTarget = badgeEffects.getSoulShockTarget();
+		EntityLivingBase oldTarget = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityLivingBase) badgeEffects.getTether(techSlot) : null;
 
 		if(oldTarget != target)
 		{
@@ -55,7 +55,7 @@ public class TechSoulStun extends TechHeroAspect
 				else targetEffects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.HEART, 1);
 			}
 
-			badgeEffects.setSoulShockTarget(target);
+			badgeEffects.setTether(target, techSlot);
 		}
 
 		if(state == SkillKeyStates.KeyState.NONE) return false;

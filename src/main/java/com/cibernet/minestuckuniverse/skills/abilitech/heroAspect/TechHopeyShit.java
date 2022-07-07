@@ -8,6 +8,7 @@ import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketTitle;
@@ -68,7 +69,7 @@ public class TechHopeyShit extends TechHeroAspect
 					((EntityPlayerMP)target).connection.sendPacket(spackettitle1);
 				}
 
-				if(time % 5 == 0)
+				if(!(target instanceof EntityItem) && time % 5 == 0)
 				{
 					target.hurtResistantTime = 0;
 					target.attackEntityFrom(damage, 1);

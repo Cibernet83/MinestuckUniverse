@@ -1,49 +1,31 @@
-package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect;
+package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
-import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
+import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
-import com.cibernet.minestuckuniverse.util.EnumTechType;
+import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
+import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class TechMindKarmaHeal extends TechHeroAspect
+public class TechSylphKarmaRestore extends TechHeroClass
 {
-	public TechMindKarmaHeal(String name) {
-		super(name, EnumAspect.MIND, EnumTechType.UTILITY);
-	}
-
-	@Override
-	public boolean onPassiveTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot)
+	public TechSylphKarmaRestore(String name)
 	{
-		IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
-		if(data != null)
-			return false;
-
-		if((data.getStaticKarma() != 0 || data.getTempKarma() != 0)    )// && time % ((int)(4 + 0.4f * data.getTempKarma())) == 0)
-		{
-			if (data.getStaticKarma() != 0)
-				data.setStaticKarma(data.getStaticKarma() + (data.getStaticKarma() > 0 ? -1 : 1));
-			else
-				data.setTempKarma(data.getTempKarma() + (data.getTempKarma() > 0 ? -1 : 1));
-			return true;
-		}
-		return false;
+		super(name, EnumClass.SYLPH);
 	}
-	
-	/*
+
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
 		if(state == SkillKeyStates.KeyState.RELEASED)
-			badgeEffects.setJusticeTarget(null);
+			badgeEffects.clearTether(techSlot);
 
 		if (state == SkillKeyStates.KeyState.NONE)
 			return false;
@@ -54,12 +36,11 @@ public class TechMindKarmaHeal extends TechHeroAspect
 			return false;
 		}
 
-		EntityLivingBase target = badgeEffects.getJusticeTarget();
-
+		EntityLivingBase target = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityLivingBase) badgeEffects.getTether(techSlot) : null;
 		if(target == null && MSUUtils.getTargetEntity(player) instanceof EntityPlayer)
 		{
 			target = MSUUtils.getTargetEntity(player);
-			badgeEffects.setJusticeTarget(target);
+			badgeEffects.setTether(target, techSlot);
 		}
 
 		if (target instanceof EntityPlayer)
@@ -67,7 +48,7 @@ public class TechMindKarmaHeal extends TechHeroAspect
 			IGodTierData targetData = target.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 
 			int tickMod = (int)(4 + 0.4f * player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTempKarma());
-			if ((targetData.getStaticKarma() != 0 || targetData.getTempKarma() != 0) && time % tickMod == 0)
+			if((targetData.getStaticKarma() != 0 || targetData.getTempKarma() != 0) && time % tickMod == 0)
 			{
 				if (targetData.getStaticKarma() != 0)
 					targetData.setStaticKarma(targetData.getStaticKarma() + (targetData.getStaticKarma() > 0 ? -1 : 1));
@@ -76,15 +57,15 @@ public class TechMindKarmaHeal extends TechHeroAspect
 
 				if (time % (tickMod * 2) == 0)
 					player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
-
-				badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.BURST, EnumAspect.MIND, 4);
+				
+				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.BURST, EnumClass.SYLPH, 4);
 			}
-
 		}
+		
 
-		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 2);
+		
+		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumClass.SYLPH, 2);
 
 		return true;
 	}
-	*/
 }

@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.events.handlers.GTEventHandler;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +29,7 @@ public class TechSeerDodge extends TechHeroClass
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
 		boolean canDodge = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(this);
-        if (state == SkillKeyStates.KeyState.PRESS)
+		if (state == SkillKeyStates.KeyState.PRESS)
         {
             player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).setSkillPassiveEnabled(this, !canDodge);
             player.sendStatusMessage(new TextComponentTranslation(!canDodge ? "status.badgeEnabled" : "status.badgeDisabled", getDisplayComponent()), true);
@@ -36,10 +37,12 @@ public class TechSeerDodge extends TechHeroClass
         return true;
 	}
 	
-	//TODO: maybe make it so that client's last dodge is also set to world time
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onLivingAttack(LivingAttackEvent event)
 	{
+		if(event.getEntityLiving().world.isRemote)
+			return;
+		
 		IGodTierData data = event.getEntityLiving().getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 		IBadgeEffects effects = event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 
@@ -48,15 +51,12 @@ public class TechSeerDodge extends TechHeroClass
 		{
 			EntityLivingBase entity = event.getEntityLiving();
 
-			if(!event.getEntityLiving().world.isRemote)
-			{
-				effects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.SEER, 20);
-				effects.setLastSeerDodge((int) event.getEntityLiving().world.getTotalWorldTime());
-			}
+			effects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.SEER, 20);
+			effects.setLastSeerDodge((int) event.getEntityLiving().world.getTotalWorldTime());
 			
 			event.setCanceled(true);
 
-			entity.moveRelative(0, (float)Math.cos((entity.rotationPitch+90)*Math.PI/180f), (float)Math.sin((entity.rotationPitch+90)*Math.PI/180f), 3);
+			entity.moveRelative(0, (float)Math.cos((entity.rotationPitch+90)*Math.PI/180f)/(MSUUtils.isTrulyOnGround(entity) ? 2.5F : 1.25F), (float)Math.sin((entity.rotationPitch+90)*Math.PI/180f), MSUUtils.isTrulyOnGround(entity) ? 3F : 1.5F);
 			entity.velocityChanged = true;
 		}
 	}

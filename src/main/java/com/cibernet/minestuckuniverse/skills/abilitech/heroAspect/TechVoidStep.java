@@ -58,6 +58,12 @@ public class TechVoidStep extends TechHeroAspect
 
         return true;
     }
+    
+    @Override
+    public void onEquipped(World world, EntityPlayer player, int techSlot)
+    {
+    	player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).setSkillPassiveEnabled(this, false);
+    }
 
     @Override
     public boolean canUse(World world, EntityPlayer player) {

@@ -22,36 +22,40 @@ public class TechSylph extends TechHeroClass
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
+		if(state == SkillKeyStates.KeyState.RELEASED)
+			badgeEffects.clearTether(techSlot);
+		if(!state.equals(SkillKeyStates.KeyState.HELD))
+			return false;
+		
 		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 1)
 		{
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 			return false;
 		}
-
-		if(!state.equals(SkillKeyStates.KeyState.HELD))
-			return false;
-
-		EntityLivingBase target = MSUUtils.getTargetEntity(player);
+		
+		EntityLivingBase target = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityLivingBase) badgeEffects.getTether(techSlot) : null;
+		if(target == null && MSUUtils.getTargetEntity(player) instanceof EntityPlayer)
+		{
+			target = MSUUtils.getTargetEntity(player);
+			badgeEffects.setTether(target, techSlot);
+		}
 
 		if(target == null || !(target.getHealth() < target.getMaxHealth() || (target instanceof EntityPlayer && ((EntityPlayer) target).getFoodStats().needFood())))
 			return false;
-
+		
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumClass.SYLPH, 5);
 
 		if((time % 10) == 0)
 		{
 			target.heal(2);
-
-			if((time % 20) == 0 && target instanceof EntityPlayer && ((EntityPlayer) target).getFoodStats().needFood())
-				((EntityPlayer) target).getFoodStats().addStats(1, 2);
-
-
+			if(target instanceof EntityPlayer && ((EntityPlayer) target).getFoodStats().needFood())
+				((EntityPlayer) target).getFoodStats().addStats(4, 2);
 
 			if (!player.isCreative())
 				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
 			((WorldServer)world).spawnParticle(EnumParticleTypes.HEART, target.posX + ((Math.random()-0.5)/2), target.posY+1.5, target.posZ + ((Math.random()-0.5)/2), 1, 1, 0, 0.5, 0);
 		}
-
+			
 		return true;
 	}
 }
