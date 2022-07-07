@@ -153,7 +153,7 @@ public class SkillKeyStates implements ISkillKeyStates
 				}
 			}
 
-			if(!isActive && !actions.contains(abilitech))
+			if(!isActive && !actions.contains(abilitech) && badgeEffects != null)
 				badgeEffects.stopPowerParticles(abilitech.getClass());
 		}
 
