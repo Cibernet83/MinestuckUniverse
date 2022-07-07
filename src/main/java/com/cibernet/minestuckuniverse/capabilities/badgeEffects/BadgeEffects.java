@@ -33,6 +33,8 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
+import javax.annotation.Nullable;
+
 public class BadgeEffects implements IBadgeEffects
 {
 	// Serialized data
@@ -67,13 +69,14 @@ public class BadgeEffects implements IBadgeEffects
 	// Unserialized data that we don't want to store or ship
 	private Queue<SoulData> timeSoulData = new LinkedList<>();
 	private Vec3d prevPos;
+	
 
 	// Metadata
 	private final Map<Class, MSUParticles.PowerParticleState> particleMap = new HashMap<>();
 
 	private EntityLivingBase owner;
 
-
+	private Entity[] tethers = new Entity[3];
 
 	@Override
 	public int getDecayTime() {
@@ -162,15 +165,21 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
-	public EntityBubble getActiveBubble()
+	public Entity getTether(int slot)
 	{
-		return (EntityBubble) getEntity(TechLightBubble.class);
+		return tethers[Math.min(tethers.length-1, Math.max(slot, 0))];
 	}
-
+	
 	@Override
-	public void setActiveBubble(EntityBubble bubble)
+	public void setTether(@Nullable Entity entity, int slot)
 	{
-		setEntity(TechLightBubble.class, bubble);
+		tethers[Math.min(tethers.length-1, Math.max(slot, 0))] = entity;
+	}
+	
+	@Override
+	public void clearTether(int slot)
+	{
+		setTether(null, slot);
 	}
 
 	@Override
@@ -246,16 +255,6 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
-	public EntityLivingBase getSoulShockTarget() {
-		return getLivingEntity(TechSoulStun.Target.class);
-	}
-
-	@Override
-	public void setSoulShockTarget(EntityLivingBase target) {
-		setLivingEntity(TechSoulStun.Target.class, target);
-	}
-
-	@Override
 	public boolean isSoulShocked() {
 		return getBoolean(TechSoulStun.class);
 	}
@@ -263,16 +262,6 @@ public class BadgeEffects implements IBadgeEffects
 	@Override
 	public void setSoulShocked(boolean v) {
 		setBoolean(TechSoulStun.class, v);
-	}
-
-	@Override
-	public void setJusticeTarget(EntityLivingBase target) {
-		setLivingEntity(TechMindKarmaHeal.class, target);
-	}
-
-	@Override
-	public EntityLivingBase getJusticeTarget() {
-		return getLivingEntity(TechMindKarmaHeal.class);
 	}
 
 	@Override

@@ -264,11 +264,15 @@ public class GTEventHandler
 		SburbConnection c = SkaianetHandler.getMainConnection(identifier, true);
 		int rung = MinestuckPlayerData.getData(identifier).echeladder.getRung();
 		EnumAspect aspect = null;
+		HashMap<Potion, PotionEffect> appliedPotions = new HashMap<>();
 		if(c != null && c.enteredGame())
 			aspect = MinestuckPlayerData.getTitle(identifier).getHeroAspect();
+		
+		if(aspect == null)
+			return appliedPotions;
 
 		int potionLevel = (int)(aspectStrength[aspect.ordinal()] * (float)(gtData.isGodTier() ? 60 : rung)) + (gtData.isBadgeActive(MSUSkills.BADGE_PAGE) ? 2 : 0);
-		HashMap<Potion, PotionEffect> appliedPotions = new HashMap<>();
+		
 		if (gtData.isBadgeActive(MSUSkills.EFFECT_BUFF))
 			switch (aspect)
 			{
@@ -303,7 +307,6 @@ public class GTEventHandler
 	public static final ArrayList<DamageSource> BLOCKABLE_UNBLOCKABLES = new ArrayList<DamageSource>()
 	{{
 		add(DamageSource.FLY_INTO_WALL);
-		add(DamageSource.GENERIC);
 	}};
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)

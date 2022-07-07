@@ -6,6 +6,8 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.util.SoulData;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +15,8 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.Map;
 import java.util.Queue;
+
+import javax.annotation.Nullable;
 
 public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 {
@@ -36,9 +40,12 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void setRageShifted(boolean rageShifted);
 	void cleanRageShift();
 	boolean isRageShiftDirty();
-
-	EntityBubble getActiveBubble();
-	void setActiveBubble(EntityBubble bubble);
+	
+	Entity getTether(int slot);
+	void setTether(@Nullable Entity entity, int slot);
+	void clearTether(int slot);
+	
+	//tethers start
 
 	EntityLivingBase getMindflayerEntity();
 	void setMindflayerEntity(EntityLivingBase entity);
@@ -46,15 +53,13 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	EntityLivingBase getMindflayedBy();
 	boolean isMindflayed();
 
-	EntityLivingBase getSoulShockTarget();
-	void setSoulShockTarget(EntityLivingBase target);
 	boolean isSoulShocked();
 	void setSoulShocked(boolean v);
 
-	void setJusticeTarget(EntityLivingBase target);
-	EntityLivingBase getJusticeTarget();
 	void setSoulLinkTarget(EntityLivingBase target);
 	EntityLivingBase getSoulLinkTarget();
+	
+	//tethers end
 
 	void setHoping(boolean v);
 	boolean isHoping();
@@ -106,7 +111,6 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, BadgeEffects.getAspectParticleColors(aspect)));
 	}
 	default void startPowerParticles(Class badge, MSUParticles.ParticleType particleType, EnumClass clazz, int count) {
-		System.out.println(BadgeEffects.getClassParticleColors(clazz));
 		startPowerParticles(badge, new MSUParticles.PowerParticleState(particleType, count, BadgeEffects.getClassParticleColors(clazz)));
 	}
 	default void startPowerParticles(Class badge, MSUParticles.ParticleType particleType, int count, int... colors) {

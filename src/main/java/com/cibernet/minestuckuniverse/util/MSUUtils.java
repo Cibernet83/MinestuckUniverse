@@ -271,4 +271,18 @@ public class MSUUtils
 
         return player;
     }
+    
+    public static boolean isTrulyOnGround(Entity entity)
+    {
+    	double y = entity.motionY;
+    	double oldY = y;
+    	if(y != 0)
+    	{
+            List<AxisAlignedBB> list1 = entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox().expand(0, y, 0));
+    		for(int i = 0; i < list1.size(); i++)
+    			y = ((AxisAlignedBB)list1.get(i)).calculateYOffset(entity.getEntityBoundingBox(), y);
+    		
+    	}
+    	return oldY != y && oldY < 0;
+    }
 }

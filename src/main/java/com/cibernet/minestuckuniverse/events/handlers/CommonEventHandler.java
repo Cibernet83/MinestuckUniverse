@@ -171,16 +171,16 @@ public class CommonEventHandler
 	public static void onTick(LivingEvent.LivingUpdateEvent event)
 	{
 		EntityLivingBase player = event.getEntityLiving();
-		if(player.isPotionActive(MSUPotions.EARTHBOUND) && player.getActivePotionEffect(MSUPotions.EARTHBOUND).getAmplifier() > 0)
+		if(!((player instanceof EntityPlayer) && ((EntityPlayer)player).isSpectator()) && player.isPotionActive(MSUPotions.EARTHBOUND) && player.getActivePotionEffect(MSUPotions.EARTHBOUND).getAmplifier() > 0)
 			player.motionY = Math.min(0, player.motionY);
 	}
 
 	@SideOnly(Side.CLIENT)
-	@SubscribeEvent(priority = EventPriority.LOWEST)
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void onInput(InputUpdateEvent event)
 	{
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
-		if(player.isPotionActive(MSUPotions.EARTHBOUND) && player.getActivePotionEffect(MSUPotions.EARTHBOUND).getAmplifier() > 0)
+		if(!player.isSpectator() && player.isPotionActive(MSUPotions.EARTHBOUND) && (player.getActivePotionEffect(MSUPotions.EARTHBOUND).getAmplifier() > 0 || !MSUUtils.isTrulyOnGround(player)))
 			player.movementInput.jump = false;
 	}
 

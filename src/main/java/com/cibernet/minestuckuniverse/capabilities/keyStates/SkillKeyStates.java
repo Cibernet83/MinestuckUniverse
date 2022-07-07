@@ -127,30 +127,34 @@ public class SkillKeyStates implements ISkillKeyStates
 		ISkillKeyStates keyStates = event.player.getCapability(MSUCapabilities.SKILL_KEY_STATES, null);
 
 		List<Abilitech> passives = new ArrayList<>();
+		List<Abilitech> actions = new ArrayList<>();
 
-		if(!event.player.isSpectator())
+		for(Key key : Key.values())
 		{
-			for(Key key : Key.values())
+			Abilitech abilitech = data.getTech(key.ordinal());
+			boolean isActive = false;
+
+			if(!event.player.isSpectator())
 			{
-				Abilitech abilitech = data.getTech(key.ordinal());
-				boolean isActive = false;
-
 				if(abilitech == null) continue;
-
+	
 				if(abilitech.canUse(event.player.world, event.player))
 				{
 					isActive = abilitech.onUseTick(event.player.world, event.player, badgeEffects, key.ordinal(), keyStates.getKeyState(key), keyStates.getKeyTime(key));
-
+	
+					if(isActive)
+						actions.add(abilitech);
+					
 					if(!passives.contains(abilitech) && data.isTechPassiveEnabled(abilitech))
 					{
 						isActive = abilitech.onPassiveTick(event.player.world, event.player, badgeEffects, key.ordinal()) || isActive;
 						passives.add(abilitech);
 					}
 				}
-
-				if(!isActive)
-					badgeEffects.stopPowerParticles(abilitech.getClass());
 			}
+
+			if(!isActive && !actions.contains(abilitech))
+				badgeEffects.stopPowerParticles(abilitech.getClass());
 		}
 
 		keyStates.tickKeyStates();
