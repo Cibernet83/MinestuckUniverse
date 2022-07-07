@@ -289,6 +289,7 @@ public class MSUSkills
 	public static final Abilitech PRINCE_WRATH = new TechPrinceWrath("prince_wrath");
 	public static final Abilitech RULING_SLASH = new TechPrinceSlash("ruling_slash");
 	public static final Abilitech WITCH_INHIBITION = new TechWitch("witch_inhibition");
+	public static final Abilitech WITCH_TRAP = new TechWitchTrap("wicked_trap");
 	public static final Abilitech THIEF_FILCH = new TechThief("thief_filch");
 	public static final Abilitech MAGE_AWARENESS = new TechMage("mage_awareness");
 

@@ -167,7 +167,10 @@ public class BadgeEffects implements IBadgeEffects
 	@Override
 	public Entity getTether(int slot)
 	{
-		return tethers[Math.min(tethers.length-1, Math.max(slot, 0))];
+		int slott = Math.min(tethers.length-1, Math.max(slot, 0));
+		if(tethers[slott] != null && tethers[slott].isDead)
+			clearTether(slott);
+		return tethers[slott];
 	}
 	
 	@Override

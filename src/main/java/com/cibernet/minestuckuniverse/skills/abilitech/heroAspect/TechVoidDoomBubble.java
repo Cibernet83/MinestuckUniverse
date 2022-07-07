@@ -40,7 +40,7 @@ public class TechVoidDoomBubble extends TechHeroAspect
 		if(trace.getBlockPos() == null && trace.entityHit == null)
 			return false;
 
-		EntityBubble bubble = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityBubble) badgeEffects.getTether(techSlot) : null;
+		EntityBubble bubble = badgeEffects.getTether(techSlot) instanceof EntityBubble ? (EntityBubble) badgeEffects.getTether(techSlot) : null;
 
 		if(bubble != null && bubble.isDead)
 			bubble = null;
