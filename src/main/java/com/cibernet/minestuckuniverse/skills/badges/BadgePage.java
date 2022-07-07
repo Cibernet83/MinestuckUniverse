@@ -1,16 +1,18 @@
 package com.cibernet.minestuckuniverse.skills.badges;
 
-import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
-import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
-import com.cibernet.minestuckuniverse.skills.badges.Badge;
 import com.mraof.minestuck.util.EnumClass;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class BadgePage extends Badge
 {
+	private final int requiredXp = 80;
+
 	public BadgePage()
 	{
 		setUnlocalizedName("page");
@@ -37,4 +39,20 @@ public class BadgePage extends Badge
 		return EnumClass.PAGE.equals(playerClass);
 	}
 
+	@Override
+	public boolean canUnlock(World world, EntityPlayer player)
+	{
+		if(player.experienceLevel >= requiredXp)
+		{
+			player.experienceLevel -= requiredXp;
+			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.ADD_PLAYER_XP, -requiredXp), player);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String getUnlockRequirements() {
+		return new TextComponentTranslation("badge.class.unlock", requiredXp).getFormattedText();
+	}
 }

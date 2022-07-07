@@ -30,19 +30,6 @@ public class TechTimeAcceleration extends TechHeroAspect
 	}
 
 	@Override
-	public boolean canUnlock(World world, EntityPlayer player)
-	{
-		if (Badge.findItem(player, new ItemStack(MinestuckUniverseItems.heroStoneShards.get(EnumAspect.TIME), 128), false) &&
-			Badge.findItem(player, new ItemStack(Items.CLOCK, 100), false))
-		{
-			Badge.findItem(player, new ItemStack(MinestuckUniverseItems.heroStoneShards.get(EnumAspect.TIME), 128), true);
-			Badge.findItem(player, new ItemStack(Items.CLOCK, 100), true);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time) {
 		if(!state.equals(SkillKeyStates.KeyState.HELD))
 			return false;
@@ -52,6 +39,8 @@ public class TechTimeAcceleration extends TechHeroAspect
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 			return false;
 		}
+
+
 
 		BlockPos target = MSUUtils.getTargetBlock(player);
 		if (target == null)
