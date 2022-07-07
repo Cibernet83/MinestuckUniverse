@@ -33,30 +33,44 @@ public class TechLifeLeech extends TechHeroAspect
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
-		if (state != SkillKeyStates.KeyState.PRESS)
+		if (state == SkillKeyStates.KeyState.NONE)
 			return false;
 
-		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 4)
+		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 1)
 		{
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 			return false;
 		}
 
-		EntityLivingBase target = MSUUtils.getTargetEntity(player);
+		EntityLivingBase target = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityLivingBase) badgeEffects.getTether(techSlot) : null;
+
+		if(target != null && target.getDistance(player) > 20)
+		{
+			target = null;
+			badgeEffects.clearTether(techSlot);
+		}
+
+		if(time % 20 != 0)
+		{
+			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 5);
+			if(target != null)
+				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 2);
+			return true;
+		}
 
 		if (target != null)
 		{
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 10);
 
-			target.attackEntityFrom(new LifeDamageSource(player), 4);
-			player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 400));
-			player.heal(4);
+			target.hurtResistantTime = 0;
+			target.attackEntityFrom(new LifeDamageSource(player), 2);
+			player.heal(2);
 
 			if(target.hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 5);
 
 			if (!player.isCreative())
-				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 4);
+				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
 		}
 		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 5);
 
@@ -81,7 +95,7 @@ public class TechLifeLeech extends TechHeroAspect
 
 		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
 		{
-			return  new TextComponentTranslation("death.attack." + this.damageType, new Object[] {entityLivingBaseIn.getDisplayName(), this.damageSourceEntity.getDisplayName()});
+			return  new TextComponentTranslation("death.attack." + this.damageType, entityLivingBaseIn.getDisplayName(), this.damageSourceEntity.getDisplayName());
 		}
 
 		/**
