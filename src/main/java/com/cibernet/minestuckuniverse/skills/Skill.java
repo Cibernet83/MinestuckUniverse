@@ -91,4 +91,9 @@ public abstract class Skill extends net.minecraftforge.registries.IForgeRegistry
 	}
 
 	public int getColor() { return 0x77FFEC; }
+
+	public boolean isObtainable()
+	{
+		return true;
+	}
 }

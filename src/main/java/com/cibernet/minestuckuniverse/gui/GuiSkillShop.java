@@ -63,7 +63,7 @@ public class GuiSkillShop extends GuiScreen
 
 		IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 		for(Abilitech abilitech : Abilitech.ABILITECHS)
-			if((!data.hasSkill(abilitech) && (abilitech.canAppearOnList(player.world, player)) || data.hasMasterControl()))
+			if((abilitech.isObtainable() && !data.hasSkill(abilitech) && (abilitech.canAppearOnList(player.world, player)) || data.hasMasterControl()))
 				availableTech.add(abilitech);
 	}
 

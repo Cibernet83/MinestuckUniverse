@@ -15,6 +15,7 @@ public class Abilitech extends Skill
 	public static final List<Abilitech> ABILITECHS = new ArrayList<>();
 
 	String name;
+	public boolean isSuper = false;
 
 	public Abilitech(String name)
 	{
@@ -42,5 +43,10 @@ public class Abilitech extends Skill
 	public Skill setRegistryName()
 	{
 		return setRegistryName(MinestuckUniverse.MODID, name);
+	}
+
+	@Override
+	public boolean isObtainable() {
+		return !isSuper;
 	}
 }
