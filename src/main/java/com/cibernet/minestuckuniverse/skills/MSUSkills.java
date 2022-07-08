@@ -337,8 +337,7 @@ public class MSUSkills
 	public static final Abilitech SPACE_SPATIAL_WARP = new TechSpaceTargetTele("spatial_warp");
 	public static final Abilitech SPACE_MATTER_MANIPULATOR = new TechSpaceManipulator("matter_manipulator");
 	public static final Abilitech SPACE_SPATIAL_MANIPULATOR = new TechSpaceResize("spatial_manipulator");
-	public static final Abilitech SPACE_KINETIC_GRAB = new TechSpaceGrab("kinetic_grab", false);
-	public static final Abilitech SPACE_SUPER_KINETIC_GRAB = new TechSpaceGrab("super_kinetic_grab", true);
+	public static final Abilitech SPACE_KINETIC_GRAB = new TechSpaceGrab("kinetic_grab");
 
 	public static final Abilitech TIME_TEMPORAL_RECALL = new TechTimeRecall("temporal_recall");
 	public static final Abilitech TIME_CHRONOFREEZE = new TechTimeStop("chronofreeze");

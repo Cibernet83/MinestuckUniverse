@@ -49,4 +49,10 @@ public class Abilitech extends Skill
 	public boolean isObtainable() {
 		return !isSuper;
 	}
+
+	public Abilitech setSuper(boolean v)
+	{
+		isSuper = v;
+		return this;
+	}
 }

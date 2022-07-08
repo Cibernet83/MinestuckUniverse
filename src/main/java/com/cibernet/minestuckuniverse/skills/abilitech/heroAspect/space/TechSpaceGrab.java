@@ -19,10 +19,9 @@ import net.minecraft.world.World;
 public class TechSpaceGrab extends TechHeroAspect
 {
 
-	public TechSpaceGrab(String name, boolean master)
+	public TechSpaceGrab(String name)
 	{
 		super(name, EnumAspect.SPACE, EnumTechType.UTILITY);
-		this.isSuper = master;
 	}
 
 	@Override
