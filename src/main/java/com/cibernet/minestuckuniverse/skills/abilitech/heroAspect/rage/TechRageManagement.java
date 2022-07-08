@@ -20,6 +20,7 @@ import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -142,8 +143,6 @@ public class TechRageManagement extends TechHeroAspect
 		else if (entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE) != null &&
 				!entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).hasModifier(ATTACK_MOD))
 			entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).applyModifier(ATTACK_MOD);
-
-		entity.getCapability(MSUCapabilities.BADGE_EFFECTS, null).cleanRageShift();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -169,17 +168,17 @@ public class TechRageManagement extends TechHeroAspect
 		{
 			e.printStackTrace();
 		}
-
-		entity.getCapability(MSUCapabilities.BADGE_EFFECTS, null).cleanRageShift();
 	}
 
+	/*
 	@SubscribeEvent
-	public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event)
+	public static void onLivingUpdate(EntityJoinWorldEvent event)
 	{
-		if (event.getEntity().world.isRemote || !(event.getEntityLiving() instanceof EntityCreature))
+		if (event.getEntity().world.isRemote || !(event.getEntity() instanceof EntityCreature))
 			return;
 
-		if (event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShiftDirty())
+		if (event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShifted() && !event.getEntity().)
 			TechRageManagement.enableRageShift((EntityCreature) event.getEntityLiving());
 	}
+	*/
 }

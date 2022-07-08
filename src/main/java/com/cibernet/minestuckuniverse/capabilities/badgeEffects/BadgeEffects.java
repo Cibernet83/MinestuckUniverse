@@ -162,18 +162,6 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
-	public void cleanRageShift()
-	{
-		// This literally does nothing Ciber
-	}
-
-	@Override
-	public boolean isRageShiftDirty()
-	{
-		return false;
-	}
-
-	@Override
 	public Entity getTether(int slot)
 	{
 		int slott = Math.min(tethers.length-1, Math.max(slot, 0));

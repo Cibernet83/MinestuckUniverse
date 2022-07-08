@@ -24,6 +24,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindC
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindKarmaHeal;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageBerserk;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageFrenzy;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageOutburst;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.*;
@@ -388,6 +389,7 @@ public class MSUSkills
 	public static final Abilitech RAGE_ENRAGED_BERSERK = new TechRageBerserk("enraged_berserk");
 	public static final Abilitech RAGE_VENGEFUL_OUTBURST = new TechRageOutburst("vengeful_outburst");
 	public static final Abilitech RAGE_ANGER_MANAGEMENT = new TechRageManagement("anger_management");
+	public static final Abilitech RAGE_RAGING_INSANITY = new TechRageFrenzy("raging_insanity");
 
 	public static final Abilitech MIND_MINDFLAYERS_SPELL = new TechMindControl("mindflayers_spell");
 	public static final Abilitech MIND_SENSORY_BREAK = new TechMindConfusion("sensory_break");

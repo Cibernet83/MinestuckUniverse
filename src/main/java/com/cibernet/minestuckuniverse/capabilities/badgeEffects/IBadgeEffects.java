@@ -38,8 +38,6 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 
 	boolean isRageShifted();
 	void setRageShifted(boolean rageShifted);
-	void cleanRageShift();
-	boolean isRageShiftDirty();
 	
 	Entity getTether(int slot);
 	void setTether(@Nullable Entity entity, int slot);
