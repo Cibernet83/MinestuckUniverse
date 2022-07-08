@@ -12,6 +12,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHear
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindStrike;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceManipulator;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceTargetTele;
@@ -272,6 +273,16 @@ public class BadgeEffects implements IBadgeEffects
 	@Override
 	public EntityLivingBase getSoulLinkTarget() {
 		return getLivingEntity(TechHeartLink.class);
+	}
+	
+	public void setCalculating(int calc)
+	{
+		setInt(TechMindStrike.class, calc);
+	}
+	
+	public int getCalculating()
+	{
+		return getInt(TechMindStrike.class);
 	}
 
 	@Override
@@ -714,8 +725,6 @@ public class BadgeEffects implements IBadgeEffects
 		else
 			effects.put(badge, new IBadgeEffect.EntityEffect(entity));
 	}
-
-
 
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)

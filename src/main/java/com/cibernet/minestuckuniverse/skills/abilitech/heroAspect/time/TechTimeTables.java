@@ -5,6 +5,8 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.events.TimetableEffectEvent;
 import com.cibernet.minestuckuniverse.items.ItemTimetable;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.skills.badges.Badge;
@@ -48,10 +50,10 @@ public class TechTimeTables extends TechHeroAspect
 		if(!(time % 10 == 0))
 			return true;
 
-		Entity target = MSUUtils.getMouseOver(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()).entityHit;
+		Entity target = MSUUtils.getMouseOver(world, player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), true).entityHit;
 
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.TIME, target == null ? 1 : 5);
-
+		
 		TimetableEffectEvent event = new TimetableEffectEvent(player, target);
 		MinecraftForge.EVENT_BUS.post(event);
 
@@ -99,6 +101,8 @@ public class TechTimeTables extends TechHeroAspect
 				}
 			} else return true;
 		}
+		if(target != null)
+			MSUChannelHandler.sendToTrackingAndSelf(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, 0xFF2106, 2, target), player);
 
 		if((event.isCanceled() || target != null))
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);

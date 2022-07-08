@@ -1,9 +1,10 @@
 package com.cibernet.minestuckuniverse.client;
 
-import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
-import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.util.SpaceSaltUtils;
+import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.mraof.minestuck.block.BlockSburbMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
