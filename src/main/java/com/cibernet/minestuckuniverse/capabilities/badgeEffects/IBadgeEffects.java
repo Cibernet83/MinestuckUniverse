@@ -104,6 +104,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	int getLastSeerDodge();
 	void setLastSeerDodge(int v);
 
+	int getLastPageAwakening();
+	void setLastPageAwakening(int v);
+
 	// ----- Particles
 	Map<Class, MSUParticles.PowerParticleState> getPowerParticles();
 

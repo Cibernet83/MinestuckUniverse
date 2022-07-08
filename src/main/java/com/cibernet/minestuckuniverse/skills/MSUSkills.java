@@ -48,6 +48,7 @@ import com.mraof.minestuck.entity.EntityFrog;
 import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.tracker.MinestuckPlayerTracker;
 import com.mraof.minestuck.util.EnumAspect;
+import com.mraof.minestuck.util.EnumClass;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.client.Minecraft;
@@ -330,6 +331,7 @@ public class MSUSkills
 	public static final Abilitech IRRADIANT_SERVITUDE = new TechMaidServe("irraidant_servitude");
 	public static final Abilitech HEIR_WILL = new TechHeir("heir_will");
 	public static final Abilitech UNIVERSAL_REVERSE = new TechHeir("universal_reverse");
+	public static final Abilitech PERSEVERANT_AWAKENING = new TechHeroClass("perseverant_awakening", EnumClass.PAGE);
 
 	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem");
 	public static final Abilitech LORD_DECREE = new TechLord("lord_decree");

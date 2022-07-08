@@ -12,6 +12,7 @@ import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -100,6 +101,12 @@ public class KarmaEventHandler
 						((WorldServer)player.world).spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, player.posX, player.posY+0.5, player.posZ, 1, 0, 0, 0, 0d);
 						for(EntityLivingBase target : player.world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(8, 3, 8), (e) -> e != player && (e instanceof IMob || e instanceof EntityPlayer)))
 							target.attackEntityFrom(DamageSource.causeExplosionDamage(player).setDamageBypassesArmor(), target == event.getSource().getTrueSource() ? 30 : 15);
+					}
+
+					if(targetData.isTechPassiveEnabled(MSUSkills.PERSEVERANT_AWAKENING) && Math.abs(player.world.getTotalWorldTime() - player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getLastPageAwakening()) >= 12000)
+					{
+						player.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 200, 255));
+						player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setLastPageAwakening((int) player.world.getTotalWorldTime());
 					}
 
 					player.setHealth(hasRevenantBadge ? 30 : 20);
