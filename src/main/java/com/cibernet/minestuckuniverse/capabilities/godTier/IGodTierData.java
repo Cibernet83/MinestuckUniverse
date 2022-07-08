@@ -55,7 +55,7 @@ public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 	float getSkillXp(GodTierData.StatType type);
 	void increaseXp(GodTierData.StatType type, float value);
 	void resetSkill(GodTierData.StatType type, boolean sendUpdate);
-	void resetSkills(boolean sendUpdate);
+	void resetStats(boolean sendUpdate);
 	double getSkillAttributeLevel(GodTierData.StatType type);
 	int getXpToNextLevel(GodTierData.StatType type);
 	int getSkillAttributeOperationType(GodTierData.StatType skill);

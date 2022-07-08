@@ -230,7 +230,7 @@ public class MSUUtils
             {
                 IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
                 data.resetBadges();
-                data.resetSkills(true);
+                data.resetStats(true);
                 MinestuckPlayerData.getData(player).echeladder.setProgressEnabled(true);
                 data.markForReset();
                 data.update();

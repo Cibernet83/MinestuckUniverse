@@ -18,7 +18,7 @@ public class TechKnightHalt extends TechHeroClass {
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
-		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 5)
+		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 3)
 		{
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 			return false;
@@ -27,23 +27,21 @@ public class TechKnightHalt extends TechHeroClass {
 		if(state == SkillKeyStates.KeyState.NONE || time >= 60)
 			return false;
 
-		if(time >= 20)
+
+		if(time % 20 == 0)
+			if (!player.isCreative())
+				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 3);
+
+		for(Entity target : world.getEntitiesWithinAABB(Entity.class, player.getEntityBoundingBox().grow(5,1,5), (entity) -> !(entity instanceof EntityLivingBase)))
 		{
-			if(time == 20)
-				if (!player.isCreative())
-					player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 5);
-
-			for(Entity target : world.getEntitiesWithinAABB(Entity.class, player.getEntityBoundingBox().grow(5,1,5), (entity) -> !(entity instanceof EntityLivingBase)))
-			{
-				target.motionX = 0;
-				target.motionY = 0;
-				target.motionZ = 0;
-				target.velocityChanged = true;
-			}
-
-			badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.BURST, EnumClass.KNIGHT, 20);
+			target.motionX = 0;
+			target.motionY = 0;
+			target.motionZ = 0;
+			target.velocityChanged = true;
 		}
-		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumClass.KNIGHT, 3);
+
+		badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.BURST, EnumClass.KNIGHT, 20);
+
 		return true;
 	}
 }

@@ -10,7 +10,9 @@ import com.mraof.minestuck.alchemy.GristHelper;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.editmode.ClientEditHandler;
+import com.mraof.minestuck.editmode.DeployList;
 import com.mraof.minestuck.editmode.ServerEditHandler;
+import com.mraof.minestuck.network.skaianet.SkaianetHandler;
 import com.mraof.minestuck.tracker.MinestuckPlayerTracker;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
@@ -21,6 +23,7 @@ import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -139,7 +142,8 @@ public class BadgeBuilder extends BadgeLevel
 
 	private static boolean canEditDrag(EntityPlayer player)
 	{
-		return ((player.world.isRemote ? ClientEditHandler.isActive() : ServerEditHandler.getData(player) != null)
+		return (((player.world.isRemote ? ClientEditHandler.isActive() : ServerEditHandler.getData(player) != null) && DeployList.getEntryForItem(player.getHeldItem(player.getHeldItemMainhand().isEmpty() ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND),
+				SkaianetHandler.getClientConnection(IdentifierHandler.encode(player))) != null)
 				|| (player.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.BUILDER_BADGE)))
 				&& ((player.getHeldItemMainhand().getItem() instanceof ItemBlock) || (player.getHeldItemOffhand().getItem() instanceof ItemBlock));
 	}

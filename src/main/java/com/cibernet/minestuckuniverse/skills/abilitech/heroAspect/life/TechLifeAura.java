@@ -20,7 +20,7 @@ public class TechLifeAura extends TechHeroAspect
 		super(name, EnumAspect.LIFE, EnumTechType.DEFENSE, EnumAspect.LIGHT);
 	}
 
-	protected static final int RADIUS = 16;
+	protected static final int RADIUS = 8;
 
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
@@ -60,7 +60,7 @@ public class TechLifeAura extends TechHeroAspect
 			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(RADIUS)))
 			{
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 10);
-				target.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 2400, 5));
+				target.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 1200, 3));
 			}
 			if (!player.isCreative())
 				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 4);

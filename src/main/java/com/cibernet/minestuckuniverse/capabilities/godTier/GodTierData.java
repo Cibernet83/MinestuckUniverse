@@ -197,7 +197,9 @@ public class GodTierData implements IGodTierData
 	public void resetBadges()
 	{
 		masterBadge = null;
-		badges.clear();
+
+		for(Skill badge : Badge.BADGES)
+			badges.remove(badge);
 	}
 
 	@Override
@@ -305,7 +307,7 @@ public class GodTierData implements IGodTierData
 	@Override
 	public void setToBaseGodTier(boolean sendUpdate)
 	{
-		resetSkills(sendUpdate);
+		resetStats(sendUpdate);
 		godTierXp.get(StatType.GENERAL).level = 1;
 		if(sendUpdate) update();
 	}
@@ -374,7 +376,7 @@ public class GodTierData implements IGodTierData
 	}
 
 	@Override
-	public void resetSkills(boolean sendUpdate)
+	public void resetStats(boolean sendUpdate)
 	{
 		for(StatType type : StatType.values())
 			resetSkill(type, false);

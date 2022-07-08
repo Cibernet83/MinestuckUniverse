@@ -1,13 +1,16 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.damage.CritDamageSource;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketTitle;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -22,6 +26,8 @@ import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class TechHopeyShit extends TechHeroAspect
 {
@@ -57,9 +63,9 @@ public class TechHopeyShit extends TechHeroAspect
 		}
 
 
-		float range = Math.min(time/30f, 16);
+		float range = Math.min(time/30f, 10);
 
-		DamageSource damage = new EntityDamageSource("hopefulOutburst", player).setDamageBypassesArmor();
+		DamageSource damage = new HopeDamageSource(player);
 		for(Entity target : player.world.getEntitiesWithinAABB(Entity.class, player.getEntityBoundingBox().grow(range)))
 		{
 			if(target != player && target.getDistance(player) < range)
@@ -111,5 +117,36 @@ public class TechHopeyShit extends TechHeroAspect
 	@Override
 	public boolean canAppearOnList(World world, EntityPlayer player) {
 		return super.canAppearOnList(world, player) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+	}
+
+	public static class HopeDamageSource extends CritDamageSource
+	{
+		protected Entity damageSourceEntity;
+
+		public HopeDamageSource(Entity damageSourceEntityIn)
+		{
+			super(MinestuckUniverse.MODID+".hopefulOutburst");
+			this.damageSourceEntity = damageSourceEntityIn;
+			setDamageBypassesArmor();
+		}
+
+		public Entity getTrueSource()
+		{
+			return this.damageSourceEntity;
+		}
+
+		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
+		{
+			return  new TextComponentTranslation("death.attack." + this.damageType, entityLivingBaseIn.getDisplayName(), this.damageSourceEntity.getDisplayName());
+		}
+
+		/**
+		 * Gets the location from which the damage originates.
+		 */
+		@Nullable
+		public Vec3d getDamageLocation()
+		{
+			return new Vec3d(this.damageSourceEntity.posX, this.damageSourceEntity.posY, this.damageSourceEntity.posZ);
+		}
 	}
 }

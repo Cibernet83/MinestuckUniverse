@@ -39,8 +39,8 @@ public class MSURenderMachineOutline
 			
 			
 			IBlockState state = mc.player.getEntityWorld().getBlockState(mc.objectMouseOver.getBlockPos());
-			IGodTierData gtData = mc.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
-			if ((mc.player.getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.spaceSalt) || (gtData != null && gtData.isTechEquipped(MSUSkills.SPACE_SPATIAL_MANIPULATOR))) && state.getBlock() instanceof BlockSburbMachine)
+			if (state.getBlock() instanceof BlockSburbMachine && (mc.player.getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.spaceSalt) ||
+					mc.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.SPACE_SPATIAL_MANIPULATOR)))
 			{
 				BlockSburbMachine.MachineType type = state.getValue(BlockSburbMachine.MACHINE_TYPE);
 				EnumFacing facing = state.getValue(BlockSburbMachine.FACING);
