@@ -7,10 +7,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloo
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBubble;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodReformer;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodTransfusion;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathGale;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathKnockback;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathSpaceFallProof;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathWindVessel;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartSoulSwitcher;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
@@ -351,6 +348,7 @@ public class MSUSkills
 	public static final Abilitech BREATH_TEMPESTING_ASCENSION = new TechBreathGale("tempesting_ascension");
 	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon");
 	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind");
+	public static final Abilitech BREATH_SUPERSONIC_SPEED = new TechBreathSpeed("supersonic_speed");
 	public static final Abilitech BREATH_SPACE_VERTIGO_BLOCK = new TechBreathSpaceFallProof("vertigo_block", 5000);
 
 	public static final Abilitech LIGHT_STORM_OF_THE_STRIKER = new TechLightStriker("storm_of_the_striker");
