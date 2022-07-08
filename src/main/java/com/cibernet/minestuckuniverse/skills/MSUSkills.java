@@ -25,10 +25,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageF
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageOutburst;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.*;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeAcceleration;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeRecall;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeStop;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeTables;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.voidAspect.*;
 import com.cibernet.minestuckuniverse.skills.badges.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
@@ -344,6 +341,7 @@ public class MSUSkills
 	public static final Abilitech TIME_CHRONOFREEZE = new TechTimeStop("chronofreeze");
 	public static final Abilitech TIME_FLOW_ACCELERATOR = new TechTimeAcceleration("flow_accelerator");
 	public static final Abilitech TIME_RAPID_REWIND = new TechTimeTables("rapid_rewind");
+	public static final Abilitech TIME_CELESTIAL_SHIFT = new TechTimeShift("celestial_shift");
 
 	public static final Abilitech BREATH_TEMPESTING_ASCENSION = new TechBreathGale("tempesting_ascension");
 	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon");
