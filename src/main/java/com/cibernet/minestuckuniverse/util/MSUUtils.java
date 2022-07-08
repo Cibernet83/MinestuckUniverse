@@ -127,9 +127,17 @@ public class MSUUtils
     {
         return getMouseOver(player.world, player, blockReachDistance);
     }
-
+    
     public static RayTraceResult getMouseOver(World world, EntityPlayer player, double blockReachDistance)
     {
+    	return getMouseOver(world, player, blockReachDistance, false);
+    }
+
+    public static RayTraceResult getMouseOver(World world, EntityPlayer player, double blockReachDistance, boolean getNonCollidables)
+    {
+    	if(blockReachDistance == player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue())
+    		blockReachDistance *= 2;
+    	
         if (world != null)
         {
             Entity pointedEntity = null;
@@ -143,7 +151,7 @@ public class MSUUtils
             Vec3d look = player.getLook(1.0F);
             Vec3d lookPos = eyePos.addVector(look.x * blockReachDistance, look.y * blockReachDistance, look.z * blockReachDistance);
             Vec3d hitPos = null;
-            List<Entity> entities = world.getEntitiesInAABBexcluding(player, player.getEntityBoundingBox().expand(look.x * blockReachDistance, look.y * blockReachDistance, look.z * blockReachDistance).grow(1.0D, 1.0D, 1.0D), Predicates.and(EntitySelectors.NOT_SPECTATING, p_apply_1_ -> p_apply_1_ != null && p_apply_1_.canBeCollidedWith()));
+            List<Entity> entities = world.getEntitiesInAABBexcluding(player, player.getEntityBoundingBox().expand(look.x * blockReachDistance, look.y * blockReachDistance, look.z * blockReachDistance).grow(1.0D, 1.0D, 1.0D), Predicates.and(EntitySelectors.NOT_SPECTATING, p_apply_1_ -> p_apply_1_ != null && (getNonCollidables || p_apply_1_.canBeCollidedWith())));
             double entityHitDistance = blockHitDistance;
 
             for (Entity entity : entities) {

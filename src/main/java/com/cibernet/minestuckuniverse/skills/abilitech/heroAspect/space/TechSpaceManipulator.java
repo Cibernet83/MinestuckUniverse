@@ -3,9 +3,11 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
+import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.items.ItemManipulatedMatter;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -151,7 +153,8 @@ public class TechSpaceManipulator extends TechHeroAspect
 
 				}
 			}
-			if (cap.getManipulatedPos1() != null)
+			IGodTierData gtData = mc.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
+			if (cap.getManipulatedPos1() != null && gtData != null && gtData.isTechEquipped(MSUSkills.SPACE_MATTER_MANIPULATOR));
 			{
 				BlockPos posA = cap.getManipulatedPos1();
 				BlockPos posB = cap.getManipulatedPos2();

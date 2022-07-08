@@ -16,6 +16,7 @@ import java.util.List;
 
 public class SkillKeyStates implements ISkillKeyStates
 {
+	private KeyState[] receivedKeyStates;
 	private KeyState[] keyStates;
 	private int[] keyTimes;
 
@@ -27,13 +28,10 @@ public class SkillKeyStates implements ISkillKeyStates
 	@Override
 	public void updateKeyState(Key key, boolean pressed)
 	{
-		if (pressed && keyStates[key.ordinal()] != KeyState.HELD)
-		{
-			keyStates[key.ordinal()] = KeyState.PRESS;
-			keyTimes[key.ordinal()] = 0;
-		}
-		else if (!pressed && keyStates[key.ordinal()] != KeyState.NONE)
-			keyStates[key.ordinal()] = KeyState.RELEASED;
+		if (pressed && receivedKeyStates[key.ordinal()] != KeyState.HELD)
+			receivedKeyStates[key.ordinal()] = KeyState.PRESS;
+		else if (!pressed && receivedKeyStates[key.ordinal()] != KeyState.NONE)
+			receivedKeyStates[key.ordinal()] = KeyState.RELEASED;
 	}
 
 	@Override
@@ -51,24 +49,34 @@ public class SkillKeyStates implements ISkillKeyStates
 	@Override
 	public void tickKeyStates()
 	{
-		for (int i = 0; i < keyStates.length; i++)
+		for (int i = 0; i < Key.values().length; i++)
 		{
+			if(receivedKeyStates[i] == KeyState.PRESS)
+				receivedKeyStates[i] = KeyState.HELD;
+			else if(receivedKeyStates[i] == KeyState.RELEASED)
+				receivedKeyStates[i] = KeyState.NONE;
+			
+			if(keyStates[i] != receivedKeyStates[i])
+				keyStates[i] = KeyState.values()[(keyStates[i].ordinal() + 1) % KeyState.values().length];
+			
 			if(keyStates[i] == KeyState.PRESS)
-				keyStates[i] = KeyState.HELD;
-			else if(keyStates[i] == KeyState.RELEASED)
-				keyStates[i] = KeyState.NONE;
-
-			keyTimes[i]++;
+				keyTimes[i] = 0;
+			else
+				keyTimes[i]++;
 		}
 	}
 
 	@Override
 	public void resetKeyStates() {
+		receivedKeyStates = new KeyState[Key.values().length];
 		keyStates = new KeyState[Key.values().length];
 		keyTimes  = new int[Key.values().length];
 
-		for (int i = 0; i < keyStates.length; i++)
+		for (int i = 0; i < Key.values().length; i++)
+		{
+			receivedKeyStates[i] = KeyState.NONE;
 			keyStates[i] = KeyState.NONE;
+		}
 	}
 
 	@Override
@@ -76,6 +84,7 @@ public class SkillKeyStates implements ISkillKeyStates
 	{
 		for (int i = 0; i < keyStates.length; i++)
 		{
+			receivedKeyStates[i] = KeyState.values()[nbt.getInteger(i + "Received")];
 			keyStates[i] = KeyState.values()[nbt.getInteger(i + "State")];
 			keyTimes[i] = nbt.getInteger(i + "Time");
 		}
@@ -87,6 +96,7 @@ public class SkillKeyStates implements ISkillKeyStates
 		NBTTagCompound nbt = new NBTTagCompound();
 		for (int i = 0; i < keyStates.length; i++)
 		{
+			nbt.setInteger(i + "Received", receivedKeyStates[i].ordinal());
 			nbt.setInteger(i + "State", keyStates[i].ordinal());
 			nbt.setInteger(i + "Time", keyTimes[i]);
 		}
@@ -156,7 +166,7 @@ public class SkillKeyStates implements ISkillKeyStates
 			if(!isActive && !actions.contains(abilitech) && badgeEffects != null)
 				badgeEffects.stopPowerParticles(abilitech.getClass());
 		}
-
-		keyStates.tickKeyStates();
+		if(!event.player.isDead && !badgeEffects.isTimeStopped() && !badgeEffects.isSoulShocked())
+			keyStates.tickKeyStates();
 	}
 }

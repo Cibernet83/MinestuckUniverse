@@ -1,7 +1,10 @@
 package com.cibernet.minestuckuniverse.client;
 
 import com.cibernet.minestuckuniverse.util.SpaceSaltUtils;
+import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.mraof.minestuck.block.BlockSburbMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -36,7 +39,8 @@ public class MSURenderMachineOutline
 			
 			
 			IBlockState state = mc.player.getEntityWorld().getBlockState(mc.objectMouseOver.getBlockPos());
-			if (mc.player.getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.spaceSalt) && state.getBlock() instanceof BlockSburbMachine)
+			IGodTierData gtData = mc.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
+			if ((mc.player.getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.spaceSalt) || (gtData != null && gtData.isTechEquipped(MSUSkills.SPACE_SPATIAL_MANIPULATOR))) && state.getBlock() instanceof BlockSburbMachine)
 			{
 				BlockSburbMachine.MachineType type = state.getValue(BlockSburbMachine.MACHINE_TYPE);
 				EnumFacing facing = state.getValue(BlockSburbMachine.FACING);
