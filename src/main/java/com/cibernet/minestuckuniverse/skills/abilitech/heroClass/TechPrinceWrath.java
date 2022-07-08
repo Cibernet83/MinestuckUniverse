@@ -36,7 +36,7 @@ public class TechPrinceWrath extends TechHeroClass
 		if(state.equals(SkillKeyStates.KeyState.RELEASED))
 		{
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
-			float dmg = 10 * Math.min(3.0f, Math.max(1.0f, time/40f));
+			float dmg = 10 * Math.min(3.0f, Math.max(1.0f, time/20f));
 			if(target != null)
 			{
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.PRINCE, 20);

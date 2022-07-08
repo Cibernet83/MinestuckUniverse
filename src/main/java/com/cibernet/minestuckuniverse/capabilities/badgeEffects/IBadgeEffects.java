@@ -61,6 +61,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	
 	//tethers end
 
+	void setCalculating(int calc);
+	int getCalculating();
+	
 	void setHoping(boolean v);
 	boolean isHoping();
 
