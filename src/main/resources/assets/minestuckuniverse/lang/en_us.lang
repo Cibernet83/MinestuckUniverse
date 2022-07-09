@@ -1533,8 +1533,8 @@ tech.enraged_berserk.name=Enraged Berserk
 tech.enraged_berserk.tooltip=Using your mastery over the aspect of @RAGE@, this Abilitech makes you enter a deadly BERSERK state for a brief period of time.
 tech.anger_management.name=Anger Management
 tech.anger_management.tooltip=Grants you the ability to control the targeted mob's hostility, both friendly and aggresive. Hold down the button to affect all creatures in an area.
-tech.raging_insanity.name=Raging Insanity
-tech.raging_insanity.tooltip=Puts all nearby creatures into a frenzied state, causing them to start attacking one another.
+tech.frenzied_mayhem.name=Frenzied Mayhem
+tech.frenzied_mayhem.tooltip=Puts all nearby creatures into a frenzied state, causing them to start attacking one another.
 
 tech.sensory_break.name=Sensory Break
 tech.sensory_break.tooltip=Scrambles the target's mind for a short period of time, reversing their controls whilst in effect.

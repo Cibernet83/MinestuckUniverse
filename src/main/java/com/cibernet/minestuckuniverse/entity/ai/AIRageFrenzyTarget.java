@@ -18,7 +18,7 @@ public class AIRageFrenzyTarget extends EntityAINearestAttackableTarget<EntityCr
 	@Override
 	protected boolean isSuitableTarget(@Nullable EntityLivingBase target, boolean includeInvincibles)
 	{
-		if(target instanceof EntityCreature)
+		if(super.isSuitableTarget(target, includeInvincibles) && target instanceof EntityCreature)
 			for(EntityAITasks.EntityAITaskEntry taskEntry : ((EntityCreature) target).targetTasks.taskEntries)
 				if(taskEntry.action instanceof AIRageFrenzyTarget)
 					return true;

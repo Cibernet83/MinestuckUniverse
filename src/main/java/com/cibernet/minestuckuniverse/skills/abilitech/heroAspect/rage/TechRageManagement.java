@@ -8,7 +8,9 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
+import com.mraof.minestuck.entity.ai.EntityAIHurtByTargetAllied;
 import com.mraof.minestuck.entity.ai.EntityAINearestAttackableTargetWithHeight;
+import com.mraof.minestuck.entity.underling.EntityUnderling;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
@@ -27,9 +29,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class TechRageManagement extends TechHeroAspect
 {
@@ -114,7 +114,7 @@ public class TechRageManagement extends TechHeroAspect
 
 		for(EntityAITasks.EntityAITaskEntry entry : new LinkedHashSet<>(entity.targetTasks.taskEntries))
 		{
-			if(entry.action instanceof EntityAINearestAttackableTarget || entry.action instanceof EntityAINearestAttackableTargetWithHeight)
+			if(entry.action instanceof EntityAINearestAttackableTarget || entry.action instanceof EntityAINearestAttackableTargetWithHeight || entry.action instanceof EntityAIHurtByTargetAllied)
 			{
 				entity.targetTasks.removeTask(entry.action);
 				hasHostileTask = true;
@@ -143,6 +143,8 @@ public class TechRageManagement extends TechHeroAspect
 		else if (entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE) != null &&
 				!entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).hasModifier(ATTACK_MOD))
 			entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).applyModifier(ATTACK_MOD);
+
+		resetAI(entity);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -153,32 +155,43 @@ public class TechRageManagement extends TechHeroAspect
 		for(EntityAITasks.EntityAITaskEntry entry : new LinkedHashSet<>(entity.tasks.taskEntries))
 			entity.tasks.removeTask(entry.action);
 
+	}
+
+	public static void resetAI(EntityLiving entity)
+	{
+
+		Iterator<EntityAITasks.EntityAITaskEntry> iterator;
+
 		try
 		{
-			try
-			{
-				ObfuscationReflectionHelper.findMethod(EntityLiving.class, "func_184651_r", void.class).invoke(entity);
-			}
-			catch (ReflectionHelper.UnableToFindMethodException e)
-			{
-				ObfuscationReflectionHelper.findMethod(EntityLiving.class, "initEntityAI", void.class).invoke(entity);
-			}
+			iterator = ((Set<EntityAITasks.EntityAITaskEntry>)ObfuscationReflectionHelper.getPrivateValue(EntityAITasks.class, entity.targetTasks, "field_75780_b")).iterator();
 		}
-		catch (IllegalAccessException | InvocationTargetException e)
+		catch (ReflectionHelper.UnableToFindMethodException e)
 		{
-			e.printStackTrace();
+			iterator = ((Set<EntityAITasks.EntityAITaskEntry>)ObfuscationReflectionHelper.getPrivateValue(EntityAITasks.class, entity.targetTasks, "executingTaskEntries")).iterator();
+		}
+
+		if(iterator != null)
+		{
+			while (iterator.hasNext())
+			{
+				EntityAITasks.EntityAITaskEntry entityaitasks$entityaitaskentry1 = iterator.next();
+
+				entityaitasks$entityaitaskentry1.using = false;
+				entityaitasks$entityaitaskentry1.action.resetTask();
+				iterator.remove();
+			}
 		}
 	}
 
-	/*
 	@SubscribeEvent
-	public static void onLivingUpdate(EntityJoinWorldEvent event)
+	public static void onJoinWorld(EntityJoinWorldEvent event)
 	{
 		if (event.getEntity().world.isRemote || !(event.getEntity() instanceof EntityCreature))
 			return;
 
-		if (event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShifted() && !event.getEntity().)
-			TechRageManagement.enableRageShift((EntityCreature) event.getEntityLiving());
+		if (event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShifted())
+			event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).setRageShifted(false);
+
 	}
-	*/
 }

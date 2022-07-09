@@ -10,6 +10,7 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.entity.ai.EntityAINearestAttackableTargetWithHeight;
+import com.mraof.minestuck.entity.underling.EntityUnderling;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
@@ -27,9 +28,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.UUID;
+
+import static com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement.resetAI;
 
 public class TechRageFrenzy extends TechHeroAspect
 {
@@ -53,6 +57,8 @@ public class TechRageFrenzy extends TechHeroAspect
 			return false;
 		}
 
+		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.RAGE, 2);
+
 		if(time == 20)
 		{
 			List<EntityCreature> list = world.getEntitiesWithinAABB(EntityCreature.class, player.getEntityBoundingBox().grow(RADIUS));
@@ -67,7 +73,7 @@ public class TechRageFrenzy extends TechHeroAspect
 			if(!player.isCreative())
 				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-5);
 
-			badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.BURST, EnumAspect.RAGE, list.isEmpty() ? 1 : 4);
+			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.RAGE, list.isEmpty() ? 1 : 4);
 		}
 
 		return true;
@@ -87,8 +93,11 @@ public class TechRageFrenzy extends TechHeroAspect
 			}
 		}
 
+		if(entity instanceof EntityUnderling)
+			for(EntityAITasks.EntityAITaskEntry task : entity.targetTasks.taskEntries)
+				entity.targetTasks.removeTask(task.action);
 
-		entity.targetTasks.addTask(3, new AIRageFrenzyTarget(entity));
+		entity.targetTasks.addTask(1, new AIRageFrenzyTarget(entity));
 
 		if(!hasAttackAI)
 			entity.tasks.addTask(2, new EntityAIAttackRageShifted(entity,1.5D,false));
@@ -99,17 +108,18 @@ public class TechRageFrenzy extends TechHeroAspect
 
 		IBadgeEffects badgeEffects = entity.getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 		badgeEffects.setRageShifted(true);
+
+		resetAI(entity);
 	}
 
-	/*
+
 	@SubscribeEvent
 	public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event)
 	{
 		if (event.getEntity().world.isRemote || !(event.getEntityLiving() instanceof EntityCreature))
 			return;
 
-		if (event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageFrenzyDirty())
+		if (event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShifted())
 			TechRageFrenzy.enableRageFrenzy((EntityCreature) event.getEntityLiving());
 	}
-	*/
 }

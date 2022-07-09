@@ -347,8 +347,8 @@ public class MSUSkills
 
 	public static final Abilitech BREATH_TEMPESTING_ASCENSION = new TechBreathGale("tempesting_ascension");
 	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon");
-	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind");
 	public static final Abilitech BREATH_SUPERSONIC_SPEED = new TechBreathSpeed("supersonic_speed");
+	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind");
 	public static final Abilitech BREATH_SPACE_VERTIGO_BLOCK = new TechBreathSpaceFallProof("vertigo_block", 5000);
 
 	public static final Abilitech LIGHT_STORM_OF_THE_STRIKER = new TechLightStriker("storm_of_the_striker");
@@ -387,7 +387,7 @@ public class MSUSkills
 	public static final Abilitech RAGE_ENRAGED_BERSERK = new TechRageBerserk("enraged_berserk");
 	public static final Abilitech RAGE_VENGEFUL_OUTBURST = new TechRageOutburst("vengeful_outburst");
 	public static final Abilitech RAGE_ANGER_MANAGEMENT = new TechRageManagement("anger_management");
-	public static final Abilitech RAGE_RAGING_INSANITY = new TechRageFrenzy("raging_insanity");
+	public static final Abilitech RAGE_FRENZIED_MAYHEM = new TechRageFrenzy("frenzied_mayhem");
 
 	public static final Abilitech MIND_MINDFLAYERS_SPELL = new TechMindControl("mindflayers_spell");
 	public static final Abilitech MIND_SENSORY_BREAK = new TechMindConfusion("sensory_break");
