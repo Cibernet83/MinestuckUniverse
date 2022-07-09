@@ -40,7 +40,7 @@ public class TechSpaceGrab extends TechHeroAspect
 		if(state == SkillKeyStates.KeyState.PRESS)
 		{
 			RayTraceResult result = MSUUtils.getMouseOver(world, player, player.getEntityAttribute(EntityPlayerMP.REACH_DISTANCE).getAttributeValue(), true);
-			if(!isSuper && (result.entityHit == null || result.entityHit instanceof EntityPlayer || result.entityHit instanceof EntityLiving))
+			if(!isSuper || (result.entityHit == null || result.entityHit instanceof EntityPlayer || result.entityHit instanceof EntityLiving))
 				badgeEffects.clearTether(techSlot);
 
 			target = result.entityHit;
