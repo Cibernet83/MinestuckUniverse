@@ -104,6 +104,97 @@ public class TechSpaceManipulator extends TechHeroAspect
 		return true;
 	}
 
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void renderOutline(RenderWorldLastEvent event)
+	{
+		Minecraft mc = Minecraft.getMinecraft();
+
+		if (mc.player != null && mc.getRenderViewEntity() == mc.player)
+		{
+			RayTraceResult rayTraceResult = mc.objectMouseOver;
+
+			EntityPlayerSP player = mc.player;
+			IBadgeEffects cap = player.getCapability(MSUCapabilities.BADGE_EFFECTS, null);
+			float partialTicks = event.getPartialTicks();
+			double d1 = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double)partialTicks;
+			double d2 = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double)partialTicks;
+			double d3 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double)partialTicks;
+
+			if (player.getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.manipulatedMatter) && rayTraceResult != null && rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK)
+			{
+				ItemStack stack = player.getHeldItemMainhand();
+
+				if(stack.isEmpty())
+					stack = player.getHeldItemOffhand();
+
+				BlockPos pos = rayTraceResult.getBlockPos().offset(rayTraceResult.sideHit);
+
+				if(stack.hasTagCompound())
+				{
+					NBTTagCompound nbt = stack.getTagCompound();
+					int w = nbt.getInteger("width")+1, h = nbt.getInteger("height")+1, d = nbt.getInteger("depth")+1;
+
+					AxisAlignedBB boundingBox = new AxisAlignedBB(0,0,0, w, h, d).offset(ItemManipulatedMatter.getPlacementPos(player, player.world, pos, stack));
+					AxisAlignedBB boundingBoxRelative = boundingBox.offset(-d1, -d2, -d3).shrink(0.002);
+
+					GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+					GlStateManager.glLineWidth(2.0F);
+					GlStateManager.disableTexture2D();
+					GlStateManager.depthMask(false);
+
+					if(player.world.checkNoEntityCollision(boundingBox))
+						RenderGlobal.drawSelectionBoundingBox(boundingBoxRelative, 0, 1, 0.5f, 0.5F);
+					else RenderGlobal.drawSelectionBoundingBox(boundingBoxRelative, 1, 0.2f, 0, 0.5F);
+
+					GlStateManager.depthMask(true);
+					GlStateManager.enableTexture2D();
+					GlStateManager.disableBlend();
+
+				}
+			}
+			IGodTierData gtData = mc.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
+			if (cap.getManipulatedPos1() != null && gtData != null && gtData.isTechEquipped(MSUSkills.SPACE_MATTER_MANIPULATOR))
+			{
+				BlockPos posA = cap.getManipulatedPos1();
+				BlockPos posB = cap.getManipulatedPos2();
+				int dimB = cap.getManipulatedPos2Dim();
+
+				boolean lockedIn = posB != null;
+
+				if(posB == null && rayTraceResult != null && rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK)
+				{
+					posB = rayTraceResult.getBlockPos();
+					dimB = player.dimension;
+				}
+
+				if(posB != null && cap.getManipulatedPos1Dim() == dimB)
+				{
+					System.out.println("in render outline");
+					System.out.println(posA);
+					System.out.println(posB);
+					AxisAlignedBB boundingBox = new AxisAlignedBB(Math.min(posA.getX(), posB.getX()), Math.min(posA.getY(), posB.getY()), Math.min(posA.getZ(), posB.getZ()),
+							Math.max(posA.getX(), posB.getX())+1, Math.max(posA.getY(), posB.getY())+1, Math.max(posA.getZ(), posB.getZ())+1).offset(-d1, -d2, -d3).grow(0.002);
+					boolean canSet = Math.abs(posA.getX() - posB.getX()) < 8 &&
+									 Math.abs(posA.getY() - posB.getY()) < 8 &&
+									 Math.abs(posA.getZ() - posB.getZ()) < 8;
+
+					GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+					GlStateManager.glLineWidth(2.0F);
+					GlStateManager.disableTexture2D();
+					GlStateManager.depthMask(false);
+
+					RenderGlobal.drawSelectionBoundingBox(boundingBox, !canSet ? lockedIn ? 1 : 0.8f : 0, canSet ? lockedIn ? 1 : 0.8f : 0, 0, 0.5F);
+
+					GlStateManager.depthMask(true);
+					GlStateManager.enableTexture2D();
+					GlStateManager.disableBlend();
+				}
+
+			}
+		}
+	}
+
 	public static class PosA {}
 	public static class PosB {}
 }

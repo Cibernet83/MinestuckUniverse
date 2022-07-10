@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.proxy;
 
 import com.cibernet.minestuckuniverse.entity.EntityBubble;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond;
 import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsData;
 import com.cibernet.minestuckuniverse.modSupport.MSUSplatcraftSupport;
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
@@ -42,6 +43,8 @@ public class CommonProxy
 
     public void preInit()
     {
+    	MinecraftForge.EVENT_BUS.register(TechHeartBond.class);
+    	
         MinecraftForge.EVENT_BUS.register(new MinestuckUniverseGrist());
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);

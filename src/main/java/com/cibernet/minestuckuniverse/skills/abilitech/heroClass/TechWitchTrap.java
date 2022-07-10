@@ -58,6 +58,7 @@ public class TechWitchTrap extends TechHeroClass
 		if(cloud == null)
 		{
 			IdentifierHandler.PlayerIdentifier identifier = IdentifierHandler.encode(player);
+
 			Title title = MinestuckPlayerData.getTitle(identifier);
 			if(title == null)
 				return false;

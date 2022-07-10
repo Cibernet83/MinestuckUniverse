@@ -10,6 +10,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBre
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.TechDoomDemise;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartLink;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond.HeartDamageSource;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeGrace;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
@@ -283,15 +284,28 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
-	public void setSoulLinkTarget(EntityLivingBase target) {
+	public void setSoulLinkedBy(@Nullable EntityLivingBase target) {
 		setLivingEntity(TechHeartLink.class, target);
 	}
 
 	@Override
-	public EntityLivingBase getSoulLinkTarget() {
+	public EntityLivingBase getSoulLinkedBy() {
 		return getLivingEntity(TechHeartLink.class);
 	}
 	
+	@Override
+	public void setSoulLinkInt(int v)
+	{
+		setInt(HeartDamageSource.class, v);
+	}
+	
+	@Override
+	public int getSoulLinkInt()
+	{
+		return getInt(HeartDamageSource.class);
+	}
+	
+	@Override
 	public void setCalculating(int calc)
 	{
 		setInt(TechMindStrike.class, calc);

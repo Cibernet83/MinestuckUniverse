@@ -9,6 +9,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloo
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodTransfusion;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.*;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartSoulSwitcher;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeCleansing;
@@ -361,6 +362,7 @@ public class MSUSkills
 
 	public static final Abilitech HEART_SOUL_SWITCHER = new TechHeartSoulSwitcher("soul_switcher");
 	public static final Abilitech HEART_SOUL_SHOCK = new TechSoulStun("soul_shock");
+	public static final Abilitech HEART_SPIRITUAL_BOND = new TechHeartBond("spiritual_bond");
 
 	public static final Abilitech DOOM_TERMINAL_DEMISE = new TechDoomDemise("terminal_demise");
 	public static final Abilitech DOOM_DEATHS_SHROUD = new TechDoomDemiseAoE("deaths_shroud");
