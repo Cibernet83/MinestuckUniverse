@@ -28,6 +28,8 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TechHeartBond extends TechHeroAspect
 {
@@ -177,7 +179,8 @@ public class TechHeartBond extends TechHeroAspect
 			}
 		return linkedNTether;
 	}
-	
+
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void onLivingDeathRender(RenderLivingEvent.Pre<EntityLivingBase> event)
 	{

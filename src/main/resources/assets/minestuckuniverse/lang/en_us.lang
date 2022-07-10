@@ -1506,7 +1506,7 @@ tech.green_thumbs.tooltip=Fertilizes the block your currently looking at, replic
 tech.chloroball.name=Chloroball
 tech.chloroball.tooltip=Creates a small floating Orb that fertilizes nearby crops.
 tech.song_of_fertility.name=Song of Fertility
-tech.song_of_fertility.tooltip=Greatly fertilizes all nearby plants, as well as making all nearby animals breed. Truly a @LIFE@ player's grestest tool.
+tech.song_of_fertility.tooltip=Greatly fertilizes all nearby plants, as well as making all nearby animals breed. Truly a @LIFE@ player's greatest tool.
 tech.saving_grace.name=Saving Grace
 tech.saving_grace.tooltip=Casts a protective spell upon the target, bringing them once back to life right after they die. This Abilitech can only be used once per player until the user dies.
 
