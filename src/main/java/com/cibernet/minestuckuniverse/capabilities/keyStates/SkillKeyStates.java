@@ -142,12 +142,12 @@ public class SkillKeyStates implements ISkillKeyStates
 		for(Key key : Key.values())
 		{
 			Abilitech abilitech = data.getTech(key.ordinal());
+			if(abilitech == null) continue;
+			
 			boolean isActive = false;
 
 			if(!event.player.isSpectator() && !event.player.isDead && !badgeEffects.isTimeStopped() && !badgeEffects.isSoulShocked())
 			{
-				if(abilitech == null) continue;
-	
 				if(abilitech.canUse(event.player.world, event.player))
 				{
 					isActive = abilitech.onUseTick(event.player.world, event.player, badgeEffects, key.ordinal(), keyStates.getKeyState(key), keyStates.getKeyTime(key));

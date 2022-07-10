@@ -63,7 +63,7 @@ public class TechWitchTrap extends TechHeroClass
 			IdentifierHandler.PlayerIdentifier identifier = IdentifierHandler.encode(player);
 			SburbConnection c = SkaianetHandler.getMainConnection(identifier, true);
 			EnumAspect aspect = null;
-			if(c != null && c.enteredGame())
+			if(c != null)
 				aspect = MinestuckPlayerData.getTitle(identifier).getHeroAspect();
 			if(aspect == null)
 				return false;

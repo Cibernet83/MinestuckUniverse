@@ -56,8 +56,10 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	boolean isSoulShocked();
 	void setSoulShocked(boolean v);
 
-	void setSoulLinkTarget(EntityLivingBase target);
-	EntityLivingBase getSoulLinkTarget();
+	void setSoulLinkedBy(@Nullable EntityLivingBase target);
+	EntityLivingBase getSoulLinkedBy();
+	void setSoulLinkInt(int v);
+	int getSoulLinkInt();
 	
 	//tethers end
 
