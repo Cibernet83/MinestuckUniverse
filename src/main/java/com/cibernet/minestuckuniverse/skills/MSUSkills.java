@@ -374,6 +374,7 @@ public class MSUSkills
 	public static final Abilitech LIFE_MATING_SEASON = new TechLifeBreed("mating_season");
 	public static final Abilitech LIFE_CHLOROBALL = new TechLifeChloroball("chloroball");
 	public static final Abilitech LIFE_SONG_OF_FERTILITY = new TechLifeFertility("song_of_fertility");
+	public static final Abilitech LIFE_SAVING_GRACE = new TechLifeGrace("saving_grace");
 
 	public static final Abilitech BLOOD_BLEEDING_EDGE = new TechBloodBleeding("bleeding_edge");
 	public static final Abilitech BLOOD_REFORMERS_REACH = new TechBloodReformer("reformers_reach");

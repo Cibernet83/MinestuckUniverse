@@ -13,8 +13,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -73,6 +75,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void setMovement(float moveStrafe, float moveForward, boolean jump, boolean sneak);
 	void unsetMovement();
 
+	ArrayList<UUID> getSavingGraceTargets();
+	boolean isSavingGraced();
+	void setSavingGraced(boolean v);
 
 	boolean isWindFormed();
 	void setWindFormed(boolean doingWimdyThing);
