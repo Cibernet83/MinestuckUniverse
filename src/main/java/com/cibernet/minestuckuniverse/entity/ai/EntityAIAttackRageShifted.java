@@ -24,11 +24,7 @@ public class EntityAIAttackRageShifted extends EntityAIAttackMelee
 			this.attacker.swingArm(EnumHand.MAIN_HAND);
 
 			if(!this.attacker.attackEntityAsMob(target))
-			{
-				float volume = attacker.width * attacker.height;
-
-				target.attackEntityFrom(DamageSource.causeMobDamage(attacker), attacker.getHealth());
-			}
+				target.attackEntityFrom(DamageSource.causeMobDamage(attacker), attacker.getMaxHealth() * .2f);
 		}
 	}
 }

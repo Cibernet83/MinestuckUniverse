@@ -321,6 +321,7 @@ public class MSUSkills
 	public static final Abilitech WITCH_INHIBITION = new TechWitch("witch_inhibition");
 	public static final Abilitech WITCH_TRAP = new TechWitchTrap("wicked_trap");
 	public static final Abilitech THIEF_FILCH = new TechThief("thief_filch");
+	public static final Abilitech HERMES_DASH = new TechThiefDash("hermes_dash");
 	public static final Abilitech MAGE_AWARENESS = new TechMage("mage_awareness");
 
 	public static final Abilitech SEER_PREDICTION = new TechSeer("seer_prediction");
@@ -351,8 +352,8 @@ public class MSUSkills
 
 	public static final Abilitech BREATH_TEMPESTING_ASCENSION = new TechBreathGale("tempesting_ascension");
 	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon");
-	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind");
 	public static final Abilitech BREATH_SUPERSONIC_SPEED = new TechBreathSpeed("supersonic_speed");
+	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind");
 	public static final Abilitech BREATH_SPACE_VERTIGO_BLOCK = new TechBreathSpaceFallProof("vertigo_block", 5000);
 
 	public static final Abilitech LIGHT_STORM_OF_THE_STRIKER = new TechLightStriker("storm_of_the_striker");
@@ -378,6 +379,7 @@ public class MSUSkills
 	public static final Abilitech LIFE_MATING_SEASON = new TechLifeBreed("mating_season");
 	public static final Abilitech LIFE_CHLOROBALL = new TechLifeChloroball("chloroball");
 	public static final Abilitech LIFE_SONG_OF_FERTILITY = new TechLifeFertility("song_of_fertility");
+	public static final Abilitech LIFE_SAVING_GRACE = new TechLifeGrace("saving_grace");
 
 	public static final Abilitech BLOOD_BLEEDING_EDGE = new TechBloodBleeding("bleeding_edge");
 	public static final Abilitech BLOOD_REFORMERS_REACH = new TechBloodReformer("reformers_reach");
@@ -392,7 +394,7 @@ public class MSUSkills
 	public static final Abilitech RAGE_ENRAGED_BERSERK = new TechRageBerserk("enraged_berserk");
 	public static final Abilitech RAGE_VENGEFUL_OUTBURST = new TechRageOutburst("vengeful_outburst");
 	public static final Abilitech RAGE_ANGER_MANAGEMENT = new TechRageManagement("anger_management");
-	public static final Abilitech RAGE_RAGING_INSANITY = new TechRageFrenzy("raging_insanity");
+	public static final Abilitech RAGE_FRENZIED_MAYHEM = new TechRageFrenzy("frenzied_mayhem");
 
 	public static final Abilitech MIND_MINDFLAYERS_SPELL = new TechMindControl("mindflayers_spell");
 	public static final Abilitech MIND_SENSORY_BREAK = new TechMindConfusion("sensory_break");

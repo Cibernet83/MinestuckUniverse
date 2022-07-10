@@ -1382,7 +1382,7 @@ tech.ruling_slash.tooltip=Greatly multiplies the damage dealt by melee attacks a
 tech.witch_inhibition.name=Witch's Inhibition
 tech.witch_inhibition.tooltip=Suppresses the target's Aspect Effects, as well as any Abilitechs associated to Class or Aspect for a short period of time.
 tech.wicked_trap.name=Wicked Trap
-tech.wicked_trap.tooltip=Creates an aura directly where the user is looking that inflicts a negative version of their Aspect Effect upon targets for as long as they're inside it.
+tech.wicked_trap.tooltip=Creates an aura directly where the user is looking that inflicts a negative version of their Aspect Effect upon targets for as long as they're inside it. The aura will start to dissipate if the Abilitech is not held.
 
 tech.mage_awareness.name=Mage's Awareness
 tech.mage_awareness.tooltip=Taps into your inner knowledge as a @MAGE@, granting you the ability to determine your Karmic Alignment. If your alignment is not neutral, your next death will not trigger your Conditional Immortality.
@@ -1411,6 +1411,9 @@ tech.seer_prediction.name=Seer's Prediction
 tech.seer_prediction.tooltip=Taps into your knowledge of the universe around you as a @SEER@, allowing you to determine the target's exact Karma value. Player Karma determines a wide variety of factors, such as the effects of some Abilitechs, as well as whether your Conditional Immortality will trigger.
 tech.foresight_dodge.name=Foresight Dodge
 tech.foresight_dodge.tooltip=Makes you instinctively dodge any attacks eveey few minutes, completely negating any damage taken as well as moving you in the direction you're facing. Can be toggled on/off by using the Abilitech.
+
+tech.perseverant_awakening.name=Perseverant Awakening
+tech.perseverant_awakening.tooltip=Lets forth the full potential of a @PAGE@ every few minutes after triggering the user's Conditional Immortality, granting them 10 seconds of unlimited energy that can be used to cast Abilitechs. Can be toggled on/off by using the Abilitech.
 
 tech.muse_requiem.name=Muse's Requiem
 tech.muse_requiem.tooltip=Taps into the full potential of your role as a @MUSE@, giving an amplified version of your Aspect Effect to every player with a shared or neutral alignment when having a TRUE DEATH.
@@ -1468,7 +1471,7 @@ tech.matter_manipulator.tooltip=Bends @SPACE@ itself to collapse a defined area 
 tech.spatial_manipulator.name=Spatial Manipulator
 tech.spatial_manipulator.tooltip=Shrinks and enlarges certain entities and SBURB Machines, similar in function to Spatial Manipulation Dust.
 tech.kinetic_grab.name=Kinetic Grab
-tech.kinetic_grab.tooltip=Allows you to grab hold of any non-living entities, pulling them into the direction you're facing.
+tech.kinetic_grab.tooltip=Allows you to grab hold of any creature or innanimate entity, as long as their soul is light enough, pulling them into the direction you're facing.
 tech.super_kinetic_grab.name=Super Kinetic Grab
 tech.super_kinetic_grab.tooltip=Allows you to grab hold of any entity, including players, pulling them into the direction you're facing.\n\nWanna have a bad time?
 
@@ -1533,8 +1536,8 @@ tech.enraged_berserk.name=Enraged Berserk
 tech.enraged_berserk.tooltip=Using your mastery over the aspect of @RAGE@, this Abilitech makes you enter a deadly BERSERK state for a brief period of time.
 tech.anger_management.name=Anger Management
 tech.anger_management.tooltip=Grants you the ability to control the targeted mob's hostility, both friendly and aggresive. Hold down the button to affect all creatures in an area.
-tech.raging_insanity.name=Raging Insanity
-tech.raging_insanity.tooltip=Puts all nearby creatures into a frenzied state, causing them to start attacking one another.
+tech.frenzied_mayhem.name=Frenzied Mayhem
+tech.frenzied_mayhem.tooltip=Puts all nearby creatures into a frenzied state, causing them to start attacking one another.
 
 tech.sensory_break.name=Sensory Break
 tech.sensory_break.tooltip=Scrambles the target's mind for a short period of time, reversing their controls whilst in effect.

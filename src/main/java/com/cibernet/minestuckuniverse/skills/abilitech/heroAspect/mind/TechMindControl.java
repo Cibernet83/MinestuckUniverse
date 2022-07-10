@@ -14,6 +14,7 @@ import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,6 +31,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
+
+import static com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement.resetAI;
 
 public class TechMindControl extends TechHeroAspect
 {
@@ -83,12 +86,14 @@ public class TechMindControl extends TechHeroAspect
 		{
 			EntityCreature target = (EntityCreature) mfTarget;
 			target.tasks.addTask(2, new EntityAIMindflayerTarget(target, 1f));
+			resetAI((EntityLiving) mfTarget);
 		}
 		else if(mfTarget instanceof EntityPlayer)
 		{
 			mfTarget.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setMindflayedBy(player);
 			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.SET_CURRENT_ITEM, player.inventory.currentItem), (EntityPlayer) mfTarget);
 		}
+
 		return mfTarget;
 	}
 

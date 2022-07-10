@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
+import com.mraof.minestuck.entity.underling.EntityUnderling;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -37,15 +38,17 @@ public class TechSpaceGrab extends TechHeroAspect
 		}
 
 		Entity target;
+		int soulValue = 0;
+
 		if(state == SkillKeyStates.KeyState.PRESS)
 		{
 			RayTraceResult result = MSUUtils.getMouseOver(world, player, player.getEntityAttribute(EntityPlayerMP.REACH_DISTANCE).getAttributeValue(), true);
-			if(!isSuper && (result.entityHit == null || result.entityHit instanceof EntityPlayer || result.entityHit instanceof EntityLiving))
+			if(result.entityHit == null || result.entityHit instanceof EntityPlayer /*|| result.entityHit instanceof EntityLiving*/)
 				badgeEffects.clearTether(techSlot);
 
 			target = result.entityHit;
 
-			/* make this an edit mode thing instead
+			/* maybe make this an edit mode thing instead
 			if(target == null && player.capabilities.allowEdit)
 			{
 				BlockPos targetBlock = MSUUtils.getTargetBlock(player);
@@ -74,6 +77,25 @@ public class TechSpaceGrab extends TechHeroAspect
 		if(target == null)
 			return false;
 
+		if(target instanceof EntityLiving)
+			soulValue += ((EntityLiving) target).getMaxHealth() * (target instanceof EntityUnderling ? 0.5f : 1f);
+
+		for(Entity entity : target.getPassengers())
+			if(entity instanceof EntityPlayer)
+				soulValue += 100000000;
+			else if(entity instanceof EntityLiving)
+				soulValue += ((EntityLiving) entity).getMaxHealth();
+
+
+		if(soulValue > 20)
+		{
+			badgeEffects.clearTether(techSlot);
+			target = null;
+		}
+
+		if(target == null)
+			return false;
+
 		RayTraceResult result = MSUUtils.rayTraceBlocks(player, player.getEntityAttribute(EntityPlayerMP.REACH_DISTANCE).getAttributeValue());
 
 		target.motionX = 0;
@@ -94,7 +116,7 @@ public class TechSpaceGrab extends TechHeroAspect
 
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.SPACE, 1);
 
-		if(!player.isCreative() && time % 50 == 0)
+		if(!player.isCreative() && time % (50 - 40*soulValue/20f) == 0)
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);
 
 		return true;

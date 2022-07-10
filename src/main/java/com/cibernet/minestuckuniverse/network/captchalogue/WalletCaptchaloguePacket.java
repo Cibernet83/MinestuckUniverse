@@ -197,29 +197,34 @@ public class WalletCaptchaloguePacket extends MSUPacket
                 }
                 return new ItemStack(MinestuckBlocks.cruxtruder);
             }
-        } else if (Item.getItemFromBlock(block) != Items.AIR && state.getBlockHardness(worldIn, pos) < 50F &&worldIn.getTileEntity(pos) != null) {
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setTag("BlockEntityTag", worldIn.getTileEntity(pos).writeToNBT(new NBTTagCompound()));
-
-            if (!nbt.getCompoundTag("BlockEntityTag").hasNoTags())
+        } else
+        {
+            float hardness = state.getBlockHardness(worldIn, pos);
+            if (Item.getItemFromBlock(block) != Items.AIR && hardness < 50F && hardness >= 0 && worldIn.getTileEntity(pos) != null)
             {
-                NBTTagCompound displayTag = new NBTTagCompound();
-                NBTTagList tooltipList = new NBTTagList();
-                tooltipList.appendTag(new NBTTagString("(+NBT)"));
-                displayTag.setTag("Lore", tooltipList);
-                nbt.setTag("display", displayTag);
+                NBTTagCompound nbt = new NBTTagCompound();
+                nbt.setTag("BlockEntityTag", worldIn.getTileEntity(pos).writeToNBT(new NBTTagCompound()));
+
+                if (!nbt.getCompoundTag("BlockEntityTag").hasNoTags())
+                {
+                    NBTTagCompound displayTag = new NBTTagCompound();
+                    NBTTagList tooltipList = new NBTTagList();
+                    tooltipList.appendTag(new NBTTagString("(+NBT)"));
+                    displayTag.setTag("Lore", tooltipList);
+                    nbt.setTag("display", displayTag);
+                }
+
+                ItemStack result = new ItemStack(Item.getItemFromBlock(block));
+                if(nbt.getCompoundTag("BlockEntityTag").hasKey("CustomName"))
+                    result.setStackDisplayName(nbt.getCompoundTag("BlockEntityTag").getString("CustomName"));
+
+                result.setTagCompound(nbt);
+
+                worldIn.removeTileEntity(pos);
+                worldIn.destroyBlock(pos, false);
+
+                return result;
             }
-
-            ItemStack result = new ItemStack(Item.getItemFromBlock(block));
-            if(nbt.getCompoundTag("BlockEntityTag").hasKey("CustomName"))
-                result.setStackDisplayName(nbt.getCompoundTag("BlockEntityTag").getString("CustomName"));
-
-            result.setTagCompound(nbt);
-
-            worldIn.removeTileEntity(pos);
-            worldIn.destroyBlock(pos, false);
-
-            return result;
         }
         return ItemStack.EMPTY;
     }

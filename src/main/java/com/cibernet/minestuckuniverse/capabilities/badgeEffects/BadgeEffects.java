@@ -12,6 +12,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHear
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond.HeartDamageSource;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeGrace;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindStrike;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
@@ -39,10 +40,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 import javax.annotation.Nullable;
 
@@ -79,6 +77,7 @@ public class BadgeEffects implements IBadgeEffects
 
 	// Unserialized data that we don't want to store or ship
 	private Queue<SoulData> timeSoulData = new LinkedList<>();
+	private ArrayList<UUID> savingGraceTargets = new ArrayList<>();
 	private Vec3d prevPos;
 	
 
@@ -249,6 +248,24 @@ public class BadgeEffects implements IBadgeEffects
 	public void unsetMovement()
 	{
 		setMovement(0, 0, false, false);
+	}
+
+	@Override
+	public ArrayList<UUID> getSavingGraceTargets()
+	{
+		return savingGraceTargets;
+	}
+
+	@Override
+	public boolean isSavingGraced()
+	{
+		return getBoolean(TechLifeGrace.class);
+	}
+
+	@Override
+	public void setSavingGraced(boolean v)
+	{
+		setBoolean(TechLifeGrace.class, v);
 	}
 
 	@Override
@@ -564,6 +581,16 @@ public class BadgeEffects implements IBadgeEffects
 		nbt.setTag("Effects", effects);
 		nbt.setTag("Particles", particles);
 
+		NBTTagList savingGrace = new NBTTagList();
+		for(UUID uuid : getSavingGraceTargets())
+		{
+			NBTTagCompound uuidNbt = new NBTTagCompound();
+			uuidNbt.setTag("UUID", uuidNbt);
+			savingGrace.appendTag(uuidNbt);
+		}
+		nbt.setTag("SavingGrace", savingGrace);
+
+
 		return nbt;
 	}
 
@@ -627,6 +654,11 @@ public class BadgeEffects implements IBadgeEffects
 				e.printStackTrace();
 				continue;
 			}
+
+		getSavingGraceTargets().clear();
+		NBTTagList savingGrace = nbt.getTagList("SavingGrace", 10);
+		for(int i = 0; i < savingGrace.tagCount(); i++)
+			getSavingGraceTargets().add(((NBTTagCompound)savingGrace.get(i)).getUniqueId("UUID"));
 	}
 
 
