@@ -125,7 +125,7 @@ public class TechHopeyShit extends TechHeroAspect
 
 		public HopeDamageSource(Entity damageSourceEntityIn)
 		{
-			super(MinestuckUniverse.MODID+".hopefulOutburst");
+			super("hopefulOutburst");
 			this.damageSourceEntity = damageSourceEntityIn;
 			setDamageBypassesArmor();
 		}

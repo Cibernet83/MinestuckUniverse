@@ -83,7 +83,7 @@ public class TechLifeLeech extends TechHeroAspect
 
 		public LifeDamageSource(Entity damageSourceEntityIn)
 		{
-			super(MinestuckUniverse.MODID+".lifeforceLeech");
+			super("lifeforceLeech");
 			this.damageSourceEntity = damageSourceEntityIn;
 			setDamageBypassesArmor();
 		}
