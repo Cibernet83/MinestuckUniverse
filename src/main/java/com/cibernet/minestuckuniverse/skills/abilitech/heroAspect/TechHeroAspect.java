@@ -26,15 +26,12 @@ public class TechHeroAspect extends TechBoondollarCost
 	public static final Collection<TechHeroAspect> HERO_ASPECT_BADGES = new ArrayList<>();
 
 	protected final EnumAspect heroAspect;
-	protected final EnumTechType[] techTypes;
 
 	public TechHeroAspect(String name, EnumAspect heroAspect, long cost, EnumTechType... techTypes)
 	{
-		super(name, cost);
+		super(name, cost, techTypes);
 		this.heroAspect = heroAspect;
-		this.techTypes = techTypes;
 		HERO_ASPECT_BADGES.add(this);
-		setUnlocalizedName(name);
 	}
 
 	public TechHeroAspect(String name, EnumAspect heroAspect, EnumTechType heroRole, EnumAspect... auxAspects) {

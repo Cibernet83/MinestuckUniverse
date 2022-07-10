@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.skills;
 
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -15,6 +16,13 @@ public class TechBoondollarCost extends Abilitech
 		super(name);
 		//TODO: set this back to cost
 
+		this.cost = 1;
+	}
+	
+	public TechBoondollarCost(String name, long cost, EnumTechType... techTypes)
+	{
+		super(name, techTypes);
+		
 		this.cost = 1;
 	}
 

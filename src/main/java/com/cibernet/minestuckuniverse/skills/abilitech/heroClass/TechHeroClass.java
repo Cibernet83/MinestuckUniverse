@@ -23,10 +23,9 @@ public class TechHeroClass extends TechBoondollarCost
 
 	private final String name;
 	protected final EnumClass heroClass;
-	protected final EnumTechType heroRole = EnumTechType.DEFENSE;
 
 	public TechHeroClass(String name, EnumClass heroClass, int requiredLevel) {
-		super(name, requiredLevel);
+		super(name, requiredLevel, EnumTechType.DEFENSE);
 		this.name = name;
 		this.heroClass = heroClass;
 		HERO_CLASS_BADGES.add(this);
@@ -64,8 +63,13 @@ public class TechHeroClass extends TechBoondollarCost
 
 	@Override
 	public List<String> getTags()
-	{
-		return Arrays.asList( "@"+heroClass.name()+"@", "@"+heroRole.name()+"@");
+	{	
+		return new ArrayList<String>() 
+		{{
+			add("@"+heroClass.name()+"@");
+			for(EnumTechType type : techTypes)
+				add("@"+type.name()+"@");
+		}};
 	}
 
 	@Override
