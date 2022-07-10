@@ -21,6 +21,13 @@ public class TechBreathSpeed extends TechHeroAspect
 	}
 
 	@Override
+	public void onUnequipped(World world, EntityPlayer player, int techSlot)
+	{
+		super.onUnequipped(world, player, techSlot);
+		player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).stopPowerParticles(getClass());
+	}
+
+	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
 		boolean windSpeeding = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(this);

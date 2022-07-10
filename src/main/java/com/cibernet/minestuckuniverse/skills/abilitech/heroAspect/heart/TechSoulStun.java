@@ -67,7 +67,7 @@ public class TechSoulStun extends TechHeroAspect
 			return false;
 		}
 
-		if (!player.isCreative() && time % 40 == 0)
+		if (!player.isCreative() && time % 10 == 0)
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
 
 		if(player.getName().equals("Cibernet"))

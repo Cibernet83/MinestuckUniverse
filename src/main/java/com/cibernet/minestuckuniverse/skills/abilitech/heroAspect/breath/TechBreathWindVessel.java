@@ -35,6 +35,12 @@ public class TechBreathWindVessel extends TechHeroAspect
 	}
 
 	@Override
+	public void onUnequipped(World world, EntityPlayer player, int techSlot) {
+		super.onUnequipped(world, player, techSlot);
+		player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setWindFormed(false);
+	}
+
+	@Override
 	public boolean canUse(World world, EntityPlayer player) {
 		return !player.isPotionActive(MSUPotions.EARTHBOUND) && super.canUse(world, player) && !player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isMindflayed();
 	}

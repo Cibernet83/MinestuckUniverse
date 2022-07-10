@@ -37,7 +37,7 @@ public class TechSpaceGrab extends TechHeroAspect
 			return false;
 		}
 
-		Entity target;
+		Entity target = null;
 		int soulValue = 0;
 
 		if(state == SkillKeyStates.KeyState.PRESS)
@@ -45,8 +45,7 @@ public class TechSpaceGrab extends TechHeroAspect
 			RayTraceResult result = MSUUtils.getMouseOver(world, player, player.getEntityAttribute(EntityPlayerMP.REACH_DISTANCE).getAttributeValue(), true);
 			if(result.entityHit == null || result.entityHit instanceof EntityPlayer /*|| result.entityHit instanceof EntityLiving*/)
 				badgeEffects.clearTether(techSlot);
-
-			target = result.entityHit;
+			else target = result.entityHit;
 
 			/* maybe make this an edit mode thing instead
 			if(target == null && player.capabilities.allowEdit)

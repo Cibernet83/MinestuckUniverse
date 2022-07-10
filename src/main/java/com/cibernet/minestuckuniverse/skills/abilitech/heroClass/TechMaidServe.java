@@ -45,7 +45,7 @@ public class TechMaidServe extends TechHeroClass
 			if(entity instanceof EntityLivingBase && (entity instanceof EntityAnimal || entity instanceof EntityPlayer))
 				for(Potion pot : GTEventHandler.getAspectEffects(player).keySet())
 					if(!(((EntityLivingBase) entity).isPotionActive(pot) && ((EntityLivingBase) entity).getActivePotionEffect(pot).getDuration() <= 20))
-						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(pot, 100, GTEventHandler.getAspectEffects(player).get(pot).getAmplifier(), true, false));;
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(pot, 100, GTEventHandler.getAspectEffects(player).get(pot).getAmplifier(), true, true));
 		return true;
 	}
 	

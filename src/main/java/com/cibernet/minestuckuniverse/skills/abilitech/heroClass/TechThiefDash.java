@@ -32,6 +32,9 @@ public class TechThiefDash extends TechHeroClass
 		MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.PERFORM_DASH, 3f), player);
 		badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.THIEF, 20);
 
+		if(!player.isCreative())
+			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-4);
+
 		return true;
 	}
 }
