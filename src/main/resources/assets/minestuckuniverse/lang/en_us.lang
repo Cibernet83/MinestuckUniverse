@@ -1382,7 +1382,7 @@ tech.ruling_slash.tooltip=Greatly multiplies the damage dealt by melee attacks a
 tech.witch_inhibition.name=Witch's Inhibition
 tech.witch_inhibition.tooltip=Suppresses the target's Aspect Effects, as well as any Abilitechs associated to Class or Aspect for a short period of time.
 tech.wicked_trap.name=Wicked Trap
-tech.wicked_trap.tooltip=Creates an aura directly where the user is looking that inflicts a negative version of their Aspect Effect upon targets for as long as they're inside it.
+tech.wicked_trap.tooltip=Creates an aura directly where the user is looking that inflicts a negative version of their Aspect Effect upon targets for as long as they're inside it. The aura will start to dissipate if the Abilitech is not held.
 
 tech.mage_awareness.name=Mage's Awareness
 tech.mage_awareness.tooltip=Taps into your inner knowledge as a @MAGE@, granting you the ability to determine your Karmic Alignment. If your alignment is not neutral, your next death will not trigger your Conditional Immortality.

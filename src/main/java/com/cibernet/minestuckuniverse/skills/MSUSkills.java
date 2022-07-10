@@ -317,6 +317,7 @@ public class MSUSkills
 	public static final Abilitech WITCH_INHIBITION = new TechWitch("witch_inhibition");
 	public static final Abilitech WITCH_TRAP = new TechWitchTrap("wicked_trap");
 	public static final Abilitech THIEF_FILCH = new TechThief("thief_filch");
+	public static final Abilitech HERMES_DASH = new TechThiefDash("hermes_dash");
 	public static final Abilitech MAGE_AWARENESS = new TechMage("mage_awareness");
 
 	public static final Abilitech SEER_PREDICTION = new TechSeer("seer_prediction");

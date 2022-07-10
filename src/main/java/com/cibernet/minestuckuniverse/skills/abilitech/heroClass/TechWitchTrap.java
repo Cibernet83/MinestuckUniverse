@@ -13,10 +13,7 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.network.skaianet.SburbConnection;
 import com.mraof.minestuck.network.skaianet.SkaianetHandler;
-import com.mraof.minestuck.util.EnumAspect;
-import com.mraof.minestuck.util.EnumClass;
-import com.mraof.minestuck.util.IdentifierHandler;
-import com.mraof.minestuck.util.MinestuckPlayerData;
+import com.mraof.minestuck.util.*;
 
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityLivingBase;
@@ -61,12 +58,10 @@ public class TechWitchTrap extends TechHeroClass
 		if(cloud == null)
 		{
 			IdentifierHandler.PlayerIdentifier identifier = IdentifierHandler.encode(player);
-			SburbConnection c = SkaianetHandler.getMainConnection(identifier, true);
-			EnumAspect aspect = null;
-			if(c != null && c.enteredGame())
-				aspect = MinestuckPlayerData.getTitle(identifier).getHeroAspect();
-			if(aspect == null)
+			Title title = MinestuckPlayerData.getTitle(identifier);
+			if(title == null)
 				return false;
+			EnumAspect aspect = title.getHeroAspect();
 			
 			cloud = new EntityAreaEffectCloud(world);
 			
@@ -76,6 +71,7 @@ public class TechWitchTrap extends TechHeroClass
 			cloud.setRadius(3.5F);
 			cloud.setOwner(player);
 			cloud.setDuration(30);
+			cloud.setRadiusOnUse(0);
 			int[] colors = BadgeEffects.getAspectParticleColors(aspect);
 			if(colors.length > 0)
 				cloud.setColor(colors[0]);
