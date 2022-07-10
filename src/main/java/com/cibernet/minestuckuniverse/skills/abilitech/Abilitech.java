@@ -4,6 +4,8 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.skills.Skill;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -13,17 +15,19 @@ import java.util.List;
 public class Abilitech extends Skill
 {
 	public static final List<Abilitech> ABILITECHS = new ArrayList<>();
+	protected final EnumTechType[] techTypes;
 
 	String name;
 	public boolean isSuper = false;
 
-	public Abilitech(String name)
+	public Abilitech(String name, EnumTechType... techTypes)
 	{
 		super();
 		setUnlocalizedName(name);
 
 		ABILITECHS.add(this);
 		this.name = name;
+		this.techTypes = techTypes;
 	}
 
 	@Override

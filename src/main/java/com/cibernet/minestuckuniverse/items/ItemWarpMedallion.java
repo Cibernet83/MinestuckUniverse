@@ -140,7 +140,7 @@ public class ItemWarpMedallion extends MSUItemBase
     @SideOnly(Side.CLIENT)
     public static int getColor(ItemStack stack)
     {
-        int colorIndex = ColorCollector.getColor(MinestuckPlayerData.getData(Minecraft.getMinecraft().player).color);
+        int colorIndex = MinestuckPlayerData.getData(Minecraft.getMinecraft().player).color;
         if(stack.hasTagCompound() && stack.getTagCompound().hasKey("Color"))
             colorIndex = stack.getTagCompound().getInteger("Color");
 

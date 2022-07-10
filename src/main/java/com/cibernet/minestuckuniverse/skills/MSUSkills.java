@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills;
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.cibernet.minestuckuniverse.skills.abilitech.TechReturn;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBleeding;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBubble;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodReformer;
@@ -308,6 +309,8 @@ public class MSUSkills
 			return false;
 		}
 	};
+	
+	public static final Abilitech RETURN_JUMP = new TechReturn("return_jump");
 
 	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward");
 	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt");
@@ -408,6 +411,8 @@ public class MSUSkills
 	public static void registerSkills(RegistryEvent.Register<Skill> event)
 	{
 		IForgeRegistry<Skill> registry = event.getRegistry();
+		
+		
 
 		registry.register(MASTER_BADGE_MIGHTY.setRegistryName("master_badge_mighty"));
 		registry.register(MASTER_BADGE_BRAVE.setRegistryName("master_badge_brave"));
@@ -428,11 +433,16 @@ public class MSUSkills
 		registry.register(BADGE_PAGE.setRegistryName("page_potential"));
 		registry.register(BADGE_OVERLORD.setRegistryName("world_ender"));
 
+		for(Abilitech tech : Abilitech.ABILITECHS)
+			registry.register(tech.setRegistryName());
+		
+		/*
 		for (TechHeroClass badge : TechHeroClass.HERO_CLASS_BADGES)
 			registry.register(badge.setRegistryName());
 
 		for (TechHeroAspect badge : TechHeroAspect.HERO_ASPECT_BADGES)
 			registry.register(badge.setRegistryName());
+		*/
 	}
 
 	@SubscribeEvent
