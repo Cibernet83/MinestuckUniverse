@@ -7,10 +7,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloo
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBubble;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodReformer;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodTransfusion;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathGale;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathKnockback;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathSpaceFallProof;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathWindVessel;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartSoulSwitcher;
@@ -26,13 +23,11 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindC
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindKarmaHeal;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindStrike;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageBerserk;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageFrenzy;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageOutburst;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.*;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeAcceleration;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeRecall;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeStop;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeTables;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.voidAspect.*;
 import com.cibernet.minestuckuniverse.skills.badges.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
@@ -50,6 +45,7 @@ import com.mraof.minestuck.entity.EntityFrog;
 import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.tracker.MinestuckPlayerTracker;
 import com.mraof.minestuck.util.EnumAspect;
+import com.mraof.minestuck.util.EnumClass;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.client.Minecraft;
@@ -332,6 +328,7 @@ public class MSUSkills
 	public static final Abilitech IRRADIANT_SERVITUDE = new TechMaidServe("irraidant_servitude");
 	public static final Abilitech HEIR_WILL = new TechHeir("heir_will");
 	public static final Abilitech UNIVERSAL_REVERSE = new TechHeir("universal_reverse");
+	public static final Abilitech PERSEVERANT_AWAKENING = new TechHeroClass("perseverant_awakening", EnumClass.PAGE);
 
 	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem");
 	public static final Abilitech LORD_DECREE = new TechLord("lord_decree");
@@ -341,15 +338,18 @@ public class MSUSkills
 	public static final Abilitech SPACE_SPATIAL_WARP = new TechSpaceTargetTele("spatial_warp");
 	public static final Abilitech SPACE_MATTER_MANIPULATOR = new TechSpaceManipulator("matter_manipulator");
 	public static final Abilitech SPACE_SPATIAL_MANIPULATOR = new TechSpaceResize("spatial_manipulator");
+	public static final Abilitech SPACE_KINETIC_GRAB = new TechSpaceGrab("kinetic_grab");
 
 	public static final Abilitech TIME_TEMPORAL_RECALL = new TechTimeRecall("temporal_recall");
 	public static final Abilitech TIME_CHRONOFREEZE = new TechTimeStop("chronofreeze");
 	public static final Abilitech TIME_FLOW_ACCELERATOR = new TechTimeAcceleration("flow_accelerator");
 	public static final Abilitech TIME_RAPID_REWIND = new TechTimeTables("rapid_rewind");
+	public static final Abilitech TIME_CELESTIAL_SHIFT = new TechTimeShift("celestial_shift");
 
 	public static final Abilitech BREATH_TEMPESTING_ASCENSION = new TechBreathGale("tempesting_ascension");
 	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon");
 	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind");
+	public static final Abilitech BREATH_SUPERSONIC_SPEED = new TechBreathSpeed("supersonic_speed");
 	public static final Abilitech BREATH_SPACE_VERTIGO_BLOCK = new TechBreathSpaceFallProof("vertigo_block", 5000);
 
 	public static final Abilitech LIGHT_STORM_OF_THE_STRIKER = new TechLightStriker("storm_of_the_striker");
@@ -389,6 +389,7 @@ public class MSUSkills
 	public static final Abilitech RAGE_ENRAGED_BERSERK = new TechRageBerserk("enraged_berserk");
 	public static final Abilitech RAGE_VENGEFUL_OUTBURST = new TechRageOutburst("vengeful_outburst");
 	public static final Abilitech RAGE_ANGER_MANAGEMENT = new TechRageManagement("anger_management");
+	public static final Abilitech RAGE_RAGING_INSANITY = new TechRageFrenzy("raging_insanity");
 
 	public static final Abilitech MIND_MINDFLAYERS_SPELL = new TechMindControl("mindflayers_spell");
 	public static final Abilitech MIND_SENSORY_BREAK = new TechMindConfusion("sensory_break");

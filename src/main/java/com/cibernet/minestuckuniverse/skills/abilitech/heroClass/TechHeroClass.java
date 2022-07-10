@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class TechHeroClass extends TechBoondollarCost
+public class TechHeroClass extends TechBoondollarCost
 {
 	public static final Collection<TechHeroClass> HERO_CLASS_BADGES = new ArrayList<>();
 

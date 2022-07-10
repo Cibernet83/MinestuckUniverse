@@ -18,11 +18,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class ItemSkaianScroll extends MSUItemBase
 {
+	private static final ArrayList<Skill> SCROLL_POOL = new ArrayList<>();
+
 	public ItemSkaianScroll()
 	{
 		super("skaian_scroll", "skaianScroll");
@@ -37,7 +40,13 @@ public class ItemSkaianScroll extends MSUItemBase
 
 	public static ItemStack storeRandomSkill(ItemStack stack, Random rand)
 	{
-		return storeSkill(stack, MSUSkills.REGISTRY.getValues().get((int) ((MSUSkills.REGISTRY.getValues().size()-1)*rand.nextFloat())));
+		if(SCROLL_POOL.isEmpty())
+		{
+			SCROLL_POOL.addAll(MSUSkills.REGISTRY.getValues());
+			SCROLL_POOL.removeIf(Skill::isObtainable);
+		}
+
+		return storeSkill(stack, SCROLL_POOL.get((int) ((SCROLL_POOL.size()-1)*rand.nextFloat())));
 	}
 
 	@SideOnly(Side.CLIENT)

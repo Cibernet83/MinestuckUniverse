@@ -19,6 +19,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpac
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceTargetTele;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeStop;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechSeerDodge;
+import com.cibernet.minestuckuniverse.skills.badges.BadgePage;
 import com.cibernet.minestuckuniverse.util.SoulData;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
@@ -160,18 +161,6 @@ public class BadgeEffects implements IBadgeEffects
 	public void setRageShifted(boolean rageShifted)
 	{
 		setBoolean(TechRageManagement.class, rageShifted);
-	}
-
-	@Override
-	public void cleanRageShift()
-	{
-		// This literally does nothing Ciber
-	}
-
-	@Override
-	public boolean isRageShiftDirty()
-	{
-		return false;
 	}
 
 	@Override
@@ -456,6 +445,16 @@ public class BadgeEffects implements IBadgeEffects
 	public void setLastSeerDodge(int v)
 	{
 		setInt(TechSeerDodge.class, v);
+	}
+
+	@Override
+	public int getLastPageAwakening() {
+		return getInt(BadgePage.class); //not the right class but hey, it's not like we're using it to store stuff
+	}
+
+	@Override
+	public void setLastPageAwakening(int v) {
+		setInt(BadgePage.class, v);
 	}
 
 	@Override

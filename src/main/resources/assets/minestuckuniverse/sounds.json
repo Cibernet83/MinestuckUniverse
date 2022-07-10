@@ -56,5 +56,37 @@
     "sounds": [
         "minestuckuniverse:item/gaster_blaster_release"
     ]
-  }
+  },
+  "chat_ping": {
+        "subtitle": "subtitle.chat_ping",
+        "sounds": [ "minestuckuniverse:chat_ping" ]
+    },
+    "eight_ball_throw": {
+        "subtitle": "subtitle.eight_ball_throw",
+        "sounds": [ "random/bow" ]
+    },
+    "operandi_task_complete": {
+        "subtitle": "subtitle.operandi_task_complete",
+        "sounds": [ "note/bell" ]
+    },
+    "cruxtruder_fill_gel": {
+        "subtitle": "subtitle.cruxtruder_fill_gel",
+        "sounds":
+        [
+            "block/brewing_stand/brew1",
+            "block/brewing_stand/brew2"
+        ]
+    },
+    "chasity_lock": {
+        "subtitle": "subtitle.chasity_lock",
+        "sounds": [{"name": "locks:lock.close1"}, {"name": "locks:lock.close2"}]
+    },
+    "chasity_rattle": {
+        "subtitle": "subtitle.chasity_lock",
+        "sounds": [{"name": "locks:lock.rattle"}]
+    },
+    "chasity_unlock": {
+        "subtitle": "subtitle.chasity_unlock",
+        "sounds": [{"name": "locks:lock.open"}]
+    }
 }

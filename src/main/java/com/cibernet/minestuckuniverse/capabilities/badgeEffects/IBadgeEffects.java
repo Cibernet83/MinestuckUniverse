@@ -38,8 +38,6 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 
 	boolean isRageShifted();
 	void setRageShifted(boolean rageShifted);
-	void cleanRageShift();
-	boolean isRageShiftDirty();
 	
 	Entity getTether(int slot);
 	void setTether(@Nullable Entity entity, int slot);
@@ -108,6 +106,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 
 	int getLastSeerDodge();
 	void setLastSeerDodge(int v);
+
+	int getLastPageAwakening();
+	void setLastPageAwakening(int v);
 
 	// ----- Particles
 	Map<Class, MSUParticles.PowerParticleState> getPowerParticles();

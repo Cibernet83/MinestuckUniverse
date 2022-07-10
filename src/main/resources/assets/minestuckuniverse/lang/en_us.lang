@@ -1443,15 +1443,19 @@ tech.vessel_of_the_wind.name=Vessel of the Wind
 tech.vessel_of_the_wind.tooltip=Lets you become one with the wind, granting you temporary flight as well as the ability to phase to non-full blocks.
 tech.vertigo_block.name=Vertigo Block
 tech.vertigo_block.tooltip=Completely negates fall damage while this Abilitech is equipped.
+tech.supersonic_speed.name=Supersonic Speed
+tech.supersonic_speed.tooltip=Taps into the essense of @BREATH@ to passively give the user the ability to traverse the ground at breakneck speeds.  Can be toggled on/off by using the Abilitech.
 
 tech.temporal_recall.name=Temporal Recall
-tech.temporal_recall.tooltip=Lets you travel through %TIME% itself, restoring your health and position to how they were 5 seconds in the past.
+tech.temporal_recall.tooltip=Lets you travel through @TIME@ itself, restoring your health and position to how they were 5 seconds in the past.
 tech.chronofreeze.name=Chronofreeze
 tech.chronofreeze.tooltip=Uses the aspect of @TIME@ to conjure Time Stop for a short period of time upon a target, completely freezing them in place.
 tech.flow_accelerator.name=Flow Accelerator
 tech.flow_accelerator.tooltip=Speeds up whatever block you're looking at whilst being held.
 tech.rapid_rewind.name=Rapid Rewind
 tech.rapid_rewind.tooltip=Regresses the targeted creature or object in time whilst held, mimicking the effects of the Time Tables.
+tech.celestial_shift.name=Celestial Shift
+tech.celestial_shift.tooltip=Manipulates @TIME@ itself to advance or rewind the current time of day. Its will not be noticeable in dimensions without a day-night cycle like The Medium.
 
 tech.spatial_warp.name=Spatial Warp
 tech.spatial_warp.tooltip=Crouch while pressing to summon a Teleport Focus Point. Teleports the targeted entity to your set Anchor Point, or a nearby random position if none is set.
@@ -1465,6 +1469,8 @@ tech.spatial_manipulator.name=Spatial Manipulator
 tech.spatial_manipulator.tooltip=Shrinks and enlarges certain entities and SBURB Machines, similar in function to Spatial Manipulation Dust.
 tech.kinetic_grab.name=Kinetic Grab
 tech.kinetic_grab.tooltip=Allows you to grab hold of any non-living entities, pulling them into the direction you're facing.
+tech.super_kinetic_grab.name=Super Kinetic Grab
+tech.super_kinetic_grab.tooltip=Allows you to grab hold of any entity, including players, pulling them into the direction you're facing.\n\nWanna have a bad time?
 
 tech.withering_whisper.name=Withering Whisper
 tech.withering_whisper.tooltip=Brings forth @DOOM@ upon all nearby creatures, casting a deadly spell that incrementally withers away at their health.
@@ -1489,7 +1495,7 @@ tech.soul_shock.tooltip=Holds the target's soul hostage for as long as the Abili
 tech.healing_aura.name=Healing Aura
 tech.healing_aura.tooltip=Grants Regeneration to the target and all nearby creatures for a brief period of time.
 tech.lifeforce_leech.name=Lifeforce Leech
-tech.lifeforce_leech.tooltip=Gradually steals some of the target's lifeforce for as long as it's in use, damaging them whilst healing the user.
+tech.lifeforce_leech.tooltip=Gradually steals some of the target's lifeforce for as long as it's in use, damaging them whilst healing the user. Tethers to target.
 tech.mating_season.name=Mating Season
 tech.mating_season.tooltip=Puts all nearby animals into a breeding mood.
 tech.green_thumbs.name=Green Thumbs
@@ -1537,7 +1543,7 @@ tech.mindflayers_spell.tooltip=Allows you to take control of any player or livin
 tech.godhoods_justice.name=Godhood's Justice
 tech.godhoods_justice.tooltip=Passively increases the rate that your karma lowers.
 tech.calculated_strike.name=Calculated Strike
-tech.calculated_strike.tooltip=Sees through all possible outcomes in order to increase the damage of your next attack.
+tech.calculated_strike.tooltip=Sifts through all possible futures in order to increase the damage of your next attack. The extra damage done fluctuates, generally raising, the longer its used, but lowering over time if its not used.
 tech.illusory_cloak.name=Illusory Cloak
 tech.illusory_cloak.tooltip=Casts an illusion upon all players, disguising you as the targeted creature, player or block until cast again.
 
