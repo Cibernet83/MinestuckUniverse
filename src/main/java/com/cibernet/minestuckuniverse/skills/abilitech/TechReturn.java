@@ -51,7 +51,7 @@ public class TechReturn extends TechBoondollarCost
 		if(identifier == null)
 		    return false;
 		
-		int color = ColorCollector.getColor(MinestuckPlayerData.getData(Minecraft.getMinecraft().player).color);
+		int color = ColorCollector.getColor(MinestuckPlayerData.getData(player).color);
         
         badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, 2, color);
         
