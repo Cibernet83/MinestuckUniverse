@@ -8,7 +8,9 @@ import com.cibernet.minestuckuniverse.skills.TechBoondollarCost;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
+import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
+import com.mraof.minestuck.util.Title;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -47,13 +49,8 @@ public class TechHeroClass extends TechBoondollarCost
 		if(!super.canAppearOnList(world, player))
 			return false;
 
-		EnumClass playerClass;
-
-		if(world.isRemote)
-			playerClass = MinestuckPlayerData.title.getHeroClass();
-		else playerClass = MinestuckPlayerData.getData(player).title.getHeroClass();
-
-		return heroClass.equals(playerClass);
+		Title title = world.isRemote ? MinestuckPlayerData.title : MinestuckPlayerData.getTitle(IdentifierHandler.encode(player));
+		return title != null && heroClass.equals(title.getHeroClass());
 	}
 
 	public Skill setRegistryName()
@@ -63,13 +60,10 @@ public class TechHeroClass extends TechBoondollarCost
 
 	@Override
 	public List<String> getTags()
-	{	
-		return new ArrayList<String>() 
-		{{
-			add("@"+heroClass.name()+"@");
-			for(EnumTechType type : techTypes)
-				add("@"+type.name()+"@");
-		}};
+	{
+		List<String> list = super.getTags();
+		list.add("@"+heroClass.name()+"@");
+		return list;
 	}
 
 	@Override

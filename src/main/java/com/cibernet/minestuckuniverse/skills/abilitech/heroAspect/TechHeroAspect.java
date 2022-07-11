@@ -9,7 +9,9 @@ import com.cibernet.minestuckuniverse.client.MSUKeys;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
+import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
+import com.mraof.minestuck.util.Title;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -89,10 +91,8 @@ public class TechHeroAspect extends TechBoondollarCost
 	@Override
 	public List<String> getTags()
 	{
-		List<String > list = new ArrayList<>();
+		List<String> list = super.getTags();
 		list.add("@"+heroAspect.name()+"@");
-		for(EnumTechType type : techTypes)
-			list.add("@"+type.name()+"@");
 		return list;
 	}
 
@@ -102,13 +102,8 @@ public class TechHeroAspect extends TechBoondollarCost
 		if(!super.canAppearOnList(world, player))
 			return false;
 
-		EnumAspect playerAspect;
-
-		if(world.isRemote)
-			playerAspect = MinestuckPlayerData.title.getHeroAspect();
-		else playerAspect = MinestuckPlayerData.getData(player).title.getHeroAspect();
-
-		return heroAspect.equals(playerAspect);// && heroRole.equals(playerRole);
+		Title title = world.isRemote ? MinestuckPlayerData.title : MinestuckPlayerData.getTitle(IdentifierHandler.encode(player));
+		return title != null && heroAspect.equals(title.getHeroAspect());
 	}
 
 	@Override

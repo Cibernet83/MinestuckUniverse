@@ -34,7 +34,14 @@ public class Abilitech extends Skill
 	public String getUnlocalizedName() {
 		return "tech." + unlocalizedName;
 	}
-	public List<String> getTags() { return new ArrayList<>(); }
+
+	public List<String> getTags()
+	{
+		List<String > list = new ArrayList<>();
+		for(EnumTechType type : techTypes)
+			list.add("@"+type.name()+"@");
+		return list;
+	}
 
 
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time) { return false; }

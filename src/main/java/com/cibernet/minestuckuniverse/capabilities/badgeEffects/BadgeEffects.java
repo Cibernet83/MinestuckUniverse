@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.PotionConceal;
+import com.cibernet.minestuckuniverse.skills.abilitech.TechDragonAura;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathWindVessel;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.TechDoomDemise;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartLink;
@@ -472,6 +473,16 @@ public class BadgeEffects implements IBadgeEffects
 	@Override
 	public void setLastPageAwakening(int v) {
 		setInt(BadgePage.class, v);
+	}
+
+	@Override
+	public boolean hasDragonAura() {
+		return getBoolean(TechDragonAura.class);
+	}
+
+	@Override
+	public void setHasDragonAura(boolean v) {
+		setBoolean(TechDragonAura.class, v);
 	}
 
 	@Override

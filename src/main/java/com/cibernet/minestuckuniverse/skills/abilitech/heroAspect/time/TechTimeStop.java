@@ -26,7 +26,7 @@ public class TechTimeStop extends TechHeroAspect
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
-		if(state != SkillKeyStates.KeyState.PRESS)
+		if(state == SkillKeyStates.KeyState.NONE)
 			return false;
 
 		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < ENERGY_USE)
@@ -35,16 +35,20 @@ public class TechTimeStop extends TechHeroAspect
 			return false;
 		}
 
-		EntityLivingBase target = MSUUtils.getTargetEntity(player);
-		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.TIME, target != null ? 5 : 2);
+		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.TIME, time >= 40 ? 5 : 2);
 
-		if(target != null)
+		if(state == SkillKeyStates.KeyState.RELEASED && time >= 40)
 		{
-			target.addPotionEffect(new PotionEffect(MSUPotions.TIME_STOP, 80, 0));
-			if (!player.isCreative())
-				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - ENERGY_USE);
+			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
-			target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.TIME, 10);
+			if(target != null)
+			{
+				target.addPotionEffect(new PotionEffect(MSUPotions.TIME_STOP, 80, 0));
+				if (!player.isCreative())
+					player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - ENERGY_USE);
+
+				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.TIME, 10);
+			}
 		}
 
 		return true;

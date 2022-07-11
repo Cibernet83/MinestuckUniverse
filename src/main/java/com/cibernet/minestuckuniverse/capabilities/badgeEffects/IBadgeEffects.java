@@ -115,6 +115,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	int getLastPageAwakening();
 	void setLastPageAwakening(int v);
 
+	boolean hasDragonAura();
+	void setHasDragonAura(boolean v);
+
 	// ----- Particles
 	Map<Class, MSUParticles.PowerParticleState> getPowerParticles();
 
@@ -147,5 +150,4 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void setOwner(EntityLivingBase entity);
 
 	void receive(String key, IBadgeEffect value);
-
 }

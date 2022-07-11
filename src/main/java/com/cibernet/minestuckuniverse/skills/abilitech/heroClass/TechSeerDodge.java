@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -38,7 +39,7 @@ public class TechSeerDodge extends TechHeroClass
 	}
 	
 	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public static void onLivingAttack(LivingAttackEvent event)
+	public static void onLivingAttack(LivingHurtEvent event)
 	{
 		if(event.getEntityLiving().world.isRemote)
 			return;
