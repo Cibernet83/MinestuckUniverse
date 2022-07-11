@@ -32,6 +32,7 @@ public class MSUConsorts
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new GodTierMessage("skillShop.godTier"))).type(SHOP_SKILLS);
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.zillystone"))).type(SHOP_SKILLS);
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.abilitechnosynth"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.scrolls"))).type(SHOP_SKILLS);
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.skaia"))).type(SHOP_SKILLS).consortReq(entityConsort -> MinestuckDimensionHandler.isSkaia(entityConsort.dimension));
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.skaiaBattle"))).type(SHOP_SKILLS).consortReq(entityConsort -> MinestuckDimensionHandler.isSkaia(entityConsort.dimension));
 		//ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.skaiaReckoning"))).type(SHOP_SKILLS).consortReq(entityConsort -> MinestuckDimensionHandler.isSkaia(entityConsort.dimension));

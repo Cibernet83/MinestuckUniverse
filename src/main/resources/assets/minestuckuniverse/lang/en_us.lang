@@ -1171,6 +1171,7 @@ consort.skillShop.godTier.false=I know I shouldn't be helping out the competitio
 consort.skillShop.godTier.true=Good job ascending to godhood kid! I may have some wares on the back to suit your newfound abilities.
 consort.skillShop.zillystone=You know that Zillium stuff? People say it's pretty rare, but I've got one trick that'll sure help you get some. Just get a Zillystone block and a Moonstone Chisel and you should be set for life.
 consort.skillShop.abilitechnosynth=Ever want to swap out your Abilitechs? I don't have anything that can help you with that, but you should be able to use the synthy... abilitech... bah, the piano-looking thing in your house.
+consort.skillShop.scrolls=Legends speak of ancient scrolls buried deep within dungeon walls that grant readers the ability to learn any Abilitech, but only a select few choose to lend their wisdom to the reader. Good thing those things are fickle and rare, I'd be out of buisness otherwise!
 consort.skillShop.skaia=So this is Skaia, huh? It's a lot emptier that I was expecting.
 consort.skillShop.skaiaBattle=Kid, you better use those Abilitechs I've sold you in the battle ahead, you're sure going to need them.
 consort.skillShop.skaiaReckoning=Y'know, being here in Skaia gives me an idea. Maybe I could ask it nicely to lend me some of its power, I might be able to make a sick Abilitech with it!
@@ -1806,3 +1807,8 @@ status.hopey.winOneForTheGipper=§eWIN ONE FOR THE GIPPER
 status.hopey.jumpinJehosaPhat=§eJUMPIN' JEHOSA PHAT
 status.hopey.shuckyDarn=§eSHUCKY DARN
 status.hopey.fiddleFaddle=§eFIDDLE FADDLE
+
+status.skaianScroll.unlock=You learned how to use %s!
+status.skaianScroll.alreadyUnlocked=§cYou already know %s.
+status.skaianScroll.outOfScrolls=§cThe scroll refuses to lend you its wisdom.
+status.skaianScroll.empty=It's blank...?
