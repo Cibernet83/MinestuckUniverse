@@ -135,7 +135,7 @@ item.fluorite.name=Fluorite Chunk
 item.unrealAir.name=Unreal Air
 item.unrealAir.tooltip=It is RIDICULOUS what kind of air this thing is getting. Dude come get the ruler check this out.
 item.laserPointer.name=Laser Pointer
-item.cueBall.name=Cue Ball
+item.cueBall.name=Magic Cue Ball
 item.stoneTablet.name=Stone Tablet
 item.stoneTablet.carved=It appears to have something engraved in it!
 
@@ -785,6 +785,7 @@ death.attack.minestuckuniverse.lifeforceTransfusion.player=%s ran out of blood w
 death.attack.minestuckuniverse.terminalDemise=%s met their demise.
 death.attack.minestuckuniverse.terminalDemise.external=%s met their demise to the hands of %s.
 death.attack.minestuckuniverse.hopefulOutburst=%s failed %s's vibe check.
+death.attack.minestuckuniverse.spiritBond=%s soul wasn't as strong as %s's.
 
 status.heroicDeath=%s's death was Heroic.
 status.justDeath=%s's death was Just.
@@ -1164,6 +1165,53 @@ status.overlordSkillLevel=%s tiers climb you shall, to claim what's yours and co
 status.overlordPvpDeath=To simply perish does not suffice, to another soul you must meet your demise.
 status.overlordAscend=%s ascended.
 
+consort.skillShop.helloWorld=Hello world, welcome to the one and only Skill Shop! Your one-stop place for all things Abilitechs and Fraymotifs.
+consort.skillShop.hero=Yeah I know who you are, you're the %. If you weren't then why else would you be talking to me?
+consort.skillShop.godTier.false=I know I shouldn't be helping out the competition, but I like you enough to let you in on a little secret. You know that weird sealed book some of the other guys sell? It is said that if you manage to unlock it, it can guide you to achieving godhood!
+consort.skillShop.godTier.true=Good job ascending to godhood kid! I may have some wares on the back to suit your newfound abilities.
+consort.skillShop.zillystone=You know that Zillium stuff? People say it's pretty rare, but I've got one trick that'll sure help you get some. Just get a Zillystone block and a Moonstone Chisel and you should be set for life.
+consort.skillShop.abilitechnosynth=Ever want to swap out your Abilitechs? I don't have anything that can help you with that, but you should be able to use the synthy... abilitech... bah, the piano-looking thing in your house.
+consort.skillShop.skaia=So this is Skaia, huh? It's a lot emptier that I was expecting.
+consort.skillShop.skaiaBattle=Kid, you better use those Abilitechs I've sold you in the battle ahead, you're sure going to need them.
+consort.skillShop.skaiaReckoning=Y'know, being here in Skaia gives me an idea. Maybe I could ask it nicely to lend me some of its power, I might be able to make a sick Abilitech with it!
+consort.skillShop.innateTransformations=There're legends of otherwordly transformations some people may experience. I doubt that they can be achieved by commonfolk like us, but if you ever find any proof of their existence, I should be able to study it and make Abilitechs that can replicate their power.
+consort.skillShop.dragonGel=Ever heard of Dragon Gel? They say it's unnatural nature make it the most powerful substance ever made. If you ever find some make sure to send it my way, I'll make sure to reward you handsomely.
+consort.skillShop.returnMedallion=Say, do you happen to have one of them Return Medallions with you? If you let me crack one open I should be able to turn it into new stock.
+consort.skillShop.ghostCard=They say there's a lot of knowledge to be found within pictures. If you ever take a photo of something big, like a planet or a star, I might be able to study it and make an Abilitech out of it.
+consort.skillShop.alchemiter=You know that Alchemiter machine in your house? If you find a way to somehow bring it to me, I should be able to see how it works and make an Abilitech out of it.
+consort.skillShop.susanFrog=You know those rainbow-eyed frogs that can be found in your land? They seem to posess some sort of weird, spacey energy. If you ever turn that into something useful, don't be shy to send it my way. I might be able to turn it into an Abilitech.
+consort.skillShop.tickingStopwatch=There's a unique artifact found within the depths of dungeons found in time-bound lands known as the Ticking Stopwatch. It doesn't appear to do much on its own, but if you ever manage to turn it into something useful, don't be shy to send it my way. I might be able to turn it into an Abilitech.
+consort.skillShop.class=What do you think you're doing here kid, are you lost or something?
+consort.skillShop.class.knight=So you're a Knight, right? Would you be interested in arranging some sort of deal? I could do with some protection against those pesky Underlings.
+consort.skillShop.class.page=So you're a Page, right? Look kid, it's not my fault you got the short end of the stick, there's not much in the back I could find that'd help your class.
+consort.skillShop.class.thief=So you're a Thief, right? I better not catch you stealing any of my 'techs, alright?
+consort.skillShop.class.rogue=So you're a Rogue, right? About that whole "Stealing from the rich to give to the poor" thing. Maybe you should go talk to Scrooge over there about it, some of us deserve his fortune more than him.
+consort.skillShop.class.bard=So you're a Bard, right? Think you could play a tune or something? It might help attract more customers.
+consort.skillShop.class.prince=So you're a Prince, right? You better not cause any damage around my stand, or else you can start saying goodbye to my merch.
+consort.skillShop.class.witch=So you're a Witch, right? If you could use that magic of yours to conjure some more customers for my stand, that would be greatly appreciated.
+consort.skillShop.class.sylph=So you're a Sylph, right? Say doc, think you can stop by next time I break my leg? I might be able to get you a discount.
+consort.skillShop.class.maid=So you're a Maid, right? If you ever find yourself having too much of your aspect don't be afraid to send some my way, I would greatly appreciate it.
+consort.skillShop.class.heir=So you're an Heir, right? How does it feel to have the universe inherit something to you?
+consort.skillShop.class.seer=So you're a Seer, right? Say doc, mind checking my karma level? I'd be nice living for a couple more days y'know?
+consort.skillShop.class.mage=So you're a Mage, right? If I'm not mistaken, your kind have the ability to replicate Abilitechs at will, just don't use that power to run me out of business, ok?
+consort.skillShop.class.lord=Woah, you're a Lord? Look, if I give you a discount, would you promise not to destroy my stand?
+consort.skillShop.class.muse=Woah, you're a Muse? You must be very importatnt to have that title, good luck trying to stay alive.
+
+consort.skillShop.player=How's it hanging kid? Done anything special today?
+consort.skillShop.player.aridThought=Hey, you're that Clairen-obsessed kid people keep talking about. I don't want any trouble, but I really don't know what a "Clairen" is.
+consort.skillShop.player.Cibernet=Hey, you're that lightning kid people keep talking about. Say, think I could trade you that orange gemstone on the back of your hand?
+consort.skillShop.player.Cibernet.2=Oh, you say your Soul is trapped inside that thing? Yeah nevermind, i'm not that desperate.
+consort.skillShop.player.Badadamadaba=Hey, you're that blue guy people keep talking about. If you ever need to spend all those boons of yours then you've come to the right place!
+consort.skillShop.player.ThatLameOverlord=Hey, you're that blue guy people keep talking about. If you ever need to spend all those boons of yours then you've come to the right place!
+consort.skillShop.player.JDubSupreme=You say you're partially responsible for the creation of this universe? Gee kid, that's mighty impressive!
+consort.skillShop.player.Ishumire=You say you're partially responsible for the creation of this universe? Gee kid, that's mighty impressive!
+consort.skillShop.player.Dweblenod=You say you're partially responsible for the creation of a parallel universe? Gee kid, that's mighty impressive!
+consort.skillShop.player.Kirderf1=You say you're partially responsible for the creation of a parallel universe? Gee kid, that's mighty impressive!
+
+consort.skillShop.mythsAndModiDev=So you're to thank for my existence, right? No wonder why people in the village don't like me.
+consort.skillShop.msuDev=You say you're partially responsible for the creation of this universe? Gee kid, that's mighty impressive!
+consort.skillShop.msDev=You say you're partially responsible for the creation of a parallel universe? Gee kid, that's mighty impressive!
+
 config.minestuckuniverse.general.zillystoneYields=Zillystone Luck Modifier
 config.minestuckuniverse.general.baseZillystoneLuck=Zillystone Base Luck
 config.minestuckuniverse.general.IDAlchemy=ID-Based Alchemy
@@ -1351,6 +1399,10 @@ techType.utility=Utility
 techType.passive=Passive
 
 tech.unlock.boondollar=%s Boondollars
+tech.unlock.list=%s %s%s and %s
+tech.unlock.list.entry=, %s %s
+tech.unlock.list.solo=%s %s
+tech.unlock.free=Free!
 
 tech.sylladex_sling.name=Sylladex Sling
 tech.sylladex_sling.tooltip=Launches the first available item from the player's Sylladex forwards, causing it to deal damage upon whomever it hits.
@@ -1358,6 +1410,14 @@ tech.static_cling.name=Static Cling
 tech.static_cling.tooltip=Passively attracts items with metallic properties to the user while equipped.
 tech.draconic_flight.name=Draconic Flight
 tech.draconic_flight.tooltip=Propels the user forwards and upwards with great force, leaving a cloud of Dragon's Breath behind.
+tech.return_jump.name=Return Jump
+tech.return_jump.tooltip=Utilizes the energy found within Return Medallions to teleport the user back to their home base on command.
+tech.alchemical_replicator.name=Alchemical Replicator
+tech.alchemical_replicator.tooltip=By reverse engineering the technology found in Alchemiters, this Abilitech allows the user to create an exact duplicate of the targeted item or block by using Grist from the user's Grist Cache.
+tech.skaian_reckoning.name=Skaian Reckoning
+tech.skaian_reckoning.tooltip=Summons forth the power of Skaia to teleport meteors from The Veil towards the user's targeted position.
+tech.aspectral_bolt.name=Aspectral Bolt
+tech.aspectral_bolt.tooltip=Harnesses the user's innate Aspect Abilities to shoot a bolt of raw energy. Its effects vary according to the user's aspect, and can be commanded to being positive if shot whilst crouching.
 
 tech.knight_ward.name=Knight's Ward
 tech.knight_ward.tooltip=Allows you to cast a protective spell upon yourself and any living creature. Charging it allows you target all nearby living being beings at once.

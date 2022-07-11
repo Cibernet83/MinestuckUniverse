@@ -8,6 +8,12 @@ import com.mraof.minestuck.entity.consort.ConsortDialogue;
 import com.mraof.minestuck.entity.consort.EntityConsort;
 import com.mraof.minestuck.entity.consort.EnumConsort;
 import com.mraof.minestuck.entity.consort.MessageType;
+import com.mraof.minestuck.util.IdentifierHandler;
+import com.mraof.minestuck.util.MinestuckPlayerData;
+import com.mraof.minestuck.util.Title;
+import com.mraof.minestuck.world.MinestuckDimensionHandler;
+import com.mraof.minestuck.world.lands.LandAspectRegistry;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -21,7 +27,23 @@ public class MSUConsorts
 
 	public static void setupCustomConsortAttributes()
 	{
-		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("helloWorld"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.helloWorld"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.hero", "playerTitle"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new GodTierMessage("skillShop.godTier"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.zillystone"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.abilitechnosynth"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.skaia"))).type(SHOP_SKILLS).consortReq(entityConsort -> MinestuckDimensionHandler.isSkaia(entityConsort.dimension));
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.skaiaBattle"))).type(SHOP_SKILLS).consortReq(entityConsort -> MinestuckDimensionHandler.isSkaia(entityConsort.dimension));
+		//ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.skaiaReckoning"))).type(SHOP_SKILLS).consortReq(entityConsort -> MinestuckDimensionHandler.isSkaia(entityConsort.dimension));
+		//ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.ghostCard"))).type(SHOP_SKILLS);
+		//ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.innateTransformations"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.dragonGel"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.returnMedallion"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.ghostCard"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.susanFrog"))).type(SHOP_SKILLS).landTerrain(LandAspectRegistry.fromNameTerrain("frogs"));
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.tickingStopwatch"))).type(SHOP_SKILLS).landTerrain(LandAspectRegistry.fromNameTerrain("clockwork"));
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new HeroClassMessage("skillShop.class"))).type(SHOP_SKILLS);
+		ConsortDialogue.addMessage(new SkillShopGuiMessage(new PlayerCustomMessage("skillShop.player"))).type(SHOP_SKILLS);
 	}
 
 	public static class SkillShopGuiMessage extends MessageType
@@ -50,6 +72,80 @@ public class MSUConsorts
 
 		public ITextComponent getFromChain(EntityConsort consort, EntityPlayer player, String chainIdentifier, String fromChain) {
 			return null;
+		}
+	}
+
+	public static class PlayerCustomMessage extends MessageType.SingleMessage
+	{
+
+		protected String nbtName;
+
+		public PlayerCustomMessage(String message, String... args)
+		{
+			super(message, args);
+			nbtName = message;
+		}
+
+		@Override
+		public ITextComponent getMessage(EntityConsort consort, EntityPlayer player, String chainIdentifier)
+		{
+			String name = player.getName();
+
+			if(!I18n.hasKey("consort."+unlocalizedMessage + "." + name))
+				return super.getMessage(consort, player, chainIdentifier);
+
+			unlocalizedMessage += "." + name;
+			ITextComponent result = super.getMessage(consort, player, chainIdentifier);
+			unlocalizedMessage = nbtName;
+
+			return result;
+		}
+	}
+
+	public static class HeroClassMessage extends MessageType.SingleMessage
+	{
+		protected String nbtName;
+
+		public HeroClassMessage(String message, String... args)
+		{
+			super(message, args);
+			nbtName = message;
+		}
+
+		@Override
+		public ITextComponent getMessage(EntityConsort consort, EntityPlayer player, String chainIdentifier)
+		{
+			Title title = MinestuckPlayerData.getTitle(IdentifierHandler.encode(player));
+
+			if(title == null)
+				return super.getMessage(consort, player, chainIdentifier);
+
+			unlocalizedMessage += "." + title.getHeroClass().name();
+			ITextComponent result = super.getMessage(consort, player, chainIdentifier);
+			unlocalizedMessage = nbtName;
+
+			return result;
+		}
+	}
+
+	public static class GodTierMessage extends MessageType.SingleMessage
+	{
+		protected String nbtName;
+
+		public GodTierMessage(String message, String... args)
+		{
+			super(message, args);
+			nbtName = message;
+		}
+
+		@Override
+		public ITextComponent getMessage(EntityConsort consort, EntityPlayer player, String chainIdentifier)
+		{
+			unlocalizedMessage += "." + (player.hasCapability(MSUCapabilities.GOD_TIER_DATA, null) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier() ? "true" : "false");
+			ITextComponent result = super.getMessage(consort, player, chainIdentifier);
+			unlocalizedMessage = nbtName;
+
+			return result;
 		}
 	}
 
