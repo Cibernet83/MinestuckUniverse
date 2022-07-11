@@ -1814,3 +1814,5 @@ status.skaianScroll.unlock=You learned how to use %s!
 status.skaianScroll.alreadyUnlocked=§cYou already know %s.
 status.skaianScroll.outOfScrolls=§cThe scroll refuses to lend you its wisdom.
 status.skaianScroll.empty=It's blank...?
+status.tech.illusoryCloak.disguise=You are now cloaked as %s
+status.tech.illusoryCloak.reset=The illusion dissipates.

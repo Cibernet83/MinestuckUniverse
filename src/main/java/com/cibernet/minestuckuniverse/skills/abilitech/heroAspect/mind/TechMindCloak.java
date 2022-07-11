@@ -14,8 +14,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.network.NetworkPlayerInfo;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -80,7 +78,7 @@ public class TechMindCloak extends TechHeroAspect
 		{
 			badgeEffects.clearCloakData();
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
-			System.out.println("clearing cloak");
+			player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.reset"), true);
 		}
 		else if(result.entityHit != null)
 		{
@@ -88,7 +86,11 @@ public class TechMindCloak extends TechHeroAspect
 			{
 				EntityPlayer cloakPlayer = (EntityPlayer) result.entityHit;
 				NBTTagCompound nbt = new NBTTagCompound();
-
+				nbt.setUniqueId("UUID", cloakPlayer.getUniqueID());
+				cloakData.setTag("Player", nbt);
+				badgeEffects.setCloakData(cloakData);
+				badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
+				player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.disguise", player.getDisplayName()), true);
 			}
 			else
 			{
@@ -98,7 +100,7 @@ public class TechMindCloak extends TechHeroAspect
 				cloakData.setTag("Entity", nbt );
 				badgeEffects.setCloakData(cloakData);
 				badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
-				System.out.println("setting cloak to " + result.entityHit);
+				player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.disguise", result.entityHit.getDisplayName()), true);
 			}
 		}
 		else if(result.typeOfHit == RayTraceResult.Type.BLOCK)
@@ -113,7 +115,7 @@ public class TechMindCloak extends TechHeroAspect
 			cloakData.setTag("Block", compound);
 			badgeEffects.setCloakData(cloakData);
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
-			System.out.println("setting cloak to " + blockState);
+			player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.disguise", new TextComponentTranslation(blockState.getBlock().getUnlocalizedName())), true);
 
 		}
 
