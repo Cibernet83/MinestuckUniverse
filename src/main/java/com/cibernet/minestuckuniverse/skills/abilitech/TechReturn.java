@@ -30,6 +30,7 @@ public class TechReturn extends TechBoondollarCost
 	public TechReturn(String name) 
 	{
 		super(name, 100, EnumTechType.UTILITY);
+		requiredStacks.add(new ItemStack(MinestuckUniverseItems.returnMedallion));
 	}
 	
 	@Override
@@ -66,23 +67,5 @@ public class TechReturn extends TechBoondollarCost
 		BlockPos pos = worldd.provider.getRandomizedSpawnPoint();
 		Teleport.teleportEntity(player, c.getClientDimension(), null, pos);
 		return true;
-	}
-	
-	@Override
-	public boolean canAppearOnList(World world, EntityPlayer player)
-	{
-		return super.canAppearOnList(world, player) && Badge.findItem(player, new ItemStack(MinestuckUniverseItems.returnMedallion), false, true);
-	}
-	
-	@Override
-	public boolean canUnlock(World world, EntityPlayer player)
-	{
-		return super.canAppearOnList(world, player) && Badge.findItem(player, new ItemStack(MinestuckUniverseItems.returnMedallion), false, true);
-	}
-
-	@Override
-	public void onUnlock(World world, EntityPlayer player)
-	{
-		Badge.findItem(player, new ItemStack(MinestuckUniverseItems.returnMedallion), true, true);
 	}
 }
