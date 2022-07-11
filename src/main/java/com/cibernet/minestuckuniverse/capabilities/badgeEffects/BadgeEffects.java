@@ -14,6 +14,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoul
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond.HeartDamageSource;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeGrace;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindCloak;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindStrike;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
@@ -161,6 +162,29 @@ public class BadgeEffects implements IBadgeEffects
 	public void setRageShifted(boolean rageShifted)
 	{
 		setBoolean(TechRageManagement.class, rageShifted);
+	}
+
+	@Override
+	public NBTTagCompound getCloakData()
+	{
+		return getTag(TechMindCloak.class);
+	}
+
+	@Override
+	public boolean isCloaked() {
+		return getCloakData() != null;
+	}
+
+	@Override
+	public void setCloakData(NBTTagCompound nbtTagCompound)
+	{
+		setTag(TechMindCloak.class, nbtTagCompound);
+	}
+
+	@Override
+	public void clearCloakData()
+	{
+		setTag(TechMindCloak.class, null);
 	}
 
 	@Override
@@ -781,6 +805,18 @@ public class BadgeEffects implements IBadgeEffects
 			effects.remove(badge);
 		else
 			effects.put(badge, new IBadgeEffect.EntityEffect(entity));
+	}
+
+	private void setTag(Class badge, NBTTagCompound tag)
+	{
+		if(tag == null)
+			effects.remove(badge);
+		else effects.put(badge, new IBadgeEffect.NBTEffect(tag, false));
+	}
+
+	private NBTTagCompound getTag(Class badge)
+	{
+		return effects.containsKey(badge) ? ((IBadgeEffect.NBTEffect) effects.get(badge)).value : null;
 	}
 
 	@SubscribeEvent

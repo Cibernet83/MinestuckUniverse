@@ -10,6 +10,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.TechDoomB
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeGrace;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindCloak;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindStrike;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
@@ -119,6 +120,7 @@ public class BadgeEventHandler
 		MinecraftForge.EVENT_BUS.register(TechMindStrike.class);
 		MinecraftForge.EVENT_BUS.register(TechLifeGrace.class);
 		MinecraftForge.EVENT_BUS.register(TechDragonAura.class);
+		MinecraftForge.EVENT_BUS.register(TechMindCloak.class);
 	}
 
 	@SubscribeEvent

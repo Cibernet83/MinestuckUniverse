@@ -20,10 +20,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeP
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.light.*;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindConfusion;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindKarmaHeal;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindStrike;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageBerserk;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageFrenzy;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
@@ -402,6 +399,7 @@ public class MSUSkills
 	public static final Abilitech MIND_SENSORY_BREAK = new TechMindConfusion("sensory_break");
 	public static final Abilitech MIND_GODHOODS_JUSTICE = new TechMindKarmaHeal("godhoods_justice");
 	public static final Abilitech MIND_CALCULATED_STRIKE = new TechMindStrike("calculated_strike");
+	public static final Abilitech MIND_ILLUSORY_CLOAK = new TechMindCloak("illusory_cloak", 100000);
 
 	public static final Abilitech HOPE_WILLED_ALLIANCE = new TechHopeGolem("willed_alliance");
 	public static final Abilitech HOPE_ANSWERED_PRAYERS = new TechHopePrayers("answered_prayers");

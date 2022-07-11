@@ -121,7 +121,7 @@ public class MSUConsorts
 			if(title == null)
 				return super.getMessage(consort, player, chainIdentifier);
 
-			unlocalizedMessage += "." + title.getHeroClass().name();
+			unlocalizedMessage += "." + title.getHeroClass().toString();
 			ITextComponent result = super.getMessage(consort, player, chainIdentifier);
 			unlocalizedMessage = nbtName;
 
