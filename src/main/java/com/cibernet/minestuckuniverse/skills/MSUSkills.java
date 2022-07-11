@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills;
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.cibernet.minestuckuniverse.skills.abilitech.TechDragonAura;
 import com.cibernet.minestuckuniverse.skills.abilitech.TechReturn;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBleeding;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBubble;
@@ -311,6 +312,7 @@ public class MSUSkills
 	};
 	
 	public static final Abilitech RETURN_JUMP = new TechReturn("return_jump");
+	public static final Abilitech DRACONIC_AURA = new TechDragonAura("draconic_aura");
 
 	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward");
 	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt");
