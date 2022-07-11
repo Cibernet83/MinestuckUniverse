@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeChloroball;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
@@ -42,9 +43,9 @@ public class TechDoomDemiseAoE extends TechHeroAspect
 
 		world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_WITHER_SPAWN, SoundCategory.PLAYERS, 1, 1, false);
 
-		for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> entity != player && entity.getDistance(player) <= RADIUS) )
+		for(EntityPlayer target : world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> entity != player && entity.getDistance(player) <= RADIUS) )
 		{
-			if (target.getHealth()/target.getMaxHealth() <= 0.2f)
+			if (!player.isCreative() && target.getHealth()/target.getMaxHealth() <= 0.2f)
 				karmakill(target, player);
 		}
 
