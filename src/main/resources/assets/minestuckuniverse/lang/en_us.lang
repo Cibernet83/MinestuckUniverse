@@ -67,7 +67,7 @@ tile.abilitechnosynth.name=Abilitechnosynth
 
 tile.magicBlock.name=Perfectly Magical Object
 tile.uniqueObject.name=Perfectly Unique Object
-tile.artifact.name=ßkArtifact
+tile.artifact.name=¬ßkArtifact
 
 item.diverHelmet.name=Diver Helmet
 item.diverHelmet.tooltip=A Diving Helmet for all your diving needs, this piece of headgear lets traverse the depths of the ocean without needing to worry about oxygen.
@@ -98,7 +98,7 @@ item.airJordansCobalt.tooltip=Wearing these grants you the ability to jump in mi
 item.windWalkers.name=Wind Walkers
 item.windWalkers.tooltip=These magical boots let you cruise through the air as you would in the ground, perfect for making long jumps or platforming through floating islands.
 item.rocketBoots.name=Rocket Boots
-item.rocketBoots.tooltip=ßaPSHOOOES
+item.rocketBoots.tooltip=¬ßaPSHOOOES
 
 item.scarf.black.name=Black Scarf
 item.scarf.blue.name=Blue Scarf
@@ -179,8 +179,8 @@ item.lightning_ghost_item.name=Lightning
 
 item.whip.name=Whip
 item.whip.tooltip=nah, there's no way i'm coding in a real whip into the mod
-item.whipSbahj.name=ßothe Whip.
-item.whipSbahj.tooltip=ß9ßnhttps://www.youtube.com/watch?v=5-5nP3jrq6w
+item.whipSbahj.name=¬ßothe Whip.
+item.whipSbahj.tooltip=¬ß9¬ßnhttps://www.youtube.com/watch?v=5-5nP3jrq6w
 
 item.katana.name=Obsidian Katana
 item.unbreakableKatana.name=Unbreakable Katana
@@ -514,10 +514,10 @@ item.manipulatedMatter.cantEdit=You cannot edit blocks here
 item.manipulatedMatter.tooltip=An entire area of blocks concentrated into a single item, something only someone with a mastery over SPACE can achieve.
 
 item.skaianScroll.name=Skaian Scroll
-item.skaianScroll.tooltip.skill=ß9ßo%s
-item.skaianScroll.tooltip.hasSkill=ßcYou already have this Skill!
-item.skaianScroll.tooltip.skillsLeft=ßa%s Skills left
-item.skaianScroll.tooltip.noSkills=ßc0 Skills left
+item.skaianScroll.tooltip.skill=¬ß9¬ßo%s
+item.skaianScroll.tooltip.hasSkill=¬ßcYou already have this Skill!
+item.skaianScroll.tooltip.skillsLeft=¬ßa%s Skills left
+item.skaianScroll.tooltip.noSkills=¬ßc0 Skills left
 
 item.operandi_pickaxe.name=Operandi Pickaxe
 item.operandi_axe.name=Operandi Axe
@@ -639,7 +639,7 @@ kindAbstratus.fist.name=Fistkind
 kindAbstratus.hammer.name=Hammerkind
 kindAbstratus.handle.name=Handlekind
 kindAbstratus.sword.name=Bladekind
-kindAbstratus.halfSword.name=ΩBladekind
+kindAbstratus.halfSword.name=¬ΩBladekind
 kindAbstratus.needles.name=Needlekind
 kindAbstratus.rifle.name=Riflekind
 kindAbstratus.pistol.name=Pistolkind
@@ -654,7 +654,7 @@ kindAbstratus.glove.name=Gauntletkind
 kindAbstratus.claw.name=Clawkind
 kindAbstratus.shield.name=Shieldkind
 kindAbstratus.bow.name=Bowkind
-kindAbstratus.halfBow.name=ΩBowkind
+kindAbstratus.halfBow.name=¬ΩBowkind
 kindAbstratus.projectile.name=Throwkind
 kindAbstratus.pickaxe.name=Pickaxekind
 kindAbstratus.axe.name=Axekind
@@ -687,7 +687,7 @@ kindAbstratus.bunny.name=Bunnykind
 
 container.machineChassis=Machine Assembly
 container.boondollarRegister=Boondollar Register
-container.itemVoid=ßkItem Void
+container.itemVoid=¬ßkItem Void
 
 commands.globalsay.usage=/globalsay <message>
 commands.localizedChat.outOfReach=%s is too far away to talk to!
@@ -740,7 +740,7 @@ subtitle.minestuckuniverse.home_run_bat=Home Run!
 subtitle.minestuckuniverse.shield_parry=Shield parried
 subtitle.minestuckuniverse.shock=Bzzzt
 subtitle.minestuckuniverse.whip_crack=Whip cracks
-subtitle.minestuckuniverse.whip_crock=ßnßocrock.
+subtitle.minestuckuniverse.whip_crock=¬ßn¬ßocrock.
 subtitle.minestuckuniverse.gaster_blaster.charge=Beam Charging
 subtitle.minestuckuniverse.gaster_blaster.release=Beam Released
 
@@ -1058,13 +1058,13 @@ gui.bookPublish=Publish
 
 gui.badgesLeft=Badges Left: %s
 gui.showBadgeInfo=Press [LSHIFT] to show more info
-gui.masterBadgeWarning=ßcYou can only unlock one Master Badge at a time!
-gui.noBadgesLeft=ßcYou can't unlock any more badges!
-gui.badgeDisabled=ßcClick to enable.
-gui.badgeBlocked=ßcSomething is inhibiting the effect of this badge!
-gui.needXp=ßcYou need at least %s experience levels to allocate Skill XP
-gui.abilitechDisabled=ßcRight-Click to enable.
-gui.abilitechBlocked=ßcSomething is inhibiting this Abilitech.
+gui.masterBadgeWarning=¬ßcYou can only unlock one Master Badge at a time!
+gui.noBadgesLeft=¬ßcYou can't unlock any more badges!
+gui.badgeDisabled=¬ßcClick to enable.
+gui.badgeBlocked=¬ßcSomething is inhibiting the effect of this badge!
+gui.needXp=¬ßcYou need at least %s experience levels to allocate Skill XP
+gui.abilitechDisabled=¬ßcRight-Click to enable.
+gui.abilitechBlocked=¬ßcSomething is inhibiting this Abilitech.
 gui.abilitechnosynth=Abilitechnosynth
 gui.skillShop.buy=Buy
 gui.skillShop.cantAfford=Can't Afford
@@ -1072,15 +1072,15 @@ gui.skillShop.cantAfford=Can't Afford
 enchantment.minestuckuniverse.superpunch=Superpunch
 enchantment.minestuckuniverse.superpunch.desc=Increases the knockback strength of the weapon but increases its attack damage inversely to the enchanment level
 
-status.strife.unlockSwitcher=ßaThe Strife Specibus Quick Switcher has been unlocked! Crouch while holding the STRIFE key to change between your active specibi on the go!
+status.strife.unlockSwitcher=¬ßaThe Strife Specibus Quick Switcher has been unlocked! Crouch while holding the STRIFE key to change between your active specibi on the go!
 status.strife.strifeDeckFull=Your %s Strife Deck is full!
 status.strife.portfolioFull=Your Strife Portfolio is full!
 status.strife.portfolioDuplicate=You already have a %s Strife Specibus in your Portfolio
 status.strife.assign=The %s Strife Specibus has been assigned to your Portfolio
 status.strife.assignWeapon=Your %s has been assigned to your %s Strife Deck
 status.strife.weaponMissmach=Your %s doesn't fit inside any of your Strife Specibi
-strife.item.allocated=ß2[Strife Allocated]
-strife.item.abstrataList=ß8ßo%s
+strife.item.allocated=¬ß2[Strife Allocated]
+strife.item.abstrataList=¬ß8¬ßo%s
 
 status.wildMagicRoll=You rolled a %s!
 status.exhausted=You're too exhausted to perform this action!
@@ -1106,7 +1106,7 @@ status.eightBallBlind=Some Magic 8-Ball liquid went into your eyes!
 status.eightBallMessage.0=[It is certain.]
 status.eightBallMessage.1=[It is decidedly so.]
 status.eightBallMessage.2=[Without a doubt.]
-status.eightBallMessage.3=[Yes ñ definitely.]
+status.eightBallMessage.3=[Yes ‚Äì definitely.]
 status.eightBallMessage.4=[You may rely on it.]
 status.eightBallMessage.5=[As I see it, yes.]
 status.eightBallMessage.6=[Most likely.]
@@ -1260,9 +1260,9 @@ attribute.name.underling.attackDamage=Underling Damage
 book_desc.missing=[No information was provided by the author of this book.]
 book_desc.empty=This is an empty captchalogue card, you can put items in it by holding them and pressing the Captchalogue button, you can also retrieve it from your sylladex by pressing right-click.
 
-book_desc.mod_name=ß9Mod: %s
-book_desc.vanilla=ß9This item comes from Vanilla Minecraft
-book_desc.item_id=ß9Item ID: ß7%s
+book_desc.mod_name=¬ß9Mod: %s
+book_desc.vanilla=¬ß9This item comes from Vanilla Minecraft
+book_desc.item_id=¬ß9Item ID: ¬ß7%s
 
 book_desc.durability_high=This one in particular is practically brand new!
 book_desc.durability_low=This one in particular looks to be a bit damaged, you should repair it by using an anvil, or the Mending enchantment.
@@ -1304,21 +1304,21 @@ minecraft:leaves.book_desc=Appears on certain types of trees. Drops saplings whe
 minecraft:leaves.0.book_desc=Appears on oak trees. Drops saplings and apples. Obtain with shears or a Silk Touch tool.
 minecraft:diamond_block.book_desc=The best way to say "I wasted my time and diamonds", the diamond block is crafted with 9 diamonds, and can be used for compact diamond storage and making a beacon. Do not use it to build houses. Diamond block houses don't make you look cool, they make you look like a jerk.
 minecraft:iron_block.book_desc=Crafted with 9 Iron Ingots, the Block of Iron can be a versatile component in Alchemy, or used to make Beacon bases, anvils, or store large amounts of Iron. It can also be used to make Iron Golems by building a vertical T-Shape out of them and putting a pumpkin on top.
-minecraft:anvil.book_desc=The Anvil, one of the handier, yet deadlier blocks in the game. Dropping this from a high distance on someoneís head will be sure to give them headache, and possibly a trip back to spawn. It can also be used to repair, rename, and apply Enchanted Books to most items, as well as used in the creation of some weapons such as the Blacksmithís Hammer and the Blacksmithís Bane.
+minecraft:anvil.book_desc=The Anvil, one of the handier, yet deadlier blocks in the game. Dropping this from a high distance on someone‚Äôs head will be sure to give them headache, and possibly a trip back to spawn. It can also be used to repair, rename, and apply Enchanted Books to most items, as well as used in the creation of some weapons such as the Blacksmith‚Äôs Hammer and the Blacksmith‚Äôs Bane.
 
-minestuckuniverse:wild_magic_modus.book_desc=The Wild Magic Modus, One of the more unpredictable fetch modi that exist, this modus makes you roll a d20 dice every time you try to retrieve an item, rolling a high enough number will let you do so, other than that, youíll be granted certain effects tied to each number. This modus is suitable for people that like to rely on luck, or for adept light players that might have it in abundance.
-minestuckuniverse:weight_modus.book_desc=This modus is slightly different from the rest, as it has its own weight of sorts, with it increasing every time an item is captchalogued, reducing the userís walking speed by a noticeable amount. However, the modusí weight can be counteracted by captchaloguing float stones. This modus is perfect for people that donít mind slowing down for a bit, or for those rich enough in build grist to alchemize enough float stones.
-minestuckuniverse:book_modus.book_desc=The Book Modus, one of the handier Fetch Modi there are,++ and the one youíre currently using right now! This modus stores all your cards into an alphabetically organized book, filled with boundless wisdom about most, if not some items. Itís one downside being that you can only see one card per page, making it incredibly tedious to use when storing large quantities of items. You can also get a physical copy of the book by clicking the Publish button, allowing you to share your sylladex with others, or storing your items by categories. You can then swap it out with your currently active book by simply captchaloguing it.
-minestuckuniverse:capitalist_modus.book_desc=Some people say that nothing in life is free, and the Capitalist Modus stands by that premise, itíll allow you to retrieve any item from any slot, but at the price of some boondollars, but fear not, buying every item at once will grant you a 20% discount. Each itemís price is determined by its stack size and grist cost. This modus is mostly suitable for players with copious amounts of boons, or for any local Overlord that might be associated with capitalism.
-minestuckuniverse:mod_us.book_desc=The ModUs is practically the opposite to the capitalist modus, as itíll let you retrieve items for free, however, youíll have to share your Sylladex with everyone else that has this Fetch Modus. This does come with some perks, as you wonít lose your Sylladex when you die. Perfect for people that like to share their belongings, and for a certain SBURB session associated with communism.
-minestuckuniverse:operandi_modus.book_desc=The Operandi Modus gives you a special item each time you try to retrieve something from your Sylladex, youíll then be tasked to use said item correctly, whether itís by throwing it, eating it, or hitting something with it, to get your item back. Great for people that like doing mindless tasks.
+minestuckuniverse:wild_magic_modus.book_desc=The Wild Magic Modus, One of the more unpredictable fetch modi that exist, this modus makes you roll a d20 dice every time you try to retrieve an item, rolling a high enough number will let you do so, other than that, you‚Äôll be granted certain effects tied to each number. This modus is suitable for people that like to rely on luck, or for adept light players that might have it in abundance.
+minestuckuniverse:weight_modus.book_desc=This modus is slightly different from the rest, as it has its own weight of sorts, with it increasing every time an item is captchalogued, reducing the user‚Äôs walking speed by a noticeable amount. However, the modus‚Äô weight can be counteracted by captchaloguing float stones. This modus is perfect for people that don‚Äôt mind slowing down for a bit, or for those rich enough in build grist to alchemize enough float stones.
+minestuckuniverse:book_modus.book_desc=The Book Modus, one of the handier Fetch Modi there are,++ and the one you‚Äôre currently using right now! This modus stores all your cards into an alphabetically organized book, filled with boundless wisdom about most, if not some items. It‚Äôs one downside being that you can only see one card per page, making it incredibly tedious to use when storing large quantities of items. You can also get a physical copy of the book by clicking the Publish button, allowing you to share your sylladex with others, or storing your items by categories. You can then swap it out with your currently active book by simply captchaloguing it.
+minestuckuniverse:capitalist_modus.book_desc=Some people say that nothing in life is free, and the Capitalist Modus stands by that premise, it‚Äôll allow you to retrieve any item from any slot, but at the price of some boondollars, but fear not, buying every item at once will grant you a 20% discount. Each item‚Äôs price is determined by its stack size and grist cost. This modus is mostly suitable for players with copious amounts of boons, or for any local Overlord that might be associated with capitalism.
+minestuckuniverse:mod_us.book_desc=The ModUs is practically the opposite to the capitalist modus, as it‚Äôll let you retrieve items for free, however, you‚Äôll have to share your Sylladex with everyone else that has this Fetch Modus. This does come with some perks, as you won‚Äôt lose your Sylladex when you die. Perfect for people that like to share their belongings, and for a certain SBURB session associated with communism.
+minestuckuniverse:operandi_modus.book_desc=The Operandi Modus gives you a special item each time you try to retrieve something from your Sylladex, you‚Äôll then be tasked to use said item correctly, whether it‚Äôs by throwing it, eating it, or hitting something with it, to get your item back. Great for people that like doing mindless tasks.
 minestuckuniverse:onion_modus.book_desc=Like onions, this Fetch Modus has layers. The Onion Modus stores items into ring-shaped layers, with each layer having more items than the last, only allowing you to retrieve items from the top-most layer.
 minestuckuniverse:slime_modus.book_desc=The Slime Modus is shaped like a friend, then retrieving items while using it, a slime containing said item will appear in its place. You can get your item back by either killing the slime, or taming it by feeding it apples, raw chicken, cookies or carrots. These peculiar slimes will excrete a special substance known as Cruxite Gel when well fed, and will grow in size or change color when fed an enchanted golden apple or a cruxite dowel respectively. This modus is perfect for people that like having a lot of pets, or cold-hearted murderers.
 
 minestuckuniverse:cyclone_modus.book_desc=Crated with 4 Cruxite Lumps surrounding a Captchalogue Card, the Cyclone Modus arranges all of your cards in a slowly rotating, ring-like shape, only allowing you to access the top-most card in the ring. Perfect for stimulating your patience, resourcefulness, and card management.
 minestuckuniverse:energy_modus.book_desc=> The Energy Modus is one of the more versatile, yet more energy-consuming quite modus to use, or well, the only energy-consuming modus that exists. With this modus, you'll be able to captchalogue and retrieve any item at any time, as long as you have enough energy stored. The Energy Modus can be charged by captchaloguing an Energy Cell, each one corresponding to one point. Starting off your Energy Modus will only be able to hold up to 20 energy points, with it gaining more capacity as you climb your echeladder, maxing out at 100 points.
 
-minestuckuniverse:hue_modus.book_desc=The Hue Modus acts like a regular Stack Modus, this means that youíll only be able to retrieve the first item in your sylladex, but it also sorts items by their color, the order being Red > Orange > Yellow > Green > Cyan > Blue > Magenta > Light Gray > Dark Gray > Rainbow.
+minestuckuniverse:hue_modus.book_desc=The Hue Modus acts like a regular Stack Modus, this means that you‚Äôll only be able to retrieve the first item in your sylladex, but it also sorts items by their color, the order being Red > Orange > Yellow > Green > Cyan > Blue > Magenta > Light Gray > Dark Gray > Rainbow.
 minestuckuniverse:hue_stack_modus.book_desc=The Hue-Stack modus is a step up from the Hue Modus, as it not just stores your items by color, but it also lets you retrieve the first captchalogued item from each color. This Modus is perfect for people that like to sort their skittles.
 status.alchemodus.alchemArtifact=yeah no, that's not going to happen lmao.
 
@@ -1328,65 +1328,65 @@ godTierSkill.defense.name=Defense
 godTierSkill.speed.name=Athletics
 godTierSkill.luck.name=Luck
 
-godTierSkill.general.tooltipName=ßb	God Tier %s
-godTierSkill.attack.tooltipName=ßaAttack Level %s
-godTierSkill.defense.tooltipName=ßaDefense Level %s
-godTierSkill.speed.tooltipName=ßaAthletics Level %s
-godTierSkill.luck.tooltipName=ßaLuck Level %s
+godTierSkill.general.tooltipName=¬ßb	God Tier %s
+godTierSkill.attack.tooltipName=¬ßaAttack Level %s
+godTierSkill.defense.tooltipName=¬ßaDefense Level %s
+godTierSkill.speed.tooltipName=¬ßaAthletics Level %s
+godTierSkill.luck.tooltipName=¬ßaLuck Level %s
 
-godTierSkill.general.tooltipDesc=ß9Climb the GOD TIERS by allocating experience levels to your other SKILLS.
-godTierSkill.attack.tooltipDesc=ß9+%s%% Attack Damage
-godTierSkill.defense.tooltipDesc=ß9+%s Armor Toughness
-godTierSkill.defense.tooltipDesc2=ß9%s%% Damage Reduction
-godTierSkill.speed.tooltipDesc=ß9+%s%% Movement Speed when Sprinting
-godTierSkill.luck.tooltipDesc=ß9+%s Luck
-godTierSkill.tooltipNextLevel=ßa%s more levels to upgrade
+godTierSkill.general.tooltipDesc=¬ß9Climb the GOD TIERS by allocating experience levels to your other SKILLS.
+godTierSkill.attack.tooltipDesc=¬ß9+%s%% Attack Damage
+godTierSkill.defense.tooltipDesc=¬ß9+%s Armor Toughness
+godTierSkill.defense.tooltipDesc2=¬ß9%s%% Damage Reduction
+godTierSkill.speed.tooltipDesc=¬ß9+%s%% Movement Speed when Sprinting
+godTierSkill.luck.tooltipDesc=¬ß9+%s Luck
+godTierSkill.tooltipNextLevel=¬ßa%s more levels to upgrade
 
-badge.secret.read=ß9???
-badge.level.read=ß9Requires God Tier %s to unlock.
+badge.secret.read=¬ß9???
+badge.level.read=¬ß9Requires God Tier %s to unlock.
 badge.giftOfGab.name=The Gift of Gab
-badge.giftOfGab.tooltip=ß9The very first badge you unlock after clearing your first GOD TIER, it enables you to engage in simple, direct dialogue with others, without requiring any gimmicks to facilitate communication.
-badge.giftOfGab.unlock=ßaWhy don't you have this already?
+badge.giftOfGab.tooltip=¬ß9The very first badge you unlock after clearing your first GOD TIER, it enables you to engage in simple, direct dialogue with others, without requiring any gimmicks to facilitate communication.
+badge.giftOfGab.unlock=¬ßaWhy don't you have this already?
 badge.skeletonKey.name=Skeleton Key Badge
-badge.skeletonKey.unlock=ßaRequires 16 Auxilatrix Keys and a Skeleton nearby to unlock.
-badge.skeletonKey.tooltip=ß9This badge proves your dedication to locks, it grants you the power of the SKELETON KEY, allowing you to unlock any lock with ease, even ones that aren't shaped like traditional locks.
+badge.skeletonKey.unlock=¬ßaRequires 16 Auxilatrix Keys and a Skeleton nearby to unlock.
+badge.skeletonKey.tooltip=¬ß9This badge proves your dedication to locks, it grants you the power of the SKELETON KEY, allowing you to unlock any lock with ease, even ones that aren't shaped like traditional locks.
 badge.patchOfTheHoarder.name=Patch of the Hoarder
-badge.patchOfTheHoarder.unlock=ßaRequires 256 Captchalogue Cards and 5000 Shale Grist to unlock.
-badge.patchOfTheHoarder.tooltip=ß9This badge is further proof of love towards carrying items around with you. It permanently unlocks every remaining slot in your inventory.
+badge.patchOfTheHoarder.unlock=¬ßaRequires 256 Captchalogue Cards and 5000 Shale Grist to unlock.
+badge.patchOfTheHoarder.tooltip=¬ß9This badge is further proof of love towards carrying items around with you. It permanently unlocks every remaining slot in your inventory.
 badge.hoardOfTheAlchemizer.name=Hoard of the Alchemizer Badge
-badge.hoardOfTheAlchemizer.tooltip=ß9This badge proves your devotion towards ALCHEMY, granting you an unlimited supply of %s.
+badge.hoardOfTheAlchemizer.tooltip=¬ß9This badge proves your devotion towards ALCHEMY, granting you an unlimited supply of %s.
 badge.hoardOfTheAlchemizer.tooltip.any=a grist type of your choice
-badge.hoardOfTheAlchemizer.unlock=ßaRequires %s of each Grist Type in the first tab to unlock.
+badge.hoardOfTheAlchemizer.unlock=¬ßaRequires %s of each Grist Type in the first tab to unlock.
 badge.karma.name=Medal of the Univerally Charismatic
-badge.karma.unlock=ßaRequires 128 Moonstones and 8000 Gold Grist to unlock.
-badge.karma.tooltip=ß9This badge proves that the universe has grown a liking towards you, giving you a better chance at triggering your conditional immortality when killed.
+badge.karma.unlock=¬ßaRequires 128 Moonstones and 8000 Gold Grist to unlock.
+badge.karma.tooltip=¬ß9This badge proves that the universe has grown a liking towards you, giving you a better chance at triggering your conditional immortality when killed.
 badge.revenantsRetaliation.name=The Revenant's Retaliation Badge
-badge.revenantsRetaliation.tooltip=ß9Unlocking this badge proves that your daring enough to bring a living Creeper to your QUEST BED, giving you the upper hand in combat by boosting your stats and hurting every other player and hostile mob upon triggering your CONDITIONAL IMORTALITY.
-badge.revenantsRetaliation.unlock=ßaRequires 10000 Diamond Grist and a Creeper nearby to unlock.
+badge.revenantsRetaliation.tooltip=¬ß9Unlocking this badge proves that your daring enough to bring a living Creeper to your QUEST BED, giving you the upper hand in combat by boosting your stats and hurting every other player and hostile mob upon triggering your CONDITIONAL IMORTALITY.
+badge.revenantsRetaliation.unlock=¬ßaRequires 10000 Diamond Grist and a Creeper nearby to unlock.
 badge.effectBuff.name=Medal of the Universally Attuned
-badge.effectBuff.tooltip=ß9This Badge proves your deep connection with the UNIVERSE and its components, giving your Aspect Effect a significant buff.
-badge.effectBuff.unlock=ßaRequires 5000 Quartz Grist and 5 Rainbow-Eyed Frogs nearby to unlock.
+badge.effectBuff.tooltip=¬ß9This Badge proves your deep connection with the UNIVERSE and its components, giving your Aspect Effect a significant buff.
+badge.effectBuff.unlock=¬ßaRequires 5000 Quartz Grist and 5 Rainbow-Eyed Frogs nearby to unlock.
 
 badge.strifeBadge.name=Medal of the Omni-Dextrous
-badge.strifeBadge.tooltip=ß9This badge proves your mastery over WEAPONS and COMBAT, granting you the ability to use them without the need of your STRIE SPECIBUS.
-badge.strifeBadge.unlock=ßaRequires 2 Strife Cards and 5 different LEGENDARY ZILLIUM WEAPONS to unlock
+badge.strifeBadge.tooltip=¬ß9This badge proves your mastery over WEAPONS and COMBAT, granting you the ability to use them without the need of your STRIE SPECIBUS.
+badge.strifeBadge.unlock=¬ßaRequires 2 Strife Cards and 5 different LEGENDARY ZILLIUM WEAPONS to unlock
 badge.builderBadge.name=Badge of the Architecturally Adept
-badge.builderBadge.tooltip=ß9This badge proves your mastery over matter and the power of BUILDING, allowing you to use certain building techniques outside of EDIT MODE.
-badge.builderBadge.unlock=ßaRequires The Battlepick of Zilydew and 20k Build Grist to unlock.
+badge.builderBadge.tooltip=¬ß9This badge proves your mastery over matter and the power of BUILDING, allowing you to use certain building techniques outside of EDIT MODE.
+badge.builderBadge.unlock=¬ßaRequires The Battlepick of Zilydew and 20k Build Grist to unlock.
 
 badge.overlord.name=World Ender's Badge
-badge.overlord.tooltip=ß9You have become the bane of the universe, nothing can stop you now.
+badge.overlord.tooltip=¬ß9You have become the bane of the universe, nothing can stop you now.
 
 badge.masterBadgeBrave.name=Badge of the Brave
-badge.masterBadgeBrave.tooltip=ß9A badge suited for the brave, it grants you a %s%% chance at completely blocking most incoming attacks.
+badge.masterBadgeBrave.tooltip=¬ß9A badge suited for the brave, it grants you a %s%% chance at completely blocking most incoming attacks.
 badge.masterBadgeWise.name=Badge of the Wise
-badge.masterBadgeWise.tooltip=ß9A badge suited for the wise, it grants you a %s%% chance to earn more spoils from Mobs and Underlings, while also increasing your natural Looting level by %s.
+badge.masterBadgeWise.tooltip=¬ß9A badge suited for the wise, it grants you a %s%% chance to earn more spoils from Mobs and Underlings, while also increasing your natural Looting level by %s.
 badge.masterBadgeMighty.name=Badge of the Mighty
-badge.masterBadgeMighty.tooltip=ß9A badge suited for the mighty, it grants you a %s%% chance at doubling the effectiveness of any attack.
+badge.masterBadgeMighty.tooltip=¬ß9A badge suited for the mighty, it grants you a %s%% chance at doubling the effectiveness of any attack.
 
-badge.class.unlock=ßaRequires %s Experience Levels to unlock.
+badge.class.unlock=¬ßaRequires %s Experience Levels to unlock.
 badge.page.name=Page's Potential
-badge.page.tooltip=ß9Earning this tech has proven your perseverance as a PAGE, giving you a major boost on all GOD TIER stats and Aspect Effect.
+badge.page.tooltip=¬ß9Earning this tech has proven your perseverance as a PAGE, giving you a major boost on all GOD TIER stats and Aspect Effect.
 
 lunarSway.prospit=Prospit
 lunarSway.derse=Derse
@@ -1484,8 +1484,8 @@ tech.muse_requiem.tooltip=Taps into the full potential of your role as a @MUSE@,
 tech.lord_decree.name=Lord's Decree
 tech.lord_decree.tooltip=Taps into the full potential of your role as a @LORD@, allowing you to inflict a negative version of your Aspect Effect upon all nearby players and hostile mobs.
 
-badge.aspect.unlock=ßaRequires 40 Experience Levels and 96 Hero Stone Shards of %s to unlock.
-badge.aspect.unlock.aux=ßaRequires 40 Experience Levels, 64 %s Shards%s and %s %s Shards to unlock.
+badge.aspect.unlock=¬ßaRequires 40 Experience Levels and 96 Hero Stone Shards of %s to unlock.
+badge.aspect.unlock.aux=¬ßaRequires 40 Experience Levels, 64 %s Shards%s and %s %s Shards to unlock.
 badge.aspect.unlock.aux.entry=, %s %s Shards
 
 tech.lightbound_wisdom.name=Lightbound's Wisdom
@@ -1626,13 +1626,13 @@ godTierTitle.default=True %s
 
 godTierTitle.space.1=Quantum Entangler
 godTierTitle.space.2=Radioactive Renegade
-godTierTitle.space.3=Heisenbergís Uncertainty
+godTierTitle.space.3=Heisenberg‚Äôs Uncertainty
 godTierTitle.space.4=Guardian of the Galaxy
 godTierTitle.space.5=Master of Matter
-godTierTitle.space.max=Subject of Schrˆdinger
+godTierTitle.space.max=Subject of Schr√∂dinger
 godTierTitle.time.1=Time's Relative
 godTierTitle.time.3=Hourglass Flipper
-godTierTitle.time.4=Professor Paradoxís Right Hand Man
+godTierTitle.time.4=Professor Paradox‚Äôs Right Hand Man
 godTierTitle.time.5=Chronoquantum Paradox Cognoscente
 godTierTitle.time.max=Temporal of Flesh
 
@@ -1692,7 +1692,7 @@ godTierTitle.knight.light.5=Multiverse Collider
 godtierTitle.knight.light.6=Stormbound Guardian
 
 
-godTierTitle.knight.space.3=Echidnaís Appointed Champion
+godTierTitle.knight.space.3=Echidna‚Äôs Appointed Champion
 godTierTitle.knight.space.4=Keeper of the Cosmos
 
 godTierTitle.knight.doom.2=Keeper of the First Flame
@@ -1702,7 +1702,7 @@ godTierTitle.page.heart.1=Speedo Enthusiast
 godTierTitle.lord.rage.2=More than just a PEZ Dispenser
 godTierTitle.lord.rage.3=Village Obliterator
 godTierTitle.lord.rage.4=Bedrock Berserker
-godTierTitle.lord.rage.5=Lazurtís Legendary Wielder
+godTierTitle.lord.rage.5=Lazurt‚Äôs Legendary Wielder
 godTierTitle.lord.rage.6=Post-Scratch Session Smiter
 godTierTitle.lord.rage.7=Enraged Godhead Unleashed
 
@@ -1722,7 +1722,7 @@ godTierTitle.5=Universe Unraveler 2: Die Harder
 godTierTitle.6=Aspect Acolyte
 godTierTitle.7=Godhood Graduate
 
-godTierTitle.page.8=%sís Final Form
+godTierTitle.page.8=%s‚Äôs Final Form
 
 godTierTitle.knight.time.5=Clockstopper
 
@@ -1778,8 +1778,8 @@ godTierTitle.maid.space.3=Keeper of Quantum Matter
 
 godTierTitle.lord.mind.2=The First Thinker
 godTierTitle.lord.mind.3=Just According to Cake
-godTierTitle.lord.mind.6=Your next line is ìOh cool, leveled upî
-godTierTitle.lord.mind.7=A Billion Calculations a Second and Theyíre All Wrong
+godTierTitle.lord.mind.6=Your next line is ‚ÄúOh cool, leveled up‚Äù
+godTierTitle.lord.mind.7=A Billion Calculations a Second and They‚Äôre All Wrong
 godTierTitle.lord.mind.max=Wealthier Than Scrooge McDuck
 
 godTierTitle.knight.breath.1=Blue Blur
@@ -1794,23 +1794,23 @@ godTierTitle.thief.blood.2=Hemoglobin Heathen
 
 godTierTitle.thief.light.1=Cleromancer
 
-status.hopey.tallyHo=ßeTALLY HO
-status.hopey.gadzooks=ßeGADZOOKS
-status.hopey.boyHowdy=ßeBOY HOWDY
-status.hopey.holyToledo=ßeHOLY TOLEDO
-status.hopey.landSakesAlive=ßeLAND SAKES ALIVE
-status.hopey.helloNurse=ßeHELLO NURSE
-status.hopey.byGum=ßeBY GUM
-status.hopey.ayChihuahua=ßeAY CHIHUAHUA
-status.hopey.bobUncle=ßeBOB'S YOUR UNCLE
-status.hopey.sockItToMe=ßeSOCK IT TO ME
-status.hopey.shiverMeTimbers=ßeSHIVER ME TIMBERS
-status.hopey.winOneForTheGipper=ßeWIN ONE FOR THE GIPPER
-status.hopey.jumpinJehosaPhat=ßeJUMPIN' JEHOSA PHAT
-status.hopey.shuckyDarn=ßeSHUCKY DARN
-status.hopey.fiddleFaddle=ßeFIDDLE FADDLE
+status.hopey.tallyHo=¬ßeTALLY HO
+status.hopey.gadzooks=¬ßeGADZOOKS
+status.hopey.boyHowdy=¬ßeBOY HOWDY
+status.hopey.holyToledo=¬ßeHOLY TOLEDO
+status.hopey.landSakesAlive=¬ßeLAND SAKES ALIVE
+status.hopey.helloNurse=¬ßeHELLO NURSE
+status.hopey.byGum=¬ßeBY GUM
+status.hopey.ayChihuahua=¬ßeAY CHIHUAHUA
+status.hopey.bobUncle=¬ßeBOB'S YOUR UNCLE
+status.hopey.sockItToMe=¬ßeSOCK IT TO ME
+status.hopey.shiverMeTimbers=¬ßeSHIVER ME TIMBERS
+status.hopey.winOneForTheGipper=¬ßeWIN ONE FOR THE GIPPER
+status.hopey.jumpinJehosaPhat=¬ßeJUMPIN' JEHOSA PHAT
+status.hopey.shuckyDarn=¬ßeSHUCKY DARN
+status.hopey.fiddleFaddle=¬ßeFIDDLE FADDLE
 
 status.skaianScroll.unlock=You learned how to use %s!
-status.skaianScroll.alreadyUnlocked=ßcYou already know %s.
-status.skaianScroll.outOfScrolls=ßcThe scroll refuses to lend you its wisdom.
+status.skaianScroll.alreadyUnlocked=¬ßcYou already know %s.
+status.skaianScroll.outOfScrolls=¬ßcThe scroll refuses to lend you its wisdom.
 status.skaianScroll.empty=It's blank...?
