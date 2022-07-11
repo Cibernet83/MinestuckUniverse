@@ -30,9 +30,6 @@ public class Badge extends Skill
     }
 
     @Override
-    public boolean canUse(World world, EntityPlayer player) { return !(player.isPotionActive(MSUPotions.GOD_TIER_LOCK) && player.getActivePotionEffect(MSUPotions.GOD_TIER_LOCK).getAmplifier() >= 2); }
-
-    @Override
     public boolean canDisable() { return true; }
 
     @SideOnly(Side.CLIENT)
