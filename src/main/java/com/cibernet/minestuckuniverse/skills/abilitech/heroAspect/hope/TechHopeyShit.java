@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
 
 public class TechHopeyShit extends TechHeroAspect
 {
-	private static final String[] STATUS_OPTIONS = new String[] {"tallyHo", "gadzooks", "boyHowdy", "holyToledo", "landSakesAlive", "helloNurse", "byGum", "ayChihuahua", "bobUncle", "sockItToMe", "shiverMeTimbers", "winOneForTheGipper", "jumpyJehosaPhat", "shuckyDarn", "fiddleFaddle", ""};
+	private static final String[] STATUS_OPTIONS = new String[] {"tallyHo", "gadzooks", "boyHowdy", "holyToledo", "landSakesAlive", "helloNurse", "byGum", "ayChihuahua", "bobUncle", "sockItToMe", "shiverMeTimbers", "winOneForTheGipper", "jumpinJehosaPhat", "shuckyDarn", "fiddleFaddle"};
 
 	public TechHopeyShit(String name)
 	{
