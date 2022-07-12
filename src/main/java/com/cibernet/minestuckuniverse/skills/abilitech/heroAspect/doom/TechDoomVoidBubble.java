@@ -9,6 +9,9 @@ import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 
+import com.mraof.minestuck.util.IdentifierHandler;
+import com.mraof.minestuck.util.MinestuckPlayerData;
+import com.mraof.minestuck.util.Title;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.RayTraceResult;
@@ -17,9 +20,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class TechDoomBubble extends TechHeroAspect
+public class TechDoomVoidBubble extends TechHeroAspect
 {
-	public TechDoomBubble(String name)
+	public TechDoomVoidBubble(String name)
 	{
 		super(name, EnumAspect.DOOM, 10000, EnumTechType.DEFENSE);
 	}
@@ -65,5 +68,21 @@ public class TechDoomBubble extends TechHeroAspect
 		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA,2, 0x001856, 0x1C1C1C);
 
 		return true;
+	}
+
+	@Override
+	public List<String> getTags()
+	{
+		List<String> list = super.getTags();
+		list.add(0, "@VOID@");
+
+		return list;
+	}
+
+	@Override
+	public boolean canAppearOnList(World world, EntityPlayer player)
+	{
+		Title title = MinestuckPlayerData.getTitle(IdentifierHandler.encode(player));
+		return title != null && (title.getHeroAspect() == EnumAspect.VOID || title.getHeroAspect() == EnumAspect.DOOM);
 	}
 }
