@@ -272,7 +272,8 @@ public class GodTierData implements IGodTierData
 	@Override
 	public void unequipTech(int slot)
 	{
-		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))].onUnequipped(owner.world, owner, Math.min(equippedTech.length-1, Math.max(0, slot)));
+		if(!owner.world.isRemote)
+			equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))].onUnequipped(owner.world, owner, Math.min(equippedTech.length-1, Math.max(0, slot)));
 		equippedTech[Math.min(equippedTech.length-1, Math.max(0, slot))] = null;
 	}
 

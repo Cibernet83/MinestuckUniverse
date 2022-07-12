@@ -5,6 +5,8 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.client.render.RenderPlayerCloak;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
+import com.cibernet.minestuckuniverse.potions.MSUPotions;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -141,17 +143,19 @@ public class TechMindCloak extends TechHeroAspect
 	@SideOnly(Side.CLIENT)
 	public static void onRenderPlayer(RenderPlayerEvent.Pre event)
 	{
+		if(event.getEntityPlayer().getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.MIND_VOID_ILLUSORY_CLOAK))
 		event.setCanceled(renderCloak(event.getEntityLiving()));
 	}
 
 	@SideOnly(Side.CLIENT)
 	protected static boolean renderCloak(EntityLivingBase entity)
 	{
-		if(!entity.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isCloaked())
+		if(Minecraft.getMinecraft().player.isPotionActive(MSUPotions.MIND_FORTITUDE) || !entity.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isCloaked())
 		{
 			cloakedCache.remove(entity);
 			return false;
 		}
+
 
 		NBTTagCompound cloakData = entity.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getCloakData();
 
@@ -262,12 +266,13 @@ public class TechMindCloak extends TechHeroAspect
 
 
 
+
 	@SubscribeEvent
 	public static void canTargetPlayer(PlayerEvent.Visibility event)
 	{
 		NBTTagCompound cloakData = event.getEntityPlayer().getCapability(MSUCapabilities.BADGE_EFFECTS, null).getCloakData();
 
-		if(cloakData != null && cloakData.hasKey("Block") || cloakData.hasKey("Entity"))
+		if(cloakData != null && (cloakData.hasKey("Block") || cloakData.hasKey("Entity")))
 			event.modifyVisibility(0);
 
 	}
