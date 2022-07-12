@@ -353,6 +353,7 @@ public class MSUSkills
 	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon");
 	public static final Abilitech BREATH_SUPERSONIC_SPEED = new TechBreathSpeed("supersonic_speed");
 	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind");
+	public static final Abilitech BREATH_ENTOMBING_TWISTER = new TechBreathBubble("entombing_twister", 5000);
 	public static final Abilitech BREATH_SPACE_VERTIGO_BLOCK = new TechBreathSpaceFallProof("vertigo_block", 5000);
 
 	public static final Abilitech LIGHT_STORM_OF_THE_STRIKER = new TechLightStriker("storm_of_the_striker");

@@ -786,6 +786,7 @@ death.attack.minestuckuniverse.terminalDemise=%s met their demise.
 death.attack.minestuckuniverse.terminalDemise.external=%s met their demise to the hands of %s.
 death.attack.minestuckuniverse.hopefulOutburst=%s failed %s's vibe check.
 death.attack.minestuckuniverse.spiritBond=%s soul wasn't as strong as %s's.
+death.attack.minestuckuniverse.suffocate=%s ran out of Breath.
 
 status.heroicDeath=%s's death was Heroic.
 status.justDeath=%s's death was Just.
@@ -1511,6 +1512,8 @@ tech.vertigo_block.name=Vertigo Block
 tech.vertigo_block.tooltip=Completely negates fall damage while this Abilitech is equipped.
 tech.supersonic_speed.name=Supersonic Speed
 tech.supersonic_speed.tooltip=Taps into the essense of @BREATH@ to passively give the user the ability to traverse the ground at breakneck speeds.  Can be toggled on/off by using the Abilitech.
+tech.entombing_twister.name=Entombing Twister
+tech.entombing_twister.tooltip=Casts a powerful bubble upon the target that slowly sucks out all of the air inside of it. The bubble prevents anyone from coming in or coming out.
 
 tech.temporal_recall.name=Temporal Recall
 tech.temporal_recall.tooltip=Lets you travel through @TIME@ itself, restoring your health and position to how they were 5 seconds in the past.
