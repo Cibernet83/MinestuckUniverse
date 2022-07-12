@@ -371,7 +371,7 @@ public class MSUSkills
 	public static final Abilitech DOOM_WITHERING_WHISPER = new TechDoomDecay("withering_whisper");
 	public static final Abilitech DOOM_CHAINS_OF_DESPAIR = new TechDoomChain("chains_of_despair");
 	public static final Abilitech DOOM_SURVIVORS_BIND = new TechDoomBind("survivors_bind");
-	public static final Abilitech DOOM_VOID_ABYSS_CAGE = new TechVoidDoomBubble("abyss_cage");
+	public static final Abilitech DOOM_VOID_ABYSS_CAGE = new TechDoomBubble("abyss_cage");
 
 	public static final Abilitech LIFE_LIFEFORCE_LEECH = new TechLifeLeech("lifeforce_leech");
 	public static final Abilitech LIFE_HEALING_AURA = new TechLifeAura("healing_aura");

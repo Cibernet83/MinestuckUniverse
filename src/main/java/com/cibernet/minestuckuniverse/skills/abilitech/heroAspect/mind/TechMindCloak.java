@@ -9,6 +9,9 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
+import com.mraof.minestuck.util.IdentifierHandler;
+import com.mraof.minestuck.util.MinestuckPlayerData;
+import com.mraof.minestuck.util.Title;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -36,6 +39,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class TechMindCloak extends TechHeroAspect
 {
@@ -266,5 +270,21 @@ public class TechMindCloak extends TechHeroAspect
 		if(cloakData != null && cloakData.hasKey("Block") || cloakData.hasKey("Entity"))
 			event.modifyVisibility(0);
 
+	}
+
+	@Override
+	public List<String> getTags()
+	{
+		List<String> list = super.getTags();
+		list.add(0, "@VOID@");
+
+		return list;
+	}
+
+	@Override
+	public boolean canAppearOnList(World world, EntityPlayer player)
+	{
+		Title title = MinestuckPlayerData.getTitle(IdentifierHandler.encode(player));
+		return title != null && (title.getHeroAspect() == EnumAspect.VOID || title.getHeroAspect() == EnumAspect.MIND);
 	}
 }

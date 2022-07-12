@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.voidAspect;
+package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom;
 
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
@@ -17,11 +17,11 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class TechVoidDoomBubble extends TechHeroAspect
+public class TechDoomBubble extends TechHeroAspect
 {
-	public TechVoidDoomBubble(String name)
+	public TechDoomBubble(String name)
 	{
-		super(name, EnumAspect.VOID, 10000, EnumTechType.DEFENSE);
+		super(name, EnumAspect.DOOM, 10000, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -66,16 +66,4 @@ public class TechVoidDoomBubble extends TechHeroAspect
 
 		return true;
 	}
-
-
-	@Override
-	public List<String> getTags()
-	{
-		List<String> list = super.getTags();
-		list.add(0, "@DOOM@");
-
-		return list;
-	}
-
-
 }

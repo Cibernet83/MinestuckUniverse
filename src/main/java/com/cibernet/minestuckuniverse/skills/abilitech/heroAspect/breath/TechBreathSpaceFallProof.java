@@ -23,7 +23,7 @@ public class TechBreathSpaceFallProof extends TechHeroAspect
 {
 	public TechBreathSpaceFallProof(String name, long cost)
 	{
-		super(name, EnumAspect.SPACE, cost, EnumTechType.PASSIVE);
+		super(name, EnumAspect.BREATH, cost, EnumTechType.PASSIVE);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class TechBreathSpaceFallProof extends TechHeroAspect
 	public List<String> getTags()
 	{
 		List<String> list = super.getTags();
-		list.add(0, "@BREATH@");
+		list.add(0, "@SPACE@");
 
 		return list;
 	}
