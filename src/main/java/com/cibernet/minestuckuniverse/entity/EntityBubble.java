@@ -99,8 +99,6 @@ public class EntityBubble extends Entity
 			for(EntityLivingBase entityLivingBase : world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox()))
 				entityLivingBase.attackEntityFrom(TechBreathBubble.DAMAGE_SOURCE, 2);
 		}
-
-		System.out.println(getBubbleSize());
 	}
 
 	@Override

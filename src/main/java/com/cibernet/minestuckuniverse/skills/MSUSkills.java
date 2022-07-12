@@ -336,6 +336,8 @@ public class MSUSkills
 	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem");
 	public static final Abilitech LORD_DECREE = new TechLord("lord_decree");
 
+	public static final Abilitech ASPECTRAL_BOLT = new TechAspectralBolt("aspectral_bolt", 5000);
+
 	public static final Abilitech SPACE_WORMHOLE_TROTTER = new TechSpaceTele("wormhole_trotter");
 	public static final Abilitech SPACE_ANCHORED_WORMHOLE = new TechSpaceAnchoredTele("anchored_wormhole");
 	public static final Abilitech SPACE_SPATIAL_WARP = new TechSpaceTargetTele("spatial_warp");
