@@ -1520,11 +1520,13 @@ tech.temporal_recall.tooltip=Lets you travel through @TIME@ itself, restoring yo
 tech.chronofreeze.name=Chronofreeze
 tech.chronofreeze.tooltip=Uses the aspect of @TIME@ to conjure Time Stop for a short period of time upon a target, completely freezing them in place.
 tech.flow_accelerator.name=Flow Accelerator
-tech.flow_accelerator.tooltip=Speeds up whatever block you're looking at whilst being held.
+tech.flow_accelerator.tooltip=Speeds up whatever block you're looking at for as long as you hold down this Abilitech.
 tech.rapid_rewind.name=Rapid Rewind
 tech.rapid_rewind.tooltip=Regresses the targeted creature or object in time whilst held, mimicking the effects of the Time Tables.
 tech.celestial_shift.name=Celestial Shift
 tech.celestial_shift.tooltip=Manipulates @TIME@ itself to advance or rewind the current time of day. Its will not be noticeable in dimensions without a day-night cycle like The Medium.
+tech.accelerando.name=Accelerando
+tech.accelerando.tooltip=Pushes @TIME@ forwards for the targeted entity, speeding them up for as long as this Abilitech is active. Tethers to target.
 
 tech.spatial_warp.name=Spatial Warp
 tech.spatial_warp.tooltip=Crouch while pressing to summon a Teleport Focus Point. Teleports the targeted entity to your set Anchor Point, or a nearby random position if none is set.
