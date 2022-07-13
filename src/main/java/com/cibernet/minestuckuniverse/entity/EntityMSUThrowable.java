@@ -6,16 +6,21 @@ import com.cibernet.minestuckuniverse.items.MSUThrowableBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.IPropertyThrowable;
+import com.google.common.collect.Multimap;
+
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
@@ -30,7 +35,8 @@ public class EntityMSUThrowable extends EntityThrowable
 {
     private static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityMSUThrowable.class, DataSerializers.ITEM_STACK);
     private static final DataParameter<Float> SIZE = EntityDataManager.createKey(EntityMSUThrowable.class, DataSerializers.FLOAT);
-
+    private static final DataParameter<Boolean> PLAIN = EntityDataManager.createKey(EntityMSUThrowable.class, DataSerializers.BOOLEAN);
+    
     private NBTTagCompound projectileData = new NBTTagCompound();
 
     public EntityMSUThrowable(World worldIn) {
@@ -63,6 +69,7 @@ public class EntityMSUThrowable extends EntityThrowable
         super.entityInit();
         dataManager.register(STACK, new ItemStack(MinestuckUniverseItems.wizardbeardYarn));
         dataManager.register(SIZE, 1f);
+        dataManager.register(PLAIN, false);
     }
 
     @Override
@@ -123,6 +130,9 @@ public class EntityMSUThrowable extends EntityThrowable
     {
         if (!this.world.isRemote)
         {
+        	if(this.ticksExisted <= 4 && result.entityHit != null && result.entityHit.equals(this.thrower))
+        		return;
+        	
             boolean destroy = true;
             boolean isEntity = result.entityHit != null;
 
@@ -145,6 +155,46 @@ public class EntityMSUThrowable extends EntityThrowable
                     stack.damageItem(1, thrower);
                 spawnItem(posX, posY + (EnumFacing.DOWN.equals(result.sideHit) ? -0.3 : 0), posZ, 5);
                 this.setDead();
+            }
+            
+            if(getPlainHit() && isEntity)
+            {
+            	Multimap<String, AttributeModifier> att = stack.getAttributeModifiers(EntityEquipmentSlot.MAINHAND);
+            	float dmg = 1;
+            	if(att == null || att.size() <= 0)
+            		dmg *= (float) Math.min(5, (stack.getCount()/stack.getMaxStackSize() + 1) * Math.min(2.5, 1 + (motionX * motionX + motionY * motionY + motionZ * motionZ)));
+            	else
+            	{
+            		double attkSpeed = 4;
+            		for(String key : att.keySet())
+            		{
+            			double baseAdd = 0;
+            			double baseMult = 1;
+            			double finalMult = 1;
+            			for(AttributeModifier mod : att.get(key))
+            			{
+            				switch(mod.getOperation())
+            				{
+            				default:
+            					baseAdd += mod.getAmount();
+            					break;
+            				case 1:
+            					baseMult *= mod.getAmount();
+            					break;
+            				case 2:
+            					finalMult *= mod.getAmount();
+            					break;
+            				}
+            			}
+            			if(key.toLowerCase().contains("speed"))
+            				attkSpeed = ((attkSpeed * baseMult) + baseAdd) * finalMult;
+            			if(key.toLowerCase().contains("attack"))
+            				dmg = (float) (((dmg * baseMult) + baseAdd) * finalMult);
+            		}
+            		
+            		dmg *= Math.min(1, ((ticksExisted/20)%(1/attkSpeed) + .05)/(1/attkSpeed));
+            	}
+            	result.entityHit.attackEntityFrom(DamageSource.causeIndirectDamage(this, this.thrower), dmg);
             }
         }
     }
@@ -172,10 +222,13 @@ public class EntityMSUThrowable extends EntityThrowable
         if(!(getThrower() instanceof EntityPlayer && ((EntityPlayer) getThrower()).isCreative()))
             items.add(getStack());
 
-        List<WeaponProperty> propertyList = ((IPropertyWeapon) getStack().getItem()).getProperties(getStack());
-        for (WeaponProperty p : propertyList)
-            if (p instanceof IPropertyThrowable)
-                ((IPropertyThrowable) p).getDroppedItems(this, items);
+        if(getStack().getItem() instanceof IPropertyWeapon)
+        {
+	        List<WeaponProperty> propertyList = ((IPropertyWeapon) getStack().getItem()).getProperties(getStack());
+	        for (WeaponProperty p : propertyList)
+	            if (p instanceof IPropertyThrowable)
+	                ((IPropertyThrowable) p).getDroppedItems(this, items);
+        }
 
         if(!items.contains(getStack()))
             world.setEntityState(this, (byte) 4);
@@ -203,6 +256,16 @@ public class EntityMSUThrowable extends EntityThrowable
     {
         dataManager.set(STACK, stack);
     }
+    
+    public boolean getPlainHit()
+    {
+    	return dataManager.get(PLAIN);
+    }
+    
+    public void setPlainHit(boolean plain)
+    {
+        dataManager.set(PLAIN, plain);
+    }
 
     public NBTTagCompound getProjectileData() {
         return projectileData;
@@ -219,6 +282,8 @@ public class EntityMSUThrowable extends EntityThrowable
             setProjectileSize(compound.getFloat("Size"));
         if(compound.hasKey("Item"))
             setStack(new ItemStack(compound.getCompoundTag("Item")));
+        if(compound.hasKey("Plain"))
+        	setPlainHit(compound.getBoolean("Plain"));
     }
 
     @Override
@@ -229,6 +294,7 @@ public class EntityMSUThrowable extends EntityThrowable
         if(!projectileData.hasNoTags())
             compound.setTag("ProjectileData", getProjectileData());
         compound.setFloat("Size", getProjectileSize());
+        compound.setBoolean("Plain", getPlainHit());
 
         NBTTagCompound stackNbt = getStack().writeToNBT(new NBTTagCompound());
         compound.setTag("Item", stackNbt);

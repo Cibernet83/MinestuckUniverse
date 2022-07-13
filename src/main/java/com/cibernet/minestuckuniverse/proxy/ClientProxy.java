@@ -26,8 +26,10 @@ import com.cibernet.minestuckuniverse.util.AspectColorHandler;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.mraof.minestuck.client.model.ModelFrog;
 import com.mraof.minestuck.client.renderer.BlockColorCruxite;
+import com.mraof.minestuck.client.renderer.entity.RenderDecoy;
 import com.mraof.minestuck.client.renderer.entity.RenderEntityMinestuck;
 import com.mraof.minestuck.client.renderer.entity.frog.RenderFrog;
+import com.mraof.minestuck.entity.EntityDecoy;
 import com.mraof.minestuck.entity.EntityFrog;
 import com.mraof.minestuck.entity.consort.EntityIguana;
 import com.mraof.minestuck.entity.consort.EntityNakagator;
@@ -63,6 +65,7 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityRock.class, RenderRock::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCruxiteSlime.class, RenderCruxiteSlime::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityBubble.class, RenderBubble::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHeartDecoy.class, RenderHeartDecoy::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHopeGolem.class, (manager) -> new RenderHopeGolem(manager));
         RenderingRegistry.registerEntityRenderingHandler(EntityLocatorEye.class, (manager) -> new RenderSnowball<>(manager, MinestuckUniverseItems.denizenEye, Minecraft.getMinecraft().getRenderItem()));
 

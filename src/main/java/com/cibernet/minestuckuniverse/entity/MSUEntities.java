@@ -20,6 +20,7 @@ public class MSUEntities
 		registerEntity(EntityCruxiteSlime.class, "cruxite_slime");
 		registerEntity(EntityLocatorEye.class, "denizen_eye");
 		registerEntity(EntityHopeGolem.class, "hope_golem");
+		registerEntity(EntityHeartDecoy.class, "decoy");
 	}
 	
 	

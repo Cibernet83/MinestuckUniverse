@@ -1,15 +1,18 @@
 package com.cibernet.minestuckuniverse.capabilities.badgeEffects;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIMindflayerTarget;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.PotionConceal;
+import com.cibernet.minestuckuniverse.skills.abilitech.TechSling;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathWindVessel;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.TechDoomDemise;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartLink;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartProject;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond.HeartDamageSource;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeGrace;
@@ -21,11 +24,15 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpac
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeStop;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechSeerDodge;
 import com.cibernet.minestuckuniverse.skills.badges.BadgePage;
+import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.cibernet.minestuckuniverse.util.SoulData;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
@@ -79,6 +86,7 @@ public class BadgeEffects implements IBadgeEffects
 	private Queue<SoulData> timeSoulData = new LinkedList<>();
 	private ArrayList<UUID> savingGraceTargets = new ArrayList<>();
 	private Vec3d prevPos;
+	private int increasedFOV;
 	
 
 	// Metadata
@@ -86,7 +94,7 @@ public class BadgeEffects implements IBadgeEffects
 
 	private EntityLivingBase owner;
 
-	private Entity[] tethers = new Entity[3];
+	private Entity[] tethers = new Entity[SkillKeyStates.Key.values().length];
 
 	@Override
 	public int getDecayTime() {
@@ -285,12 +293,12 @@ public class BadgeEffects implements IBadgeEffects
 
 	@Override
 	public void setSoulLinkedBy(@Nullable EntityLivingBase target) {
-		setLivingEntity(TechHeartLink.class, target);
+		setLivingEntity(TechHeartBond.class, target);
 	}
 
 	@Override
 	public EntityLivingBase getSoulLinkedBy() {
-		return getLivingEntity(TechHeartLink.class);
+		return getLivingEntity(TechHeartBond.class);
 	}
 	
 	@Override
@@ -306,11 +314,43 @@ public class BadgeEffects implements IBadgeEffects
 	}
 	
 	@Override
+	public void setProjectionTime(int time)
+	{
+		setInt(TechHeartProject.class, time);
+	}
+	
+	@Override
+	public int getProjectionTime()
+	{
+		return getInt(TechHeartProject.class);
+	}
+	
+	@Override
+	public void setFOV(int fov)
+	{
+		if (owner.world.isRemote)
+			if (MSUUtils.isClientPlayer(owner))
+				Minecraft.getMinecraft().gameSettings.fovSetting = Math.min(119, fov - getFOV() + Minecraft.getMinecraft().gameSettings.fovSetting);
+			else;
+		else
+			if (owner instanceof EntityPlayer)
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.SET_FOV, fov - getFOV()), (EntityPlayer) owner);
+		setInt(TechSling.class, fov);
+	}
+	
+	@Override
+	public int getFOV()
+	{
+		return getInt(TechSling.class);
+	}
+	
+	@Override
 	public void setCalculating(int calc)
 	{
 		setInt(TechMindStrike.class, calc);
 	}
 	
+	@Override
 	public int getCalculating()
 	{
 		return getInt(TechMindStrike.class);

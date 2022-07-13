@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.proxy;
 import com.cibernet.minestuckuniverse.entity.EntityBubble;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartProject;
 import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsData;
 import com.cibernet.minestuckuniverse.modSupport.MSUSplatcraftSupport;
 import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
@@ -83,6 +84,7 @@ public class CommonProxy
         GameRegistry.registerTileEntity(TileEntityEffectBeacon.class, MinestuckUniverse.MODID + ":effect_beacon");
         GameRegistry.registerTileEntity(TileEntityBoondollarRegister.class, MinestuckUniverse.MODID + ":porkhollow_vault");
 
+        MinecraftForge.EVENT_BUS.register(TechHeartProject.class);
     }
 
     public void init()

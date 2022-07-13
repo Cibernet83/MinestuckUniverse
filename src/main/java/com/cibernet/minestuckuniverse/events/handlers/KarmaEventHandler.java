@@ -103,7 +103,7 @@ public class KarmaEventHandler
 							target.attackEntityFrom(DamageSource.causeExplosionDamage(player).setDamageBypassesArmor(), target == event.getSource().getTrueSource() ? 30 : 15);
 					}
 
-					if(targetData.isTechPassiveEnabled(MSUSkills.PERSEVERANT_AWAKENING) && Math.abs(player.world.getTotalWorldTime() - player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getLastPageAwakening()) >= 12000)
+					if(targetData.isTechPassiveEnabled(MSUSkills.PERSEVERANT_AWAKENING) && Math.abs(player.world.getTotalWorldTime() - player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getLastPageAwakening()) >= 3000)
 					{
 						player.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 200, 255));
 						player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setLastPageAwakening((int) player.world.getTotalWorldTime());

@@ -92,6 +92,7 @@ public abstract class MSUPacket
         SEND_GRIST_HOARD(PacketSendGristHoard.class),
         UPDATE_ALL_BADGE_EFFECTS(PacketUpdateAllBadgeEffects.class),
         SET_MOUSE_SENSITIVITY(PacketSetMouseSensitivity.class),
+        SET_FOV(PacketSetFOV.class),
         SEND_PARTICLE(PacketSendParticle.class),
         UPDATE_BADGE_EFFECT(PacketUpdateBadgeEffect.class),
         KEY_INPUT(PacketKeyInput.class),

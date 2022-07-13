@@ -62,6 +62,12 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	int getSoulLinkInt();
 	
 	//tethers end
+	
+	void setProjectionTime(int time);
+	int getProjectionTime();
+	
+	void setFOV(int fov);
+	int getFOV();
 
 	void setCalculating(int calc);
 	int getCalculating();

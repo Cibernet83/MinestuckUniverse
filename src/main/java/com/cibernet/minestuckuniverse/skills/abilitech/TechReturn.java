@@ -41,7 +41,7 @@ public class TechReturn extends TechBoondollarCost
 		if(time > 10)
 			return false;
 		
-		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 1)
+		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 4)
 		{
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 			return false;
@@ -65,6 +65,10 @@ public class TechReturn extends TechBoondollarCost
 		WorldServer worldd = player.getServer().getWorld(c.getClientDimension());
 		BlockPos pos = worldd.provider.getRandomizedSpawnPoint();
 		Teleport.teleportEntity(player, c.getClientDimension(), null, pos);
+		
+		if (!player.isCreative())
+            player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 4);
+		
 		return true;
 	}
 	

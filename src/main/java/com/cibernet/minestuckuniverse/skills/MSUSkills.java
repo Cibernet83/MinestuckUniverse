@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.skills.abilitech.TechReturn;
+import com.cibernet.minestuckuniverse.skills.abilitech.TechSling;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBleeding;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBubble;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodReformer;
@@ -11,6 +12,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloo
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartProject;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartSoulSwitcher;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeCleansing;
@@ -311,6 +313,7 @@ public class MSUSkills
 	};
 	
 	public static final Abilitech RETURN_JUMP = new TechReturn("return_jump");
+	public static final Abilitech SYLLADEX_SLING = new TechSling("sylladex_sling");
 
 	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward");
 	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt");
@@ -366,6 +369,7 @@ public class MSUSkills
 	public static final Abilitech HEART_SOUL_SWITCHER = new TechHeartSoulSwitcher("soul_switcher");
 	public static final Abilitech HEART_SOUL_SHOCK = new TechSoulStun("soul_shock");
 	public static final Abilitech HEART_SPIRITUAL_BOND = new TechHeartBond("spiritual_bond");
+	public static final Abilitech HEART_ASTRAL_PROJECTION = new TechHeartProject("astral_projection");
 
 	public static final Abilitech DOOM_TERMINAL_DEMISE = new TechDoomDemise("terminal_demise");
 	public static final Abilitech DOOM_DEATHS_SHROUD = new TechDoomDemiseAoE("deaths_shroud");
