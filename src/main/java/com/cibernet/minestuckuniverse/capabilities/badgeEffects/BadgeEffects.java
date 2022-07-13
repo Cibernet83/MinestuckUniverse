@@ -859,6 +859,18 @@ public class BadgeEffects implements IBadgeEffects
 		return effects.containsKey(badge) ? ((IBadgeEffect.NBTEffect) effects.get(badge)).value : null;
 	}
 
+	private void setString(Class badge, String str)
+	{
+		if(str == null)
+			effects.remove(badge);
+		else effects.put(badge, new IBadgeEffect.StringEffect(str));
+	}
+
+	private String getString(Class badge)
+	{
+		return effects.containsKey(badge) ? ((IBadgeEffect.StringEffect)effects.get(badge)).value : null;
+	}
+
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
 	{
