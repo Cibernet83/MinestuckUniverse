@@ -55,6 +55,8 @@ public class Abilitech extends Skill
 	{
 		return setRegistryName(MinestuckUniverse.MODID, name);
 	}
+	
+	public boolean isUsableExternally(World world, EntityPlayer player) {return canUse(world, player);}
 
 	@Override
 	public boolean isObtainable() {
