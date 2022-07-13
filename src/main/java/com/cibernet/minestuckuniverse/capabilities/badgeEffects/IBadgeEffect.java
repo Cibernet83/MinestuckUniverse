@@ -21,7 +21,7 @@ public interface IBadgeEffect
 
 	enum BadgeEffectType
 	{
-		INT, BOOLEAN, VEC4, MOVEMENT_INPUT, ENTITY, NBT
+		INT, BOOLEAN, VEC4, MOVEMENT_INPUT, ENTITY, NBT, STRING
 	}
 
 	static IBadgeEffect deserialize(NBTTagCompound tag)
@@ -42,6 +42,8 @@ public interface IBadgeEffect
 				return new EntityIDEffect(tag);
 			case NBT:
 				return new NBTEffect(tag, true);
+			case STRING:
+				return new StringEffect(tag);
 			default:
 					throw new IllegalArgumentException("Unknown BadgeEffectType " + type);
 		}
@@ -65,6 +67,8 @@ public interface IBadgeEffect
 				return new EntityIDEffect(data);
 			case NBT:
 				return new NBTEffect(data);
+			case STRING:
+				return new StringEffect(data);
 			default:
 				throw new IllegalArgumentException("Unknown BadgeEffectType " + type);
 		}
@@ -390,6 +394,50 @@ public interface IBadgeEffect
 		{
 			data.writeByte(BadgeEffectType.NBT.ordinal());
 			ByteBufUtils.writeTag(data, value);
+		}
+	}
+
+	class StringEffect implements IBadgeEffect
+	{
+		public final String value;
+
+		public StringEffect(String value)
+		{
+			this.value = value;
+		}
+
+		private StringEffect(NBTTagCompound tag)
+		{
+			this.value = tag.getString("Value");
+		}
+
+		private StringEffect(ByteBuf data)
+		{
+			this.value = ByteBufUtils.readUTF8String(data);
+		}
+
+		@Override
+		public void serialize(NBTTagCompound tag)
+		{
+			tag.setByte("BadgeEffectType", (byte) BadgeEffectType.STRING.ordinal());
+			tag.setString("Value", value);
+		}
+
+		@Override
+		public void serialize(ByteBuf data)
+		{
+			data.writeByte(BadgeEffectType.INT.ordinal());
+			ByteBufUtils.writeUTF8String(data, value);
+		}
+
+		@Override
+		public boolean equals(Object obj)
+		{
+			if (!(obj instanceof StringEffect))
+				return false;
+			StringEffect effect = (StringEffect) obj;
+
+			return this.value == effect.value;
 		}
 	}
 }
