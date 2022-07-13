@@ -336,6 +336,7 @@ public class MSUSkills
 	public static final Abilitech ROGUE_CONTRIBUTION = new TechRogue("rogue_contribution");
 	public static final Abilitech ROGUELIKE_ADAPTABILITY = new TechRogueSteal("roguelike_adaptability");
 	public static final Abilitech BARD_DISSONANCE = new TechBard("bard_dissonance");
+	public static final Abilitech BARD_METRONOME = new TechBardMetronome("magic_metronome");
 	public static final Abilitech MAID_FAVOR = new TechMaid("maid_favor");
 	public static final Abilitech IRRADIANT_SERVITUDE = new TechMaidServe("irraidant_servitude");
 	public static final Abilitech HEIR_WILL = new TechHeir("heir_will");
