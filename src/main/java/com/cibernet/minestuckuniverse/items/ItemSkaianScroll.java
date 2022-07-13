@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -64,7 +65,7 @@ public class ItemSkaianScroll extends MSUItemBase
 			if(data.hasSkill(skill))
 				tooltip.add(I18n.format(getUnlocalizedName()+".tooltip.hasSkill"));
 			else if(MSUConfig.skaiaScrollLimit >= 0 && !isSuperScroll(stack))
-				tooltip.add(I18n.format(getUnlocalizedName()+".tooltip." + (data.getScrollsUsed() < MSUConfig.skaiaScrollLimit ? "skillsLeft" : "noSkills"), MSUConfig.skaiaScrollLimit-data.getScrollsUsed()));
+				tooltip.add(I18n.format(getUnlocalizedName()+".tooltip." + (data.getScrollsUsed() <= MSUConfig.skaiaScrollLimit ? "skillsLeft" : "noSkills"), MSUConfig.skaiaScrollLimit-data.getScrollsUsed()));
 		}
 	}
 
@@ -83,20 +84,25 @@ public class ItemSkaianScroll extends MSUItemBase
 		{
 			IGodTierData data = playerIn.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 
-			if(!data.hasSkill(skill) && (isSuperScroll(stack) || MSUConfig.skaiaScrollLimit < 0 || data.getScrollsUsed() < MSUConfig.skaiaScrollLimit))
+			if (!data.hasSkill(skill))
 			{
-				data.addSkill(skill, false);
-				if(!isSuperScroll(stack))
-					data.addScrollsUsed();
-				data.update();
+				if (isSuperScroll(stack) || MSUConfig.skaiaScrollLimit < 0 || data.getScrollsUsed() < MSUConfig.skaiaScrollLimit)
+				{
+					data.addSkill(skill, false);
+					if (!isSuperScroll(stack))
+						data.addScrollsUsed();
+					data.update();
 
-				stack.shrink(1);
-				return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
-			}
+					playerIn.sendStatusMessage(new TextComponentTranslation("status.skaianScroll.unlock", skill.getDisplayComponent()), true);
+					stack.shrink(1);
+					return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+				} else playerIn.sendStatusMessage(new TextComponentTranslation("status.skaianScroll.outOfScrolls"), true);
+			} else playerIn.sendStatusMessage(new TextComponentTranslation("status.skaianScroll.alreadyUnlocked", skill.getDisplayComponent()), true);
+		} else playerIn.sendStatusMessage(new TextComponentTranslation("status.skaianScroll.empty"), true);
 
-		}
 
-		return super.onItemRightClick(worldIn, playerIn, handIn);
+
+		return ActionResult.newResult(EnumActionResult.FAIL, stack);
 	}
 
 	public static ItemStack setSuperScroll(ItemStack stack, boolean v)

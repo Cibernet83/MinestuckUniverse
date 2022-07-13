@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills;
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.cibernet.minestuckuniverse.skills.abilitech.TechDragonAura;
 import com.cibernet.minestuckuniverse.skills.abilitech.TechReturn;
 import com.cibernet.minestuckuniverse.skills.abilitech.TechSling;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBleeding;
@@ -21,6 +22,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeP
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.light.*;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindCloak;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindConfusion;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindKarmaHeal;
@@ -314,6 +316,7 @@ public class MSUSkills
 	
 	public static final Abilitech RETURN_JUMP = new TechReturn("return_jump");
 	public static final Abilitech SYLLADEX_SLING = new TechSling("sylladex_sling");
+	public static final Abilitech DRACONIC_AURA = new TechDragonAura("draconic_aura");
 
 	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward");
 	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt");
@@ -340,6 +343,8 @@ public class MSUSkills
 	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem");
 	public static final Abilitech LORD_DECREE = new TechLord("lord_decree");
 
+	public static final Abilitech ASPECTRAL_BOLT = new TechAspectralBolt("aspectral_bolt", 5000);
+
 	public static final Abilitech SPACE_WORMHOLE_TROTTER = new TechSpaceTele("wormhole_trotter");
 	public static final Abilitech SPACE_ANCHORED_WORMHOLE = new TechSpaceAnchoredTele("anchored_wormhole");
 	public static final Abilitech SPACE_SPATIAL_WARP = new TechSpaceTargetTele("spatial_warp");
@@ -350,6 +355,7 @@ public class MSUSkills
 	public static final Abilitech TIME_TEMPORAL_RECALL = new TechTimeRecall("temporal_recall");
 	public static final Abilitech TIME_CHRONOFREEZE = new TechTimeStop("chronofreeze");
 	public static final Abilitech TIME_FLOW_ACCELERATOR = new TechTimeAcceleration("flow_accelerator");
+	public static final Abilitech TIME_ACCELERANDO = new TechTimeAcceleration("accelerando");
 	public static final Abilitech TIME_RAPID_REWIND = new TechTimeTables("rapid_rewind");
 	public static final Abilitech TIME_CELESTIAL_SHIFT = new TechTimeShift("celestial_shift");
 
@@ -357,6 +363,7 @@ public class MSUSkills
 	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon");
 	public static final Abilitech BREATH_SUPERSONIC_SPEED = new TechBreathSpeed("supersonic_speed");
 	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind");
+	public static final Abilitech BREATH_ENTOMBING_TWISTER = new TechBreathBubble("entombing_twister", 5000);
 	public static final Abilitech BREATH_SPACE_VERTIGO_BLOCK = new TechBreathSpaceFallProof("vertigo_block", 5000);
 
 	public static final Abilitech LIGHT_STORM_OF_THE_STRIKER = new TechLightStriker("storm_of_the_striker");
@@ -376,7 +383,7 @@ public class MSUSkills
 	public static final Abilitech DOOM_WITHERING_WHISPER = new TechDoomDecay("withering_whisper");
 	public static final Abilitech DOOM_CHAINS_OF_DESPAIR = new TechDoomChain("chains_of_despair");
 	public static final Abilitech DOOM_SURVIVORS_BIND = new TechDoomBind("survivors_bind");
-	public static final Abilitech DOOM_VOID_ABYSS_CAGE = new TechVoidDoomBubble("abyss_cage");
+	public static final Abilitech DOOM_VOID_ABYSS_CAGE = new TechDoomVoidBubble("abyss_cage");
 
 	public static final Abilitech LIFE_LIFEFORCE_LEECH = new TechLifeLeech("lifeforce_leech");
 	public static final Abilitech LIFE_HEALING_AURA = new TechLifeAura("healing_aura");
@@ -404,6 +411,7 @@ public class MSUSkills
 	public static final Abilitech MIND_SENSORY_BREAK = new TechMindConfusion("sensory_break");
 	public static final Abilitech MIND_GODHOODS_JUSTICE = new TechMindKarmaHeal("godhoods_justice");
 	public static final Abilitech MIND_CALCULATED_STRIKE = new TechMindStrike("calculated_strike");
+	public static final Abilitech MIND_VOID_ILLUSORY_CLOAK = new TechMindCloak("illusory_cloak", 100000);
 
 	public static final Abilitech HOPE_WILLED_ALLIANCE = new TechHopeGolem("willed_alliance");
 	public static final Abilitech HOPE_ANSWERED_PRAYERS = new TechHopePrayers("answered_prayers");

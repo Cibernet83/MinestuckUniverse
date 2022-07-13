@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.damage.CritDamageSource;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathKnockback;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
@@ -18,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketTitle;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -31,7 +33,7 @@ import javax.annotation.Nullable;
 
 public class TechHopeyShit extends TechHeroAspect
 {
-	private static final String[] STATUS_OPTIONS = new String[] {"tallyHo", "gadzooks", "boyHowdy", "holyToledo", "landSakesAlive", "helloNurse", "byGum", "ayChihuahua", "bobUncle", "sockItToMe", "shiverMeTimbers", "winOneForTheGipper", "jumpyJehosaPhat", "shuckyDarn", "fiddleFaddle", ""};
+	private static final String[] STATUS_OPTIONS = new String[] {"tallyHo", "gadzooks", "boyHowdy", "holyToledo", "landSakesAlive", "helloNurse", "byGum", "ayChihuahua", "bobUncle", "sockItToMe", "shiverMeTimbers", "winOneForTheGipper", "jumpinJehosaPhat", "shuckyDarn", "fiddleFaddle"};
 
 	public TechHopeyShit(String name)
 	{
@@ -62,34 +64,52 @@ public class TechHopeyShit extends TechHeroAspect
 			((EntityPlayerMP)player).connection.sendPacket(spackettitle1);
 		}
 
-
-		float range = Math.min(time/30f, 10);
-
-		DamageSource damage = new HopeDamageSource(player);
-		for(Entity target : player.world.getEntitiesWithinAABB(Entity.class, player.getEntityBoundingBox().grow(range)))
+		if(time % 5 == 0)
 		{
-			if(target != player && target.getDistance(player) < range)
-			{
-				if(target instanceof EntityPlayerMP && doTitle)
+			float range = Math.min(time/30f + 2, 12);
+			DamageSource damage = new HopeDamageSource(player);
+			if(doTitle)
+				for(EntityPlayerMP target : player.world.getEntitiesWithinAABB(EntityPlayerMP.class, player.getEntityBoundingBox().grow(range*2)))
 				{
 					SPacketTitle spackettitle1 = new SPacketTitle(SPacketTitle.Type.TITLE, title);
-					((EntityPlayerMP)target).connection.sendPacket(spackettitle1);
+					target.connection.sendPacket(spackettitle1);
 				}
 
-				if(!(target instanceof EntityItem) && time % 5 == 0)
+			for(EntityLivingBase target : player.world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(range)))
+			{
+				if(target != player && target.getDistance(player) < range)
 				{
-					target.hurtResistantTime = 0;
-					target.attackEntityFrom(damage, 1);
-				}
+					//if(!(target instanceof EntityItem) && time % 5 == 0)
+					{
+						target.hurtResistantTime = 0;
+						target.attackEntityFrom(damage, 1);
+					}
 
-				if(target instanceof IProjectile)
-				{
-					target.motionX *= 0.3f;
-					target.motionY *= 0.3f;
-					target.motionZ *= 0.3f;
+					float strength = 1;
+					Vec3d vec = new Vec3d(player.posX-target.posX, player.posY-target.posY, player.posZ-target.posZ).normalize();
+
+					target.velocityChanged = true;
+					strength *= 0.3f;
+					target.isAirBorne = true;
+					float f = MathHelper.sqrt(vec.x * vec.x + vec.z * vec.z);
+					target.motionX /= 2.0D;
+					target.motionZ /= 2.0D;
+					target.motionX -= vec.x / (double)f * (double)strength;
+					target.motionZ -= vec.z / (double)f * (double)strength;
+
+					if (target.onGround)
+					{
+						target.motionY /= 2.0D;
+						target.motionY += (double)strength;
+						if (target.motionY > 0.4000000059604645D)
+							target.motionY = 0.4000000059604645D;
+					}
+
 				}
 			}
 		}
+
+
 
 		if(!player.isCreative() && time % Math.max(5, 20-time/20f) == 0)
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);

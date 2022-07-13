@@ -1,4 +1,4 @@
-package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.voidAspect;
+package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom;
 
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
@@ -9,6 +9,9 @@ import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 
+import com.mraof.minestuck.util.IdentifierHandler;
+import com.mraof.minestuck.util.MinestuckPlayerData;
+import com.mraof.minestuck.util.Title;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.RayTraceResult;
@@ -17,11 +20,11 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class TechVoidDoomBubble extends TechHeroAspect
+public class TechDoomVoidBubble extends TechHeroAspect
 {
-	public TechVoidDoomBubble(String name)
+	public TechDoomVoidBubble(String name)
 	{
-		super(name, EnumAspect.VOID, 10000, EnumTechType.DEFENSE);
+		super(name, EnumAspect.DOOM, 10000, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -67,15 +70,19 @@ public class TechVoidDoomBubble extends TechHeroAspect
 		return true;
 	}
 
-
 	@Override
 	public List<String> getTags()
 	{
 		List<String> list = super.getTags();
-		list.add(0, "@DOOM@");
+		list.add(0, "@VOID@");
 
 		return list;
 	}
 
-
+	@Override
+	public boolean canAppearOnList(World world, EntityPlayer player)
+	{
+		Title title = MinestuckPlayerData.getTitle(IdentifierHandler.encode(player));
+		return title != null && (title.getHeroAspect() == EnumAspect.VOID || title.getHeroAspect() == EnumAspect.DOOM);
+	}
 }

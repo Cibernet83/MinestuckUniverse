@@ -48,7 +48,7 @@ public class TechDoomDemise extends TechHeroAspect
 			return true;
 		}
 
-		if (targetPctg <= 0.4f)
+		if (!player.isCreative() && targetPctg <= 0.4f)
 		{
 			karmakill(target, player);
 			if (playerPctg <= 0.5f)

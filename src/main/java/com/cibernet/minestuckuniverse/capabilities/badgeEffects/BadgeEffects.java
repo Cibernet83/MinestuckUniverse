@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.PotionConceal;
+import com.cibernet.minestuckuniverse.skills.abilitech.TechDragonAura;
 import com.cibernet.minestuckuniverse.skills.abilitech.TechSling;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathWindVessel;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.TechDoomDemise;
@@ -16,6 +17,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHear
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond.HeartDamageSource;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeGrace;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindCloak;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindStrike;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
@@ -168,6 +170,29 @@ public class BadgeEffects implements IBadgeEffects
 	public void setRageShifted(boolean rageShifted)
 	{
 		setBoolean(TechRageManagement.class, rageShifted);
+	}
+
+	@Override
+	public NBTTagCompound getCloakData()
+	{
+		return getTag(TechMindCloak.class);
+	}
+
+	@Override
+	public boolean isCloaked() {
+		return getCloakData() != null;
+	}
+
+	@Override
+	public void setCloakData(NBTTagCompound nbtTagCompound)
+	{
+		setTag(TechMindCloak.class, nbtTagCompound);
+	}
+
+	@Override
+	public void clearCloakData()
+	{
+		setTag(TechMindCloak.class, null);
 	}
 
 	@Override
@@ -515,6 +540,16 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
+	public boolean hasDragonAura() {
+		return getBoolean(TechDragonAura.class);
+	}
+
+	@Override
+	public void setHasDragonAura(boolean v) {
+		setBoolean(TechDragonAura.class, v);
+	}
+
+	@Override
 	public Map<Class, MSUParticles.PowerParticleState> getPowerParticles()
 	{
 		return particleMap;
@@ -810,6 +845,18 @@ public class BadgeEffects implements IBadgeEffects
 			effects.remove(badge);
 		else
 			effects.put(badge, new IBadgeEffect.EntityEffect(entity));
+	}
+
+	private void setTag(Class badge, NBTTagCompound tag)
+	{
+		if(tag == null)
+			effects.remove(badge);
+		else effects.put(badge, new IBadgeEffect.NBTEffect(tag, false));
+	}
+
+	private NBTTagCompound getTag(Class badge)
+	{
+		return effects.containsKey(badge) ? ((IBadgeEffect.NBTEffect) effects.get(badge)).value : null;
 	}
 
 	@SubscribeEvent

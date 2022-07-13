@@ -9,6 +9,7 @@ import com.mraof.minestuck.util.EnumClass;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -40,7 +41,12 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 
 	boolean isRageShifted();
 	void setRageShifted(boolean rageShifted);
-	
+
+	NBTTagCompound getCloakData();
+	boolean isCloaked();
+	void setCloakData(NBTTagCompound nbtTagCompound);
+	void clearCloakData();
+
 	Entity getTether(int slot);
 	void setTether(@Nullable Entity entity, int slot);
 	void clearTether(int slot);
@@ -121,6 +127,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	int getLastPageAwakening();
 	void setLastPageAwakening(int v);
 
+	boolean hasDragonAura();
+	void setHasDragonAura(boolean v);
+
 	// ----- Particles
 	Map<Class, MSUParticles.PowerParticleState> getPowerParticles();
 
@@ -153,5 +162,4 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void setOwner(EntityLivingBase entity);
 
 	void receive(String key, IBadgeEffect value);
-
 }

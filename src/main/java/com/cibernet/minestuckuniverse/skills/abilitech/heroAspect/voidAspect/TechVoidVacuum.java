@@ -26,7 +26,7 @@ public class TechVoidVacuum extends TechHeroAspect
     @Override
     public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
     {
-        if(state == SkillKeyStates.KeyState.NONE)
+        if(state == SkillKeyStates.KeyState.NONE || time > 300)
             return false;
 
         if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 1)
@@ -43,7 +43,7 @@ public class TechVoidVacuum extends TechHeroAspect
         if (time % 10 == 0 && !player.isCreative())
             player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
 
-        float strength = Math.min(Math.max(0, time-10)/40f , 1);
+        float strength = Math.min(Math.max(0, time-10)/80f , 1);
         for(Entity target : world.getEntitiesWithinAABB(Entity.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> entity != player))
         {
             Vec3d vec = new Vec3d(player.posX-target.posX, player.posY-target.posY, player.posZ-target.posZ).normalize();

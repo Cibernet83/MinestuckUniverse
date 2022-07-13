@@ -8,6 +8,8 @@ import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.mraof.minestuck.client.settings.MinestuckKeyHandler;
+import com.mraof.minestuck.event.CaptchalogueEvent;
+import com.mraof.minestuck.inventory.ContainerConsortMerchant;
 import com.mraof.minestuck.inventory.captchalouge.CaptchaDeckHandler;
 import com.mraof.minestuck.inventory.captchalouge.Modus;
 import com.mraof.minestuck.network.CaptchaDeckPacket;
@@ -51,6 +53,16 @@ import java.util.stream.StreamSupport;
 
 public class CaptchalogueEventHandler
 {
+	@SubscribeEvent
+	public static void onCaptchalogue(CaptchalogueEvent event)
+	{
+		if(event.getPlayer().isSpectator())
+			event.setCanceled(true);
+
+		if(event instanceof CaptchalogueEvent.Inventory && event.getPlayer().openContainer instanceof ContainerConsortMerchant)
+			event.setCanceled(true);
+	}
+
 	@SubscribeEvent
 	public static void onPlayerLogIn(PlayerEvent.PlayerLoggedInEvent event)
 	{

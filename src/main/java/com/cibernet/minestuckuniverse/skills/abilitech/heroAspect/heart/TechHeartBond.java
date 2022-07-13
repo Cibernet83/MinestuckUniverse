@@ -186,7 +186,10 @@ public class TechHeartBond extends TechHeroAspect
 	{
 		int[] LnT = hasSoulLink(event.getEntity());
 		if(LnT[0] != 0 || LnT[1] != 0)
+		{
 			event.getEntity().deathTime = 0;
+			event.getEntity().isDead = false;
+		}
 	}
 	
 	@SubscribeEvent(priority = EventPriority.HIGHEST)

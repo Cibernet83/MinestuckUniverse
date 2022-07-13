@@ -1,6 +1,8 @@
 package com.cibernet.minestuckuniverse.entity;
 
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathBubble;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -21,13 +23,15 @@ import com.mraof.minestuck.util.Teleport;
 
 public class EntityBubble extends Entity
 {
-	private static final DataParameter<Float> SIZE = EntityDataManager.createKey(EntityBubble.class, DataSerializers.FLOAT);
 	private static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityBubble.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> LIFESPAN = EntityDataManager.createKey(EntityBubble.class, DataSerializers.VARINT);
+
+	private static final DataParameter<Float> SIZE = EntityDataManager.createKey(EntityBubble.class, DataSerializers.FLOAT);
 	private static final DataParameter<Boolean> CAN_ENTER = EntityDataManager.createKey(EntityBubble.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> CAN_EXIT = EntityDataManager.createKey(EntityBubble.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> ENSNARE = EntityDataManager.createKey(EntityBubble.class, DataSerializers.BOOLEAN);
-	
+	private static final DataParameter<Boolean> SUFFOCATES = EntityDataManager.createKey(EntityBubble.class, DataSerializers.BOOLEAN);
+
 	private static HashMap<EntityBubble, ArrayList<Entity>> stuck = new HashMap<>();
 
 	public EntityBubble(World worldIn)
@@ -60,9 +64,23 @@ public class EntityBubble extends Entity
 		dataManager.register(SIZE, 3f);
 		dataManager.register(COLOR, 0xFDB1E8);
 		dataManager.register(LIFESPAN, 20);
-		dataManager.register(CAN_EXIT, false);
+		dataManager.register(CAN_EXIT, true);
 		dataManager.register(CAN_ENTER, true);
 		dataManager.register(ENSNARE, false);
+		dataManager.register(SUFFOCATES, false);
+	}
+
+	@Override
+	public void notifyDataManagerChange(DataParameter<?> key)
+	{
+		if(SIZE.equals(key))
+		{
+			float v = getBubbleSize();
+			this.setSize(v, v);
+			this.setPosition(this.posX, this.posY, this.posZ);
+		}
+
+		super.notifyDataManagerChange(key);
 	}
 
 	@Override
@@ -75,6 +93,12 @@ public class EntityBubble extends Entity
 
 		if(getLifespan() == 0)
 			setDead();
+
+		if(getSuffocates() && ticksExisted % 20 == 0)
+		{
+			for(EntityLivingBase entityLivingBase : world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox()))
+				entityLivingBase.attackEntityFrom(TechBreathBubble.DAMAGE_SOURCE, 2);
+		}
 	}
 
 	@Override
@@ -92,6 +116,8 @@ public class EntityBubble extends Entity
 			setCanEnter(compound.getBoolean("CanExit"));
 		if(compound.hasKey("Ensnare"))
 			setEnsnare(compound.getBoolean("Ensnare"));
+		if(compound.hasKey("Suffocate"))
+			setSuffocates(compound.getBoolean("Suffocate"));
 	}
 
 	@Override
@@ -103,6 +129,7 @@ public class EntityBubble extends Entity
 		compound.setBoolean("CanEnter", canEnter());
 		compound.setBoolean("CanExit", canExit());
 		compound.setBoolean("Ensnare", getEnsnare());
+		compound.setBoolean("Suffocate", getSuffocates());
 	}
 
 	@Override
@@ -178,6 +205,16 @@ public class EntityBubble extends Entity
 		dataManager.set(ENSNARE, v);
 	}
 
+	public Boolean getSuffocates()
+	{
+		return dataManager.get(SUFFOCATES);
+	}
+
+	public void setSuffocates(boolean v)
+	{
+		dataManager.set(SUFFOCATES, v);
+	}
+
 	@Override
 	public boolean isRidingSameEntity(Entity entityIn)
 	{
@@ -216,7 +253,7 @@ public class EntityBubble extends Entity
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onGetCollisionBoxes(GetCollisionBoxesEvent event)
 	{

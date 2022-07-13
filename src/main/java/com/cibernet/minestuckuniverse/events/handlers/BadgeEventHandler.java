@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.skills.abilitech.TechDragonAura;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodBleeding;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.blood.TechBloodReformer;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathSpaceFallProof;
@@ -8,6 +9,8 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBre
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.TechDoomBind;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechSoulStun;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeGrace;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindCloak;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindStrike;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
@@ -115,6 +118,9 @@ public class BadgeEventHandler
 		MinecraftForge.EVENT_BUS.register(TechHopeyShit.class);
 		MinecraftForge.EVENT_BUS.register(TechBreathSpaceFallProof.class);
 		MinecraftForge.EVENT_BUS.register(TechMindStrike.class);
+		MinecraftForge.EVENT_BUS.register(TechLifeGrace.class);
+		MinecraftForge.EVENT_BUS.register(TechDragonAura.class);
+		MinecraftForge.EVENT_BUS.register(TechMindCloak.class);
 	}
 
 	@SubscribeEvent

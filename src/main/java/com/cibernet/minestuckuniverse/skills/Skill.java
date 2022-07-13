@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.skills;
 
+import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -71,7 +72,7 @@ public abstract class Skill extends net.minecraftforge.registries.IForgeRegistry
 	{
 	}
 
-	public boolean canUse(World world, EntityPlayer player) { return true; }
+	public boolean canUse(World world, EntityPlayer player) { return !(player.isPotionActive(MSUPotions.GOD_TIER_LOCK) && player.getActivePotionEffect(MSUPotions.GOD_TIER_LOCK).getAmplifier() >= 2); }
 
 	public boolean canDisable() { return true; }
 

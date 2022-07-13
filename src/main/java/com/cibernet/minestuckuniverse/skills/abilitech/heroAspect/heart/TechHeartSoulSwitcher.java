@@ -27,17 +27,7 @@ public class TechHeartSoulSwitcher extends TechHeroAspect
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
-		if (state != SkillKeyStates.KeyState.HELD)
-			return false;
-
-		if (time < 60)
-		{
-			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.HEART, 2);
-			return true;
-		}
-
-		EntityLivingBase target = MSUUtils.getTargetEntity(player);
-		if (time != 60 || !(target instanceof EntityPlayer))
+		if (state == SkillKeyStates.KeyState.NONE)
 			return false;
 
 		if (!player.isCreative() && player.getFoodStats().getFoodLevel() < 8)
@@ -46,21 +36,33 @@ public class TechHeartSoulSwitcher extends TechHeroAspect
 			return false;
 		}
 
-		SoulData targetSoulData = new SoulData(target);
-		SoulData playerSoulData = new SoulData(player);
+		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.HEART, (time < 60) ? 2 : 10);
 
-		targetSoulData.apply(player);
-		playerSoulData.apply(target);
+		if(state == SkillKeyStates.KeyState.RELEASED && time >= 60)
+		{
 
-		PotionEffect effect = new PotionEffect(MSUPotions.GOD_TIER_LOCK, 100);
-		effect.setCurativeItems(Collections.emptyList());
-		target.addPotionEffect(effect);
+			EntityLivingBase target = MSUUtils.getTargetEntity(player);
+			if (!(target instanceof EntityPlayer))
+				return false;
 
-		if (!player.isCreative())
-			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 8);
 
-		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.HEART, 4);
-		target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.HEART, 2);
+			SoulData targetSoulData = new SoulData(target);
+			SoulData playerSoulData = new SoulData(player);
+
+			targetSoulData.apply(player);
+			playerSoulData.apply(target);
+
+			PotionEffect effect = new PotionEffect(MSUPotions.GOD_TIER_LOCK, 100);
+			effect.setCurativeItems(Collections.emptyList());
+			target.addPotionEffect(effect);
+
+			if (!player.isCreative())
+				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 8);
+
+			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.HEART, 4);
+			target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.HEART, 2);
+
+		}
 
 		return true;
 	}

@@ -22,8 +22,10 @@ import net.minecraft.world.World;
 
 public class TechSpaceResize extends TechHeroAspect
 {
-	public TechSpaceResize(String name) {
+	public TechSpaceResize(String name)
+	{
 		super(name, EnumAspect.SPACE, EnumTechType.UTILITY);
+		requiredStacks.add(new ItemStack(MinestuckUniverseItems.spaceSalt, 1));
 	}
 
 
@@ -79,12 +81,5 @@ public class TechSpaceResize extends TechHeroAspect
 		}
 
 		return false;
-	}
-
-
-	@Override
-	public boolean canAppearOnList(World world, EntityPlayer player)
-	{
-		return super.canAppearOnList(world, player) && Badge.findItem(player, new ItemStack(MinestuckUniverseItems.spaceSalt), false, true);
 	}
 }

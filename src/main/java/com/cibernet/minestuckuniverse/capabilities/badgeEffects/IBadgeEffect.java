@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import java.util.UUID;
 
@@ -20,12 +21,13 @@ public interface IBadgeEffect
 
 	enum BadgeEffectType
 	{
-		INT, BOOLEAN, VEC4, MOVEMENT_INPUT, ENTITY
+		INT, BOOLEAN, VEC4, MOVEMENT_INPUT, ENTITY, NBT
 	}
 
 	static IBadgeEffect deserialize(NBTTagCompound tag)
 	{
 		BadgeEffectType type = BadgeEffectType.values()[tag.getByte("BadgeEffectType")];
+		System.out.println(type + " tag");
 		switch (type)
 		{
 			case INT:
@@ -38,6 +40,8 @@ public interface IBadgeEffect
 				return new MovementInputEffect(tag);
 			case ENTITY:
 				return new EntityIDEffect(tag);
+			case NBT:
+				return new NBTEffect(tag, true);
 			default:
 					throw new IllegalArgumentException("Unknown BadgeEffectType " + type);
 		}
@@ -46,6 +50,7 @@ public interface IBadgeEffect
 	static IBadgeEffect deserialize(ByteBuf data)
 	{
 		BadgeEffectType type = BadgeEffectType.values()[data.readByte()];
+		System.out.println(type + " buffer");
 		switch (type)
 		{
 			case INT:
@@ -58,6 +63,8 @@ public interface IBadgeEffect
 				return new MovementInputEffect(data);
 			case ENTITY:
 				return new EntityIDEffect(data);
+			case NBT:
+				return new NBTEffect(data);
 			default:
 				throw new IllegalArgumentException("Unknown BadgeEffectType " + type);
 		}
@@ -351,6 +358,38 @@ public interface IBadgeEffect
 		public EntityLivingBase getLiving()
 		{
 			return value instanceof EntityLivingBase ? (EntityLivingBase) value : null;
+		}
+	}
+
+	class NBTEffect implements IBadgeEffect
+	{
+		public final NBTTagCompound value;
+
+		protected NBTEffect(NBTTagCompound tag, boolean serialized)
+		{
+			if(serialized)
+				value = tag.getCompoundTag("Value");
+			else value = tag;
+		}
+
+		public NBTEffect(ByteBuf data)
+		{
+			value = ByteBufUtils.readTag(data);
+		}
+
+		@Override
+		public void serialize(NBTTagCompound tag)
+		{
+
+			tag.setByte("BadgeEffectType", (byte) BadgeEffectType.NBT.ordinal());
+			tag.setTag("Value", value);
+		}
+
+		@Override
+		public void serialize(ByteBuf data)
+		{
+			data.writeByte(BadgeEffectType.NBT.ordinal());
+			ByteBufUtils.writeTag(data, value);
 		}
 	}
 }

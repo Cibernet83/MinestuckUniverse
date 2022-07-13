@@ -32,6 +32,7 @@ public class TechTimeTables extends TechHeroAspect
 	public TechTimeTables(String name)
 	{
 		super(name, EnumAspect.TIME, 50000, EnumTechType.UTILITY);
+		requiredStacks.add(new ItemStack(MinestuckUniverseItems.timetable));
 	}
 
 	@Override
@@ -107,11 +108,5 @@ public class TechTimeTables extends TechHeroAspect
 		if((event.isCanceled() || target != null))
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
 		return true;
-	}
-
-	@Override
-	public boolean canAppearOnList(World world, EntityPlayer player)
-	{
-		return super.canAppearOnList(world, player) && Badge.findItem(player, new ItemStack(MinestuckUniverseItems.timetable), false, true);
 	}
 }
