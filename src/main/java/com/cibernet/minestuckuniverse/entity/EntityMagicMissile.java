@@ -69,8 +69,10 @@ public class EntityMagicMissile extends Entity implements IProjectile
 		int b = color & 255;
 
 		for(int k = 0; k < 4; k++)
-			this.world.spawnAlwaysVisibleParticle(EnumParticleTypes.CRIT.getParticleID(), this.posX + this.motionX * (double)k / 4.0D, this.posY + this.motionY * (double)k / 4.0D, this.posZ + this.motionZ * (double)k / 4.0D,
+			this.world.spawnAlwaysVisibleParticle(EnumParticleTypes.SPELL_INSTANT.getParticleID(), this.posX + this.motionX * (double)k / 4.0D, this.posY + this.motionY * (double)k / 4.0D, this.posZ + this.motionZ * (double)k / 4.0D,
 					(double)((float)r / 255.0F), (double)((float)g / 255.0F), (double)((float)b / 255.0F));
+
+
 
 
 		++this.ticksInAir;
@@ -114,8 +116,12 @@ public class EntityMagicMissile extends Entity implements IProjectile
 
 	public void onHit(RayTraceResult raytraceresult)
 	{
+
 		if(raytraceresult.entityHit != null)
 		{
+			if(raytraceresult.entityHit.equals(shootingEntity) && ticksInAir < 5)
+				return;
+
 			raytraceresult.entityHit.attackEntityFrom(new EntityDamageSourceIndirect(MinestuckUniverse.MODID+"magic", this, shootingEntity), (float) damage);
 			if(raytraceresult.entityHit instanceof EntityLivingBase)
 				for(PotionEffect effect : effects)

@@ -61,6 +61,7 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityAcheron.class, RenderEntityMinestuck.getFactory(new ModelAcheron(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityMSUThrowable.class, RenderThrowable::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMSUArrow.class, RenderArrow::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityMagicMissile.class, RenderEmpty::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityUnrealAir.class, RenderUnrealAir::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityRock.class, RenderRock::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCruxiteSlime.class, RenderCruxiteSlime::new);

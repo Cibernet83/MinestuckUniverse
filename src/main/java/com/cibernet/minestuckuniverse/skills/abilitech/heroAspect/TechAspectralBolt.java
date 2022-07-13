@@ -8,7 +8,6 @@ import com.cibernet.minestuckuniverse.events.handlers.BadgeEventHandler;
 import com.cibernet.minestuckuniverse.events.handlers.GTEventHandler;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.TechBoondollarCost;
-import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import com.mraof.minestuck.util.Title;
@@ -57,6 +56,11 @@ public class TechAspectralBolt extends TechBoondollarCost
 			PotionEffect effect = BadgeEventHandler.NEGATIVE_EFFECTS.get(title.getHeroAspect());
 			missile.effects.add(new PotionEffect(effect.getPotion(), effect.getAmplifier(), effect.getDuration()/2));
 		}
+
+		world.spawnEntity(missile);
+
+		if(!player.isCreative())
+			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-2);
 
 		return true;
 	}
