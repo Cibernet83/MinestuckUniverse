@@ -329,6 +329,7 @@ public class MSUSkills
 	public static final Abilitech THIEF_FILCH = new TechThief("thief_filch");
 	public static final Abilitech HERMES_DASH = new TechThiefDash("hermes_dash");
 	public static final Abilitech MAGE_AWARENESS = new TechMage("mage_awareness");
+	public static final Abilitech ARCANE_STUDY = new TechMageStudy("arcane_study");
 
 	public static final Abilitech SEER_PREDICTION = new TechSeer("seer_prediction");
 	public static final Abilitech FORESIGHT_DODGE = new TechSeerDodge("foresight_dodge");
@@ -355,7 +356,7 @@ public class MSUSkills
 
 	public static final Abilitech TIME_TEMPORAL_RECALL = new TechTimeRecall("temporal_recall");
 	public static final Abilitech TIME_CHRONOFREEZE = new TechTimeStop("chronofreeze");
-	public static final Abilitech TIME_FLOW_ACCELERATOR = new TechTimeAcceleration("flow_accelerator");
+	public static final Abilitech TIME_CLOCKWORK_ACCELERATOR = new TechTimeAcceleration("clockwork_accelerator");
 	public static final Abilitech TIME_ACCELERANDO = new TechTimeAcceleration("accelerando");
 	public static final Abilitech TIME_RAPID_REWIND = new TechTimeTables("rapid_rewind");
 	public static final Abilitech TIME_CELESTIAL_SHIFT = new TechTimeShift("celestial_shift");
