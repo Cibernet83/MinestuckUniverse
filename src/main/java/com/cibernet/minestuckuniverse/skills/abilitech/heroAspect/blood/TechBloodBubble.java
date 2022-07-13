@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 
 public class TechBloodBubble extends TechHeroAspect
 {
-	public TechBloodBubble(String name)
+	public TechBloodBubble(String name, long cost)
 	{
-		super(name, EnumAspect.BLOOD, 10000, EnumTechType.DEFENSE);
+		super(name, EnumAspect.BLOOD, cost, EnumTechType.DEFENSE);
 	}
 
 	@Override

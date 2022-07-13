@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 
 public class TechBreathSpeed extends TechHeroAspect
 {
-	public TechBreathSpeed(String name)
+	public TechBreathSpeed(String name, long cost)
 	{
-		super(name, EnumAspect.BREATH, EnumTechType.UTILITY);
+		super(name, EnumAspect.BREATH, cost, EnumTechType.PASSIVE, EnumTechType.UTILITY);
 	}
 
 	@Override

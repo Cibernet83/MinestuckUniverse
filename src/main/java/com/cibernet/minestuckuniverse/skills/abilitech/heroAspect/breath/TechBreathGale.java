@@ -18,8 +18,8 @@ import java.util.List;
 
 public class TechBreathGale extends TechHeroAspect
 {
-	public TechBreathGale(String name) {
-		super(name, EnumAspect.BREATH, EnumTechType.OFFENSE, EnumAspect.LIGHT);
+	public TechBreathGale(String name, long cost) {
+		super(name, EnumAspect.BREATH, cost, EnumTechType.UTILITY);
 	}
 
 	@Override

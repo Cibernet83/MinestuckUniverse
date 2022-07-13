@@ -27,9 +27,9 @@ import java.util.LinkedHashSet;
 
 public class TechBloodReformer extends TechHeroAspect
 {
-	public TechBloodReformer(String name)
+	public TechBloodReformer(String name, long cost)
 	{
-		super(name, EnumAspect.BLOOD, EnumTechType.UTILITY);
+		super(name, EnumAspect.BLOOD, cost, EnumTechType.UTILITY);
 	}
 
 	@Override

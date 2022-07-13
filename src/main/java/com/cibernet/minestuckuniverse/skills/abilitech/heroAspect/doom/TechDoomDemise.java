@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.damage.CritDamageSource;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -16,13 +17,14 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import javax.annotation.Nullable;
 
 public class TechDoomDemise extends TechHeroAspect
 {
-	public TechDoomDemise(String name) {
-		super(name, EnumAspect.DOOM, EnumTechType.OFFENSE);
+	public TechDoomDemise(String name, long cost) {
+		super(name, EnumAspect.DOOM, cost, EnumTechType.OFFENSE);
 	}
 
 	@Override
@@ -38,6 +40,9 @@ public class TechDoomDemise extends TechHeroAspect
 		}
 
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
+
+		if(target != null && MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+			target = null;
 
 		float playerPctg = player.getHealth()/player.getMaxHealth();
 		float targetPctg = target == null ? 1 : target.getHealth()/target.getMaxHealth();

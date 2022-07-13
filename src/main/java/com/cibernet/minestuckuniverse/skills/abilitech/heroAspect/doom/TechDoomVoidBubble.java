@@ -22,9 +22,9 @@ import java.util.List;
 
 public class TechDoomVoidBubble extends TechHeroAspect
 {
-	public TechDoomVoidBubble(String name)
+	public TechDoomVoidBubble(String name, long cost)
 	{
-		super(name, EnumAspect.DOOM, 10000, EnumTechType.DEFENSE);
+		super(name, EnumAspect.DOOM, cost, EnumTechType.OFFENSE);
 	}
 
 	@Override

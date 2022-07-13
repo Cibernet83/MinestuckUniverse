@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
@@ -14,11 +15,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechDoomDecay extends TechHeroAspect
 {
-	public TechDoomDecay(String name) {
-		super(name, EnumAspect.DOOM, EnumTechType.DEFENSE, EnumAspect.BLOOD);
+	public TechDoomDecay(String name, long cost) {
+		super(name, EnumAspect.DOOM, cost, EnumTechType.OFFENSE);
 	}
 
 	protected static final int RADIUS = 16;
@@ -44,7 +46,8 @@ public class TechDoomDecay extends TechHeroAspect
 		{
 			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(RADIUS), p -> !p.equals(player)))
 			{
-				if(!(target instanceof EntityPlayer || target instanceof IMob))
+				if(!(target instanceof EntityPlayer || target instanceof IMob) ||
+						MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
 					continue;
 
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.DOOM, 10);

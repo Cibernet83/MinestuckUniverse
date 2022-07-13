@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
@@ -15,13 +16,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.Collections;
 
 public class TechHeartSoulSwitcher extends TechHeroAspect
 {
-	public TechHeartSoulSwitcher(String name) {
-		super(name, EnumAspect.HEART, EnumTechType.UTILITY);
+	public TechHeartSoulSwitcher(String name, long cost) {
+		super(name, EnumAspect.HEART, cost, EnumTechType.OFFENSE, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class TechHeartSoulSwitcher extends TechHeroAspect
 		{
 
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
-			if (!(target instanceof EntityPlayer))
+			if (target == null || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
 				return false;
 
 

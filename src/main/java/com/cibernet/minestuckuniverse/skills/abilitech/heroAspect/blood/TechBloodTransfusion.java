@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -15,13 +16,14 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechBloodTransfusion extends TechHeroAspect
 {
 	public static final DamageSource DAMAGE_SOURCE = new DamageSource(MinestuckUniverse.MODID+".lifeforceTransfusion").setDamageBypassesArmor();
 
-	public TechBloodTransfusion(String name) {
-		super(name, EnumAspect.BLOOD, EnumTechType.DEFENSE, EnumAspect.HEART);
+	public TechBloodTransfusion(String name, long cost) {
+		super(name, EnumAspect.BLOOD, cost, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class TechBloodTransfusion extends TechHeroAspect
 			return false;
 
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
-		if (target != null)
+		if (target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true)))
 		{
 			player.attackEntityFrom(DAMAGE_SOURCE, 8);
 			if (target.getHealth() >= target.getMaxHealth())

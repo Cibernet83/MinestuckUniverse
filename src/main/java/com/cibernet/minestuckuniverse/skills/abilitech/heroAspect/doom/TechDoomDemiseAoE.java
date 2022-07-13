@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom;
 
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeChloroball;
@@ -13,13 +14,14 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechDoomDemiseAoE extends TechHeroAspect
 {
 	private static final int RADIUS = 20;
 
-	public TechDoomDemiseAoE(String name) {
-		super(name, EnumAspect.DOOM, EnumTechType.OFFENSE);
+	public TechDoomDemiseAoE(String name, long cost) {
+		super(name, EnumAspect.DOOM, cost, EnumTechType.OFFENSE);
 	}
 
 	@Override
@@ -45,7 +47,8 @@ public class TechDoomDemiseAoE extends TechHeroAspect
 
 		for(EntityPlayer target : world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> entity != player && entity.getDistance(player) <= RADIUS) )
 		{
-			if (!player.isCreative() && target.getHealth()/target.getMaxHealth() <= 0.2f)
+			if (!player.isCreative() && target.getHealth()/target.getMaxHealth() <= 0.2f &&
+					!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
 				karmakill(target, player);
 		}
 

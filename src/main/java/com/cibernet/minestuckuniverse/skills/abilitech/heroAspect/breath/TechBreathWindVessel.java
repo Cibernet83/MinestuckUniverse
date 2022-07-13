@@ -30,8 +30,8 @@ import java.util.ArrayList;
 public class TechBreathWindVessel extends TechHeroAspect
 {
 
-	public TechBreathWindVessel(String name) {
-		super(name, EnumAspect.BREATH, EnumTechType.UTILITY);
+	public TechBreathWindVessel(String name, long cost) {
+		super(name, EnumAspect.BREATH, cost, EnumTechType.UTILITY);
 	}
 
 	@Override

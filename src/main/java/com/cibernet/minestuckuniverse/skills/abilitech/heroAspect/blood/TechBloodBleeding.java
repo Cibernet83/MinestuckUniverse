@@ -21,8 +21,8 @@ import java.util.Collections;
 
 public class TechBloodBleeding extends TechHeroAspect
 {
-	public TechBloodBleeding(String name) {
-		super(name, EnumAspect.BLOOD, EnumTechType.OFFENSE, EnumAspect.RAGE);
+	public TechBloodBleeding(String name, long cost) {
+		super(name, EnumAspect.BLOOD, cost, EnumTechType.PASSIVE, EnumTechType.OFFENSE);
 	}
 
 	@Override

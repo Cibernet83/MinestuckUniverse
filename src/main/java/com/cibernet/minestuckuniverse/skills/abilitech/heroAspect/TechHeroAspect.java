@@ -36,10 +36,6 @@ public class TechHeroAspect extends TechBoondollarCost
 		HERO_ASPECT_BADGES.add(this);
 	}
 
-	public TechHeroAspect(String name, EnumAspect heroAspect, EnumTechType heroRole, EnumAspect... auxAspects) {
-		this(name, heroAspect, 100000, heroRole);
-	}
-
 	@Override
 	public boolean canUse(World world, EntityPlayer player)
 	{

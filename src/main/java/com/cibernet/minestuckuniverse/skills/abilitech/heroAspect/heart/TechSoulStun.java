@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.gui.GuiSoulStun;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
@@ -16,6 +17,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -25,8 +27,8 @@ import org.lwjgl.input.Keyboard;
 
 public class TechSoulStun extends TechHeroAspect
 {
-	public TechSoulStun(String name) {
-		super(name, EnumAspect.HEART, EnumTechType.OFFENSE);
+	public TechSoulStun(String name, long cost) {
+		super(name, EnumAspect.HEART, cost, EnumTechType.OFFENSE);
 	}
 
 	@Override
@@ -34,6 +36,9 @@ public class TechSoulStun extends TechHeroAspect
 	{
 		EntityLivingBase target = state == SkillKeyStates.KeyState.NONE ? null : MSUUtils.getTargetEntity(player);
 		EntityLivingBase oldTarget = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityLivingBase) badgeEffects.getTether(techSlot) : null;
+
+		if(target != null && MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+			target = null;
 
 		if(oldTarget != target)
 		{

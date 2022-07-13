@@ -8,6 +8,7 @@ import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates.Key;
 import com.cibernet.minestuckuniverse.damage.CritDamageSource;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
@@ -25,6 +26,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -34,9 +36,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TechHeartBond extends TechHeroAspect
 {
 	
-	public TechHeartBond(String name)
+	public TechHeartBond(String name, long cost)
 	{
-		super(name, EnumAspect.HEART, EnumTechType.OFFENSE);
+		super(name, EnumAspect.HEART, cost, EnumTechType.OFFENSE, EnumTechType.DEFENSE);
 	}
 	//lower food, make particles, set *dead* 
 	@Override
@@ -59,6 +61,10 @@ public class TechHeartBond extends TechHeroAspect
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.HEART, 1);
 		
 		EntityLivingBase target = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityLivingBase) badgeEffects.getTether(techSlot) : null;
+
+		if(target != null && MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+			target = null;
+
 		IBadgeEffects targetBadgeEffects = target != null ? target.getCapability(MSUCapabilities.BADGE_EFFECTS, null) : null;
 		
 		if(!released && target != null && targetBadgeEffects.getSoulLinkedBy() == player)

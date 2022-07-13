@@ -42,8 +42,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class TechHeartProject extends TechHeroAspect
 {
-	public TechHeartProject(String name) {
-		super(name, EnumAspect.HEART, EnumTechType.UTILITY);
+	public TechHeartProject(String name, long cost) {
+		super(name, EnumAspect.HEART, cost, EnumTechType.UTILITY);
 	}
 
 	@Override

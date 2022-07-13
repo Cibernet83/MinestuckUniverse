@@ -14,9 +14,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class TechDoomBind extends TechHeroAspect
 {
-	public TechDoomBind(String name)
+	public TechDoomBind(String name, long cost)
 	{
-		super(name, EnumAspect.DOOM, 100000, EnumTechType.DEFENSE, EnumTechType.PASSIVE);
+		super(name, EnumAspect.DOOM, cost, EnumTechType.PASSIVE, EnumTechType.DEFENSE);
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
