@@ -45,7 +45,7 @@ public class TechBardMetronome  extends TechHeroClass
 		{
 			ArrayList<Abilitech> POOL = new ArrayList<Abilitech>();
 			POOL.addAll(ABILITECHS);
-			POOL.removeIf(tech -> !tech.isUsableExternally(world, player));
+			POOL.removeIf(tech -> !tech.isUsableExternally(world, player) || tech instanceof TechBardMetronome);
 			if(POOL.size() < 1)
 			{
 				player.sendStatusMessage(new TextComponentTranslation("status.externalTech.notFound"), true);
@@ -59,7 +59,7 @@ public class TechBardMetronome  extends TechHeroClass
 		
 		Abilitech externalTech = (Abilitech) MSUSkills.REGISTRY.getValue(new ResourceLocation(MinestuckUniverse.MODID, ID));
 		
-		externalTech.onUseTick(world, player, badgeEffects, techSlot, state, time);
+		boolean toReturn = externalTech.onUseTick(world, player, badgeEffects, techSlot, state, time);
 		
 		if(state == KeyState.RELEASED)
 		{
@@ -67,7 +67,7 @@ public class TechBardMetronome  extends TechHeroClass
 			player.getFoodStats().setFoodLevel(0);
 		}
 		
-		return true;
+		return toReturn;
 	}
 	
 	public static class slotA {}
