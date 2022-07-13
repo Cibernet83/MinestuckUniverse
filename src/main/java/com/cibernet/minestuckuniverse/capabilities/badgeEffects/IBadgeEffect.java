@@ -426,7 +426,7 @@ public interface IBadgeEffect
 		@Override
 		public void serialize(ByteBuf data)
 		{
-			data.writeByte(BadgeEffectType.INT.ordinal());
+			data.writeByte(BadgeEffectType.STRING.ordinal());
 			ByteBufUtils.writeUTF8String(data, value);
 		}
 

@@ -333,6 +333,7 @@ public class MSUSkills
 	public static final Abilitech SEER_PREDICTION = new TechSeer("seer_prediction");
 	public static final Abilitech FORESIGHT_DODGE = new TechSeerDodge("foresight_dodge");
 	public static final Abilitech ROGUE_CONTRIBUTION = new TechRogue("rogue_contribution");
+	public static final Abilitech ROGUELIKE_ADAPTABILITY = new TechRogueSteal("roguelike_adaptability");
 	public static final Abilitech BARD_DISSONANCE = new TechBard("bard_dissonance");
 	public static final Abilitech BARD_METRONOME = new TechBardMetronome("magic_metronome");
 	public static final Abilitech MAID_FAVOR = new TechMaid("maid_favor");
