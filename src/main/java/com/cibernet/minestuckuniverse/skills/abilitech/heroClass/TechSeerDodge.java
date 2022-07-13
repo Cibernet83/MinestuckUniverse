@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.events.handlers.GTEventHandler;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,9 +22,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class TechSeerDodge extends TechHeroClass
 {
-	public TechSeerDodge(String name)
+	public TechSeerDodge(String name, long cost)
 	{
-		super(name, EnumClass.SEER);
+		super(name, EnumClass.SEER, cost, EnumTechType.DEFENSE);
 	}
 
 	@Override

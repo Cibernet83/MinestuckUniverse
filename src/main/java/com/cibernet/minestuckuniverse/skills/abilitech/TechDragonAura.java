@@ -24,9 +24,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class TechDragonAura extends TechBoondollarCost
 {
-	public TechDragonAura(String name)
+	public TechDragonAura(String name, long cost)
 	{
-		super(name, 0, EnumTechType.DEFENSE);
+		super(name, cost, EnumTechType.DEFENSE);
 		requiredStacks.add(new ItemStack(MinestuckUniverseItems.dragonGel));
 	}
 

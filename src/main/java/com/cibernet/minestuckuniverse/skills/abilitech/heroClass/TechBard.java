@@ -1,11 +1,12 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
-import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
-import com.cibernet.minestuckuniverse.particles.MSUParticles;
+import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.events.handlers.BadgeEventHandler;
 import com.cibernet.minestuckuniverse.events.handlers.GTEventHandler;
+import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.mraof.minestuck.util.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,15 +14,16 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class TechBard extends TechHeroClass
 {
-	public TechBard(String name)
+	public TechBard(String name, int cost)
 	{
-		super(name, EnumClass.BARD);
+		super(name, EnumClass.BARD, cost);
 	}
 
 	@Override
@@ -39,7 +41,11 @@ public class TechBard extends TechHeroClass
 		Title title = MinestuckPlayerData.getTitle(IdentifierHandler.encode(player));
 		for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(10,1,10), (entity) -> entity != player))
 		{
-			if(world.rand.nextBoolean())
+			boolean negative = world.rand.nextBoolean();
+			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, !negative)))
+				continue;
+
+			if(negative)
 			{
 				PotionEffect effect = BadgeEventHandler.NEGATIVE_EFFECTS.get(title == null ? EnumAspect.RAGE : title.getHeroAspect());
 				target.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration()*2, effect.getAmplifier()*2));

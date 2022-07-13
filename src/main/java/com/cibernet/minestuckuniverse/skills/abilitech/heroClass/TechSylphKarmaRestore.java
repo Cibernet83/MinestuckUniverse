@@ -4,8 +4,10 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.EnumClass;
@@ -13,12 +15,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechSylphKarmaRestore extends TechHeroClass
 {
-	public TechSylphKarmaRestore(String name)
+	public TechSylphKarmaRestore(String name, long cost)
 	{
-		super(name, EnumClass.SYLPH);
+		super(name, EnumClass.SYLPH, cost, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -36,14 +39,15 @@ public class TechSylphKarmaRestore extends TechHeroClass
 			return false;
 		}
 
-		EntityLivingBase target = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityLivingBase) badgeEffects.getTether(techSlot) : null;
-		if(target == null && MSUUtils.getTargetEntity(player) instanceof EntityPlayer)
+		EntityPlayer target = badgeEffects.getTether(techSlot) instanceof EntityPlayer ? (EntityPlayer) badgeEffects.getTether(techSlot) : null;
+		if(target == null && MSUUtils.getTargetEntity(player) instanceof EntityPlayer &&
+				!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true)))
 		{
-			target = MSUUtils.getTargetEntity(player);
+			target = (EntityPlayer) MSUUtils.getTargetEntity(player);
 			badgeEffects.setTether(target, techSlot);
 		}
 
-		if (target instanceof EntityPlayer)
+		if (target != null)
 		{
 			IGodTierData targetData = target.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 

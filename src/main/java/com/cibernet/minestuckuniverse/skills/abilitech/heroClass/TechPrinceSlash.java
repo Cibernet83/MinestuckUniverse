@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
@@ -15,9 +16,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class TechPrinceSlash extends TechHeroClass
 {
-	public TechPrinceSlash(String name)
+	public TechPrinceSlash(String name, long cost)
 	{
-		super(name, EnumClass.PRINCE);
+		super(name, EnumClass.PRINCE, cost, EnumTechType.PASSIVE, EnumTechType.OFFENSE);
 	}
 
 	@Override

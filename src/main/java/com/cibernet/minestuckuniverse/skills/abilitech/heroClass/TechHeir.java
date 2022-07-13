@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.events.handlers.BadgeEventHandler;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,9 +20,9 @@ import static com.mraof.minestuck.util.MinestuckPlayerData.title;
 
 public class TechHeir extends TechHeroClass
 {
-	public TechHeir(String name)
+	public TechHeir(String name, long cost)
 	{
-		super(name, EnumClass.HEIR);
+		super(name, EnumClass.HEIR, cost, EnumTechType.PASSIVE, EnumTechType.DEFENSE);
 	}
 
 	@Override

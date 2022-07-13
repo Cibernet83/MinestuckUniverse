@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
@@ -7,6 +8,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,12 +17,13 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechSeer extends TechHeroClass
 {
-	public TechSeer(String name)
+	public TechSeer(String name, long cost)
 	{
-		super(name, EnumClass.SEER);
+		super(name, EnumClass.SEER, cost, EnumTechType.UTILITY);
 	}
 
 	@Override
@@ -32,6 +35,9 @@ public class TechSeer extends TechHeroClass
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
 		if(!(target instanceof EntityPlayer))
+			return false;
+
+		if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
 			return false;
 
 		if(!player.isCreative())

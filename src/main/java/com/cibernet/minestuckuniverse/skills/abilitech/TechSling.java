@@ -21,9 +21,9 @@ import net.minecraft.world.World;
 public class TechSling extends TechBoondollarCost
 {
 
-	public TechSling(String name) 
+	public TechSling(String name, long cost)
 	{
-		super(name, 100, EnumTechType.UTILITY);
+		super(name, cost, EnumTechType.OFFENSE);
 	}
 	
 	@Override

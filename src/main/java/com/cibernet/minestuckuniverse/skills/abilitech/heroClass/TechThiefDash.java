@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -12,9 +13,9 @@ import net.minecraft.world.World;
 
 public class TechThiefDash extends TechHeroClass
 {
-	public TechThiefDash(String name)
+	public TechThiefDash(String name, long cost)
 	{
-		super(name, EnumClass.THIEF);
+		super(name, EnumClass.THIEF, cost, EnumTechType.UTILITY);
 	}
 
 	@Override

@@ -1,11 +1,13 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.events.handlers.GTEventHandler;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
@@ -14,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -22,9 +25,9 @@ import java.util.Collection;
 
 public class TechMuse extends TechHeroClass
 {
-	public TechMuse(String name)
+	public TechMuse(String name, long cost)
 	{
-		super(name, EnumClass.MUSE);
+		super(name, EnumClass.MUSE, cost, EnumTechType.PASSIVE, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -48,7 +51,8 @@ public class TechMuse extends TechHeroClass
 
 		for(EntityPlayer target : player.world.getMinecraftServer().getPlayerList().getPlayers())
 		{
-			if(!player.isOnSameTeam(target) && Math.signum(target.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTotalKarma()) != Math.signum(player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTotalKarma()))
+			if(Math.signum(target.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTotalKarma()) != Math.signum(player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTotalKarma()) &&
+					!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player.world, target, MSUSkills.MUSE_REQUIEM, -1, false)))
 				continue;
 
 			Collection<PotionEffect> effects = title == null ? new ArrayList<PotionEffect>(){{add(new PotionEffect(MobEffects.STRENGTH, 300, 4));}} :

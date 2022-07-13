@@ -10,6 +10,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.entity.EntityBubble;
 import com.cibernet.minestuckuniverse.events.handlers.BadgeEventHandler;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.network.skaianet.SburbConnection;
 import com.mraof.minestuck.network.skaianet.SkaianetHandler;
@@ -28,9 +29,9 @@ import net.minecraft.world.World;
 public class TechWitchTrap extends TechHeroClass
 {
 	
-	public TechWitchTrap(String name)
+	public TechWitchTrap(String name, long cost)
 	{
-		super(name, EnumClass.WITCH);
+		super(name, EnumClass.WITCH, cost, EnumTechType.OFFENSE);
 	}
 	
 	@Override

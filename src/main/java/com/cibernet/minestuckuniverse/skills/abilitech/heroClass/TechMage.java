@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.Style;
@@ -16,9 +17,9 @@ import net.minecraft.world.World;
 
 public class TechMage extends TechHeroClass
 {
-	public TechMage(String name)
+	public TechMage(String name, long cost)
 	{
-		super(name, EnumClass.MAGE);
+		super(name, EnumClass.MAGE, cost, EnumTechType.UTILITY);
 	}
 
 	@Override

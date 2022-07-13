@@ -2,17 +2,20 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechKnightHalt extends TechHeroClass {
-	public TechKnightHalt(String name) {
-		super(name, EnumClass.KNIGHT);
+	public TechKnightHalt(String name, long cost) {
+		super(name, EnumClass.KNIGHT, cost, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -38,6 +41,9 @@ public class TechKnightHalt extends TechHeroClass {
 			target.motionY = 0;
 			target.motionZ = 0;
 			target.velocityChanged = true;
+
+			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+				continue;
 		}
 
 		badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.BURST, EnumClass.KNIGHT, 20);

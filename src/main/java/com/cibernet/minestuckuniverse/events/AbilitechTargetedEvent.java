@@ -15,13 +15,15 @@ public class AbilitechTargetedEvent extends Event
 	final Entity target;
 	final Abilitech abilitech;
 	final int techSlot;
+	final Boolean beneficial; //making this an object so that it can be null
 
-	public AbilitechTargetedEvent(@Nonnull World world, @Nonnull Entity target, @Nonnull Abilitech abilitech, int techSlot)
+	public AbilitechTargetedEvent(@Nonnull World world, @Nonnull Entity target, @Nonnull Abilitech abilitech, int techSlot, Boolean beneficial)
 	{
 		this.world = world;
 		this.target = target;
 		this.abilitech = abilitech;
 		this.techSlot = techSlot;
+		this.beneficial = beneficial;
 	}
 
 	@Override
@@ -43,5 +45,9 @@ public class AbilitechTargetedEvent extends Event
 
 	public World getWorld() {
 		return world;
+	}
+
+	public Boolean isBeneficial() {
+		return beneficial;
 	}
 }

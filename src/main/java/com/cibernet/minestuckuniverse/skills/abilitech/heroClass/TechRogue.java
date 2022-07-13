@@ -3,7 +3,9 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,14 +13,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.ArrayList;
 
 public class TechRogue extends TechHeroClass
 {
-	public TechRogue(String name)
+	public TechRogue(String name, long cost)
 	{
-		super(name, EnumClass.ROGUE);
+		super(name, EnumClass.ROGUE, cost, EnumTechType.OFFENSE, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -47,11 +50,12 @@ public class TechRogue extends TechHeroClass
 			}
 
 			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(5,1,5), (entity) -> entity != player))
-				for(PotionEffect effect : appliedPotions)
-				{
-					target.addPotionEffect(effect);
-					target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.ROGUE, 3);
-				}
+				if(!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+					for(PotionEffect effect : appliedPotions)
+					{
+						target.addPotionEffect(effect);
+						target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.ROGUE, 3);
+					}
 			if (!player.isCreative())
 				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 8);
 		}
@@ -64,7 +68,7 @@ public class TechRogue extends TechHeroClass
 		if(!state.equals(SkillKeyStates.KeyState.PRESS))
 			return true;
 
-		if(target != null)
+		if(target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
 		{
 			for(PotionEffect effect : appliedPotions)
 				target.addPotionEffect(effect);

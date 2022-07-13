@@ -3,9 +3,11 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.events.handlers.GTEventHandler;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.network.skaianet.SburbConnection;
 import com.mraof.minestuck.network.skaianet.SkaianetHandler;
@@ -16,15 +18,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.Collection;
 import java.util.Collections;
 
 public class TechThief extends TechHeroClass
 {
-	public TechThief(String name)
+	public TechThief(String name, long cost)
 	{
-		super(name, EnumClass.THIEF);
+		super(name, EnumClass.THIEF, cost, EnumTechType.OFFENSE);
 	}
 
 	@Override
@@ -51,7 +54,7 @@ public class TechThief extends TechHeroClass
 
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
-		if (!(target instanceof EntityPlayer))
+		if (!(target instanceof EntityPlayer) || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
 			return false;
 
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumClass.THIEF, 20);

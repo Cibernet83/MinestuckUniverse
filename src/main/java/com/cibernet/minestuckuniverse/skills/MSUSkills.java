@@ -320,7 +320,7 @@ public class MSUSkills
 
 	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward");
 	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt");
-	public static final Abilitech SYLPH_MEND = new TechSylph("sylph_mend");
+	public static final Abilitech SYLPH_MEND = new TechSylph("sylph_mend", 0);
 	public static final Abilitech KARMIC_RESTORATION = new TechSylphKarmaRestore("karmic_restoration");
 	public static final Abilitech PRINCE_WRATH = new TechPrinceWrath("prince_wrath");
 	public static final Abilitech RULING_SLASH = new TechPrinceSlash("ruling_slash");
@@ -335,8 +335,8 @@ public class MSUSkills
 	public static final Abilitech FORESIGHT_DODGE = new TechSeerDodge("foresight_dodge");
 	public static final Abilitech ROGUE_CONTRIBUTION = new TechRogue("rogue_contribution");
 	public static final Abilitech ROGUELIKE_ADAPTABILITY = new TechRogueSteal("roguelike_adaptability");
-	public static final Abilitech BARD_DISSONANCE = new TechBard("bard_dissonance");
-	public static final Abilitech BARD_METRONOME = new TechBardMetronome("magic_metronome");
+	public static final Abilitech BARD_DISSONANCE = new TechBard("bard_dissonance", 0);
+	public static final Abilitech BARD_METRONOME = new TechBardMetronome("magic_metronome", 0);
 	public static final Abilitech MAID_FAVOR = new TechMaid("maid_favor");
 	public static final Abilitech IRRADIANT_SERVITUDE = new TechMaidServe("irraidant_servitude");
 	public static final Abilitech HEIR_WILL = new TechHeir("heir_will");

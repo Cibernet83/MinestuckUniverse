@@ -26,15 +26,12 @@ public class TechHeroClass extends TechBoondollarCost
 	private final String name;
 	protected final EnumClass heroClass;
 
-	public TechHeroClass(String name, EnumClass heroClass, int requiredLevel) {
-		super(name, requiredLevel, EnumTechType.DEFENSE);
+	public TechHeroClass(String name, EnumClass heroClass, long cost, EnumTechType... techTypes)
+	{
+		super(name, cost, techTypes);
 		this.name = name;
 		this.heroClass = heroClass;
 		HERO_CLASS_BADGES.add(this);
-	}
-
-	public TechHeroClass(String name, EnumClass heroClass) {
-		this(name, heroClass, 5000);
 	}
 
 	@Override

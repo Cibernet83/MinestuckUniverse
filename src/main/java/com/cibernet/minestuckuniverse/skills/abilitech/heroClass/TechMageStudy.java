@@ -9,6 +9,7 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.Skill;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -18,9 +19,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class TechMageStudy extends TechHeroClass
 {
-	public TechMageStudy(String name)
+	public TechMageStudy(String name, long cost)
 	{
-		super(name, EnumClass.MAGE);
+		super(name, EnumClass.MAGE, cost, EnumTechType.HYBRID);
 	}
 
 	@Override

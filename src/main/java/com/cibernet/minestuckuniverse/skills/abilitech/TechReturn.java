@@ -27,9 +27,9 @@ import net.minecraft.world.WorldServer;
 public class TechReturn extends TechBoondollarCost
 {
 
-	public TechReturn(String name) 
+	public TechReturn(String name, long cost)
 	{
-		super(name, 100, EnumTechType.UTILITY);
+		super(name, cost, EnumTechType.UTILITY);
 		requiredStacks.add(new ItemStack(MinestuckUniverseItems.returnMedallion));
 	}
 	

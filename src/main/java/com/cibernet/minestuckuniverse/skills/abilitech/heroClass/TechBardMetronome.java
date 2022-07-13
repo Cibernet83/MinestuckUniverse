@@ -1,26 +1,25 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates.KeyState;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+
 public class TechBardMetronome  extends TechHeroClass
 {
-	public TechBardMetronome(String name)
+	public TechBardMetronome(String name, long cost)
 	{
-		super(name, EnumClass.BARD);
+		super(name, EnumClass.BARD, cost, EnumTechType.OFFENSE, EnumTechType.HYBRID);
 	}
 
 	@Override
