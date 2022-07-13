@@ -24,6 +24,9 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageM
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceManipulator;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceTargetTele;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeStop;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechBardMetronome.slotA;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechBardMetronome.slotB;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechBardMetronome.slotC;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechSeerDodge;
 import com.cibernet.minestuckuniverse.skills.badges.BadgePage;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -380,7 +383,38 @@ public class BadgeEffects implements IBadgeEffects
 	{
 		return getInt(TechMindStrike.class);
 	}
-
+	
+	@Override
+	public void setExternalTech(int slot, String id)
+	{
+		switch(slot)
+		{
+		default:
+			setString(slotA.class, id);
+			break;
+		case 1:
+			setString(slotB.class, id);
+			break;
+		case 2:
+			setString(slotC.class, id);
+			break;
+		}
+	}
+	
+	@Override
+	public String getExternalTech(int slot)
+	{
+		switch(slot)
+		{
+		default:
+			return getString(slotA.class);
+		case 1:
+			return getString(slotB.class);
+		case 2:
+			return getString(slotC.class);
+		}
+	}
+	
 	@Override
 	public void setHoping(boolean v) {
 		setBoolean(TechHopeyShit.class, v);

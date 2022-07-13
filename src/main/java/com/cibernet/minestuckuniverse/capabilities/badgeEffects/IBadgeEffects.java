@@ -69,6 +69,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	
 	//tethers end
 	
+	void setExternalTech(int slot, String id);
+	String getExternalTech(int slot);
+	
 	void setProjectionTime(int time);
 	int getProjectionTime();
 	
