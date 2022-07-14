@@ -51,7 +51,7 @@ public class TechBreathKnockback extends TechHeroAspect
             player.setAir(300);
             for(Entity target : world.getEntitiesWithinAABB(Entity.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> entity != player))
             {
-                if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+                if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
                     continue;
 
                 float strength = 3;

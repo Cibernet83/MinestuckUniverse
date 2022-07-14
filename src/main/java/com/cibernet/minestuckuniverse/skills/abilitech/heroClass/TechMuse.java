@@ -52,7 +52,7 @@ public class TechMuse extends TechHeroClass
 		for(EntityPlayer target : player.world.getMinecraftServer().getPlayerList().getPlayers())
 		{
 			if(Math.signum(target.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTotalKarma()) != Math.signum(player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTotalKarma()) &&
-					!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player.world, target, MSUSkills.MUSE_REQUIEM, -1, false)))
+					!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, MSUSkills.MUSE_REQUIEM, -1, false)))
 				continue;
 
 			Collection<PotionEffect> effects = title == null ? new ArrayList<PotionEffect>(){{add(new PotionEffect(MobEffects.STRENGTH, 300, 4));}} :

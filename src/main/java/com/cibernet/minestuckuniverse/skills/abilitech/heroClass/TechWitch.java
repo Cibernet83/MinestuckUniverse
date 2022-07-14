@@ -48,7 +48,7 @@ public class TechWitch extends TechHeroClass
 
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
-		if (target == null || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+		if (target == null || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 			return false;
 
 		target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.WITCH, 20);

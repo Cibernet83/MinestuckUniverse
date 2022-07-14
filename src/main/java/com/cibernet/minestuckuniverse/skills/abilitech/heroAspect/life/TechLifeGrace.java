@@ -44,7 +44,7 @@ public class TechLifeGrace extends TechHeroAspect
 		{
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
-			if(target == null || badgeEffects.getSavingGraceTargets().contains(target.getUniqueID()) || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true))) return false;
+			if(target == null || badgeEffects.getSavingGraceTargets().contains(target.getUniqueID()) || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, true))) return false;
 
 			IBadgeEffects targetEffects = target.getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 

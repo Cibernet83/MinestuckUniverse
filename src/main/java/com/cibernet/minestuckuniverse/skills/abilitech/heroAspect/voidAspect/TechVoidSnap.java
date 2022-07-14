@@ -43,7 +43,7 @@ public class TechVoidSnap extends TechHeroAspect
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.VOID, 5);
 
 		if(target != null && !(target instanceof EntityPlayer) && !MSUConfig.entityPowerProtection.contains(EntityRegistry.getEntry(target.getClass()).getRegistryName().toString()) &&
-				!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, player, this, techSlot, false)))
+				!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 		{
 			target.setDead();
 			if (!player.isCreative() && !world.isRemote)

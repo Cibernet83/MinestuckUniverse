@@ -1064,6 +1064,7 @@ gui.noBadgesLeft=§cYou can't unlock any more badges!
 gui.badgeDisabled=§cClick to enable.
 gui.badgeBlocked=§cSomething is inhibiting the effect of this badge!
 gui.needXp=§cYou need at least %s experience levels to allocate Skill XP
+gui.generalMax=§cYou have reached God Tier %s and can no longer increase your God Tier stats
 gui.abilitechDisabled=§cRight-Click to enable.
 gui.abilitechBlocked=§cSomething is inhibiting this Abilitech.
 gui.abilitechnosynth=Abilitechnosynth
@@ -1231,6 +1232,11 @@ config.minestuckuniverse.strife.strifeDeckMaxSize=Strife Deck Weapon Limit
 config.minestuckuniverse.strife.abstrataSwitcherRung=Strife Specibus Quick Switcher Unlock Rung
 config.minestuckuniverse.strife.weaponAttackMultiplier=Weapon Attack Factor
 config.minestuckuniverse.title=Minestuck Universe
+
+config.minestuckuniverse.godtier.maxGodTier=Maximum God Tier
+
+config.minestuckuniverse.godtier.cyberware.addedPowerPerDeath=Cyberware Power Added Every Death
+config.minestuckuniverse.godtier.cyberware.acceptablePower=Acceptable Power Before Replacing Vital Cyberorgans
 
 
 property.item.broken=Broken %s

@@ -44,7 +44,7 @@ public class TechHeartSoulSwitcher extends TechHeroAspect
 		{
 
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
-			if (target == null || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+			if (target == null || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 				return false;
 
 

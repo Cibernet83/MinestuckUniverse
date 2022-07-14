@@ -59,7 +59,20 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GTEventHandler
 {
 
-	public static Potion[] aspectEffects = { MobEffects.ABSORPTION, MobEffects.SPEED, MobEffects.RESISTANCE, MobEffects.ABSORPTION, MobEffects.FIRE_RESISTANCE, MobEffects.REGENERATION, MobEffects.LUCK, MobEffects.NIGHT_VISION, MobEffects.STRENGTH, MobEffects.JUMP_BOOST, MobEffects.HASTE, MobEffects.INVISIBILITY }; //Blood, Breath, Doom, Heart, Hope, Life, Light, Mind, Rage, Space, Time, Void
+	public static Potion[] aspectEffects = {
+			MobEffects.ABSORPTION, //blood
+			MobEffects.SPEED, //breath
+			MobEffects.RESISTANCE, //doom
+			MobEffects.ABSORPTION, //heart
+			MobEffects.FIRE_RESISTANCE, //hope
+			MobEffects.REGENERATION, //life
+			MobEffects.LUCK, //light
+			MobEffects.NIGHT_VISION, //mind
+			MobEffects.STRENGTH, //rage
+			MobEffects.JUMP_BOOST, //space
+			MobEffects.HASTE, //time
+			MobEffects.INVISIBILITY //void
+	};
 	// Increase the starting rungs
 	public static float[] aspectStrength = new float[] {1.0F/12, 1.0F/15, 1.0F/28, 1.0F/25, 1.0F/18, 1.0F/20, 1.0F/10, 1.0F/12, 1.0F/25, 1.0F/10, 1.0F/13, 1.0F/12}; //Absorption, Speed, Resistance, Saturation, Fire Resistance, Regeneration, Luck, Night Vision, Strength, Jump Boost, Haste, Invisibility
 
@@ -242,13 +255,23 @@ public class GTEventHandler
 		{
 			HashMap<Potion, PotionEffect> appliedPotions = getAspectEffects(player);
 
-			if (MinestuckPlayerData.getEffectToggle(identifier) && !player.isPotionActive(MSUPotions.GOD_TIER_LOCK))
+			if(gtData.wereEffectsActive() && ((gtData.isGodTier() && !MinestuckPlayerData.getEffectToggle(identifier)) || player.isPotionActive(MSUPotions.GOD_TIER_LOCK)))
+			{
+				for (Potion key : appliedPotions.keySet())
+					if (player.isPotionActive(key))
+						player.removePotionEffect(key);
+				gtData.wereEffectsActive(false);
+			}
+			else if(MinestuckPlayerData.getEffectToggle(identifier) && !player.isPotionActive(MSUPotions.GOD_TIER_LOCK))
+			{
 				for (PotionEffect effect : appliedPotions.values())
 				{
 					PotionEffect currentPotionEffect = player.getActivePotionEffect(effect.getPotion());
-					if (currentPotionEffect == null || (currentPotionEffect.getDuration() <= 200 && currentPotionEffect.getAmplifier() <= effect.getAmplifier() && !REFRESH_POTIONS.contains(effect.getPotion())))
+					if ((currentPotionEffect == null && (!REFRESH_POTIONS.contains(effect.getPotion()) || player.ticksExisted%600 == 0)) || (currentPotionEffect != null && currentPotionEffect.getDuration() <= 200 && currentPotionEffect.getAmplifier() <= effect.getAmplifier() && !REFRESH_POTIONS.contains(effect.getPotion())))
 						player.addPotionEffect(effect);
 				}
+				gtData.wereEffectsActive(true);
+			}
 
 			else if(gtData.isGodTier() || player.isPotionActive(MSUPotions.GOD_TIER_LOCK))
 				for (Potion key : appliedPotions.keySet())
@@ -283,11 +306,11 @@ public class GTEventHandler
 					appliedPotions.put(MSUPotions.DECAYPROOF, new PotionEffect(MSUPotions.DECAYPROOF, 600, 0, true, false));
 					break;
 				case MIND:
-					if (!(player.getActivePotionEffect(MobEffects.GLOWING) != null && player.getActivePotionEffect(MobEffects.GLOWING).getAmplifier() >= 2))
-						appliedPotions.put(MSUPotions.MIND_FORTITUDE, new PotionEffect(MSUPotions.MIND_FORTITUDE, 600, 0, true, false));
+					appliedPotions.put(MSUPotions.MIND_FORTITUDE, new PotionEffect(MSUPotions.MIND_FORTITUDE, 600, 0, true, false));
 					break;
 				case VOID:
-					appliedPotions.put(MSUPotions.VOID_CONCEAL, new PotionEffect(MSUPotions.VOID_CONCEAL, 600, 0, true, false));
+					if (!(player.getActivePotionEffect(MobEffects.GLOWING) != null && player.getActivePotionEffect(MobEffects.GLOWING).getAmplifier() >= 2))
+						appliedPotions.put(MSUPotions.VOID_CONCEAL, new PotionEffect(MSUPotions.VOID_CONCEAL, 600, 0, true, false));
 					break;
 				default:
 					potionLevel *= 2;
@@ -318,7 +341,7 @@ public class GTEventHandler
 			return;
 
 		IGodTierData data = event.getEntityLiving().getCapability(MSUCapabilities.GOD_TIER_DATA, null);
-		float dmgReduction = data.getSkillLevel(GodTierData.StatType.DEFENSE) * 0.002f * (data.isBadgeActive(MSUSkills.BADGE_PAGE) ? 2 : 1);
+		float dmgReduction = data.getSkillLevel(GodTierData.StatType.DEFENSE) * 0.002f * (data.isBadgeActive(MSUSkills.BADGE_PAGE) ? 2 : 1)* (data.isBadgeActive(MSUSkills.BADGE_OVERLORD) ? 3 : 1);
 
 		if(event.getSource() instanceof CritDamageSource || event.getSource() instanceof EntityCritDamageSource)
 			dmgReduction *= 0.4;

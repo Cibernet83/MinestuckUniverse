@@ -45,7 +45,7 @@ public class TechMaidServe extends TechHeroClass
 			return false;
 		for(Entity entity : player.world.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().grow(3)))
 			if(entity instanceof EntityLivingBase && (entity instanceof EntityAnimal || entity instanceof EntityPlayer &&
-					!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, entity, this, techSlot, true))))
+					!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, entity, this, techSlot, true))))
 				for(Potion pot : GTEventHandler.getAspectEffects(player).keySet())
 					if(!(((EntityLivingBase) entity).isPotionActive(pot) && ((EntityLivingBase) entity).getActivePotionEffect(pot).getDuration() <= 20))
 						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(pot, 100, GTEventHandler.getAspectEffects(player).get(pot).getAmplifier(), true, true));

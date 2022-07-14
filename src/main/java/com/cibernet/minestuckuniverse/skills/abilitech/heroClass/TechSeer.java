@@ -37,7 +37,7 @@ public class TechSeer extends TechHeroClass
 		if(!(target instanceof EntityPlayer))
 			return false;
 
-		if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+		if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 			return false;
 
 		if(!player.isCreative())

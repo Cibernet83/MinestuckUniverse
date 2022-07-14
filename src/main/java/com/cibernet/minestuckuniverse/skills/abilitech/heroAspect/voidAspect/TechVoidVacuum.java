@@ -48,7 +48,7 @@ public class TechVoidVacuum extends TechHeroAspect
         float strength = Math.min(Math.max(0, time-10)/80f , 1);
         for(Entity target : world.getEntitiesWithinAABB(Entity.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> entity != player))
         {
-            if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, player, this, techSlot, false)))
+            if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
                 continue;
 
             Vec3d vec = new Vec3d(player.posX-target.posX, player.posY-target.posY, player.posZ-target.posZ).normalize();

@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.entity;
 
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathBubble;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,6 +10,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.world.GetCollisionBoxesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -255,6 +257,24 @@ public class EntityBubble extends Entity
 	}
 
 	@SubscribeEvent
+	public static void onTechTarget(AbilitechTargetedEvent event)
+	{
+		if(!event.getWorld().getEntitiesWithinAABB(EntityBubble.class, event.getSource().getEntityBoundingBox(), bubble -> !bubble.canEnter()).
+				equals(event.getWorld().getEntitiesWithinAABB(EntityBubble.class, event.getTarget().getEntityBoundingBox(), bubble -> !bubble.canEnter())))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void onAttack(LivingAttackEvent event)
+	{
+		Entity source = event.getSource().getImmediateSource() == null ? event.getSource().getTrueSource() : event.getSource().getImmediateSource();
+
+		if(!event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, source.getEntityBoundingBox(), bubble -> !bubble.canEnter()).
+				equals(event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, event.getEntity().getEntityBoundingBox(), bubble -> !bubble.canEnter())))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
 	public static void onGetCollisionBoxes(GetCollisionBoxesEvent event)
 	{
 		Entity entity = event.getEntity();
@@ -278,7 +298,7 @@ public class EntityBubble extends Entity
 					else if((entity.posX >= aabb.minX && entity.posY >= aabb.minY && entity.posZ >= aabb.minZ && entity.posX <= aabb.maxX && entity.posY <= aabb.maxY && entity.posZ <= aabb.maxZ))
 					{
 						if(stuck.get(bubble) == null)
-							stuck.put(bubble, new ArrayList<Entity>());
+							stuck.put(bubble, new ArrayList<>());
 						if(!stuck.get(bubble).contains(entity))
 							stuck.get(bubble).add(entity);
 					}
@@ -286,5 +306,6 @@ public class EntityBubble extends Entity
 			}
 		}
 	}
+
 
 }

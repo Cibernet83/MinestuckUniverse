@@ -62,7 +62,7 @@ public class TechHeartBond extends TechHeroAspect
 		
 		EntityLivingBase target = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityLivingBase) badgeEffects.getTether(techSlot) : null;
 
-		if(target != null && MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+		if(target != null && MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 			target = null;
 
 		IBadgeEffects targetBadgeEffects = target != null ? target.getCapability(MSUCapabilities.BADGE_EFFECTS, null) : null;

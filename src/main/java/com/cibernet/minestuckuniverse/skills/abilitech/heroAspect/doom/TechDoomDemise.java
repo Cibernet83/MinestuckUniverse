@@ -41,7 +41,7 @@ public class TechDoomDemise extends TechHeroAspect
 
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
-		if(target != null && MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+		if(target != null && MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 			target = null;
 
 		float playerPctg = player.getHealth()/player.getMaxHealth();

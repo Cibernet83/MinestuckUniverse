@@ -44,7 +44,7 @@ public class TechTimeTickUp extends TechHeroAspect
 
 		if (target != null)
 		{
-			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 				return false;
 			
 			if(!player.isCreative() && time % 20 == 0)

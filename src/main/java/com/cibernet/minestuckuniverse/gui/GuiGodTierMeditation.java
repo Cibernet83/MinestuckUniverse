@@ -218,7 +218,7 @@ public class GuiGodTierMeditation extends GuiScreen
 			drawTexturedModalRect(skillX + 10, skillY + 6, 0, 10, 77, 5);
 			drawTexturedModalRect(skillX + 10, skillY + 6, 0, 15, (int) (77*filled), 5);
 			drawTexturedModalRect(skillX, skillY, 164 + (i*18), 0, 18, 18);
-			drawTexturedModalRect(skillX + 89, skillY, ((player.isCreative() || player.experienceLevel >= MSUConfig.godTierXpThreshold) ? isPointInRegion(mouseX, mouseY, skillX+89, skillY, 18, 18) ? (mouseClicked ? 36 : 18) : 0 : 36), 20, 18, 18);
+			drawTexturedModalRect(skillX + 89, skillY, (((MSUConfig.maxGodTier < 0 || data.getSkillLevel(GodTierData.StatType.GENERAL) < MSUConfig.maxGodTier) && (player.isCreative() || player.experienceLevel >= MSUConfig.godTierXpThreshold)) ? isPointInRegion(mouseX, mouseY, skillX+89, skillY, 18, 18) ? (mouseClicked ? 36 : 18) : 0 : 36), 20, 18, 18);
 			renderBorderedText(skillX+9 - (fontRenderer.getStringWidth(String.valueOf(level))/2), skillY+9 - (fontRenderer.FONT_HEIGHT/2), String.valueOf(level),  data.isBadgeActive(MSUSkills.BADGE_PAGE) ? 0xFFD84C : (isOverlord ? 0xFF0000 : 0x80FF20), 0);
 		}
 
@@ -246,6 +246,8 @@ public class GuiGodTierMeditation extends GuiScreen
 			}
 			else if((!player.isCreative() && player.experienceLevel < MSUConfig.godTierXpThreshold) && isPointInRegion(mouseX, mouseY, skillX+89, skillY, 18, 18))
 				drawHoveringText(I18n.format("gui.needXp", MSUConfig.godTierXpThreshold), mouseX, mouseY);
+			else if(MSUConfig.maxGodTier >= 0 && data.getSkillLevel(GodTierData.StatType.GENERAL) >= MSUConfig.maxGodTier && isPointInRegion(mouseX, mouseY, skillX+89, skillY, 18, 18))
+				drawHoveringText(I18n.format("gui.generalMax", MSUConfig.maxGodTier), mouseX, mouseY);
 
 		}
 		for(int i = 0; i < masterBadges.size(); i++)
@@ -379,6 +381,10 @@ public class GuiGodTierMeditation extends GuiScreen
 	protected void upgradeSkills(int mouseX, int mouseY)
 	{
 		IGodTierData data = Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
+
+		if(data == null)
+			return;
+
 		int yOffset = this.height / 2 - ySize/2;
 		int xOffset = this.width / 2 - xSize/2;
 

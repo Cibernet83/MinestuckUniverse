@@ -50,7 +50,7 @@ public class TechRogue extends TechHeroClass
 			}
 
 			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(5,1,5), (entity) -> entity != player))
-				if(!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+				if(!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 					for(PotionEffect effect : appliedPotions)
 					{
 						target.addPotionEffect(effect);
@@ -68,7 +68,7 @@ public class TechRogue extends TechHeroClass
 		if(!state.equals(SkillKeyStates.KeyState.PRESS))
 			return true;
 
-		if(target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+		if(target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 		{
 			for(PotionEffect effect : appliedPotions)
 				target.addPotionEffect(effect);

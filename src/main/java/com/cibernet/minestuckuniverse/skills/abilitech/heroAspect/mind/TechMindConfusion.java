@@ -42,7 +42,7 @@ public class TechMindConfusion extends TechHeroAspect
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
 
-		if(target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+		if(target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 		{
 			PotionEffect effect = new PotionEffect(MSUPotions.MIND_CONFUSION, 400, 0);
 			effect.setCurativeItems(Collections.emptyList());

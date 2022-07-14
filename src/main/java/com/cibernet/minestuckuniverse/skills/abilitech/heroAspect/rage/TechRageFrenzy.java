@@ -67,7 +67,7 @@ public class TechRageFrenzy extends TechHeroAspect
 
 			for(EntityLivingBase target : list)
 			{
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 					continue;
 				if(!target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShifted())
 					enableRageFrenzy((EntityCreature) target);

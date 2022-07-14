@@ -40,7 +40,7 @@ public class TechPrinceWrath extends TechHeroClass
 		{
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 			float dmg = 10 * Math.min(3.0f, Math.max(1.0f, time/20f));
-			if(target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+			if(target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 			{
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.PRINCE, 20);
 				target.attackEntityFrom(new EntityCritDamageSource("princeDmg", player).setCrit(), dmg);

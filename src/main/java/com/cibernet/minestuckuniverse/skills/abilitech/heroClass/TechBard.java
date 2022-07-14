@@ -42,7 +42,7 @@ public class TechBard extends TechHeroClass
 		for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(10,1,10), (entity) -> entity != player))
 		{
 			boolean negative = world.rand.nextBoolean();
-			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, !negative)))
+			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, !negative)))
 				continue;
 
 			if(negative)

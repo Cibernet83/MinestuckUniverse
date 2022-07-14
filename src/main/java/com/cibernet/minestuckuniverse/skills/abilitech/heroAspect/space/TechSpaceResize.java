@@ -58,7 +58,7 @@ public class TechSpaceResize extends TechHeroAspect
 			else if(trace.typeOfHit == RayTraceResult.Type.ENTITY)
 			{
 				EntityLivingBase target = (EntityLivingBase) trace.entityHit;
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 					return false;
 				NBTTagCompound nbt = target.writeToNBT(new NBTTagCompound());
 				if(nbt.hasKey("Size"))

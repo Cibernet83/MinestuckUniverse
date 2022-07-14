@@ -45,6 +45,11 @@ public class MSUConfig
 	public static int questBedSpawnArea;
 	public static int godTierBadgeSlots;
 	public static boolean godTierMasterControl;
+	public static int maxGodTier;
+
+	//Cyberware compat
+	public static int addedPowerPerDeath = 1500;
+	public static int acceptablePower = 900;
 
 	public static void load(File file, Side sideIn)
 	{
@@ -94,6 +99,8 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.strife.weaponAttackMultiplier").getDouble();
 		skaiaScrollLimit = config.get("Strife", "skaiaScrollLimit", 2, "Determines the total number of Skaia Scrolls a player can use in total. Set to negative to ignore the limit.").setLanguageKey("config.minestuckuniverse.strife.skaiaScrollLimit").getInt();
 
+		maxGodTier = config.get("God Tier", "maxGodTier", -1, "Determines max god tier you can reach. When reached you cannot level up further. -1 makes it so that there is no limit. Warning: can prevent players from accessing certain badges if too low.")
+				.setLanguageKey("config.minestuckuniverse.godtier.maxGodTier").getInt();
 		multiAspectUnlocks = config.get("God Tier", "multiAspectUnlocks", true, "Enabling this makes certain skills require multiple kinds of Hero Stone Shards to unlock.")
 				.setLanguageKey("config.minestuckuniverse.godtier.multiAspectUnlocks").getBoolean();
 		godTierXpThreshold = config.get("God Tier", "godTierXpThreshold", 30, "Determines the minimum number of levels required to upgrade God Tier Skills")
@@ -107,6 +114,13 @@ public class MSUConfig
 		godTierMasterControl = config.get("God Tier", "godTierMasterControl", false, "Determines whether God Tiered players start with Master Control enabled, allowing them to unlock all skills regardless of their classpect")
 				.setLanguageKey("config.minestuckuniverse.godtier.godTierMasterControl").getBoolean();
 
+		if(MinestuckUniverse.isCyberwareLoaded)
+		{
+			addedPowerPerDeath = config.get("General", "addedPowerPerDeath", 1500, "Determines how much Cyberware power you recieve when you experience a non-true death.")
+					.setLanguageKey("config.minestuckuniverse.godtier.cyberware.addedPowerPerDeath").getInt();
+			acceptablePower = config.get("General", "acceptablePower", 900, "Determines the minimum amount of power you need before replacing vital cyber organs. Recommended to be higher than 500 but less than addedPowerPerDeath.")
+					.setLanguageKey("config.minestuckuniverse.godtier.cyberware.acceptablePower").getInt();
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -128,6 +142,10 @@ public class MSUConfig
 		data.writeInt(godTierXpThreshold);
 		data.writeBoolean(restrictedStrife);
 		data.writeInt(skaiaScrollLimit);
+		data.writeInt(maxGodTier);
+
+		data.writeInt(addedPowerPerDeath);
+		data.writeInt(acceptablePower);
 	}
 
 	public static void readFromBuffer(ByteBuf data)
@@ -137,5 +155,9 @@ public class MSUConfig
 		godTierXpThreshold = data.readInt();
 		restrictedStrife = data.readBoolean();
 		skaiaScrollLimit = data.readInt();
+		maxGodTier = data.readInt();
+
+		addedPowerPerDeath = data.readInt();
+		acceptablePower = data.readInt();
 	}
 }

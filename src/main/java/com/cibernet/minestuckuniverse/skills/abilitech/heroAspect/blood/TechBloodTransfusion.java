@@ -36,7 +36,7 @@ public class TechBloodTransfusion extends TechHeroAspect
 			return false;
 
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
-		if (target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true)))
+		if (target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, true)))
 		{
 			player.attackEntityFrom(DAMAGE_SOURCE, 8);
 			if (target.getHealth() >= target.getMaxHealth())

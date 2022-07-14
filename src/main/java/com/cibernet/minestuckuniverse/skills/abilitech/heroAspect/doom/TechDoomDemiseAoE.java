@@ -48,7 +48,7 @@ public class TechDoomDemiseAoE extends TechHeroAspect
 		for(EntityPlayer target : world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> entity != player && entity.getDistance(player) <= RADIUS) )
 		{
 			if (!player.isCreative() && target.getHealth()/target.getMaxHealth() <= 0.2f &&
-					!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+					!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 				karmakill(target, player);
 		}
 
