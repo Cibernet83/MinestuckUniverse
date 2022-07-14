@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
+import com.cibernet.minestuckuniverse.modSupport.CyberwareSupport;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
@@ -95,6 +96,8 @@ public class KarmaEventHandler
 
 					((WorldServer)player.world).spawnParticle(EnumParticleTypes.TOTEM, player.posX, player.posY+0.25, player.posZ, 30, 1, 0, 0, hasRevenantBadge ? 0.8 : 0.5);
 					player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ITEM_TOTEM_USE, player.getSoundCategory(), 1.0F, 1.0F);
+
+					CyberwareSupport.returnVitals(player);
 
 					if(hasRevenantBadge)
 					{

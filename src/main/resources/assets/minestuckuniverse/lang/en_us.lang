@@ -1232,6 +1232,9 @@ config.minestuckuniverse.strife.abstrataSwitcherRung=Strife Specibus Quick Switc
 config.minestuckuniverse.strife.weaponAttackMultiplier=Weapon Attack Factor
 config.minestuckuniverse.title=Minestuck Universe
 
+config.minestuckuniverse.godtier.cyberware.addedPowerPerDeath=Cyberware Power Added Every Death
+config.minestuckuniverse.godtier.cyberware.acceptablePower=Acceptable Power Before Replacing Vital Cyberorgans
+
 
 property.item.broken=Broken %s
 

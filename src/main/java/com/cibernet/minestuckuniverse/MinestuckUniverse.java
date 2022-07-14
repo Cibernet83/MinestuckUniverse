@@ -50,6 +50,7 @@ public class MinestuckUniverse
     public static boolean isFutureMcLoaded;
     public static boolean isLocksLoaded;
     public static boolean isTrophySlotsLoaded;
+    public static boolean isCyberwareLoaded;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -72,6 +73,7 @@ public class MinestuckUniverse
         isFutureMcLoaded = Loader.isModLoaded("futuremc");
         isLocksLoaded = Loader.isModLoaded("locks");
         isTrophySlotsLoaded = Loader.isModLoaded("trophyslots");
+        isCyberwareLoaded = Loader.isModLoaded("cyberware");
 
         proxy.preInit();
     }

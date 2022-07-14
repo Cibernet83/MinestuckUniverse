@@ -46,6 +46,10 @@ public class MSUConfig
 	public static int godTierBadgeSlots;
 	public static boolean godTierMasterControl;
 
+	//Cyberware compat
+	public static int addedPowerPerDeath = 1500;
+	public static int acceptablePower = 900;
+
 	public static void load(File file, Side sideIn)
 	{
 		MinecraftForge.EVENT_BUS.register(MSUConfig.class);
@@ -107,6 +111,13 @@ public class MSUConfig
 		godTierMasterControl = config.get("God Tier", "godTierMasterControl", false, "Determines whether God Tiered players start with Master Control enabled, allowing them to unlock all skills regardless of their classpect")
 				.setLanguageKey("config.minestuckuniverse.godtier.godTierMasterControl").getBoolean();
 
+		if(MinestuckUniverse.isCyberwareLoaded)
+		{
+			addedPowerPerDeath = config.get("General", "addedPowerPerDeath", 1500, "Determines how much Cyberware power you recieve when you experience a non-true death.")
+					.setLanguageKey("config.minestuckuniverse.godtier.cyberware.addedPowerPerDeath").getInt();
+			acceptablePower = config.get("General", "acceptablePower", 900, "Determines the minimum amount of power you need before replacing vital cyber organs. Recommended to be higher than 500 but less than addedPowerPerDeath.")
+					.setLanguageKey("config.minestuckuniverse.godtier.cyberware.acceptablePower").getInt();
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
