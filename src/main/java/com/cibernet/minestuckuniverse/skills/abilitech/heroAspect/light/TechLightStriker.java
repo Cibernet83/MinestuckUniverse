@@ -39,7 +39,7 @@ public class TechLightStriker extends TechHeroAspect
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 			if(target != null)
 			{
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 					return false;
 				PotionEffect effect = new PotionEffect(MobEffects.GLOWING, 1200, 0);
 				effect.setCurativeItems(Collections.emptyList());
@@ -75,7 +75,7 @@ public class TechLightStriker extends TechHeroAspect
 		{
 			for(EntityLivingBase target : world.getEntities(EntityLivingBase.class, (entity) -> entity != player && entity.isPotionActive(MobEffects.GLOWING)))
 			{
-				if(player.isOnSameTeam(target) || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+				if(player.isOnSameTeam(target) || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 					continue;
 
 				EntityLightningBolt lightning = new EntityLightningBolt(world, target.posX, target.posY, target.posZ, true);

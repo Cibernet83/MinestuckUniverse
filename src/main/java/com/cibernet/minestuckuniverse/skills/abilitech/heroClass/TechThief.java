@@ -54,7 +54,7 @@ public class TechThief extends TechHeroClass
 
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
-		if (!(target instanceof EntityPlayer) || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+		if (!(target instanceof EntityPlayer) || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 			return false;
 
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumClass.THIEF, 20);

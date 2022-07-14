@@ -59,7 +59,7 @@ public class TechRageManagement extends TechHeroAspect
 		{
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
-			if(!(target instanceof EntityCreature) && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+			if(!(target instanceof EntityCreature) && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 				return false;
 
 			toggleRageShift((EntityCreature) target);
@@ -74,7 +74,7 @@ public class TechRageManagement extends TechHeroAspect
 
 			for(EntityLivingBase target : list)
 			{
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 					continue;
 				
 				if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 3)

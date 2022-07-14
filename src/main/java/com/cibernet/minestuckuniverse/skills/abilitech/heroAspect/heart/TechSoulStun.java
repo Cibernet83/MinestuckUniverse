@@ -37,7 +37,7 @@ public class TechSoulStun extends TechHeroAspect
 		EntityLivingBase target = state == SkillKeyStates.KeyState.NONE ? null : MSUUtils.getTargetEntity(player);
 		EntityLivingBase oldTarget = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityLivingBase) badgeEffects.getTether(techSlot) : null;
 
-		if(target != null && MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+		if(target != null && MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 			target = null;
 
 		if(oldTarget != target)

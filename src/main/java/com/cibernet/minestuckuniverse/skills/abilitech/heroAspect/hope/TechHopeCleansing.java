@@ -39,7 +39,7 @@ public class TechHopeCleansing extends TechHeroAspect
 		if(target == null || target.getActivePotionMap().isEmpty())
 			target = player;
 
-		if(!target.getActivePotionMap().isEmpty() && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+		if(!target.getActivePotionMap().isEmpty() && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 		{
 			target.clearActivePotions();
 			if (!player.isCreative())

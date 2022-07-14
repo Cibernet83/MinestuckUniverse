@@ -63,7 +63,7 @@ public class TechSpaceTargetTele extends TechHeroAspect
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 			if (target != null)
 			{
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 					return false;
 				if (!badgeEffects.hasWarpPoint())
 				{

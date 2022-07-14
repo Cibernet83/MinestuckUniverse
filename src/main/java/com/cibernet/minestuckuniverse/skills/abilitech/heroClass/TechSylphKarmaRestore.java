@@ -41,7 +41,7 @@ public class TechSylphKarmaRestore extends TechHeroClass
 
 		EntityPlayer target = badgeEffects.getTether(techSlot) instanceof EntityPlayer ? (EntityPlayer) badgeEffects.getTether(techSlot) : null;
 		if(target == null && MSUUtils.getTargetEntity(player) instanceof EntityPlayer &&
-				!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true)))
+				!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, true)))
 		{
 			target = (EntityPlayer) MSUUtils.getTargetEntity(player);
 			badgeEffects.setTether(target, techSlot);

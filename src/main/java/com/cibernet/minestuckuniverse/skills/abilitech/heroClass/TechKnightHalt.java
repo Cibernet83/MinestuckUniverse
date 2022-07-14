@@ -42,7 +42,7 @@ public class TechKnightHalt extends TechHeroClass {
 			target.motionZ = 0;
 			target.velocityChanged = true;
 
-			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 				continue;
 		}
 

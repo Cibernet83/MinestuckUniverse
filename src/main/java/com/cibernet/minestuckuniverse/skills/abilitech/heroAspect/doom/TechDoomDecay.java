@@ -47,7 +47,7 @@ public class TechDoomDecay extends TechHeroAspect
 			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(RADIUS), p -> !p.equals(player)))
 			{
 				if(!(target instanceof EntityPlayer || target instanceof IMob) ||
-						MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+						MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 					continue;
 
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.DOOM, 10);

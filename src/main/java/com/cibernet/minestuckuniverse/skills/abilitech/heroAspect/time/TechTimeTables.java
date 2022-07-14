@@ -54,7 +54,7 @@ public class TechTimeTables extends TechHeroAspect
 
 		Entity target = MSUUtils.getMouseOver(world, player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), true).entityHit;
 
-		if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+		if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 			return false;
 		
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.TIME, target == null ? 1 : 5);

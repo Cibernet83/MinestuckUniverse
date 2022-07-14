@@ -45,7 +45,7 @@ public class TechRogueSteal extends TechHeroClass
 		if(state == SkillKeyStates.KeyState.PRESS && target != null)
 		{
 			IGodTierData targetData = target.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
-			if(targetData != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+			if(targetData != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 			{
 				boolean cast = false;
 				for(Abilitech tech : targetData.getTechLoadout())

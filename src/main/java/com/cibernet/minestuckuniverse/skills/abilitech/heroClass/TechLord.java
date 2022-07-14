@@ -58,7 +58,7 @@ public class TechLord extends TechHeroClass
 				}
 				else if(!(target instanceof IMob)) continue;
 
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 					continue;
 
 				PotionEffect effect = BadgeEventHandler.NEGATIVE_EFFECTS.get(title.getHeroAspect());

@@ -75,7 +75,7 @@ public class TechSpaceGrab extends TechHeroAspect
 		}
 		else target = badgeEffects.getTether(techSlot);
 
-		if(target == null || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+		if(target == null || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 			return false;
 
 		if(target instanceof EntityLiving)

@@ -93,7 +93,7 @@ public class TechMindCloak extends TechHeroAspect
 			if(result.entityHit instanceof EntityPlayer)
 			{
 				EntityPlayer cloakPlayer = (EntityPlayer) result.entityHit;
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, cloakPlayer, this, techSlot, false)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, cloakPlayer, this, techSlot, false)))
 					return false;
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setUniqueId("UUID", cloakPlayer.getUniqueID());
@@ -104,7 +104,7 @@ public class TechMindCloak extends TechHeroAspect
 			}
 			else
 			{
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, result.entityHit, this, techSlot, false)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, result.entityHit, this, techSlot, false)))
 					return false;
 				NBTTagCompound nbt = result.entityHit.writeToNBT(new NBTTagCompound());
 				nbt.setString("id", EntityRegistry.getEntry(result.entityHit.getClass()).getRegistryName().toString());

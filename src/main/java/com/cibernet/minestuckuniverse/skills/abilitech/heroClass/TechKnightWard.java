@@ -45,7 +45,7 @@ public class TechKnightWard extends TechHeroClass
 
 			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(5,1,5), (entity) -> true))
 			{
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, true)))
 					continue;
 				target.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 2400, 2));
 			}
@@ -61,7 +61,7 @@ public class TechKnightWard extends TechHeroClass
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumClass.KNIGHT, target == null ? 1 : 5);
 
 		if(state == SkillKeyStates.KeyState.PRESS && target != null &&
-				!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true)))
+				!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, true)))
 		{
 			target.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 2400, 2));
 			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 2400, 2));
