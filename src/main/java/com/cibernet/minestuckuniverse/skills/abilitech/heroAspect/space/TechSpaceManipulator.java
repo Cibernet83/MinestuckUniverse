@@ -176,9 +176,6 @@ public class TechSpaceManipulator extends TechHeroAspect
 
 				if(posB != null && cap.getManipulatedPos1Dim() == dimB)
 				{
-					System.out.println("in render outline");
-					System.out.println(posA);
-					System.out.println(posB);
 					AxisAlignedBB boundingBox = new AxisAlignedBB(Math.min(posA.getX(), posB.getX()), Math.min(posA.getY(), posB.getY()), Math.min(posA.getZ(), posB.getZ()),
 							Math.max(posA.getX(), posB.getX())+1, Math.max(posA.getY(), posB.getY())+1, Math.max(posA.getZ(), posB.getZ())+1).offset(-d1, -d2, -d3).grow(0.002);
 					boolean canSet = Math.abs(posA.getX() - posB.getX()) < 8 &&

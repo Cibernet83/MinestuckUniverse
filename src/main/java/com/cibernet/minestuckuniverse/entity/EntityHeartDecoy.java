@@ -190,7 +190,6 @@ public class EntityHeartDecoy extends EntityDecoy
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound)
 	{
-		System.out.println("writeentityNBt");
 		super.writeEntityToNBT(compound);
 		compound.setString("heldUsername", dataManager.get(UUSERNAME));
 		compound.setUniqueId("heldUUID", UUID.fromString(dataManager.get(PPLAYER_UUID)));
@@ -199,7 +198,6 @@ public class EntityHeartDecoy extends EntityDecoy
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound)
 	{
-		System.out.println("readentityNBt");
 		super.readEntityFromNBT(compound);
 		dataManager.set(UUSERNAME, compound.getString("heldUsername"));
 		dataManager.set(PPLAYER_UUID, compound.getUniqueId("heldUUID").toString());
