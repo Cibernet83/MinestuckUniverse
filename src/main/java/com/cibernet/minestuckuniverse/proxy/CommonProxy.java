@@ -1,20 +1,28 @@
 package com.cibernet.minestuckuniverse.proxy;
 
+import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.alchemy.MSUAlchemyRecipes;
+import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
+import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
+import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsData;
+import com.cibernet.minestuckuniverse.captchalogue.MSUModi;
+import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.entity.EntityBubble;
+import com.cibernet.minestuckuniverse.entity.MSUEntities;
+import com.cibernet.minestuckuniverse.events.handlers.*;
+import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
+import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
+import com.cibernet.minestuckuniverse.modSupport.MSUSplatcraftSupport;
+import com.cibernet.minestuckuniverse.modSupport.TrophySlotsSupport;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartProject;
-import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsData;
-import com.cibernet.minestuckuniverse.modSupport.MSUSplatcraftSupport;
-import com.cibernet.minestuckuniverse.blocks.BlockArtifact;
-import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
-import com.cibernet.minestuckuniverse.captchalogue.MSUModi;
-import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
-import com.cibernet.minestuckuniverse.events.handlers.*;
-import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
-import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
-import com.cibernet.minestuckuniverse.modSupport.TrophySlotsSupport;
-import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.strife.KindAbstratus;
 import com.cibernet.minestuckuniverse.strife.MSUKindAbstrata;
 import com.cibernet.minestuckuniverse.tileentity.*;
@@ -22,15 +30,6 @@ import com.cibernet.minestuckuniverse.util.MSUBannerPatterns;
 import com.cibernet.minestuckuniverse.util.MSUConsorts;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
-import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.alchemy.MSUAlchemyRecipes;
-import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
-import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
-import com.cibernet.minestuckuniverse.entity.MSUEntities;
-import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
-import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
-import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
-import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
 import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
 import com.cibernet.minestuckuniverse.world.gen.WorldGenHandler;
 import com.cibernet.minestuckuniverse.world.storage.loot.MSULoot;
@@ -49,7 +48,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(new MinestuckUniverseGrist());
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
-        PotionEventHandler.registerPotionEvents();
+        MinecraftForge.EVENT_BUS.register(BackwardsCompatHandler.class);
         MinecraftForge.EVENT_BUS.register(MSUEnchantments.class);
         MinecraftForge.EVENT_BUS.register(MSUSoundHandler.class);
 
@@ -84,7 +83,8 @@ public class CommonProxy
         GameRegistry.registerTileEntity(TileEntityEffectBeacon.class, MinestuckUniverse.MODID + ":effect_beacon");
         GameRegistry.registerTileEntity(TileEntityBoondollarRegister.class, MinestuckUniverse.MODID + ":porkhollow_vault");
 
-        MinecraftForge.EVENT_BUS.register(TechHeartProject.class);
+
+        PotionEventHandler.registerPotionEvents();
     }
 
     public void init()

@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items.captchalogue;
 
 import com.cibernet.minestuckuniverse.captchalogue.OperandiModus;
+import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.mraof.minestuck.item.TabMinestuck;
@@ -16,16 +17,18 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class OperandiHoeItem extends ItemHoe
+public class OperandiHoeItem extends ItemHoe implements IRegistryItem
 {
+	final String name;
 	public OperandiHoeItem(String name)
 	{
 		super(ToolMaterial.IRON);
 		setMaxDamage(10);
 		
 		setUnlocalizedName(name);
-		setRegistryName(name);
 		setCreativeTab(TabMinestuck.instance);
+
+		this.name = name;
 
 		OperandiModus.itemPool.add(this);
 	}
@@ -67,5 +70,10 @@ public class OperandiHoeItem extends ItemHoe
 			if(!player.addItemStackToInventory(storedStack))
 				player.dropItem(storedStack, true);
 		}
+	}
+
+	@Override
+	public void setRegistryName() {
+		setRegistryName(name);
 	}
 }

@@ -111,23 +111,24 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.strife.strifeCardMobDrops").getInt();
 		strifeCardMobDropsWhitelist = config.get("Strife", "strifeCardMobDropsWhitelist", new String[]
 				{
-						MSUKindAbstrata.bladekind.getRegistryName().toString(),
-						MSUKindAbstrata.hammerkind.getRegistryName().toString(),
-						MSUKindAbstrata.clubkind.getRegistryName().toString(),
-						MSUKindAbstrata.canekind.getRegistryName().toString(),
-						MSUKindAbstrata.sicklekind.getRegistryName().toString(),
-						MSUKindAbstrata.spoonkind.getRegistryName().toString(),
-						MSUKindAbstrata.potionkind.getRegistryName().toString(),
-						MSUKindAbstrata.throwkind.getRegistryName().toString(),
-						MSUKindAbstrata.clawkind.getRegistryName().toString(),
-						MSUKindAbstrata.glovekind.getRegistryName().toString(),
-						MSUKindAbstrata.bowkind.getRegistryName().toString(),
-						MSUKindAbstrata.needlekind.getRegistryName().toString(),
-						MSUKindAbstrata.shieldkind.getRegistryName().toString(),
-						MSUKindAbstrata.rockkind.getRegistryName().toString(),
-						MSUKindAbstrata.bunnykind.getRegistryName().toString(),
-						MSUKindAbstrata.sbahjkind.getRegistryName().toString(),
-						MSUKindAbstrata.jokerkind.getRegistryName().toString(),
+						"minestuckuniverse:sword",
+						"minestuckuniverse:hammer",
+						"minestuckuniverse:club",
+						"minestuckuniverse:cane",
+						"minestuckuniverse:sickle",
+						"minestuckuniverse:spoon",
+						"minestuckuniverse:fork",
+						"minestuckuniverse:potion",
+						"minestuckuniverse:projectile",
+						"minestuckuniverse:claw",
+						"minestuckuniverse:glove",
+						"minestuckuniverse:bow",
+						"minestuckuniverse:shield",
+							"minestuckuniverse:needle",
+						"minestuckuniverse:rock",
+						"minestuckuniverse:bunny",
+						"minestuckuniverse:sbahj",
+						"minestuckuniverse:joker"
 				}, "Determines what Kind Abstrata can be dropped by killing underlings.").setLanguageKey("config.minestuckuniverse.general.strifeCardMobDropsWhitelist").getStringList();
 
 

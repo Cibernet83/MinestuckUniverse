@@ -781,6 +781,8 @@ public class MinestuckUniverseItems
         registerItem(registry, yesterdaysNews);
 
 
+        OperandiModus.itemPool.add(MinestuckUniverseItems.operandiEightBall);
+        OperandiModus.itemPool.add(MinestuckUniverseItems.operandiSplashPotion);
         for(Item operandi : OperandiModus.itemPool)
             if(!(operandi instanceof ItemBlock) && !(operandi.getRegistryName() != null && registry.containsKey(operandi.getRegistryName())))
                 registerItem(registry, operandi);
