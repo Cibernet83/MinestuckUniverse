@@ -27,7 +27,6 @@ public interface IBadgeEffect
 	static IBadgeEffect deserialize(NBTTagCompound tag)
 	{
 		BadgeEffectType type = BadgeEffectType.values()[tag.getByte("BadgeEffectType")];
-		System.out.println(type + " tag");
 		switch (type)
 		{
 			case INT:
@@ -52,7 +51,6 @@ public interface IBadgeEffect
 	static IBadgeEffect deserialize(ByteBuf data)
 	{
 		BadgeEffectType type = BadgeEffectType.values()[data.readByte()];
-		System.out.println(type + " buffer");
 		switch (type)
 		{
 			case INT:
