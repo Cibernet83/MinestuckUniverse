@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.entity;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import net.minecraft.entity.Entity;
@@ -8,6 +9,7 @@ import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
@@ -63,17 +65,9 @@ public class EntityMagicMissile extends Entity implements IProjectile
 		super.onUpdate();
 
 
-		int color = this.rand.nextBoolean() ? 16777215 : this.getColor();
-		int r = color >> 16 & 255;
-		int g = color >> 8 & 255;
-		int b = color & 255;
-
-		for(int k = 0; k < 4; k++)
-			this.world.spawnAlwaysVisibleParticle(EnumParticleTypes.SPELL_INSTANT.getParticleID(), this.posX + this.motionX * (double)k / 4.0D, this.posY + this.motionY * (double)k / 4.0D, this.posZ + this.motionZ * (double)k / 4.0D,
-					(double)((float)r / 255.0F), (double)((float)g / 255.0F), (double)((float)b / 255.0F));
-
-
-
+		if(world.isRemote) for (int k = 0; k < 4; ++k)
+				MSUParticles.spawnPowerParticle(world, this.posX + this.motionX * (double)k / 4.0D, this.posY + this.motionY * (double)k / 4.0D, this.posZ + this.motionZ * (double)k / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ,
+						10, getColor());
 
 		++this.ticksInAir;
 		Vec3d vec3d1 = new Vec3d(this.posX, this.posY, this.posZ);

@@ -23,8 +23,8 @@ import java.util.List;
 
 public class TechVoidGrasp extends TechHeroAspect
 {
-	public TechVoidGrasp(String name) {
-		super(name, EnumAspect.VOID, EnumTechType.UTILITY);
+	public TechVoidGrasp(String name, long cost) {
+		super(name, EnumAspect.VOID, cost, EnumTechType.UTILITY);
 	}
 
 	@Override

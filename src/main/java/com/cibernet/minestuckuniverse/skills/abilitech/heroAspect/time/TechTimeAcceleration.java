@@ -25,8 +25,8 @@ public class TechTimeAcceleration extends TechHeroAspect
 {
 	private static final Random random = new Random();
 
-	public TechTimeAcceleration(String name) {
-		super(name, EnumAspect.TIME, EnumTechType.UTILITY);
+	public TechTimeAcceleration(String name, long cost) {
+		super(name, EnumAspect.TIME, cost, EnumTechType.UTILITY);
 	}
 
 	@Override
@@ -39,8 +39,6 @@ public class TechTimeAcceleration extends TechHeroAspect
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 			return false;
 		}
-
-
 
 		BlockPos target = MSUUtils.getTargetBlock(player);
 		if (target == null)
@@ -63,5 +61,10 @@ public class TechTimeAcceleration extends TechHeroAspect
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.TIME, 2);
 
 		return true;
+	}
+
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player) {
+		return super.isUsableExternally(world, player) && player.getFoodStats().getFoodLevel() > 0;
 	}
 }

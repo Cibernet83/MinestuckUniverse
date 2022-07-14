@@ -54,7 +54,7 @@ public class TechAspectralBolt extends TechBoondollarCost
 		else
 		{
 			PotionEffect effect = BadgeEventHandler.NEGATIVE_EFFECTS.get(title.getHeroAspect());
-			missile.effects.add(new PotionEffect(effect.getPotion(), effect.getAmplifier(), effect.getDuration()/2));
+			missile.effects.add(new PotionEffect(effect.getPotion(), effect.getDuration()/2, effect.getAmplifier()));
 		}
 
 		world.spawnEntity(missile);
@@ -69,5 +69,11 @@ public class TechAspectralBolt extends TechBoondollarCost
 	public boolean canUse(World world, EntityPlayer player)
 	{
 		return !(player.isPotionActive(MSUPotions.GOD_TIER_LOCK) && player.getActivePotionEffect(MSUPotions.GOD_TIER_LOCK).getAmplifier() >= 1);
+	}
+
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return super.isUsableExternally(world, player) && (player.isCreative() || player.getFoodStats().getFoodLevel() >= 2);
 	}
 }

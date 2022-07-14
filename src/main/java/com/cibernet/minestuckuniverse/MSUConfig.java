@@ -10,11 +10,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class MSUConfig
 {
 	public static Configuration config;
 	private static Side side;
+
+
+	public static final ArrayList<String> entityPowerProtection = new ArrayList<>();
 
 	public static double zillystoneYields;
 	public static double gristDropsMultiplier;

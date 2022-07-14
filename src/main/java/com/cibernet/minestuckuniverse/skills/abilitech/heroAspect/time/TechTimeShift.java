@@ -12,9 +12,9 @@ import net.minecraft.world.World;
 
 public class TechTimeShift extends TechHeroAspect
 {
-	public TechTimeShift(String name)
+	public TechTimeShift(String name, long cost)
 	{
-		super(name, EnumAspect.TIME, EnumTechType.UTILITY);
+		super(name, EnumAspect.TIME, cost, EnumTechType.UTILITY);
 	}
 
 	@Override
@@ -37,5 +37,10 @@ public class TechTimeShift extends TechHeroAspect
 
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.TIME, 6);
 		return true;
+	}
+
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player) {
+		return super.isUsableExternally(world, player) && player.getFoodStats().getFoodLevel() > 0;
 	}
 }

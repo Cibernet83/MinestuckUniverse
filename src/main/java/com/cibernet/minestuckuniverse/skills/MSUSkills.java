@@ -357,7 +357,7 @@ public class MSUSkills
 
 	public static final Abilitech TIME_TEMPORAL_RECALL = new TechTimeRecall("temporal_recall");
 	public static final Abilitech TIME_CHRONOFREEZE = new TechTimeStop("chronofreeze");
-	public static final Abilitech TIME_CLOCKWORK_ACCELERATOR = new TechTimeAcceleration("clockwork_accelerator");
+	public static final Abilitech TIME_FLOW_ACCELERATOR = new TechTimeAcceleration("flow_accelerator");
 	public static final Abilitech TIME_ACCELERANDO = new TechTimeAcceleration("accelerando");
 	public static final Abilitech TIME_RAPID_REWIND = new TechTimeTables("rapid_rewind");
 	public static final Abilitech TIME_CELESTIAL_SHIFT = new TechTimeShift("celestial_shift");

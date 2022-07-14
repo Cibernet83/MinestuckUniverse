@@ -21,8 +21,8 @@ public class TechTimeRecall extends TechHeroAspect
 	private static final int ENERGY_USE = 5;
 	private static final int RECALL_TICKS = 5 * 20;
 
-	public TechTimeRecall(String name) {
-		super(name, EnumAspect.TIME, EnumTechType.OFFENSE, EnumAspect.BREATH);
+	public TechTimeRecall(String name, long cost) {
+		super(name, EnumAspect.TIME, cost, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -67,5 +67,10 @@ public class TechTimeRecall extends TechHeroAspect
 	{
 		if(event.getEntity().hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
 			event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).getTimeSoulData().clear();
+	}
+
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player) {
+		return super.isUsableExternally(world, player) && player.getFoodStats().getFoodLevel() >= ENERGY_USE;
 	}
 }

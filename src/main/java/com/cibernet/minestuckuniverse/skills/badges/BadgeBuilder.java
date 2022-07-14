@@ -9,9 +9,12 @@ import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.mraof.minestuck.alchemy.GristHelper;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.client.gui.playerStats.GuiInventoryEditmode;
 import com.mraof.minestuck.editmode.ClientEditHandler;
 import com.mraof.minestuck.editmode.DeployList;
 import com.mraof.minestuck.editmode.ServerEditHandler;
+import com.mraof.minestuck.item.block.ItemSburbMachine;
+import com.mraof.minestuck.network.skaianet.SburbConnection;
 import com.mraof.minestuck.network.skaianet.SkaianetHandler;
 import com.mraof.minestuck.tracker.MinestuckPlayerTracker;
 import com.mraof.minestuck.util.IdentifierHandler;
@@ -142,10 +145,15 @@ public class BadgeBuilder extends BadgeLevel
 
 	private static boolean canEditDrag(EntityPlayer player)
 	{
-		return (((player.world.isRemote ? ClientEditHandler.isActive() : ServerEditHandler.getData(player) != null) && DeployList.getEntryForItem(player.getHeldItem(player.getHeldItemMainhand().isEmpty() ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND),
-				SkaianetHandler.getClientConnection(IdentifierHandler.encode(player))) != null)
+		return (((player.world.isRemote ? ClientEditHandler.isActive() : ServerEditHandler.getData(player) != null) && isDeployListItem(player, player.getHeldItem(player.getHeldItemMainhand().isEmpty() ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND)))
 				|| (player.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.BUILDER_BADGE)))
 				&& ((player.getHeldItemMainhand().getItem() instanceof ItemBlock) || (player.getHeldItemOffhand().getItem() instanceof ItemBlock));
+	}
+
+	private static boolean isDeployListItem(EntityPlayer player, ItemStack stack)
+	{
+		SburbConnection c = SkaianetHandler.getClientConnection(IdentifierHandler.encode(player));
+		return DeployList.getItemList(c).removeIf(deployEntry -> deployEntry.getItemStack(c).equals(stack));
 	}
 
 	@SideOnly(Side.CLIENT)

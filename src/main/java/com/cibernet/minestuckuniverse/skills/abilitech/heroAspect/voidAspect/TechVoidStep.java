@@ -26,9 +26,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TechVoidStep extends TechHeroAspect
 {
-    public TechVoidStep(String name)
+    public TechVoidStep(String name, long cost)
     {
-        super(name, EnumAspect.VOID, EnumTechType.PASSIVE, EnumAspect.BREATH);
+        super(name, EnumAspect.VOID, cost, EnumTechType.PASSIVE, EnumTechType.UTILITY);
     }
 
     @Override
@@ -107,5 +107,10 @@ public class TechVoidStep extends TechHeroAspect
     {
         if(Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.VOID_VOIDSTEP))
             event.setCanceled(true);
+    }
+
+    @Override
+    public boolean isUsableExternally(World world, EntityPlayer player) {
+        return false;
     }
 }
