@@ -317,6 +317,7 @@ public class MSUSkills
 	public static final Abilitech RETURN_JUMP = new TechReturn("return_jump", 0);
 	public static final Abilitech SYLLADEX_SLING = new TechSling("sylladex_sling", 0);
 	public static final Abilitech DRACONIC_AURA = new TechDragonAura("draconic_aura", 0);
+	public static final Abilitech ASPECTRAL_BOLT = new TechAspectralBolt("aspectral_bolt", 5000);
 
 	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward", 0);
 	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt", 0);
@@ -345,8 +346,6 @@ public class MSUSkills
 
 	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem", 0);
 	public static final Abilitech LORD_DECREE = new TechLord("lord_decree", 0);
-
-	public static final Abilitech ASPECTRAL_BOLT = new TechAspectralBolt("aspectral_bolt", 5000);
 
 	public static final Abilitech SPACE_WORMHOLE_TROTTER = new TechSpaceTele("wormhole_trotter", 0);
 	public static final Abilitech SPACE_ANCHORED_WORMHOLE = new TechSpaceAnchoredTele("anchored_wormhole", 0);
