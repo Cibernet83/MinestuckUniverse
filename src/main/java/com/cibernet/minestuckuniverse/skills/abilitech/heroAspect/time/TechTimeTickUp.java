@@ -20,6 +20,8 @@ public class TechTimeTickUp extends TechHeroAspect
 		super(name, EnumAspect.TIME, cost, EnumTechType.HYBRID);
 	}
 
+
+	private static boolean ticking = false;
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
@@ -48,7 +50,13 @@ public class TechTimeTickUp extends TechHeroAspect
 			if(!player.isCreative() && time % 20 == 0)
 				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-2);
 
-			target.onUpdate();
+			if(!ticking)
+			{
+				ticking = true;
+				target.onUpdate();
+			}
+			ticking = false;
+
 			target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.TIME, 2);
 		}
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.TIME, target == null ? 2 : 5);

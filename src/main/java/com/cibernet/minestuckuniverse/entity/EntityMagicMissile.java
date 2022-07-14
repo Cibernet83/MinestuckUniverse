@@ -5,11 +5,9 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
@@ -18,7 +16,6 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -64,10 +61,10 @@ public class EntityMagicMissile extends Entity implements IProjectile
 	{
 		super.onUpdate();
 
-
-		if(world.isRemote) for (int k = 0; k < 4; ++k)
-				MSUParticles.spawnPowerParticle(world, this.posX + this.motionX * (double)k / 4.0D, this.posY + this.motionY * (double)k / 4.0D, this.posZ + this.motionZ * (double)k / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ,
-						10, getColor());
+		if(world.isRemote) for (int k = 0; k < 8; ++k)
+				MSUParticles.spawnPowerParticle(world, this.posX + this.motionX * (double)k / 8.0D + (rand.nextFloat()*.25-0.125), this.posY + this.motionY * (double)k / 8.0D + (rand.nextFloat()*.25-0.125), this.posZ + this.motionZ * (double)k / 8.0D + (rand.nextFloat()*.25-0.125),
+						-this.motionX, -this.motionY, -this.motionZ,
+						3, getColor());
 
 		++this.ticksInAir;
 		Vec3d vec3d1 = new Vec3d(this.posX, this.posY, this.posZ);
@@ -110,13 +107,15 @@ public class EntityMagicMissile extends Entity implements IProjectile
 
 	public void onHit(RayTraceResult raytraceresult)
 	{
+		if(world.isRemote || ticksExisted <= 1 || raytraceresult.typeOfHit == RayTraceResult.Type.MISS)
+			return;
 
 		if(raytraceresult.entityHit != null)
 		{
-			if(raytraceresult.entityHit.equals(shootingEntity) && ticksInAir < 5)
+			if(raytraceresult.entityHit.equals(shootingEntity))
 				return;
 
-			raytraceresult.entityHit.attackEntityFrom(new EntityDamageSourceIndirect(MinestuckUniverse.MODID+"magic", this, shootingEntity), (float) damage);
+			raytraceresult.entityHit.attackEntityFrom(new EntityDamageSourceIndirect(MinestuckUniverse.MODID+"magic", this, shootingEntity), damage);
 			if(raytraceresult.entityHit instanceof EntityLivingBase)
 				for(PotionEffect effect : effects)
 					((EntityLivingBase) raytraceresult.entityHit).addPotionEffect(effect);
@@ -173,6 +172,9 @@ public class EntityMagicMissile extends Entity implements IProjectile
 		if(compound.hasKey("Damage"))
 			damage = compound.getFloat("Damage");
 
+		if(compound.hasUniqueId("Owner"))
+			shootingEntity = world.getPlayerEntityByUUID(compound.getUniqueId("Owner"));
+
 		if (compound.hasKey("Effects", 9))
 		{
 			NBTTagList nbttaglist = compound.getTagList("Effects", 10);
@@ -193,6 +195,9 @@ public class EntityMagicMissile extends Entity implements IProjectile
 	{
 		compound.setInteger("Color", getColor());
 		compound.setFloat("Damage", damage);
+
+		if(shootingEntity != null)
+			compound.setUniqueId("Owner", shootingEntity.getUniqueID());
 
 		if (!this.effects.isEmpty())
 		{
