@@ -15,6 +15,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -63,14 +64,46 @@ public class TechLord extends TechHeroClass
 
 				PotionEffect effect = BadgeEventHandler.NEGATIVE_EFFECTS.get(title.getHeroAspect());
 
-				if(isOverlord && (title.getHeroAspect() == EnumAspect.MIND || title.getHeroAspect() == EnumAspect.SPACE))
+				if(isOverlord)
 				{
-					target.addPotionEffect(new PotionEffect(title.getHeroAspect() == EnumAspect.MIND ? MobEffects.NAUSEA : MobEffects.BLINDNESS, 200, 0));
-					target.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 100, 1));
-					target.addPotionEffect(new PotionEffect(MSUPotions.EARTHBOUND, 100, 0));
+					switch(title.getHeroAspect())
+					{
+						case SPACE:
+							target.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 800, 200));
+							break;
+						case LIGHT:
+							target.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 1200, 2));
+							break;
+						case MIND:
+							target.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 400, 0));
+							break;
+						case TIME:
+							target.addPotionEffect(new PotionEffect(MSUPotions.TIME_STOP, 600, 0));
+							break;
+						case DOOM:
+							target.addPotionEffect(new PotionEffect(MSUPotions.DECAY, 115, 2));
+							break;
+						case RAGE:
+							target.addPotionEffect(new PotionEffect(MSUPotions.RAGE_BERSERK, 300, 10));
+							break;
+						case VOID:
+							target.attackEntityFrom(DamageSource.OUT_OF_WORLD, 18);
+							break;
+						case HOPE:
+							target.attackEntityFrom(DamageSource.ON_FIRE, 30);
+							break;
+						case BREATH:
+							target.attackEntityFrom(DamageSource.DROWN, 18);
+							break;
+						case LIFE:
+						case HEART:
+						case BLOOD:
+							target.attackEntityFrom(DamageSource.MAGIC, 40);
+							break;
+					}
 				}
 
-				target.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration()*2 * (isOverlord ? 2 : 1), (int) (effect.getAmplifier()*1.5f * (isOverlord ? 2 : 1))));
+				target.addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration()*2 * (isOverlord ? 2 : 1), (int) ((effect.getAmplifier() + 1)*1.5f * (isOverlord ? 2 : 1)) - 1));
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.LORD, 10);
 			}
 			if (!player.isCreative())

@@ -43,7 +43,8 @@ public class BadgeOverlord extends Badge //TODD
 
 	@Override
 	public boolean isReadable(World world, EntityPlayer player) {
-		return false;
+		IGodTierData data = player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
+		return data != null && (data.hasMasterControl() && data.getSkillLevel(GodTierData.StatType.GENERAL) >= REQ_SKILL_LEVEL || data.hasSkill(MSUSkills.BADGE_OVERLORD));
 	}
 
 	@Override
