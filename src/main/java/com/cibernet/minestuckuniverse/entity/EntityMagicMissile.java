@@ -30,7 +30,7 @@ public class EntityMagicMissile extends Entity implements IProjectile
 {
 	private static final Predicate<Entity> TARGETS = Predicates.and(EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, p_apply_1_ -> p_apply_1_.canBeCollidedWith());
 
-	private static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityBubble.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityMagicMissile.class, DataSerializers.VARINT);
 	public final ArrayList<PotionEffect> effects = new ArrayList<>();
 
 	public float damage = 2;
@@ -61,7 +61,8 @@ public class EntityMagicMissile extends Entity implements IProjectile
 	{
 		super.onUpdate();
 
-		if(world.isRemote) for (int k = 0; k < 8; ++k)
+		if(world.isRemote) 
+			for (int k = 0; k < 8; ++k)
 				MSUParticles.spawnPowerParticle(world, this.posX + this.motionX * (double)k / 8.0D + (rand.nextFloat()*.25-0.125), this.posY + this.motionY * (double)k / 8.0D + (rand.nextFloat()*.25-0.125), this.posZ + this.motionZ * (double)k / 8.0D + (rand.nextFloat()*.25-0.125),
 						-this.motionX, -this.motionY, -this.motionZ,
 						3, getColor());
@@ -79,7 +80,7 @@ public class EntityMagicMissile extends Entity implements IProjectile
 		}
 
 		Entity entity = this.findEntityOnPath(vec3d1, vec3d);
-
+		
 		if (entity != null)
 		{
 			raytraceresult = new RayTraceResult(entity);
@@ -100,6 +101,7 @@ public class EntityMagicMissile extends Entity implements IProjectile
 			this.onHit(raytraceresult);
 		}
 
+		this.setEntityBoundingBox(getEntityBoundingBox().offset(this.motionX, this.motionY, this.motionZ));
 		this.posX += this.motionX;
 		this.posY += this.motionY;
 		this.posZ += this.motionZ;
@@ -109,12 +111,10 @@ public class EntityMagicMissile extends Entity implements IProjectile
 	{
 		if(world.isRemote || ticksExisted <= 1 || raytraceresult.typeOfHit == RayTraceResult.Type.MISS)
 			return;
-
 		if(raytraceresult.entityHit != null)
 		{
 			if(raytraceresult.entityHit.equals(shootingEntity))
 				return;
-
 			raytraceresult.entityHit.attackEntityFrom(new EntityDamageSourceIndirect(MinestuckUniverse.MODID+"magic", this, shootingEntity), damage);
 			if(raytraceresult.entityHit instanceof EntityLivingBase)
 				for(PotionEffect effect : effects)
@@ -131,11 +131,9 @@ public class EntityMagicMissile extends Entity implements IProjectile
 		Entity entity = null;
 		List<Entity> list = this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(1.0D), TARGETS);
 		double d0 = 0.0D;
-
 		for (int i = 0; i < list.size(); ++i)
 		{
 			Entity entity1 = list.get(i);
-
 			if (entity1 != this.shootingEntity || this.ticksInAir >= 5)
 			{
 				AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow(0.30000001192092896D);
