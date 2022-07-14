@@ -67,24 +67,26 @@ public class TechHeartBond extends TechHeroAspect
 
 		IBadgeEffects targetBadgeEffects = target != null ? target.getCapability(MSUCapabilities.BADGE_EFFECTS, null) : null;
 		
+		if(released || player.getHealth() <= 0 || (target != null && target.getHealth() <= 0))
+		{
+			if(targetBadgeEffects != null)
+				targetBadgeEffects.setSoulLinkedBy(null);
+			badgeEffects.clearTether(techSlot);
+			badgeEffects.setSoulLinkInt(0);
+			return false;
+		}
+		
 		if(!released && target != null && targetBadgeEffects.getSoulLinkedBy() == player)
 		{
 			double linkedPercent = (player.getHealth()/player.getMaxHealth() + target.getHealth()/target.getMaxHealth())/2;
-			if(linkedPercent <= .005 || (linkedPercent*player.getMaxHealth() < 1 && linkedPercent*target.getMaxHealth() < 1))
-			{
-				player.attackEntityFrom(new HeartDamageSource(player), Float.MAX_VALUE);
-				target.attackEntityFrom(new HeartDamageSource(player), Float.MAX_VALUE);
-				return true;
-			}
+			//if(linkedPercent <= .005 || (linkedPercent*player.getMaxHealth() < 1 && linkedPercent*target.getMaxHealth() < 1))
 			
-			if(player.getMaxHealth() * linkedPercent != player.getHealth())
+			System.out.println("Linkedpercent: " + linkedPercent);
+			if((player.getMaxHealth() * linkedPercent) != player.getHealth())
 				player.setHealth((float) (player.getMaxHealth() * linkedPercent));
-			if(target.getMaxHealth() * linkedPercent != target.getHealth())
+			if((target.getMaxHealth() * linkedPercent) != target.getHealth())
 				target.setHealth((float) (target.getMaxHealth() * linkedPercent));
-			player.deathTime = 0;
-			target.deathTime = 0;
-			player.isDead = false;
-			target.isDead = false;
+			
 			
 			if (!player.isCreative() && time % 20 == 0)
 				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
@@ -93,14 +95,7 @@ public class TechHeartBond extends TechHeroAspect
 			targetBadgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.HEART, 3);
 		}
 		
-		if(released || player.isDead || (target != null && target.isDead))
-		{
-			if(targetBadgeEffects != null)
-				targetBadgeEffects.setSoulLinkedBy(null);
-			badgeEffects.clearTether(techSlot);
-			badgeEffects.setSoulLinkInt(0);
-			return false;
-		}
+		
 		
 		EntityLivingBase targett = MSUUtils.getTargetEntity(player);
 		targetBadgeEffects = targett == null ? null : targett.getCapability(MSUCapabilities.BADGE_EFFECTS, null);		
@@ -191,6 +186,7 @@ public class TechHeartBond extends TechHeroAspect
 		return linkedNTether;
 	}
 
+	/*
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void onLivingDeathRender(RenderLivingEvent.Pre<EntityLivingBase> event)
@@ -228,4 +224,5 @@ public class TechHeartBond extends TechHeroAspect
 				event.setCanceled(true);
 		}
 	}
+	*/
 }
