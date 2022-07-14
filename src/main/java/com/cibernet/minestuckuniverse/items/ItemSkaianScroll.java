@@ -15,11 +15,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -45,7 +47,11 @@ public class ItemSkaianScroll extends MSUItemBase
 		{
 			SCROLL_POOL.addAll(MSUSkills.REGISTRY.getValues());
 			SCROLL_POOL.removeIf(Skill::isObtainable);
+			SCROLL_POOL.removeIf(tech -> Arrays.asList(MSUConfig.skaiaScrollBlacklist).contains(tech.getRegistryName().toString()));
 		}
+
+		if(SCROLL_POOL.isEmpty())
+			return stack;
 
 		return storeSkill(stack, SCROLL_POOL.get((int) ((SCROLL_POOL.size()-1)*rand.nextFloat())));
 	}

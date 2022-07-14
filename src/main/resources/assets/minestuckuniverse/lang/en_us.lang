@@ -1067,7 +1067,7 @@ gui.needXp=§cYou need at least %s experience levels to allocate Skill XP
 gui.generalMax=§cYou have reached God Tier %s and can no longer increase your God Tier stats
 gui.abilitechDisabled=§cRight-Click to enable.
 gui.abilitechBlocked=§cSomething is inhibiting this Abilitech.
-gui.abilitechnosynth=Abilitechnosynth
+gui.abilitechnosynth=Abilitechs
 gui.skillShop.buy=Buy
 gui.skillShop.cantAfford=Can't Afford
 

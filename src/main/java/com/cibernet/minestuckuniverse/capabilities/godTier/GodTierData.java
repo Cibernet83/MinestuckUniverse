@@ -18,6 +18,7 @@ import com.mraof.minestuck.network.skaianet.SburbHandler;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import com.mraof.minestuck.util.Title;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -303,7 +304,8 @@ public class GodTierData implements IGodTierData
 	@Override
 	public boolean canGodTier(World world)
 	{
-		return canGodTier && SburbHandler.getConnectionForDimension(world.provider.getDimension()) != null && owner.equals(SburbHandler.getConnectionForDimension(world.provider.getDimension()).getClientIdentifier().getPlayer());
+		return canGodTier && (MSUConfig.requiredRungToGT < 0 || (owner.isUser() ? MinestuckPlayerData.rung : MinestuckPlayerData.getData(owner).echeladder.getRung()) >= MSUConfig.requiredRungToGT)
+				&& SburbHandler.getConnectionForDimension(world.provider.getDimension()) != null && owner.equals(SburbHandler.getConnectionForDimension(world.provider.getDimension()).getClientIdentifier().getPlayer());
 	}
 
 	@Override
