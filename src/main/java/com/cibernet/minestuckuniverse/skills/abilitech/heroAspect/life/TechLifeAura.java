@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life;
 
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
@@ -13,11 +14,12 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechLifeAura extends TechHeroAspect
 {
-	public TechLifeAura(String name) {
-		super(name, EnumAspect.LIFE, EnumTechType.DEFENSE, EnumAspect.LIGHT);
+	public TechLifeAura(String name, long cost) {
+		super(name, EnumAspect.LIFE, cost, EnumTechType.DEFENSE);//, EnumAspect.LIGHT);
 	}
 
 	protected static final int RADIUS = 8;
@@ -59,6 +61,9 @@ public class TechLifeAura extends TechHeroAspect
 		{
 			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(RADIUS)))
 			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true)))
+					continue;
+				
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 10);
 				target.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 1200, 3));
 			}
@@ -67,5 +72,11 @@ public class TechLifeAura extends TechHeroAspect
 		}
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 6 && super.isUsableExternally(world, player);
 	}
 }

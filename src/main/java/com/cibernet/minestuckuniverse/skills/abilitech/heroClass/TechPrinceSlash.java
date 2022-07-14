@@ -42,4 +42,10 @@ public class TechPrinceSlash extends TechHeroClass
 				source.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.RULING_SLASH))
 			event.setAmount(event.getAmount()*3);
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
 }

@@ -72,4 +72,10 @@ public class TechReturn extends TechBoondollarCost
 		
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 4 && super.isUsableExternally(world, player);
+	}
 }

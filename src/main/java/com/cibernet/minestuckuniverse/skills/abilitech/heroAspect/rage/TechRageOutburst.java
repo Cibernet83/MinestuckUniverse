@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.damage.EntityCritDamageSource;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
@@ -13,11 +14,12 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechRageOutburst extends TechHeroAspect
 {
-	public TechRageOutburst(String name) {
-		super(name, EnumAspect.RAGE, EnumTechType.DEFENSE, EnumAspect.MIND);
+	public TechRageOutburst(String name, long cost) {
+		super(name, EnumAspect.RAGE, cost, EnumTechType.OFFENSE);//, EnumAspect.MIND);
 	}
 
 	@Override
@@ -42,11 +44,32 @@ public class TechRageOutburst extends TechHeroAspect
 			float dmg = Math.max(8, Math.abs(player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTempKarma()));
 
 			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(16), (entity) -> entity != player && (entity instanceof EntityPlayer || entity instanceof IMob)))
-				if(!player.isOnSameTeam(target)) target.attackEntityFrom(new EntityCritDamageSource("vengefulOutburst", player).setCrit().setDamageBypassesArmor(), dmg);
+			{
+				if(!player.isOnSameTeam(target) && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+					target.attackEntityFrom(new EntityCritDamageSource("vengefulOutburst", player).setCrit().setDamageBypassesArmor(), dmg);
+			}
 			if (!player.isCreative() && !world.isRemote)
 				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 12);
 		}
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 12 && super.isUsableExternally(world, player);
+	}
+	
+	@Override
+	public boolean canAppearOnList(World world, EntityPlayer player)
+	{
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+	}
+	
+	@Override
+	public boolean canUnlock(World world, EntityPlayer player)
+	{
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
 }

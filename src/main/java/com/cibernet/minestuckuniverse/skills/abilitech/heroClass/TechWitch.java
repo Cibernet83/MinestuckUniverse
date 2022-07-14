@@ -60,4 +60,10 @@ public class TechWitch extends TechHeroClass
 
 		return false;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 8 && super.isUsableExternally(world, player);
+	}
 }

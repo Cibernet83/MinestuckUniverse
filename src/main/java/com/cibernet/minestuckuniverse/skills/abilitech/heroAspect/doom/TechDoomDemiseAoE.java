@@ -58,6 +58,12 @@ public class TechDoomDemiseAoE extends TechHeroAspect
 
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return !player.getFoodStats().needFood() && super.isUsableExternally(world, player);
+	}
 
 	private static void karmakill(EntityLivingBase target, EntityPlayer player)
 	{

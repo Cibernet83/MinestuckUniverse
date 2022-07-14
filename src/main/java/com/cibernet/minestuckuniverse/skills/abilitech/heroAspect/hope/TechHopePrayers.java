@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.entity.EntityHopeGolem;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -16,14 +17,15 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TechHopePrayers extends TechHeroAspect
 {
-	public TechHopePrayers(String name) {
-		super(name, EnumAspect.HOPE, EnumTechType.DEFENSE, EnumAspect.LIGHT);
+	public TechHopePrayers(String name, long cost) {
+		super(name, EnumAspect.HOPE, cost, EnumTechType.DEFENSE); //, EnumAspect.LIGHT);
 	}
 
 	protected static final int RADIUS = 20;
@@ -54,6 +56,9 @@ public class TechHopePrayers extends TechHeroAspect
 
 			for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(RADIUS), target -> target != player && !(target instanceof IMob) && !target.isSpectator()))
 			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true)))
+					continue;
+				
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.HOPE, 10);
 
 				target.addPotionEffect(new PotionEffect(potion, potion.isInstant() ? 0 : 300, 2));
@@ -91,5 +96,11 @@ public class TechHopePrayers extends TechHeroAspect
 		}
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 8 && super.isUsableExternally(world, player);
 	}
 }

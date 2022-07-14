@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.damage.CritDamageSource;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathKnockback;
@@ -25,6 +26,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.InputUpdateEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -35,9 +37,9 @@ public class TechHopeyShit extends TechHeroAspect
 {
 	private static final String[] STATUS_OPTIONS = new String[] {"tallyHo", "gadzooks", "boyHowdy", "holyToledo", "landSakesAlive", "helloNurse", "byGum", "ayChihuahua", "bobUncle", "sockItToMe", "shiverMeTimbers", "winOneForTheGipper", "jumpinJehosaPhat", "shuckyDarn", "fiddleFaddle"};
 
-	public TechHopeyShit(String name)
+	public TechHopeyShit(String name, long cost)
 	{
-		super(name, EnumAspect.HOPE, 10000, EnumTechType.OFFENSE);
+		super(name, EnumAspect.HOPE, cost, EnumTechType.OFFENSE);
 	}
 
 	@Override
@@ -77,6 +79,9 @@ public class TechHopeyShit extends TechHeroAspect
 
 			for(EntityLivingBase target : player.world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(range)))
 			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+					continue;
+				
 				if(target != player && target.getDistance(player) < range)
 				{
 					//if(!(target instanceof EntityItem) && time % 5 == 0)
@@ -119,6 +124,12 @@ public class TechHopeyShit extends TechHeroAspect
 		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.HOPE, 10);
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
 	}
 
 	@SubscribeEvent

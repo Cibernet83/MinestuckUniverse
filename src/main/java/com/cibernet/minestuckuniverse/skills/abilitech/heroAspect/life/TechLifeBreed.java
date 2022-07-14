@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life;
 
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
@@ -11,11 +12,12 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechLifeBreed extends TechHeroAspect
 {
-	public TechLifeBreed(String name) {
-		super(name, EnumAspect.LIFE, EnumTechType.UTILITY);
+	public TechLifeBreed(String name, long cost) {
+		super(name, EnumAspect.LIFE, cost, EnumTechType.UTILITY);
 	}
 
 	protected static final int RADIUS = 8;
@@ -41,6 +43,8 @@ public class TechLifeBreed extends TechHeroAspect
 		{
 			for(EntityAnimal target : world.getEntitiesWithinAABB(EntityAnimal.class, player.getEntityBoundingBox().grow(RADIUS)))
 			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true)))
+					continue;
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 3);
 
 				target.setInLove(player);
@@ -50,5 +54,11 @@ public class TechLifeBreed extends TechHeroAspect
 		}
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 4 && super.isUsableExternally(world, player);
 	}
 }

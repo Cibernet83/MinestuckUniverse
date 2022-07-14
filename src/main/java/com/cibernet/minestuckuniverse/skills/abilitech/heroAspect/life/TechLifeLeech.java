@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.damage.CritDamageSource;
 import com.cibernet.minestuckuniverse.damage.IGodTierDamage;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -21,13 +22,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import javax.annotation.Nullable;
 
 public class TechLifeLeech extends TechHeroAspect
 {
-	public TechLifeLeech(String name) {
-		super(name, EnumAspect.LIFE, EnumTechType.OFFENSE, EnumAspect.BLOOD);
+	public TechLifeLeech(String name, long cost) {
+		super(name, EnumAspect.LIFE, cost, EnumTechType.OFFENSE);//, EnumAspect.BLOOD);
 	}
 
 	@Override
@@ -60,6 +62,8 @@ public class TechLifeLeech extends TechHeroAspect
 
 		if (target != null)
 		{
+			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+				return false;
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 10);
 
 			target.hurtResistantTime = 0;
@@ -75,6 +79,12 @@ public class TechLifeLeech extends TechHeroAspect
 		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 5);
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
 	}
 
 	public static class LifeDamageSource extends CritDamageSource

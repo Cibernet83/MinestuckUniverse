@@ -31,8 +31,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TechSpaceManipulator extends TechHeroAspect
 {
-	public TechSpaceManipulator(String name) {
-		super(name, EnumAspect.SPACE, EnumTechType.UTILITY);
+	public TechSpaceManipulator(String name, long cost) {
+		super(name, EnumAspect.SPACE, cost, EnumTechType.UTILITY);
 	}
 
 	@Override
@@ -102,6 +102,12 @@ public class TechSpaceManipulator extends TechHeroAspect
 		else badgeEffects.startPowerParticles(TechSpaceManipulator.class, MSUParticles.ParticleType.AURA, EnumAspect.SPACE, (time >= 20 && pos1 != null && pos2 != null) ? 6 : 1);
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)

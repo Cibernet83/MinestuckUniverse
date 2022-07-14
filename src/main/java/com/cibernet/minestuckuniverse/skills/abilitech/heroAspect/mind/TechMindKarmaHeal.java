@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 
 public class TechMindKarmaHeal extends TechHeroAspect
 {
-	public TechMindKarmaHeal(String name) {
-		super(name, EnumAspect.MIND, EnumTechType.UTILITY);
+	public TechMindKarmaHeal(String name, long cost) {
+		super(name, EnumAspect.MIND, cost, EnumTechType.DEFENSE, EnumTechType.PASSIVE);
 	}
 
 	@Override
@@ -31,5 +31,23 @@ public class TechMindKarmaHeal extends TechHeroAspect
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean canAppearOnList(World world, EntityPlayer player)
+	{
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+	}
+	
+	@Override
+	public boolean canUnlock(World world, EntityPlayer player)
+	{
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
 }

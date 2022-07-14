@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -13,11 +14,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechLifeFertility extends TechHeroAspect
 {
-	public TechLifeFertility(String name) {
-		super(name, EnumAspect.LIFE, EnumTechType.UTILITY);
+	public TechLifeFertility(String name, long cost) {
+		super(name, EnumAspect.LIFE, cost, EnumTechType.UTILITY);
 	}
 
 	protected static final int RADIUS = 20;
@@ -44,6 +46,9 @@ public class TechLifeFertility extends TechHeroAspect
 		{
 			for(EntityAnimal target : world.getEntitiesWithinAABB(EntityAnimal.class, player.getEntityBoundingBox().grow(RADIUS)))
 			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true)))
+					continue;
+				
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 3);
 
 				target.setInLove(player);
@@ -72,5 +77,11 @@ public class TechLifeFertility extends TechHeroAspect
 
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 4 && super.isUsableExternally(world, player);
 	}
 }

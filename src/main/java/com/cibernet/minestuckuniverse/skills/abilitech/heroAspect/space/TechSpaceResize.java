@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
@@ -19,12 +20,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechSpaceResize extends TechHeroAspect
 {
-	public TechSpaceResize(String name)
+	public TechSpaceResize(String name, long cost)
 	{
-		super(name, EnumAspect.SPACE, EnumTechType.UTILITY);
+		super(name, EnumAspect.SPACE, cost, EnumTechType.UTILITY);
 		requiredStacks.add(new ItemStack(MinestuckUniverseItems.spaceSalt, 1));
 	}
 
@@ -56,6 +58,8 @@ public class TechSpaceResize extends TechHeroAspect
 			else if(trace.typeOfHit == RayTraceResult.Type.ENTITY)
 			{
 				EntityLivingBase target = (EntityLivingBase) trace.entityHit;
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+					return false;
 				NBTTagCompound nbt = target.writeToNBT(new NBTTagCompound());
 				if(nbt.hasKey("Size"))
 				{
@@ -81,5 +85,11 @@ public class TechSpaceResize extends TechHeroAspect
 		}
 
 		return false;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 4 && super.isUsableExternally(world, player);
 	}
 }

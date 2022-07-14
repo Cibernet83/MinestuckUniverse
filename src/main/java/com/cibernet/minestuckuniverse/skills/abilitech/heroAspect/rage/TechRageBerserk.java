@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 
 public class TechRageBerserk extends TechHeroAspect
 {
-	public TechRageBerserk(String name) {
-		super(name, EnumAspect.RAGE, EnumTechType.OFFENSE, EnumAspect.HOPE);
+	public TechRageBerserk(String name, long cost) {
+		super(name, EnumAspect.RAGE, cost, EnumTechType.OFFENSE);//, EnumAspect.HOPE);
 	}
 
 	protected static final int ENERGY_USE = 3;
@@ -42,5 +42,11 @@ public class TechRageBerserk extends TechHeroAspect
 		}
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 3 && super.isUsableExternally(world, player);
 	}
 }

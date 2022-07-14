@@ -64,4 +64,10 @@ public class TechMuse extends TechHeroClass
 			target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.MUSE, 10);
 		}
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
 }

@@ -57,6 +57,12 @@ public class TechMageStudy extends TechHeroClass
 
 		return ((Abilitech) stolenTech).onUseTick(world, player, badgeEffects, techSlot, state, time);
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
 
 	@SubscribeEvent
 	public static void onTechTargeted(AbilitechTargetedEvent event)

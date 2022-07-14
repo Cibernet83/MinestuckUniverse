@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 
 public class TechLifeChloroball extends TechHeroAspect
 {
-	public TechLifeChloroball(String name) {
-		super(name, EnumAspect.LIFE, EnumTechType.UTILITY);
+	public TechLifeChloroball(String name, long cost) {
+		super(name, EnumAspect.LIFE, cost, EnumTechType.UTILITY);
 	}
 
 	public TechLifeChloroball(String name, int cost, EnumTechType... types)
@@ -52,5 +52,11 @@ public class TechLifeChloroball extends TechHeroAspect
 				return true;
 			}
 		return false;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 6 && super.isUsableExternally(world, player);
 	}
 }

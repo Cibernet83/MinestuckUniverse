@@ -78,4 +78,10 @@ public class TechDoomChain extends TechHeroAspect
 
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 4 && super.isUsableExternally(world, player);
+	}
 }

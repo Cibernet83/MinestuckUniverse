@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind;
 
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
@@ -14,13 +15,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.Collections;
 
 public class TechMindConfusion extends TechHeroAspect
 {
-	public TechMindConfusion(String name) {
-		super(name, EnumAspect.MIND, EnumTechType.DEFENSE, EnumAspect.HOPE);
+	public TechMindConfusion(String name, long cost) {
+		super(name, EnumAspect.MIND, cost, EnumTechType.OFFENSE);//, EnumAspect.HOPE);
 	}
 
 	protected static final int ENERGY_USE = 9;
@@ -40,7 +42,7 @@ public class TechMindConfusion extends TechHeroAspect
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
 
-		if(target != null)
+		if(target != null && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
 		{
 			PotionEffect effect = new PotionEffect(MSUPotions.MIND_CONFUSION, 400, 0);
 			effect.setCurativeItems(Collections.emptyList());
@@ -51,5 +53,11 @@ public class TechMindConfusion extends TechHeroAspect
 		}
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 9 && super.isUsableExternally(world, player);
 	}
 }

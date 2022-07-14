@@ -39,6 +39,12 @@ public class TechSeerDodge extends TechHeroClass
         return true;
 	}
 	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
+	
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onLivingAttack(LivingHurtEvent event)
 	{

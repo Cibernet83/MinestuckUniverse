@@ -49,4 +49,9 @@ public class TechBreathSpeed extends TechHeroAspect
 
 		return true;
 	}
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
 }

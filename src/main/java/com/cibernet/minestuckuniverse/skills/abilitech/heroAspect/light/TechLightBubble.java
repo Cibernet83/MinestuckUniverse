@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 
 public class TechLightBubble extends TechHeroAspect
 {
-	public TechLightBubble(String name)
+	public TechLightBubble(String name, long cost)
 	{
-		super(name, EnumAspect.LIGHT, 10000, EnumTechType.DEFENSE);
+		super(name, EnumAspect.LIGHT, cost, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -57,4 +57,9 @@ public class TechLightBubble extends TechHeroAspect
 		return true;
 	}
 
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
+	}
 }

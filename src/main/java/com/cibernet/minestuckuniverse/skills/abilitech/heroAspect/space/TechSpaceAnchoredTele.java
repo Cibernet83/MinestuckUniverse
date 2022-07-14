@@ -21,8 +21,8 @@ public class TechSpaceAnchoredTele extends TechHeroAspect
 {
 	private static int RANGE = 20;
 
-	public TechSpaceAnchoredTele(String name) {
-		super(name, EnumAspect.SPACE, EnumTechType.DEFENSE, EnumAspect.MIND);
+	public TechSpaceAnchoredTele(String name, long cost) {
+		super(name, EnumAspect.SPACE, cost, EnumTechType.UTILITY);//, EnumAspect.MIND);
 	}
 
 	@Override
@@ -98,4 +98,9 @@ public class TechSpaceAnchoredTele extends TechHeroAspect
 		return true;
 	}
 
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 6 && super.isUsableExternally(world, player);
+	}
 }

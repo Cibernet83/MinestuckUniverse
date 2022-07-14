@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
@@ -14,11 +15,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechTimeStop extends TechHeroAspect
 {
-	public TechTimeStop(String name) {
-		super(name, EnumAspect.TIME, EnumTechType.DEFENSE, EnumAspect.SPACE);
+	public TechTimeStop(String name, long cost) {
+		super(name, EnumAspect.TIME, cost, EnumTechType.OFFENSE);//, EnumAspect.SPACE);
 	}
 
 	protected static final int ENERGY_USE = 8;
@@ -43,6 +45,8 @@ public class TechTimeStop extends TechHeroAspect
 
 			if(target != null)
 			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+					return false;
 				target.addPotionEffect(new PotionEffect(MSUPotions.TIME_STOP, 80, 0));
 				if (!player.isCreative())
 					player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - ENERGY_USE);
@@ -52,5 +56,11 @@ public class TechTimeStop extends TechHeroAspect
 		}
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 8 && super.isUsableExternally(world, player);
 	}
 }

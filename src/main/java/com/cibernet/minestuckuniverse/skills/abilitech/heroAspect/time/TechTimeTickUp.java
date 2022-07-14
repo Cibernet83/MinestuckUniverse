@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -11,11 +12,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechTimeTickUp extends TechHeroAspect
 {
-	public TechTimeTickUp(String name) {
-		super(name, EnumAspect.TIME, EnumTechType.DEFENSE);
+	public TechTimeTickUp(String name, long cost) {
+		super(name, EnumAspect.TIME, cost, EnumTechType.HYBRID);
 	}
 
 	@Override
@@ -40,6 +42,9 @@ public class TechTimeTickUp extends TechHeroAspect
 
 		if (target != null)
 		{
+			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+				return false;
+			
 			if(!player.isCreative() && time % 20 == 0)
 				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-2);
 
@@ -49,5 +54,11 @@ public class TechTimeTickUp extends TechHeroAspect
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.TIME, target == null ? 2 : 5);
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 2 && super.isUsableExternally(world, player);
 	}
 }

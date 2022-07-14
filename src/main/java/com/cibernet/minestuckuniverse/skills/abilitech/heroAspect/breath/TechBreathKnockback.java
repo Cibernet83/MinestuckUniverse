@@ -88,4 +88,11 @@ public class TechBreathKnockback extends TechHeroAspect
 
         return true;
     }
+    
+    //maybe change it to 6 because it needs 6 food to work TEST THIS
+    @Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 4 && super.isUsableExternally(world, player);
+	}
 }

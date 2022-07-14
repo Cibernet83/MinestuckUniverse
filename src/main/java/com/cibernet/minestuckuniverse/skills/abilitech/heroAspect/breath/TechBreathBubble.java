@@ -67,4 +67,10 @@ public class TechBreathBubble extends TechHeroAspect
 
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
+	}
 }

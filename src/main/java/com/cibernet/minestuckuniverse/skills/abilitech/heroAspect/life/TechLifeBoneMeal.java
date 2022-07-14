@@ -13,10 +13,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+//unused
 public class TechLifeBoneMeal extends TechHeroAspect
 {
-	public TechLifeBoneMeal(String name) {
-		super(name, EnumAspect.LIFE, EnumTechType.UTILITY);
+	public TechLifeBoneMeal(String name, long cost) {
+		super(name, EnumAspect.LIFE, cost, EnumTechType.UTILITY);
 	}
 
 

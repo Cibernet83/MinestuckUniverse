@@ -13,11 +13,11 @@ import net.minecraft.world.World;
 
 public class TechLightGlorb extends TechHeroAspect
 {
-	public TechLightGlorb(String name) {
-		super(name, EnumAspect.LIGHT, EnumTechType.UTILITY);
+	public TechLightGlorb(String name, long cost) {
+		super(name, EnumAspect.LIGHT, cost, EnumTechType.UTILITY);
 	}
 
-	public TechLightGlorb(String name, int cost, EnumTechType... types)
+	public TechLightGlorb(String name, long cost, EnumTechType... types)
 	{
 		super(name, EnumAspect.LIGHT, cost, types);
 	}

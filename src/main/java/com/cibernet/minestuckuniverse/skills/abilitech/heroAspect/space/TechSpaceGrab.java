@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space;
 
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -16,13 +17,14 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechSpaceGrab extends TechHeroAspect
 {
 
-	public TechSpaceGrab(String name)
+	public TechSpaceGrab(String name, long cost)
 	{
-		super(name, EnumAspect.SPACE, EnumTechType.UTILITY);
+		super(name, EnumAspect.SPACE, cost, EnumTechType.UTILITY);
 	}
 
 	@Override
@@ -73,7 +75,7 @@ public class TechSpaceGrab extends TechHeroAspect
 		}
 		else target = badgeEffects.getTether(techSlot);
 
-		if(target == null)
+		if(target == null || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
 			return false;
 
 		if(target instanceof EntityLiving)
@@ -119,6 +121,12 @@ public class TechSpaceGrab extends TechHeroAspect
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
 	}
 
 	@Override

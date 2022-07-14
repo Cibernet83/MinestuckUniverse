@@ -50,6 +50,12 @@ public class TechBloodReformer extends TechHeroAspect
 
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
 
 	@SubscribeEvent
 	public static void canTargetPlayer(PlayerEvent.Visibility event)

@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time;
 
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.events.TimetableEffectEvent;
 import com.cibernet.minestuckuniverse.items.ItemTimetable;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
@@ -29,9 +30,9 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class TechTimeTables extends TechHeroAspect
 {
-	public TechTimeTables(String name)
+	public TechTimeTables(String name, long cost)
 	{
-		super(name, EnumAspect.TIME, 50000, EnumTechType.UTILITY);
+		super(name, EnumAspect.TIME, cost, EnumTechType.UTILITY);
 		requiredStacks.add(new ItemStack(MinestuckUniverseItems.timetable));
 	}
 
@@ -53,6 +54,9 @@ public class TechTimeTables extends TechHeroAspect
 
 		Entity target = MSUUtils.getMouseOver(world, player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), true).entityHit;
 
+		if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+			return false;
+		
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.TIME, target == null ? 1 : 5);
 		
 		TimetableEffectEvent event = new TimetableEffectEvent(player, target);
@@ -108,5 +112,11 @@ public class TechTimeTables extends TechHeroAspect
 		if((event.isCanceled() || target != null))
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
 	}
 }

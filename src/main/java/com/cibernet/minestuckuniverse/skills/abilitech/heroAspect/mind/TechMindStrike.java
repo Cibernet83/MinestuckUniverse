@@ -28,8 +28,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class TechMindStrike extends TechHeroAspect
 {
 	
-	public TechMindStrike(String name) {
-		super(name, EnumAspect.MIND, EnumTechType.DEFENSE, EnumAspect.HOPE);
+	public TechMindStrike(String name, long cost) {
+		super(name, EnumAspect.MIND, cost, EnumTechType.OFFENSE);//, EnumAspect.HOPE);
 	}
 
 	@Override
@@ -40,11 +40,26 @@ public class TechMindStrike extends TechHeroAspect
 			badgeEffects.setCalculating(badgeEffects.getCalculating() - 1);
 			return false;
 		}
+		
+		if(!player.isCreative())
+		{
+			if(player.getFoodStats().getFoodLevel() < 1)
+			{
+				player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
+				return false;
+			}
+			if((time % 20) == 0)
+				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);
+		}
+		
 		if(state == KeyState.RELEASED)
 		{
 			badgeEffects.setCalculating(Math.max(time + badgeEffects.getCalculating(), 100));
 			return true;
 		}
+		
+		if(time % 20 == 0)
+			
 		
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 2);
 
@@ -64,4 +79,9 @@ public class TechMindStrike extends TechHeroAspect
 		}
 	}
 	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
+	}
 }

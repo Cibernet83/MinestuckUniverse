@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 
 public class TechHopeGolem extends TechHeroAspect
 {
-	public TechHopeGolem(String name) {
-		super(name, EnumAspect.HOPE, EnumTechType.OFFENSE, EnumAspect.SPACE);
+	public TechHopeGolem(String name, long cost) {
+		super(name, EnumAspect.HOPE, cost, EnumTechType.OFFENSE);//, EnumAspect.SPACE);
 	}
 
 	@Override
@@ -63,5 +63,11 @@ public class TechHopeGolem extends TechHeroAspect
 		}
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
 	}
 }

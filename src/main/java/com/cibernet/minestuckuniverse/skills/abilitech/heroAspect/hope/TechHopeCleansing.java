@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope;
 
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
@@ -11,11 +12,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechHopeCleansing extends TechHeroAspect
 {
-	public TechHopeCleansing(String name) {
-		super(name, EnumAspect.HOPE, EnumTechType.UTILITY);
+	public TechHopeCleansing(String name, long cost) {
+		super(name, EnumAspect.HOPE, cost, EnumTechType.UTILITY);
 	}
 
 	protected static final int ENERGY_USE = 4;
@@ -37,7 +39,7 @@ public class TechHopeCleansing extends TechHeroAspect
 		if(target == null || target.getActivePotionMap().isEmpty())
 			target = player;
 
-		if(!target.getActivePotionMap().isEmpty())
+		if(!target.getActivePotionMap().isEmpty() && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
 		{
 			target.clearActivePotions();
 			if (!player.isCreative())
@@ -47,5 +49,11 @@ public class TechHopeCleansing extends TechHeroAspect
 		}
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 4 && super.isUsableExternally(world, player);
 	}
 }

@@ -79,4 +79,10 @@ public class TechLord extends TechHeroClass
 
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= (player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.BADGE_OVERLORD) ? 6 : 12) && super.isUsableExternally(world, player);
+	}
 }

@@ -50,4 +50,10 @@ public class TechKnightHalt extends TechHeroClass {
 
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 3 && super.isUsableExternally(world, player);
+	}
 }

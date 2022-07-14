@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIMindflayerTarget;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
@@ -24,6 +25,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.client.event.MouseEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -36,21 +38,27 @@ import static com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.Te
 
 public class TechMindControl extends TechHeroAspect
 {
-	public TechMindControl(String name) {
-		super(name, EnumAspect.MIND, EnumTechType.OFFENSE);
+	public TechMindControl(String name, long cost) {
+		super(name, EnumAspect.MIND, cost, EnumTechType.OFFENSE);
 	}
 
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
 		EntityLivingBase mfTarget = player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getMindflayerEntity();
-
+		
 		if (state == SkillKeyStates.KeyState.PRESS)
 		{
 			if (mfTarget == null)
 				mfTarget = setTarget(player);
 			else
 				mfTarget = unsetTarget(mfTarget);
+			
+			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, mfTarget, this, techSlot, false)))
+			{
+				mfTarget = unsetTarget(mfTarget);
+				return false;
+			}
 
 			player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setMindflayerEntity(mfTarget);
 
@@ -74,6 +82,12 @@ public class TechMindControl extends TechHeroAspect
 
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
 
 	private static EntityLivingBase setTarget(EntityPlayer player)
 	{
@@ -81,7 +95,7 @@ public class TechMindControl extends TechHeroAspect
 
 		if(mfTarget == null || mfTarget.isPotionActive(MSUPotions.MIND_FORTITUDE))
 			return null;
-
+		
 		if (mfTarget instanceof EntityCreature)
 		{
 			EntityCreature target = (EntityCreature) mfTarget;

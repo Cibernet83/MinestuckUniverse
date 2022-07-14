@@ -12,9 +12,9 @@ import net.minecraft.world.World;
 
 public class TechLightAutoGlorb extends TechLightGlorb
 {
-	public TechLightAutoGlorb(String name)
+	public TechLightAutoGlorb(String name, long cost)
 	{
-		super(name, 1000, EnumTechType.UTILITY, EnumTechType.PASSIVE);
+		super(name, cost, EnumTechType.UTILITY, EnumTechType.PASSIVE);
 	}
 
 	@Override
@@ -34,5 +34,11 @@ public class TechLightAutoGlorb extends TechLightGlorb
 		}
 		else
 			return false;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
 	}
 }

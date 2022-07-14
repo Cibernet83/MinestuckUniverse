@@ -59,4 +59,6 @@ public class TechBloodTransfusion extends TechHeroAspect
 
 		return true;
 	}
+
+	//doesnt use food so no overriding external
 }

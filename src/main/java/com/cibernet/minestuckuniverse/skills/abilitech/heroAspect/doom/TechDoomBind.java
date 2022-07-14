@@ -8,6 +8,9 @@ import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -17,6 +20,12 @@ public class TechDoomBind extends TechHeroAspect
 	public TechDoomBind(String name, long cost)
 	{
 		super(name, EnumAspect.DOOM, cost, EnumTechType.PASSIVE, EnumTechType.DEFENSE);
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)

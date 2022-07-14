@@ -58,4 +58,22 @@ public class TechMage extends TechHeroClass
 
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
+	}
+	
+	@Override
+	public boolean canAppearOnList(World world, EntityPlayer player)
+	{
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+	}
+	
+	@Override
+	public boolean canUnlock(World world, EntityPlayer player)
+	{
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+	}
 }

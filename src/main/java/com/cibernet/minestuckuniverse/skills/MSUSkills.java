@@ -314,37 +314,37 @@ public class MSUSkills
 		}
 	};
 	
-	public static final Abilitech RETURN_JUMP = new TechReturn("return_jump");
-	public static final Abilitech SYLLADEX_SLING = new TechSling("sylladex_sling");
-	public static final Abilitech DRACONIC_AURA = new TechDragonAura("draconic_aura");
+	public static final Abilitech RETURN_JUMP = new TechReturn("return_jump", 0);
+	public static final Abilitech SYLLADEX_SLING = new TechSling("sylladex_sling", 0);
+	public static final Abilitech DRACONIC_AURA = new TechDragonAura("draconic_aura", 0);
 
-	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward");
-	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt");
+	public static final Abilitech KNIGHT_WARD = new TechKnightWard("knight_ward", 0);
+	public static final Abilitech GUARDIAN_HALT = new TechKnightHalt("guardian_halt", 0);
 	public static final Abilitech SYLPH_MEND = new TechSylph("sylph_mend", 0);
-	public static final Abilitech KARMIC_RESTORATION = new TechSylphKarmaRestore("karmic_restoration");
-	public static final Abilitech PRINCE_WRATH = new TechPrinceWrath("prince_wrath");
-	public static final Abilitech RULING_SLASH = new TechPrinceSlash("ruling_slash");
-	public static final Abilitech WITCH_INHIBITION = new TechWitch("witch_inhibition");
-	public static final Abilitech WITCH_TRAP = new TechWitchTrap("wicked_trap");
-	public static final Abilitech THIEF_FILCH = new TechThief("thief_filch");
-	public static final Abilitech HERMES_DASH = new TechThiefDash("hermes_dash");
-	public static final Abilitech MAGE_AWARENESS = new TechMage("mage_awareness");
-	public static final Abilitech ARCANE_STUDY = new TechMageStudy("arcane_study");
+	public static final Abilitech KARMIC_RESTORATION = new TechSylphKarmaRestore("karmic_restoration", 0);
+	public static final Abilitech PRINCE_WRATH = new TechPrinceWrath("prince_wrath", 0);
+	public static final Abilitech RULING_SLASH = new TechPrinceSlash("ruling_slash", 0);
+	public static final Abilitech WITCH_INHIBITION = new TechWitch("witch_inhibition", 0);
+	public static final Abilitech WITCH_TRAP = new TechWitchTrap("wicked_trap", 0);
+	public static final Abilitech THIEF_FILCH = new TechThief("thief_filch", 0);
+	public static final Abilitech HERMES_DASH = new TechThiefDash("hermes_dash", 0);
+	public static final Abilitech MAGE_AWARENESS = new TechMage("mage_awareness", 0);
+	public static final Abilitech ARCANE_STUDY = new TechMageStudy("arcane_study", 0);
 
-	public static final Abilitech SEER_PREDICTION = new TechSeer("seer_prediction");
-	public static final Abilitech FORESIGHT_DODGE = new TechSeerDodge("foresight_dodge");
-	public static final Abilitech ROGUE_CONTRIBUTION = new TechRogue("rogue_contribution");
-	public static final Abilitech ROGUELIKE_ADAPTABILITY = new TechRogueSteal("roguelike_adaptability");
+	public static final Abilitech SEER_PREDICTION = new TechSeer("seer_prediction", 0);
+	public static final Abilitech FORESIGHT_DODGE = new TechSeerDodge("foresight_dodge", 0);
+	public static final Abilitech ROGUE_CONTRIBUTION = new TechRogue("rogue_contribution", 0);
+	public static final Abilitech ROGUELIKE_ADAPTABILITY = new TechRogueSteal("roguelike_adaptability", 0);
 	public static final Abilitech BARD_DISSONANCE = new TechBard("bard_dissonance", 0);
 	public static final Abilitech BARD_METRONOME = new TechBardMetronome("magic_metronome", 0);
-	public static final Abilitech MAID_FAVOR = new TechMaid("maid_favor");
-	public static final Abilitech IRRADIANT_SERVITUDE = new TechMaidServe("irraidant_servitude");
-	public static final Abilitech HEIR_WILL = new TechHeir("heir_will");
-	public static final Abilitech UNIVERSAL_REVERSE = new TechHeir("universal_reverse");
-	public static final Abilitech PERSEVERANT_AWAKENING = new TechHeroClass("perseverant_awakening", EnumClass.PAGE);
+	public static final Abilitech MAID_FAVOR = new TechMaid("maid_favor", 0);
+	public static final Abilitech IRRADIANT_SERVITUDE = new TechMaidServe("irraidant_servitude", 0);
+	public static final Abilitech HEIR_WILL = new TechHeir("heir_will", 0);
+	public static final Abilitech UNIVERSAL_REVERSE = new TechHeir("universal_reverse", 0);
+	public static final Abilitech PERSEVERANT_AWAKENING = new TechHeroClass("perseverant_awakening", EnumClass.PAGE, 0);
 
-	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem");
-	public static final Abilitech LORD_DECREE = new TechLord("lord_decree");
+	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem", 0);
+	public static final Abilitech LORD_DECREE = new TechLord("lord_decree", 0);
 
 	public static final Abilitech ASPECTRAL_BOLT = new TechAspectralBolt("aspectral_bolt", 5000);
 
@@ -362,10 +362,10 @@ public class MSUSkills
 	public static final Abilitech TIME_RAPID_REWIND = new TechTimeTables("rapid_rewind");
 	public static final Abilitech TIME_CELESTIAL_SHIFT = new TechTimeShift("celestial_shift");
 
-	public static final Abilitech BREATH_TEMPESTING_ASCENSION = new TechBreathGale("tempesting_ascension");
-	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon");
-	public static final Abilitech BREATH_SUPERSONIC_SPEED = new TechBreathSpeed("supersonic_speed");
-	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind");
+	public static final Abilitech BREATH_TEMPESTING_ASCENSION = new TechBreathGale("tempesting_ascension", 0);
+	public static final Abilitech BREATH_WINDSWEEPING_TYPHOON = new TechBreathKnockback("windsweeping_typhoon", 0);
+	public static final Abilitech BREATH_SUPERSONIC_SPEED = new TechBreathSpeed("supersonic_speed", 0);
+	public static final Abilitech BREATH_VESSEL_OF_THE_WIND = new TechBreathWindVessel("vessel_of_the_wind", 0);
 	public static final Abilitech BREATH_ENTOMBING_TWISTER = new TechBreathBubble("entombing_twister", 5000);
 	public static final Abilitech BREATH_SPACE_VERTIGO_BLOCK = new TechBreathSpaceFallProof("vertigo_block", 5000);
 
@@ -374,19 +374,19 @@ public class MSUSkills
 	public static final Abilitech LIGHT_ORB_OF_LIGHT = new TechLightGlorb("orb_of_light");
 	public static final Abilitech LIGHT_ETERNAL_GLOW = new TechLightAutoGlorb("eternal_glow");
 	public static final Abilitech LIGHT_HARDLIGHT_BUBBLE = new TechLightBubble("hardlight_bubble");
-	public static final Abilitech LIGHT_SKAIAN_INISHGT = new TechHeroAspect("skaian_insight", EnumAspect.LIGHT, EnumTechType.PASSIVE);
+	public static final Abilitech LIGHT_SKAIAN_INISHGT = new TechHeroAspect("skaian_insight", EnumAspect.LIGHT, 0, EnumTechType.PASSIVE);
 
-	public static final Abilitech HEART_SOUL_SWITCHER = new TechHeartSoulSwitcher("soul_switcher");
-	public static final Abilitech HEART_SOUL_SHOCK = new TechSoulStun("soul_shock");
-	public static final Abilitech HEART_SPIRITUAL_BOND = new TechHeartBond("spiritual_bond");
-	public static final Abilitech HEART_ASTRAL_PROJECTION = new TechHeartProject("astral_projection");
+	public static final Abilitech HEART_SOUL_SWITCHER = new TechHeartSoulSwitcher("soul_switcher", 0);
+	public static final Abilitech HEART_SOUL_SHOCK = new TechSoulStun("soul_shock", 0);
+	public static final Abilitech HEART_SPIRITUAL_BOND = new TechHeartBond("spiritual_bond", 0);
+	public static final Abilitech HEART_ASTRAL_PROJECTION = new TechHeartProject("astral_projection", 0);
 
-	public static final Abilitech DOOM_TERMINAL_DEMISE = new TechDoomDemise("terminal_demise");
-	public static final Abilitech DOOM_DEATHS_SHROUD = new TechDoomDemiseAoE("deaths_shroud");
-	public static final Abilitech DOOM_WITHERING_WHISPER = new TechDoomDecay("withering_whisper");
-	public static final Abilitech DOOM_CHAINS_OF_DESPAIR = new TechDoomChain("chains_of_despair");
-	public static final Abilitech DOOM_SURVIVORS_BIND = new TechDoomBind("survivors_bind");
-	public static final Abilitech DOOM_VOID_ABYSS_CAGE = new TechDoomVoidBubble("abyss_cage");
+	public static final Abilitech DOOM_TERMINAL_DEMISE = new TechDoomDemise("terminal_demise", 0);
+	public static final Abilitech DOOM_DEATHS_SHROUD = new TechDoomDemiseAoE("deaths_shroud", 0);
+	public static final Abilitech DOOM_WITHERING_WHISPER = new TechDoomDecay("withering_whisper", 0);
+	public static final Abilitech DOOM_CHAINS_OF_DESPAIR = new TechDoomChain("chains_of_despair", 0);
+	public static final Abilitech DOOM_SURVIVORS_BIND = new TechDoomBind("survivors_bind", 0);
+	public static final Abilitech DOOM_VOID_ABYSS_CAGE = new TechDoomVoidBubble("abyss_cage", 0);
 
 	public static final Abilitech LIFE_LIFEFORCE_LEECH = new TechLifeLeech("lifeforce_leech");
 	public static final Abilitech LIFE_HEALING_AURA = new TechLifeAura("healing_aura");
@@ -395,10 +395,10 @@ public class MSUSkills
 	public static final Abilitech LIFE_SONG_OF_FERTILITY = new TechLifeFertility("song_of_fertility");
 	public static final Abilitech LIFE_SAVING_GRACE = new TechLifeGrace("saving_grace");
 
-	public static final Abilitech BLOOD_BLEEDING_EDGE = new TechBloodBleeding("bleeding_edge");
-	public static final Abilitech BLOOD_REFORMERS_REACH = new TechBloodReformer("reformers_reach");
-	public static final Abilitech BLOOD_LIFEFORCE_TRANSFUSION = new TechBloodTransfusion("lifeforce_transfusion");
-	public static final Abilitech BLOOD_HAEMODOME = new TechBloodBubble("haemodome");
+	public static final Abilitech BLOOD_BLEEDING_EDGE = new TechBloodBleeding("bleeding_edge", 0);
+	public static final Abilitech BLOOD_REFORMERS_REACH = new TechBloodReformer("reformers_reach", 0);
+	public static final Abilitech BLOOD_LIFEFORCE_TRANSFUSION = new TechBloodTransfusion("lifeforce_transfusion", 0);
+	public static final Abilitech BLOOD_HAEMODOME = new TechBloodBubble("haemodome", 0);
 
 	public static final Abilitech VOID_VOIDSTEP = new TechVoidStep("voidstep");
 	public static final Abilitech VOID_RETURN_TO_DUST = new TechVoidSnap("return_to_dust");

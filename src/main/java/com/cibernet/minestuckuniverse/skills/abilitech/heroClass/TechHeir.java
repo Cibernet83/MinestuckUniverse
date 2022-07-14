@@ -30,6 +30,11 @@ public class TechHeir extends TechHeroClass
 	{
 		return false;
 	}
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
 
 	private static void doHeirThings(EntityPlayer target, EntityLivingBase trueSource, float amount)
 	{

@@ -119,8 +119,13 @@ public class TechHeartBond extends TechHeroAspect
 		else if(target == null)
 			badgeEffects.setSoulLinkInt(0);
 		
-		return true;
-		
+		return true;	
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
 	}
 	
 	public static class HeartDamageSource extends CritDamageSource

@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates.KeyState;
@@ -32,7 +33,7 @@ public class TechBardMetronome  extends TechHeroClass
 			return false;
 		}
 		
-		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 1)
+		if(!player.isCreative() && player.getFoodStats().needFood())
 		{
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 			return false;
@@ -67,6 +68,24 @@ public class TechBardMetronome  extends TechHeroClass
 		}
 		
 		return toReturn;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return !player.getFoodStats().needFood() && super.isUsableExternally(world, player);
+	}
+	
+	@Override
+	public boolean canAppearOnList(World world, EntityPlayer player)
+	{
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+	}
+	
+	@Override
+	public boolean canUnlock(World world, EntityPlayer player)
+	{
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
 	
 	public static class slotA {}

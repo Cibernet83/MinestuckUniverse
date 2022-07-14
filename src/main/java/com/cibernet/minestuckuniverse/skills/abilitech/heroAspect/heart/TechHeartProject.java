@@ -59,7 +59,7 @@ public class TechHeartProject extends TechHeroAspect
 			return false;
 		}
 		
-		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 20)
+		if(!player.isCreative() && player.getFoodStats().needFood())
 		{
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 			return false;
@@ -72,7 +72,7 @@ public class TechHeartProject extends TechHeroAspect
 		}
 		
 		if (!player.isCreative())
-			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 20);
+			player.getFoodStats().setFoodLevel(0);
 		
 		EntityHeartDecoy decoy = new EntityHeartDecoy(world.getMinecraftServer().getWorld(world.provider.getDimension()), (EntityPlayerMP) player);
 
@@ -85,6 +85,12 @@ public class TechHeartProject extends TechHeroAspect
 		
 		return true;
 	}	
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return !player.getFoodStats().needFood() && super.isUsableExternally(world, player);
+	}
 	
 	@SubscribeEvent
 	public static void update(LivingEvent.LivingUpdateEvent event)

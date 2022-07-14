@@ -68,4 +68,10 @@ public class TechBard extends TechHeroClass
 
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 6 && super.isUsableExternally(world, player);
+	}
 }

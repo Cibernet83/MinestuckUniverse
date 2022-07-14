@@ -64,4 +64,10 @@ public class TechSylph extends TechHeroClass
 			
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
+	}
 }

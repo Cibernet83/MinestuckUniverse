@@ -66,6 +66,12 @@ public class TechDoomDemise extends TechHeroAspect
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.DOOM, 20);
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 16 && super.isUsableExternally(world, player);
+	}
 
 	private static void karmakill(EntityLivingBase target, EntityPlayer player)
 	{

@@ -81,6 +81,12 @@ public class TechSoulStun extends TechHeroAspect
 
 		return true;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
+	}
 
 	@SubscribeEvent
 	public static void onLoggedOut(PlayerEvent.PlayerLoggedOutEvent event)

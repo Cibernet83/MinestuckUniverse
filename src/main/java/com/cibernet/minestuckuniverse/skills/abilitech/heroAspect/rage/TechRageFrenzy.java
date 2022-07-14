@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.entity.ai.AIRageFrenzyTarget;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIAttackRageShifted;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -22,6 +23,7 @@ import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -41,8 +43,8 @@ public class TechRageFrenzy extends TechHeroAspect
 
 	public static final AttributeModifier ATTACK_MOD = new AttributeModifier(UUID.fromString("a10e3486-c1dd-4a74-acfc-9be5d8bcaecc"), "rage_util_boost", 4, 0).setSaved(true);
 
-	public TechRageFrenzy(String name) {
-		super(name, EnumAspect.RAGE, EnumTechType.UTILITY);
+	public TechRageFrenzy(String name, long cost) {
+		super(name, EnumAspect.RAGE, cost, EnumTechType.UTILITY);
 	}
 
 	@Override
@@ -65,6 +67,8 @@ public class TechRageFrenzy extends TechHeroAspect
 
 			for(EntityLivingBase target : list)
 			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+					continue;
 				if(!target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShifted())
 					enableRageFrenzy((EntityCreature) target);
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.RAGE, 10);
@@ -79,6 +83,11 @@ public class TechRageFrenzy extends TechHeroAspect
 		return true;
 	}
 
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 5 && super.isUsableExternally(world, player);
+	}
 
 	public static void enableRageFrenzy(EntityCreature entity)
 	{

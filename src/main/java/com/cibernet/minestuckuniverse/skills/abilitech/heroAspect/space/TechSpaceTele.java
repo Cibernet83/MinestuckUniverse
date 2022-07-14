@@ -19,8 +19,8 @@ import net.minecraft.world.World;
 
 public class TechSpaceTele extends TechHeroAspect
 {
-	public TechSpaceTele(String name) {
-		super(name, EnumAspect.SPACE, EnumTechType.OFFENSE, EnumAspect.BREATH);
+	public TechSpaceTele(String name, long cost) {
+		super(name, EnumAspect.SPACE, cost, EnumTechType.UTILITY);//, EnumAspect.BREATH);
 	}
 
 	@Override
@@ -68,5 +68,11 @@ public class TechSpaceTele extends TechHeroAspect
 		Teleport.localTeleport(player, null, pos.getX()+0.5, pos.getY(), pos.getZ()+0.5);
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
 	}
 }

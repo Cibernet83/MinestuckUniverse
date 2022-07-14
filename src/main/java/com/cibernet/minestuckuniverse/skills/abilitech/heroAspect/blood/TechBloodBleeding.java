@@ -29,6 +29,12 @@ public class TechBloodBleeding extends TechHeroAspect
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time) {
 		return false;
 	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
 
 	@SubscribeEvent
 	public static void onLivingDamage(LivingDamageEvent event)
@@ -50,4 +56,5 @@ public class TechBloodBleeding extends TechHeroAspect
 			}
 		}
 	}
+	
 }

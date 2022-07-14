@@ -52,4 +52,10 @@ public class TechMaidServe extends TechHeroClass
 		return true;
 	}
 	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
+	}
+	
 }

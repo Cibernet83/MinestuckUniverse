@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -15,15 +16,16 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class TechLifeGrace extends TechHeroAspect
 {
-	public TechLifeGrace(String name)
+	public TechLifeGrace(String name, long cost)
 	{
-		super(name, EnumAspect.LIFE, EnumTechType.DEFENSE);
+		super(name, EnumAspect.LIFE, cost, EnumTechType.DEFENSE);
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class TechLifeGrace extends TechHeroAspect
 		{
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
-			if(target == null || badgeEffects.getSavingGraceTargets().contains(target.getUniqueID())) return false;
+			if(target == null || badgeEffects.getSavingGraceTargets().contains(target.getUniqueID()) || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, true))) return false;
 
 			IBadgeEffects targetEffects = target.getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 
@@ -54,6 +56,24 @@ public class TechLifeGrace extends TechHeroAspect
 
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, time < 60 ? 2 : 10);
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return !player.getFoodStats().needFood() && super.isUsableExternally(world, player);
+	}
+	
+	@Override
+	public boolean canAppearOnList(World world, EntityPlayer player)
+	{
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+	}
+	
+	@Override
+	public boolean canUnlock(World world, EntityPlayer player)
+	{
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)

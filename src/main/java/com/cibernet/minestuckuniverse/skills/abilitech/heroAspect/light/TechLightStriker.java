@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.damage.EntityCritDamageSource;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -18,6 +19,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
 
 import java.util.Collections;
@@ -25,8 +27,8 @@ import java.util.List;
 
 public class TechLightStriker extends TechHeroAspect
 {
-	public TechLightStriker(String name) {
-		super(name, EnumAspect.LIGHT, EnumTechType.OFFENSE, EnumAspect.DOOM);
+	public TechLightStriker(String name, long cost) {
+		super(name, EnumAspect.LIGHT, cost, EnumTechType.OFFENSE);//, EnumAspect.DOOM);
 	}
 
 	@Override
@@ -37,11 +39,13 @@ public class TechLightStriker extends TechHeroAspect
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 			if(target != null)
 			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
+					return false;
 				PotionEffect effect = new PotionEffect(MobEffects.GLOWING, 1200, 0);
 				effect.setCurativeItems(Collections.emptyList());
 				target.addPotionEffect(effect);
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.LIGHT, 10);
-				return false;
+				return true;
 			}
 		}
 
@@ -71,7 +75,7 @@ public class TechLightStriker extends TechHeroAspect
 		{
 			for(EntityLivingBase target : world.getEntities(EntityLivingBase.class, (entity) -> entity != player && entity.isPotionActive(MobEffects.GLOWING)))
 			{
-				if(player.isOnSameTeam(target))
+				if(player.isOnSameTeam(target) || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, false)))
 					continue;
 
 				EntityLightningBolt lightning = new EntityLightningBolt(world, target.posX, target.posY, target.posZ, true);
@@ -99,5 +103,11 @@ public class TechLightStriker extends TechHeroAspect
 		}
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return player.getFoodStats().getFoodLevel() >= 8 && super.isUsableExternally(world, player);
 	}
 }

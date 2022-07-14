@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.client.render.RenderPlayerCloak;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
@@ -32,6 +33,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -91,6 +93,8 @@ public class TechMindCloak extends TechHeroAspect
 			if(result.entityHit instanceof EntityPlayer)
 			{
 				EntityPlayer cloakPlayer = (EntityPlayer) result.entityHit;
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, cloakPlayer, this, techSlot, false)))
+					return false;
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setUniqueId("UUID", cloakPlayer.getUniqueID());
 				cloakData.setTag("Player", nbt);
@@ -100,6 +104,8 @@ public class TechMindCloak extends TechHeroAspect
 			}
 			else
 			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, result.entityHit, this, techSlot, false)))
+					return false;
 				NBTTagCompound nbt = result.entityHit.writeToNBT(new NBTTagCompound());
 				nbt.setString("id", EntityRegistry.getEntry(result.entityHit.getClass()).getRegistryName().toString());
 
@@ -127,6 +133,12 @@ public class TechMindCloak extends TechHeroAspect
 
 
 		return true;
+	}
+	
+	@Override
+	public boolean isUsableExternally(World world, EntityPlayer player)
+	{
+		return false;
 	}
 
 	private static final HashMap<EntityLivingBase, Entity> cloakedCache = new HashMap<>();

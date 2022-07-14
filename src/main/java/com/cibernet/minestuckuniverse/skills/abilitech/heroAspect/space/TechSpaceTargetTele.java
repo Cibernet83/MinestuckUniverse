@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
@@ -17,13 +18,14 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TechSpaceTargetTele extends TechHeroAspect
 {
 	private static int RANGE = 20;
 
-	public TechSpaceTargetTele(String name) {
-		super(name, EnumAspect.SPACE, EnumTechType.DEFENSE, EnumAspect.MIND);
+	public TechSpaceTargetTele(String name, long cost) {
+		super(name, EnumAspect.SPACE, cost, EnumTechType.HYBRID);//, EnumAspect.MIND);
 	}
 
 	@Override
@@ -61,6 +63,8 @@ public class TechSpaceTargetTele extends TechHeroAspect
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 			if (target != null)
 			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(world, target, this, techSlot, null)))
+					return false;
 				if (!badgeEffects.hasWarpPoint())
 				{
 					if (target.isRiding())
