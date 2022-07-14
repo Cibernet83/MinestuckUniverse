@@ -21,16 +21,13 @@ public class TechBoondollarCost extends Abilitech
 	public TechBoondollarCost(String name, long cost)
 	{
 		super(name);
-		//TODO: set this back to cost
-
-		this.cost = 1;
+		this.cost = cost;
 	}
 	
 	public TechBoondollarCost(String name, long cost, EnumTechType... techTypes)
 	{
 		super(name, techTypes);
-		
-		this.cost = 1;
+		this.cost = cost;
 	}
 
 	@Override
