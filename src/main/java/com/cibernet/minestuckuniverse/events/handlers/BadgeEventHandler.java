@@ -86,13 +86,13 @@ public class BadgeEventHandler
 		put(EnumAspect.BLOOD, new PotionEffect(MSUPotions.BLEEDING, 1000, 2));
 		put(EnumAspect.RAGE, new PotionEffect(MobEffects.WEAKNESS, 1200, 4));
 		put(EnumAspect.HOPE, new PotionEffect(MSUPotions.GOD_TIER_LOCK, 600, 0));
-		put(EnumAspect.DOOM, new PotionEffect(MobEffects.WITHER, 600, 3));
+		put(EnumAspect.DOOM, new PotionEffect(MobEffects.WITHER, 600, 1));
 		put(EnumAspect.HEART, new PotionEffect(MobEffects.HUNGER, 1000, 3));
 		put(EnumAspect.LIFE, new PotionEffect(MobEffects.POISON, 1200, 4));
-		put(EnumAspect.VOID, new PotionEffect(MobEffects.GLOWING, 1200, 2));
+		put(EnumAspect.VOID, new PotionEffect(MobEffects.BLINDNESS, 1200, 0));
 		put(EnumAspect.LIGHT, new PotionEffect(MobEffects.UNLUCK, 1200, 7));
 		put(EnumAspect.TIME, new PotionEffect(MSUPotions.TIME_STOP, 100, 0));
-		put(EnumAspect.MIND, new PotionEffect(MSUPotions.MIND_CONFUSION, 300, 0));
+		put(EnumAspect.MIND, new PotionEffect(MobEffects.MINING_FATIGUE, 300, 2));
 	}};
 
 	public static void registerBadgeEvents()

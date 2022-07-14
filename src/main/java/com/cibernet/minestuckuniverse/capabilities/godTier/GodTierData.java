@@ -55,6 +55,7 @@ public class GodTierData implements IGodTierData
 	private boolean masterControl = MSUConfig.godTierMasterControl;
 	private boolean canGodTier = true;
 	private boolean climbedTheSpire = false;
+	private boolean wereEffectsActive = false;
 
 	private EnumLunarSway lunarSway;
 	private EnumConsort consortType;
@@ -345,6 +346,18 @@ public class GodTierData implements IGodTierData
 	}
 
 	@Override
+	public void wereEffectsActive(boolean wereEffectsActive)
+	{
+		this.wereEffectsActive = wereEffectsActive;
+	}
+
+	@Override
+	public boolean wereEffectsActive()
+	{
+		return wereEffectsActive;
+	}
+
+	@Override
 	public int getSkillLevel(StatType type)
 	{
 		return godTierXp.get(type).level;
@@ -361,7 +374,7 @@ public class GodTierData implements IGodTierData
 	{
 		godTierXp.get(type).addXp(value, getXpToNextLevel(type));
 		if(type != StatType.GENERAL)
-			godTierXp.get(StatType.GENERAL).addXp(value, getXpToNextLevel(type));
+			godTierXp.get(StatType.GENERAL).addXp(value, getXpToNextLevel(StatType.GENERAL));
 
 		if(!hasSkill(MSUSkills.GIFT_OF_GAB) && getSkillLevel(StatType.GENERAL) > 1)
 			this.badges.put(MSUSkills.GIFT_OF_GAB, true);

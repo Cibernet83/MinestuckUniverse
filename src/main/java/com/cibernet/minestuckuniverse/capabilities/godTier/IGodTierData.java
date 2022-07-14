@@ -50,6 +50,8 @@ public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 
 	boolean climbedTheSpire();
 	void setClimbedTheSpire(boolean v);
+	void wereEffectsActive(boolean wereEffectsActive);
+	boolean wereEffectsActive();
 
 	int getSkillLevel(GodTierData.StatType type);
 	float getSkillXp(GodTierData.StatType type);
@@ -76,4 +78,5 @@ public interface IGodTierData extends IMSUCapabilityBase<EntityPlayer>
 	void setConsortType(EnumConsort consortType);
 	EnumLunarSway getLunarSway();
 	void setLunarSway(EnumLunarSway lunarSway);
+
 }

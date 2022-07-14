@@ -78,7 +78,7 @@ public class KarmaEventHandler
 
 			if(targetData.isGodTier() && !(event.getSource() instanceof IGodTierDamage && ((IGodTierDamage) event.getSource()).isGodproof()))
 			{
-				int minKarma = targetData.isBadgeActive(MSUSkills.KARMA) ? 40 : 20;
+				int minKarma = targetData.isBadgeActive(MSUSkills.KARMA) ? 40 : 20 * (targetData.isTechPassiveEnabled(MSUSkills.MUSE_REQUIEM) ? 2 : 1);
 				if(totalKarma >= minKarma || totalKarma <= -minKarma)
 				{
 					if(totalKarma >= minKarma)
@@ -115,7 +115,7 @@ public class KarmaEventHandler
 					player.setHealth(hasRevenantBadge ? 30 : 20);
 					event.setCanceled(true);
 					
-					if(!pvpKill && MinestuckPlayerData.getData((EntityPlayer) event.getEntityLiving()).echeladder.getRung() >= 49)
+					if(!pvpKill)
 						targetData.setTempKarma(Math.max(targetData.getTempKarma() - 15, -KARMA_CAP));
 				}
 
