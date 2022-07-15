@@ -1,8 +1,11 @@
 package com.cibernet.minestuckuniverse.client;
 
+import com.cibernet.minestuckuniverse.blocks.BlockFraymachine;
+import com.cibernet.minestuckuniverse.blocks.BlockHolopad;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
+import com.cibernet.minestuckuniverse.items.ItemAbilitechnosyth;
 import com.cibernet.minestuckuniverse.util.SpaceSaltUtils;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
-import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.mraof.minestuck.block.BlockSburbMachine;
@@ -12,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -39,20 +43,60 @@ public class MSURenderMachineOutline
 			
 			
 			IBlockState state = mc.player.getEntityWorld().getBlockState(mc.objectMouseOver.getBlockPos());
-			if (state.getBlock() instanceof BlockSburbMachine && (mc.player.getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.spaceSalt) ||
+			if ((mc.player.getHeldItemMainhand().getItem().equals(MinestuckUniverseItems.spaceSalt) ||
 					mc.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.SPACE_SPATIAL_MANIPULATOR)))
 			{
-				BlockSburbMachine.MachineType type = state.getValue(BlockSburbMachine.MACHINE_TYPE);
-				EnumFacing facing = state.getValue(BlockSburbMachine.FACING);
-				//facing = mc.player.getHorizontalFacing().getOpposite();
-				ItemStack stack = mc.player.getHeldItemMainhand();
-				
-				renderCheckItem(mc.player, stack, type, event.getContext(), rayTraceResult, event.getPartialTicks(), facing);
+				if(state.getBlock() instanceof BlockSburbMachine)
+				{
+					BlockSburbMachine.MachineType type = state.getValue(BlockSburbMachine.MACHINE_TYPE);
+					EnumFacing facing = state.getValue(BlockSburbMachine.FACING);
+					//facing = mc.player.getHorizontalFacing().getOpposite();
+					ItemStack stack = mc.player.getHeldItemMainhand();
+
+					renderCheckSburbMachine(mc.player, stack, type, event.getContext(), rayTraceResult, event.getPartialTicks(), facing);
+				}
 			}
+
+			if(mc.player.getHeldItemMainhand().getItem().equals(Item.getItemFromBlock(MinestuckUniverseBlocks.abilitechnosynth[0])))
+				renderCheckSynth(mc.player, mc.player.getHeldItemMainhand(), rayTraceResult, event.getPartialTicks(), mc.player.getHorizontalFacing().getOpposite());
+			else if(mc.player.getHeldItemOffhand().getItem().equals(Item.getItemFromBlock(MinestuckUniverseBlocks.abilitechnosynth[0])))
+				renderCheckSynth(mc.player, mc.player.getHeldItemOffhand(), rayTraceResult, event.getPartialTicks(), mc.player.getHorizontalFacing().getOpposite());
+
 		}
 	}
-	
-	private static boolean renderCheckItem(EntityPlayerSP player, ItemStack stack, BlockSburbMachine.MachineType machineType, RenderGlobal render, RayTraceResult rayTraceResult, float partialTicks, EnumFacing placedFacing)
+
+
+	private static boolean renderCheckSynth(EntityPlayerSP player, ItemStack stack, RayTraceResult rayTraceResult, float partialTicks, EnumFacing placedFacing)
+	{
+		if(!placedFacing.equals(EnumFacing.UP))
+			return false;
+
+		BlockPos pos = rayTraceResult.getBlockPos();
+
+		if(!player.world.getBlockState(pos).getBlock().isReplaceable(player.world, pos))
+			pos = pos.up();
+
+		double d1 = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double)partialTicks;
+		double d2 = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double)partialTicks;
+		double d3 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double)partialTicks;
+
+		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+		GlStateManager.glLineWidth(2.0F);
+		GlStateManager.disableTexture2D();
+		GlStateManager.depthMask(false);	//GL stuff was copied from the standard mouseover bounding box drawing, which is likely why the alpha isn't working
+
+		AxisAlignedBB boundingBox = BlockHolopad.modifyAABBForDirection(placedFacing.getOpposite(),new AxisAlignedBB(-1,0,1,2,4,-1)).offset(pos).offset(-d1, -d2, -d3).shrink(0.002);
+		boolean placeable = ItemAbilitechnosyth.canPlaceAt(stack, player, player.world, pos, placedFacing);
+
+		RenderGlobal.drawSelectionBoundingBox(boundingBox, placeable ? 0 : 1, placeable ? 1 : 0, 0, 0.5F);
+		GlStateManager.depthMask(true);
+		GlStateManager.enableTexture2D();
+		GlStateManager.disableBlend();
+
+		return true;
+	}
+
+	private static boolean renderCheckSburbMachine(EntityPlayerSP player, ItemStack stack, BlockSburbMachine.MachineType machineType, RenderGlobal render, RayTraceResult rayTraceResult, float partialTicks, EnumFacing placedFacing)
 	{
 			BlockPos pos = rayTraceResult.getBlockPos();
 			

@@ -4,7 +4,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
-import com.cibernet.minestuckuniverse.items.ItemFraymachine;
+import com.cibernet.minestuckuniverse.items.ItemAbilitechnosyth;
 import com.cibernet.minestuckuniverse.items.godtier.ItemGodTierKit;
 import com.google.common.base.Predicates;
 import com.mojang.authlib.GameProfile;
@@ -64,7 +64,7 @@ public class MSUUtils
     {
         DeployList.registerItem("holopad", new ItemStack(MinestuckUniverseBlocks.holopad), new GristSet(GristType.Build, MinestuckUniverse.isArsenalLoaded ? 10000 : 1000), 2);
         DeployList.registerItem("gt_kit", new GristSet(GristType.Zillium, 20), 0, ItemGodTierKit::isAvailable, ItemGodTierKit::generateKit);
-        DeployList.registerItem("fraymachine", new GristSet(GristType.Build, 5000), 0, ItemFraymachine::isAvailable, sburbConnection -> new ItemStack(MinestuckUniverseBlocks.fraymachine));
+        DeployList.registerItem("fraymachine", new GristSet(GristType.Build, 5000), 0, ItemAbilitechnosyth::isAvailable, sburbConnection -> new ItemStack(MinestuckUniverseBlocks.abilitechnosynth[0]));
     }
     
     public static boolean compareCards(ItemStack card1, ItemStack card2, boolean ignoreStacksize)

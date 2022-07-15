@@ -14,7 +14,7 @@ public class BlockFraymachine extends MSUBlockBase
 {
 	public BlockFraymachine()
 	{
-		super(Material.IRON, "abilitechnosynth", "abilitechnosynth");
+		super(Material.IRON, "mini_abilitechnosynth", "abilitechnosynth");
 	}
 
 	@Override

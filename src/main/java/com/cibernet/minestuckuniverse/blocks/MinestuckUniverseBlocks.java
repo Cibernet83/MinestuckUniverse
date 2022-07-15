@@ -4,7 +4,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
-import com.cibernet.minestuckuniverse.items.ItemFraymachine;
+import com.cibernet.minestuckuniverse.items.ItemAbilitechnosyth;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.captchalogue.OperandiBlockItem;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
@@ -18,11 +18,8 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -60,8 +57,14 @@ public class MinestuckUniverseBlocks
 	public static final Block operandiLog = new OperandiLogBlock("operandi_log", 2.0f, 0, OperandiBlock.LOG, "axe");
 
     public static Block holopad = new BlockHolopad();
-    public static Block fraymachine = new BlockFraymachine();
-	
+    public static Block miniAbilitechnosynth = new BlockFraymachine();
+
+    public static Block[] abilitechnosynth = new Block[]{
+		    new BlockAbilitechnosynth(0),
+		    new BlockAbilitechnosynth(1),
+		    new BlockAbilitechnosynth(2),
+		    new BlockAbilitechnosynth(3)};
+
 	public static Block machineChasis = new BlockMachineChasis();
     public static Block gristHopper = new BlockGristHopper();
     public static Block autoWidget = new BlockAutoWidget();
@@ -212,7 +215,11 @@ public class MinestuckUniverseBlocks
 		registerBlock(registry, operandiGlass, new OperandiBlockItem("operandi_glass", MinestuckUniverseBlocks.operandiGlass));
 
         registerBlock(registry, holopad);
-        registerBlock(registry, fraymachine, new ItemFraymachine());
+
+        for(Block b : abilitechnosynth)
+            registerBlock(registry, b, null);
+        MinestuckUniverseItems.itemBlocks.add(new ItemAbilitechnosyth());
+        registerBlock(registry, miniAbilitechnosynth, null);
 
         registerBlock(registry, machineChasis);
 		registerBlock(registry, gristHopper);

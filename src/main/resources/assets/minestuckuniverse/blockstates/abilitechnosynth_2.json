@@ -1,0 +1,23 @@
+{
+    "variants": {
+        "facing=west,part=0":       { "model": "minestuckuniverse:abilitechnosynth_9" },
+        "facing=west,part=1":       { "model": "minestuckuniverse:abilitechnosynth_10" },
+        "facing=west,part=2":       { "model": "minestuckuniverse:abilitechnosynth_11" },
+        "facing=west,part=3":       { "model": "minestuckuniverse:abilitechnosynth_12" },
+        
+        "facing=north,part=0":        { "model": "minestuckuniverse:abilitechnosynth_9", "y": 90 },
+        "facing=north,part=1":        { "model": "minestuckuniverse:abilitechnosynth_10", "y": 90 },
+        "facing=north,part=2":        { "model": "minestuckuniverse:abilitechnosynth_11", "y": 90 },
+        "facing=north,part=3":        { "model": "minestuckuniverse:abilitechnosynth_12", "y": 90 },
+        
+        "facing=east,part=0":       { "model": "minestuckuniverse:abilitechnosynth_9", "y": 180 },
+        "facing=east,part=1":       { "model": "minestuckuniverse:abilitechnosynth_10", "y": 180 },
+        "facing=east,part=2":       { "model": "minestuckuniverse:abilitechnosynth_11", "y": 180 },
+        "facing=east,part=3":       { "model": "minestuckuniverse:abilitechnosynth_12", "y": 180 },
+        
+        "facing=south,part=0":        { "model": "minestuckuniverse:abilitechnosynth_9", "y": 270 },
+        "facing=south,part=1":        { "model": "minestuckuniverse:abilitechnosynth_10", "y": 270 },
+        "facing=south,part=2":        { "model": "minestuckuniverse:abilitechnosynth_11", "y": 270 },
+        "facing=south,part=3":        { "model": "minestuckuniverse:abilitechnosynth_12", "y": 270 }
+    }
+}

@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.util;
 
+import com.cibernet.minestuckuniverse.blocks.BlockFraymachine;
 import com.cibernet.minestuckuniverse.events.SpaceSaltEffectEvent;
 import com.mraof.minestuck.block.*;
 import com.mraof.minestuck.editmode.EditData;
@@ -253,6 +254,10 @@ public class SpaceSaltUtils
 			}
 
 			return true;
+		}
+		else if(block instanceof BlockFraymachine)
+		{
+
 		}
 
 		return false;

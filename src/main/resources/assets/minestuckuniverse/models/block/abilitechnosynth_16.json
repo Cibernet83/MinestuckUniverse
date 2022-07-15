@@ -1,0 +1,70 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [256, 256],
+	"textures": {
+		"0": "minestuckuniverse:machines/abilitechnosynth",
+		"particle": "minestuckuniverse:machines/abilitechnosynth_particles"
+	},
+	"elements": [
+		{
+			"name": "pipe3",
+			"from": [12, 0, 0],
+			"to": [16, 3, 4],
+			"faces": {
+				"north": {"uv": [4, 1.875, 4.25, 2.0625], "texture": "#0"},
+				"east": {"uv": [2, 4, 2.25, 4.1875], "texture": "#0"},
+				"south": {"uv": [2.25, 4, 2.5, 4.1875], "texture": "#0"},
+				"west": {"uv": [2.5, 4, 2.75, 4.1875], "texture": "#0"},
+				"up": {"uv": [9.5, 6.8125, 9.25, 6.5625], "texture": "#0"},
+				"down": {"uv": [7, 9.25, 6.75, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "pipe4",
+			"from": [12, 0, 4],
+			"to": [16, 7, 8],
+			"faces": {
+				"north": {"uv": [0, 3.875, 0.25, 4.3125], "texture": "#0"},
+				"east": {"uv": [0.25, 3.875, 0.5, 4.3125], "texture": "#0"},
+				"south": {"uv": [0.5, 3.875, 0.75, 4.3125], "texture": "#0"},
+				"west": {"uv": [0.75, 3.875, 1, 4.3125], "texture": "#0"},
+				"up": {"uv": [9.5, 7.0625, 9.25, 6.8125], "texture": "#0"},
+				"down": {"uv": [9.5, 7.0625, 9.25, 7.3125], "texture": "#0"}
+			}
+		},
+		{
+			"name": "pipe4",
+			"from": [12, 0, 12],
+			"to": [16, 3, 16],
+			"faces": {
+				"north": {"uv": [2.75, 4, 3, 4.1875], "texture": "#0"},
+				"east": {"uv": [3, 4, 3.25, 4.1875], "texture": "#0"},
+				"south": {"uv": [3.25, 4, 3.5, 4.1875], "texture": "#0"},
+				"west": {"uv": [3.5, 4, 3.75, 4.1875], "texture": "#0"},
+				"up": {"uv": [9.625, 1.4375, 9.375, 1.1875], "texture": "#0"},
+				"down": {"uv": [2.5, 9.375, 2.25, 9.625], "texture": "#0"}
+			}
+		},
+		{
+			"name": "pipe5",
+			"from": [12, 0, 8],
+			"to": [16, 7, 12],
+			"faces": {
+				"north": {"uv": [1, 4, 1.25, 4.4375], "texture": "#0"},
+				"east": {"uv": [1.25, 4, 1.5, 4.4375], "texture": "#0"},
+				"south": {"uv": [1.5, 4, 1.75, 4.4375], "texture": "#0"},
+				"west": {"uv": [1.75, 4, 2, 4.4375], "texture": "#0"},
+				"up": {"uv": [2.75, 9.625, 2.5, 9.375], "texture": "#0"},
+				"down": {"uv": [3, 9.375, 2.75, 9.625], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "bone",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [0, 1, 2, 3]
+		}
+	]
+}
