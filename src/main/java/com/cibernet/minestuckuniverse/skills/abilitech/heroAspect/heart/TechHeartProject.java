@@ -99,7 +99,7 @@ public class TechHeartProject extends TechHeroAspect
 		{
 			IBadgeEffects BE = event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 			for(int i = 0; i < SkillKeyStates.Key.values().length; i++)
-				if(BE.getTether(i) instanceof EntityHeartDecoy && (((EntityPlayerMP) event.getEntityLiving()).interactionManager.getGameType() != GameType.SPECTATOR || Math.abs(event.getEntityLiving().world.getTotalWorldTime() - BE.getProjectionTime()) >= 400))
+				if(BE.getTether(i) instanceof EntityHeartDecoy && (((EntityPlayerMP) event.getEntityLiving()).interactionManager.getGameType() != GameType.SPECTATOR || Math.abs(event.getEntityLiving().world.getTotalWorldTime() - BE.getProjectionTime()) >= 1200))
 					((EntityHeartDecoy) BE.getTether(i)).returnToSender(null, 0);
 		}
 	}
