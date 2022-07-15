@@ -46,8 +46,10 @@ public class TechBreathBubble extends TechHeroAspect
 		if(bubble != null && bubble.isDead)
 			bubble = null;
 
-		if(bubble == null)
+		if(state == SkillKeyStates.KeyState.PRESS)
 		{
+			if(bubble != null)
+				bubble.setDead();
 			bubble = new EntityBubble(world, trace.entityHit == null ? 1 : Math.max(trace.entityHit.width, trace.entityHit.height), 0x47E2FA, 25, false, false, false);
 			bubble.setSuffocates(true);
 

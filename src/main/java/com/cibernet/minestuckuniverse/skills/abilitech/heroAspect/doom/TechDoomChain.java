@@ -42,7 +42,7 @@ public class TechDoomChain extends TechHeroAspect
 				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 					continue;
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.DOOM, 10);
-				target.addPotionEffect(new PotionEffect(MSUPotions.EARTHBOUND, 1200, 1));
+				target.addPotionEffect(new PotionEffect(MSUPotions.EARTHBOUND, 1200, 0));
 			}
 
 			if (!player.isCreative())

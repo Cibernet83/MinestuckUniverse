@@ -4,17 +4,22 @@ import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.breath.TechBreathBubble;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.world.GetCollisionBoxesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -101,6 +106,69 @@ public class EntityBubble extends Entity
 			for(EntityLivingBase entityLivingBase : world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox()))
 				entityLivingBase.attackEntityFrom(TechBreathBubble.DAMAGE_SOURCE, 2);
 		}
+		
+		if(!isDead && !canEnter())
+			for(Entity target : world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox(), (entity) -> !(entity instanceof EntityLivingBase) && !(entity instanceof EntityBubble)))
+			{	
+				if(this.getEntityBoundingBox().intersects(target.getEntityBoundingBox().offset(-target.posX + target.prevPosX, -target.posY + target.prevPosY, -target.posZ + target.prevPosZ)) ||
+						(target.prevPosX == 0 && target.prevPosY == 0 && target.prevPosZ == 0))
+					continue;
+				if(target instanceof EntityFireball)
+				{
+					((EntityFireball) target).accelerationX *= -1;
+					((EntityFireball) target).accelerationY *= -1;
+					((EntityFireball) target).accelerationZ *= -1;
+				}
+				target.motionX *= -.2;
+				target.posX = target.prevPosX;
+				target.motionY *= -.2;
+				target.posY = target.prevPosY;
+				target.motionZ *= -.2;
+				target.posZ = target.prevPosZ;
+				/*
+				if(this.getEntityBoundingBox().intersects(target.getEntityBoundingBox().offset(-target.posX + target.prevPosX, -target.posY + target.prevPosY, -target.posZ + target.prevPosZ)) ||
+						(target.prevPosX == 0 && target.prevPosY == 0 && target.prevPosZ == 0))
+					continue;
+				
+				double[] direction = new double[] {0, target.posX - (posX)};
+				if(Math.abs(direction[1]) < Math.abs(target.posY - (posY + getBubbleSize()/2)))
+				{
+					direction[0] = 1;
+					direction[1] = target.posY - (posY + getBubbleSize()/2);
+				}
+				if(Math.abs(direction[1]) < Math.abs(target.posZ - (posZ)))
+				{
+					direction[0] = 2;
+					direction[1] = target.posZ - (posZ);
+				}
+				
+				System.out.println("bub pos: " + posX + ", " + posY + ", " + posZ);
+				System.out.println("Direction: " + direction[0] + ", " + direction[1]);
+				
+				if(direction[0] < 1)
+				{
+					if(target instanceof EntityFireball)
+						((EntityFireball) target).accelerationX *= -1;
+					target.motionX *= Math.signum(target.motionX) != Math.signum(direction[1]) ? -.5 : 1;
+					target.posX = target.prevPosX;
+				}
+				else if(direction[0] < 2)
+				{
+					if(target instanceof EntityFireball)
+						((EntityFireball) target).accelerationY *= -1;
+					target.motionY *= Math.signum(target.motionY) != Math.signum(direction[1]) ? -.5 : 1;;
+					target.posY = target.prevPosY;
+				}
+				else
+				{
+					if(target instanceof EntityFireball)
+						((EntityFireball) target).accelerationZ *= -1;
+					target.motionZ *= Math.signum(target.motionZ) != Math.signum(direction[1]) ? -.5 : 1;;
+					target.posZ = target.prevPosZ;
+				}
+				*/
+				target.velocityChanged = true;
+			}
 	}
 
 	@Override
@@ -267,9 +335,9 @@ public class EntityBubble extends Entity
 	@SubscribeEvent
 	public static void onAttack(LivingAttackEvent event)
 	{
-		Entity source = event.getSource().getImmediateSource() == null ? event.getSource().getTrueSource() : event.getSource().getImmediateSource();
+		Entity source = event.getSource().getImmediateSource() == null ? event.getSource().getTrueSource() == null ? null : event.getSource().getTrueSource() : event.getSource().getImmediateSource();
 
-		if(!event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, source.getEntityBoundingBox(), bubble -> !bubble.canEnter()).
+		if(source != null && !event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, source.getEntityBoundingBox(), bubble -> !bubble.canEnter()).
 				equals(event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, event.getEntity().getEntityBoundingBox(), bubble -> !bubble.canEnter())))
 			event.setCanceled(true);
 	}

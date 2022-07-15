@@ -49,8 +49,10 @@ public class TechDoomVoidBubble extends TechHeroAspect
 		if(bubble != null && bubble.isDead)
 			bubble = null;
 
-		if(bubble == null)
+		if(state == SkillKeyStates.KeyState.PRESS)
 		{
+			if(bubble != null)
+				bubble.setDead();
 			bubble = new EntityBubble(world, trace.entityHit == null ? 4 : Math.max(trace.entityHit.width, trace.entityHit.height)+1, 0x181633, 25, true, false, true);
 
 			if(trace.entityHit != null)

@@ -75,7 +75,7 @@ public class TechLord extends TechHeroClass
 							target.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 1200, 2));
 							break;
 						case MIND:
-							target.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 400, 0));
+							target.addPotionEffect(new PotionEffect(MSUPotions.MIND_CONFUSION, 300, 0));
 							break;
 						case TIME:
 							target.addPotionEffect(new PotionEffect(MSUPotions.TIME_STOP, 600, 0));

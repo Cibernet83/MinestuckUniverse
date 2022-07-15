@@ -348,7 +348,7 @@ public class GTEventHandler
 		if(event.getSource().isMagicDamage() || event.getSource().equals(DamageSource.DRAGON_BREATH))
 			dmgReduction *= 0.5;
 		if(event.getSource().equals(DamageSource.CACTUS) || event.getSource().isFireDamage())
-			dmgReduction *= 0.75;
+			dmgReduction *= 0.25;
 
 		event.setAmount(event.getAmount()*Math.max(0, 1-dmgReduction));
 
