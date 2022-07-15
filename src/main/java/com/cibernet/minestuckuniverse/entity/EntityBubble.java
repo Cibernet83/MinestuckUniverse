@@ -340,14 +340,10 @@ public class EntityBubble extends Entity
 	{
 		Entity source = event.getSource().getImmediateSource() == null ? event.getSource().getTrueSource() == null ? null : event.getSource().getTrueSource() : event.getSource().getImmediateSource();
 
-<<<<<<< HEAD
-		if(source != null && !event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, source.getEntityBoundingBox(), bubble -> !bubble.canEnter()).
-=======
 		if(source == null || event.getEntity() == null || event.getEntity().world == null)
 			return;
 
 		if(!event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, source.getEntityBoundingBox(), bubble -> !bubble.canEnter()).
->>>>>>> branch 's-collide' of https://github.com/Cibernet83/MinestuckUniverse.git
 				equals(event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, event.getEntity().getEntityBoundingBox(), bubble -> !bubble.canEnter())))
 			event.setCanceled(true);
 	}
