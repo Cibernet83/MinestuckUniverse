@@ -20,7 +20,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -176,28 +178,6 @@ public class MinestuckUniverseBlocks
 	public static final BlockHeroStoneWall wildcardHeroStoneWall = new BlockHeroStoneWall(null);
 	public static final BlockSpectralHeroStone wildcardSpectralHeroStone = new BlockSpectralHeroStone(null);
 	public static final Block glowingHeroStone = new BlockGlowingHeroStone();
-
-    @SubscribeEvent
-    public static void remapBlocks(RegistryEvent.MissingMappings<Block> event)
-    {
-    	event.getMappings().forEach(mapping ->
-	    {
-    		if(mapping.key.getResourcePath().equals("porkhollow_atm"))
-    			mapping.remap(ceramicPorkhollow);
-
-	    });
-    }
-
-	@SubscribeEvent
-	public static void remapItems(RegistryEvent.MissingMappings<Item> event)
-	{
-		event.getMappings().forEach(mapping ->
-		{
-			if(mapping.key.getResourcePath().equals("porkhollow_atm"))
-				mapping.remap(Item.getItemFromBlock(MinestuckUniverseBlocks.ceramicPorkhollow));
-
-		});
-	}
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)

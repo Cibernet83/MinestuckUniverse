@@ -1,16 +1,18 @@
 package com.cibernet.minestuckuniverse;
 
+import com.cibernet.minestuckuniverse.strife.MSUKindAbstrata;
 import com.mraof.minestuck.util.Echeladder;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MSUConfig
 {
@@ -18,7 +20,11 @@ public class MSUConfig
 	private static Side side;
 
 
-	public static final ArrayList<String> entityPowerProtection = new ArrayList<>();
+	public static String[] protectedEntities;
+	public static String[] protectedTileEntities;
+	public static String[] skaiaScrollBlacklist;
+	public static String[] abilitechExternalUseBlacklist;
+	public static String[] strifeCardMobDropsWhitelist;
 
 	public static double zillystoneYields;
 	public static double gristDropsMultiplier;
@@ -39,13 +45,14 @@ public class MSUConfig
 	public static int skaiaScrollLimit;
 
 	//God Tier
+	public static int requiredRungToGT;
+	public static int maxGodTier;
 	public static boolean multiAspectUnlocks;
 	public static int godTierXpThreshold;
 	public static int questBedSpawnDistance;
 	public static int questBedSpawnArea;
 	public static int godTierBadgeSlots;
 	public static boolean godTierMasterControl;
-	public static int maxGodTier;
 
 	//Cyberware compat
 	public static int addedPowerPerDeath = 1500;
@@ -84,21 +91,49 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.general.nullSoloSessions").getBoolean();
 		unstableArtifactSpread = config.get("General", "unstableArtifactSpread", false, "Do not enable this while playing on any world you care about if you don't know what it does.")
 				.setLanguageKey("config.minestuckuniverse.general.unstableArtifactSpread").getBoolean();
+		skaiaScrollLimit = config.get("General", "skaiaScrollLimit", 2, "Determines the total number of Skaia Scrolls a player can use in total. Set to negative to ignore the limit.").setLanguageKey("config.minestuckuniverse.general.skaiaScrollLimit").getInt();
+		protectedEntities = config.get("General", "protectedEntities", new String[0], "A list that determines what entities cannot be affected by certain powers in the game, such as Return to Dust and Captchaloguing.").setLanguageKey("config.minestuckuniverse.general.protectedEntities").getStringList();
+		protectedTileEntities = config.get("General", "protectedTileEntities", new String[0], "A list that determines what tile entities cannot be affected by certain powers in the game, such as Wallet Modus Captchaloguing.").setLanguageKey("config.minestuckuniverse.general.protectedTileEntities").getStringList();
+		skaiaScrollBlacklist = config.get("General", "skaiaScrollBlacklist", new String[0], "Prevents the included Abilitechs from spawning as Skaian Scrolls.").setLanguageKey("config.minestuckuniverse.general.skaianScrollBlacklist").getStringList();
+		abilitechExternalUseBlacklist = config.get("General", "abilitechExternalUseBlacklist", new String[0], "Prevents the included Abilitechs from being used by mimicking Abilitechs such as Magic Metronome, Roguelike Adaptability and Arcane Study.").setLanguageKey("config.minestuckuniverse.general.abilitechExternalUseBlacklist").getStringList();
 
 		restrictedStrife = config.get("Strife", "restrictedStrife", false, "Prevents players from attacking without an allocated weapon in their main hand. It also restricts the use of certain items such as bows.")
 				.setLanguageKey("config.minestuckuniverse.strife.restrictedStrife").getBoolean();
 		keepPortfolioOnDeath = config.get("Strife", "keepPortfolioOnDeath", false, "Determines whether the player drops their Strife Portfolio after dying or not.")
 				.setLanguageKey("config.minestuckuniverse.strife.keepPortfolioOnDeath").getBoolean();
-		strifeCardMobDrops = config.get("Strife", "strifeCardMobDrops", 5, "Some mobs have a chance at dropping Strife Specibus Cards allocated to whatever item they're holding when killed by a player. This config determines how many cards each player can get from this method at most.")
-				.setLanguageKey("config.minestuckuniverse.strife.strifeCardMobDrops").getInt();
 		strifeDeckMaxSize = config.get("Strife", "strifeDeckMaxSize", 20, "Determines the max amount of weapons that can fit inside a single Strife Deck, set this to -1 to remove the limit.").setMinValue(-1)
 				.setLanguageKey("config.minestuckuniverse.strife.strifeDeckMaxSize").getInt();
 		abstrataSwitcherRung = config.get("Strife", "abstrataSwitcherRung", 17, "Determines the rung needed to unlock the Strife Specibus Quick Switcher. Set it to -1 to let all players use it, or " + Echeladder.RUNG_COUNT + " to completely disable it.").setMinValue(-1).setMaxValue(Echeladder.RUNG_COUNT)
 				.setLanguageKey("config.minestuckuniverse.strife.abstrataSwitcherRung").getInt();
 		weaponAttackMultiplier = config.get("Strife", "weaponAttackMultiplier", 0.15, "Allows players to tweak how much damage Minestuck and Minestuck Universe weapons do as a percentage against entities that aren't Underlings.").setMinValue(0).setMaxValue(1)
 				.setLanguageKey("config.minestuckuniverse.strife.weaponAttackMultiplier").getDouble();
-		skaiaScrollLimit = config.get("Strife", "skaiaScrollLimit", 2, "Determines the total number of Skaia Scrolls a player can use in total. Set to negative to ignore the limit.").setLanguageKey("config.minestuckuniverse.strife.skaiaScrollLimit").getInt();
+		strifeCardMobDrops = config.get("Strife", "strifeCardMobDrops", 5, "Some mobs have a chance at dropping Strife Specibus Cards allocated to whatever item they're holding when killed by a player. This config determines how many cards each player can get from this method at most.")
+				.setLanguageKey("config.minestuckuniverse.strife.strifeCardMobDrops").getInt();
+		strifeCardMobDropsWhitelist = config.get("Strife", "strifeCardMobDropsWhitelist", new String[]
+				{
+						"minestuckuniverse:sword",
+						"minestuckuniverse:hammer",
+						"minestuckuniverse:club",
+						"minestuckuniverse:cane",
+						"minestuckuniverse:sickle",
+						"minestuckuniverse:spoon",
+						"minestuckuniverse:fork",
+						"minestuckuniverse:potion",
+						"minestuckuniverse:projectile",
+						"minestuckuniverse:claw",
+						"minestuckuniverse:glove",
+						"minestuckuniverse:bow",
+						"minestuckuniverse:shield",
+							"minestuckuniverse:needle",
+						"minestuckuniverse:rock",
+						"minestuckuniverse:bunny",
+						"minestuckuniverse:sbahj",
+						"minestuckuniverse:joker"
+				}, "Determines what Kind Abstrata can be dropped by killing underlings.").setLanguageKey("config.minestuckuniverse.general.strifeCardMobDropsWhitelist").getStringList();
 
+
+		requiredRungToGT = config.get("God Tier", "requiredRungToGodTier", 20, "Determines the minimum rung required to God Tier, set to -1 to bypass god tiering requirements.")
+				.setLanguageKey("config.minestuckuniverse.godtier.maxGodTier").getInt();
 		maxGodTier = config.get("God Tier", "maxGodTier", -1, "Determines max god tier you can reach. When reached you cannot level up further. -1 makes it so that there is no limit. Warning: can prevent players from accessing certain badges if too low.")
 				.setLanguageKey("config.minestuckuniverse.godtier.maxGodTier").getInt();
 		multiAspectUnlocks = config.get("God Tier", "multiAspectUnlocks", true, "Enabling this makes certain skills require multiple kinds of Hero Stone Shards to unlock.")

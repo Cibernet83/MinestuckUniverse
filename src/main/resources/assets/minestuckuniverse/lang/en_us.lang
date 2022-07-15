@@ -494,7 +494,7 @@ item.gtArmorKit.name=God Tier Clothes Kit
 item.gtHood.hiddenExtras.rogue=Unmasked
 item.gtShirt.hiddenExtras.lord=Coat-less
 
-item.skillResetCharm.name=Charm of God Tier Descension
+item.godTierResetCharm.name=Charm of God Tier Descension
 item.denizenEye.name=Eye of the Denizen
 item.denizenEye.tooltip=This eye is bound to the %s
 item.sashKit.name=Kiddie Camper Handysash Sewing Kit
@@ -1067,7 +1067,7 @@ gui.needXp=§cYou need at least %s experience levels to allocate Skill XP
 gui.generalMax=§cYou have reached God Tier %s and can no longer increase your God Tier stats
 gui.abilitechDisabled=§cRight-Click to enable.
 gui.abilitechBlocked=§cSomething is inhibiting this Abilitech.
-gui.abilitechnosynth=Abilitechnosynth
+gui.abilitechnosynth=Abilitechs
 gui.skillShop.buy=Buy
 gui.skillShop.cantAfford=Can't Afford
 

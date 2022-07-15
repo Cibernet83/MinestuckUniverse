@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.network.captchalogue;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.captchalogue.WalletEntityItem;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
@@ -28,8 +29,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
+import java.util.Arrays;
 import java.util.EnumSet;
 
 public class WalletCaptchaloguePacket extends MSUPacket
@@ -74,7 +77,7 @@ public class WalletCaptchaloguePacket extends MSUPacket
         if(!player.getHeldItemMainhand().isEmpty())
             return;
         Entity entity = player.world.getEntityByID(this.entity);
-        if(entity != null)
+        if(entity != null && !Arrays.asList(MSUConfig.protectedEntities).contains(EntityRegistry.getEntry(entity.getClass()).getRegistryName().toString()))
         {
             ItemStack stack = new ItemStack(MinestuckUniverseItems.walletEntityItem);
             WalletEntityItem.storeEntity(entity, stack);
@@ -159,7 +162,7 @@ public class WalletCaptchaloguePacket extends MSUPacket
             }else if(block instanceof BlockPunchDesignix)
             {
                 mainPos = ((BlockPunchDesignix)block).getMainPos(state, pos);
-                mchnFacing = (EnumFacing)state.getValue(BlockPunchDesignix.DIRECTION);
+                mchnFacing = state.getValue(BlockPunchDesignix.DIRECTION);
 
                 TileEntity te = worldIn.getTileEntity(mainPos);
                 if(!(te instanceof TileEntityPunchDesignix))
@@ -200,7 +203,9 @@ public class WalletCaptchaloguePacket extends MSUPacket
         } else
         {
             float hardness = state.getBlockHardness(worldIn, pos);
-            if (Item.getItemFromBlock(block) != Items.AIR && hardness < 50F && hardness >= 0 && worldIn.getTileEntity(pos) != null)
+            TileEntity te = worldIn.getTileEntity(pos);
+
+            if (te != null && !Arrays.asList(MSUConfig.protectedTileEntities).contains(TileEntity.getKey(te.getClass()).toString()) && Item.getItemFromBlock(block) != Items.AIR && hardness < 50F && hardness >= 0)
             {
                 NBTTagCompound nbt = new NBTTagCompound();
                 nbt.setTag("BlockEntityTag", worldIn.getTileEntity(pos).writeToNBT(new NBTTagCompound()));

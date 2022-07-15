@@ -9,15 +9,17 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
-import com.mraof.minestuck.entity.EntityMinestuck;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TechVoidSnap extends TechHeroAspect
 {
@@ -42,7 +44,7 @@ public class TechVoidSnap extends TechHeroAspect
 		EntityLivingBase target = MSUUtils.getTargetEntity(player);
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.VOID, 5);
 
-		if(target != null && !(target instanceof EntityPlayer) && !MSUConfig.entityPowerProtection.contains(EntityRegistry.getEntry(target.getClass()).getRegistryName().toString()) &&
+		if(target != null && !(target instanceof EntityPlayer) && !Arrays.asList(MSUConfig.protectedEntities).contains(EntityRegistry.getEntry(target.getClass()).getRegistryName().toString()) &&
 				!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 		{
 			target.setDead();

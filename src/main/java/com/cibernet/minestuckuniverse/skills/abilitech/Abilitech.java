@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.skills.abilitech;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
@@ -8,8 +9,10 @@ import com.cibernet.minestuckuniverse.util.EnumTechType;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Abilitech extends Skill
@@ -56,7 +59,7 @@ public class Abilitech extends Skill
 		return setRegistryName(MinestuckUniverse.MODID, name);
 	}
 	
-	public boolean isUsableExternally(World world, EntityPlayer player) {return canUse(world, player);}
+	public boolean isUsableExternally(World world, EntityPlayer player) {return canUse(world, player) && !Arrays.asList(MSUConfig.abilitechExternalUseBlacklist).contains(getRegistryName().toString());}
 
 	@Override
 	public boolean isObtainable() {

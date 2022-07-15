@@ -47,10 +47,12 @@ import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -486,7 +488,8 @@ public class StrifeEventHandler
 			{
 				ArrayList<KindAbstratus> abstrata = new ArrayList<>(KindAbstratus.REGISTRY.getValuesCollection());
 
-				abstrata.removeIf(k -> k.isEmpty());
+				abstrata.removeIf(k -> k.isEmpty() && !Arrays.asList(MSUConfig.strifeCardMobDropsWhitelist).contains(k.getRegistryName().toString())
+				);
 				abstrata.add(null);
 
 				EntityItem item = new EntityItem(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ,
