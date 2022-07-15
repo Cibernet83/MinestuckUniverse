@@ -339,7 +339,7 @@ public class MSUSkills
 	public static final Abilitech BARD_DISSONANCE = new TechBard("bard_dissonance", 0);
 	public static final Abilitech BARD_METRONOME = new TechBardMetronome("magic_metronome", 0);
 	public static final Abilitech MAID_FAVOR = new TechMaid("maid_favor", 0);
-	public static final Abilitech IRRADIANT_SERVITUDE = new TechMaidServe("irraidant_servitude", 0);
+	public static final Abilitech ASPECTRAL_RADIATOR = new TechMaidServe("aspectral_radiator", 0);
 	public static final Abilitech HEIR_WILL = new TechHeir("heir_will", 0);
 	public static final Abilitech UNIVERSAL_REVERSE = new TechHeir("universal_reverse", 0);
 	public static final Abilitech PERSEVERANT_AWAKENING = new TechHeroClass("perseverant_awakening", EnumClass.PAGE, 0);

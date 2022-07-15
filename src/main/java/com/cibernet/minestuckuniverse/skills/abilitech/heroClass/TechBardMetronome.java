@@ -20,7 +20,7 @@ public class TechBardMetronome  extends TechHeroClass
 {
 	public TechBardMetronome(String name, long cost)
 	{
-		super(name, EnumClass.BARD, cost, EnumTechType.OFFENSE, EnumTechType.HYBRID);
+		super(name, EnumClass.BARD, cost, EnumTechType.HYBRID);
 	}
 
 	@Override

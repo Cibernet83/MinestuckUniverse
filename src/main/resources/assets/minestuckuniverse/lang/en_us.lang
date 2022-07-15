@@ -1457,6 +1457,8 @@ tech.wicked_trap.tooltip=Creates an aura directly where the user is looking that
 
 tech.mage_awareness.name=Mage's Awareness
 tech.mage_awareness.tooltip=Taps into your inner knowledge as a @MAGE@, granting you the ability to determine your Karmic Alignment. If your alignment is not neutral, your next death will not trigger your Conditional Immortality.
+tech.arcane_study.name=Arcane Study
+tech.arcane_study.tooltip=Studies the last Abilitech casted upon the user, granting them the ability to replicate it until hit by another one.
 
 tech.heir_will.name=Heir's Will
 tech.heir_will.tooltip=Equipping this Abilitech gives you a passive chance to inflict a negative version of your Aspect Effect upon any attackers. The chance of this Abilitech firing is determined by your level of Luck.
@@ -1475,8 +1477,8 @@ tech.magic_metronome.tooltip=Attunes the user with the chaotic energy of the Uni
 
 tech.maid_favor.name=Maid's Favor
 tech.maid_favor.tooltip=Allows you to enhance the target's Aspect Effect, or share yours with them if thairs can't be improved.
-tech.irraidant_servitude.name=Irradiant Servitude
-tech.irraidant_servitude.tooltip=Grants all friendly creatures and players your Aspect Effect when standing close to you.
+tech.aspectral_radiator.name=Aspectral Radiator
+tech.aspectral_radiator.tooltip=Grants all friendly creatures and players your Aspect Effect when standing close to you.
 
 tech.seer_prediction.name=Seer's Prediction
 tech.seer_prediction.tooltip=Taps into your knowledge of the universe around you as a @SEER@, allowing you to determine the target's exact Karma value. Player Karma determines a wide variety of factors, such as the effects of some Abilitechs, as well as whether your Conditional Immortality will trigger.

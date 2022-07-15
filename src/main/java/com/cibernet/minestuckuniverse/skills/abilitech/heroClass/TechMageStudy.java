@@ -21,7 +21,7 @@ public class TechMageStudy extends TechHeroClass
 {
 	public TechMageStudy(String name, long cost)
 	{
-		super(name, EnumClass.MAGE, cost, EnumTechType.HYBRID);
+		super(name, EnumClass.MAGE, cost, EnumTechType.PASSIVE, EnumTechType.HYBRID);
 	}
 
 	@Override
