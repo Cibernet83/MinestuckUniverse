@@ -46,7 +46,7 @@ public class TechAspectralBolt extends TechBoondollarCost
 		EntityMagicMissile missile = new EntityMagicMissile(world, player);
 		missile.shoot(player, player.rotationPitch, player.rotationYawHead, 0, 0.5f, 0.2f);
 
-		missile.setColor(BadgeEffects.getAspectParticleColors(title.getHeroAspect())[player.isSneaking() ? 1 : 0]);
+		missile.setColor(BadgeEffects.getAspectParticleColors(title.getHeroAspect())[Math.min(player.isSneaking() ? 1 : 0, BadgeEffects.getAspectParticleColors(title.getHeroAspect()).length-1)] );
 
 		missile.damage = player.isSneaking() ? 0 : 4;
 

@@ -37,13 +37,18 @@ public class TechBloodBubble extends TechHeroAspect
 		if(bubble != null && bubble.isDead)
 			bubble = null;
 
-		if(bubble == null)
+		if(state == SkillKeyStates.KeyState.PRESS)
 		{
+			if(bubble != null)
+				bubble.setDead();
 			bubble = new EntityBubble(world, 3, 0xB71015, 25, false, true, false);
 			bubble.setPosition(player.posX, player.posY-0.05, player.posZ);
 			world.spawnEntity(bubble);
 			badgeEffects.setTether(bubble, techSlot);
 		}
+		
+		if(bubble == null)
+			return false;
 
 		bubble.setLifespan(bubble.getLifespan()+1);
 
