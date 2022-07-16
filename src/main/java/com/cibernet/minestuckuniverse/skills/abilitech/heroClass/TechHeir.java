@@ -20,10 +20,11 @@ import static com.mraof.minestuck.util.MinestuckPlayerData.title;
 
 public class TechHeir extends TechHeroClass
 {
-	public TechHeir(String name, long cost)
+	public TechHeir(String name, long cost, EnumTechType... types)
 	{
-		super(name, EnumClass.HEIR, cost, EnumTechType.PASSIVE, EnumTechType.DEFENSE);
+		super(name, EnumClass.HEIR, cost, types);
 	}
+
 
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)

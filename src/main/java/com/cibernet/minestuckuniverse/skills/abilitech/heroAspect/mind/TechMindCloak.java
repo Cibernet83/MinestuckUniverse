@@ -275,9 +275,7 @@ public class TechMindCloak extends TechHeroAspect
 				player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isCloaked() && player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getCloakData().hasKey("Block"))
 			player.setPosition(Math.floor(player.posX) + .5f, player.posY, Math.floor(player.posZ)+0.5f);
 	}
-
-
-
+	
 
 	@SubscribeEvent
 	public static void canTargetPlayer(PlayerEvent.Visibility event)
@@ -293,7 +291,7 @@ public class TechMindCloak extends TechHeroAspect
 	public List<String> getTags()
 	{
 		List<String> list = super.getTags();
-		list.add(0, "@VOID@");
+		list.add("@VOID@");
 
 		return list;
 	}

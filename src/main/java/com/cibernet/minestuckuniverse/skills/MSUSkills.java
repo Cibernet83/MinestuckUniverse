@@ -340,8 +340,8 @@ public class MSUSkills
 	public static final Abilitech BARD_METRONOME = new TechBardMetronome("magic_metronome", 0);
 	public static final Abilitech MAID_FAVOR = new TechMaid("maid_favor", 0);
 	public static final Abilitech ASPECTRAL_RADIATOR = new TechMaidServe("aspectral_radiator", 0);
-	public static final Abilitech HEIR_WILL = new TechHeir("heir_will", 0);
-	public static final Abilitech UNIVERSAL_REVERSE = new TechHeir("universal_reverse", 0);
+	public static final Abilitech HEIR_WILL = new TechHeir("heir_will", 0, EnumTechType.PASSIVE, EnumTechType.DEFENSE);
+	public static final Abilitech UNIVERSAL_REVERSE = new TechHeir("universal_reverse", 0, EnumTechType.PASSIVE, EnumTechType.OFFENSE);
 	public static final Abilitech PERSEVERANT_AWAKENING = new TechHeroClass("perseverant_awakening", EnumClass.PAGE, 0);
 
 	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem", 0);
@@ -357,7 +357,7 @@ public class MSUSkills
 	public static final Abilitech TIME_TEMPORAL_RECALL = new TechTimeRecall("temporal_recall", 0);
 	public static final Abilitech TIME_CHRONOFREEZE = new TechTimeStop("chronofreeze", 0);
 	public static final Abilitech TIME_FLOW_ACCELERATOR = new TechTimeAcceleration("flow_accelerator", 0);
-	public static final Abilitech TIME_ACCELERANDO = new TechTimeAcceleration("accelerando", 0);
+	public static final Abilitech TIME_ACCELERANDO = new TechTimeTickUp("accelerando", 0);
 	public static final Abilitech TIME_RAPID_REWIND = new TechTimeTables("rapid_rewind", 0);
 	public static final Abilitech TIME_CELESTIAL_SHIFT = new TechTimeShift("celestial_shift", 0);
 
@@ -373,7 +373,7 @@ public class MSUSkills
 	public static final Abilitech LIGHT_ORB_OF_LIGHT = new TechLightGlorb("orb_of_light", 0);
 	public static final Abilitech LIGHT_ETERNAL_GLOW = new TechLightAutoGlorb("eternal_glow", 0);
 	public static final Abilitech LIGHT_HARDLIGHT_BUBBLE = new TechLightBubble("hardlight_bubble", 0);
-	public static final Abilitech LIGHT_SKAIAN_INISHGT = new TechHeroAspect("skaian_insight", EnumAspect.LIGHT, 0, EnumTechType.PASSIVE);
+	public static final Abilitech LIGHT_SKAIAN_INISHGT = new TechHeroAspect("skaian_insight", EnumAspect.LIGHT, 0, EnumTechType.PASSIVE, EnumTechType.UTILITY);
 
 	public static final Abilitech HEART_SOUL_SWITCHER = new TechHeartSoulSwitcher("soul_switcher", 0);
 	public static final Abilitech HEART_SOUL_SHOCK = new TechSoulStun("soul_shock", 0);

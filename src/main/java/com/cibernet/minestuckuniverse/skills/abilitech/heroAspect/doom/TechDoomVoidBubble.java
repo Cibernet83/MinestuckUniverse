@@ -82,7 +82,7 @@ public class TechDoomVoidBubble extends TechHeroAspect
 	public List<String> getTags()
 	{
 		List<String> list = super.getTags();
-		list.add(0, "@VOID@");
+		list.add("@VOID@");
 
 		return list;
 	}
