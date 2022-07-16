@@ -1,5 +1,7 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
+import java.util.HashMap;
+
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
@@ -12,6 +14,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -46,9 +49,15 @@ public class TechMaidServe extends TechHeroClass
 		for(Entity entity : player.world.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().grow(3)))
 			if(entity instanceof EntityLivingBase && (entity instanceof EntityAnimal || entity instanceof EntityPlayer &&
 					!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, entity, this, techSlot, true))))
-				for(Potion pot : GTEventHandler.getAspectEffects(player).keySet())
-					if(!(((EntityLivingBase) entity).isPotionActive(pot) && ((EntityLivingBase) entity).getActivePotionEffect(pot).getDuration() <= 20))
-						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(pot, 100, GTEventHandler.getAspectEffects(player).get(pot).getAmplifier(), true, true));
+			{
+				HashMap<Potion, PotionEffect> effectsToBeAdded = GTEventHandler.getAspectEffects(player);
+				for(Potion pot : effectsToBeAdded.keySet())
+				{
+					PotionEffect currentPotionEffect = ((EntityLivingBase) entity).getActivePotionEffect(pot);
+					if ((currentPotionEffect == null && (!GTEventHandler.REFRESH_POTIONS.contains(pot) || entity.ticksExisted%600 == 0)) || (currentPotionEffect != null && currentPotionEffect.getDuration() <= (pot.equals(MobEffects.NIGHT_VISION) ? 200 : 20) && currentPotionEffect.getAmplifier() <= effectsToBeAdded.get(pot).getAmplifier() && !GTEventHandler.REFRESH_POTIONS.contains(pot)))
+						player.addPotionEffect(new PotionEffect(pot, (pot.equals(MobEffects.NIGHT_VISION) ? 300 : 100), effectsToBeAdded.get(pot).getAmplifier(), true, true));
+				}
+			}
 		return true;
 	}
 	
