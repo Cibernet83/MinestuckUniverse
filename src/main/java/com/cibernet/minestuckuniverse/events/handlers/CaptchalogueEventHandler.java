@@ -182,7 +182,15 @@ public class CaptchalogueEventHandler
 			if(modus != null)
 			{
 				double floatstoneValue = WeightModus.getFloatStones(modus)*1.5;
-				double speedMod = (modus.getNonEmptyCards()-floatstoneValue) / -WeightModus.getItemCap(player);
+
+				double speedMod = 0;
+
+				try
+				{
+
+					speedMod = (modus.getNonEmptyCards()-floatstoneValue) / -WeightModus.getItemCap(player);
+
+				} catch (Throwable throwable) {} //bc tree modus is dumb :(
 
 				AttributeModifier WEIGHT_MODUS_SPEED = (new AttributeModifier(WEIGHT_MODUS_SPEED_UUID, "Backpack Modus speed penalty", Math.min(0, speedMod), 2)).setSaved(false);
 

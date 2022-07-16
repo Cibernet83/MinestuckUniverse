@@ -19,10 +19,7 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpac
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeRecall;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.voidAspect.TechVoidGrasp;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.voidAspect.TechVoidStep;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechHeir;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechMuse;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechPrinceSlash;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechSeerDodge;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.*;
 import com.cibernet.minestuckuniverse.skills.badges.BadgeBuilder;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.badges.BadgeOverlord;
@@ -123,6 +120,7 @@ public class BadgeEventHandler
 		MinecraftForge.EVENT_BUS.register(TechDragonAura.class);
 		MinecraftForge.EVENT_BUS.register(TechMindCloak.class);
 		MinecraftForge.EVENT_BUS.register(TechHeartProject.class);
+		MinecraftForge.EVENT_BUS.register(TechMageStudy.class);
 	}
 
 	@SubscribeEvent

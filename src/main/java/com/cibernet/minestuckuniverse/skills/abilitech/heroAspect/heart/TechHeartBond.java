@@ -80,8 +80,7 @@ public class TechHeartBond extends TechHeroAspect
 		{
 			double linkedPercent = (player.getHealth()/player.getMaxHealth() + target.getHealth()/target.getMaxHealth())/2;
 			//if(linkedPercent <= .005 || (linkedPercent*player.getMaxHealth() < 1 && linkedPercent*target.getMaxHealth() < 1))
-			
-			System.out.println("Linkedpercent: " + linkedPercent);
+
 			if((player.getMaxHealth() * linkedPercent) != player.getHealth())
 				player.setHealth((float) (player.getMaxHealth() * linkedPercent));
 			if((target.getMaxHealth() * linkedPercent) != target.getHealth())

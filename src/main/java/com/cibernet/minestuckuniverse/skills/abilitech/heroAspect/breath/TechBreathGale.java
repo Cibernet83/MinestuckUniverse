@@ -47,7 +47,7 @@ public class TechBreathGale extends TechHeroAspect
 
 			player.setSprinting(false);
 			player.capabilities.isFlying = false;
-			player.motionY = Math.min(1, Math.max(2f, time/20f)+1);
+			player.motionY = Math.max(1, Math.min(3f, time/20f)+1);
 			player.motionX = Math.sin(Math.toRadians(-player.rotationYaw))*player.motionY*0.7f;
 			player.motionZ = Math.cos(Math.toRadians(-player.rotationYaw))*player.motionY*0.7f;
 			player.velocityChanged = true;

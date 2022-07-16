@@ -57,8 +57,8 @@ public class TechSoulStun extends TechHeroAspect
 					((EntityLiving) target).setNoAI(true);
 
 				if(player.getName().equals("Cibernet"))
-					targetEffects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, 1, 0xFFB745, 0xFF7929);
-				else targetEffects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.HEART, 1);
+					targetEffects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, 3, 0xFFB745, 0xFF7929);
+				else targetEffects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.HEART, 3);
 			}
 
 			badgeEffects.setTether(target, techSlot);

@@ -15,6 +15,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class TechBardMetronome  extends TechHeroClass
 {
@@ -40,7 +41,7 @@ public class TechBardMetronome  extends TechHeroClass
 		}
 		
 		String ID = badgeEffects.getExternalTech(techSlot);
-		
+
 		if(ID == null || ID.isEmpty())
 		{
 			ArrayList<Abilitech> POOL = new ArrayList<Abilitech>();
@@ -51,7 +52,7 @@ public class TechBardMetronome  extends TechHeroClass
 				player.sendStatusMessage(new TextComponentTranslation("status.externalTech.notFound"), true);
 				return false;
 			}
-			Abilitech tech = POOL.get(world.rand.nextInt(POOL.size()));
+			Abilitech tech = POOL.get(new Random().nextInt(POOL.size()));
 			player.sendStatusMessage(new TextComponentTranslation("status.externalTech.casting", tech.getDisplayComponent()), true);
 			ID = MSUSkills.REGISTRY.getKey(tech).getResourcePath();
 			badgeEffects.setExternalTech(techSlot, ID);
@@ -64,7 +65,8 @@ public class TechBardMetronome  extends TechHeroClass
 		if(state == KeyState.RELEASED)
 		{
 			badgeEffects.stopPowerParticles(externalTech.getClass());
-			player.getFoodStats().setFoodLevel(0);
+			if(!player.isCreative())
+				player.getFoodStats().setFoodLevel(0);
 		}
 		
 		return toReturn;

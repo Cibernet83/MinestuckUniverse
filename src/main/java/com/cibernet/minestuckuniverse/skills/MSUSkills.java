@@ -342,7 +342,12 @@ public class MSUSkills
 	public static final Abilitech ASPECTRAL_RADIATOR = new TechMaidServe("aspectral_radiator", 0);
 	public static final Abilitech HEIR_WILL = new TechHeir("heir_will", 0, EnumTechType.PASSIVE, EnumTechType.DEFENSE);
 	public static final Abilitech UNIVERSAL_REVERSE = new TechHeir("universal_reverse", 0, EnumTechType.PASSIVE, EnumTechType.OFFENSE);
-	public static final Abilitech PERSEVERANT_AWAKENING = new TechHeroClass("perseverant_awakening", EnumClass.PAGE, 0);
+	public static final Abilitech PERSEVERANT_AWAKENING = new TechHeroClass("perseverant_awakening", EnumClass.PAGE, 0){
+		@Override
+		public boolean isUsableExternally(World world, EntityPlayer player) {
+			return false;
+		}
+	};
 
 	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem", 0);
 	public static final Abilitech LORD_DECREE = new TechLord("lord_decree", 0);
@@ -373,7 +378,13 @@ public class MSUSkills
 	public static final Abilitech LIGHT_ORB_OF_LIGHT = new TechLightGlorb("orb_of_light", 0);
 	public static final Abilitech LIGHT_ETERNAL_GLOW = new TechLightAutoGlorb("eternal_glow", 0);
 	public static final Abilitech LIGHT_HARDLIGHT_BUBBLE = new TechLightBubble("hardlight_bubble", 0);
-	public static final Abilitech LIGHT_SKAIAN_INISHGT = new TechHeroAspect("skaian_insight", EnumAspect.LIGHT, 0, EnumTechType.PASSIVE, EnumTechType.UTILITY);
+	public static final Abilitech LIGHT_SKAIAN_INISHGT = new TechHeroAspect("skaian_insight", EnumAspect.LIGHT, 0, EnumTechType.PASSIVE, EnumTechType.UTILITY)
+	{
+		@Override
+		public boolean isUsableExternally(World world, EntityPlayer player) {
+			return false;
+		}
+	};
 
 	public static final Abilitech HEART_SOUL_SWITCHER = new TechHeartSoulSwitcher("soul_switcher", 0);
 	public static final Abilitech HEART_SOUL_SHOCK = new TechSoulStun("soul_shock", 0);

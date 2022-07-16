@@ -125,8 +125,6 @@ public class ItemAbilitechnosyth extends MSUItemBlock
 			pos = pos.offset(facing.rotateY(), (part%3)-1).down(2).offset(facing, 1);
 		else pos = pos.down(3).offset(facing, 1);
 
-		System.out.println(pos);
-
 		int i = 0;
 		for(int y = 0; y < 2; y++) for(int z = 0; z >= -1 ; z--) for(int x = -1; x <= 1; x++)
 		{

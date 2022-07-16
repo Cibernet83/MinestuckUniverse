@@ -155,7 +155,6 @@ public class TechMindCloak extends TechHeroAspect
 	@SideOnly(Side.CLIENT)
 	public static void onRenderPlayer(RenderPlayerEvent.Pre event)
 	{
-		if(event.getEntityPlayer().getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.MIND_VOID_ILLUSORY_CLOAK))
 		event.setCanceled(renderCloak(event.getEntityLiving()));
 	}
 
@@ -177,6 +176,7 @@ public class TechMindCloak extends TechHeroAspect
 			{
 				NetworkPlayerInfo playerInfo = Minecraft.getMinecraft().getConnection().getPlayerInfo(cloakData.getCompoundTag("Player").getUniqueId("UUID"));
 
+				if(playerInfo != null)
 				new RenderPlayerCloak(Minecraft.getMinecraft().getRenderManager(), !playerInfo.getSkinType().equals("slim"), playerInfo.getLocationSkin())
 						.doRender((AbstractClientPlayer) entity, entity.posX, entity.posY, entity.posZ, entity.rotationYawHead, Minecraft.getMinecraft().getRenderPartialTicks());
 			}
@@ -188,6 +188,8 @@ public class TechMindCloak extends TechHeroAspect
 					cloakedCache.put(entity, EntityList.createEntityFromNBT(cloakData.getCompoundTag("Entity"), entity.world));
 			if(cloakData.hasKey("Block"))
 			{
+
+
 				IBlockState state;
 				NBTTagCompound compound = cloakData.getCompoundTag("Block");
 				int i = compound.getByte("Data") & 255;
@@ -275,7 +277,6 @@ public class TechMindCloak extends TechHeroAspect
 				player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isCloaked() && player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getCloakData().hasKey("Block"))
 			player.setPosition(Math.floor(player.posX) + .5f, player.posY, Math.floor(player.posZ)+0.5f);
 	}
-	
 
 	@SubscribeEvent
 	public static void canTargetPlayer(PlayerEvent.Visibility event)

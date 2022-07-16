@@ -21,6 +21,9 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class MSUConsorts
 {
 	public static EnumConsort.MerchantType SHOP_SKILLS = EnumHelper.addEnum(EnumConsort.MerchantType.class, "SKILLS", new Class[0]);;
@@ -40,7 +43,6 @@ public class MSUConsorts
 		//ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.innateTransformations"))).type(SHOP_SKILLS);
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.dragonGel"))).type(SHOP_SKILLS);
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.returnMedallion"))).type(SHOP_SKILLS);
-		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.ghostCard"))).type(SHOP_SKILLS);
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.susanFrog"))).type(SHOP_SKILLS).landTerrain(LandAspectRegistry.fromNameTerrain("frogs"));
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.tickingStopwatch"))).type(SHOP_SKILLS).landTerrain(LandAspectRegistry.fromNameTerrain("clockwork"));
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new HeroClassMessage("skillShop.class"))).type(SHOP_SKILLS);
@@ -79,6 +81,8 @@ public class MSUConsorts
 	public static class PlayerCustomMessage extends MessageType.SingleMessage
 	{
 
+		final List<String> names = Arrays.asList("Cibernet", "aridThought", "Badadamadaba", "ThatLameOverlord", "Ishumire", "JDubSupreme", "Dweblenod", "Kirderf1");
+
 		protected String nbtName;
 
 		public PlayerCustomMessage(String message, String... args)
@@ -92,7 +96,7 @@ public class MSUConsorts
 		{
 			String name = player.getName();
 
-			if(!I18n.hasKey("consort."+unlocalizedMessage + "." + name))
+			if(!names.contains(name))
 				return super.getMessage(consort, player, chainIdentifier);
 
 			unlocalizedMessage += "." + name;

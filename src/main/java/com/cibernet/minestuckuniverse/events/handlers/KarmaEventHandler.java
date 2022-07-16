@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.modSupport.CyberwareSupport;
+import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
@@ -8,6 +9,7 @@ import com.cibernet.minestuckuniverse.damage.IGodTierDamage;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.mraof.minestuck.network.skaianet.SburbConnection;
 import com.mraof.minestuck.network.skaianet.SkaianetHandler;
+import com.mraof.minestuck.util.EnumClass;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.entity.EntityLivingBase;
@@ -110,6 +112,7 @@ public class KarmaEventHandler
 					{
 						player.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 200, 255));
 						player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setLastPageAwakening((int) player.world.getTotalWorldTime());
+						player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.PAGE, 10);
 					}
 
 					player.setHealth(hasRevenantBadge ? 30 : 20);

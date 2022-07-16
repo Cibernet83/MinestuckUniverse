@@ -8,6 +8,7 @@ import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -41,6 +42,9 @@ public class TechKnightHalt extends TechHeroClass {
 			target.motionY = 0;
 			target.motionZ = 0;
 			target.velocityChanged = true;
+
+			if(target instanceof IProjectile)
+				((IProjectile) target).shoot(0,0,0,0,0);
 
 			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 				continue;

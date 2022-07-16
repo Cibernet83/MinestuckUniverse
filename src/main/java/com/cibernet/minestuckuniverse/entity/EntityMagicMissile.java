@@ -115,7 +115,10 @@ public class EntityMagicMissile extends Entity implements IProjectile
 		{
 			if(raytraceresult.entityHit.equals(shootingEntity))
 				return;
-			raytraceresult.entityHit.attackEntityFrom(new EntityDamageSourceIndirect(MinestuckUniverse.MODID+"magic", this, shootingEntity), damage);
+			if(damage > 0)
+				raytraceresult.entityHit.attackEntityFrom(new EntityDamageSourceIndirect(MinestuckUniverse.MODID+"magic", this, shootingEntity), damage);
+			else if(damage < 0 && raytraceresult.entityHit instanceof EntityLivingBase)
+				((EntityLivingBase) raytraceresult.entityHit).heal(-damage);
 			if(raytraceresult.entityHit instanceof EntityLivingBase)
 				for(PotionEffect effect : effects)
 					((EntityLivingBase) raytraceresult.entityHit).addPotionEffect(effect);

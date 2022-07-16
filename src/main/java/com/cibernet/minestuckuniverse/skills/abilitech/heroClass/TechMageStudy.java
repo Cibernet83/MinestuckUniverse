@@ -27,15 +27,15 @@ public class TechMageStudy extends TechHeroClass
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{if(state == SkillKeyStates.KeyState.NONE)
-	{
-		Skill stolenTech = badgeEffects.getExternalTech(techSlot) == null ? null : MSUSkills.REGISTRY.getValue(new ResourceLocation(badgeEffects.getExternalTech(techSlot)));
+		{
+			Skill stolenTech = badgeEffects.getExternalTech(techSlot) == null ? null : MSUSkills.REGISTRY.getValue(new ResourceLocation(badgeEffects.getExternalTech(techSlot)));
 
-		if(stolenTech instanceof Abilitech)
-			badgeEffects.stopPowerParticles(stolenTech.getClass());
+			if(stolenTech instanceof Abilitech)
+				badgeEffects.stopPowerParticles(stolenTech.getClass());
 
-		badgeEffects.setExternalTech(techSlot, null);
-		return false;
-	}
+			badgeEffects.setExternalTech(techSlot, null);
+			return false;
+		}
 		Skill stolenTech = badgeEffects.getExternalTech(techSlot) == null ? null : MSUSkills.REGISTRY.getValue(new ResourceLocation(badgeEffects.getExternalTech(techSlot)));
 
 		if(state == SkillKeyStates.KeyState.PRESS)
@@ -43,7 +43,7 @@ public class TechMageStudy extends TechHeroClass
 			if(stolenTech == null)
 			{
 				badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.MAGE, 3);
-				player.sendStatusMessage(new TextComponentTranslation("status.externalTech.notFound", stolenTech.getDisplayComponent()), true);
+				player.sendStatusMessage(new TextComponentTranslation("status.externalTech.notFound"), true);
 			}
 			else
 			{
@@ -69,7 +69,7 @@ public class TechMageStudy extends TechHeroClass
 	{
 		IGodTierData data = event.getTarget().getCapability(MSUCapabilities.GOD_TIER_DATA, null);
 
-		if(data != null && data.isTechEquipped(MSUSkills.ARCANE_STUDY))
+		if(data != null && data.isTechPassiveEnabled(MSUSkills.ARCANE_STUDY))
 		{
 			for(int i = 0; i < data.getTechSlots(); i++)
 				if(MSUSkills.ARCANE_STUDY.equals(data.getTech(i)) && event.getTarget().getCapability(MSUCapabilities.SKILL_KEY_STATES, null).getKeyState(SkillKeyStates.Key.values()[i]) == SkillKeyStates.KeyState.NONE)

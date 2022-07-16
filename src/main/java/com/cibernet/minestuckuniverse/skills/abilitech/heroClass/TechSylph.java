@@ -55,12 +55,13 @@ public class TechSylph extends TechHeroClass
 		{
 			target.heal(2);
 			if(target instanceof EntityPlayer && ((EntityPlayer) target).getFoodStats().needFood())
-				((EntityPlayer) target).getFoodStats().addStats(4, 2);
+				((EntityPlayer) target).getFoodStats().addStats(1, 1);
 
-			if (!player.isCreative())
-				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
 			((WorldServer)world).spawnParticle(EnumParticleTypes.HEART, target.posX + ((Math.random()-0.5)/2), target.posY+1.5, target.posZ + ((Math.random()-0.5)/2), 1, 1, 0, 0.5, 0);
 		}
+
+		if (!player.isCreative() && time % 15 == 0)
+			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
 			
 		return true;
 	}

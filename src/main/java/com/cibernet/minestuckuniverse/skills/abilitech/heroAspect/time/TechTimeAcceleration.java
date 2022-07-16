@@ -1,5 +1,8 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time;
 
+import com.cibernet.minestuckuniverse.capabilities.badgeEffects.BadgeEffects;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.skills.badges.Badge;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
@@ -49,6 +52,8 @@ public class TechTimeAcceleration extends TechHeroAspect
 
 		IBlockState blockState = world.getBlockState(target);
 		blockState.getBlock().updateTick(world, target, blockState, random);
+
+		MSUChannelHandler.sendToTrackingAndSelf(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, BadgeEffects.getAspectParticleColors(EnumAspect.TIME)[0], 2, target), player);
 
 		TileEntity tileEntity = world.getTileEntity(target);
 		if (tileEntity instanceof ITickable)
