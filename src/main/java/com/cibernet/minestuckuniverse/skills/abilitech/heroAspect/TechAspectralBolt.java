@@ -70,6 +70,12 @@ public class TechAspectralBolt extends TechBoondollarCost
 	}
 
 	@Override
+	public boolean canAppearOnList(World world, EntityPlayer player)
+	{
+		return MinestuckPlayerData.getData(player).title != null;
+	}
+
+	@Override
 	public boolean canUse(World world, EntityPlayer player)
 	{
 		return !(player.isPotionActive(MSUPotions.GOD_TIER_LOCK) && player.getActivePotionEffect(MSUPotions.GOD_TIER_LOCK).getAmplifier() >= 1);

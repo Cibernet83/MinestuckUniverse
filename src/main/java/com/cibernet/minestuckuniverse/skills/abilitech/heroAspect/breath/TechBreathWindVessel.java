@@ -63,6 +63,8 @@ public class TechBreathWindVessel extends TechHeroAspect
 
 		badgeEffects.setWindFormed(true);
 
+		player.fallDistance = Math.max(0, player.fallDistance-2);
+
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.BREATH, 10);
 		MSUChannelHandler.sendToTrackingAndSelf(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, 0x47E2FA, 5, player.posX, player.posY+1, player.posZ), player);
 		MSUChannelHandler.sendToTrackingAndSelf(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, 0x4379E6, 5, player.posX, player.posY+1, player.posZ), player);

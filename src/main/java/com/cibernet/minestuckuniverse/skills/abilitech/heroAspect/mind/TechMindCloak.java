@@ -90,7 +90,7 @@ public class TechMindCloak extends TechHeroAspect
 		}
 		else if(result.entityHit != null)
 		{
-			if(result.entityHit instanceof EntityPlayer)
+			if(false)//result.entityHit instanceof EntityPlayer)
 			{
 				EntityPlayer cloakPlayer = (EntityPlayer) result.entityHit;
 				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, cloakPlayer, this, techSlot, false)))
@@ -218,9 +218,7 @@ public class TechMindCloak extends TechHeroAspect
 			if(cloakedCache.containsKey(entity))
 			{
 				Entity cloak = cloakedCache.get(entity);
-				cloak.posX = entity.posX;
-				cloak.posY = entity.posY;
-				cloak.posZ = entity.posZ;
+				cloak.setPosition(entity.posX, entity.posY, entity.posZ);
 				cloak.motionX = entity.motionX;
 				cloak.motionY = entity.motionY;
 				cloak.motionZ = entity.motionZ;
