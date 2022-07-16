@@ -7,8 +7,11 @@ import com.cibernet.minestuckuniverse.entity.EntityMSUThrowable;
 import com.cibernet.minestuckuniverse.items.MSUThrowableBase;
 import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.IPropertyThrowable;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.skills.TechBoondollarCost;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
+import com.mraof.minestuck.inventory.captchalouge.CaptchaDeckHandler;
 import com.mraof.minestuck.inventory.captchalouge.Modus;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 
@@ -64,6 +67,7 @@ public class TechSling extends TechBoondollarCost
 			{
 				proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, time * .075F, 0);
 				world.spawnEntity(proj);
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_MODUS, CaptchaDeckHandler.writeToNBT(modus)), player);
 			}
 			
 			if (!player.isCreative())
