@@ -46,13 +46,19 @@ public class TechLifeLeech extends TechHeroAspect
 
 		EntityLivingBase target = badgeEffects.getTether(techSlot) instanceof EntityLivingBase ? (EntityLivingBase) badgeEffects.getTether(techSlot) : null;
 
+		if(target == null)
+		{
+			target = MSUUtils.getTargetEntity(player);
+			badgeEffects.setTether(target, techSlot);
+		}
+		
 		if(target != null && target.getDistance(player) > 20)
 		{
 			target = null;
 			badgeEffects.clearTether(techSlot);
 		}
 
-		if(time % 20 != 0)
+		if(time+1 % 20 != 0)
 		{
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 5);
 			if(target != null)

@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
+import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +36,12 @@ public class TechTimeTickUp extends TechHeroAspect
 		}
 
 		Entity target = badgeEffects.getTether(techSlot);
+		
+		if(target == null)
+		{
+			target = MSUUtils.getMouseOver(world, player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), true).entityHit;
+			badgeEffects.setTether(target, techSlot);
+		}
 
 		if(target != null && target.getDistance(player) > 20)
 		{
