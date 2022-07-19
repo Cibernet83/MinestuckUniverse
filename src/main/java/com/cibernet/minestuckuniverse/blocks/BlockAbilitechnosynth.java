@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
 import com.cibernet.minestuckuniverse.items.ItemAbilitechnosyth;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
@@ -35,6 +36,7 @@ public class BlockAbilitechnosynth extends BlockLargeMachine implements IRegistr
 	public BlockAbilitechnosynth(int index)
 	{
 		this(index == 0 ? "abilitechnosynth" : "abilitechnosynth_"+index, index);
+		setCreativeTab(TabMinestuckUniverse.main);
 	}
 
 	public BlockAbilitechnosynth(String name, int index)
