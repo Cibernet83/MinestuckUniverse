@@ -26,12 +26,12 @@ public class PropertyCrowdDamage extends WeaponProperty
 		{
 			if(entity == player || (entity instanceof EntityPlayer && ((EntityPlayer) entity).isSpectator()))
 				continue;
-			if((buffPerEntity < 1 && buff <= maxBuff) || (buffPerEntity >= 1 && buff >= maxBuff))
+			buff += buffPerEntity;
+			if(buff >=  maxBuff)
 			{
 				buff = maxBuff;
 				break;
 			}
-			buff += buffPerEntity;
 		}
 
 		return amount * (buff+1);
