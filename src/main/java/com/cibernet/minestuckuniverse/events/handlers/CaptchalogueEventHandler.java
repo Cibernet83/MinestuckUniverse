@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.captchalogue.*;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
@@ -9,6 +10,7 @@ import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.mraof.minestuck.client.settings.MinestuckKeyHandler;
 import com.mraof.minestuck.event.CaptchalogueEvent;
+import com.mraof.minestuck.event.DropSylladexEvent;
 import com.mraof.minestuck.inventory.ContainerConsortMerchant;
 import com.mraof.minestuck.inventory.captchalouge.CaptchaDeckHandler;
 import com.mraof.minestuck.inventory.captchalouge.Modus;
@@ -153,6 +155,13 @@ public class CaptchalogueEventHandler
 					((EntityPlayer) event.getEntityLiving()).dropItem(storedStack, true);
 			}
 		}
+	}
+
+	@SubscribeEvent
+	public static void onSylladexDrop(DropSylladexEvent event)
+	{
+		if(MSUConfig.keepSylladexOnDeath)
+			event.setCanceled(true);
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -34,6 +34,7 @@ public class MSUConfig
 	public static boolean nullSoloSessions;
 	public static boolean unstableArtifactSpread;
 	public static boolean localizedChat;
+	public static boolean keepSylladexOnDeath;
 
 	//Strife
 	public static boolean combatOverhaul;
@@ -82,6 +83,8 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.general.IDAlchemy").getBoolean();
 		localizedChat = config.get("General", "localizedChat", false, "Enabling this makes players only be able to receive chat messages from nearby players unless Gift of Gab is enabled.")
 				.setLanguageKey("config.minestuckuniverse.general.localizedChat").getBoolean();
+		keepSylladexOnDeath = config.get("General", "keepSylladexOnDeath", false, "Enabling this prevents you from losing your sylladex upon death.")
+				.setLanguageKey("config.minestuckuniverse.general.keepSylladexOnDeath").getBoolean();
 		zillystoneYields = config.get("General", "zillystoneYields", 0.1, "Determines how much luck affects the amount of Zillystone Shards get dropped by a Zillystone when chiseled.")
 				.setLanguageKey("config.minestuckuniverse.general.zillystoneYields").getDouble();
 		baseZillystoneLuck = config.get("General", "baseZillystoneLuck", -2, "Determines a player's base luck when chiseling a block of Zillystone.")
@@ -183,6 +186,8 @@ public class MSUConfig
 
 		data.writeInt(addedPowerPerDeath);
 		data.writeInt(acceptablePower);
+
+		data.writeBoolean(keepSylladexOnDeath);
 	}
 
 	public static void readFromBuffer(ByteBuf data)
@@ -196,5 +201,7 @@ public class MSUConfig
 
 		addedPowerPerDeath = data.readInt();
 		acceptablePower = data.readInt();
+
+		keepPortfolioOnDeath = data.readBoolean();
 	}
 }
