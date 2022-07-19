@@ -25,6 +25,7 @@ public class MSUConfig
 	public static String[] skaiaScrollBlacklist;
 	public static String[] abilitechExternalUseBlacklist;
 	public static String[] strifeCardMobDropsWhitelist;
+	public static String[] IDAlchemyBlacklist;
 
 	public static double zillystoneYields;
 	public static double gristDropsMultiplier;
@@ -96,6 +97,7 @@ public class MSUConfig
 		protectedTileEntities = config.get("General", "protectedTileEntities", new String[0], "A list that determines what tile entities cannot be affected by certain powers in the game, such as Wallet Modus Captchaloguing.").setLanguageKey("config.minestuckuniverse.general.protectedTileEntities").getStringList();
 		skaiaScrollBlacklist = config.get("General", "skaiaScrollBlacklist", new String[0], "Prevents the included Abilitechs from spawning as Skaian Scrolls.").setLanguageKey("config.minestuckuniverse.general.skaianScrollBlacklist").getStringList();
 		abilitechExternalUseBlacklist = config.get("General", "abilitechExternalUseBlacklist", new String[0], "Prevents the included Abilitechs from being used by mimicking Abilitechs such as Magic Metronome, Roguelike Adaptability and Arcane Study.").setLanguageKey("config.minestuckuniverse.general.abilitechExternalUseBlacklist").getStringList();
+		IDAlchemyBlacklist = config.get("General", "IDAlchemyBlacklist", new String[0], "Prevents the included from being obtainable through ID Alchemy, yielding an Artifact block instead.").setLanguageKey("config.minestuckuniverse.general.IDAlchemyBlacklist").getStringList();
 
 		restrictedStrife = config.get("Strife", "restrictedStrife", false, "Prevents players from attacking without an allocated weapon in their main hand. It also restricts the use of certain items such as bows.")
 				.setLanguageKey("config.minestuckuniverse.strife.restrictedStrife").getBoolean();
