@@ -8,14 +8,16 @@ import net.minecraft.item.ItemStack;
 public class PropertyLuckBasedDamage extends WeaponProperty
 {
 	float multiplier;
+	float multMax;
 
-	public PropertyLuckBasedDamage(float multiplier)
+	public PropertyLuckBasedDamage(float multiplier, float multMax)
 	{
 		this.multiplier = multiplier;
+		this.multMax = multMax;
 	}
 
 	@Override
 	public float damageAgainstEntity(ItemStack stack, EntityLivingBase player, EntityLivingBase target, float amount) {
-		return player instanceof EntityPlayer ? amount + amount*((EntityPlayer) player).getLuck()*multiplier : amount;
+		return player instanceof EntityPlayer ? Math.max(amount + amount*((EntityPlayer) player).getLuck()*multiplier, multMax) : amount;
 	}
 }

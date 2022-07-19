@@ -264,11 +264,11 @@ public class MinestuckUniverseItems
             new ItemBeamBlade(385, 8, -2.3, 30, "battery_beam_blade_green", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.GREEN),
             new ItemBeamBlade(385, 8, -2.3, 30, "battery_beam_blade_red", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.RED),
             new ItemBeamBlade(385, 8, -2.3, 30, "battery_beam_blade_black", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BLACK)};
-    public static Item lightbringer = new MSUWeaponBase(1375, 20, -2.07, 32, "lightbringer", "lightbringer").setTool(toolSword, 4, 10F).addProperties(new PropertySweep(), new PropertyFire(4, 0.8f, true), new PropertyLuckBasedDamage(0.5f), new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
-    public static Item cybersword = new MSUWeaponBase(1650, 28.8, -2.07, 32, "cybersword", "cybersword").setTool(toolSword, 5, 8F).addProperties(new PropertySweep(), new PropertyShock(15, 8, 0.5f, false), new PropertyLightning(15, 1, true, false), new PropertyLuckBasedDamage(0.1f)).setCreativeTab(null);
+    public static Item lightbringer = new MSUWeaponBase(1375, 20, -2.07, 32, "lightbringer", "lightbringer").setTool(toolSword, 4, 10F).addProperties(new PropertySweep(), new PropertyFire(4, 0.8f, true), new PropertyLuckBasedDamage(0.025f, 2.5f), new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
+    public static Item cybersword = new MSUWeaponBase(1650, 28.8, -2.07, 32, "cybersword", "cybersword").setTool(toolSword, 5, 8F).addProperties(new PropertySweep(), new PropertyShock(15, 8, 0.5f, false), new PropertyLightning(15, 1, true, false), new PropertyLuckBasedDamage(0.005f, 5)).setCreativeTab(null);
     public static Item crystallineRibbitar = new MSUWeaponBase(3300, 16.4, -2.3, 24, "crystalline_ribbitar", "crystallineRibbitar").setTool(toolSword, 4, 6F).addProperties(new PropertySweep());
     public static Item quantumEntangloporter = new MSUWeaponBase(1430, 19.2, -2.3, 9, "quantum_entangloporter", "quantumEntangloporter").setTool(toolSword, 3, 2F).addProperties(new PropertySweep(), new PropertyTeleBlock(Blocks.CACTUS, 20));
-    public static Item valorsEdge = new MSUWeaponBase(1650, 26.4, -2.07, 28, "valor_edge", "calamitySword").setTool(toolSword, 4, 4F).addProperties(new PropertySweep(), new PropertyCrowdDamage(0.3f, 3f, 10),
+    public static Item valorsEdge = new MSUWeaponBase(1650, 26.4, -2.07, 28, "valor_edge", "calamitySword").setTool(toolSword, 4, 4F).addProperties(new PropertySweep(), new PropertyCrowdDamage(0.15f, 3f, 20),
             new PropertyLowHealthBoost(SharedMonsterAttributes.MOVEMENT_SPEED, "Calamity Boost", 1.2, 0.4, 0.4f, 2), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_SPEED, "Calamity Boost", 0.4, 0.2, 0.4f, 2));
 
     //Gauntletkind
