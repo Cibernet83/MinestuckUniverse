@@ -59,7 +59,7 @@ public class TechRageManagement extends TechHeroAspect
 		{
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
-			if(!(target instanceof EntityCreature) && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
+			if(!(target instanceof EntityCreature) || !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 				return false;
 
 			toggleRageShift((EntityCreature) target);

@@ -9,6 +9,7 @@ import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.mraof.minestuck.alchemy.GristHelper;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.block.BlockLargeMachine;
 import com.mraof.minestuck.client.gui.playerStats.GuiInventoryEditmode;
 import com.mraof.minestuck.editmode.ClientEditHandler;
 import com.mraof.minestuck.editmode.DeployList;
@@ -19,6 +20,7 @@ import com.mraof.minestuck.network.skaianet.SkaianetHandler;
 import com.mraof.minestuck.tracker.MinestuckPlayerTracker;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.GlStateManager;
@@ -69,12 +71,6 @@ public class BadgeBuilder extends BadgeLevel
 	{
 		if(canEditDrag(event.getEntityPlayer()))
 			event.setCanceled(true);
-	}
-
-	@SubscribeEvent
-	public static void baba(ClientChatEvent event)
-	{
-		MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_CONFIG));
 	}
 
 	@SubscribeEvent
@@ -152,8 +148,7 @@ public class BadgeBuilder extends BadgeLevel
 
 	private static boolean isDeployListItem(EntityPlayer player, ItemStack stack)
 	{
-		SburbConnection c = SkaianetHandler.getClientConnection(IdentifierHandler.encode(player));
-		return DeployList.getItemList(c).removeIf(deployEntry -> deployEntry.getItemStack(c).equals(stack));
+		return Block.getBlockFromItem(stack.getItem()) instanceof BlockLargeMachine; //TODO make it actually use deploy list entries
 	}
 
 	@SideOnly(Side.CLIENT)

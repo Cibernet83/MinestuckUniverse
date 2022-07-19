@@ -6,14 +6,11 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
-import com.mraof.minestuck.editmode.ServerEditHandler;
 import com.mraof.minestuck.entity.EntityDecoy;
 import com.mraof.minestuck.util.Teleport;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.network.NetworkPlayerInfo;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityHeartDecoy extends EntityDecoy
 {
-	private static final DataParameter<String> UUSERNAME = EntityDataManager.createKey(EntityHeartDecoy.class, DataSerializers.STRING);
+	private static final DataParameter<String> USERNAME = EntityDataManager.createKey(EntityHeartDecoy.class, DataSerializers.STRING);
 	private static final DataParameter<String> PPLAYER_UUID = EntityDataManager.createKey(EntityHeartDecoy.class, DataSerializers.STRING);
 	
 	public int slim = -1;
@@ -48,7 +45,7 @@ public class EntityHeartDecoy extends EntityDecoy
 		prevPosX = posX;
 		prevPosY = posY;
 		prevPosZ = posZ;
-		dataManager.set(UUSERNAME, username);
+		dataManager.set(USERNAME, username);
 		dataManager.set(PPLAYER_UUID, uuid.toString());
 	}
 	
@@ -56,7 +53,7 @@ public class EntityHeartDecoy extends EntityDecoy
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(UUSERNAME, "");
+		dataManager.register(USERNAME, "");
 		dataManager.register(PPLAYER_UUID, "");
 	}
 	
@@ -128,7 +125,7 @@ public class EntityHeartDecoy extends EntityDecoy
 	
 	public void returnToSender(DamageSource damageSource, float damage)
 	{
-		username = dataManager.get(UUSERNAME);
+		username = dataManager.get(USERNAME);
 		if(username == null || username.isEmpty())
 			return;
 		
@@ -191,7 +188,7 @@ public class EntityHeartDecoy extends EntityDecoy
 	public void writeEntityToNBT(NBTTagCompound compound)
 	{
 		super.writeEntityToNBT(compound);
-		compound.setString("heldUsername", dataManager.get(UUSERNAME));
+		compound.setString("heldUsername", dataManager.get(USERNAME));
 		compound.setUniqueId("heldUUID", UUID.fromString(dataManager.get(PPLAYER_UUID)));
 	}
 
@@ -199,7 +196,7 @@ public class EntityHeartDecoy extends EntityDecoy
 	public void readEntityFromNBT(NBTTagCompound compound)
 	{
 		super.readEntityFromNBT(compound);
-		dataManager.set(UUSERNAME, compound.getString("heldUsername"));
+		dataManager.set(USERNAME, compound.getString("heldUsername"));
 		dataManager.set(PPLAYER_UUID, compound.getUniqueId("heldUUID").toString());
 		if(world.isRemote)
 			setupCustomSkin();

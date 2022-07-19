@@ -31,7 +31,7 @@ public class MSUConsorts
 	public static void setupCustomConsortAttributes()
 	{
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.helloWorld"))).type(SHOP_SKILLS);
-		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.hero", "playerTitle"))).type(SHOP_SKILLS);
+		//ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.hero", "playerTitle"))).type(SHOP_SKILLS); TODO doesn't work???
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new GodTierMessage("skillShop.godTier"))).type(SHOP_SKILLS);
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.zillystone"))).type(SHOP_SKILLS);
 		ConsortDialogue.addMessage(new SkillShopGuiMessage(new MessageType.SingleMessage("skillShop.abilitechnosynth"))).type(SHOP_SKILLS);

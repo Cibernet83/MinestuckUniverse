@@ -26,16 +26,17 @@ public class TechMageStudy extends TechHeroClass
 
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
-	{if(state == SkillKeyStates.KeyState.NONE)
+	{
+		if(state == SkillKeyStates.KeyState.NONE)
 		{
 			Skill stolenTech = badgeEffects.getExternalTech(techSlot) == null ? null : MSUSkills.REGISTRY.getValue(new ResourceLocation(badgeEffects.getExternalTech(techSlot)));
 
 			if(stolenTech instanceof Abilitech)
 				badgeEffects.stopPowerParticles(stolenTech.getClass());
 
-			badgeEffects.setExternalTech(techSlot, null);
 			return false;
 		}
+
 		Skill stolenTech = badgeEffects.getExternalTech(techSlot) == null ? null : MSUSkills.REGISTRY.getValue(new ResourceLocation(badgeEffects.getExternalTech(techSlot)));
 
 		if(state == SkillKeyStates.KeyState.PRESS)

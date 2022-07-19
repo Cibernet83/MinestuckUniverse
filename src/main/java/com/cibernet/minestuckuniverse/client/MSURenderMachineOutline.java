@@ -68,7 +68,7 @@ public class MSURenderMachineOutline
 
 	private static boolean renderCheckSynth(EntityPlayerSP player, ItemStack stack, RayTraceResult rayTraceResult, float partialTicks, EnumFacing placedFacing)
 	{
-		if(!placedFacing.equals(EnumFacing.UP))
+		if(!EnumFacing.UP.equals(rayTraceResult.sideHit))
 			return false;
 
 		BlockPos pos = rayTraceResult.getBlockPos();

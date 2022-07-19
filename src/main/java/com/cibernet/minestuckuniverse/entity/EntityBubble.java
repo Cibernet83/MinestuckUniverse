@@ -330,8 +330,8 @@ public class EntityBubble extends Entity
 		if(event.getTarget() == null || event.getSource() == null || event.getWorld() == null)
 			return;
 
-		if(!event.getWorld().getEntitiesWithinAABB(EntityBubble.class, event.getSource().getEntityBoundingBox(), bubble -> !bubble.canEnter()).
-				equals(event.getWorld().getEntitiesWithinAABB(EntityBubble.class, event.getTarget().getEntityBoundingBox(), bubble -> !bubble.canEnter())))
+		if(!event.getWorld().getEntitiesWithinAABB(EntityBubble.class, event.getSource().getEntityBoundingBox().shrink(event.getSource().width/2f), bubble -> !bubble.canEnter()).
+				equals(event.getWorld().getEntitiesWithinAABB(EntityBubble.class, event.getTarget().getEntityBoundingBox().shrink(event.getTarget().width/2f), bubble -> !bubble.canEnter())))
 			event.setCanceled(true);
 	}
 
@@ -343,8 +343,8 @@ public class EntityBubble extends Entity
 		if(source == null || event.getEntity() == null || event.getEntity().world == null)
 			return;
 
-		if(!event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, source.getEntityBoundingBox(), bubble -> !bubble.canEnter()).
-				equals(event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, event.getEntity().getEntityBoundingBox(), bubble -> !bubble.canEnter())))
+		if(!event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, source.getEntityBoundingBox().shrink(source.width/2f), bubble -> !bubble.canEnter()).
+				equals(event.getEntity().world.getEntitiesWithinAABB(EntityBubble.class, event.getEntity().getEntityBoundingBox().shrink(event.getEntity().width/2f), bubble -> !bubble.canEnter())))
 			event.setCanceled(true);
 	}
 
@@ -380,6 +380,4 @@ public class EntityBubble extends Entity
 			}
 		}
 	}
-
-
 }

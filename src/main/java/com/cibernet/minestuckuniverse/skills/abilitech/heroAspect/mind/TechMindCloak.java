@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.client.render.RenderPlayerCloak;
+import com.cibernet.minestuckuniverse.entity.EntityHeartDecoy;
 import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
@@ -11,6 +12,7 @@ import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
+import com.mraof.minestuck.entity.EntityDecoy;
 import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.util.MinestuckPlayerData;
@@ -90,7 +92,8 @@ public class TechMindCloak extends TechHeroAspect
 		}
 		else if(result.entityHit != null)
 		{
-			if(false)//result.entityHit instanceof EntityPlayer)
+			/* TODO make Illusory cloak do players/blocks
+			if(result.entityHit instanceof EntityPlayer))//
 			{
 				EntityPlayer cloakPlayer = (EntityPlayer) result.entityHit;
 				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, cloakPlayer, this, techSlot, false)))
@@ -102,19 +105,25 @@ public class TechMindCloak extends TechHeroAspect
 				badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
 				player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.disguise", player.getDisplayName()), true);
 			}
-			else
+			*/
+			Entity cloak = result.entityHit;
+
+			if(cloak.hasCapability(MSUCapabilities.BADGE_EFFECTS, null) && cloak.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isCloaked())
+				badgeEffects.setCloakData(cloak.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getCloakData());
+			else if(!(cloak instanceof EntityPlayer))
 			{
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, result.entityHit, this, techSlot, false)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, cloak, this, techSlot, false)))
 					return false;
-				NBTTagCompound nbt = result.entityHit.writeToNBT(new NBTTagCompound());
-				nbt.setString("id", EntityRegistry.getEntry(result.entityHit.getClass()).getRegistryName().toString());
+				NBTTagCompound nbt = cloak.writeToNBT(new NBTTagCompound());
+				nbt.setString("id", EntityRegistry.getEntry(cloak.getClass()).getRegistryName().toString());
 
 				cloakData.setTag("Entity", nbt );
 				badgeEffects.setCloakData(cloakData);
 				badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
-				player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.disguise", result.entityHit.getDisplayName()), true);
+				player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.disguise", cloak.getDisplayName()), true);
 			}
 		}
+		/*
 		else if(result.typeOfHit == RayTraceResult.Type.BLOCK)
 		{
 			IBlockState blockState = world.getBlockState(result.getBlockPos());
@@ -130,7 +139,7 @@ public class TechMindCloak extends TechHeroAspect
 			player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.disguise", new TextComponentTranslation(blockState.getBlock().getUnlocalizedName())), true);
 
 		}
-
+		*/
 
 		return true;
 	}
@@ -172,6 +181,7 @@ public class TechMindCloak extends TechHeroAspect
 
 		if(cloakData.hasKey("Player"))
 		{
+			/*
 			if(entity instanceof AbstractClientPlayer)
 			{
 				NetworkPlayerInfo playerInfo = Minecraft.getMinecraft().getConnection().getPlayerInfo(cloakData.getCompoundTag("Player").getUniqueId("UUID"));
@@ -179,7 +189,7 @@ public class TechMindCloak extends TechHeroAspect
 				if(playerInfo != null)
 				new RenderPlayerCloak(Minecraft.getMinecraft().getRenderManager(), !playerInfo.getSkinType().equals("slim"), playerInfo.getLocationSkin())
 						.doRender((AbstractClientPlayer) entity, entity.posX, entity.posY, entity.posZ, entity.rotationYawHead, Minecraft.getMinecraft().getRenderPartialTicks());
-			}
+			}*/
 		}
 		else
 		{

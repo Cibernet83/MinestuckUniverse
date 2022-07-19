@@ -46,7 +46,7 @@ public class TechSeerDodge extends TechHeroClass
 	}
 	
 	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public static void onLivingAttack(LivingHurtEvent event)
+	public static void onLivingAttack(LivingAttackEvent event)
 	{
 		if(event.getEntityLiving().world.isRemote)
 			return;

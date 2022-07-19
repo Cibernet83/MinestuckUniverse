@@ -66,20 +66,11 @@ public class ItemAbilitechnosyth extends MSUItemBlock
 		}
 	}
 
-	public static boolean canPlaceAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing facing) {
-		for(int x = -1; x < 1; x++) {
-			if (!player.canPlayerEdit(pos.offset(facing.rotateYCCW(), x), EnumFacing.UP, stack)) {
-				return false;
-			}
-
-			for(int y = 0; y < 4; ++y) {
-				for(int z = 0; z < 2; ++z) {
-					if (!world.mayPlace(MinestuckUniverseBlocks.abilitechnosynth[0], pos.offset(facing.getOpposite(), z).offset(facing.rotateYCCW(), x).up(y), false, EnumFacing.UP, null)) {
-						return false;
-					}
-				}
-			}
-		}
+	public static boolean canPlaceAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing facing)
+	{
+		for(int y = 0; y < 4; y++) for(int z = 0; z >= -1 ; z--) for(int x = -1; x <= 1; x++)
+		if (!world.mayPlace(MinestuckUniverseBlocks.abilitechnosynth[0], pos.offset(facing, z).offset(facing.rotateYCCW(), x).up(y), false, EnumFacing.UP, null))
+			return false;
 
 		return true;
 	}

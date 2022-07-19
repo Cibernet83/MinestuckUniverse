@@ -630,7 +630,7 @@ entity.minestuckuniverse.rock.name=Rock
 entity.minestuckuniverse.cruxite_slime.name=Cruxite Slime
 entity.minestuckuniverse.eight_ball.name=Magic 8-Ball
 entity.EnderCrystal.name=Ender Crystal
-entity.minestuckuniverse:hope_golem.name=Willed Golem
+entity.minestuckuniverse.hope_golem.name=Willed Golem
 
 grist.vis=Vis
 grist.mana=Mana
@@ -787,6 +787,7 @@ death.attack.minestuckuniverse.terminalDemise.external=%s met their demise to th
 death.attack.minestuckuniverse.hopefulOutburst=%s failed %s's vibe check.
 death.attack.minestuckuniverse.spiritBond=%s soul wasn't as strong as %s's.
 death.attack.minestuckuniverse.suffocate=%s ran out of Breath.
+death.attack.minestuckuniverse.lightningBolt=%s was struck by %s's lightning.
 
 status.heroicDeath=%s's death was Heroic.
 status.justDeath=%s's death was Just.

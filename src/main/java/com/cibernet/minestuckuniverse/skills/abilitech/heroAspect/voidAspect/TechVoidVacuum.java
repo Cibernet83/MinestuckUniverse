@@ -28,7 +28,7 @@ public class TechVoidVacuum extends TechHeroAspect
     @Override
     public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
     {
-        if(state == SkillKeyStates.KeyState.NONE || time > 300)
+        if(state == SkillKeyStates.KeyState.NONE || time > 160)
             return false;
 
         if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 1)

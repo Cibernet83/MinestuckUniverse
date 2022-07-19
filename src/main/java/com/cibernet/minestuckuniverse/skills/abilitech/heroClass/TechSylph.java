@@ -51,13 +51,13 @@ public class TechSylph extends TechHeroClass
 
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumClass.SYLPH, 5);
 
-		if((time % 10) == 0)
+		if((time % 20) == 0)
 		{
 			target.heal(2);
 			if(target instanceof EntityPlayer && ((EntityPlayer) target).getFoodStats().needFood())
 				((EntityPlayer) target).getFoodStats().addStats(1, 1);
 
-			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 2);
+			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
 			((WorldServer)world).spawnParticle(EnumParticleTypes.HEART, target.posX + ((Math.random()-0.5)/2), target.posY+1.5, target.posZ + ((Math.random()-0.5)/2), 1, 1, 0, 0.5, 0);
 		}
 

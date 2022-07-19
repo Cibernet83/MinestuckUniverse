@@ -35,6 +35,9 @@ public class TechBoondollarCost extends Abilitech
 	{
 		if(!requiredStacks.isEmpty())
 		{
+			if(requiredStacks.size() == 1 && cost == 0)
+				return new TextComponentTranslation("tech.unlock.list.solo", requiredStacks.get(0).getCount(), requiredStacks.get(0).getDisplayName()).getFormattedText();
+
 			String entries = "";
 			for(int i = 1; i < requiredStacks.size()- (cost == 0 ? 1 : 0); i++)
 				entries += I18n.format("tech.unlock.list.entry", requiredStacks.get(i).getCount(), requiredStacks.get(i).getDisplayName());
