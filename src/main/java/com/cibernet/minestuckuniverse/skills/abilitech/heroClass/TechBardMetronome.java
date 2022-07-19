@@ -81,13 +81,13 @@ public class TechBardMetronome  extends TechHeroClass
 	@Override
 	public boolean canAppearOnList(World world, EntityPlayer player)
 	{
-		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+		return super.canAppearOnList(world, player) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
 	
 	@Override
 	public boolean canUnlock(World world, EntityPlayer player)
 	{
-		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+		return super.canUnlock(world, player) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
 	
 	public static class slotA {}

@@ -60,16 +60,16 @@ public class TechRageOutburst extends TechHeroAspect
 	{
 		return player.getFoodStats().getFoodLevel() >= 12 && super.isUsableExternally(world, player);
 	}
-	
+
 	@Override
 	public boolean canAppearOnList(World world, EntityPlayer player)
 	{
-		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+		return super.canAppearOnList(world, player) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
-	
+
 	@Override
 	public boolean canUnlock(World world, EntityPlayer player)
 	{
-		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+		return super.canUnlock(world, player) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
 }

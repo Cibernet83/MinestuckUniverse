@@ -57,23 +57,23 @@ public class TechLifeGrace extends TechHeroAspect
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, time < 60 ? 2 : 10);
 		return true;
 	}
-	
+
 	@Override
 	public boolean isUsableExternally(World world, EntityPlayer player)
 	{
 		return !player.getFoodStats().needFood() && super.isUsableExternally(world, player);
 	}
-	
+
 	@Override
 	public boolean canAppearOnList(World world, EntityPlayer player)
 	{
-		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+		return super.canAppearOnList(world, player) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
-	
+
 	@Override
 	public boolean canUnlock(World world, EntityPlayer player)
 	{
-		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+		return super.canUnlock(world, player) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
