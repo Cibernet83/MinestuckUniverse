@@ -692,7 +692,7 @@ container.itemVoid=§kItem Void
 commands.globalsay.usage=/globalsay <message>
 commands.localizedChat.outOfReach=%s is too far away to talk to!
 
-commands.godtier.usage=/godtier <title|reset|maxbadges|mastercontrol|lunarsway>
+commands.godtier.usage=/godtier <title|ascend|reset|maxbadges|mastercontrol|lunarsway>
 commands.godtier.locate.wrongDim=Cannot find Quest Bed outside of The Medium
 commands.godtier.maxbadges.usage=/godtier maxbadges <amount> [player]
 commands.godtier.mastercontrol.usage=/godtier mastercontrol <true|false> [player]
@@ -704,6 +704,7 @@ commands.godtier.mastercontrol.success.off=Revoked access to all Badges from %s
 commands.godtier.lunarsway.usage=/godtier lunarsway <prospit|derse>
 commands.godtier.lunarsway.prospit=Set %s's Lunar Sway to Prospit
 commands.godtier.lunarsway.derse=Set %s's Lunar Sway to Derse
+commands.godtier.ascend.noClass=%s doesn't have an assigned classpect!
 
 commands.sburbSkills.usage=/sburbSkills <grant|revoke> <skill> [player]
 commands.sburbSkills.grant.success=Successfully gave %s the %s skill
@@ -1626,7 +1627,7 @@ tech.godhoods_justice.tooltip=Passively increases the rate that your karma lower
 tech.calculated_strike.name=Calculated Strike
 tech.calculated_strike.tooltip=Sifts through all possible futures in order to increase the damage of your next attack. The extra damage done fluctuates, generally raising, the longer its used, but lowering over time if its not used.
 tech.illusory_cloak.name=Illusory Cloak
-tech.illusory_cloak.tooltip=Casts an illusion upon all players, disguising you as the targeted creature, player or block until cast again.
+tech.illusory_cloak.tooltip=Casts an illusion upon all players, disguising you as the targeted creature until cast again.
 
 tech.answered_prayers.name=Answered Prayers
 tech.answered_prayers.tooltip=Blesses all nearby players and passive creatures with a possitive Potion Effect.

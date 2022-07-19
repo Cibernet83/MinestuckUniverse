@@ -84,13 +84,9 @@ public class TechMindCloak extends TechHeroAspect
 		RayTraceResult result = MSUUtils.getMouseOver(world, player, player.getEntityAttribute(EntityPlayerMP.REACH_DISTANCE).getAttributeValue(), false);
 		NBTTagCompound cloakData = new NBTTagCompound();
 
-		if(result == null || result.typeOfHit == RayTraceResult.Type.MISS)
-		{
-			badgeEffects.clearCloakData();
-			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
-			player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.reset"), true);
-		}
-		else if(result.entityHit != null)
+		boolean doCloak = false;
+
+		if(result != null && result.entityHit != null)
 		{
 			/* TODO make Illusory cloak do players/blocks
 			if(result.entityHit instanceof EntityPlayer))//
@@ -121,6 +117,7 @@ public class TechMindCloak extends TechHeroAspect
 				badgeEffects.setCloakData(cloakData);
 				badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
 				player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.disguise", cloak.getDisplayName()), true);
+				doCloak = true;
 			}
 		}
 		/*
@@ -140,6 +137,13 @@ public class TechMindCloak extends TechHeroAspect
 
 		}
 		*/
+
+		if(badgeEffects.isCloaked() && !doCloak)
+		{
+			badgeEffects.clearCloakData();
+			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
+			player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.reset"), true);
+		}
 
 		return true;
 	}

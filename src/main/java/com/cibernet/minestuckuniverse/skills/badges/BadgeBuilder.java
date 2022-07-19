@@ -141,7 +141,7 @@ public class BadgeBuilder extends BadgeLevel
 
 	private static boolean canEditDrag(EntityPlayer player)
 	{
-		return (((player.world.isRemote ? ClientEditHandler.isActive() : ServerEditHandler.getData(player) != null) && isDeployListItem(player, player.getHeldItem(player.getHeldItemMainhand().isEmpty() ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND)))
+		return (((player.world.isRemote ? ClientEditHandler.isActive() : ServerEditHandler.getData(player) != null) && !isDeployListItem(player, player.getHeldItem(player.getHeldItemMainhand().isEmpty() ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND)))
 				|| (player.getCapability(MSUCapabilities.GOD_TIER_DATA, null) != null && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isBadgeActive(MSUSkills.BUILDER_BADGE)))
 				&& ((player.getHeldItemMainhand().getItem() instanceof ItemBlock) || (player.getHeldItemOffhand().getItem() instanceof ItemBlock));
 	}

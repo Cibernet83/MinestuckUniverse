@@ -72,7 +72,7 @@ public class TechAspectralBolt extends TechBoondollarCost
 	@Override
 	public boolean canAppearOnList(World world, EntityPlayer player)
 	{
-		return MinestuckPlayerData.getData(player).title != null;
+		return (world.isRemote ? MinestuckPlayerData.title : MinestuckPlayerData.getData(player).title) != null;
 	}
 
 	@Override
