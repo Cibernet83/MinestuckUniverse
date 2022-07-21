@@ -631,6 +631,7 @@ entity.minestuckuniverse.cruxite_slime.name=Cruxite Slime
 entity.minestuckuniverse.eight_ball.name=Magic 8-Ball
 entity.EnderCrystal.name=Ender Crystal
 entity.minestuckuniverse.hope_golem.name=Willed Golem
+entity.minestuckuniverse.bubble.name=Bubble
 
 grist.vis=Vis
 grist.mana=Mana

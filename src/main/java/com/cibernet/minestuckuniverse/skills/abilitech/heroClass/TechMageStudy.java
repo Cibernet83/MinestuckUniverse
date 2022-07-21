@@ -57,6 +57,10 @@ public class TechMageStudy extends TechHeroClass
 			return false;
 
 		boolean active = ((Abilitech) stolenTech).onUseTick(world, player, badgeEffects, techSlot, state, time);
+
+		if(!active)
+			badgeEffects.stopPowerParticles(stolenTech.getClass());
+
 		if(state == SkillKeyStates.KeyState.RELEASED)
 			((Abilitech) stolenTech).onUnequipped(world, player, techSlot);
 		return active;
