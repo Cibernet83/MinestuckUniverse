@@ -1,26 +1,27 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time;
 
-import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.BadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
+import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -42,13 +43,18 @@ public class TechTimeTickUp extends TechHeroAspect
 		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 2)
 		{
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
+
+			if(badgeEffects.getTether(techSlot) != null && badgeEffects.getTether(techSlot).hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
+				badgeEffects.getTether(techSlot).getCapability(MSUCapabilities.BADGE_EFFECTS, null).increaseTickUpStacks(-1);
+			badgeEffects.clearTether(techSlot);
+
 			return false;
 		}
 		
 		if (state == SkillKeyStates.KeyState.RELEASED)
 		{
 			if(badgeEffects.getTether(techSlot) != null && badgeEffects.getTether(techSlot).hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
-				badgeEffects.getTether(techSlot).getCapability(MSUCapabilities.BADGE_EFFECTS, null).setTickedUp(false);
+				badgeEffects.getTether(techSlot).getCapability(MSUCapabilities.BADGE_EFFECTS, null).increaseTickUpStacks(-1);
 			badgeEffects.clearTether(techSlot);
 			return true;
 		}
@@ -59,12 +65,15 @@ public class TechTimeTickUp extends TechHeroAspect
 		{
 			target = MSUUtils.getMouseOver(world, player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), true).entityHit;
 			badgeEffects.setTether(target, techSlot);
+			if(target != null)
+				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).increaseTickUpStacks(1);
 		}
 		
 		if(target != null && target.getDistance(player) > 20)
 		{
 			target = null;
 			badgeEffects.clearTether(techSlot);
+			target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).increaseTickUpStacks(-1);
 		}
 
 		if (target != null)
@@ -85,7 +94,6 @@ public class TechTimeTickUp extends TechHeroAspect
 			if(target.hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
 			{
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.TIME, 2);
-				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setTickedUp(true);
 			}
 			else
 				MSUChannelHandler.sendToTrackingAndSelf(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, BadgeEffects.getAspectParticleColors(EnumAspect.TIME)[0], 2, target), player);
@@ -94,7 +102,7 @@ public class TechTimeTickUp extends TechHeroAspect
 
 		return true;
 	}
-	
+
 	@Override
 	public boolean isUsableExternally(World world, EntityPlayer player)
 	{
@@ -109,7 +117,24 @@ public class TechTimeTickUp extends TechHeroAspect
 		if(player == null || event.phase == TickEvent.Phase.END || Minecraft.getMinecraft().isIntegratedServerRunning())
 			return;
 
-		if(player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isTickedUp())
+		for (int i = 0; i >= 0 && i < player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getTickUpStacks(); i++)
 			player.onUpdate();
+	}
+
+	@SubscribeEvent
+	public static void onPlayerLogOut(PlayerEvent.PlayerLoggedOutEvent event)
+	{
+		IGodTierData cap = event.player.getCapability(MSUCapabilities.GOD_TIER_DATA, null);
+		if(cap.isTechEquipped(MSUSkills.TIME_ACCELERANDO))
+		{
+			for(int i = 0; i < cap.getTechSlots(); i++)
+				if(cap.getTech(i) instanceof TechTimeTickUp)
+				{
+					Entity tether = event.player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getTether(i);
+					if(tether != null && tether.hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
+						tether.getCapability(MSUCapabilities.BADGE_EFFECTS, null).increaseTickUpStacks(-1);
+				}
+		}
+
 	}
 }

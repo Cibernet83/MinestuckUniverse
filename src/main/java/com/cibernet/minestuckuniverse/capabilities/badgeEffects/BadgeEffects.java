@@ -385,13 +385,18 @@ public class BadgeEffects implements IBadgeEffects
 	}
 
 	@Override
-	public void setTickedUp(boolean v) {
-		setBoolean(TechTimeTickUp.class, v);
+	public void setTickUpStacks(int v) {
+		setInt(TechTimeTickUp.class, v);
 	}
 
 	@Override
-	public boolean isTickedUp() {
-		return getBoolean(TechTimeTickUp.class);
+	public void increaseTickUpStacks(int v) {
+		setTickUpStacks(getTickUpStacks() + v);
+	}
+
+	@Override
+	public int getTickUpStacks() {
+		return getInt(TechTimeTickUp.class);
 	}
 
 	@Override
