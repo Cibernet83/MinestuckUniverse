@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
+import com.cibernet.minestuckuniverse.entity.EntityBubble;
 import com.cibernet.minestuckuniverse.items.ItemAbilitechnosyth;
 import com.cibernet.minestuckuniverse.items.godtier.ItemGodTierKit;
 import com.google.common.base.Predicates;
@@ -155,6 +156,7 @@ public class MSUUtils
             double entityHitDistance = blockHitDistance;
 
             for (Entity entity : entities) {
+            	System.out.println("entity is bubble: " + (entity instanceof EntityBubble));
                 AxisAlignedBB entityAABB = entity.getEntityBoundingBox().grow((double) entity.getCollisionBorderSize());
                 RayTraceResult entityResult = entityAABB.calculateIntercept(eyePos, lookPos);
 

@@ -30,12 +30,6 @@ public class TechDoomDemiseAoE extends TechHeroAspect
 		if (state == SkillKeyStates.KeyState.NONE)
 			return false;
 
-		if(!player.isCreative() && player.getFoodStats().needFood())
-		{
-			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
-			return false;
-		}
-
 		if(time < 100)
 		{
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.DOOM, 25);
@@ -57,12 +51,6 @@ public class TechDoomDemiseAoE extends TechHeroAspect
 		karmakill(player, player);
 
 		return true;
-	}
-	
-	@Override
-	public boolean isUsableExternally(World world, EntityPlayer player)
-	{
-		return !player.getFoodStats().needFood() && super.isUsableExternally(world, player);
 	}
 
 	private static void karmakill(EntityLivingBase target, EntityPlayer player)

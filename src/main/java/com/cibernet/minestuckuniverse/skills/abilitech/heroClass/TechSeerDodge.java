@@ -55,12 +55,12 @@ public class TechSeerDodge extends TechHeroClass
 		IBadgeEffects effects = event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 
 		if((GTEventHandler.BLOCKABLE_UNBLOCKABLES.contains(event.getSource()) || event.getSource().isMagicDamage() || !event.getSource().isUnblockable())
-				&& data != null && data.isTechPassiveEnabled(MSUSkills.FORESIGHT_DODGE) && effects != null && Math.abs(event.getEntityLiving().world.getTotalWorldTime() - effects.getLastSeerDodge()) >= 1200)
+				&& data != null && data.isTechPassiveEnabled(MSUSkills.FORESIGHT_DODGE) && effects != null && Math.abs(event.getEntityLiving().ticksExisted - effects.getLastSeerDodge()) >= 1200)
 		{
 			EntityLivingBase entity = event.getEntityLiving();
 
 			effects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumClass.SEER, 20);
-			effects.setLastSeerDodge((int) event.getEntityLiving().world.getTotalWorldTime());
+			effects.setLastSeerDodge((int) event.getEntityLiving().ticksExisted);
 			
 			event.setCanceled(true);
 

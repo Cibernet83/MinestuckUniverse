@@ -327,7 +327,7 @@ public class EntityBubble extends Entity
 	@SubscribeEvent
 	public static void onTechTarget(AbilitechTargetedEvent event)
 	{
-		if(event.getTarget() == null || event.getSource() == null || event.getWorld() == null)
+		if(event.getTarget() == null || event.getSource() == null || event.getWorld() == null || (event.getTarget() instanceof EntityBubble))
 			return;
 
 		if(!event.getWorld().getEntitiesWithinAABB(EntityBubble.class, event.getSource().getEntityBoundingBox().shrink(event.getSource().width/2f), bubble -> !bubble.canEnter()).

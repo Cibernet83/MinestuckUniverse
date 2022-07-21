@@ -37,7 +37,8 @@ public class TechMindStrike extends TechHeroAspect
 	{
 		if(state == KeyState.NONE)
 		{
-			badgeEffects.setCalculating(badgeEffects.getCalculating() - 1);
+			if(badgeEffects.getCalculating() > 0)
+				badgeEffects.setCalculating(badgeEffects.getCalculating() - 1);
 			return false;
 		}
 		
@@ -71,11 +72,12 @@ public class TechMindStrike extends TechHeroAspect
 	{
 		if((event.getSource().getImmediateSource() instanceof EntityPlayer) &&
 				((EntityPlayer) event.getSource().getImmediateSource()).getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechEquipped(MSUSkills.MIND_CALCULATED_STRIKE) &&
-				((EntityPlayer) event.getSource().getImmediateSource()).getCapability(MSUCapabilities.BADGE_EFFECTS, null).getCalculating() != 0)
+				((EntityPlayer) event.getSource().getImmediateSource()).getCapability(MSUCapabilities.BADGE_EFFECTS, null).getCalculating() > 0)
 		{
 			IBadgeEffects badgeEffects = ((EntityPlayer) event.getSource().getImmediateSource()).getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 			badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.MIND, 2);
 			event.setAmount((float) (event.getAmount()*Math.max(2, Math.sin(badgeEffects.getCalculating() * 1.1 + Math.PI * 1.5)/2 + badgeEffects.getCalculating() * .017 + .5)));
+			badgeEffects.setCalculating(0);
 		}
 	}
 	
