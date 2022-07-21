@@ -64,7 +64,7 @@ public class TechLifeLeech extends TechHeroAspect
 			badgeEffects.clearTether(techSlot);
 		}
 			
-		if(time+1 % 20 != 0)
+		if((time+1) % 20 != 0)
 		{
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 5);
 			if(target != null)
