@@ -1829,6 +1829,10 @@ status.hopey.jumpinJehosaPhat=§eJUMPIN' JEHOSA PHAT
 status.hopey.shuckyDarn=§eSHUCKY DARN
 status.hopey.fiddleFaddle=§eFIDDLE FADDLE
 
+status.calculatedStrike.low=Your next attack is calculated, but, boy, are you bad at math...
+status.calculatedStrike.med=While uncertain, you at least have a plan.
+status.calculatedStrike.high=You know your next attack will strike true!
+
 status.skaianScroll.unlock=You learned how to use %s!
 status.skaianScroll.alreadyUnlocked=§cYou already know %s.
 status.skaianScroll.outOfScrolls=§cThe scroll refuses to lend you its wisdom.
