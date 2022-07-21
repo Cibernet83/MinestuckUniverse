@@ -1,8 +1,11 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom;
 
+import com.cibernet.minestuckuniverse.capabilities.badgeEffects.BadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeChloroball;
@@ -33,15 +36,23 @@ public class TechDoomDemiseAoE extends TechHeroAspect
 		if(time < 100)
 		{
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.DOOM, 25);
+
+			for(EntityPlayer target : world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> !entity.isSpectator() && entity != player && entity.getDistance(player) <= RADIUS
+					&& !entity.isCreative() && entity.getHealth()/entity.getMaxHealth() <= 0.2f))
+			{
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, BadgeEffects.getAspectParticleColors(EnumAspect.DOOM)[0],2, target), player);
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, BadgeEffects.getAspectParticleColors(EnumAspect.DOOM)[1],2, target), player);
+			}
+
 			return true;
 		} else if(time > 100)
 			return false;
 
 		world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_WITHER_SPAWN, SoundCategory.PLAYERS, 1, 1, false);
 
-		for(EntityPlayer target : world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> entity != player && entity.getDistance(player) <= RADIUS) )
+		for(EntityPlayer target : world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> !entity.isSpectator() && entity != player && entity.getDistance(player) <= RADIUS) )
 		{
-			if (!player.isCreative() && target.getHealth()/target.getMaxHealth() <= 0.2f &&
+			if (!target.isCreative() && target.getHealth()/target.getMaxHealth() <= 0.2f &&
 					!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, null)))
 				karmakill(target, player);
 		}
