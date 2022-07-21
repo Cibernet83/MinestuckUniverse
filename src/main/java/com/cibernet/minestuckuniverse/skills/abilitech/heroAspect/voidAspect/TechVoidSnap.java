@@ -12,6 +12,7 @@ import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
+import com.mraof.minestuck.entity.EntityDecoy;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -49,7 +50,7 @@ public class TechVoidSnap extends TechHeroAspect
 
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.VOID, 5);
 
-		if(target != null && !(target instanceof EntityPlayer) && !Arrays.asList(MSUConfig.protectedEntities).contains(EntityRegistry.getEntry(target.getClass()).getRegistryName().toString()) &&
+		if(target != null && !(target instanceof EntityPlayer) && !(target instanceof EntityDecoy)&& !Arrays.asList(MSUConfig.protectedEntities).contains(EntityRegistry.getEntry(target.getClass()).getRegistryName().toString()) &&
 				!MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 		{
 			target.setDead();

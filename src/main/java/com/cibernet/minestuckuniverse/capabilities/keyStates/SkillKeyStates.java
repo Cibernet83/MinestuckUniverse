@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.capabilities.keyStates;
 
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
+import com.mraof.minestuck.editmode.ServerEditHandler;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
@@ -146,7 +147,7 @@ public class SkillKeyStates implements ISkillKeyStates
 			
 			boolean isActive = false;
 
-			if(!event.player.isSpectator() && !event.player.isDead && !badgeEffects.isTimeStopped() && !badgeEffects.isSoulShocked())
+			if(!event.player.isSpectator() && !event.player.isDead && !badgeEffects.isTimeStopped() && !badgeEffects.isSoulShocked() && ServerEditHandler.getData(event.player) == null)
 			{
 				if(abilitech.canUse(event.player.world, event.player))
 				{

@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.items.captchalogue;
 
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
+import com.mraof.minestuck.entity.EntityDecoy;
 import com.mraof.minestuck.inventory.captchalouge.CaptchaDeckHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -65,7 +66,7 @@ public class WalletEntityItem extends MSUItemBase
 
     public static void storeEntity(Entity entity, ItemStack stack)
     {
-        if(entity instanceof EntityPlayer)
+        if((entity instanceof EntityPlayer) || (entity instanceof EntityDecoy))
             return;
 
         NBTTagCompound nbt = entity.writeToNBT(new NBTTagCompound());
