@@ -3,6 +3,8 @@ package com.cibernet.minestuckuniverse.gui;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.skills.Skill;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -322,6 +324,8 @@ public class GuiFraymachine extends GuiScreen
 			if(selected >= maxTech)
 			{
 				data.unequipTech(selected-maxTech);
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UNEQUIP_ABILITECH, data.getTech(selected-maxTech), selected-maxTech), player);
+
 				data.update();
 			}
 

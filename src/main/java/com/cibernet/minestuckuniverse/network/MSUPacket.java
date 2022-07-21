@@ -84,6 +84,7 @@ public abstract class MSUPacket
 
         UPDATE_DATA_CLIENT(PacketUpdateGTDataFromClient.class),
         UPDATE_DATA_SERVER(PacketUpdateGTDataFromServer.class),
+        UNEQUIP_ABILITECH(PacketUnequipTech.class),
         INCREASE_XP(PacketAddSkillXp.class),
         ATTEMPT_BADGE_UNLOCK(PacketAttemptBadgeUnlock.class),
         TOGGLE_BADGE(PacketToggleBadge.class),

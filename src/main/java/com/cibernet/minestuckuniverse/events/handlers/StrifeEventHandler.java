@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
 import com.cibernet.minestuckuniverse.damage.CritDamageSource;
+import com.cibernet.minestuckuniverse.damage.EntityCritDamageSource;
 import com.cibernet.minestuckuniverse.damage.IGodTierDamage;
 import com.cibernet.minestuckuniverse.events.WeaponAssignedEvent;
 import com.cibernet.minestuckuniverse.gui.GuiStrifePortfolio;
@@ -117,7 +118,7 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onPlayerAttack(LivingAttackEvent event)
 	{
-		if(event.getSource() instanceof CritDamageSource || !MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer) || event.getSource().getImmediateSource() instanceof FakePlayer)
+		if(event.getSource() instanceof EntityCritDamageSource || !MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer) || event.getSource().getImmediateSource() instanceof FakePlayer)
 			return;
 
 		EntityLivingBase source = (EntityLivingBase) event.getSource().getImmediateSource();
@@ -168,7 +169,7 @@ public class StrifeEventHandler
 		ItemStack stack = event.getItemStack();
 		boolean canUse = true;
 
-		if(Arrays.asList(MSUConfig.restrictedStrifeBypass).contains(stack.getItem()) || isStackAssigned(stack))
+		if(Arrays.asList(MSUConfig.restrictedStrifeBypass).contains(stack.getItem().getRegistryName().toString()) || isStackAssigned(stack))
 			canUse = true;
 		else if(USABLE_ASSIGNED_ONLY.contains(stack.getItem()))
 		{

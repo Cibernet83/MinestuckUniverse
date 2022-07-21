@@ -106,9 +106,10 @@ public class TechMindCloak extends TechHeroAspect
 
 			if(cloak.hasCapability(MSUCapabilities.BADGE_EFFECTS, null) && cloak.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isCloaked())
 				badgeEffects.setCloakData(cloak.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getCloakData());
-			else if(!(cloak instanceof EntityPlayer))
+
+			if(!(cloak instanceof EntityPlayer))
 			{
-				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, cloak, this, techSlot, false)))
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, result.entityHit, this, techSlot, false)))
 					return false;
 				NBTTagCompound nbt = cloak.writeToNBT(new NBTTagCompound());
 				nbt.setString("id", EntityRegistry.getEntry(cloak.getClass()).getRegistryName().toString());

@@ -80,7 +80,7 @@ public class TechLifeLeech extends TechHeroAspect
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 10);
 
 			target.hurtResistantTime = 0;
-			target.attackEntityFrom(new EntityCritDamageSource("lifeforceLeech", player), 2);
+			target.attackEntityFrom(new LeechDamageSource(player), 2);
 			player.heal(2);
 
 			if(target.hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
@@ -98,5 +98,36 @@ public class TechLifeLeech extends TechHeroAspect
 	public boolean isUsableExternally(World world, EntityPlayer player)
 	{
 		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
+	}
+
+	public static class LeechDamageSource extends CritDamageSource
+	{
+		protected Entity damageSourceEntity;
+
+		public LeechDamageSource(Entity damageSourceEntityIn)
+		{
+			super("lifeforceLeech");
+			this.damageSourceEntity = damageSourceEntityIn;
+			setDamageBypassesArmor();
+		}
+
+		public Entity getTrueSource()
+		{
+			return this.damageSourceEntity;
+		}
+
+		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
+		{
+			return  new TextComponentTranslation("death.attack." + this.damageType, entityLivingBaseIn.getDisplayName(), this.damageSourceEntity.getDisplayName());
+		}
+
+		/**
+		 * Gets the location from which the damage originates.
+		 */
+		@Nullable
+		public Vec3d getDamageLocation()
+		{
+			return new Vec3d(this.damageSourceEntity.posX, this.damageSourceEntity.posY, this.damageSourceEntity.posZ);
+		}
 	}
 }
