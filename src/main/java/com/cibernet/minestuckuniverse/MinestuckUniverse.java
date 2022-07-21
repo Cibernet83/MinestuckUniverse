@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.event.*;
         version = MinestuckUniverse.VERSION,
         dependencies = "required-after:minestuck@[1.4.302,);",
         guiFactory = "com.cibernet.minestuckuniverse.gui.MSUGuiFactory"
+        
 )
 public class MinestuckUniverse
 {
@@ -38,7 +39,6 @@ public class MinestuckUniverse
     public static boolean isBotaniaLoaded;
     public static boolean isSplatcraftLodaded;
     public static boolean isCarryOnLoaded;
-    public static boolean isArsenalLoaded;
     public static boolean isVcLoaded;
     public static boolean isMekanismLoaded;
     public static boolean isCyclicLoaded;
@@ -59,7 +59,6 @@ public class MinestuckUniverse
 
         isThaumLoaded = Loader.isModLoaded("thaumcraft");
         isBotaniaLoaded = Loader.isModLoaded("botania");
-        isArsenalLoaded = Loader.isModLoaded("minestuckarsenal");
         isSplatcraftLodaded = Loader.isModLoaded("splatcraft");
         isCarryOnLoaded = Loader.isModLoaded("carryon");
         isVcLoaded = Loader.isModLoaded("variedcommodities");

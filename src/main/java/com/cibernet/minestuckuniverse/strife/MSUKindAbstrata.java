@@ -167,8 +167,6 @@ public class MSUKindAbstrata
 		registry.register(sbahjkind.setRegistryName("sbahj"));
 		registry.register(bunnykind.setRegistryName("bunny"));
 
-		if(MinestuckUniverse.isArsenalLoaded)
-			registerArsenalApi();
 		if(MinestuckUniverse.isVcLoaded)
 			registerVariedCommoditiesApi();
 

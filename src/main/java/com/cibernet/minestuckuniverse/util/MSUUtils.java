@@ -63,7 +63,7 @@ public class MSUUtils
 
     public static void registerDeployList()
     {
-        DeployList.registerItem("holopad", new ItemStack(MinestuckUniverseBlocks.holopad), new GristSet(GristType.Build, MinestuckUniverse.isArsenalLoaded ? 10000 : 1000), 2);
+        DeployList.registerItem("holopad", new ItemStack(MinestuckUniverseBlocks.holopad), new GristSet(GristType.Build, 1000), 2);
         DeployList.registerItem("gt_kit", new GristSet(GristType.Zillium, 20), 0, ItemGodTierKit::isAvailable, ItemGodTierKit::generateKit);
         DeployList.registerItem("fraymachine", new GristSet(GristType.Build, 5000), 0, ItemAbilitechnosyth::isAvailable, sburbConnection -> new ItemStack(MinestuckUniverseBlocks.abilitechnosynth[0]));
     }
