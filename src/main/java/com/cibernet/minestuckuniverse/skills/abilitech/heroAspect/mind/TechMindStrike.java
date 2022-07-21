@@ -56,6 +56,13 @@ public class TechMindStrike extends TechHeroAspect
 		if(state == KeyState.RELEASED)
 		{
 			badgeEffects.setCalculating(Math.max(time + badgeEffects.getCalculating(), 100));
+			double power = Math.sin(badgeEffects.getCalculating() * 1.1 + Math.PI * 1.5)/2 + badgeEffects.getCalculating() * .017 + .5;
+			if(power < .8)
+				player.sendStatusMessage(new TextComponentTranslation("status.calculatedStrike.low"), true);
+			else if(power < 1.2)
+				player.sendStatusMessage(new TextComponentTranslation("status.calculatedStrike.med"), true);
+			else
+				player.sendStatusMessage(new TextComponentTranslation("status.calculatedStrike.high"), true);
 			return true;
 		}
 		
