@@ -156,18 +156,6 @@ public class StrifeEventHandler
 		add(MinestuckUniverseItems.archmageDaggers);
 		add(MinestuckUniverseItems.gasterBlaster);
 	}};
-	public static final List<Item> FORCED_USABLE_UNASSIGNED = new ArrayList<Item>()
-	{{
-		add(MSUKindAbstrata.getItem("botania", "managun"));
-		add(MSUKindAbstrata.getItem("bibliocraft", "bibliodrill"));
-		add(Items.EGG);
-		add(Items.SNOWBALL);
-		add(Items.ENDER_EYE);
-		add(Items.ENDER_PEARL);
-		add(Items.EXPERIENCE_BOTTLE);
-		add(Items.POTIONITEM);
-		add(MinestuckUniverseItems.yarnBall);
-	}};
 
 	@SubscribeEvent
 	public static void onItemInteract(PlayerInteractEvent.RightClickItem event)
@@ -178,7 +166,7 @@ public class StrifeEventHandler
 		ItemStack stack = event.getItemStack();
 		boolean canUse = true;
 
-		if(FORCED_USABLE_UNASSIGNED.contains(stack.getItem()) || isStackAssigned(stack))
+		if(Arrays.asList(MSUConfig.restrictedStrifeBypass).contains(stack.getItem()) || isStackAssigned(stack))
 			canUse = true;
 		else if(USABLE_ASSIGNED_ONLY.contains(stack.getItem()))
 		{

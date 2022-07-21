@@ -26,6 +26,7 @@ public class MSUConfig
 	public static String[] abilitechExternalUseBlacklist;
 	public static String[] strifeCardMobDropsWhitelist;
 	public static String[] IDAlchemyBlacklist;
+	public static String[] restrictedStrifeBypass;
 
 	public static double zillystoneYields;
 	public static double gristDropsMultiplier;
@@ -104,6 +105,20 @@ public class MSUConfig
 
 		restrictedStrife = config.get("Strife", "restrictedStrife", false, "Prevents players from attacking without an allocated weapon in their main hand. It also restricts the use of certain items such as bows.")
 				.setLanguageKey("config.minestuckuniverse.strife.restrictedStrife").getBoolean();
+		restrictedStrifeBypass = config.get("Strife", "restrictedStrifeBypass", new String[]
+				{
+						"minecraft:egg",
+						"minecraft:snowball",
+						"minecraft:ender_eye",
+						"minecraft:ender_pearl",
+						"minecraft:potion",
+						"minecraft:experience_bottle",
+						"minestuckuniverse:yarn_ball",
+						"minestuckuniverse:eight_ball",
+						"minestuckuniverse:wallet_ball",
+						"botania:managun",
+						"bibliocraft:bibliodrill",
+				}, "Determines what items still have right-click functionality, even if Restricted Strife is enabled.").setLanguageKey("config.minestuckuniverse.general.strifeCardMobDropsWhitelist").getStringList();
 		keepPortfolioOnDeath = config.get("Strife", "keepPortfolioOnDeath", false, "Determines whether the player drops their Strife Portfolio after dying or not.")
 				.setLanguageKey("config.minestuckuniverse.strife.keepPortfolioOnDeath").getBoolean();
 		strifeDeckMaxSize = config.get("Strife", "strifeDeckMaxSize", 20, "Determines the max amount of weapons that can fit inside a single Strife Deck, set this to -1 to remove the limit.").setMinValue(-1)
