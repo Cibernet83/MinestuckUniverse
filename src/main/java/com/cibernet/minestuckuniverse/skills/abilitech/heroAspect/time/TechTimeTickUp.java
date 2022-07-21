@@ -65,14 +65,15 @@ public class TechTimeTickUp extends TechHeroAspect
 		{
 			target = MSUUtils.getMouseOver(world, player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), true).entityHit;
 			badgeEffects.setTether(target, techSlot);
-			if(target != null)
+			if(target != null && target.hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).increaseTickUpStacks(1);
 		}
 		
 		if(target != null && target.getDistance(player) > 20)
 		{
 			badgeEffects.clearTether(techSlot);
-			target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).increaseTickUpStacks(-1);
+			if(target.hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
+				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).increaseTickUpStacks(-1);
 			target = null;
 		}
 

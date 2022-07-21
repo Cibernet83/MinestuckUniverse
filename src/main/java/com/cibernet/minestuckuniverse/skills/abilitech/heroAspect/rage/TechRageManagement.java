@@ -55,17 +55,22 @@ public class TechRageManagement extends TechHeroAspect
 			return false;
 		}
 
-		if(state == SkillKeyStates.KeyState.RELEASED && time < 40)
+		if(time < 40)
 		{
-			EntityLivingBase target = MSUUtils.getTargetEntity(player);
+			if(state == SkillKeyStates.KeyState.RELEASED)
+			{
+				EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
-			if(!(target instanceof EntityCreature) || !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
-				return false;
+				if(!(target instanceof EntityCreature) || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
+					return false;
 
-			toggleRageShift((EntityCreature) target);
-			target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.RAGE, 10);
-			if(!player.isCreative())
-				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-3);
+				toggleRageShift((EntityCreature) target);
+				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.RAGE, 10);
+				if(!player.isCreative())
+					player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-3);
+			}
+
+			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.RAGE, 5);
 		}
 		else if(time == 40)
 		{

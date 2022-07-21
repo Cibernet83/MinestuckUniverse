@@ -29,6 +29,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -60,6 +61,7 @@ public class WalletCaptchaloguePacket extends MSUPacket
         return this;
     }
 
+
     @Override
     public MSUPacket consumePacket(ByteBuf buffer)
     {
@@ -77,7 +79,8 @@ public class WalletCaptchaloguePacket extends MSUPacket
         if(!player.getHeldItemMainhand().isEmpty())
             return;
         Entity entity = player.world.getEntityByID(this.entity);
-        if(entity != null && !Arrays.asList(MSUConfig.protectedEntities).contains(EntityRegistry.getEntry(entity.getClass()).getRegistryName().toString()))
+        if(!(entity instanceof EntityPlayer || entity instanceof FakePlayer) &&
+                entity != null && !Arrays.asList(MSUConfig.protectedEntities).contains(EntityRegistry.getEntry(entity.getClass()).getRegistryName().toString()))
         {
             ItemStack stack = new ItemStack(MinestuckUniverseItems.walletEntityItem);
             WalletEntityItem.storeEntity(entity, stack);

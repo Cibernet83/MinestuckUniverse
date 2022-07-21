@@ -53,13 +53,6 @@ public class MSUModelManager
         register(dDEHammerAxe, 0, "eeeeeeeeeeee");
         register(stoneSlab, 0, "stone_slab");
 
-        if(!MinestuckUniverse.isArsenalLoaded)
-        {
-            if(MinestuckConfig.oldItemModels)
-                register(fearNoAnvil);
-            else register(fearNoAnvil, 0, "fear_no_anvil");
-        }
-
         register(grimoire, 0, "grimoire");
         ModelLoader.setCustomModelResourceLocation(crockerSpork, 0, new ModelResourceLocation(Minestuck.MOD_ID+":crocker_spoon", "inventory"));
         ModelLoader.setCustomModelResourceLocation(crockerFork, 0, new ModelResourceLocation(Minestuck.MOD_ID+":crocker_fork", "inventory"));

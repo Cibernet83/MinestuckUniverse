@@ -66,12 +66,6 @@ public class MinestuckUniverseGrist
             register(registry, Vis.setRegistryName("vis"));
         if(MinestuckUniverse.isBotaniaLoaded)
             register(registry, Mana.setRegistryName("mana"));
-
-
-        if(!MinestuckUniverse.isArsenalLoaded)
-        {
-            //registry.register(Fluorite);
-        }
     }
     
     protected void register(IForgeRegistry<GristType> registry, GristType grist)

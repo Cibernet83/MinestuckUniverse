@@ -50,9 +50,6 @@ import static com.mraof.minestuck.alchemy.GristType.*;
 
 public class MSUAlchemyRecipes
 {
-    private static GristType wood = MinestuckUniverse.isArsenalLoaded ? GristType.getTypeFromString("minestuckarsenal:wood")  : Build;
-    private static GristType iron = MinestuckUniverse.isArsenalLoaded ? GristType.getTypeFromString("minestuckarsenal:iron")  : Rust;
-
     public static final ArrayList<Block> gristBlocks = new ArrayList<Block>() {{add(gristBlockAmber); add(gristBlockAmethyst); add(gristBlockArtifact); add(gristBlockCaulk); add(gristBlockChalk); add(gristBlockCobalt); add(gristBlockBuild); add(gristBlockDiamond); add(gristBlockGarnet); add(gristBlockGold); add(gristBlockIodine); add(gristBlockMarble);
         add(gristBlockMercury); add(gristBlockQuartz); add(gristBlockRuby); add(gristBlockRust); add(gristBlockSulfur); add(gristBlockShale); add(gristBlockTar); add(gristBlockUranium); add(gristBlockZillium);}};
 
@@ -71,7 +68,6 @@ public class MSUAlchemyRecipes
         if(MinestuckUniverse.isThaumLoaded) registerThaumcraft();
         if(MinestuckUniverse.isBotaniaLoaded) registerBotania();
         if(MinestuckUniverse.isSplatcraftLodaded) registerSplatcraft();
-        if(!MinestuckUniverse.isArsenalLoaded) registerArsenalFallback();
         if(MinestuckUniverse.isChiselLoaded) registerChiselRecipes();
         if(MinestuckUniverse.isMysticalWorldLoaded) registerMysticalWorldRecipes();
         if(MinestuckUniverse.isBOPLoaded) registerBOPRecipes();
@@ -317,16 +313,9 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(dragonCharge), new GristSet(new GristType[] {Ruby, Sulfur, Tar}, new int[] {200, 800, 450}));
         GristRegistry.addGristConversion(new ItemStack(tornadoGlaive), new GristSet(new GristType[] {Cobalt, Gold, Quartz, Uranium}, new int[] {260, 120, 30, 2}));
 
-        if(MinestuckUniverse.isArsenalLoaded)
-        {
-            GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, getTypeFromString("minestuckarsenal:moonstone"), Uranium}, new int[] {5, 5, 2}));
-            GristRegistry.addGristConversion(new ItemStack(moonstoneOre), new GristSet(new GristType[] {Build, getTypeFromString("minestuckarsenal:moonstone"), Uranium, Build}, new int[] {5, 5, 2, 4}));
-        }
-        else
-        {
-            GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium}, new int[] {5, 4, 3, 2}));
-            GristRegistry.addGristConversion(new ItemStack(moonstoneOre), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium, Build}, new int[] {5, 4, 3, 2, 4}));
-        }
+        GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium}, new int[] {5, 4, 3, 2}));
+        GristRegistry.addGristConversion(new ItemStack(moonstoneOre), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium, Build}, new int[] {5, 4, 3, 2, 4}));
+
 
         GristRegistry.addGristConversion(new ItemStack(fluorite), new GristSet(new GristType[] {Cobalt, Diamond}, new int[] {20, 1}));
         GristRegistry.addGristConversion(new ItemStack(zillystoneShard), new GristSet(new GristType[] {Zillium}, new int[] {1}));
@@ -735,13 +724,13 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.phial, 1, 1), new GristSet(new GristType[] {Build, Shale, Vis}, new int[] {1, 1, 20}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.primordialPearl), new GristSet(new GristType[] {Build, Vis, Zillium}, new int[] {1600, 240, 5}));
 
-        GristRegistry.addGristConversion(new ItemStack(ItemsTC.nuggets, 1, 0), new GristSet(new GristType[] {iron}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ItemsTC.nuggets, 1, 0), new GristSet(new GristType[] {Rust}, new int[] {1}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.nuggets, 1, 10), new GristSet(new GristType[] {Vis, Rust, Gold}, new int[] {2, 2, 1}));
 
-        GristRegistry.addGristConversion(new ItemStack(ItemsTC.ingots, 1, 0), new GristSet(new GristType[] {Vis, iron}, new int[] {18, 9}));
-        GristRegistry.addGristConversion(new ItemStack(ItemsTC.ingots, 1, 2), new GristSet(new GristType[] {Vis, Gold, iron}, new int[] {5, 4, 9}));
+        GristRegistry.addGristConversion(new ItemStack(ItemsTC.ingots, 1, 0), new GristSet(new GristType[] {Vis, Rust}, new int[] {18, 9}));
+        GristRegistry.addGristConversion(new ItemStack(ItemsTC.ingots, 1, 2), new GristSet(new GristType[] {Vis, Gold, Rust}, new int[] {5, 4, 9}));
 
-        GristRegistry.addGristConversion(new ItemStack(ItemsTC.clusters, 1, 0), new GristSet(new GristType[] {Build, iron}, new int[] {4, 16*MinestuckConfig.oreMultiplier}));
+        GristRegistry.addGristConversion(new ItemStack(ItemsTC.clusters, 1, 0), new GristSet(new GristType[] {Build, Rust}, new int[] {4, 16*MinestuckConfig.oreMultiplier}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.clusters, 1, 1), new GristSet(new GristType[] {Build, Gold}, new int[] {4, 16*MinestuckConfig.oreMultiplier}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.clusters, 1, 6), new GristSet(new GristType[] {Build, Mercury}, new int[] {4, 16*MinestuckConfig.oreMultiplier}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.clusters, 1, 7), new GristSet(new GristType[] {Build, Quartz, Marble}, new int[] {2, 16*MinestuckConfig.oreMultiplier, 2*MinestuckConfig.oreMultiplier}));
@@ -771,8 +760,8 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.saplingSilverwood), new GristSet(new GristType[] {Vis, Build, Mercury}, new int[] {16, 16, 8}));
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.saplingGreatwood), new GristSet(new GristType[] {Vis, Build, Iodine}, new int[] {8, 16, 16}));
 
-        GristRegistry.addGristConversion(new ItemStack(BlocksTC.logSilverwood), new GristSet(new GristType[] {wood, Vis, Mercury}, new int[] {8, 4, 4}));
-        GristRegistry.addGristConversion(new ItemStack(BlocksTC.logGreatwood), new GristSet(new GristType[] {wood, Vis}, new int[] {12, 4}));
+        GristRegistry.addGristConversion(new ItemStack(BlocksTC.logSilverwood), new GristSet(new GristType[] {Build, Vis, Mercury}, new int[] {8, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(BlocksTC.logGreatwood), new GristSet(new GristType[] {Build, Vis}, new int[] {12, 4}));
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.leafSilverwood), new GristSet(new GristType[] {Build, Mercury}, new int[] {1, 1}));
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.leafGreatwood), new GristSet(new GristType[] {Build, Vis}, new int[] {1, 1}));
 
