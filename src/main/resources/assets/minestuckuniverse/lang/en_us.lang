@@ -708,7 +708,9 @@ commands.godtier.ascend.noClass=%s doesn't have an assigned classpect!
 
 commands.sburbSkills.usage=/sburbSkills <grant|revoke> <skill> [player]
 commands.sburbSkills.grant.success=Successfully gave %s the %s skill
+commands.sburbSkills.grant.all=Successfully gave %s all Abilitechs
 commands.sburbSkills.revoke.success=Successfully revoked from %s the %s skill
+commands.sburbSkills.revoke.all=Successfully revoked from %s all Abilitechs
 
 message.transportalizer.notOwner=This is not your transportalizer!
 message.transportalizer.notOpped=You do not have permission to use this transportalizer.

@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.godTier.IGodTierData;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.Skill;
+import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.command.CommandBase;
@@ -16,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,12 +47,33 @@ public class SkillCommand extends CommandBase
 		switch (args[0])
 		{
 			case "grant":
+				if(args[1].toLowerCase().equals("all"))
+				{
+					for(Skill s : Abilitech.ABILITECHS)
+						data.addSkill(s, false);
+					data.update();
+					notifyCommandListener(sender, this, 0, "commands.sburbSkills.grant.all", target.getDisplayName());
+				}
+				else
+				{
 					data.addSkill(skill, true);
-				notifyCommandListener(sender, this, 0, "commands.sburbSkills.grant.success", target.getDisplayName(), skill.getDisplayComponent());
+					notifyCommandListener(sender, this, 0, "commands.sburbSkills.grant.success", target.getDisplayName(), skill.getDisplayComponent());
+				}
 				break;
 			case "revoke":
+				if(args[1].toLowerCase().equals("all"))
+				{
+					for(Skill s : new ArrayList<>(data.getSkills()))
+						if(skill instanceof Abilitech)
+							data.revokeSkill(s, false);
+					data.update();
+					notifyCommandListener(sender, this, 0, "commands.sburbSkills.revoke.all", target.getDisplayName());
+				}
+				else
+				{
 					data.revokeSkill(skill, true);
-				notifyCommandListener(sender, this, 0, "commands.sburbSkills.revoke.success", target.getDisplayName(), skill.getDisplayComponent());
+					notifyCommandListener(sender, this, 0, "commands.sburbSkills.revoke.success", target.getDisplayName(), skill.getDisplayComponent());
+				}
 				break;
 		}
 	}
