@@ -62,7 +62,8 @@ public class TechDoomVoidBubble extends TechHeroAspect
 			badgeEffects.setTether(bubble, techSlot);
 		}
 
-		bubble.setLifespan(bubble.getLifespan()+1);
+		if(bubble != null && bubble.isEntityAlive())
+			bubble.setLifespan(bubble.getLifespan()+1);
 
 		if(!player.isCreative() && time % 20 == 0)
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);

@@ -49,8 +49,8 @@ public class TechBloodBubble extends TechHeroAspect
 		
 		if(bubble == null)
 			return false;
-
-		bubble.setLifespan(bubble.getLifespan()+1);
+		if(bubble != null && bubble.isEntityAlive())
+			bubble.setLifespan(bubble.getLifespan()+1);
 
 		if(!player.isCreative() && time % 20 == 0)
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);

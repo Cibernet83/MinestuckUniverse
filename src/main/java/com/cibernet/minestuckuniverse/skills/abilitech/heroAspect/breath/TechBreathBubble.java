@@ -50,7 +50,7 @@ public class TechBreathBubble extends TechHeroAspect
 		{
 			if(bubble != null)
 				bubble.setDead();
-			bubble = new EntityBubble(world, trace.entityHit == null ? 1 : Math.max(trace.entityHit.width, trace.entityHit.height), 0x47E2FA, 25, false, false, false);
+			bubble = new EntityBubble(world, trace.entityHit == null ? 1 : Math.max(trace.entityHit.width, trace.entityHit.height) * 1.1f, 0x47E2FA, 25, false, false, false);
 			bubble.setSuffocates(true);
 
 			if(trace.entityHit != null)
@@ -59,8 +59,8 @@ public class TechBreathBubble extends TechHeroAspect
 			world.spawnEntity(bubble);
 			badgeEffects.setTether(bubble, techSlot);
 		}
-
-		bubble.setLifespan(bubble.getLifespan()+1);
+		if(bubble != null && bubble.isEntityAlive())
+			bubble.setLifespan(bubble.getLifespan()+1);
 
 		if(!player.isCreative() && time % 10 == 0)
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);
