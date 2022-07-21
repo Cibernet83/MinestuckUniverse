@@ -1481,7 +1481,7 @@ tech.magic_metronome.tooltip=Attunes the user with the chaotic energy of the Uni
 
 tech.maid_favor.name=Maid's Favor
 tech.maid_favor.tooltip=Allows you to enhance the target's Aspect Effect, or share yours with them if thairs can't be improved.
-tech.aspectral_radiator.name=Aspectral Radiator
+tech.irradiant_servitude.name=Irradiant Servitude
 tech.aspectral_radiator.tooltip=Grants all friendly creatures and players your Aspect Effect when standing close to you.
 
 tech.seer_prediction.name=Seer's Prediction
