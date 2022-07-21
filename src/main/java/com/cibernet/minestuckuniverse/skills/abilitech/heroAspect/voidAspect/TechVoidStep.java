@@ -68,7 +68,7 @@ public class TechVoidStep extends TechHeroAspect
 
     @Override
     public boolean canUse(World world, EntityPlayer player) {
-        return player.getFoodStats().getFoodLevel() > 0 && super.canUse(world, player);
+        return (player.isCreative() || player.getFoodStats().getFoodLevel() > 0) && super.canUse(world, player);
     }
 
     @SubscribeEvent

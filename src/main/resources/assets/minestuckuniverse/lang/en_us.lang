@@ -1608,7 +1608,7 @@ tech.bleeding_edge.tooltip=Gives all your melee hits a chance to inflict Bleedin
 tech.reformers_reach.name=Reformer's Reach
 tech.reformers_reach.tooltip=Utilizing the power of @BLOOD@, this Abilitech makes all passive mobs fall to your influence, and hostile mobs much less likely to target you.
 tech.haemodome.name=Haemodome
-tech.haemodome.tooltip=Use the power of %BLOOD% to create a protective dome around you and your allies, shielding you from projectiles, other Abilitechs, as well as preventing anyone from coming in, but not out.
+tech.haemodome.tooltip=Use the power of @BLOOD@ to create a protective dome around you and your allies, shielding you from projectiles, other Abilitechs, as well as preventing anyone from coming in, but not out.
 tech.lifeforce_transfusion.name=Lifeforce Transfusion
 tech.lifeforce_transfusion.tooltip=Lets you donate some of your health to the targeted entity, making you take damage whilst healing them. If the target is already fully healed, their max health will be increased for a short period of time.
 
@@ -1628,7 +1628,7 @@ tech.mindflayers_spell.tooltip=Allows you to take control of any player or livin
 tech.godhoods_justice.name=Godhood's Justice
 tech.godhoods_justice.tooltip=Passively increases the rate that your karma lowers.
 tech.calculated_strike.name=Calculated Strike
-tech.calculated_strike.tooltip=Sifts through all possible futures in order to increase the damage of your next attack. The extra damage done fluctuates, generally raising, the longer its used, but lowering over time if its not used.
+tech.calculated_strike.tooltip=Sifts through all possible futures in order to increase the damage of your next attack. The extra damage done fluctuates, generally raising, the longer it's charged, but lowering over time if it's not used.
 tech.illusory_cloak.name=Illusory Cloak
 tech.illusory_cloak.tooltip=Casts an illusion upon all players, disguising you as the targeted creature until cast again.
 

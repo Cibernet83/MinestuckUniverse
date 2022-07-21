@@ -60,6 +60,7 @@ public class TechMindCloak extends TechHeroAspect
 	{
 		super.onUnequipped(world, player, techSlot);
 		player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).clearCloakData();
+		player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.reset"), true);
 	}
 
 	@Override
