@@ -63,7 +63,7 @@ public class TechMindControl extends TechHeroAspect
 			else
 				mfTarget = unsetTarget(mfTarget);
 			
-			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, mfTarget, this, techSlot, false)))
+			if(mfTarget == null || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, mfTarget, this, techSlot, false)))
 			{
 				mfTarget = unsetTarget(mfTarget);
 				return false;
