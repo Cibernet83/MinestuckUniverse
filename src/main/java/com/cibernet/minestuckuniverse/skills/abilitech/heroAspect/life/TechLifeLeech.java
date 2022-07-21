@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.damage.CritDamageSource;
+import com.cibernet.minestuckuniverse.damage.EntityCritDamageSource;
 import com.cibernet.minestuckuniverse.damage.IGodTierDamage;
 import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
@@ -80,7 +81,7 @@ public class TechLifeLeech extends TechHeroAspect
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 10);
 
 			target.hurtResistantTime = 0;
-			target.attackEntityFrom(new LifeDamageSource(player), 2);
+			target.attackEntityFrom(new EntityCritDamageSource("lifeforceLeech", player), 2);
 			player.heal(2);
 
 			if(target.hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
@@ -98,36 +99,5 @@ public class TechLifeLeech extends TechHeroAspect
 	public boolean isUsableExternally(World world, EntityPlayer player)
 	{
 		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
-	}
-
-	public static class LifeDamageSource extends CritDamageSource
-	{
-		protected Entity damageSourceEntity;
-
-		public LifeDamageSource(Entity damageSourceEntityIn)
-		{
-			super("lifeforceLeech");
-			this.damageSourceEntity = damageSourceEntityIn;
-			setDamageBypassesArmor();
-		}
-
-		public Entity getTrueSource()
-		{
-			return this.damageSourceEntity;
-		}
-
-		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
-		{
-			return  new TextComponentTranslation("death.attack." + this.damageType, entityLivingBaseIn.getDisplayName(), this.damageSourceEntity.getDisplayName());
-		}
-
-		/**
-		 * Gets the location from which the damage originates.
-		 */
-		@Nullable
-		public Vec3d getDamageLocation()
-		{
-			return new Vec3d(this.damageSourceEntity.posX, this.damageSourceEntity.posY, this.damageSourceEntity.posZ);
-		}
 	}
 }

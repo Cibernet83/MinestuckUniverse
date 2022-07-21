@@ -14,9 +14,11 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeG
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindCloak;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindStrike;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageFrenzy;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceManipulator;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeRecall;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeTickUp;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.voidAspect.TechVoidGrasp;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.voidAspect.TechVoidStep;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.*;
@@ -99,10 +101,12 @@ public class BadgeEventHandler
 		MinecraftForge.EVENT_BUS.register(TechBloodBleeding.class);
 		MinecraftForge.EVENT_BUS.register(TechMindControl.class);
 		MinecraftForge.EVENT_BUS.register(TechTimeRecall.class);
+		MinecraftForge.EVENT_BUS.register(TechTimeTickUp.class);
 		MinecraftForge.EVENT_BUS.register(TechVoidStep.class);
 		MinecraftForge.EVENT_BUS.register(TechBloodReformer.class);
 		MinecraftForge.EVENT_BUS.register(TechBreathWindVessel.class);
 		MinecraftForge.EVENT_BUS.register(TechRageManagement.class);
+		MinecraftForge.EVENT_BUS.register(TechRageFrenzy.class);
 		MinecraftForge.EVENT_BUS.register(TechVoidGrasp.class);
 		MinecraftForge.EVENT_BUS.register(TechHeir.class);
 		MinecraftForge.EVENT_BUS.register(TechMuse.class);

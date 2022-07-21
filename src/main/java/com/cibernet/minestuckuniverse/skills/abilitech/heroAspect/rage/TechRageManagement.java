@@ -110,7 +110,8 @@ public class TechRageManagement extends TechHeroAspect
 	{
 		IBadgeEffects badgeEffects = entity.getCapability(MSUCapabilities.BADGE_EFFECTS, null);
 
-		if(!badgeEffects.isRageShifted())
+
+		if(!badgeEffects.isRageShifted() && !badgeEffects.isFrenzied())
 			enableRageShift(entity);
 		else
 			disableRageShift(entity);
@@ -202,7 +203,6 @@ public class TechRageManagement extends TechHeroAspect
 			return;
 
 		if (event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShifted())
-			event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).setRageShifted(false);
-
+			enableRageShift((EntityCreature) event.getEntity());
 	}
 }

@@ -41,6 +41,8 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 
 	boolean isRageShifted();
 	void setRageShifted(boolean rageShifted);
+	boolean isFrenzied();
+	void setFrenzied(boolean frenzied);
 
 	NBTTagCompound getCloakData();
 	boolean isCloaked();
@@ -77,6 +79,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	
 	void setFOV(int fov);
 	int getFOV();
+
+	void setTickedUp(boolean v);
+	boolean isTickedUp();
 
 	void setCalculating(int calc);
 	int getCalculating();

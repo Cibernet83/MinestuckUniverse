@@ -20,10 +20,12 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.life.TechLifeG
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindCloak;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindControl;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.mind.TechMindStrike;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageFrenzy;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage.TechRageManagement;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceManipulator;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.space.TechSpaceTargetTele;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeStop;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time.TechTimeTickUp;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechBardMetronome.slotA;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechBardMetronome.slotB;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.TechBardMetronome.slotC;
@@ -173,6 +175,16 @@ public class BadgeEffects implements IBadgeEffects
 	public void setRageShifted(boolean rageShifted)
 	{
 		setBoolean(TechRageManagement.class, rageShifted);
+	}
+
+	@Override
+	public boolean isFrenzied() {
+		return getBoolean(TechRageFrenzy.class);
+	}
+
+	@Override
+	public void setFrenzied(boolean frenzied) {
+		setBoolean(TechRageFrenzy.class, frenzied);
 	}
 
 	@Override
@@ -371,7 +383,17 @@ public class BadgeEffects implements IBadgeEffects
 	{
 		return getInt(TechSling.class);
 	}
-	
+
+	@Override
+	public void setTickedUp(boolean v) {
+		setBoolean(TechTimeTickUp.class, v);
+	}
+
+	@Override
+	public boolean isTickedUp() {
+		return getBoolean(TechTimeTickUp.class);
+	}
+
 	@Override
 	public void setCalculating(int calc)
 	{

@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.time;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.BadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
@@ -12,12 +13,17 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.mraof.minestuck.util.EnumAspect;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TechTimeTickUp extends TechHeroAspect
 {
@@ -41,6 +47,8 @@ public class TechTimeTickUp extends TechHeroAspect
 		
 		if (state == SkillKeyStates.KeyState.RELEASED)
 		{
+			if(badgeEffects.getTether(techSlot) != null && badgeEffects.getTether(techSlot).hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
+				badgeEffects.getTether(techSlot).getCapability(MSUCapabilities.BADGE_EFFECTS, null).setTickedUp(false);
 			badgeEffects.clearTether(techSlot);
 			return true;
 		}
@@ -74,8 +82,11 @@ public class TechTimeTickUp extends TechHeroAspect
 			}
 			ticking = false;
 
-			if(target instanceof EntityLivingBase)
+			if(target.hasCapability(MSUCapabilities.BADGE_EFFECTS, null))
+			{
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.TIME, 2);
+				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).setTickedUp(true);
+			}
 			else
 				MSUChannelHandler.sendToTrackingAndSelf(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, BadgeEffects.getAspectParticleColors(EnumAspect.TIME)[0], 2, target), player);
 		}
@@ -88,5 +99,17 @@ public class TechTimeTickUp extends TechHeroAspect
 	public boolean isUsableExternally(World world, EntityPlayer player)
 	{
 		return player.getFoodStats().getFoodLevel() >= 2 && super.isUsableExternally(world, player);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void onClientTick(TickEvent.ClientTickEvent event)
+	{
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		if(player == null || event.phase == TickEvent.Phase.END || Minecraft.getMinecraft().isIntegratedServerRunning())
+			return;
+
+		if(player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isTickedUp())
+			player.onUpdate();
 	}
 }

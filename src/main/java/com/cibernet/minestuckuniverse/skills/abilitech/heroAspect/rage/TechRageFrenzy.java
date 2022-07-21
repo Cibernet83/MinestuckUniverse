@@ -24,6 +24,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -69,7 +70,7 @@ public class TechRageFrenzy extends TechHeroAspect
 			{
 				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 					continue;
-				if(!target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShifted())
+				if(!target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isFrenzied())
 					enableRageFrenzy((EntityCreature) target);
 				target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).oneshotPowerParticles(MSUParticles.ParticleType.AURA, EnumAspect.RAGE, 10);
 			}
@@ -116,19 +117,19 @@ public class TechRageFrenzy extends TechHeroAspect
 			entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).applyModifier(ATTACK_MOD);
 
 		IBadgeEffects badgeEffects = entity.getCapability(MSUCapabilities.BADGE_EFFECTS, null);
-		badgeEffects.setRageShifted(true);
+		badgeEffects.setFrenzied(true);
 
 		resetAI(entity);
 	}
 
 
 	@SubscribeEvent
-	public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event)
+	public static void onJoinWorld(EntityJoinWorldEvent event)
 	{
-		if (event.getEntity().world.isRemote || !(event.getEntityLiving() instanceof EntityCreature))
+		if (event.getEntity().world.isRemote || !(event.getEntity() instanceof EntityCreature))
 			return;
 
-		if (event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShifted())
-			TechRageFrenzy.enableRageFrenzy((EntityCreature) event.getEntityLiving());
+		if (event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isFrenzied())
+			TechRageFrenzy.enableRageFrenzy((EntityCreature) event.getEntity());
 	}
 }
