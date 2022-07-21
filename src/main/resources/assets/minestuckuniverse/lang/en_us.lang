@@ -708,7 +708,9 @@ commands.godtier.ascend.noClass=%s doesn't have an assigned classpect!
 
 commands.sburbSkills.usage=/sburbSkills <grant|revoke> <skill> [player]
 commands.sburbSkills.grant.success=Successfully gave %s the %s skill
+commands.sburbSkills.grant.all=Successfully gave %s all Abilitechs
 commands.sburbSkills.revoke.success=Successfully revoked from %s the %s skill
+commands.sburbSkills.revoke.all=Successfully revoked from %s all Abilitechs
 
 message.transportalizer.notOwner=This is not your transportalizer!
 message.transportalizer.notOpped=You do not have permission to use this transportalizer.
@@ -1479,7 +1481,7 @@ tech.magic_metronome.tooltip=Attunes the user with the chaotic energy of the Uni
 
 tech.maid_favor.name=Maid's Favor
 tech.maid_favor.tooltip=Allows you to enhance the target's Aspect Effect, or share yours with them if thairs can't be improved.
-tech.aspectral_radiator.name=Aspectral Radiator
+tech.irradiant_servitude.name=Irradiant Servitude
 tech.aspectral_radiator.tooltip=Grants all friendly creatures and players your Aspect Effect when standing close to you.
 
 tech.seer_prediction.name=Seer's Prediction
