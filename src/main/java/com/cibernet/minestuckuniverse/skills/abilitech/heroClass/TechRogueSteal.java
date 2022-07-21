@@ -69,7 +69,10 @@ public class TechRogueSteal extends TechHeroClass
 
 		if(!(stolenTech instanceof Abilitech))
 			return false;
-
-		return ((Abilitech) stolenTech).onUseTick(world, player, badgeEffects, techSlot, state, time);
+		
+		boolean active = ((Abilitech) stolenTech).onUseTick(world, player, badgeEffects, techSlot, state, time);
+		if(state == SkillKeyStates.KeyState.RELEASED)
+			((Abilitech) stolenTech).onUnequipped(world, player, techSlot);
+		return active;
 	}
 }

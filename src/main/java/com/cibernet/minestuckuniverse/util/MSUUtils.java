@@ -156,7 +156,6 @@ public class MSUUtils
             double entityHitDistance = blockHitDistance;
 
             for (Entity entity : entities) {
-            	System.out.println("entity is bubble: " + (entity instanceof EntityBubble));
                 AxisAlignedBB entityAABB = entity.getEntityBoundingBox().grow((double) entity.getCollisionBorderSize());
                 RayTraceResult entityResult = entityAABB.calculateIntercept(eyePos, lookPos);
 

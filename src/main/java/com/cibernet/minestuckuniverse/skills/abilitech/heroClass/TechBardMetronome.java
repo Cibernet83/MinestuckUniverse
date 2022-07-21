@@ -64,6 +64,7 @@ public class TechBardMetronome  extends TechHeroClass
 		
 		if(state == KeyState.RELEASED)
 		{
+			((Abilitech) stolenTech).onUnequipped(world, player, techSlot);
 			badgeEffects.stopPowerParticles(externalTech.getClass());
 			if(!player.isCreative())
 				player.getFoodStats().setFoodLevel(0);

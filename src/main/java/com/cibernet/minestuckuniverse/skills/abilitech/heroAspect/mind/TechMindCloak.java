@@ -151,7 +151,7 @@ public class TechMindCloak extends TechHeroAspect
 	@Override
 	public boolean isUsableExternally(World world, EntityPlayer player)
 	{
-		return false;
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
 	}
 
 	private static final HashMap<EntityLivingBase, Entity> cloakedCache = new HashMap<>();
