@@ -1,7 +1,10 @@
 package com.cibernet.minestuckuniverse.damage;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
+
+import javax.annotation.Nullable;
 
 public class CritDamageSource extends DamageSource implements IGodTierDamage
 {
@@ -11,6 +14,7 @@ public class CritDamageSource extends DamageSource implements IGodTierDamage
 	public CritDamageSource(String damageTypeIn)
 	{
 		super(MinestuckUniverse.MODID+"."+damageTypeIn);
+
 	}
 
 	@Override
@@ -35,5 +39,11 @@ public class CritDamageSource extends DamageSource implements IGodTierDamage
 	@Override
 	public boolean isGodproof() {
 		return godproof;
+	}
+
+	@Nullable
+	@Override
+	public Entity getImmediateSource() {
+		return null;
 	}
 }

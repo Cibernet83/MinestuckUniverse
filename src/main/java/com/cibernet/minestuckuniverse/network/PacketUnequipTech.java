@@ -1,6 +1,5 @@
 package com.cibernet.minestuckuniverse.network;
 
-import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.Abilitech;
 import io.netty.buffer.ByteBuf;
@@ -19,7 +18,7 @@ public class PacketUnequipTech extends MSUPacket
 	@Override
 	public MSUPacket generatePacket(Object... args)
 	{
-		data.writeInt((Integer) args[0]);
+		data.writeInt((int) args[0]);
 		ByteBufUtils.writeUTF8String(data, ((Abilitech)args[1]).getRegistryName().toString());
 		return this;
 	}

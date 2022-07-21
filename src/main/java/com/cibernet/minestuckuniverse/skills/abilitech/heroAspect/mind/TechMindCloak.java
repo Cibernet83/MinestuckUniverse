@@ -105,9 +105,16 @@ public class TechMindCloak extends TechHeroAspect
 			Entity cloak = result.entityHit;
 
 			if(cloak.hasCapability(MSUCapabilities.BADGE_EFFECTS, null) && cloak.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isCloaked())
-				badgeEffects.setCloakData(cloak.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getCloakData());
+			{
+				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, result.entityHit, this, techSlot, false)))
+					return false;
 
-			if(!(cloak instanceof EntityPlayer))
+				badgeEffects.setCloakData(cloak.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getCloakData());
+				badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.MIND, 5);
+				player.sendStatusMessage(new TextComponentTranslation("status.tech.illusoryCloak.disguise", cloak.getDisplayName()), true);
+				doCloak = true;
+			}
+			else if(!(cloak instanceof EntityPlayer))
 			{
 				if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, result.entityHit, this, techSlot, false)))
 					return false;

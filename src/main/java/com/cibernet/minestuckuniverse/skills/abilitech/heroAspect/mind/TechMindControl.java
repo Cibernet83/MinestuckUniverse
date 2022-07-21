@@ -46,9 +46,12 @@ public class TechMindControl extends TechHeroAspect
 	public void onUnequipped(World world, EntityPlayer player, int techSlot)
 	{
 		super.onUnequipped(world, player, techSlot);
-		EntityLivingBase target = player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getMindflayerEntity();
-		if(target != null)
-			unsetTarget(target);
+
+		IBadgeEffects cap = player.getCapability(MSUCapabilities.BADGE_EFFECTS, null);
+		EntityLivingBase mfTarget = cap.getMindflayerEntity();
+		if(mfTarget != null)
+			cap.setMindflayerEntity(unsetTarget(mfTarget));
+		cap.stopPowerParticles(getClass());
 	}
 
 	@Override
@@ -63,7 +66,7 @@ public class TechMindControl extends TechHeroAspect
 			else
 				mfTarget = unsetTarget(mfTarget);
 			
-			if(mfTarget == null || MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, mfTarget, this, techSlot, false)))
+			if(mfTarget != null && MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, mfTarget, this, techSlot, false)))
 			{
 				mfTarget = unsetTarget(mfTarget);
 				return false;

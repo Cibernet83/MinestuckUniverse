@@ -323,8 +323,8 @@ public class GuiFraymachine extends GuiScreen
 			Abilitech sel = selected >= maxTech ? data.getTechLoadout()[selected-maxTech] : tech.get(selected+techTab*maxTech);
 			if(selected >= maxTech)
 			{
+				MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.UNEQUIP_ABILITECH, selected-maxTech, data.getTech(selected-maxTech)));
 				data.unequipTech(selected-maxTech);
-				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UNEQUIP_ABILITECH, data.getTech(selected-maxTech), selected-maxTech), player);
 
 				data.update();
 			}
@@ -336,6 +336,9 @@ public class GuiFraymachine extends GuiScreen
 
 				if(pointInTechSlot(x, y, mouseX, mouseY))
 				{
+					if(data.getTech(i) != null)
+						MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.UNEQUIP_ABILITECH, i, data.getTech(i)));
+
 					data.equipTech(sel, i);
 					data.update();
 				}

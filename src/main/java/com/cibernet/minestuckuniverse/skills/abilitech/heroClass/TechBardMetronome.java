@@ -61,7 +61,10 @@ public class TechBardMetronome  extends TechHeroClass
 		Abilitech externalTech = (Abilitech) MSUSkills.REGISTRY.getValue(new ResourceLocation(MinestuckUniverse.MODID, ID));
 		
 		boolean toReturn = externalTech.onUseTick(world, player, badgeEffects, techSlot, state, time);
-		
+
+		if(!toReturn)
+			badgeEffects.stopPowerParticles(externalTech.getClass());
+
 		if(state == KeyState.RELEASED)
 		{
 			externalTech.onUnequipped(world, player, techSlot);

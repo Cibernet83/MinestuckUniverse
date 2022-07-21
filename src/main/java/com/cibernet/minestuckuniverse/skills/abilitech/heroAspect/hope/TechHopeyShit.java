@@ -120,7 +120,7 @@ public class TechHopeyShit extends TechHeroAspect
 			player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-1);
 
 		if(player.getName().equals("aridThought"))
-			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, 10, 0x534B60, 0xF3296F, 0x6CF4FC);
+			 badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, 10, 0x534B60, 0xF3296F, 0x6CF4FC);
 		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.HOPE, 10);
 
 		return true;
