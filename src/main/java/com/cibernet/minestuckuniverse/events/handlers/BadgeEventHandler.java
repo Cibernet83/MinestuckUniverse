@@ -83,16 +83,16 @@ public class BadgeEventHandler
 	{{
 		put(EnumAspect.BREATH, new PotionEffect(MobEffects.SLOWNESS, 1200, 2));
 		put(EnumAspect.SPACE, new PotionEffect(MSUPotions.EARTHBOUND, 400, 0));
-		put(EnumAspect.BLOOD, new PotionEffect(MSUPotions.BLEEDING, 1000, 2));
-		put(EnumAspect.RAGE, new PotionEffect(MobEffects.WEAKNESS, 1200, 4));
+		put(EnumAspect.BLOOD, new PotionEffect(MSUPotions.BLEEDING, 600, 1));
+		put(EnumAspect.RAGE, new PotionEffect(MobEffects.WEAKNESS, 1200, 1));
 		put(EnumAspect.HOPE, new PotionEffect(MSUPotions.GOD_TIER_LOCK, 600, 0));
 		put(EnumAspect.DOOM, new PotionEffect(MobEffects.WITHER, 600, 1));
 		put(EnumAspect.HEART, new PotionEffect(MobEffects.HUNGER, 1000, 3));
-		put(EnumAspect.LIFE, new PotionEffect(MobEffects.POISON, 1200, 4));
+		put(EnumAspect.LIFE, new PotionEffect(MobEffects.POISON, 1200, 1));
 		put(EnumAspect.VOID, new PotionEffect(MobEffects.BLINDNESS, 1200, 2));
-		put(EnumAspect.LIGHT, new PotionEffect(MobEffects.UNLUCK, 1200, 7));
+		put(EnumAspect.LIGHT, new PotionEffect(MobEffects.UNLUCK, 800, 11));
 		put(EnumAspect.TIME, new PotionEffect(MobEffects.MINING_FATIGUE, 1200, 2));
-		put(EnumAspect.MIND, new PotionEffect(MobEffects.NAUSEA, 400, 0));
+		put(EnumAspect.MIND, new PotionEffect(MobEffects.NAUSEA, 1200, 0));
 	}};
 
 	public static void registerBadgeEvents()
