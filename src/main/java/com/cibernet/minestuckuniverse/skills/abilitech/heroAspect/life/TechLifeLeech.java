@@ -65,7 +65,7 @@ public class TechLifeLeech extends TechHeroAspect
 			badgeEffects.clearTether(techSlot);
 		}
 			
-		if((time+1) % 20 != 0)
+		if((time + 1) % 20 != 0)
 		{
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 5);
 			if(target != null)
@@ -75,7 +75,6 @@ public class TechLifeLeech extends TechHeroAspect
 
 		if (target != null)
 		{
-			System.out.println("leeching: " + target);
 			if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
 				return false;
 			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.LIFE, 10);

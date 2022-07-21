@@ -41,6 +41,15 @@ public class TechMindControl extends TechHeroAspect
 	public TechMindControl(String name, long cost) {
 		super(name, EnumAspect.MIND, cost, EnumTechType.OFFENSE);
 	}
+	
+	@Override
+	public void onUnequipped(World world, EntityPlayer player, int techSlot)
+	{
+		super.onUnequipped(world, player, techSlot);
+		EntityLivingBase target = player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).getMindflayerEntity();
+		if(target != null)
+			unsetTarget(target);
+	}
 
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
@@ -86,7 +95,7 @@ public class TechMindControl extends TechHeroAspect
 	@Override
 	public boolean isUsableExternally(World world, EntityPlayer player)
 	{
-		return false;
+		return player.getFoodStats().getFoodLevel() >= 1 && super.isUsableExternally(world, player);
 	}
 
 	private static EntityLivingBase setTarget(EntityPlayer player)
