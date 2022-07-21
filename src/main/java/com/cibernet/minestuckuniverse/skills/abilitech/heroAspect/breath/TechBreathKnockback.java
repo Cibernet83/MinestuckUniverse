@@ -38,14 +38,14 @@ public class TechBreathKnockback extends TechHeroAspect
         }
 
         if(time > 15)
-            badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.VOID, 20);
+            badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.BREATH, 20);
         else
-            badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.VOID, 10);
+            badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.BREATH, 10);
 
         if (time % 10 == 0 && !player.isCreative())
             player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 1);
 
-        float strength = Math.min(Math.max(0, time-10)/80f , 1);
+        float strength = -Math.min(Math.max(0, time-10)/80f , 1);
         for(Entity target : world.getEntitiesWithinAABB(Entity.class, player.getEntityBoundingBox().grow(RADIUS), (entity) -> entity != player))
         {
             if(MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
