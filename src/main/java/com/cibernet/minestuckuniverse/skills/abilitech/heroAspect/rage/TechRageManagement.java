@@ -55,7 +55,7 @@ public class TechRageManagement extends TechHeroAspect
 			return false;
 		}
 
-		if(time == 1)
+		if(state == SkillKeyStates.KeyState.RELEASED && time < 40)
 		{
 			EntityLivingBase target = MSUUtils.getTargetEntity(player);
 
