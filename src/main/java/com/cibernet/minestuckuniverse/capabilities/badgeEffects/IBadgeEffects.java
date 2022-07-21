@@ -80,8 +80,9 @@ public interface IBadgeEffects extends IMSUCapabilityBase<EntityLivingBase>
 	void setFOV(int fov);
 	int getFOV();
 
-	void setTickedUp(boolean v);
-	boolean isTickedUp();
+	void setTickUpStacks(int v);
+	void increaseTickUpStacks(int v);
+	int getTickUpStacks();
 
 	void setCalculating(int calc);
 	int getCalculating();
