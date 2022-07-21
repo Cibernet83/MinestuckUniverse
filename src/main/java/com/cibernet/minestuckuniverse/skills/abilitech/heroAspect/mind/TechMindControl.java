@@ -144,7 +144,7 @@ public class TechMindControl extends TechHeroAspect
 	@SubscribeEvent
 	public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event)
 	{
-		if(event.getEntityLiving().isPotionActive(MSUPotions.MIND_FORTITUDE) && event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isMindflayed())
+		if(event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isMindflayed() && (event.getEntityLiving().isPotionActive(MSUPotions.MIND_FORTITUDE) || event.getEntityLiving().getDistance(event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null).getMindflayedBy()) > 20))
 			event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null).getMindflayedBy().getCapability(MSUCapabilities.BADGE_EFFECTS, null).setMindflayerEntity(unsetTarget(event.getEntityLiving()));
 	}
 

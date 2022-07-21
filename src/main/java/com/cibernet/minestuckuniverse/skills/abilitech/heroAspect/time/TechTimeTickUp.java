@@ -71,9 +71,9 @@ public class TechTimeTickUp extends TechHeroAspect
 		
 		if(target != null && target.getDistance(player) > 20)
 		{
-			target = null;
 			badgeEffects.clearTether(techSlot);
 			target.getCapability(MSUCapabilities.BADGE_EFFECTS, null).increaseTickUpStacks(-1);
+			target = null;
 		}
 
 		if (target != null)
