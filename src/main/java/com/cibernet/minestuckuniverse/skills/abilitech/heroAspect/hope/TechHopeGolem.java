@@ -52,7 +52,7 @@ public class TechHopeGolem extends TechHeroAspect
 			if (time == 80)
 			{
 				EntityHopeGolem golem = new EntityHopeGolem(world);
-				golem.setHopeTicks((int) (EntityHopeGolem.MAX_HOPE_TICKS*0.4f));
+				golem.setHopeTicks((int) (EntityHopeGolem.MAX_EFFECTIVE_TICKS*0.4f));
 				golem.setPosition(player.posX + world.rand.nextDouble() * 10 - 5d, player.posY, player.posZ + world.rand.nextDouble() * 10 - 5d);
 				golem.setCreatedBy(player);
 				golem.getLookHelper().setLookPosition(player.posX, player.posY + (double) player.getEyeHeight(), player.posZ, (float) golem.getHorizontalFaceSpeed(), (float) golem.getVerticalFaceSpeed());

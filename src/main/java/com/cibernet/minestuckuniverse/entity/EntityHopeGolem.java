@@ -5,6 +5,7 @@ import com.cibernet.minestuckuniverse.entity.ai.EntityAIFollowHope;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIHopeHurtByTarget;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIHopeHurtTarget;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.hope.TechHopeyShit;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.mraof.minestuck.util.EnumAspect;
@@ -17,6 +18,7 @@ import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -24,6 +26,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -35,7 +38,8 @@ public class EntityHopeGolem extends EntityIronGolem
 	protected static final DataParameter<Integer> HOPE_TICKS = EntityDataManager.createKey(EntityHopeGolem.class, DataSerializers.VARINT);
 	protected static final DataParameter<Boolean> ANGRY = EntityDataManager.createKey(EntityHopeGolem.class, DataSerializers.BOOLEAN);
 
-	public static final int MAX_HOPE_TICKS = 6000;
+	public static final int MAX_HOPE_TICKS = 7200;
+	public static final int MAX_EFFECTIVE_TICKS = 6000;
 
 	public EntityHopeGolem(World worldIn) {
 		super(worldIn);
@@ -46,7 +50,7 @@ public class EntityHopeGolem extends EntityIronGolem
 		super.entityInit();
 
 		this.dataManager.register(OWNER_UNIQUE_ID, Optional.absent());
-		this.dataManager.register(HOPE_TICKS, MAX_HOPE_TICKS);
+		this.dataManager.register(HOPE_TICKS, MAX_EFFECTIVE_TICKS);
 		this.dataManager.register(ANGRY, false);
 	}
 
@@ -92,7 +96,7 @@ public class EntityHopeGolem extends EntityIronGolem
 			if(hasOwner())
 			{
 				EntityLivingBase owner = getOwner();
-				hopeDecay = owner.isDead ? MAX_HOPE_TICKS : Math.max(10-(int) (owner.getHealth()/owner.getMaxHealth()*10), 1);
+				hopeDecay = owner.isDead ? MAX_EFFECTIVE_TICKS : Math.max(10-(int) (owner.getHealth()/owner.getMaxHealth()*10), 1);
 			}
 
 			List<EntityHopeGolem> golemAllies = world.getEntitiesWithinAABB(EntityHopeGolem.class, getEntityBoundingBox().grow(128), t -> t != this && t.getOwner() == getOwner());
@@ -113,8 +117,25 @@ public class EntityHopeGolem extends EntityIronGolem
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
-		return super.attackEntityFrom(source, Math.min(amount, 6));
+		return super.attackEntityFrom(source, Math.min(amount, 10 * (1 - (getHopeTicks()/MAX_EFFECTIVE_TICKS))));
 	}
+	
+	@Override
+	public boolean attackEntityAsMob(Entity entityIn)
+    {
+		ObfuscationReflectionHelper.setPrivateValue(EntityIronGolem.class, this, 10, "field_179471_a");
+        this.world.setEntityState(this, (byte)4);
+        boolean flag = entityIn.attackEntityFrom((getHopeTicks() >= MAX_EFFECTIVE_TICKS * .8) ? new TechHopeyShit.HopeDamageSource(this) : DamageSource.causeMobDamage(this), (float)(7 + this.rand.nextInt(15)));
+
+        if (flag)
+        {
+            entityIn.motionY += 0.4000000059604645D;
+            this.applyEnchantments(this, entityIn);
+        }
+
+        this.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
+        return flag;
+    }
 
 	public void setAttackTarget(@Nullable EntityLivingBase entitylivingbaseIn)
 	{
@@ -126,7 +147,7 @@ public class EntityHopeGolem extends EntityIronGolem
 	}
 
 	public int getHopeTicks() { return dataManager.get(HOPE_TICKS); }
-	public void setHopeTicks(int v) { dataManager.set(HOPE_TICKS, v); }
+	public void setHopeTicks(int v) { dataManager.set(HOPE_TICKS, Math.min(MAX_HOPE_TICKS, v)); }
 
 	public boolean isAngry() { return dataManager.get(ANGRY); }
 	public void setAngry(boolean v) { dataManager.set(ANGRY, v); }
