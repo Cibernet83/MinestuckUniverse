@@ -50,6 +50,8 @@ public class TechSling extends TechBoondollarCost
 			badgeEffects.setFOV(badgeEffects.getFOV() - time);
 			
 			Modus modus = MinestuckPlayerData.getData(player).modus;
+			if(modus == null)
+				return false;
 			ItemStack stack = modus.getSize() >= 1 ? modus.getItem(0, false) : ItemStack.EMPTY;
 			if(stack == ItemStack.EMPTY)
 				return false;
