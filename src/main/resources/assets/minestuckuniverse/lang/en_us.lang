@@ -1841,3 +1841,4 @@ status.tech.illusoryCloak.disguise=You are now cloaked as %s
 status.tech.illusoryCloak.reset=The illusion dissipates.
 status.externalTech.casting=Casting %s
 status.externalTech.notFound=Couldn't find any available Abilitechs!
+status.entry.spawnProtected=This area is protected from Cruxite Artifacts!
