@@ -31,6 +31,7 @@ public class MSUConfig
 	public static double zillystoneYields;
 	public static double gristDropsMultiplier;
 	public static int baseZillystoneLuck;
+	public static int entrySpawnProtection;
 	public static boolean IDAlchemy;
 	public static boolean nullSoloSessions;
 	public static boolean unstableArtifactSpread;
@@ -90,6 +91,8 @@ public class MSUConfig
 				.setLanguageKey("config.minestuckuniverse.general.zillystoneYields").getDouble();
 		baseZillystoneLuck = config.get("General", "baseZillystoneLuck", -2, "Determines a player's base luck when chiseling a block of Zillystone.")
 				.setLanguageKey("config.minestuckuniverse.general.baseZillystoneLuck").getInt();
+		entrySpawnProtection = config.get("General", "entrySpawnProtection", 0, "Similar to Spawn Protection, determines the radius starting from world spawn that prevents players from entering.")
+				.setLanguageKey("config.minestuckuniverse.general.entrySpawnProtection").getInt();
 		gristDropsMultiplier = config.get("General", "gristDropsMultiplier", 1, "Determines how much grist is dropped from Underlings.")
 				.setLanguageKey("config.minestuckuniverse.general.gristDropsMultiplier").getDouble();
 		nullSoloSessions = config.get("General", "nullSoloSessions", false, "Whether solo sessions should use the null title and terrain aspects.")
@@ -171,9 +174,9 @@ public class MSUConfig
 
 		if(MinestuckUniverse.isCyberwareLoaded)
 		{
-			addedPowerPerDeath = config.get("General", "addedPowerPerDeath", 1500, "Determines how much Cyberware power you recieve when you experience a non-true death.")
+			addedPowerPerDeath = config.get("God Tier", "cyberware.addedPowerPerDeath", 1500, "Determines how much Cyberware power you recieve when you experience a non-true death.")
 					.setLanguageKey("config.minestuckuniverse.godtier.cyberware.addedPowerPerDeath").getInt();
-			acceptablePower = config.get("General", "acceptablePower", 900, "Determines the minimum amount of power you need before replacing vital cyber organs. Recommended to be higher than 500 but less than addedPowerPerDeath.")
+			acceptablePower = config.get("God Tier", "cyberware.acceptablePower", 900, "Determines the minimum amount of power you need before replacing vital cyber organs. Recommended to be higher than 500 but less than addedPowerPerDeath.")
 					.setLanguageKey("config.minestuckuniverse.godtier.cyberware.acceptablePower").getInt();
 		}
 	}

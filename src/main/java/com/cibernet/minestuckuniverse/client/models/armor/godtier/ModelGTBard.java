@@ -27,7 +27,7 @@ public class ModelGTBard extends ModelGTAbstract
 		
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.cubeList.add(new ModelBox(head, 0, 0, -5.0F, -1.0F+0.2f, -5.0F, 10, 1, 10, 0.0F, false));
-		head.cubeList.add(new ModelBox(head, 22, 11, -5.0F, -+0.2f, 4.0F, 10, 8, 1, 0.0F, false));
+		head.cubeList.add(new ModelBox(head, 22, 11, -5.0F, -9f+0.2f, 4.0F, 10, 8, 1, 0.0F, false));
 		head.cubeList.add(new ModelBox(head, 0, 20, -5.0F, -9.0F+0.2f, -4.0F, 1, 8, 8, 0.0F, false));
 		head.cubeList.add(new ModelBox(head, 0, 11, -5.0F, -9.0F+0.2f, -5.0F, 10, 8, 1, 0.0F, false));
 		head.cubeList.add(new ModelBox(head, 18, 20, 4.0F, -9.0F+0.2f, -4.0F, 1, 8, 8, 0.0F, false));

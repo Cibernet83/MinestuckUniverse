@@ -18,17 +18,22 @@ import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.AlchemyRecipes;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.event.AlchemizeItemEvent;
 import com.mraof.minestuck.event.UnderlingSpoilsEvent;
+import com.mraof.minestuck.item.ICruxiteArtifact;
 import com.mraof.minestuck.item.ItemCaptcharoidCamera;
 import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.item.block.ItemAlchemiter;
 import com.mraof.minestuck.item.block.ItemCruxtruder;
 import com.mraof.minestuck.item.block.ItemPunchDesignix;
 import com.mraof.minestuck.item.block.ItemTotemLathe;
+import com.mraof.minestuck.network.skaianet.SburbConnection;
+import com.mraof.minestuck.network.skaianet.SkaianetHandler;
+import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.world.MinestuckDimensionHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -51,6 +56,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.InputUpdateEvent;
@@ -392,13 +399,26 @@ public class CommonEventHandler
 	@SubscribeEvent
 	public static void onRightClickEmpty(PlayerInteractEvent.RightClickItem event)
 	{
-		if(event.getItemStack().getItem() == Items.PAPER && event.getItemStack().getCount() == 1)
+		if(event.getItemStack().getItem() instanceof ICruxiteArtifact)
+		{
+
+			SburbConnection c = SkaianetHandler.getMainConnection(IdentifierHandler.encode(event.getEntityPlayer()), true);
+			if(c == null || !c.enteredGame())
+				if(MSUConfig.entrySpawnProtection > 0 && event.getEntityPlayer().getDistanceSqToCenter(event.getWorld().getSpawnPoint()) <= MSUConfig.entrySpawnProtection*MSUConfig.entrySpawnProtection)
+				{
+					event.getEntityPlayer().sendStatusMessage(new TextComponentTranslation("status.entry.spawnProtected"), true);
+					event.setCancellationResult(EnumActionResult.FAIL);
+					event.setCanceled(true);
+				}
+		}
+
+		else if(event.getItemStack().getItem() == Items.PAPER && event.getItemStack().getCount() == 1)
 		{
 			event.getEntityPlayer().setHeldItem(event.getHand(), new ItemStack(MinestuckUniverseItems.rolledUpPaper));
 			event.getEntityPlayer().swingArm(event.getHand());
 		}
 
-		if(event.getItemStack().getItem() instanceof ItemCaptcharoidCamera)
+		else if(event.getItemStack().getItem() instanceof ItemCaptcharoidCamera)
 		{
 			EntityPlayer player = event.getEntityPlayer();
 			World world = player.world;
@@ -469,24 +489,6 @@ public class CommonEventHandler
 
 		if(event.getUnderling().getRNG().nextFloat() <= 0.001f)
 			event.getSpoils().addGrist(new GristSet(GristType.Zillium, 1));
-	}
-
-	//fixes machines not getting consumed when placed
-	@SubscribeEvent
-	public static void onMachinePlaced(PlayerInteractEvent.RightClickBlock event)
-	{
-		Item item = event.getItemStack().getItem();
-		if(!event.getEntityPlayer().world.isRemote && (item instanceof ItemAlchemiter || item instanceof ItemPunchDesignix || item instanceof ItemCruxtruder || item instanceof ItemTotemLathe))
-		{
-			EnumActionResult result = item.onItemUse(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) event.getHitVec().x, (float)event.getHitVec().y, (float)event.getHitVec().z);
-
-			if(result == EnumActionResult.SUCCESS && !event.getEntityPlayer().isCreative())
-			{
-				event.setCanceled(true);
-				event.setCancellationResult(result);
-				event.getItemStack().shrink(1);
-			}
-		}
 	}
 
 	/*
