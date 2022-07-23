@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroClass;
 
+import com.cibernet.minestuckuniverse.capabilities.badgeEffects.BadgeEffects;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
@@ -48,11 +49,10 @@ public class TechMage extends TechHeroClass
 		else if(karma <= -minKarma)
 			alignmentColor = 0xB200FF;
 
-		if (time > 50)
-			MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, alignmentColor, 5, player), player);
-		else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumClass.MAGE, 1);
+		MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, alignmentColor, 5, player), player);
+		MSUChannelHandler.sendToTracking(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, BadgeEffects.getClassParticleColors(EnumClass.MAGE)[0], 2, player), player);
 
-		if (time > 100)
+		if (time > 50)
 			player.sendStatusMessage(new TextComponentTranslation("status.alignmentPrediction." + (karma >= minKarma ? "heroic" : karma <= -minKarma ? "just" : "neutral") + "Self")
 					                         .setStyle(new Style().setColor(karma >= minKarma ? TextFormatting.GOLD : karma <= -minKarma ? TextFormatting.DARK_PURPLE : TextFormatting.GREEN)), true);
 

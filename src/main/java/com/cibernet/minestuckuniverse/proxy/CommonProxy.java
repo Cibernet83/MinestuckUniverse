@@ -21,6 +21,7 @@ import com.cibernet.minestuckuniverse.modSupport.TrophySlotsSupport;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
+import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.TechDoomDemise;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartProject;
 import com.cibernet.minestuckuniverse.strife.KindAbstratus;
@@ -43,7 +44,9 @@ public class CommonProxy
 
     public void preInit()
     {
+        //putting these here so that they get highest priority
     	MinecraftForge.EVENT_BUS.register(TechHeartBond.class);
+        MinecraftForge.EVENT_BUS.register(TechDoomDemise.class);
     	
         MinecraftForge.EVENT_BUS.register(new MinestuckUniverseGrist());
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);

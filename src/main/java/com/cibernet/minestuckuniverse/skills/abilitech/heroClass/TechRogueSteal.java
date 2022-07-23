@@ -70,13 +70,12 @@ public class TechRogueSteal extends TechHeroClass
 		}
 		Skill stolenTech = badgeEffects.getExternalTech(techSlot) == null ? null : MSUSkills.REGISTRY.getValue(new ResourceLocation(badgeEffects.getExternalTech(techSlot)));
 
-		boolean active = ((Abilitech) stolenTech).onUseTick(world, player, badgeEffects, techSlot, state, time);
-
-		if(!active)
-			badgeEffects.stopPowerParticles(stolenTech.getClass());
-
 		if(!(stolenTech instanceof Abilitech))
 			return false;
+
+		boolean active = ((Abilitech) stolenTech).onUseTick(world, player, badgeEffects, techSlot, state, time);
+		if(!active)
+			badgeEffects.stopPowerParticles(stolenTech.getClass());
 
 		return active;
 	}

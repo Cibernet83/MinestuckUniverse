@@ -1155,6 +1155,7 @@ status.tooExhausted=You're too exhausted to perform this action!
 status.badgeError=A glitch in the universe caused your badge to malfunction
 status.badgeEnabled=%s has been enabled
 status.badgeDisabled=%s has been disabled
+status.badgeReady=%s is now ready!
 status.spatialWarp.setPoint=Warp Point set at X: %s Y: %s Z: %s
 status.spatialWarp.clearPoint=Warp Point has been cleared
 status.spatialWarp.outOfRange=Warp Point is too far away
@@ -1483,7 +1484,7 @@ tech.magic_metronome.tooltip=Attunes the user with the chaotic energy of the Uni
 tech.maid_favor.name=Maid's Favor
 tech.maid_favor.tooltip=Allows you to enhance the target's Aspect Effect, or share yours with them if thairs can't be improved.
 tech.irradiant_servitude.name=Irradiant Servitude
-tech.aspectral_radiator.tooltip=Grants all friendly creatures and players your Aspect Effect when standing close to you.
+tech.irradiant_servitude.tooltip=Grants all friendly creatures and players your Aspect Effect when standing close to you.
 
 tech.seer_prediction.name=Seer's Prediction
 tech.seer_prediction.tooltip=Taps into your knowledge of the universe around you as a @SEER@, allowing you to determine the target's exact Karma value. Player Karma determines a wide variety of factors, such as the effects of some Abilitechs, as well as whether your Conditional Immortality will trigger.

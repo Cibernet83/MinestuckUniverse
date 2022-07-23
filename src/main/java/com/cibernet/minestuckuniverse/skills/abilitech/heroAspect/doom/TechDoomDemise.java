@@ -4,6 +4,7 @@ import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.damage.CritDamageSource;
 import com.cibernet.minestuckuniverse.events.AbilitechTargetedEvent;
+import com.cibernet.minestuckuniverse.events.handlers.KarmaEventHandler;
 import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect;
 import com.cibernet.minestuckuniverse.util.EnumTechType;
@@ -18,6 +19,9 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nullable;
 
@@ -66,7 +70,7 @@ public class TechDoomDemise extends TechHeroAspect
 		badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.DOOM, 20);
 		return true;
 	}
-	
+
 	@Override
 	public boolean isUsableExternally(World world, EntityPlayer player)
 	{
@@ -82,10 +86,12 @@ public class TechDoomDemise extends TechHeroAspect
 	{
 		protected Entity damageSourceEntity;
 
+
 		public DoomDamageSource(Entity damageSourceEntityIn)
 		{
 			super("terminalDemise");
 			setDamageBypassesArmor();
+			setDamageAllowedInCreativeMode();
 			this.damageSourceEntity = damageSourceEntityIn;
 			setGodproof();
 		}
@@ -110,5 +116,20 @@ public class TechDoomDemise extends TechHeroAspect
 		{
 			return new Vec3d(this.damageSourceEntity.posX, this.damageSourceEntity.posY, this.damageSourceEntity.posZ);
 		}
+	}
+
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onLivingDeath(LivingDeathEvent event)
+	{
+		if(event.getSource() instanceof DoomDamageSource && event.getSource().canHarmInCreative())
+			event.setCanceled(true);
+
+	}
+	@SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+	public static void onLivingDeathPost(LivingDeathEvent event)
+	{
+		if(event.getSource() instanceof DoomDamageSource && event.getSource().canHarmInCreative())
+			event.setCanceled(false);
+
 	}
 }

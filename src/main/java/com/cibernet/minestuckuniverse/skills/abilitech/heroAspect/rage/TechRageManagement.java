@@ -1,6 +1,8 @@
 package com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.rage;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.capabilities.badgeEffects.BadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.entity.ai.EntityAIAttackRageShifted;
@@ -209,5 +211,15 @@ public class TechRageManagement extends TechHeroAspect
 
 		if (event.getEntity().getCapability(MSUCapabilities.BADGE_EFFECTS, null).isRageShifted())
 			enableRageShift((EntityCreature) event.getEntity());
+	}
+
+	@SubscribeEvent
+	public static void onLivingTick(LivingEvent.LivingUpdateEvent event)
+	{
+		IBadgeEffects badgeEffects = event.getEntityLiving().getCapability(MSUCapabilities.BADGE_EFFECTS, null);
+
+		if(badgeEffects != null && (badgeEffects.isFrenzied() || badgeEffects.isRageShifted()) && event.getEntityLiving().world.rand.nextFloat() < .05f)
+			badgeEffects.oneshotPowerParticles(MSUParticles.ParticleType.AURA, 1, BadgeEffects.getAspectParticleColors(EnumAspect.RAGE)[event.getEntityLiving().world.rand.nextInt(BadgeEffects.getAspectParticleColors(EnumAspect.RAGE).length)]);
+
 	}
 }

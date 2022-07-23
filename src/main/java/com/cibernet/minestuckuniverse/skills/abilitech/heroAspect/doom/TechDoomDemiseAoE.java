@@ -21,7 +21,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class TechDoomDemiseAoE extends TechHeroAspect
 {
-	private static final int RADIUS = 20;
+	private static final int RADIUS = 12;
 
 	public TechDoomDemiseAoE(String name, long cost) {
 		super(name, EnumAspect.DOOM, cost, EnumTechType.OFFENSE);

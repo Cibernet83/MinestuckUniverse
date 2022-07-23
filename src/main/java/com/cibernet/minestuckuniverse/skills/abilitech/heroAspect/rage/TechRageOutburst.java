@@ -10,11 +10,13 @@ import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.TechHeroAspect
 import com.cibernet.minestuckuniverse.util.EnumTechType;
 import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class TechRageOutburst extends TechHeroAspect
 {
@@ -25,32 +27,33 @@ public class TechRageOutburst extends TechHeroAspect
 	@Override
 	public boolean onUseTick(World world, EntityPlayer player, IBadgeEffects badgeEffects, int techSlot, SkillKeyStates.KeyState state, int time)
 	{
-		if(state == SkillKeyStates.KeyState.NONE || time >= 25)
+		if(state == SkillKeyStates.KeyState.NONE)
 			return false;
 
-		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < 12)
+		float dmg = Math.max(20, Math.abs(player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTempKarma())/2f);
+
+		if(!player.isCreative() && player.getFoodStats().getFoodLevel() < dmg/2)
 		{
 			player.sendStatusMessage(new TextComponentTranslation("status.tooExhausted"), true);
 			return false;
 		}
 
-		if(time > 20)
-			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.RAGE, 10);
-		else
-			badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.RAGE, 10);
 
-		if(time >= 24)
+		if(time >= 10)
 		{
-			float dmg = Math.max(8, Math.abs(player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTempKarma()));
-
-			for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(16), (entity) -> entity != player && (entity instanceof EntityPlayer || entity instanceof IMob)))
+			if(state == SkillKeyStates.KeyState.RELEASED)
 			{
-				if(!player.isOnSameTeam(target) && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
-					target.attackEntityFrom(new EntityCritDamageSource("vengefulOutburst", player).setCrit().setDamageBypassesArmor(), dmg);
+				for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(16), (entity) -> entity != player && (entity instanceof EntityPlayer || entity instanceof IMob)))
+				{
+					if(!player.isOnSameTeam(target) && !MinecraftForge.EVENT_BUS.post(new AbilitechTargetedEvent(player, target, this, techSlot, false)))
+						target.attackEntityFrom(new EntityCritDamageSource("vengefulOutburst", player).setCrit().setDamageBypassesArmor(), dmg);
+				}
+				if (!player.isCreative() && !world.isRemote)
+					player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - (int)(dmg*0.75f));
 			}
-			if (!player.isCreative() && !world.isRemote)
-				player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 12);
-		}
+			else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.AURA, EnumAspect.RAGE, 10);
+
+		} else badgeEffects.startPowerParticles(getClass(), MSUParticles.ParticleType.BURST, EnumAspect.RAGE, 5);
 
 		return true;
 	}
@@ -58,7 +61,7 @@ public class TechRageOutburst extends TechHeroAspect
 	@Override
 	public boolean isUsableExternally(World world, EntityPlayer player)
 	{
-		return player.getFoodStats().getFoodLevel() >= 12 && super.isUsableExternally(world, player);
+		return player.getFoodStats().getFoodLevel() >= Math.max(40, Math.abs(player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getTempKarma()))*.375f && super.isUsableExternally(world, player);
 	}
 
 	@Override

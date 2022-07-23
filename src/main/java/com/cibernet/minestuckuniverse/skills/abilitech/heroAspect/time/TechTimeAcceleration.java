@@ -57,7 +57,7 @@ public class TechTimeAcceleration extends TechHeroAspect
 
 		TileEntity tileEntity = world.getTileEntity(target);
 		if (tileEntity instanceof ITickable)
-			for(int i = 0; i < 10; i++)
+			for(int i = 0; i < 3; i++)
 				((ITickable)tileEntity).update();
 
 		if (time % 20 == 0 && !player.isCreative())
