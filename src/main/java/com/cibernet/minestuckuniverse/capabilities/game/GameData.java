@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.capabilities.game;
 
+import com.cibernet.minestuckuniverse.gui.container.InventoryItemVoid;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,7 +12,19 @@ import java.util.ArrayList;
 
 public class GameData implements IGameData
 {
+	private static final InventoryItemVoid itemVoid = new InventoryItemVoid();
 	private static final ArrayList<Item> jujuSpawns = new ArrayList<>();
+
+
+	public static IInventory getItemVoid()
+	{
+		return itemVoid;
+	}
+	public static void addItemToVoid(ItemStack itemStack)
+	{
+		itemVoid.addItem(itemStack);
+	}
+
 
 	public static boolean hasJujuSpawned(Item juju)
 	{
@@ -33,6 +46,7 @@ public class GameData implements IGameData
 	public NBTTagCompound writeToNBT()
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setTag("ItemVoid", itemVoid.saveInventoryToNBT());
 
 		NBTTagList jujuNbt = new NBTTagList();
 		if(!jujuSpawns.isEmpty())
@@ -53,6 +67,8 @@ public class GameData implements IGameData
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
+		itemVoid.loadInventoryFromNBT(nbt.getTagList("ItemVoid", 10));
+
 		jujuSpawns.clear();
 		NBTTagList jujuNbt = nbt.getTagList("JujuSpawns", 10);
 

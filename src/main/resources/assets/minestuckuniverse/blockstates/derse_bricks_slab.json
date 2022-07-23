@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom,variant=default": { "model": "minestuckuniverse:half_slab_derse_bricks" },
+        "half=top,variant=default": { "model": "minestuckuniverse:upper_slab_derse_bricks" }
+    }
+}

@@ -105,15 +105,15 @@ public class BlockHolopad extends BlockContainer implements IRegistryItem
 	}
 	
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		EnumFacing facing = (EnumFacing)state.getValue(FACING);
-		return this.modifyAABBForDirection(facing, HOLOPAD_AABB);
+		EnumFacing facing = state.getValue(FACING);
+		return modifyAABBForDirection(facing, HOLOPAD_AABB);
 	}
 	
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
 		super.addCollisionBoxToList(state, worldIn, pos, entityBox, collidingBoxes, entityIn, p_185477_7_);
-		EnumFacing facing = (EnumFacing)state.getValue(FACING);
-		AxisAlignedBB top = this.modifyAABBForDirection(facing, HOLOPAD_TOP_AABB);
-		AxisAlignedBB cardSlot = this.modifyAABBForDirection(facing, HOLOPAD_CARDSLOT_AABB);
+		EnumFacing facing = state.getValue(FACING);
+		AxisAlignedBB top = modifyAABBForDirection(facing, HOLOPAD_TOP_AABB);
+		AxisAlignedBB cardSlot = modifyAABBForDirection(facing, HOLOPAD_CARDSLOT_AABB);
 		if (entityBox.intersects(top)) {
 			collidingBoxes.add(top);
 		}
@@ -124,7 +124,7 @@ public class BlockHolopad extends BlockContainer implements IRegistryItem
 		
 	}
 	
-	public AxisAlignedBB modifyAABBForDirection(EnumFacing facing, AxisAlignedBB bb) {
+	public static AxisAlignedBB modifyAABBForDirection(EnumFacing facing, AxisAlignedBB bb) {
 		AxisAlignedBB out = null;
 		switch(facing.ordinal()) {
 			case 2:

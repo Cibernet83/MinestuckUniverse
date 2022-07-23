@@ -3,11 +3,16 @@ package com.cibernet.minestuckuniverse.items;
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
-import com.cibernet.minestuckuniverse.blocks.BlockCustomTransportalizer;
+import com.cibernet.minestuckuniverse.blocks.BlockCeramicPorkhollow;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
+import com.cibernet.minestuckuniverse.captchalogue.OperandiModus;
+import com.cibernet.minestuckuniverse.captchalogue.PopTartModus;
 import com.cibernet.minestuckuniverse.client.models.armor.*;
 import com.cibernet.minestuckuniverse.client.render.RenderThrowable;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.items.armor.*;
+import com.cibernet.minestuckuniverse.items.captchalogue.*;
+import com.cibernet.minestuckuniverse.items.godtier.*;
 import com.cibernet.minestuckuniverse.items.properties.*;
 import com.cibernet.minestuckuniverse.items.properties.beams.PropertyBeamDeathMessage;
 import com.cibernet.minestuckuniverse.items.properties.beams.PropertyMagicBeam;
@@ -19,20 +24,18 @@ import com.cibernet.minestuckuniverse.items.properties.shieldkind.*;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.*;
 import com.cibernet.minestuckuniverse.items.properties.PropertyRocketBoost;
 import com.cibernet.minestuckuniverse.items.weapons.*;
+import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.BlockMetaPair;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.cibernet.minestuckuniverse.util.MSUSoundHandler;
 import com.cibernet.splatcraft.items.ItemFilter;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.alchemy.GristType;
-import com.mraof.minestuck.block.BlockTransportalizer;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.item.MinestuckItems;
 import com.mraof.minestuck.item.TabMinestuck;
-import com.mraof.minestuck.item.block.ItemTransportalizer;
+import com.mraof.minestuck.util.EnumAspect;
 import com.mraof.minestuck.util.MinestuckSoundHandler;
-import com.mraof.minestuck.util.Pair;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.creativetab.CreativeTabs;
@@ -43,7 +46,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraftforge.common.util.EnumHelper;
@@ -51,15 +53,18 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import vazkii.botania.common.block.ModBlocks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MinestuckUniverseItems
 {
     private static final PropertySoundOnHit.Value PITCH_NOTE = ((stack, target, player) -> (-player.rotationPitch + 90) / 90f);
-    public static ArrayList<Block> itemBlocks = new ArrayList<>();
+    public static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
 
     //Armor Materials
     public static ItemArmor.ArmorMaterial materialDiverHelmet = EnumHelper.addArmorMaterial("DIVER_HELMET", MinestuckUniverse.MODID+":diver_helmet", 120, new int[] {0, 0, 0, 3}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
@@ -103,11 +108,25 @@ public class MinestuckUniverseItems
     public static Item fluorite = new MSUItemBase("fluorite");
     public static Item battery = new MSUItemBase("battery", "battery");
     public static Item strifeCard = new ItemStrifeCard("strife_card", "strifeCard");
+    public static Item skaianScroll = new ItemSkaianScroll();
     public static Item dungeonKey = new MSUItemBase("dungeon_key", "dungeonKey");
     public static Item laserPointer = new ItemBeamWeapon(-1, 0, 0, 0.01f, 0, 1, 1, "laser_pointer", "laserPointer").addProperties(new PropertyPotionBeam(new PotionEffect(MobEffects.BLINDNESS, 30, 0, false, false))).setRepairMaterials(new ItemStack(battery)).setCreativeTab(TabMinestuckUniverse.main);
     public static Item whip = new ItemSound("whip", "whip", MSUSoundHandler.whipCrack);
     public static Item sbahjWhip = new ItemSound("whip_sbahj", "whipSbahj", MSUSoundHandler.whipCrock).setSecret();
     public static Item unrealAir = new ItemUnrealAir("unreal_air", "unrealAir");
+
+    public static final Item floatStone = new MSUItemBase("float_stone").setMaxStackSize(1);
+    //public static final Item energyCell = new MSUItemBase("energy_cell");
+    public static final Item captchalogueBook = new CaptchaBookItem("captchalogue_book");
+    public static final Item chastityKey = new ChasityKeyItem("chasity_key");
+
+    //Food
+    public static final Item popTart = new MSUFoodBase("pop_tart", 3, 0, false, PopTartModus.getConsumer());
+    public static final Item popBall = new MSUFoodBase("magic_pop_balls", 6, 0.4f, false, MSUFoodBase.getPopBallConsumer());
+
+    public static final Item cruxiteGel = new CruxiteItem("cruxite_gel");
+    public static final Item dragonGel = new MSUItemBase("dragon_gel");
+    public static final Item cruxtruderGel = new CruxtruderGelItem("cruxtruder_gel");
 
     public static Item tickingStopwatch = new MSUItemBase("ticking_stopwatch", "tickingStopwatch"){{
         addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "time"), ((stack, worldIn, entityIn) -> ((System.currentTimeMillis() - Minestuck.startTime)/1000f) % 60));
@@ -147,11 +166,80 @@ public class MinestuckUniverseItems
     public static Item skaia = new ItemGhost("skaia_ghost_item");
     public static Item lightning = new ItemGhost("lightning_ghost_item");
 
+    public static Item walletEntityItem = new WalletEntityItem("wallet_entity", "walletEntity");
+
+    //Operandi Items
+    public static final Item operandiPickaxe = new OperandiToolItem("operandi_pickaxe", "pickaxe", 1.0F, -2.8F, 7.0f, 3);
+    public static final Item operandiAxe = new OperandiToolItem("operandi_axe", "axe", 5.0f, -3.2F, 7.0f, 3);
+    public static final Item operandiShovel = new OperandiToolItem("operandi_shovel", "shovel", 1.5F, -3.0F, 7.0F, 3);
+    public static final Item operandiHoe = new OperandiHoeItem("operandi_hoe");
+    public static final Item operandiSword = new OperandiWeaponItem("operandi_sword", "", 4.0f, -2.4000000953674316f, 0f, 3);
+    public static final Item operandiHammer = new OperandiWeaponItem("operandi_hammer", "pickaxe", 5.0f, -2.45f, 7.0f, 4);
+    public static final Item operandiClub = new OperandiWeaponItem("operandi_club", "club", 4.0F, -2.2F, 7.0f, 5);
+    public static final Item operandiBattleaxe = new OperandiWeaponItem("operandi_battleaxe", "axe", 7.0F, -3.2F, 7.0f, 2);
+    public static final Item operandiApple = new OperandiFoodItem("operandi_apple", 4, 0.15F);
+    public static final Item operandiPotion = new OperandiFoodItem("operandi_potion", 1, 0.4f, EnumAction.DRINK);
+    public static final Item operandiPopTart = new OperandiFoodItem("operandi_pop_tart", 3, 0);
+    public static final Item operandiEightBall = new MSUThrowableBase(0, 5, 1, "operandi_eight_ball", "operandiEightBall").addProperties(new PropertyStorageProjectile(false, true), new PropertyDamagePrjctle(2)).setSecret();
+    public static final Item operandiSplashPotion = new MSUThrowableBase(0, 0, 1, "operandi_splash_potion", "operandiSplashPotion").setThrownAngle(-20).setThrownSound(SoundEvents.ENTITY_SPLASH_POTION_THROW).addProperties(new PropertyStorageProjectile(false, true)).setSecret();
+    public static final Item operandiHelmet = new OperandiArmorItem("operandi_helmet", EntityEquipmentSlot.HEAD);
+    public static final Item operandiChestplate = new OperandiArmorItem("operandi_chestplate", EntityEquipmentSlot.CHEST);
+    public static final Item operandiLeggings = new OperandiArmorItem("operandi_leggings", EntityEquipmentSlot.LEGS);
+    public static final Item operandiBoots = new OperandiArmorItem("operandi_boots", EntityEquipmentSlot.FEET);
+
     //Medallions
     public static Item ironMedallion = new MSUItemBase("iron_medallion", "ironMedallion").setMaxStackSize(1);
     public static Item returnMedallion = new ItemWarpMedallion("returnMedallion", "return_medallion", ItemWarpMedallion.EnumTeleportType.RETURN, 80);
     public static Item teleportMedallion = new ItemWarpMedallion("teleportMedallion", "teleport_medallion", ItemWarpMedallion.EnumTeleportType.TRANSPORTALIZER, 80);
     public static Item skaianMedallion = new ItemWarpMedallion("skaianMedallion", "skaian_medallion", ItemWarpMedallion.EnumTeleportType.SKAIA, 80);
+
+    //Fetch Modi
+    public static final Item wildMagicModus = new ModusItem("wild_magic_modus");
+    public static final Item weightModus = new ModusItem("weight_modus");
+    public static final Item bookModus = new ModusItem("book_modus");
+    public static final Item capitalistModus = new ModusItem("capitalist_modus");
+    public static final Item modUs = new ModusItem("mod_us");
+    public static final Item operandiModus = new ModusItem("operandi_modus");
+    public static final Item onionModus = new ModusItem("onion_modus");
+    public static final Item slimeModus = new ModusItem("slime_modus");
+    public static final Item popTartModus = new ModusItem("pop_tart_modus");
+    public static final Item deckModus = new ModusItem("deck_modus");
+    public static final Item hueModus = new ModusItem("hue_modus");
+    public static final Item hueStackModus = new ModusItem("hue_stack_modus");
+    public static final Item chatModus = new ModusItem("chat_modus");
+    public static final Item cycloneModus = new ModusItem("cyclone_modus");
+    public static final Item energyModus = new ModusItem("energy_modus");
+    public static final Item scratchAndSniffModus = new ModusItem("scratch_and_sniff_modus");
+    public static final Item eightBallModus = new ModusItem("eight_ball_modus");
+    public static final Item chasityModus = new ModusItem("chasity_modus");
+    public static final Item jujuModus = new ModusItem("juju_modus");
+    public static final Item alcheModus = new ModusItem("alchemodus");
+
+    public static final Item arrayModus = new ModusItem("array_modus");
+    public static final Item monsterModus = new ModusItem("monster_modus");
+    public static final Item walletModus = new ModusItem("wallet_modus");
+    public static final Item walletBallModus = new ModusItem("wallet_ball_modus");
+
+    public static final Item hashchatModus = new ModusItem("hashchat_modus");
+    public static final Item sacrificeModus = new ModusItem("sacrifice_modus");
+
+    //God Tier
+    public static final Item gtHood = new ItemGTArmor(EntityEquipmentSlot.HEAD, "gtHood", "god_tier_hood");
+    public static final Item gtShirt = new ItemGTArmor(EntityEquipmentSlot.CHEST, "gtShirt", "god_tier_shirt");
+    public static final Item gtPants = new ItemGTArmor(EntityEquipmentSlot.LEGS, "gtPants", "god_tier_pants");
+    public static final Item gtShoes = new ItemGTArmor(EntityEquipmentSlot.FEET, "gtShoes", "god_tier_shoes");
+    public static final Item gtArmorKit = new ItemGodTierKit();
+    public static final Item denizenTome = new ItemDenizenTome();
+    public static final Item denizenEye = new ItemLocatorEye("denizenEye", "denizen_eye");
+    public static final Item sashKit = new ItemSashKit("sashKit", "god_tier_sash_kit");
+    public static final Item godTierResetCharm = new ItemGodTierReseter("god_tier_reset_charm", "godTierResetCharm");
+    public static final Item manipulatedMatter = new ItemManipulatedMatter("manipulatedMatter", "manipulated_matter");
+
+    public static final Map<EnumAspect, ItemHeroStoneShard> heroStoneShards = new HashMap<EnumAspect, ItemHeroStoneShard>()
+    {{
+        for(EnumAspect aspect : EnumAspect.values())
+            put(aspect, new ItemHeroStoneShard(aspect));
+    }};
 
     //Weapons
 
@@ -176,11 +264,11 @@ public class MinestuckUniverseItems
             new ItemBeamBlade(385, 8, -2.3, 30, "battery_beam_blade_green", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.GREEN),
             new ItemBeamBlade(385, 8, -2.3, 30, "battery_beam_blade_red", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.RED),
             new ItemBeamBlade(385, 8, -2.3, 30, "battery_beam_blade_black", "batteryBeamBlade").setTool(toolSword, 0, 15.0F).setColor(EnumDyeColor.BLACK)};
-    public static Item lightbringer = new MSUWeaponBase(1375, 20, -2.07, 32, "lightbringer", "lightbringer").setTool(toolSword, 4, 10F).addProperties(new PropertySweep(), new PropertyFire(4, 0.8f, true), new PropertyLuckBasedDamage(0.5f), new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
-    public static Item cybersword = new MSUWeaponBase(1650, 28.8, -2.07, 32, "cybersword", "cybersword").setTool(toolSword, 5, 8F).addProperties(new PropertySweep(), new PropertyShock(15, 8, 0.5f, false), new PropertyLightning(15, 1, true, false), new PropertyLuckBasedDamage(0.1f)).setCreativeTab(null);
+    public static Item lightbringer = new MSUWeaponBase(1375, 20, -2.07, 32, "lightbringer", "lightbringer").setTool(toolSword, 4, 10F).addProperties(new PropertySweep(), new PropertyFire(4, 0.8f, true), new PropertyLuckBasedDamage(0.025f, 2.5f), new PropertyMobTypeDamage(EnumCreatureAttribute.UNDEAD, 3));
+    public static Item cybersword = new MSUWeaponBase(1650, 28.8, -2.07, 32, "cybersword", "cybersword").setTool(toolSword, 5, 8F).addProperties(new PropertySweep(), new PropertyShock(15, 8, 0.5f, false), new PropertyLightning(15, 1, true, false), new PropertyLuckBasedDamage(0.005f, 5)).setCreativeTab(null);
     public static Item crystallineRibbitar = new MSUWeaponBase(3300, 16.4, -2.3, 24, "crystalline_ribbitar", "crystallineRibbitar").setTool(toolSword, 4, 6F).addProperties(new PropertySweep());
     public static Item quantumEntangloporter = new MSUWeaponBase(1430, 19.2, -2.3, 9, "quantum_entangloporter", "quantumEntangloporter").setTool(toolSword, 3, 2F).addProperties(new PropertySweep(), new PropertyTeleBlock(Blocks.CACTUS, 20));
-    public static Item valorsEdge = new MSUWeaponBase(1650, 26.4, -2.07, 28, "valor_edge", "calamitySword").setTool(toolSword, 4, 4F).addProperties(new PropertySweep(), new PropertyCrowdDamage(0.3f, 3f, 20),
+    public static Item valorsEdge = new MSUWeaponBase(1650, 26.4, -2.07, 28, "valor_edge", "calamitySword").setTool(toolSword, 4, 4F).addProperties(new PropertySweep(), new PropertyCrowdDamage(0.15f, 3f, 20),
             new PropertyLowHealthBoost(SharedMonsterAttributes.MOVEMENT_SPEED, "Calamity Boost", 1.2, 0.4, 0.4f, 2), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_SPEED, "Calamity Boost", 0.4, 0.2, 0.4f, 2));
 
     //Gauntletkind
@@ -259,6 +347,7 @@ public class MinestuckUniverseItems
     public static Item highVoltageStormCrusher = new MSUWeaponBase(1150, 30.7, -2.8, 18, "high_voltage_storm_crusher", "highVoltageStormCrusher").setTool(toolHammer, 4, 3.0f).addProperties(new PropertyLightning(8, 1, true, false), new PropertyElectric(60, 8, -1, false), new PropertyVMotionDamage(1.6f, 3));
     public static Item barrelsWarhammer = new MSUWeaponBase(1438, 64, -2.8, 18, "barrel_warhammer", "calamityHammer").setTool(toolHammer, 4, 4.0f).addProperties(new PropertyRocketBoost(0.6f), new PropertyLowHealthBoost(SharedMonsterAttributes.ATTACK_DAMAGE, "Calamity Boost", 0.6, 0.1, 0.3f, 2), new PropertyVMotionDamage(1.6f, 3), new PropertyVMotionDamage(1.6f, 3));
     public static Item stardustSmasher = new MSUWeaponBase(1725, 44.8, -2.8, 20, "stardust_smasher", "stardustSmasher").setTool(toolHammer, 20, 8.0f).addProperties(new PropertyMobTypeDamage(EnumCreatureAttribute.ARTHROPOD, 1000), new PropertyVMotionDamage(1.6f, 3));
+    public static Item drummer = new MSUWeaponBase(1000, 21.8, -2.8, 10, "drummer", "drummer").setTool(toolHammer, 3, 8.0f).addProperties(new PropertySoundOnHit(SoundEvents.BLOCK_NOTE_BASEDRUM, PITCH_NOTE, ((stack, target, player) -> 3f)), new PropertyVMotionDamage(1.6f, 3));
 
     //Clawkind
     public static Item katars = new MSUWeaponBase(248, 1.6, -0.65, 2, "katars", "katars").setTool(toolClaws, 2, 3).addProperties(new PropertySweep(), new PropertyDualWield());
@@ -306,6 +395,8 @@ public class MinestuckUniverseItems
     public static MSUThrowableBase redHotRang = new MSUThrowableBase(12, 0, 1, 1f, 4, -0.5, "red_hot_rang", "redHotRang"){{setMaxDamage(80);}}.addProperties(new PropertyDamagePrjctle(7), new PropertyThrowGravity(0.6f), new PropertyBoomerang(), new PropertyFirePrjctle(5, false));
     public static MSUThrowableBase tornadoGlaive = new MSUThrowableBase(8, 0, 1, 1f, 6, -1f, "tornado_glaive", "tornadoGlaive"){{setMaxDamage(550);}}.setSize(2).addProperties(new PropertyDamagePrjctle(8), new PropertyPrjctleItemPull(16, 0.5f), new PropertyBoomerang(), new PropertyThrowGravity(0.4f));
     public static MSUThrowableBase hotPotato = new MSUThrowableBase(0, 5, 16, "hot_potato", "hotPotato").addProperties(new PropertyDamagePrjctle(10), new PropertyFirePrjctle(10, true));
+    public static MSUThrowableBase eightBall = new MSUThrowableBase(0, 5, 8, "eight_ball", "eightBall").addProperties(new PropertyStorageProjectile(false, true), new PropertyDamagePrjctle(2), new PropertyProjectileBlinding(0x0000FF));
+    public static MSUThrowableBase walletBall = new MSUThrowableBase(0, 5, 8, "wallet_ball", "walletBall").addProperties(new PropertyStorageProjectile(true, true), new PropertyDamagePrjctle(4));
 
     //Rockkind
     public static MSUThrowableBase pebble = new MSUThrowableBase(0, 0, 16, 1.4f, 0, 0, "pebble", "pebble").addProperties(new PropertyDamagePrjctle(2), new PropertyThrowGravity(1.5f));
@@ -324,6 +415,9 @@ public class MinestuckUniverseItems
     public static Item battlepickOfZillydew = new MSUWeaponBase(780, 16, -2.8, 40, "battlepick_of_zillydew", "battlepickOfZillydew").setTool(toolPickaxe, 5, 10);
     public static Item rolledUpPaper = new MSUWeaponBase(200, 3, 0, 1, "rolled_up_paper", "rolledUpPaper");
     public static Item yesterdaysNews = new MSUWeaponBase(450, 7, 0, 1, "yesterdays_news", "yesterdaysNews").addProperties(new PropertyPotion(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 1), false, 0.5f), new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 200, 1), false, 0.5f), new PropertyFire(3, 0.7f, true));
+
+    @Deprecated //Use MinestuckItems.stoneSlab instead
+    private static final Item stoneTablet = new ItemStoneTablet();
 
     //Armor
     public static MSUArmorBase diverHelmet = new ItemDiverHelmet(materialDiverHelmet,0,EntityEquipmentSlot.HEAD,"diverHelmet", "diver_helmet");
@@ -347,12 +441,16 @@ public class MinestuckUniverseItems
     public static MSUArmorBase crumplyHat = new MSUArmorBase(materialCloth, 0, EntityEquipmentSlot.HEAD, "crumplyHat", Minestuck.MOD_ID+":crumply_hat");
     public static Item catclaws = new ItemDualClaw(450, 2.9, -0.65, -1.5D, -1.0D, 6, "catClaws",Minestuck.MOD_ID+ ":catclaws").setTool(toolClaws, 2, 1);
 
+
+
     //Support
     public static Item splatcraftCruxiteFilter = new MSUItemBase("cruxite_filter", "cruxiteFilter"){
         @Override
         public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         }
     };
+
+    public static ItemBlock ceramicPorkhollow = ((BlockCeramicPorkhollow)MinestuckUniverseBlocks.ceramicPorkhollow).getItemBlock();
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -370,11 +468,23 @@ public class MinestuckUniverseItems
         registerItem(registry, battery);
         registerItem(registry, yarnBall);
         registerItem(registry, wizardbeardYarn);
+
+        registerItem(registry, popTart);
+        registerItem(registry, popBall);
+        registerItem(registry, floatStone);
+        registerItem(registry, dragonGel);
+        registerItem(registry, captchalogueBook);
+        registerItem(registry, chastityKey);
+        registerItem(registry, cruxiteGel);
+
+        registerItem(registry, cruxtruderGel);
         registerItem(registry, spaceSalt);
         registerItem(registry, cueBall);
         registerItem(registry, tickingStopwatch);
         registerItem(registry, timetable);
         registerItem(registry, strifeCard);
+        registerItem(registry, skaianScroll);
+         MinestuckItems.stoneSlab = registerCustomRenderedItem(registry, stoneTablet);
 
         registerItem(registry, laserPointer);
         registerItem(registry, whip);
@@ -391,6 +501,7 @@ public class MinestuckUniverseItems
         registerItem(registry, skaia);
         registerItem(registry, greenSun);
         registerItem(registry, lightning);
+        registerItem(registry, walletEntityItem);
 
         registerItem(registry, diverHelmet);
         registerItem(registry, spikedHelmet);
@@ -415,6 +526,10 @@ public class MinestuckUniverseItems
         registerItem(registry, teleportMedallion);
         registerItem(registry, skaianMedallion);
 
+        for(Item modus : ModusItem.fetchModi)
+            if(modus instanceof ModusItem)
+                registerItem(registry, modus);
+
         if(MSUConfig.combatOverhaul)
         {
             MinestuckItems.clawHammer = registerCustomRenderedItem(registry, new MSUWeaponBase(259, 6.4, -2.52, 1, MinestuckItems.clawHammer).setTool(toolHammer, 1, 2).addProperties(new PropertyVMotionDamage(1.6f, 3)));
@@ -423,7 +538,7 @@ public class MinestuckUniverseItems
             MinestuckItems.pogoHammer = registerItem(registry, new MSUWeaponBase(863, 19.2, -2.8, 4, MinestuckItems.pogoHammer).setTool(toolHammer, 2, 4).addProperties(new PropertyPogo(0.7), new PropertyVMotionDamage(2f, 4)));
             MinestuckItems.telescopicSassacrusher = registerItem(registry, new MSUWeaponBase(1610, 51.2, -3.64, 4, MinestuckItems.telescopicSassacrusher).setTool(toolHammer, 8, 2).addProperties(new PropertyFarmine(100, 128), new PropertyVMotionDamage(1.8f, 10)));
             MinestuckItems.regiHammer = registerItem(registry, new MSUWeaponBase(776, 19.2, -2.52, 4, MinestuckItems.regiHammer).setTool(toolHammer, 3, 6));
-            MinestuckItems.fearNoAnvil = registerCustomRenderedItem(registry, new MSUWeaponBase(1725, 32, -2.66, 8, MinestuckItems.fearNoAnvil).setTool(toolHammer, 3, 10).addProperties(new PropertyPotion(false, 0.5f, new PotionEffect(MobEffects.SLOWNESS, 400, 1), new PotionEffect(MobEffects.MINING_FATIGUE, 400, 2)), new PropertyVMotionDamage(1.6f, 3)));
+            MinestuckItems.fearNoAnvil = registerCustomRenderedItem(registry, new MSUWeaponBase(1725, 32, -2.66, 8, MinestuckItems.fearNoAnvil).setTool(toolHammer, 3, 10).addProperties(new PropertyPotion(true, 0.1f, new PotionEffect(MSUPotions.TIME_STOP, 20, 0)), new PropertyPotion(false, 0.5f, new PotionEffect(MobEffects.SLOWNESS, 400, 1), new PotionEffect(MobEffects.MINING_FATIGUE, 400, 2)), new PropertyVMotionDamage(1.6f, 3)));
             MinestuckItems.meltMasher = registerItem(registry, new MSUWeaponBase(1265, 25.6, -2.8, 4, MinestuckItems.meltMasher).setTool(toolHammer, 4, 8).addProperties(new PropertyAutoSmelt(), new PropertyFarmine(8, 5), new PropertyFire(4, 1, false)));
             MinestuckItems.zillyhooHammer = registerItem(registry, new MSUWeaponBase(3450, 69.1, -2.94, 40, MinestuckItems.zillyhooHammer).setTool(toolHammer, 5, 10));
             MinestuckItems.scarletZillyhoo = registerItem(registry, new MSUWeaponBase(2588, 49.9, -2.8, 60, MinestuckItems.scarletZillyhoo).setTool(toolHammer, 5, 10).addProperties(new PropertyFire(10, 0.8f, true)));
@@ -443,27 +558,28 @@ public class MinestuckUniverseItems
         registerItem(registry, highVoltageStormCrusher);
         registerItem(registry, barrelsWarhammer);
         registerItem(registry, stardustSmasher);
+        registerItem(registry, drummer);
 
         if(MSUConfig.combatOverhaul)
         {
-            MinestuckItems.sord = registerItem(registry, new MSUWeaponBase(250, 3, -2.3, 1, MinestuckItems.sord).setTool(toolSword, 0, 0).addProperties(new PropertySlippery()));
-            MinestuckItems.cactusCutlass = registerItem(registry, new MSUWeaponBase(746, 12.7, -2.3, 5, MinestuckItems.cactusCutlass).setTool(toolSword, 1, 4));
-            MinestuckItems.beefSword = registerItem(registry, new MSUWeaponBase(550, 7.2, -2.3, 4, MinestuckItems.beefSword).setTool(toolSword, 1, 2).addProperties(new PropertyEdible(3, 0.3F, 75)));
-            MinestuckItems.steakSword = registerItem(registry, new MSUWeaponBase(550, 8, -2.3, 4, MinestuckItems.steakSword).setTool(toolSword, 1, 2).addProperties(new PropertyEdible(8, 0.8F, 50)));
-            MinestuckItems.irradiatedSteakSword = registerItem(registry, new MSUWeaponBase(550, 8, -2.3, 3, MinestuckItems.irradiatedSteakSword).setTool(toolSword, 1, 3).addProperties(new PropertyEdible(4, 0.4F, 25).setPotionEffect(0.9f, new PotionEffect(MobEffects.WITHER, 100, 1))));
-            MinestuckItems.firePoker = registerItem(registry, new MSUWeaponBase(825, 10.5, -2.07, 10, MinestuckItems.firePoker).setTool(toolSword, 2, 4).addProperties(new PropertyFire(30, 0.3f, false), new PropertyTipperDamage(0.8f, 1.2f, 1)));
-            MinestuckItems.hotHandle = registerItem(registry, new MSUWeaponBase(825, 12.0, -2.3, 10, MinestuckItems.hotHandle).setTool(toolSword, 3, 3).addProperties(new PropertyFire(15, 1f, true)));
-            MinestuckItems.royalDeringer = registerCustomRenderedItem(registry, new MSUWeaponBase(908, 13.2, -2.3, 14, MinestuckItems.royalDeringer){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 3, 6).addProperties(new PropertyBreakableItem()));
-            MinestuckItems.caledfwlch = registerCustomRenderedItem(registry, new MSUWeaponBase(1100, 16.0, -2.3, 16, MinestuckItems.caledfwlch){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 8).addProperties(new PropertyTrueDamage(), new PropertyBreakableItem()));
-            MinestuckItems.caledscratch = registerCustomRenderedItem(registry, new MSUWeaponBase(1375, 20.0, -2.07, 20, MinestuckItems.caledscratch){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 10).addProperties(new PropertyXpMend(), new PropertyBreakableItem()));
+            MinestuckItems.sord = registerItem(registry, new MSUWeaponBase(250, 3, -2.3, 1, MinestuckItems.sord).setTool(toolSword, 0, 0).addProperties(new PropertySweep(), new PropertySlippery()));
+            MinestuckItems.cactusCutlass = registerItem(registry, new MSUWeaponBase(746, 12.7, -2.3, 5, MinestuckItems.cactusCutlass).setTool(toolSword, 1, 4).addProperties(new PropertySweep()));
+            MinestuckItems.beefSword = registerItem(registry, new MSUWeaponBase(550, 7.2, -2.3, 4, MinestuckItems.beefSword).setTool(toolSword, 1, 2).addProperties(new PropertySweep(), new PropertyEdible(3, 0.3F, 75)));
+            MinestuckItems.steakSword = registerItem(registry, new MSUWeaponBase(550, 8, -2.3, 4, MinestuckItems.steakSword).setTool(toolSword, 1, 2).addProperties(new PropertySweep(), new PropertyEdible(8, 0.8F, 50)));
+            MinestuckItems.irradiatedSteakSword = registerItem(registry, new MSUWeaponBase(550, 8, -2.3, 3, MinestuckItems.irradiatedSteakSword).setTool(toolSword, 1, 3).addProperties(new PropertySweep(), new PropertyEdible(4, 0.4F, 25).setPotionEffect(0.9f, new PotionEffect(MobEffects.WITHER, 100, 1))));
+            MinestuckItems.firePoker = registerItem(registry, new MSUWeaponBase(825, 10.5, -2.07, 10, MinestuckItems.firePoker).setTool(toolSword, 2, 4).addProperties(new PropertySweep(), new PropertyFire(30, 0.3f, false), new PropertyTipperDamage(0.8f, 1.2f, 1)));
+            MinestuckItems.hotHandle = registerItem(registry, new MSUWeaponBase(825, 12.0, -2.3, 10, MinestuckItems.hotHandle).setTool(toolSword, 3, 3).addProperties(new PropertySweep(), new PropertyFire(15, 1f, true)));
+            MinestuckItems.royalDeringer = registerCustomRenderedItem(registry, new MSUWeaponBase(908, 13.2, -2.3, 14, MinestuckItems.royalDeringer){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 3, 6).addProperties(new PropertySweep(), new PropertyBreakableItem()));
+            MinestuckItems.caledfwlch = registerCustomRenderedItem(registry, new MSUWeaponBase(1100, 16.0, -2.3, 16, MinestuckItems.caledfwlch){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 8).addProperties(new PropertySweep(), new PropertyTrueDamage(), new PropertyBreakableItem()));
+            MinestuckItems.caledscratch = registerCustomRenderedItem(registry, new MSUWeaponBase(1375, 20.0, -2.07, 20, MinestuckItems.caledscratch){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 10).addProperties(new PropertySweep(), new PropertyXpMend(), new PropertyBreakableItem()));
             MinestuckItems.doggMachete = registerItem(registry, new MSUWeaponBase(1513, 20.0, -2.3, 10, MinestuckItems.doggMachete).setTool(toolSword, 4, 10).addProperties(new PropertyPotion(new PotionEffect(MobEffects.SLOWNESS, 200, 0), false, 0.4f), new PropertyKnockback(0.65f)));
-            MinestuckItems.scarletRibbitar = registerCustomRenderedItem(registry, new MSUWeaponBase(1375, 22.0, -2.415, 18, MinestuckItems.scarletRibbitar){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 10).addProperties(new PropertyFire(30, 0.5f, true), new PropertyBreakableItem()));
-            MinestuckItems.cobaltSabre = registerItem(registry, new MSUWeaponBase(1210, 16.0, -2.07, 20, MinestuckItems.cobaltSabre).setTool(toolSword, 4, 8).addProperties(new PropertyFire(8, 0.8f, true), new PropertyGristSetter(GristType.Cobalt)));
-            MinestuckItems.zillywairCutlass = registerItem(registry, new MSUWeaponBase(3300, 33.6, -2.3, 40, MinestuckItems.zillywairCutlass).setTool(toolSword, 5, 10));
-            MinestuckItems.regisword = registerItem(registry, new MSUWeaponBase(743, 12.0, -2.07, 8, MinestuckItems.regisword).setTool(toolSword, 3, 6));
-            MinestuckItems.quantumSabre = registerItem(registry, new MSUWeaponBase(880, 14.4, -2.3, 10, MinestuckItems.quantumSabre).setTool(toolSword, 3, 6).addProperties(new PropertyPotion(new PotionEffect(MobEffects.WITHER, 100, 1), false, 0.6f)));
+            MinestuckItems.scarletRibbitar = registerCustomRenderedItem(registry, new MSUWeaponBase(1375, 22.0, -2.415, 18, MinestuckItems.scarletRibbitar){{addPropertyOverride(new ResourceLocation(MinestuckUniverse.MODID, "broken"), PropertyBreakableItem.getPropertyOverride());}}.setTool(toolSword, 4, 10).addProperties(new PropertySweep(), new PropertyFire(30, 0.5f, true), new PropertyBreakableItem()));
+            MinestuckItems.cobaltSabre = registerItem(registry, new MSUWeaponBase(1210, 16.0, -2.07, 20, MinestuckItems.cobaltSabre).setTool(toolSword, 4, 8).addProperties(new PropertySweep(), new PropertyFire(8, 0.8f, true), new PropertyGristSetter(GristType.Cobalt)));
+            MinestuckItems.zillywairCutlass = registerItem(registry, new MSUWeaponBase(3300, 33.6, -2.3, 40, MinestuckItems.zillywairCutlass).setTool(toolSword, 5, 10).addProperties(new PropertySweep()));
+            MinestuckItems.regisword = registerItem(registry, new MSUWeaponBase(743, 12.0, -2.07, 8, MinestuckItems.regisword).setTool(toolSword, 3, 6).addProperties(new PropertySweep()));
+            MinestuckItems.quantumSabre = registerItem(registry, new MSUWeaponBase(880, 14.4, -2.3, 10, MinestuckItems.quantumSabre).setTool(toolSword, 3, 6).addProperties(new PropertySweep(), new PropertyPotion(new PotionEffect(MobEffects.WITHER, 100, 1), false, 0.6f)));
 
-            MinestuckItems.shatterBeacon = registerItem(registry, new MSUWeaponBase(1100, 34.0, -2.3, 14, MinestuckItems.shatterBeacon).setTool(toolSword, 3, 8).addProperties(new PropertyPotion(false, 0.6f,
+            MinestuckItems.shatterBeacon = registerItem(registry, new MSUWeaponBase(1100, 34.0, -2.3, 14, MinestuckItems.shatterBeacon).setTool(toolSword, 3, 8).addProperties(new PropertySweep(), new PropertyPotion(false, 0.6f,
                     new PotionEffect(MobEffects.SPEED, 300, 0),
                     new PotionEffect(MobEffects.HASTE, 300, 0),
                     new PotionEffect(MobEffects.RESISTANCE, 300, 0),
@@ -472,8 +588,8 @@ public class MinestuckUniverseItems
                     new PotionEffect(MobEffects.REGENERATION, 300, 1)
             )));
 
-            MinestuckItems.claymore = registerItem(registry, new MSUWeaponBase(660, 18.4, -2.76, 5, MinestuckItems.claymore).setTool(toolSword, 3, 4));
-            MinestuckItems.katana = registerItem(registry, new MSUWeaponBase(650, 8, -2.3, 6, MinestuckItems.katana).setTool(toolSword, 1, 2));
+            MinestuckItems.claymore = registerItem(registry, new MSUWeaponBase(660, 18.4, -2.76, 5, MinestuckItems.claymore).setTool(toolSword, 3, 4).addProperties(new PropertySweep()));
+            MinestuckItems.katana = registerItem(registry, new MSUWeaponBase(650, 8, -2.3, 6, MinestuckItems.katana).setTool(toolSword, 1, 2).addProperties(new PropertySweep()));
         }
 
         registerCustomRenderedItem(registry, new MSUWeaponBase(5500, 16, -2.3, 12, MinestuckItems.unbreakableKatana).setTool(toolSword, 4, 6));
@@ -655,12 +771,21 @@ public class MinestuckUniverseItems
         registerItem(registry, hotPotato);
         registerItem(registry, dragonCharge);
         registerItem(registry, tornadoGlaive);
+        registerItem(registry, eightBall);
+        registerItem(registry, walletBall);
 
         registerItem(registry, pebble);
         registerItem(registry, rock);
         registerItem(registry, bigRock);
         registerItem(registry, rolledUpPaper);
         registerItem(registry, yesterdaysNews);
+
+
+        OperandiModus.itemPool.add(MinestuckUniverseItems.operandiEightBall);
+        OperandiModus.itemPool.add(MinestuckUniverseItems.operandiSplashPotion);
+        for(Item operandi : OperandiModus.itemPool)
+            if(!(operandi instanceof ItemBlock) && !(operandi.getRegistryName() != null && registry.containsKey(operandi.getRegistryName())))
+                registerItem(registry, operandi);
 
         registerItem(registry, dungeonKey);
 
@@ -671,6 +796,23 @@ public class MinestuckUniverseItems
         if(MinestuckUniverse.isSplatcraftLodaded)
             splatcraftCruxiteFilter = new ItemFilter("cruxiteFilter", "cruxite_filter", false).setCreativeTab(TabMinestuckUniverse.main);
         registerItem(registry, splatcraftCruxiteFilter);
+
+        MinestuckItems.modusCard.setCreativeTab(TabMinestuckUniverse.fetchModi);
+        OreDictionary.registerOre("modus", MinestuckItems.modusCard);
+        for(Item modus : ModusItem.fetchModi)
+            OreDictionary.registerOre("modus", modus);
+
+        registerItem(registry, gtHood);
+        registerItem(registry, gtShirt);
+        registerItem(registry, gtPants);
+        registerItem(registry, gtShoes);
+        registerItem(registry, gtArmorKit);
+        heroStoneShards.forEach((key, item) -> registerItem(registry, item));
+        registerItem(registry, denizenTome);
+        registerItem(registry, denizenEye);
+        registerItem(registry, sashKit);
+        registerItem(registry, godTierResetCharm);
+        registerItem(registry, manipulatedMatter);
     }
 
     public static void setPostInitVariables()
@@ -686,11 +828,6 @@ public class MinestuckUniverseItems
         overgrowthTransforms. put(Blocks.LOG, 4, MinestuckBlocks.log, 0);
         overgrowthTransforms.put(Blocks.LOG, 8, MinestuckBlocks.log, 8);
         overgrowthTransforms.put(Blocks.LOG, 12, MinestuckBlocks.log, 12);
-
-
-        if(MinestuckUniverse.isMSGTLoaded && MinestuckItems.fearNoAnvil instanceof MSUWeaponBase)
-            ((MSUWeaponBase)MinestuckItems.fearNoAnvil)
-                    .addProperties(new PropertyPotion(true, 0.1f, new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("minestuckgodtier","time_stop")), 20, 0)));
 
         wisdomsPierce.addProperties(new PropertyInnocuousDouble(wisdomsHookshot, true, false, false));
         wisdomsHookshot.addProperties(new PropertyInnocuousDouble(wisdomsPierce, true, false, false));
@@ -769,6 +906,17 @@ public class MinestuckUniverseItems
         registerItemCustomRender(blizzardCutters, new MSUModelManager.DualWeaponDefinition("blizzard_cutters_drawn", "blizzard_cutters_sheathed"));
         registerItemCustomRender(katarsOfZillywhomst, new MSUModelManager.DualWeaponDefinition("katars_of_zillywhomst_drawn", "katars_of_zillywhomst_sheathed"));
 
+        registerItemCustomRender(denizenTome, new MSUModelManager.SubtypesItemDefinition("denizen_tome"));
+        registerItemCustomRender(cruxiteGel, new MSUModelManager.SubtypesItemDefinition("cruxite_gel"));
+        registerItemCustomRender(cruxtruderGel, new MSUModelManager.SubtypesItemDefinition("cruxtruder_gel"));
+        registerItemCustomRender(captchalogueBook, new MSUModelManager.SubtypesItemDefinition("captchalogue_book"));
+        registerItemCustomRender(ceramicPorkhollow, new MSUModelManager.SubtypesItemDefinition("ceramic_porkhollow"));
+
+        registerItemCustomRender(gtHood, new MSUModelManager.GodTierArmorItemDefinition((ItemGTArmor) gtHood));
+        registerItemCustomRender(gtShirt, new MSUModelManager.GodTierArmorItemDefinition((ItemGTArmor) gtShirt));
+        registerItemCustomRender(gtPants, new MSUModelManager.GodTierArmorItemDefinition((ItemGTArmor) gtPants));
+        registerItemCustomRender(gtShoes, new MSUModelManager.GodTierArmorItemDefinition((ItemGTArmor) gtShoes));
+
         RenderThrowable.IRenderProperties THROW_STAR_ROTATION = ((entity, partialTicks) ->
         {
             GlStateManager.rotate(90, 1, 0, 0);
@@ -805,17 +953,13 @@ public class MinestuckUniverseItems
     @SideOnly(Side.CLIENT)
     private static Item registerItemCustomRender(Item item, MSUModelManager.CustomItemMeshDefinition customMesh)
     {
-        MSUModelManager.customItemModels.add(new Pair<>(item, customMesh));
+        MSUModelManager.customItemModels.put(item, customMesh);
         return item;
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry)
     {
-        for(Block block : itemBlocks)
-        {
-            ItemBlock item = (block instanceof BlockCustomTransportalizer || block instanceof BlockTransportalizer)
-                    ? new ItemTransportalizer(block) : new ItemBlock(block);
+        for(ItemBlock item : itemBlocks)
             registerItem(registry, item.setRegistryName(item.getBlock().getRegistryName()));
-        }
     }
 }

@@ -2,9 +2,18 @@ package com.cibernet.minestuckuniverse;
 
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.godtier.ItemGodTierKit;
+import com.mraof.minestuck.Minestuck;
+import com.mraof.minestuck.item.ItemModus;
+import com.mraof.minestuck.item.MinestuckItems;
+import com.mraof.minestuck.util.EnumClass;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreDictionary;
+import vazkii.botania.common.item.ItemMod;
 
 public class TabMinestuckUniverse
 {
@@ -25,6 +34,39 @@ public class TabMinestuckUniverse
         @Override
         public ItemStack getTabIconItem() {
             return  new ItemStack(MinestuckUniverseItems.batteryBeamBlade);
+        }
+    };
+    public static final CreativeTabs fetchModi = new CreativeTabs("minestuckFetchModi")
+    {
+        @Override
+        public ItemStack getIconItemStack()
+        {
+            if (Minecraft.getMinecraft().player == null)
+                return getTabIconItem();
+
+            NonNullList<ItemStack> modi = NonNullList.create();
+
+            for(ItemStack modus : OreDictionary.getOres("modus"))
+                modus.getItem().getSubItems(this, modi);
+
+
+            if(modi.isEmpty())
+                return super.getIconItemStack();
+
+            return modi.get((int) Math.abs((System.currentTimeMillis() / 1000d) % modi.size()));
+        }
+
+        @Override
+        public ItemStack getTabIconItem() {
+            return new ItemStack(MinestuckItems.modusCard);
+        }
+
+    };
+    public static final CreativeTabs godTier = new CreativeTabs("minestuckGodTier")
+    {
+        @Override
+        public ItemStack getTabIconItem() {
+            return ItemGodTierKit.generateKit(EnumClass.HEIR, null);
         }
     };
 }

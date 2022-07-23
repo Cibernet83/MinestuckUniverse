@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "minestuckuniverse:derse_pillar" },
+        "axis=z":   { "model": "minestuckuniverse:derse_pillar", "x": 90 },
+        "axis=x":   { "model": "minestuckuniverse:derse_pillar", "x": 90, "y": 90 }
+    }
+}
+

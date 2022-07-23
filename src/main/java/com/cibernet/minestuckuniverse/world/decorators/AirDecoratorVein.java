@@ -20,21 +20,26 @@ public class AirDecoratorVein implements ILandDecorator
 	int size;
 	int highestY;
 
-	public AirDecoratorVein(IBlockState block, int amount, int size, int highestY)
+	int distanceFromCenter;
+
+	public AirDecoratorVein(IBlockState block, int amount, int size, int highestY, int distanceFromCenter)
 	{
 		this.amount = amount;
 		this.block = block;
 		this.size = size;
 		this.highestY = highestY;
+		this.distanceFromCenter = distanceFromCenter;
 	}
-	
+
 	@Override
 	public BlockPos generate(World world, Random random, int chunkX, int chunkZ, ChunkProviderLands provider)
 	{
 		int minY = 0;
 		int maxY = highestY;
 		int diffBtwnMinMaxY = maxY - minY;
-		for(int x = 0; x < amount; x++)
+
+		if(Math.abs(chunkX) + Math.abs(chunkZ) >= distanceFromCenter)
+		for(int x = 0; x < random.nextInt(amount+1); x++)
 		{
 			int posX = chunkX * 16 + random.nextInt(16);
 			int posY = minY + random.nextInt(diffBtwnMinMaxY);

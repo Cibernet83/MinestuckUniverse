@@ -53,7 +53,7 @@ public class LandAspectBedrock extends TerrainLandAspect
 	{
 		ArrayList<ILandDecorator> list = new ArrayList<>();
 
-		list.add(new AirDecoratorVein(Blocks.BEDROCK.getDefaultState(), 4, 7, 128));
+		list.add(new AirDecoratorVein(MinestuckUniverseBlocks.artifact.getDefaultState(), 4, 7, 128, 32));
 
 		return list;
 	}

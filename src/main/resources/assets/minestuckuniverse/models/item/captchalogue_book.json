@@ -1,0 +1,8 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/captchalogue_book",
+        "layer1": "minestuckuniverse:items/captchalogue_book_1",
+        "layer2": "minestuckuniverse:items/captchalogue_book_2"
+    }
+}

@@ -8,9 +8,9 @@ import com.cibernet.minestuckuniverse.items.properties.WeaponProperty;
 import com.cibernet.minestuckuniverse.items.properties.throwkind.IPropertyThrowable;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import javafx.scene.control.Tab;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.Entity;
@@ -45,6 +45,9 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 	protected double attackSpeed;
 	protected float throwSpeed;
 	protected float size = 1;
+
+	protected SoundEvent sound = SoundEvents.ENTITY_SNOWBALL_THROW;
+	protected float angle = 0;
 
 	@SideOnly(Side.CLIENT)
 	protected RenderThrowable.IRenderProperties renderProperties;
@@ -103,6 +106,21 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 		setCreativeTab(TabMinestuckUniverse.main);
 	}
 
+	public MSUThrowableBase setThrownSound(SoundEvent sound)
+	{
+		this.sound = sound;
+		return this;
+	}
+
+	public SoundEvent getThrownSound() {
+		return sound;
+	}
+
+	public MSUThrowableBase setThrownAngle(float angle) {
+		this.angle = angle;
+		return this;
+	}
+
 	public MSUThrowableBase setSize(float size)
 	{
 		this.size = size;
@@ -112,6 +130,14 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 	public float getSize()
 	{
 		return size;
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+	{
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		for(WeaponProperty p : getProperties(stack))
+			p.addTooltip(stack, worldIn, tooltip, flagIn);
 	}
 
 	@Override
@@ -158,13 +184,13 @@ public class MSUThrowableBase extends MSUItemBase implements IPropertyWeapon<MSU
 
 		if (!worldIn.isRemote)
 		{
-			proj.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0, throwSpeed, 1.0F);
+			proj.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, angle, throwSpeed, 1.0F);
 			worldIn.spawnEntity(proj);
 		}
 
 		if (!(entityLiving instanceof EntityPlayer) || !((EntityPlayer)entityLiving).capabilities.isCreativeMode)
 			stack.shrink(1);
-		worldIn.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		worldIn.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, sound, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
 		if(entityLiving instanceof EntityPlayer)
 		{

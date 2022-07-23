@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "variant=default": { "model": "minestuckuniverse:derse_stone" }
+    }
+}

@@ -18,26 +18,9 @@ public class MSUBannerPatterns
 
     public static void init()
     {
-        if(MinestuckUniverse.isMSGTLoaded)
-        {
-            for(EnumAspect aspect : EnumAspect.values())
-                registerPattern(aspect.toString(), new ItemStack(Item.REGISTRY.getObject(new ResourceLocation("minestuckgodtier", "hero_stone_shard_"+aspect.toString()))));
-        }
-        else
-        {
-            registerPattern("light", new ItemStack(Items.GLOWSTONE_DUST));
-            registerPattern("void", new ItemStack(Items.COAL));
-            registerPattern("space", new ItemStack(Items.COMPASS));
-            registerPattern("time", new ItemStack(Items.CLOCK));
-            registerPattern("mind", new ItemStack(Items.BOOK));
-            registerPattern("heart", new ItemStack(Items.ENDER_PEARL));
-            registerPattern("doom", new ItemStack(Items.FLINT_AND_STEEL));
-            registerPattern("life", new ItemStack(Items.WHEAT));
-            registerPattern("breath", new ItemStack(Blocks.ICE));
-            registerPattern("blood", new ItemStack(Items.REDSTONE));
-            registerPattern("rage", new ItemStack(Items.ROTTEN_FLESH));
-            registerPattern("hope", new ItemStack(Items.GHAST_TEAR));
-        }
+
+        for(EnumAspect aspect : EnumAspect.values())
+            registerPattern(aspect.toString(), new ItemStack(MinestuckUniverseItems.heroStoneShards.get(aspect)));
 
         registerPattern("moon", new ItemStack(MinestuckUniverseItems.moonstone));
     }

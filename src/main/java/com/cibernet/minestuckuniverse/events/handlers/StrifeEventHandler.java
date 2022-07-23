@@ -3,6 +3,9 @@ package com.cibernet.minestuckuniverse.events.handlers;
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
+import com.cibernet.minestuckuniverse.damage.CritDamageSource;
+import com.cibernet.minestuckuniverse.damage.EntityCritDamageSource;
+import com.cibernet.minestuckuniverse.damage.IGodTierDamage;
 import com.cibernet.minestuckuniverse.events.WeaponAssignedEvent;
 import com.cibernet.minestuckuniverse.gui.GuiStrifePortfolio;
 import com.cibernet.minestuckuniverse.items.ItemStrifeCard;
@@ -47,10 +50,12 @@ import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -99,10 +104,12 @@ public class StrifeEventHandler
 
 			if(weaponMod != null && weaponMod.getAmount() != dmg)
 			{
+				double dmgScale = event.getAmount()/dmgAttr.getAttributeValue();
+
 				dmgAttr.removeModifier(MSUWeaponBase.getAttackDamageUUID());
 				dmgAttr.applyModifier(new AttributeModifier(MSUWeaponBase.getAttackDamageUUID(), "Weapon modifier", dmg, 0));
 
-				event.getEntityLiving().attackEntityFrom(event.getSource(), (float) dmgAttr.getAttributeValue());
+				event.getEntityLiving().attackEntityFrom(event.getSource(), (float) (dmgAttr.getAttributeValue() * dmgScale));
 				event.setCanceled(true);
 			}
 		}
@@ -111,7 +118,7 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onPlayerAttack(LivingAttackEvent event)
 	{
-		if(!MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer) || event.getSource().getImmediateSource() instanceof FakePlayer)
+		if(event.getSource() instanceof EntityCritDamageSource || !MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer) || event.getSource().getImmediateSource() instanceof FakePlayer)
 			return;
 
 		EntityLivingBase source = (EntityLivingBase) event.getSource().getImmediateSource();
@@ -152,18 +159,6 @@ public class StrifeEventHandler
 		add(MinestuckUniverseItems.archmageDaggers);
 		add(MinestuckUniverseItems.gasterBlaster);
 	}};
-	public static final List<Item> FORCED_USABLE_UNASSIGNED = new ArrayList<Item>()
-	{{
-		add(MSUKindAbstrata.getItem("botania", "managun"));
-		add(MSUKindAbstrata.getItem("bibliocraft", "bibliodrill"));
-		add(Items.EGG);
-		add(Items.SNOWBALL);
-		add(Items.ENDER_EYE);
-		add(Items.ENDER_PEARL);
-		add(Items.EXPERIENCE_BOTTLE);
-		add(Items.POTIONITEM);
-		add(MinestuckUniverseItems.yarnBall);
-	}};
 
 	@SubscribeEvent
 	public static void onItemInteract(PlayerInteractEvent.RightClickItem event)
@@ -174,7 +169,7 @@ public class StrifeEventHandler
 		ItemStack stack = event.getItemStack();
 		boolean canUse = true;
 
-		if(FORCED_USABLE_UNASSIGNED.contains(stack.getItem()) || isStackAssigned(stack))
+		if(Arrays.asList(MSUConfig.restrictedStrifeBypass).contains(stack.getItem().getRegistryName().toString()) || isStackAssigned(stack))
 			canUse = true;
 		else if(USABLE_ASSIGNED_ONLY.contains(stack.getItem()))
 		{
@@ -484,7 +479,8 @@ public class StrifeEventHandler
 			{
 				ArrayList<KindAbstratus> abstrata = new ArrayList<>(KindAbstratus.REGISTRY.getValuesCollection());
 
-				abstrata.removeIf(k -> k.isEmpty());
+				abstrata.removeIf(k -> k.isEmpty() && !Arrays.asList(MSUConfig.strifeCardMobDropsWhitelist).contains(k.getRegistryName().toString())
+				);
 				abstrata.add(null);
 
 				EntityItem item = new EntityItem(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ,

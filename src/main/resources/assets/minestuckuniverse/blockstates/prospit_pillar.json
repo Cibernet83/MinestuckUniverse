@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "minestuckuniverse:prospit_pillar" },
+        "axis=z":   { "model": "minestuckuniverse:prospit_pillar", "x": 90 },
+        "axis=x":   { "model": "minestuckuniverse:prospit_pillar", "x": 90, "y": 90 }
+    }
+}
+

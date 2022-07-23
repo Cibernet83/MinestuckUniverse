@@ -44,7 +44,12 @@ public class BlockMSUDecor extends BlockDecor implements IRegistryItem
         return boundingBox.BOUNDING_BOX[facing.getHorizontalIndex()];
     }
 
-    public AxisAlignedBB modifyAABBForDirection(EnumFacing facing, AxisAlignedBB bb)
+    @Override
+    public AxisAlignedBB modifyAABBForDirection(EnumFacing facing, AxisAlignedBB bb) {
+        return rotateAABB(facing, bb);
+    }
+
+    public static AxisAlignedBB rotateAABB(EnumFacing facing, AxisAlignedBB bb)
     {
         AxisAlignedBB out = null;
         switch(facing.ordinal())

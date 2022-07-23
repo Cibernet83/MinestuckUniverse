@@ -1,29 +1,22 @@
 package com.cibernet.minestuckuniverse.client;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
-import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
+import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.events.handlers.StrifeEventHandler;
 import com.cibernet.minestuckuniverse.gui.GuiStrifeSwitcher;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
-import com.mraof.minestuck.client.settings.MinestuckKeyHandler;
-import com.mraof.minestuck.editmode.ClientEditHandler;
-import com.mraof.minestuck.network.skaianet.SburbHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.EnumHand;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 
 @SideOnly(Side.CLIENT)
 public class MSUKeys
@@ -33,6 +26,9 @@ public class MSUKeys
 	public static final KeyBinding strifeSelectorRightKey = new KeyBinding("key.minestuckuniverse.strifeSelectorRight", Keyboard.KEY_NONE, "key.categories.minestuck");
 	public static final KeyBinding swapOffhandStrifeKey = new KeyBinding("key.minestuckuniverse.swapOffhandStrife", Keyboard.KEY_NONE, "key.categories.minestuck");
 
+	public static KeyBinding[] skillKeys;
+	private static boolean[] downs;
+
 	public static void register()
 	{
 		MinecraftForge.EVENT_BUS.register(MSUKeys.class);
@@ -40,6 +36,16 @@ public class MSUKeys
 		ClientRegistry.registerKeyBinding(strifeSelectorLeftKey);
 		ClientRegistry.registerKeyBinding(strifeSelectorRightKey);
 		ClientRegistry.registerKeyBinding(swapOffhandStrifeKey);
+
+		skillKeys = new KeyBinding[SkillKeyStates.Key.values().length];
+		downs = new boolean[SkillKeyStates.Key.values().length];
+
+		skillKeys[SkillKeyStates.Key.PRIMARY.ordinal()] = new KeyBinding("key.minestuckuniverse.abilitechPrimary", Keyboard.KEY_H, "key.categories.minestuck");
+		skillKeys[SkillKeyStates.Key.SECONDARY.ordinal()] = new KeyBinding("key.minestuckuniverse.abilitechSecondary", Keyboard.KEY_J, "key.categories.minestuck");
+		skillKeys[SkillKeyStates.Key.TERTIARY.ordinal()] = new KeyBinding("key.minestuckuniverse.abilitechTertiary", Keyboard.KEY_K, "key.categories.minestuck");
+
+		for (KeyBinding binding : skillKeys)
+			ClientRegistry.registerKeyBinding(binding);
 	}
 
 	private static Boolean offhandMode = null;
@@ -49,6 +55,20 @@ public class MSUKeys
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		if(player == null)
 			return;
+
+		if(player.hasCapability(MSUCapabilities.BADGE_EFFECTS, null) && player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isTimeStopped())
+			return;
+
+		for(int i = 0; i < skillKeys.length; i++)
+		{
+			if (skillKeys[i].isKeyDown() ^ downs[i])
+			{
+				downs[i] = !downs[i];
+				MSUChannelHandler.sendToServer(MSUPacket.makePacket(MSUPacket.Type.KEY_INPUT, i, downs[i]));
+				if(Minecraft.getMinecraft().player != null)
+					Minecraft.getMinecraft().player.getCapability(MSUCapabilities.SKILL_KEY_STATES, null).updateKeyState(SkillKeyStates.Key.values()[i], downs[i]);
+			}
+		}
 
 		boolean strifeKeyDown = strifeKey.isKeyDown();
 		boolean swapStrifeKeyDown = swapOffhandStrifeKey.isKeyDown();

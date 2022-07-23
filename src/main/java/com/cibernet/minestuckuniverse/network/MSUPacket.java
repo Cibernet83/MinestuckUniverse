@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.network;
 
+import com.cibernet.minestuckuniverse.network.captchalogue.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,6 +66,44 @@ public abstract class MSUPacket
         UPDATE_BEAMS(UpdateBeamDataPacket.class),
         LEFT_CLICK_EMPTY(LeftClickEmptyPacket.class),
         ROCKET_BOOTS(RocketBootsPacket.class),
+        STONE_TABLET_REQUEST(StoneTabletRequestPacket.class),
+        UPDATE_HATS(UpdateHatsPacket.class),
+
+
+        CHAT_MODUS_EJECT(ChatModusEjectPacket.class),
+        UPDATE_MODUS(ModusUpdatePacket.class),
+        BOOK_UPDATE_PAGE(BookModusPagePacket.class),
+        REQUEST_UPDATE_MODUS(RequestModusUpdatePacket.class),
+        JUJU_UPDATE(JujuModusPacket.class),
+        COM_UPDATE(CommunistUpdatePacket.class),
+        REQUEST_COM_UPDATE(RequestCommunistUpdatePacket.class),
+        ALCHEM_WILDCARD(AlchemyWildcardPacket.class),
+        BOOK_PUBLISH(BookPublishPacket.class),
+        WALLET_CAPTCHA(WalletCaptchaloguePacket.class),
+
+
+        UPDATE_DATA_CLIENT(PacketUpdateGTDataFromClient.class),
+        UPDATE_DATA_SERVER(PacketUpdateGTDataFromServer.class),
+        UNEQUIP_ABILITECH(PacketUnequipTech.class),
+        INCREASE_XP(PacketAddSkillXp.class),
+        ATTEMPT_BADGE_UNLOCK(PacketAttemptBadgeUnlock.class),
+        TOGGLE_BADGE(PacketToggleBadge.class),
+        ADD_PLAYER_XP(PacketChangePlayerXp.class),
+        REQUEST_GRIST_HOARD(PacketRequestGristHoard.class),
+        SEND_GRIST_HOARD(PacketSendGristHoard.class),
+        UPDATE_ALL_BADGE_EFFECTS(PacketUpdateAllBadgeEffects.class),
+        SET_MOUSE_SENSITIVITY(PacketSetMouseSensitivity.class),
+        SET_FOV(PacketSetFOV.class),
+        SEND_PARTICLE(PacketSendParticle.class),
+        UPDATE_BADGE_EFFECT(PacketUpdateBadgeEffect.class),
+        KEY_INPUT(PacketKeyInput.class),
+        SEND_POWER_PARTICLES(PacketSendPowerParticlesState.class),
+        MINDFLAYER_MOVEMENT_INPUT(PacketMindflayerMovementInput.class),
+        SET_CURRENT_ITEM(PacketSetCurrentItem.class),
+        EDIT_FILL_BLOCKS(PacketPlaceBlockArea.class),
+        UPDATE_CONFIG(PacketUpdateConfig.class),
+        OPEN_GUI(PacketOpenGui.class),
+        PERFORM_DASH(PacketDash.class),
         ;
 
         Class<? extends MSUPacket> packetType;

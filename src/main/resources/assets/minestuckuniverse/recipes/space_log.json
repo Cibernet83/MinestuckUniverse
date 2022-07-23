@@ -1,0 +1,17 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "logWood"
+    },
+    {
+      "item": "minestuckuniverse:hero_stone_shard_space",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "minestuck:aspect_log_3",
+    "data": 1
+  }
+}

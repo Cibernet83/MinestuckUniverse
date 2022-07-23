@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minestuckuniverse:energy_cell"
+    ]
+  },
+  "criteria": {
+    "has_modus": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minestuckuniverse:energy_modus"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minestuckuniverse:energy_cell"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_modus",
+      "has_the_recipe"
+    ]
+  ]
+}

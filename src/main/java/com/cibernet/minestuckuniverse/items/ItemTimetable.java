@@ -2,6 +2,9 @@ package com.cibernet.minestuckuniverse.items;
 
 import com.cibernet.minestuckuniverse.events.TimetableEffectEvent;
 import com.cibernet.minestuckuniverse.items.properties.PropertyXpMend;
+import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
+import com.cibernet.minestuckuniverse.network.MSUPacket;
+import com.cibernet.minestuckuniverse.particles.MSUParticles;
 import com.google.common.base.Predicates;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -118,6 +121,9 @@ public class  ItemTimetable extends MSUItemBase
 					} else return;
 				}
 
+				if(target != null)
+					MSUChannelHandler.sendToTrackingAndSelf(MSUPacket.makePacket(MSUPacket.Type.SEND_PARTICLE, MSUParticles.ParticleType.AURA, 0xFF2106, 2, target), player);
+				
 				if((event.isCanceled() || target != null) && !player.isCreative())
 				{
 					decreaseExp(player, xpUsed);

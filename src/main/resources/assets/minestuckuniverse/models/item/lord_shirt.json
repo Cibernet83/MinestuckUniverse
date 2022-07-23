@@ -1,0 +1,21 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/shirt/lord_shirt_coated",
+        "layer1": "minestuckuniverse:items/shirt/lord_coat_detail",
+        "layer2": "minestuckuniverse:items/shirt/lord_coat",
+        "layer3": "minestuckuniverse:items/blank",
+        "layer4": "minestuckuniverse:items/blank",
+        "layer5": "minestuckuniverse:items/blank",
+        "layer6": "minestuckuniverse:items/blank",
+        "layer7": "minestuckuniverse:items/shirt/shirt_symbol"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "minestuckuniverse:hide_features": 1
+            },
+            "model": "minestuckuniverse:item/lord_shirt_hidden"
+        }
+    ]
+}

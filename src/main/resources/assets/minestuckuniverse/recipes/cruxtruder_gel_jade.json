@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "C#C",
+        "#B#",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "minestuckuniverse:cruxite_gel",
+      "data": 14
+        },
+        "C": {
+            "item": "minestuck:raw_cruxite"
+        },
+        "B": {
+            "item": "minecraft:glass_bottle"
+        }
+    },
+    "result": {
+        "item": "minestuckuniverse:cruxtruder_gel",
+        "count": 1,
+        "data": 14
+    }
+}

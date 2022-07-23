@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/blank",
+        "layer1": "minestuckuniverse:items/hood/page_hood"
+    }
+}

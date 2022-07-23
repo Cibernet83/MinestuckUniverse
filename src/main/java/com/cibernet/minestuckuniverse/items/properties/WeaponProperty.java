@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.items.properties;
 
 import com.google.common.collect.Multimap;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -15,6 +16,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public abstract class WeaponProperty
 {
@@ -122,6 +127,12 @@ public abstract class WeaponProperty
 	public int onDurabilityChanged(ItemStack stack, int damage) {return damage;}
 
 	public void onStopUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
+	{
+
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void addTooltip(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
 
 	}

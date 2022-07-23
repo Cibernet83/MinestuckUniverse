@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
 
+import java.util.List;
+
 public interface IPropertyThrowable
 {
 	default boolean onProjectileThrow(EntityMSUThrowable projectile, EntityLivingBase thrower, ItemStack stack) {return true;}
@@ -17,4 +19,5 @@ public interface IPropertyThrowable
 	default float getGravity(EntityMSUThrowable projectile, float gravity) { return gravity; }
 	default void onProjectileUpdate(EntityMSUThrowable projectile) {}
 	default void onStatusUpdate(EntityMSUThrowable projectile, byte id) {}
+	default void getDroppedItems(EntityMSUThrowable projectile, List<ItemStack> itemList) {}
 }
