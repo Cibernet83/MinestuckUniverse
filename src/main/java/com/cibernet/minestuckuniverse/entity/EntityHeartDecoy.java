@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.entity;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
@@ -27,8 +28,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityHeartDecoy extends EntityDecoy
 {
-	private static final DataParameter<String> USERNAME = EntityDataManager.createKey(EntityHeartDecoy.class, DataSerializers.STRING);
-	private static final DataParameter<String> PPLAYER_UUID = EntityDataManager.createKey(EntityHeartDecoy.class, DataSerializers.STRING);
+	public static final DataParameter<String> USERNAME = EntityDataManager.createKey(EntityHeartDecoy.class, DataSerializers.STRING);
+	public static final DataParameter<String> PPLAYER_UUID = EntityDataManager.createKey(EntityHeartDecoy.class, DataSerializers.STRING);
+	public static final ArrayList<EntityDecoy> DECOYS_ACTIVE = new ArrayList<>();
 	
 	public int slim = -1;
 	public ResourceLocation skinLoc;
@@ -53,6 +55,7 @@ public class EntityHeartDecoy extends EntityDecoy
 	protected void entityInit()
 	{
 		super.entityInit();
+		DECOYS_ACTIVE.add(this);
 		dataManager.register(USERNAME, "");
 		dataManager.register(PPLAYER_UUID, "");
 	}
@@ -125,10 +128,13 @@ public class EntityHeartDecoy extends EntityDecoy
 	
 	public void returnToSender(DamageSource damageSource, float damage)
 	{
+		DECOYS_ACTIVE.remove(this);
 		username = dataManager.get(USERNAME);
 		if(username == null || username.isEmpty())
+		{
+			this.setDead();
 			return;
-		
+		}
 		EntityPlayer player = world.getMinecraftServer() == null ? null : world.getMinecraftServer().getPlayerList().getPlayerByUsername(username);
 
 		if(damage == -1 || player == null)
@@ -159,30 +165,6 @@ public class EntityHeartDecoy extends EntityDecoy
 			if(BE.getTether(i) instanceof EntityHeartDecoy)
 				BE.setTether(null, i);
 	}
-	
-	/*
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
-	{
-		System.out.println("justwriteNBt");
-		super.writeToNBT(compound);
-		compound.setString("heldUsername", username);
-		compound.setUniqueId("heldUUID", uuid);
-		return compound;
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		System.out.println("justreadNBt");
-		super.readFromNBT(nbt);
-		username = nbt.getString("heldUsername");
-		uuid = nbt.getUniqueId("heldUUID");
-		if(world.isRemote)
-			setupCustomSkin();
-		
-	}
-	*/
 	
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound)

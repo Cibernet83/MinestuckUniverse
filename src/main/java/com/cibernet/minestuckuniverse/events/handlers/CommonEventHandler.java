@@ -1,9 +1,11 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
+import com.cibernet.minestuckuniverse.entity.EntityHeartDecoy;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.ItemGhost;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
@@ -22,6 +24,8 @@ import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.AlchemyRecipes;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.editmode.ServerEditHandler;
+import com.mraof.minestuck.entity.EntityDecoy;
 import com.mraof.minestuck.event.AlchemizeItemEvent;
 import com.mraof.minestuck.event.UnderlingSpoilsEvent;
 import com.mraof.minestuck.item.ICruxiteArtifact;
@@ -69,7 +73,6 @@ import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -160,6 +163,16 @@ public class CommonEventHandler
 	{
 		if(event.getEntity() instanceof EntityPlayer && ((EntityPlayer)event.getEntity()).getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH) == null)
 			((EntityPlayer)event.getEntity()).getAttributeMap().registerAttribute(COOLED_ATTACK_STRENGTH);
+	}
+	
+	@SubscribeEvent
+	public static void removeDecoyOnLogOut(PlayerEvent.PlayerLoggedOutEvent event)
+	{
+		if(ServerEditHandler.getData(event.player) != null)
+			ServerEditHandler.reset(ServerEditHandler.getData(event.player));
+		for(EntityDecoy decoy : EntityHeartDecoy.DECOYS_ACTIVE)
+			if(decoy instanceof EntityHeartDecoy && decoy.getDataManager().get(EntityHeartDecoy.PPLAYER_UUID).contentEquals(event.player.getUniqueID().toString()))
+				((EntityHeartDecoy) decoy).returnToSender(null, 0);
 	}
 
 	@SubscribeEvent

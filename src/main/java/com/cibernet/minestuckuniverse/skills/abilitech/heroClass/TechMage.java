@@ -68,12 +68,12 @@ public class TechMage extends TechHeroClass
 	@Override
 	public boolean canAppearOnList(World world, EntityPlayer player)
 	{
-		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier() && super.canAppearOnList(world, player);
 	}
 	
 	@Override
 	public boolean canUnlock(World world, EntityPlayer player)
 	{
-		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+		return player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier() && super.canUnlock(world, player);
 	}
 }
