@@ -46,6 +46,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -108,8 +109,10 @@ public class StrifeEventHandler
 
 				dmgAttr.removeModifier(MSUWeaponBase.getAttackDamageUUID());
 				dmgAttr.applyModifier(new AttributeModifier(MSUWeaponBase.getAttackDamageUUID(), "Weapon modifier", dmg, 0));
-
+				event.getEntityLiving().hurtResistantTime = 0;
+				event.getEntityLiving().hurtTime = 0;
 				event.getEntityLiving().attackEntityFrom(event.getSource(), (float) (dmgAttr.getAttributeValue() * dmgScale));
+
 				event.setCanceled(true);
 			}
 		}
