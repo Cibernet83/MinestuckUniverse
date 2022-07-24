@@ -46,7 +46,7 @@ public class ItemSkaianScroll extends MSUItemBase
 		if(SCROLL_POOL.isEmpty())
 		{
 			SCROLL_POOL.addAll(MSUSkills.REGISTRY.getValues());
-			SCROLL_POOL.removeIf(Skill::isObtainable);
+			SCROLL_POOL.removeIf(tech -> !tech.isObtainable());
 			SCROLL_POOL.removeIf(tech -> Arrays.asList(MSUConfig.skaiaScrollBlacklist).contains(tech.getRegistryName().toString()));
 		}
 
