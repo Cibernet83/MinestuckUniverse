@@ -108,6 +108,9 @@ public class StrifeEventHandler
 
 				dmgAttr.removeModifier(MSUWeaponBase.getAttackDamageUUID());
 				dmgAttr.applyModifier(new AttributeModifier(MSUWeaponBase.getAttackDamageUUID(), "Weapon modifier", dmg, 0));
+				
+				event.getEntityLiving().hurtResistantTime = 0;
+				event.getEntityLiving().hurtTime = 0;
 
 				event.getEntityLiving().attackEntityFrom(event.getSource(), (float) (dmgAttr.getAttributeValue() * dmgScale));
 				event.setCanceled(true);
