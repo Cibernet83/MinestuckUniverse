@@ -27,6 +27,8 @@ import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -40,6 +42,8 @@ public class EntityHopeGolem extends EntityIronGolem
 
 	public static final int MAX_HOPE_TICKS = 7200;
 	public static final int MAX_EFFECTIVE_TICKS = 6000;
+	
+	public int attackTimerr = 0;
 
 	public EntityHopeGolem(World worldIn) {
 		super(worldIn);
@@ -88,6 +92,9 @@ public class EntityHopeGolem extends EntityIronGolem
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
+		
+		if (this.attackTimerr > 0)
+            --this.attackTimerr;
 
 		if(!world.isRemote)
 		{
@@ -114,6 +121,20 @@ public class EntityHopeGolem extends EntityIronGolem
 				this.setAngry(false);
 		}
 	}
+	
+    @SideOnly(Side.CLIENT)
+    public void handleStatusUpdate(byte id)
+    {
+    	super.handleStatusUpdate(id);
+        if (id == 4)
+            this.attackTimerr = 10;
+    }
+	
+	@SideOnly(Side.CLIENT)
+    public int getAttackTimer()
+    {
+        return this.attackTimerr;
+    }
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -123,8 +144,8 @@ public class EntityHopeGolem extends EntityIronGolem
 	@Override
 	public boolean attackEntityAsMob(Entity entityIn)
     {
-		ObfuscationReflectionHelper.setPrivateValue(EntityIronGolem.class, this, 10, "field_179471_a");
-        this.world.setEntityState(this, (byte)4);
+		this.attackTimerr = 10;
+		this.world.setEntityState(this, (byte)4);
         boolean flag = entityIn.attackEntityFrom((getHopeTicks() >= MAX_EFFECTIVE_TICKS * .8) ? new TechHopeyShit.HopeDamageSource(this) : DamageSource.causeMobDamage(this), (float)(7 + this.rand.nextInt(15)));
 
         if (flag)

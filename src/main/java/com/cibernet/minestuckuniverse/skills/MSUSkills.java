@@ -38,6 +38,7 @@ import com.cibernet.minestuckuniverse.skills.badges.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.*;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroClass.*;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
+import com.cibernet.minestuckuniverse.capabilities.godTier.GodTierData.StatType;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
@@ -346,6 +347,18 @@ public class MSUSkills
 		@Override
 		public boolean isUsableExternally(World world, EntityPlayer player) {
 			return false;
+		}
+		
+		@Override
+		public boolean canAppearOnList(World world, EntityPlayer player)
+		{
+			return super.canAppearOnList(world, player) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).isGodTier();
+		}
+		
+		@Override
+		public boolean canUnlock(World world, EntityPlayer player)
+		{
+			return super.canUnlock(world, player) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getSkillLevel(StatType.GENERAL) >= 10;
 		}
 	};
 

@@ -7,6 +7,7 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
+import com.mraof.minestuck.editmode.ServerEditHandler;
 import com.mraof.minestuck.entity.EntityDecoy;
 import com.mraof.minestuck.util.Teleport;
 
@@ -23,6 +24,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -182,5 +185,15 @@ public class EntityHeartDecoy extends EntityDecoy
 		dataManager.set(PPLAYER_UUID, compound.getUniqueId("heldUUID").toString());
 		if(world.isRemote)
 			setupCustomSkin();
+	}
+	
+	@SubscribeEvent
+	public static void removeDecoyOnLogOut(PlayerEvent.PlayerLoggedOutEvent event)
+	{
+		if(ServerEditHandler.getData(event.player) != null)
+			ServerEditHandler.reset(ServerEditHandler.getData(event.player));
+		for(EntityDecoy decoy : EntityHeartDecoy.DECOYS_ACTIVE)
+			if(decoy instanceof EntityHeartDecoy && decoy.getDataManager().get(EntityHeartDecoy.PPLAYER_UUID).contentEquals(event.player.getUniqueID().toString()))
+				((EntityHeartDecoy) decoy).returnToSender(null, 0);
 	}
 }

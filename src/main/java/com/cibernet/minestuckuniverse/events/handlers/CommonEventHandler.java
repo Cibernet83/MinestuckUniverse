@@ -1,7 +1,6 @@
 package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
@@ -73,6 +72,7 @@ import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -163,16 +163,6 @@ public class CommonEventHandler
 	{
 		if(event.getEntity() instanceof EntityPlayer && ((EntityPlayer)event.getEntity()).getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH) == null)
 			((EntityPlayer)event.getEntity()).getAttributeMap().registerAttribute(COOLED_ATTACK_STRENGTH);
-	}
-	
-	@SubscribeEvent
-	public static void removeDecoyOnLogOut(PlayerEvent.PlayerLoggedOutEvent event)
-	{
-		if(ServerEditHandler.getData(event.player) != null)
-			ServerEditHandler.reset(ServerEditHandler.getData(event.player));
-		for(EntityDecoy decoy : EntityHeartDecoy.DECOYS_ACTIVE)
-			if(decoy instanceof EntityHeartDecoy && decoy.getDataManager().get(EntityHeartDecoy.PPLAYER_UUID).contentEquals(event.player.getUniqueID().toString()))
-				((EntityHeartDecoy) decoy).returnToSender(null, 0);
 	}
 
 	@SubscribeEvent

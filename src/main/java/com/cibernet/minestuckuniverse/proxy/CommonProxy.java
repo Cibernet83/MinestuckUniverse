@@ -10,6 +10,7 @@ import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsD
 import com.cibernet.minestuckuniverse.captchalogue.MSUModi;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.entity.EntityBubble;
+import com.cibernet.minestuckuniverse.entity.EntityHeartDecoy;
 import com.cibernet.minestuckuniverse.entity.MSUEntities;
 import com.cibernet.minestuckuniverse.events.handlers.*;
 import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
@@ -66,6 +67,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
         MinecraftForge.EVENT_BUS.register(MSUConsorts.class);
         MinecraftForge.EVENT_BUS.register(EntityBubble.class);
+        MinecraftForge.EVENT_BUS.register(EntityHeartDecoy.class);
         MinecraftForge.EVENT_BUS.register(LocalChatEventHandler.class);
 
         if(MinestuckUniverse.isTrophySlotsLoaded)
