@@ -7,9 +7,13 @@ import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.badgeEffects.IBadgeEffects;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
+import com.cibernet.minestuckuniverse.world.LandAspectBedrock;
+import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.editmode.ServerEditHandler;
 import com.mraof.minestuck.entity.EntityDecoy;
+import com.mraof.minestuck.entity.underling.EntityUnderling;
 import com.mraof.minestuck.util.Teleport;
+import com.mraof.minestuck.world.MinestuckDimensionHandler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
@@ -24,6 +28,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -195,5 +200,25 @@ public class EntityHeartDecoy extends EntityDecoy
 		for(EntityDecoy decoy : EntityHeartDecoy.DECOYS_ACTIVE)
 			if(decoy instanceof EntityHeartDecoy && decoy.getDataManager().get(EntityHeartDecoy.PPLAYER_UUID).contentEquals(event.player.getUniqueID().toString()))
 				((EntityHeartDecoy) decoy).returnToSender(null, 0);
+	}
+	
+	@SubscribeEvent
+	public static void onSpawnDecoy(EntityJoinWorldEvent event)
+	{
+		if(!(event.getEntity() instanceof EntityDecoy))
+			return;
+		EntityDecoy decoy = ((EntityDecoy) event.getEntity());
+		NBTTagCompound tag = decoy.getEntityData();
+		
+		if((decoy.username != null && !decoy.username.isEmpty()) && (decoy.uuid != null && !decoy.uuid.toString().isEmpty()))
+		{
+			tag.setString("decoyUsername", decoy.username);
+			tag.setUniqueId("decoyUUID", decoy.uuid);
+		}
+		else if(tag.hasKey("decoyUsername") && tag.hasKey("decoyUUID"))
+		{
+			decoy.username = tag.getString("decoyUsername");
+			decoy.uuid = tag.getUniqueId("decoyUUID");
+		}
 	}
 }
