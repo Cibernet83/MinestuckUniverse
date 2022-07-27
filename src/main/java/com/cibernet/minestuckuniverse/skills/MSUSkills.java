@@ -360,6 +360,12 @@ public class MSUSkills
 		{
 			return super.canUnlock(world, player) && player.getCapability(MSUCapabilities.GOD_TIER_DATA, null).getSkillLevel(StatType.GENERAL) >= 10;
 		}
+
+		@SideOnly(Side.CLIENT)
+		@Override
+		public String getUnlockRequirements() {
+			return new TextComponentTranslation("tech.unlock.godTier", new TextComponentTranslation("tech.unlock.boondollar", cost), 10).getFormattedText();
+		}
 	};
 
 	public static final Abilitech MUSE_REQUIEM = new TechMuse("muse_requiem", 730000);

@@ -3,6 +3,7 @@ package com.cibernet.minestuckuniverse.events.handlers;
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.strife.IStrifeData;
+import com.cibernet.minestuckuniverse.captchalogue.OperandiModus;
 import com.cibernet.minestuckuniverse.damage.CritDamageSource;
 import com.cibernet.minestuckuniverse.damage.EntityCritDamageSource;
 import com.cibernet.minestuckuniverse.damage.IGodTierDamage;
@@ -19,6 +20,7 @@ import com.cibernet.minestuckuniverse.strife.MSUKindAbstrata;
 import com.cibernet.minestuckuniverse.strife.StrifePortfolioHandler;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
 import com.mraof.minestuck.client.gui.playerStats.GuiStrifeSpecibus;
+import com.mraof.minestuck.entity.EntityDecoy;
 import com.mraof.minestuck.entity.underling.EntityUnderling;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.client.Minecraft;
@@ -121,11 +123,15 @@ public class StrifeEventHandler
 	@SubscribeEvent
 	public static void onPlayerAttack(LivingAttackEvent event)
 	{
-		if(event.getSource() instanceof EntityCritDamageSource || !MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer) || event.getSource().getImmediateSource() instanceof FakePlayer)
+		if(event.getSource() instanceof EntityCritDamageSource || !MSUConfig.combatOverhaul ||  !MSUConfig.restrictedStrife ||  !(event.getSource().getImmediateSource() instanceof EntityPlayer) ||
+				event.getSource().getImmediateSource() instanceof FakePlayer)
 			return;
 
 		EntityLivingBase source = (EntityLivingBase) event.getSource().getImmediateSource();
 		ItemStack stack = source.getHeldItemMainhand();
+
+		if(OperandiModus.itemPool.contains(stack.getItem()))
+			return;
 
 		if(stack.isEmpty())
 		{
@@ -482,7 +488,7 @@ public class StrifeEventHandler
 			{
 				ArrayList<KindAbstratus> abstrata = new ArrayList<>(KindAbstratus.REGISTRY.getValuesCollection());
 
-				abstrata.removeIf(k -> k.isEmpty() && !Arrays.asList(MSUConfig.strifeCardMobDropsWhitelist).contains(k.getRegistryName().toString())
+				abstrata.removeIf(k -> k.isEmpty() || !Arrays.asList(MSUConfig.strifeCardMobDropsWhitelist).contains(k.getRegistryName().toString())
 				);
 				abstrata.add(null);
 
