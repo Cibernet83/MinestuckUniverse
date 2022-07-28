@@ -498,10 +498,15 @@ public class CommonEventHandler
 	@SubscribeEvent
 	public static void onSpawnDecoy(EntityJoinWorldEvent event)
 	{
-		if(!(event.getEntity() instanceof EntityDecoy))
+		if(event.getEntity().world.isRemote || !(event.getEntity() instanceof EntityDecoy))
 			return;
 		EntityDecoy decoy = ((EntityDecoy) event.getEntity());
 		NBTTagCompound tag = decoy.getEntityData();
+		
+		System.out.println("name: " + decoy.username != null ? decoy.username : "null");
+		System.out.println("UUID: " + decoy.uuid != null ? decoy.uuid : "null");
+		System.out.println("nameTag: " + (tag.hasKey("decoyUsername") ? tag.getString("decoyUsername") : "null"));
+		System.out.println("name: " + (tag.hasKey("decoyUUID") ? tag.getUniqueId("decoyUUID") : "null"));
 		
 		if((decoy.username != null && !decoy.username.isEmpty()) && (decoy.uuid != null && !decoy.uuid.toString().isEmpty()))
 		{
