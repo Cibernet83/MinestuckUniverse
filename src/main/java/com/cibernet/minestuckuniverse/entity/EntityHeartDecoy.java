@@ -202,27 +202,5 @@ public class EntityHeartDecoy extends EntityDecoy
 			if(decoy instanceof EntityHeartDecoy && decoy.getDataManager().get(EntityHeartDecoy.PPLAYER_UUID).contentEquals(event.player.getUniqueID().toString()))
 				((EntityHeartDecoy) decoy).returnToSender(null, 0);
 	}
-	
-	
-	@SubscribeEvent
-	public static void onSpawnDecoy(EntityJoinWorldEvent event)
-	{
-		if(!(event.getEntity() instanceof EntityDecoy))
-			return;
-		EntityDecoy decoy = ((EntityDecoy) event.getEntity());
-		NBTTagCompound tag = decoy.getEntityData();
-		
-		if((decoy.username != null && !decoy.username.isEmpty()) && (decoy.uuid != null && !decoy.uuid.toString().isEmpty()))
-		{
-			tag.setString("decoyUsername", decoy.username);
-			tag.setUniqueId("decoyUUID", decoy.uuid);
-		}
-		else if(tag.hasKey("decoyUsername") && tag.hasKey("decoyUUID"))
-		{
-			decoy.username = tag.getString("decoyUsername");
-			decoy.uuid = tag.getUniqueId("decoyUUID");
-		}
-	}
-	
 	*/
 }
