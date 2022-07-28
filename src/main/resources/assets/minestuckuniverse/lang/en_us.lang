@@ -1414,7 +1414,7 @@ techType.passive=Passive
 techType.hybrid=Hybrid
 
 tech.unlock.boondollar=%s Boondollars
-tech.unlock.gedTier=%s and God Tier %s
+tech.unlock.godTier=%s and God Tier %s
 tech.unlock.list=%s %s%s and %s
 tech.unlock.list.entry=, %s %s
 tech.unlock.list.solo=%s %s
