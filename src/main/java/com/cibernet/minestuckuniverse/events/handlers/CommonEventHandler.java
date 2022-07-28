@@ -54,6 +54,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.math.MathHelper;
@@ -492,6 +493,31 @@ public class CommonEventHandler
 
 		if(event.getUnderling().getRNG().nextFloat() <= 0.001f)
 			event.getSpoils().addGrist(new GristSet(GristType.Zillium, 1));
+	}
+	
+	@SubscribeEvent
+	public static void onSpawnDecoy(EntityJoinWorldEvent event)
+	{
+		if(!(event.getEntity() instanceof EntityDecoy))
+			return;
+		EntityDecoy decoy = ((EntityDecoy) event.getEntity());
+		NBTTagCompound tag = decoy.getEntityData();
+		
+		if((decoy.username != null && !decoy.username.isEmpty()) && (decoy.uuid != null && !decoy.uuid.toString().isEmpty()))
+		{
+			tag.setString("decoyUsername", decoy.username);
+			tag.setUniqueId("decoyUUID", decoy.uuid);
+		}
+		else if(tag.hasKey("decoyUsername") && tag.hasKey("decoyUUID"))
+		{
+			decoy.username = tag.getString("decoyUsername");
+			decoy.uuid = tag.getUniqueId("decoyUUID");
+		}
+		else
+		{
+			decoy.markedForDespawn = true;
+			decoy.setDead();
+		}
 	}
 
 	/*

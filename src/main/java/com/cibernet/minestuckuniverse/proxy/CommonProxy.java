@@ -67,7 +67,6 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
         MinecraftForge.EVENT_BUS.register(MSUConsorts.class);
         MinecraftForge.EVENT_BUS.register(EntityBubble.class);
-        MinecraftForge.EVENT_BUS.register(EntityHeartDecoy.class);
         MinecraftForge.EVENT_BUS.register(LocalChatEventHandler.class);
 
         if(MinestuckUniverse.isTrophySlotsLoaded)
