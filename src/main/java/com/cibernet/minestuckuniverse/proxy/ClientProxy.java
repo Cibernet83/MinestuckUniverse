@@ -102,8 +102,6 @@ public class ClientProxy extends CommonProxy
     {
         Minecraft mc = Minecraft.getMinecraft();
 
-        LayerConsortCosmetics.addLayers();
-
         mc.getItemColors().registerItemColorHandler(new ItemBeamBlade.BladeColorHandler(), dyedBeamBlade);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) ->
                         BlockColorCruxite.handleColorTint(ItemWarpMedallion.getColor(stack), tintIndex),
