@@ -910,6 +910,7 @@ public class MinestuckUniverseItems
         registerItemCustomRender(cruxiteGel, new MSUModelManager.SubtypesItemDefinition("cruxite_gel"));
         registerItemCustomRender(cruxtruderGel, new MSUModelManager.SubtypesItemDefinition("cruxtruder_gel"));
         registerItemCustomRender(captchalogueBook, new MSUModelManager.SubtypesItemDefinition("captchalogue_book"));
+        registerItemCustomRender(chastityKey, new MSUModelManager.SubtypesItemDefinition("chasity_key"));
         registerItemCustomRender(ceramicPorkhollow, new MSUModelManager.SubtypesItemDefinition("ceramic_porkhollow"));
 
         registerItemCustomRender(gtHood, new MSUModelManager.GodTierArmorItemDefinition((ItemGTArmor) gtHood));
