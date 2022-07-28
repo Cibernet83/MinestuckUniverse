@@ -1,0 +1,12 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/blank",
+        "layer1": "minestuckuniverse:items/hood/rogue_hood_unmasked",
+        "layer2": "minestuckuniverse:items/blank",
+        "layer3": "minestuckuniverse:items/blank",
+        "layer4": "minestuckuniverse:items/blank",
+        "layer5": "minestuckuniverse:items/hood/rogue_hood_stitching"
+
+    }
+}

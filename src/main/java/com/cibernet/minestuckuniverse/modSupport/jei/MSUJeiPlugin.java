@@ -16,21 +16,21 @@ import java.util.Map;
 public class MSUJeiPlugin implements IModPlugin
 {
 	AssemblyRecipeCategory assemblyRecipeCategory;
-	
+
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry)
 	{
 		assemblyRecipeCategory = new AssemblyRecipeCategory(registry.getJeiHelpers().getGuiHelper());
 		registry.addRecipeCategories(assemblyRecipeCategory);
 	}
-	
+
 	@Override
 	public void register(IModRegistry registry)
 	{
 		ArrayList<AssemblyRecipeWrapper> assemblyRecipes = new ArrayList<>();
 		for(Map.Entry<String, MachineChasisRecipes.Output> entry : MachineChasisRecipes.getRecipes().entrySet())
 			assemblyRecipes.add(new AssemblyRecipeWrapper(MachineChasisRecipes.getIngredientList(entry.getKey()), entry.getValue().getStack()));
-		
+
 		registry.addRecipes(assemblyRecipes, assemblyRecipeCategory.getUid());
 		registry.addRecipeCatalyst(new ItemStack(MinestuckUniverseBlocks.machineChasis), assemblyRecipeCategory.getUid());
 	}

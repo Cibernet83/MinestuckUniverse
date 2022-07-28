@@ -1,0 +1,11 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/hood/bard_hood_highlight",
+        "layer1": "minestuckuniverse:items/hood/bard_hood",
+        "layer2": "minestuckuniverse:items/blank",
+        "layer3": "minestuckuniverse:items/blank",
+        "layer4": "minestuckuniverse:items/blank"
+
+    }
+}

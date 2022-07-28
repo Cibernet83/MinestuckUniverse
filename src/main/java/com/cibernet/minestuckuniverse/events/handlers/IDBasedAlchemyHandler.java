@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class IDBasedAlchemyHandler
@@ -44,7 +45,7 @@ public class IDBasedAlchemyHandler
 			}
 
 			if(result != null)
-				event.setResultItem(new ItemStack(result));
+				event.setResultItem(new ItemStack(Arrays.asList(MSUConfig.IDAlchemyBlacklist).contains(result.getRegistryName().toString()) ? Item.getItemFromBlock(MinestuckUniverseBlocks.artifact) : result));
 		}
 	}
 

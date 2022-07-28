@@ -1,0 +1,6 @@
+{
+    "parent": "minestuckuniverse:block/hero_stone_wall_side",
+    "textures": {
+        "wall": "minestuckuniverse:blocks/secondary_hero_stone_rage"
+    }
+}

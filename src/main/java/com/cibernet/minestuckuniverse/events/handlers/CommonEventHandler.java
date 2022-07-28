@@ -2,10 +2,11 @@ package com.cibernet.minestuckuniverse.events.handlers;
 
 import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
+import com.cibernet.minestuckuniverse.entity.EntityHeartDecoy;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.ItemGhost;
-import com.cibernet.minestuckuniverse.items.armor.ItemPogoBoots;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyRandomDamage;
@@ -18,19 +19,28 @@ import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.AlchemyRecipes;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.editmode.ServerEditHandler;
+import com.mraof.minestuck.entity.EntityDecoy;
 import com.mraof.minestuck.event.AlchemizeItemEvent;
 import com.mraof.minestuck.event.UnderlingSpoilsEvent;
+import com.mraof.minestuck.item.ICruxiteArtifact;
 import com.mraof.minestuck.item.ItemCaptcharoidCamera;
 import com.mraof.minestuck.item.MinestuckItems;
-import com.mraof.minestuck.network.skaianet.SburbHandler;
+import com.mraof.minestuck.item.block.ItemAlchemiter;
+import com.mraof.minestuck.item.block.ItemCruxtruder;
+import com.mraof.minestuck.item.block.ItemPunchDesignix;
+import com.mraof.minestuck.item.block.ItemTotemLathe;
+import com.mraof.minestuck.network.skaianet.SburbConnection;
+import com.mraof.minestuck.network.skaianet.SkaianetHandler;
+import com.mraof.minestuck.util.IdentifierHandler;
 import com.mraof.minestuck.world.MinestuckDimensionHandler;
-import com.mraof.minestuck.world.lands.gen.ChunkProviderLands;
-import com.sun.javafx.geom.Vec3f;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -43,34 +53,36 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemClock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
-import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.Sys;
 
 import java.util.List;
 import java.util.Map;
@@ -166,6 +178,23 @@ public class CommonEventHandler
 		return (float) player.getAttributeMap().getAttributeInstance(COOLED_ATTACK_STRENGTH).getAttributeValue();
 	}
 
+	@SubscribeEvent
+	public static void onTick(LivingEvent.LivingUpdateEvent event)
+	{
+		EntityLivingBase player = event.getEntityLiving();
+		if(!((player instanceof EntityPlayer) && ((EntityPlayer)player).isSpectator()) && player.isPotionActive(MSUPotions.EARTHBOUND) && player.getActivePotionEffect(MSUPotions.EARTHBOUND).getAmplifier() > 0)
+			player.motionY = Math.min(0, player.motionY);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onInput(InputUpdateEvent event)
+	{
+		EntityPlayerSP player = Minecraft.getMinecraft().player;
+		if(!player.isSpectator() && player.isPotionActive(MSUPotions.EARTHBOUND) && (player.getActivePotionEffect(MSUPotions.EARTHBOUND).getAmplifier() > 0 || !MSUUtils.isTrulyOnGround(player)))
+			player.movementInput.jump = false;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void onClientTick(TickEvent.ClientTickEvent event)
@@ -173,7 +202,7 @@ public class CommonEventHandler
 		if(Minecraft.getMinecraft().player == null)
 			return;
 
-		EntityPlayer player = Minecraft.getMinecraft().player;
+		EntityPlayerSP player = Minecraft.getMinecraft().player;
 
 		if((player.isPotionActive(MSUPotions.SKYHBOUND) && player.getActivePotionEffect(MSUPotions.SKYHBOUND).getDuration() >= 5)
 				|| (player.isCreative() && player.isPotionActive(MSUPotions.EARTHBOUND) && player.getActivePotionEffect(MSUPotions.EARTHBOUND).getDuration() < 5))
@@ -374,13 +403,26 @@ public class CommonEventHandler
 	@SubscribeEvent
 	public static void onRightClickEmpty(PlayerInteractEvent.RightClickItem event)
 	{
-		if(event.getItemStack().getItem() == Items.PAPER && event.getItemStack().getCount() == 1)
+		if(event.getItemStack().getItem() instanceof ICruxiteArtifact)
+		{
+
+			SburbConnection c = SkaianetHandler.getMainConnection(IdentifierHandler.encode(event.getEntityPlayer()), true);
+			if(c == null || !c.enteredGame())
+				if(MSUConfig.entrySpawnProtection > 0 && event.getEntityPlayer().getDistanceSqToCenter(event.getWorld().getSpawnPoint()) <= MSUConfig.entrySpawnProtection*MSUConfig.entrySpawnProtection)
+				{
+					event.getEntityPlayer().sendStatusMessage(new TextComponentTranslation("status.entry.spawnProtected"), true);
+					event.setCancellationResult(EnumActionResult.FAIL);
+					event.setCanceled(true);
+				}
+		}
+
+		else if(event.getItemStack().getItem() == Items.PAPER && event.getItemStack().getCount() == 1)
 		{
 			event.getEntityPlayer().setHeldItem(event.getHand(), new ItemStack(MinestuckUniverseItems.rolledUpPaper));
 			event.getEntityPlayer().swingArm(event.getHand());
 		}
 
-		if(event.getItemStack().getItem() instanceof ItemCaptcharoidCamera)
+		else if(event.getItemStack().getItem() instanceof ItemCaptcharoidCamera)
 		{
 			EntityPlayer player = event.getEntityPlayer();
 			World world = player.world;
@@ -440,6 +482,8 @@ public class CommonEventHandler
 	{
 		if(event.getResultItem().getItem() instanceof ItemBeamBlade)
 			ItemBeamBlade.changeState(event.getResultItem(), false);
+		else if(event.getResultItem().getItem().equals(Item.getItemFromBlock(MinestuckUniverseBlocks.ceramicPorkhollow)))
+			event.setResultItem(new ItemStack(event.getResultItem().getItem(), event.getResultItem().getCount(), event.getDowel().getMetadata()));
 	}
 
 	@SubscribeEvent
@@ -450,4 +494,56 @@ public class CommonEventHandler
 		if(event.getUnderling().getRNG().nextFloat() <= 0.001f)
 			event.getSpoils().addGrist(new GristSet(GristType.Zillium, 1));
 	}
+	
+	@SubscribeEvent
+	public static void onSpawnDecoy(EntityJoinWorldEvent event)
+	{
+		if(!(event.getEntity() instanceof EntityDecoy))
+			return;
+		EntityDecoy decoy = ((EntityDecoy) event.getEntity());
+		NBTTagCompound tag = decoy.getEntityData();
+		
+		if((decoy.username != null && !decoy.username.isEmpty()) && (decoy.uuid != null && !decoy.uuid.toString().isEmpty()))
+		{
+			tag.setString("decoyUsername", decoy.username);
+			tag.setUniqueId("decoyUUID", decoy.uuid);
+		}
+		else if(tag.hasKey("decoyUsername") && tag.hasKey("decoyUUID"))
+		{
+			decoy.username = tag.getString("decoyUsername");
+			decoy.uuid = tag.getUniqueId("decoyUUID");
+		}
+		else
+		{
+			decoy.markedForDespawn = true;
+			decoy.setDead();
+		}
+	}
+
+	/*
+	private static final List<ISound> sounds = new ArrayList<>();
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void onSound(SoundEvent.SoundSourceEvent event)
+	{
+		if(Minecraft.getMinecraft().world == null)
+			return;
+
+
+		int dim = Minecraft.getMinecraft().world.provider.getDimension();
+		if(MinestuckDimensionHandler.isLandDimension(dim) && MinestuckDimensionHandler.getAspects(dim).aspectTitle instanceof LandAspectSilence)
+			sounds.add(event.getSound());
+	}
+
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void stopSounds(TickEvent.ClientTickEvent event)
+	{
+		for(ISound sound : sounds)
+			Minecraft.getMinecraft().getSoundHandler().stopSound(sound);
+		sounds.clear();
+	}
+	*/
 }

@@ -1,0 +1,14 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/stone_slab"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "minestuckuniverse:written": 1
+            },
+            "model": "minestuckuniverse:item/stone_slab_written"
+        }
+    ]
+}

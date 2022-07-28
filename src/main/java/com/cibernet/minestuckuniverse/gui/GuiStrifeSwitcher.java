@@ -13,6 +13,7 @@ import com.cibernet.minestuckuniverse.network.UpdateStrifeDataPacket;
 import com.cibernet.minestuckuniverse.strife.StrifeSpecibus;
 import com.mraof.minestuck.util.MinestuckPlayerData;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -22,6 +23,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -173,6 +175,45 @@ public class GuiStrifeSwitcher extends Gui
 					}
 
 					renderItem(mc, 20*i + screenWidth/2 -8, screenHeight*3/4, event.renderTickTime, mc.player, stack);
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onInput(InputEvent event)
+	{
+		if(showSwitcher && Minecraft.getMinecraft().player != null)
+		{
+			int scroll = (MSUKeys.strifeSelectorRightKey.isKeyDown() ? 1 : 0) - (MSUKeys.strifeSelectorLeftKey.isKeyDown() ? 1 : 0);
+
+			IStrifeData cap = Minecraft.getMinecraft().player.getCapability(MSUCapabilities.STRIFE_DATA, null);
+			StrifeSpecibus[] nonNullPortfolio = cap.getNonEmptyPortfolio();
+
+			if(nonNullPortfolio.length > 0)
+			{
+				if(Minecraft.getMinecraft().player.isSneaking() && canUseAbstrataSwitcher())
+				{
+					if(selSpecibus < 0 || cap.getPortfolio()[selSpecibus] == null)
+						selSpecibus = 0;
+					else
+					{
+						StrifeSpecibus selectedSpecibus = cap.getPortfolio()[selSpecibus];
+						int i = 0;
+						for(int j = 0; j < nonNullPortfolio.length; j++)
+							if(nonNullPortfolio[j] == selectedSpecibus)
+							{
+								i = j;
+								break;
+							}
+						i = (int) ((i + Math.signum(-scroll) + nonNullPortfolio.length) % nonNullPortfolio.length);
+						selSpecibus = (cap.getSpecibusIndex(nonNullPortfolio[i]));
+					}
+				}
+				else if(selSpecibus >= 0 && cap.getPortfolio()[selSpecibus] != null)
+				{
+					int deckSize = cap.getPortfolio()[selSpecibus].getContents().size();
+					selWeapon = ((int) ((selWeapon+Math.signum(scroll)+deckSize)%deckSize));
 				}
 			}
 		}

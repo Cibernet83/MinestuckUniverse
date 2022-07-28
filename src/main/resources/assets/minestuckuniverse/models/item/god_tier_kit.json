@@ -1,0 +1,11 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/kit_base",
+        "layer1": "minestuckuniverse:items/blank",
+        "layer2": "minestuckuniverse:items/blank",
+        "layer3": "minestuckuniverse:items/blank",
+        "layer4": "minestuckuniverse:items/kit_top"
+
+    }
+}

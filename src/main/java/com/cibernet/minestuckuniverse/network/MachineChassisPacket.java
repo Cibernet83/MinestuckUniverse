@@ -37,7 +37,7 @@ public class MachineChassisPacket extends MSUPacket
         {
             TileEntityMachineChasis te = (TileEntityMachineChasis) player.getEntityWorld().getTileEntity(pos);
             if(te != null)
-                te.assemble();
+                te.assemble(player.world, player);
         }
     }
 

@@ -1,23 +1,34 @@
 package com.cibernet.minestuckuniverse.blocks;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.items.IRegistryItem;
+import com.cibernet.minestuckuniverse.items.ItemAbilitechnosyth;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.items.captchalogue.OperandiBlockItem;
 import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUModelManager;
 import com.mraof.minestuck.alchemy.GristType;
+import com.mraof.minestuck.item.block.ItemTransportalizer;
+import com.mraof.minestuck.util.EnumAspect;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.Map;
 import java.util.TreeMap;
 
+@Mod.EventBusSubscriber(modid = MinestuckUniverse.MODID)
 public class MinestuckUniverseBlocks
 {
 	public static final TreeMap<EnumDyeColor, BlockWoolTransportalizer> sleevedTransportalizers = new TreeMap<>();
@@ -37,14 +48,28 @@ public class MinestuckUniverseBlocks
     public static Block sbahjBedrock = new MSUBlockBase(Material.CAKE, "sbahj_bedrock", "sbahjBedrock").setResistance(0F).setHardness(-1F);
     public static Block zillyStone = new MSUBlockBase(Material.ROCK, "zillystone", "zillystone").setResistance(999F).setHardness(5.5F);
     public static Block smoothIron = new MSUBlockBase(Material.IRON, "smooth_iron", "smoothIron").setHardness(3.0F);
+    public static Block bedrockStairs = new BlockMSUStairs(Blocks.BEDROCK.getDefaultState(), "bedrockStairs", "bedrock_stairs");
+	public static final Block hardStone = new BlockHardStone("hard_stone", "hardStone").setCreativeTab(TabMinestuckUniverse.main);
+
+	public static final Block operandiBlock = new OperandiBlock("operandi_block", 1.0f, 0, Material.GOURD, "");
+	public static final Block operandiGlass = new OperandiGlassBlock("operandi_glass", 0.5f, 0, Material.GLASS, "");
+	public static final Block operandiStone = new OperandiBlock("operandi_stone", 3.0f, 6.5f, Material.IRON, "pickaxe");
+	public static final Block operandiLog = new OperandiLogBlock("operandi_log", 2.0f, 0, OperandiBlock.LOG, "axe");
 
     public static Block holopad = new BlockHolopad();
-	
+    public static Block miniAbilitechnosynth = new BlockFraymachine();
+
+    public static Block[] abilitechnosynth = new Block[]{
+		    new BlockAbilitechnosynth(0),
+		    new BlockAbilitechnosynth(1),
+		    new BlockAbilitechnosynth(2),
+		    new BlockAbilitechnosynth(3)};
+
 	public static Block machineChasis = new BlockMachineChasis();
     public static Block gristHopper = new BlockGristHopper();
     public static Block autoWidget = new BlockAutoWidget();
     public static Block autoCaptcha = new BlockAutoCaptcha();
-    public static Block porkhollowAtm = new BlockPorkhollowAtm();
+    public static Block ceramicPorkhollow = new BlockCeramicPorkhollow();
     public static Block boondollarRegister = new BlockBoondollarRegister();
 
 	public static BlockWoolTransportalizer whiteWoolTransportalizer = new BlockWoolTransportalizer(EnumDyeColor.WHITE);
@@ -95,108 +120,230 @@ public class MinestuckUniverseBlocks
 	public static Block dungeonShield = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.CREATIVE_SHOCK, 40, 0), "dungeon_shield", "dungeonShield");
 	public static Block flightBeacon = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.SKYHBOUND, 40, 0), "flight_beacon", "flightBeacon");
 	public static Block flightInhibitor = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.EARTHBOUND, 40, 0), "flight_inhibitor", "flightInhibitor");
+	public static Block badgeInhibitor = new BlockEffectBeacon(MapColor.ADOBE, new PotionEffect(MSUPotions.GOD_TIER_LOCK, 40, 2), "badge_inhibitor", "badgeInhibitor");
 
+
+	public static final Block glorb = new BlockGlorb();
+	public static final Block chloroball = new BlockChloroball();
+
+	public static final Block prospitStone = new BlockLunarStone(MapColor.YELLOW, "prospitStone", "prospit_stone");
+	public static final Block prospitSmoothstone = new BlockLunarStone(MapColor.YELLOW, "prospitSmoothstone", "prospit_smoothstone");
+	public static final Block prospitBricks = new BlockLunarStone(MapColor.YELLOW, "prospitBricks", "prospit_bricks");
+	public static final Block prospitBricksCracked = new BlockLunarStone(MapColor.YELLOW, "prospitBricksCracked", "cracked_prospit_bricks");
+	public static final Block prospitBricksChiseled = new BlockLunarStone(MapColor.YELLOW, "prospitBricksChiseled", "chiseled_prospit_bricks");
+	public static final Block prospitPillar = new BlockPillar(MapColor.YELLOW, "prospitPillar", "prospit_pillar");
+
+	public static final BlockSlab prospitStoneSlab = new BlockMSUSlab.Half(MapColor.YELLOW, "prospitStoneSlab", "prospit_stone_slab");
+	public static final BlockSlab prospitStoneDoubleSlab = new BlockMSUSlab.Double(MapColor.YELLOW, "prospitStoneSlab", "prospit_stone_slab_double", prospitStoneSlab);
+	public static final BlockSlab prospitSmoothstoneSlab = new BlockMSUSlab.Half(MapColor.YELLOW, "prospitSmoothstoneSlab", "prospit_smoothstone_slab");
+	public static final BlockSlab prospitSmoothstoneDoubleSlab = new BlockMSUSlab.Double(MapColor.YELLOW, "prospitSmoothstoneSlab", "prospit_smoothstone_slab_double", prospitSmoothstoneSlab);
+	public static final BlockSlab prospitBricksSlab = new BlockMSUSlab.Half(MapColor.YELLOW, "prospitBricksSlab", "prospit_bricks_slab");
+	public static final BlockSlab prospitBricksDoubleSlab = new BlockMSUSlab.Double(MapColor.YELLOW, "prospitBricksSlab", "prospit_bricks_slab_double", prospitBricksSlab);
+
+	public static final Block prospitStoneStairs = new BlockMSUStairs(prospitStone.getDefaultState(), "prospitStoneStairs", "prospit_stone_stairs");
+	public static final Block prospitBricksStairs = new BlockMSUStairs(prospitStone.getDefaultState(), "prospitBricksStairs", "prospit_bricks_stairs");
+
+	public static final Block prospitStoneWall = new BlockMSUWall(MapColor.YELLOW, "prospitStoneWall", "prospit_stone_wall");
+	public static final Block prospitBricksWall = new BlockMSUWall(MapColor.YELLOW, "prospitBricksWall", "prospit_bricks_wall");
+
+	public static final Block derseStone = new BlockLunarStone(MapColor.PURPLE, "derseStone", "derse_stone");
+	public static final Block derseSmoothstone = new BlockLunarStone(MapColor.PURPLE, "derseSmoothstone", "derse_smoothstone");
+	public static final Block derseBricks = new BlockLunarStone(MapColor.PURPLE, "derseBricks", "derse_bricks");
+	public static final Block derseBricksCracked = new BlockLunarStone(MapColor.PURPLE, "derseBricksCracked", "cracked_derse_bricks");
+	public static final Block derseBricksChiseled = new BlockLunarStone(MapColor.PURPLE, "derseBricksChiseled", "chiseled_derse_bricks");
+	public static final Block dersePillar = new BlockPillar(MapColor.PURPLE, "dersePillar", "derse_pillar");
+
+	public static final BlockSlab derseStoneSlab = new BlockMSUSlab.Half(MapColor.PURPLE, "derseStoneSlab", "derse_stone_slab");
+	public static final BlockSlab derseStoneDoubleSlab = new BlockMSUSlab.Double(MapColor.PURPLE, "derseStoneSlab", "derse_stone_slab_double", derseStoneSlab);
+	public static final BlockSlab derseSmoothstoneSlab = new BlockMSUSlab.Half(MapColor.PURPLE, "derseSmoothstoneSlab", "derse_smoothstone_slab");
+	public static final BlockSlab derseSmoothstoneDoubleSlab = new BlockMSUSlab.Double(MapColor.PURPLE, "derseSmoothstoneSlab", "derse_smoothstone_slab_double", derseSmoothstoneSlab);
+	public static final BlockSlab derseBricksSlab = new BlockMSUSlab.Half(MapColor.PURPLE, "derseBricksSlab", "derse_bricks_slab");
+	public static final BlockSlab derseBricksDoubleSlab = new BlockMSUSlab.Double(MapColor.PURPLE, "derseBricksSlab", "derse_bricks_slab_double", derseBricksSlab);
+
+	public static final Block derseStoneStairs = new BlockMSUStairs(derseStone.getDefaultState(), "derseStoneStairs", "derse_stone_stairs");
+	public static final Block derseBricksStairs = new BlockMSUStairs(derseStone.getDefaultState(), "derseBricksStairs", "derse_bricks_stairs");
+
+	public static final Block derseStoneWall = new BlockMSUWall(MapColor.PURPLE, "derseStoneWall", "derse_stone_wall");
+	public static final Block derseBricksWall = new BlockMSUWall(MapColor.PURPLE, "derseBricksWall", "derse_bricks_wall");
+	
 	public static Block uniqueObject = new MSUBlockBase(Material.CORAL, MapColor.DIAMOND, "unique_object", "uniqueObject");
 	public static Block artifact = new BlockArtifact(Material.FIRE, MapColor.PURPLE, "artifact", "artifact");
 
-	//Thaumcraft
-    public static Block thaumChasis = new MSUBlockBase(Material.IRON, "thaumic_machine_frame", "thaumChasis");
+	//God Tier
+
+	public static final Map<EnumAspect, BlockHeroStone> heroStones = new TreeMap<>();
+	public static final Map<EnumAspect, BlockHeroStone> chiseledHeroStones = new TreeMap<>();
+	public static final Map<EnumAspect, BlockHeroStoneWall> heroStoneWalls = new TreeMap<>();
+	public static final Map<EnumAspect, BlockSpectralHeroStone> spectralHeroStones = new TreeMap<>();
+
+	public static final BlockHeroStone wildcardHeroStone = new BlockHeroStone(null, false);
+	public static final BlockHeroStone wildcardChiseledHeroStone = new BlockHeroStone(null, true);
+	public static final BlockHeroStoneWall wildcardHeroStoneWall = new BlockHeroStoneWall(null);
+	public static final BlockSpectralHeroStone wildcardSpectralHeroStone = new BlockSpectralHeroStone(null);
+	public static final Block glowingHeroStone = new BlockGlowingHeroStone();
 
     @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Block> event)
+    public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
         IForgeRegistry<Block> registry = event.getRegistry();
 
-        registerBlock(registry, dungeonDoor, true);
-        registerBlock(registry, dungeonDoorKeyhole, true);
-		registerBlock(registry, dungeonShield, true);
-		registerBlock(registry, flightBeacon, true);
-		registerBlock(registry, flightInhibitor, true);
+        registerBlock(registry, dungeonDoor);
+        registerBlock(registry, dungeonDoorKeyhole);
+		registerBlock(registry, dungeonShield);
+		registerBlock(registry, flightBeacon);
+		registerBlock(registry, flightInhibitor);
+		registerBlock(registry, badgeInhibitor);
 
-        registerBlock(registry, sbahjBedrock, true);
-        registerBlock(registry, zillyStone, true);
+        registerBlock(registry, sbahjBedrock);
+        registerBlock(registry, zillyStone);
+        registerBlock(registry, bedrockStairs);
 
-		registerBlock(registry, magicBlock, true);
-        registerBlock(registry, smoothIron, true);
-		registerBlock(registry, netherReactorCore, true);
-		registerBlock(registry, wizardStatue, true);
-		registerBlock(registry, sbahjTree, true);
-		registerBlock(registry, fluoriteBlock, true);
-		registerBlock(registry, fluoriteOre, true);
-		registerBlock(registry, moonstoneOre, true);
+		registerBlock(registry, magicBlock);
+        registerBlock(registry, smoothIron);
+		registerBlock(registry, netherReactorCore);
+		registerBlock(registry, wizardStatue);
+		registerBlock(registry, sbahjTree);
+		registerBlock(registry, hardStone);
+		registerBlock(registry, fluoriteBlock);
+		registerBlock(registry, fluoriteOre);
+		registerBlock(registry, moonstoneOre);
 
-        registerBlock(registry, holopad, true);
-        
-        registerBlock(registry, machineChasis, true);
-		registerBlock(registry, gristHopper, true);
-		registerBlock(registry, autoWidget, true);
-		registerBlock(registry, autoCaptcha, true);
-		registerBlock(registry, porkhollowAtm, true);
-		registerBlock(registry, boondollarRegister, true);
 
-		registerBlock(registry, whiteWoolTransportalizer, true);
-		registerBlock(registry, orangeWoolTransportalizer, true);
-		registerBlock(registry, magentaWoolTransportalizer, true);
-		registerBlock(registry, lightBlueWoolTransportalizer, true);
-		registerBlock(registry, yellowWoolTransportalizer, true);
-		registerBlock(registry, limeWoolTransportalizer, true);
-		registerBlock(registry, pinkWoolTransportalizer, true);
-		registerBlock(registry, grayWoolTransportalizer, true);
-		registerBlock(registry, silverWoolTransportalizer, true);
-		registerBlock(registry, cyanWoolTransportalizer, true);
-		registerBlock(registry, purpleWoolTransportalizer, true);
-		registerBlock(registry, blueWoolTransportalizer, true);
-		registerBlock(registry, brownWoolTransportalizer, true);
-		registerBlock(registry, greenWoolTransportalizer, true);
-		registerBlock(registry, redWoolTransportalizer, true);
-		registerBlock(registry, blackWoolTransportalizer, true);
-		registerBlock(registry, rubyRedTransportalizer, true);
-		registerBlock(registry, goldenTransportalizer, true);
-		registerBlock(registry, paradoxTransportalizer, true);
-		registerBlock(registry, platinumTransportalizer, true);
+		registerBlock(registry, operandiBlock, new OperandiBlockItem("operandi_block", MinestuckUniverseBlocks.operandiBlock));
+		registerBlock(registry, operandiStone, new OperandiBlockItem("operandi_stone", MinestuckUniverseBlocks.operandiStone));
+		registerBlock(registry, operandiLog, new OperandiBlockItem("operandi_log", MinestuckUniverseBlocks.operandiLog));
+		registerBlock(registry, operandiGlass, new OperandiBlockItem("operandi_glass", MinestuckUniverseBlocks.operandiGlass));
 
-		registerBlock(registry, gristBlockBuild, true);
-		registerBlock(registry, gristBlockAmber, true);
-		registerBlock(registry, gristBlockAmethyst, true);
-		registerBlock(registry, gristBlockArtifact, true);
-		registerBlock(registry, gristBlockCaulk, true);
-		registerBlock(registry, gristBlockChalk, true);
-		registerBlock(registry, gristBlockCobalt, true);
-		registerBlock(registry, gristBlockDiamond, true);
-		registerBlock(registry, gristBlockGarnet, true);
-		registerBlock(registry, gristBlockGold, true);
-		registerBlock(registry, gristBlockIodine, true);
-		registerBlock(registry, gristBlockMarble, true);
-		registerBlock(registry, gristBlockMercury, true);
-		registerBlock(registry, gristBlockQuartz, true);
-		registerBlock(registry, gristBlockRuby, true);
-		registerBlock(registry, gristBlockRust, true);
-		registerBlock(registry, gristBlockShale, true);
-		registerBlock(registry, gristBlockSulfur, true);
-		registerBlock(registry, gristBlockTar, true);
-		registerBlock(registry, gristBlockUranium, true);
-		registerBlock(registry, gristBlockZillium, true);
+        registerBlock(registry, holopad);
+
+        for(Block b : abilitechnosynth)
+            registerBlock(registry, b, null);
+        MinestuckUniverseItems.itemBlocks.add(new ItemAbilitechnosyth());
+        registerBlock(registry, miniAbilitechnosynth, null);
+
+        registerBlock(registry, machineChasis);
+		registerBlock(registry, gristHopper);
+		registerBlock(registry, autoWidget);
+		registerBlock(registry, autoCaptcha);
+		registerBlock(registry, ceramicPorkhollow, MinestuckUniverseItems.ceramicPorkhollow);
+		registerBlock(registry, boondollarRegister);
+
+		registerBlock(registry, whiteWoolTransportalizer, new ItemTransportalizer(whiteWoolTransportalizer));
+		registerBlock(registry, orangeWoolTransportalizer, new ItemTransportalizer(orangeWoolTransportalizer));
+		registerBlock(registry, magentaWoolTransportalizer, new ItemTransportalizer(magentaWoolTransportalizer));
+		registerBlock(registry, lightBlueWoolTransportalizer, new ItemTransportalizer(lightBlueWoolTransportalizer));
+		registerBlock(registry, yellowWoolTransportalizer, new ItemTransportalizer(yellowWoolTransportalizer));
+		registerBlock(registry, limeWoolTransportalizer, new ItemTransportalizer(limeWoolTransportalizer));
+		registerBlock(registry, pinkWoolTransportalizer, new ItemTransportalizer(pinkWoolTransportalizer));
+		registerBlock(registry, grayWoolTransportalizer, new ItemTransportalizer(grayWoolTransportalizer));
+		registerBlock(registry, silverWoolTransportalizer, new ItemTransportalizer(silverWoolTransportalizer));
+		registerBlock(registry, cyanWoolTransportalizer, new ItemTransportalizer(cyanWoolTransportalizer));
+		registerBlock(registry, purpleWoolTransportalizer, new ItemTransportalizer(purpleWoolTransportalizer));
+		registerBlock(registry, blueWoolTransportalizer, new ItemTransportalizer(blueWoolTransportalizer));
+		registerBlock(registry, brownWoolTransportalizer, new ItemTransportalizer(brownWoolTransportalizer));
+		registerBlock(registry, greenWoolTransportalizer, new ItemTransportalizer(greenWoolTransportalizer));
+		registerBlock(registry, redWoolTransportalizer, new ItemTransportalizer(redWoolTransportalizer));
+		registerBlock(registry, blackWoolTransportalizer, new ItemTransportalizer(blackWoolTransportalizer));
+		registerBlock(registry, rubyRedTransportalizer, new ItemTransportalizer(rubyRedTransportalizer));
+		registerBlock(registry, goldenTransportalizer, new ItemTransportalizer(goldenTransportalizer));
+		registerBlock(registry, paradoxTransportalizer, new ItemTransportalizer(paradoxTransportalizer));
+		registerBlock(registry, platinumTransportalizer, new ItemTransportalizer(platinumTransportalizer));
+
+		registerBlock(registry, gristBlockBuild);
+		registerBlock(registry, gristBlockAmber);
+		registerBlock(registry, gristBlockAmethyst);
+		registerBlock(registry, gristBlockArtifact);
+		registerBlock(registry, gristBlockCaulk);
+		registerBlock(registry, gristBlockChalk);
+		registerBlock(registry, gristBlockCobalt);
+		registerBlock(registry, gristBlockDiamond);
+		registerBlock(registry, gristBlockGarnet);
+		registerBlock(registry, gristBlockGold);
+		registerBlock(registry, gristBlockIodine);
+		registerBlock(registry, gristBlockMarble);
+		registerBlock(registry, gristBlockMercury);
+		registerBlock(registry, gristBlockQuartz);
+		registerBlock(registry, gristBlockRuby);
+		registerBlock(registry, gristBlockRust);
+		registerBlock(registry, gristBlockShale);
+		registerBlock(registry, gristBlockSulfur);
+		registerBlock(registry, gristBlockTar);
+		registerBlock(registry, gristBlockUranium);
+		registerBlock(registry, gristBlockZillium);
 
         if(MinestuckUniverse.isThaumLoaded)
-        {
-        	registerBlock(registry, gristBlockVis, true);
-        }
+        	registerBlock(registry, gristBlockVis);
         
         if(MinestuckUniverse.isBotaniaLoaded)
-			registerBlock(registry, gristBlockMana, true);
+			registerBlock(registry, gristBlockMana);
 
-	    registerBlock(registry, artifact, true);
-	    registerBlock(registry, uniqueObject, true);
+	    registerBlock(registry, glorb, null);
+	    registerBlock(registry, chloroball, null);
+
+	    registerBlock(registry, prospitStone);
+	    registerBlock(registry, prospitSmoothstone);
+	    registerBlock(registry, prospitBricks);
+	    registerBlock(registry, prospitBricksChiseled);
+	    registerBlock(registry, prospitBricksCracked);
+	    registerBlock(registry, prospitPillar);
+	    registerBlock(registry, prospitStoneSlab);
+	    registerBlock(registry, prospitStoneDoubleSlab, null);
+	    registerBlock(registry, prospitStoneStairs);
+	    registerBlock(registry, prospitSmoothstoneSlab);
+	    registerBlock(registry, prospitSmoothstoneDoubleSlab, null);
+	    registerBlock(registry, prospitBricksSlab);
+	    registerBlock(registry, prospitBricksDoubleSlab, null);
+	    registerBlock(registry, prospitBricksStairs);
+	    registerBlock(registry, prospitStoneWall);
+	    registerBlock(registry, prospitBricksWall);
+	    
+	    registerBlock(registry, derseStone);
+	    registerBlock(registry, derseSmoothstone);
+	    registerBlock(registry, derseBricks);
+	    registerBlock(registry, derseBricksChiseled);
+	    registerBlock(registry, derseBricksCracked);
+	    registerBlock(registry, dersePillar);
+	    registerBlock(registry, derseStoneSlab);
+	    registerBlock(registry, derseStoneDoubleSlab, null);
+	    registerBlock(registry, derseStoneStairs);
+	    registerBlock(registry, derseSmoothstoneSlab);
+	    registerBlock(registry, derseSmoothstoneDoubleSlab, null);
+	    registerBlock(registry, derseBricksSlab);
+	    registerBlock(registry, derseBricksDoubleSlab, null);
+	    registerBlock(registry, derseBricksStairs);
+	    registerBlock(registry, derseStoneWall);
+	    registerBlock(registry, derseBricksWall);
+        
+	    registerBlock(registry, artifact);
+	    registerBlock(registry, uniqueObject);
+
+	    registerBlock(registry, glowingHeroStone);
+	    registerBlock(registry, wildcardHeroStone);
+	    registerBlock(registry, wildcardChiseledHeroStone);
+	    registerBlock(registry, wildcardHeroStoneWall);
+	    registerBlock(registry, wildcardSpectralHeroStone);
+
+	    for(EnumAspect aspect : EnumAspect.values())
+	    {
+	    	heroStones.put(aspect, (BlockHeroStone) registerBlock(registry, new BlockHeroStone(aspect, false)));
+	    	chiseledHeroStones.put(aspect, (BlockHeroStone) registerBlock(registry, new BlockHeroStone(aspect, true)));
+	    	heroStoneWalls.put(aspect, (BlockHeroStoneWall) registerBlock(registry, new BlockHeroStoneWall(aspect)));
+	    }
     }
     
-    private static Block registerBlock(IForgeRegistry<Block> registry, Block block, boolean hasItem)
+    private static Block registerBlock(IForgeRegistry<Block> registry, Block block)
+    {
+    	return registerBlock(registry, block, new ItemBlock(block));
+    }
+    
+    private static Block registerBlock(IForgeRegistry<Block> registry, Block block, ItemBlock item)
     {
 	    ((IRegistryItem)block).setRegistryName();
         registry.register(block);
         MSUModelManager.blocks.add(block);
         
-        if(hasItem)
-			MinestuckUniverseItems.itemBlocks.add(block);
+        if(item != null)
+			MinestuckUniverseItems.itemBlocks.add(item);
         
         return block;
     }

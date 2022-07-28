@@ -1,14 +1,10 @@
 package com.cibernet.minestuckuniverse.gui;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
-import com.cibernet.minestuckuniverse.network.BoondollarRegisterPacket;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.network.MSUPacket;
 import com.cibernet.minestuckuniverse.network.PorkhollowAtmPacket;
 import com.google.common.collect.Lists;
-import com.mraof.minestuck.client.gui.GuiSburbMachine;
-import com.mraof.minestuck.util.MinestuckPlayerData;
-import javafx.scene.input.KeyCode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -18,7 +14,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import org.lwjgl.input.Keyboard;
-import scala.Char;
 
 import java.io.IOException;
 import java.util.List;

@@ -12,9 +12,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
@@ -86,13 +88,13 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory, I
     public ItemStack[] invToArray()
     {
         return new ItemStack[]
-        {
-            inventory.get(0),
-            inventory.get(1),
-            inventory.get(2),
-            inventory.get(3),
-            inventory.get(4),
-        };
+                {
+                        inventory.get(0),
+                        inventory.get(1),
+                        inventory.get(2),
+                        inventory.get(3),
+                        inventory.get(4),
+                };
 
     }
 
@@ -101,7 +103,7 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory, I
         return MachineChasisRecipes.recipeExists(invToArray());
     }
 
-    public void assemble()
+    public void assemble(World world, @Nullable EntityPlayer player)
     {
         if(canAssemble())
         {
@@ -119,7 +121,12 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory, I
                     world.spawnEntity(item);
                 }
             }
-            else world.setBlockState(pos, output.getBlockState());
+            else
+            {
+                world.setBlockState(pos, output.getBlockState());
+                if((output.isStack() ? output.getStack().getItem() : output.getBlockState().getBlock()) instanceof ICustomAssembly)
+                    ((ICustomAssembly)(output.isStack() ? output.getStack().getItem() : output.getBlockState().getBlock())).onAssembly(world, player, pos, output, invToArray());
+            }
         }
     }
 
@@ -130,7 +137,7 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory, I
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer player) {
-        return this.world.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+        return this.world.getTileEntity(this.pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     public String getGuiID() {return MinestuckUniverse.MODID + ":machine_chasis";}
@@ -188,9 +195,17 @@ public class TileEntityMachineChasis extends TileEntity implements IInventory, I
         return new TextComponentString(this.getName());
     }
 
+
+
     @Override
     public void update() {
         if(assembling)
-            assemble();
+            assemble(world, null);
+    }
+
+    public interface ICustomAssembly
+    {
+
+        void onAssembly(World world, @Nullable EntityPlayer player, BlockPos pos, MachineChasisRecipes.Output output, ItemStack... input);
     }
 }

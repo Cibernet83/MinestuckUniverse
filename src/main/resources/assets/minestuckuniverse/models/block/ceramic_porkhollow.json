@@ -1,0 +1,136 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "minestuckuniverse:blocks/ceramic_porkhollow",
+		"particle": "minestuckuniverse:blocks/ceramic_porkhollow"
+	},
+	"elements": [
+		{
+			"name": "body",
+			"from": [4, 2, 6],
+			"to": [12, 10, 14],
+			"faces": {
+				"north": {"uv": [4, 4, 8, 8], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [0, 4, 4, 8], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [12, 4, 16, 8], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [8, 4, 12, 8], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [8, 4, 4, 0], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [12, 0, 8, 4], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "head",
+			"from": [5, 3, 3],
+			"to": [11, 8, 6],
+			"faces": {
+				"north": {"uv": [1.5, 9.5, 4.5, 12], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [0, 9.5, 1.5, 12], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [6, 9.5, 9, 12], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [4.5, 9.5, 6, 12], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [4.5, 9.5, 1.5, 8], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [7.5, 8, 4.5, 9.5], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "front_left_leg",
+			"from": [5, 0, 7],
+			"to": [7, 2, 9],
+			"faces": {
+				"north": {"uv": [9, 13, 10, 14], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [8, 13, 9, 14], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [11, 13, 12, 14], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [10, 13, 11, 14], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [10, 13, 9, 12], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [11, 12, 10, 13], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "front_right_leg",
+			"from": [9, 0, 7],
+			"to": [11, 2, 9],
+			"faces": {
+				"north": {"uv": [5, 13, 6, 14], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [4, 13, 5, 14], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [7, 13, 8, 14], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [6, 13, 7, 14], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [6, 13, 5, 12], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [7, 12, 6, 13], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "back_left_leg",
+			"from": [5, 0, 11],
+			"to": [7, 2, 13],
+			"faces": {
+				"north": {"uv": [1, 13, 2, 14], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [0, 13, 1, 14], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [3, 13, 4, 14], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [2, 13, 3, 14], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [2, 13, 1, 12], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [3, 12, 2, 13], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "back_right_leg",
+			"from": [9, 0, 11],
+			"to": [11, 2, 13],
+			"faces": {
+				"north": {"uv": [10, 9, 11, 10], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [9, 9, 10, 10], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [12, 9, 13, 10], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [11, 9, 12, 10], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [11, 9, 10, 8], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [12, 8, 11, 9], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "left_ear",
+			"from": [5.5, 8, 4],
+			"to": [7, 9, 4.5],
+			"faces": {
+				"north": {"uv": [6, 14, 6.5, 14.5], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [6, 14, 6.25, 14.5], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [6.5, 14, 7, 14.5], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [6.5, 14, 6.75, 14.5], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [6.5, 14, 6, 14.25], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [7, 14, 6.5, 14], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "right_ear",
+			"from": [9, 8, 4],
+			"to": [10.5, 9, 4.5],
+			"faces": {
+				"north": {"uv": [4, 14, 4.5, 14.5], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [4, 14, 4.25, 14.5], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [4.5, 14, 5, 14.5], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [4.5, 14, 4.75, 14.5], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [4.5, 14, 4, 14.25], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [5, 14, 4.5, 14], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "snoot",
+			"from": [6.5, 4, 2],
+			"to": [9.5, 6, 3],
+			"faces": {
+				"north": {"uv": [0.5, 14.5, 2, 15.5], "texture": "#0", "tintindex": 1},
+				"east": {"uv": [0, 14.5, 0.5, 15.5], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [2.5, 14.5, 4, 15.5], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [2, 14.5, 2.5, 15.5], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [2, 14.5, 0.5, 14], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [3.5, 14, 2, 14.5], "texture": "#0", "tintindex": 0}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "bone",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+		}
+	]
+}

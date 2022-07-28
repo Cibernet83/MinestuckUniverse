@@ -3,15 +3,19 @@ package com.cibernet.minestuckuniverse.alchemy;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.BlockGrist;
 import com.cibernet.minestuckuniverse.blocks.BlockWoolTransportalizer;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
+import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
 import com.cibernet.minestuckuniverse.items.properties.PropertyBreakableItem;
 import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
 import com.cibernet.minestuckuniverse.util.MSUCalendarUtil;
 import com.mraof.minestuck.MinestuckConfig;
-import com.mraof.minestuck.alchemy.*;
+import com.mraof.minestuck.alchemy.CombinationRegistry;
+import com.mraof.minestuck.alchemy.GristRegistry;
+import com.mraof.minestuck.alchemy.GristSet;
+import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.block.MinestuckBlocks;
 import com.mraof.minestuck.entity.consort.ConsortRewardHandler;
 import com.mraof.minestuck.item.MinestuckItems;
-import com.mraof.minestuck.util.Debug;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -36,17 +40,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeMap;
 
-import static com.mraof.minestuck.alchemy.CombinationRegistry.Mode.*;
-import static com.mraof.minestuck.alchemy.GristType.*;
-import static com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist.*;
+import static com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist.Mana;
+import static com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist.Vis;
 import static com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks.*;
 import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
+import static com.mraof.minestuck.alchemy.CombinationRegistry.Mode.MODE_AND;
+import static com.mraof.minestuck.alchemy.CombinationRegistry.Mode.MODE_OR;
+import static com.mraof.minestuck.alchemy.GristType.*;
 
 public class MSUAlchemyRecipes
 {
-    private static GristType wood = MinestuckUniverse.isArsenalLoaded ? GristType.getTypeFromString("minestuckarsenal:wood")  : Build;
-    private static GristType iron = MinestuckUniverse.isArsenalLoaded ? GristType.getTypeFromString("minestuckarsenal:iron")  : Rust;
-    
     public static final ArrayList<Block> gristBlocks = new ArrayList<Block>() {{add(gristBlockAmber); add(gristBlockAmethyst); add(gristBlockArtifact); add(gristBlockCaulk); add(gristBlockChalk); add(gristBlockCobalt); add(gristBlockBuild); add(gristBlockDiamond); add(gristBlockGarnet); add(gristBlockGold); add(gristBlockIodine); add(gristBlockMarble);
         add(gristBlockMercury); add(gristBlockQuartz); add(gristBlockRuby); add(gristBlockRust); add(gristBlockSulfur); add(gristBlockShale); add(gristBlockTar); add(gristBlockUranium); add(gristBlockZillium);}};
 
@@ -65,7 +68,6 @@ public class MSUAlchemyRecipes
         if(MinestuckUniverse.isThaumLoaded) registerThaumcraft();
         if(MinestuckUniverse.isBotaniaLoaded) registerBotania();
         if(MinestuckUniverse.isSplatcraftLodaded) registerSplatcraft();
-        if(!MinestuckUniverse.isArsenalLoaded) registerArsenalFallback();
         if(MinestuckUniverse.isChiselLoaded) registerChiselRecipes();
         if(MinestuckUniverse.isMysticalWorldLoaded) registerMysticalWorldRecipes();
         if(MinestuckUniverse.isBOPLoaded) registerBOPRecipes();
@@ -90,7 +92,7 @@ public class MSUAlchemyRecipes
 
         ConsortRewardHandler.registerPrice(new ItemStack(MinestuckItems.candy, 1, 21), 500, 600);
     }
-    
+
     public static void registerVanilla()
     {
         //OreDictionary entries
@@ -120,13 +122,22 @@ public class MSUAlchemyRecipes
 
     public static void registerMSU()
     {
+
+        for(Block block : MinestuckUniverseBlocks.chiseledHeroStones.values())
+        {
+            OreDictionary.registerOre("chiseled_hero_stone", block);
+            OreDictionary.registerOre("hero_stone", block);
+        }
+        for(Block block : MinestuckUniverseBlocks.heroStones.values())
+            OreDictionary.registerOre("hero_stone", block);
+
         GristSet magicBlockCost = new GristSet(Build, 2);
          int magicGristTotal = (
                 (MinestuckUniverse.isThaumLoaded ? 1 : 0)
                +(MinestuckUniverse.isBotaniaLoaded ? 1 : 0)
 
         );
-        
+
         int magicGristSpread = 0;
         if(magicGristTotal > 0)
             magicGristSpread = 16 / magicGristTotal;
@@ -135,7 +146,7 @@ public class MSUAlchemyRecipes
         if(MinestuckUniverse.isBotaniaLoaded) magicBlockCost.addGrist(Mana, magicGristSpread);
 
         //Grist Conversions
-        
+
         GristRegistry.addGristConversion(new ItemStack(uniqueObject), new GristSet(new GristType[] {Zillium}, new int[] {1}));
         GristRegistry.addGristConversion(new ItemStack(artifact), new GristSet(new GristType[] {Artifact}, new int[] {1000} ));
 
@@ -177,9 +188,9 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(gristHopper), new GristSet(new GristType[] {Build, Rust, Uranium}, new int[] {250, 55, 10}));
         GristRegistry.addGristConversion(new ItemStack(autoWidget), new GristSet(new GristType[] {Build, Rust, Uranium, Garnet, Zillium}, new int[] {550, 34, 24, 35, 1}));
         GristRegistry.addGristConversion(new ItemStack(autoCaptcha), new GristSet(new GristType[] {Build, Rust, Uranium, Cobalt, Ruby, Quartz}, new int[] {140, 36, 22, 16, 12, 1}));
-        GristRegistry.addGristConversion(new ItemStack(porkhollowAtm), new GristSet(new GristType[] {Build, Rust, Uranium, Iodine, Diamond}, new int[] {180, 35, 16, 18, 4}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.ceramicPorkhollow), new GristSet(new GristType[] {Build, Rust, Uranium, Iodine, Diamond}, new int[] {180, 35, 16, 18, 4}));
         GristRegistry.addGristConversion(new ItemStack(boondollarRegister), new GristSet(new GristType[] {Build, Rust, Uranium, Garnet, Iodine, Quartz}, new int[] {280, 35, 20, 25, 16, 8}));
-        
+
         GristRegistry.addGristConversion(new ItemStack(rubyRedTransportalizer), new GristSet(new GristType[] {Build, Ruby, Rust, Uranium}, new int[] {450, 100, 36, 24}));
         GristRegistry.addGristConversion(new ItemStack(goldenTransportalizer), new GristSet(new GristType[] {Build, Gold, Shale, Uranium}, new int[] {350, 36, 30, 20}));
         GristRegistry.addGristConversion(new ItemStack(paradoxTransportalizer), new GristSet(new GristType[] {Build, Rust, Uranium, Diamond, Zillium}, new int[] {750, 120, 256, 74, 25}));
@@ -201,6 +212,7 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(highVoltageStormCrusher), new GristSet(new GristType[] {Gold, Mercury, Uranium, Quartz}, new int[] {2000, 1230, 6060, 800}));
         GristRegistry.addGristConversion(new ItemStack(barrelsWarhammer), new GristSet(new GristType[] {Ruby, Diamond, Uranium, Gold}, new int[] {8400, 200, 200, 800}));
         GristRegistry.addGristConversion(new ItemStack(stardustSmasher), new GristSet(new GristType[] {Gold, Zillium, Artifact}, new int[] {5600, 10, 1}));
+        GristRegistry.addGristConversion(new ItemStack(drummer), new GristSet(new GristType[] {Build}, new int[] {400}));
         GristRegistry.addGristConversion(new ItemStack(MinestuckItems.mwrthwl), new GristSet(new GristType[]{GristType.Build, GristType.Chalk, GristType.Gold, GristType.Zillium}, new int[]{2000, 12000, 200, 1}));
 
         GristRegistry.addGristConversion(new ItemStack(hereticusAurum), new GristSet(new GristType[] {Build, Gold, Amethyst}, new int[] {210, 2000, 256}));
@@ -301,24 +313,18 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(dragonCharge), new GristSet(new GristType[] {Ruby, Sulfur, Tar}, new int[] {200, 800, 450}));
         GristRegistry.addGristConversion(new ItemStack(tornadoGlaive), new GristSet(new GristType[] {Cobalt, Gold, Quartz, Uranium}, new int[] {260, 120, 30, 2}));
 
-        if(MinestuckUniverse.isArsenalLoaded)
-        {
-            GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, getTypeFromString("minestuckarsenal:moonstone"), Uranium}, new int[] {5, 5, 2}));
-            GristRegistry.addGristConversion(new ItemStack(moonstoneOre), new GristSet(new GristType[] {Build, getTypeFromString("minestuckarsenal:moonstone"), Uranium, Build}, new int[] {5, 5, 2, 4}));
-        }
-        else
-        {
-            GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium}, new int[] {5, 4, 3, 2}));
-            GristRegistry.addGristConversion(new ItemStack(moonstoneOre), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium, Build}, new int[] {5, 4, 3, 2, 4}));
-        }
+        GristRegistry.addGristConversion(new ItemStack(moonstone), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium}, new int[] {5, 4, 3, 2}));
+        GristRegistry.addGristConversion(new ItemStack(moonstoneOre), new GristSet(new GristType[] {Build, Cobalt, Amethyst, Uranium, Build}, new int[] {5, 4, 3, 2, 4}));
+
 
         GristRegistry.addGristConversion(new ItemStack(fluorite), new GristSet(new GristType[] {Cobalt, Diamond}, new int[] {20, 1}));
         GristRegistry.addGristConversion(new ItemStack(zillystoneShard), new GristSet(new GristType[] {Zillium}, new int[] {1}));
         GristRegistry.addGristConversion(new ItemStack(spaceSalt), new GristSet(new GristType[] {Uranium, Tar, Zillium}, new int[] {10, 32, 1}));
         GristRegistry.addGristConversion(new ItemStack(timetable), new GristSet(new GristType[] {Uranium, Garnet, Rust, Zillium}, new int[] {300, 1600, 1600, 500}));
 
+        GristRegistry.addGristConversion(new ItemStack(fluoriteBlock), new GristSet(new GristType[] {Cobalt, Diamond}, new int[] {20, 1, 4}));
         GristRegistry.addGristConversion(new ItemStack(fluoriteOre), new GristSet(new GristType[] {Cobalt, Diamond, Build}, new int[] {20, 1, 4}));
-    
+
         GristRegistry.addGristConversion(new ItemStack(trueUnbreakableKatana) , new GristSet(Zillium, 1000));
 
         GristRegistry.addGristConversion(new ItemStack(returnMedallion) , new GristSet(new GristType[] {Build, Rust, Artifact, Quartz}, new int[] {10000, 1000, 250, 500}));
@@ -326,6 +332,57 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(skaianMedallion) , new GristSet(new GristType[]
                 {Amber, Amethyst, Caulk, Chalk, Cobalt, Diamond, Garnet, Gold, Iodine, Marble, Mercury, Quartz, Ruby, Rust, Shale, Sulfur, Tar, Uranium, Zillium, Artifact}, new int[]
                 {250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 250000, 100000, 100000}));
+
+
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseBlocks.hardStone), new GristSet(new GristType[] {Build}, new int[] {4}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.floatStone), new GristSet(new GristType[] {Build}, new int[] {400}));
+        //GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.energyCell), new GristSet(new GristType[] {Gold, Rust, Uranium}, new int[] {20, 10, 10}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.popBall), new GristSet(new GristType[] {Iodine, Amber, Shale}, new int[] {8, 5, 2}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.dragonGel), new GristSet(new GristType[] {Build, Sulfur, Uranium, Zillium}, new int[] {1010, 500, 742, 1525}));
+
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseBlocks.operandiBlock), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseBlocks.operandiStone), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseBlocks.operandiLog), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseBlocks.operandiGlass), new GristSet(new GristType[] {Build, Garnet}, new int[] {1, 1}));
+
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.cycloneModus), new GristSet(new GristType[] {Build}, new int[] {16}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.wildMagicModus), new GristSet(new GristType[] {Build, Garnet, Amethyst}, new int[] {310, 32, 65}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.capitalistModus), new GristSet(new GristType[] {Build, Gold, Diamond}, new int[] {270, 55, 5}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.deckModus), new GristSet(new GristType[] {Build, Ruby}, new int[] {250, 52}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.popTartModus), new GristSet(new GristType[] {Build, Chalk, Iodine}, new int[] {320, 34, 20}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.eightBallModus), new GristSet(new GristType[] {Build, Mercury, Cobalt}, new int[] {320, 16, 38}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.eightBallModus), new GristSet(new GristType[] {Build, Mercury, Cobalt}, new int[] {320, 16, 38}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.scratchAndSniffModus), new GristSet(new GristType[] {Build, Amethyst, Cobalt}, new int[] {260, 40, 20}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.chasityModus), new GristSet(new GristType[] {Build, Rust, Quartz}, new int[] {210, 36, 2}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.slimeModus), new GristSet(new GristType[] {Build, Caulk}, new int[] {340, 28}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.onionModus), new GristSet(new GristType[] {Build, Iodine, Amber}, new int[] {210, 30, 13}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.chatModus), new GristSet(new GristType[] {Build, Garnet, Artifact}, new int[] {310, 32, 10}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.hueModus), new GristSet(new GristType[] {Build, Cobalt, Amber, Amethyst, Ruby}, new int[] {290, 3, 3, 3, 3}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.hueStackModus), new GristSet(new GristType[] {Build, Cobalt, Amber, Amethyst, Ruby, Zillium}, new int[] {585, 12, 12, 12, 12, 1}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.jujuModus), new GristSet(new GristType[] {Build, Zillium}, new int[] {604, 100}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.modUs), new GristSet(new GristType[] {Build, Gold, Ruby}, new int[] {707, 128, 128}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.alcheModus), new GristSet(new GristType[] {Build, Uranium, Zillium}, new int[] {2500, 640, 4}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.operandiModus), new GristSet(new GristType[] {Build, Garnet, Shale}, new int[] {340, 24, 33}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.weightModus), new GristSet(new GristType[] {Build, Rust}, new int[] {32, 10}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.energyModus), new GristSet(new GristType[] {Build, Gold, Uranium}, new int[] {180, 32, 21}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.bookModus), new GristSet(new GristType[] {Build, Iodine, Chalk}, new int[] {980, 18, 26}));
+
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.arrayModus), new GristSet(new GristType[] {Build}, new int[] {350}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.walletModus), new GristSet(new GristType[] {Build, Iodine, Diamond, Zillium, Artifact}, new int[] {3000, 540, 20, 4050, 110}));
+        GristRegistry.addGristConversion(new ItemStack(walletBallModus), new GristSet(new GristType[] {Build, Iodine, Diamond, Zillium, Artifact, Cobalt, Iodine}, new int[] {4000, 800, 40, 10000, 500, 800, 400}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.monsterModus), new GristSet(new GristType[] {Build, Rust, Chalk}, new int[] {230, 24, 17}));
+
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.hashchatModus), new GristSet(new GristType[] {Build, Garnet, Artifact}, new int[] {510, 64, 10}));
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.sacrificeModus), new GristSet(new GristType[] {Build, Rust, Tar}, new int[] {210, 45, 8}));
+
+
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.denizenEye), new GristSet(new GristType[]{GristType.Build, GristType.Mercury, GristType.Uranium, GristType.Amethyst,
+                GristType.Diamond, GristType.Quartz, GristType.Zillium, GristType.Artifact}, new int[]{10000, 5000, 5000, 5000, 2500, 2500, 1000, 1000}));
+
+        ConsortRewardHandler.registerPrice(new ItemStack(denizenTome), 10000, 10000);
+        ConsortRewardHandler.registerPrice(new ItemStack(MinestuckItems.candy, 1, 21), 500, 600);
+        GristRegistry.addGristConversion(new ItemStack(MinestuckUniverseItems.sashKit), new GristSet(new GristType[]{GristType.Build, GristType.Gold, GristType.Zillium, GristType.Artifact}, new int[] {1080, 400, 100, 100}));
+        GristRegistry.addGristConversion(new ItemStack(godTierResetCharm), new GristSet(new GristType[]{GristType.Build, GristType.Gold, GristType.Diamond, GristType.Zillium, GristType.Artifact}, new int[] {1080, 200, 200, 100, 100}));
 
         //Alchemy
         CombinationRegistry.addCombination(new ItemStack(zillystoneShard), new ItemStack(Items.SUGAR), MODE_OR, Zillium.getCandyItem());
@@ -382,12 +439,13 @@ public class MSUAlchemyRecipes
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.regiHammer), new ItemStack(MinestuckItems.itemFrog, 1, 5), MODE_OR, false, true, new ItemStack(midasMallet));
         CombinationRegistry.addCombination(new ItemStack(midasMallet), new ItemStack(cueBall), MODE_AND, false, true, new ItemStack(MinestuckItems.mwrthwl));
         CombinationRegistry.addCombination(new ItemStack(battery), new ItemStack(MinestuckItems.clawHammer), MODE_AND, false, false, new ItemStack(aaaNailShocker));
-        CombinationRegistry.addCombination(new ItemStack(aaaNailShocker), new ItemStack(midasMallet), MODE_AND, false, false, new ItemStack(highVoltageStormCrusher));
+        CombinationRegistry.addCombination(new ItemStack(aaaNailShocker), new ItemStack(midasMallet), MODE_OR, false, false, new ItemStack(highVoltageStormCrusher));
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.scarletZillyhoo), new ItemStack(rocketFist), MODE_AND, false, false, new ItemStack(barrelsWarhammer));
         removeCombination(new ItemStack(MinestuckItems.blacksmithHammer), new ItemStack(Items.CLOCK), CombinationRegistry.Mode.MODE_OR, false, false);
         CombinationRegistry.addCombination(new ItemStack(midasMallet), new ItemStack(tickingStopwatch), MODE_OR, new ItemStack(MinestuckItems.fearNoAnvil));
         removeCombination(new ItemStack(MinestuckItems.fearNoAnvil), new ItemStack(Items.LAVA_BUCKET), CombinationRegistry.Mode.MODE_OR, false, false);
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.blacksmithHammer), new ItemStack(Items.LAVA_BUCKET), MODE_AND, new ItemStack(MinestuckItems.meltMasher));
+        CombinationRegistry.addCombination(new ItemStack(drummer), new ItemStack(drumstickNeedles), MODE_AND, new ItemStack(loghammer));
 
         //bladekind
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.katana), new ItemStack(MinestuckItems.minestuckBucket, 1, 1), MODE_OR, false, true, new ItemStack(bloodKatana));
@@ -455,8 +513,8 @@ public class MSUAlchemyRecipes
         removeCombination(new ItemStack(MinestuckItems.catClaws), new ItemStack(MinestuckItems.grimoire), MODE_AND, false, true);
 
         //shieldkind
-        CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Blocks.OAK_DOOR), MODE_OR, false, false, new ItemStack(woodenDoorshield));
-        CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Blocks.IRON_DOOR), MODE_OR, false, false, new ItemStack(ironDoorshield));
+        CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Items.OAK_DOOR), MODE_OR, false, false, new ItemStack(woodenDoorshield));
+        CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Items.IRON_DOOR), MODE_OR, false, false, new ItemStack(ironDoorshield));
         CombinationRegistry.addCombination(new ItemStack(Items.IRON_INGOT), new ItemStack(woodenDoorshield), MODE_AND, false, false, new ItemStack(ironDoorshield));
         CombinationRegistry.addCombination(new ItemStack(Items.FIREWORKS), new ItemStack(ironDoorshield), MODE_AND, false, false, new ItemStack(rocketRiotShield));
         CombinationRegistry.addCombination(new ItemStack(Items.SHIELD), new ItemStack(Items.IRON_SWORD), MODE_OR, false, false, new ItemStack(bladedShield));
@@ -560,9 +618,73 @@ public class MSUAlchemyRecipes
             CombinationRegistry.addCombination(new ItemStack(batteryBeamBlade), dye, MODE_OR, false, true, beamBlade);
         }
 
-
         if(MinestuckUniverse.isBotaniaLoaded)
             gristBlocks.add(gristBlockMana);
+
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.rawCruxite), new ItemStack(Items.EMERALD), MODE_OR, new ItemStack(MinestuckItems.boondollars));
+
+        CombinationRegistry.addCombination(new ItemStack(Blocks.STONE), new ItemStack(Blocks.OBSIDIAN), MODE_OR, new ItemStack(MinestuckUniverseBlocks.hardStone));
+        CombinationRegistry.addCombination(new ItemStack(Blocks.STONE), new ItemStack(Blocks.BEDROCK), MODE_AND, new ItemStack(MinestuckUniverseBlocks.hardStone));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckBlocks.cruxiteBlock), new ItemStack(Items.FEATHER), MODE_AND, new ItemStack(MinestuckUniverseItems.floatStone));
+        CombinationRegistry.addCombination(new ItemStack(Items.ENDER_EYE), new ItemStack(Items.BOOK), MODE_OR, new ItemStack(MinestuckUniverseItems.eightBall));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.eightBall), new ItemStack(MinestuckUniverseItems.popTart), MODE_AND, new ItemStack(MinestuckUniverseItems.popBall));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.cruxiteGel), new ItemStack(Items.DRAGON_BREATH), MODE_OR, false, false, new ItemStack(MinestuckUniverseItems.dragonGel));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.dragonGel), new ItemStack(MinestuckUniverseItems.popBall), MODE_AND, Zillium.getCandyItem());
+
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.grimoire), new ItemStack(MinestuckItems.modusCard), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.wildMagicModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.BOOK), new ItemStack(MinestuckItems.modusCard), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.bookModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.WRITABLE_BOOK), new ItemStack(MinestuckItems.modusCard), MODE_AND, true, false, new ItemStack(MinestuckUniverseItems.bookModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.WRITTEN_BOOK), new ItemStack(MinestuckItems.modusCard), MODE_AND, true, false, new ItemStack(MinestuckUniverseItems.bookModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.ENCHANTED_BOOK), new ItemStack(MinestuckItems.modusCard), MODE_AND, true, false, new ItemStack(MinestuckUniverseItems.bookModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.boondollars), new ItemStack(MinestuckItems.modusCard), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.capitalistModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.captchaCard), new ItemStack(MinestuckItems.modusCard, 1, 5), MODE_AND, new ItemStack(MinestuckUniverseItems.deckModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.CAKE), new ItemStack(MinestuckItems.modusCard), MODE_AND, true, false, new ItemStack(MinestuckUniverseItems.popTartModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.eightBall), new ItemStack(MinestuckItems.modusCard), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.eightBallModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.bookModus), new ItemStack(Items.ENDER_EYE), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.eightBallModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.DYE), new ItemStack(MinestuckItems.modusCard, 1, 1), MODE_OR, false, true, new ItemStack(MinestuckUniverseItems.hueModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.DYE), new ItemStack(MinestuckItems.modusCard, 1, 2), MODE_OR, false, true, new ItemStack(MinestuckUniverseItems.hueStackModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.hueModus), new ItemStack(MinestuckItems.modusCard, 1, 0), MODE_AND, new ItemStack(MinestuckUniverseItems.hueStackModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckBlocks.blockComputerOff), new ItemStack(MinestuckItems.modusCard, 1, 5), MODE_OR, false, true, new ItemStack(MinestuckUniverseItems.chatModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.ITEM_FRAME), new ItemStack(MinestuckItems.modusCard, 1, 4), MODE_AND, false, true, new ItemStack(MinestuckUniverseItems.chatModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.deckModus), new ItemStack(MinestuckUniverseItems.hueModus), MODE_AND, new ItemStack(MinestuckUniverseItems.scratchAndSniffModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.APPLE), new ItemStack(MinestuckItems.modusCard, 1, 5), MODE_OR, new ItemStack(MinestuckUniverseItems.scratchAndSniffModus));
+        CombinationRegistry.addCombination(new ItemStack(Blocks.LEVER), new ItemStack(MinestuckUniverseItems.operandiModus), MODE_AND, new ItemStack(MinestuckUniverseItems.chasityModus));
+        CombinationRegistry.addCombination(new ItemStack(Blocks.IRON_TRAPDOOR), new ItemStack(MinestuckItems.modusCard), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.chasityModus));
+        CombinationRegistry.addCombination(new ItemStack(Blocks.TRAPDOOR), new ItemStack(MinestuckUniverseItems.weightModus), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.chasityModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.SLIME_BALL), new ItemStack(MinestuckItems.modusCard, 1, 5), MODE_AND,true, false, new ItemStack(MinestuckUniverseItems.slimeModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.cycloneModus), new ItemStack(MinestuckItems.onion), MODE_OR, new ItemStack(MinestuckUniverseItems.onionModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.cycloneModus), new ItemStack(MinestuckItems.modusCard, 1, 3), MODE_AND, new ItemStack(MinestuckUniverseItems.onionModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.battery), new ItemStack(MinestuckItems.modusCard, 4), MODE_OR, false, true,  new ItemStack(MinestuckUniverseItems.energyModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.weightModus), new ItemStack(MinestuckItems.energyCore), MODE_AND,  new ItemStack(MinestuckUniverseItems.energyModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.eightBallModus), new ItemStack(MinestuckUniverseItems.popTartModus), MODE_AND, new ItemStack(MinestuckUniverseItems.operandiModus));
+        CombinationRegistry.addCombination(new ItemStack(Items.REDSTONE), new ItemStack(MinestuckItems.modusCard, 1, 4), MODE_AND, new ItemStack(MinestuckUniverseItems.operandiModus));
+        CombinationRegistry.addCombination(new ItemStack(Blocks.IRON_BLOCK), new ItemStack(MinestuckItems.modusCard), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.weightModus));
+        CombinationRegistry.addCombination(new ItemStack(Blocks.CHEST), new ItemStack(MinestuckUniverseItems.jujuModus), MODE_AND, new ItemStack(MinestuckUniverseItems.modUs));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckBlocks.alchemiter[0]), new ItemStack(MinestuckItems.modusCard), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.alcheModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckBlocks.sburbMachine, 1, 3), new ItemStack(MinestuckItems.modusCard), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.alcheModus));
+
+
+
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.rawCruxite), new ItemStack(MinestuckItems.modusCard), MODE_AND, false, false, new ItemStack(MinestuckUniverseItems.arrayModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.arrayModus), new ItemStack(Items.LEATHER), MODE_AND, false, false, new ItemStack(MinestuckUniverseItems.walletModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.walletModus), new ItemStack(MinestuckUniverseItems.eightBallModus), MODE_AND, false, false, new ItemStack(MinestuckUniverseItems.walletBallModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.walletModus), new ItemStack(MinestuckUniverseItems.eightBall), MODE_AND, false, false, new ItemStack(MinestuckUniverseItems.walletBallModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.modusCard), new ItemStack(walletBall), MODE_OR, false, false, new ItemStack(walletBallModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.arrayModus), new ItemStack(MinestuckUniverseItems.walletBall), MODE_OR, false, false, new ItemStack(MinestuckUniverseItems.walletBallModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.modusCard), new ItemStack(Items.ROTTEN_FLESH), MODE_OR, false, false, new ItemStack(MinestuckUniverseItems.monsterModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.modusCard), new ItemStack(Items.BONE), MODE_OR, false, false, new ItemStack(MinestuckUniverseItems.monsterModus));
+
+        CombinationRegistry.addCombination(new ItemStack(MinestuckItems.modusCard, 1, 4), new ItemStack(MinestuckUniverseItems.chatModus), MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.hashchatModus));
+        CombinationRegistry.addCombination(new ItemStack(MinestuckUniverseItems.monsterModus), new ItemStack(MinestuckItems.minestuckBucket, 1, 1), MODE_OR, false, true, new ItemStack(MinestuckUniverseItems.sacrificeModus));
+
+        CombinationRegistry.addCombination(new ItemStack(zillystoneShard), new ItemStack(MinestuckItems.modusCard), MODE_AND, true, false, new ItemStack(MinestuckUniverseItems.jujuModus));
+
+
+
+        CombinationRegistry.addCombination(new ItemStack(denizenTome, 1, 2), new ItemStack(Items.ENDER_EYE),
+                CombinationRegistry.Mode.MODE_OR, true, false, new ItemStack(MinestuckUniverseItems.denizenEye));
+        CombinationRegistry.addCombination("chiseled_hero_stone", new ItemStack(MinestuckUniverseItems.knittingNeedles), false, CombinationRegistry.Mode.MODE_OR, new ItemStack(MinestuckUniverseItems.sashKit));
+        CombinationRegistry.addCombination("chiseled_hero_stone", new ItemStack(MinestuckUniverseItems.ironMedallion), false, CombinationRegistry.Mode.MODE_AND, new ItemStack(MinestuckUniverseItems.godTierResetCharm));
     }
     
     public static void registerSleevedTransportalizerRecipes()
@@ -602,13 +724,13 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.phial, 1, 1), new GristSet(new GristType[] {Build, Shale, Vis}, new int[] {1, 1, 20}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.primordialPearl), new GristSet(new GristType[] {Build, Vis, Zillium}, new int[] {1600, 240, 5}));
 
-        GristRegistry.addGristConversion(new ItemStack(ItemsTC.nuggets, 1, 0), new GristSet(new GristType[] {iron}, new int[] {1}));
+        GristRegistry.addGristConversion(new ItemStack(ItemsTC.nuggets, 1, 0), new GristSet(new GristType[] {Rust}, new int[] {1}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.nuggets, 1, 10), new GristSet(new GristType[] {Vis, Rust, Gold}, new int[] {2, 2, 1}));
 
-        GristRegistry.addGristConversion(new ItemStack(ItemsTC.ingots, 1, 0), new GristSet(new GristType[] {Vis, iron}, new int[] {18, 9}));
-        GristRegistry.addGristConversion(new ItemStack(ItemsTC.ingots, 1, 2), new GristSet(new GristType[] {Vis, Gold, iron}, new int[] {5, 4, 9}));
+        GristRegistry.addGristConversion(new ItemStack(ItemsTC.ingots, 1, 0), new GristSet(new GristType[] {Vis, Rust}, new int[] {18, 9}));
+        GristRegistry.addGristConversion(new ItemStack(ItemsTC.ingots, 1, 2), new GristSet(new GristType[] {Vis, Gold, Rust}, new int[] {5, 4, 9}));
 
-        GristRegistry.addGristConversion(new ItemStack(ItemsTC.clusters, 1, 0), new GristSet(new GristType[] {Build, iron}, new int[] {4, 16*MinestuckConfig.oreMultiplier}));
+        GristRegistry.addGristConversion(new ItemStack(ItemsTC.clusters, 1, 0), new GristSet(new GristType[] {Build, Rust}, new int[] {4, 16*MinestuckConfig.oreMultiplier}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.clusters, 1, 1), new GristSet(new GristType[] {Build, Gold}, new int[] {4, 16*MinestuckConfig.oreMultiplier}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.clusters, 1, 6), new GristSet(new GristType[] {Build, Mercury}, new int[] {4, 16*MinestuckConfig.oreMultiplier}));
         GristRegistry.addGristConversion(new ItemStack(ItemsTC.clusters, 1, 7), new GristSet(new GristType[] {Build, Quartz, Marble}, new int[] {2, 16*MinestuckConfig.oreMultiplier, 2*MinestuckConfig.oreMultiplier}));
@@ -638,8 +760,8 @@ public class MSUAlchemyRecipes
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.saplingSilverwood), new GristSet(new GristType[] {Vis, Build, Mercury}, new int[] {16, 16, 8}));
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.saplingGreatwood), new GristSet(new GristType[] {Vis, Build, Iodine}, new int[] {8, 16, 16}));
 
-        GristRegistry.addGristConversion(new ItemStack(BlocksTC.logSilverwood), new GristSet(new GristType[] {wood, Vis, Mercury}, new int[] {8, 4, 4}));
-        GristRegistry.addGristConversion(new ItemStack(BlocksTC.logGreatwood), new GristSet(new GristType[] {wood, Vis}, new int[] {12, 4}));
+        GristRegistry.addGristConversion(new ItemStack(BlocksTC.logSilverwood), new GristSet(new GristType[] {Build, Vis, Mercury}, new int[] {8, 4, 4}));
+        GristRegistry.addGristConversion(new ItemStack(BlocksTC.logGreatwood), new GristSet(new GristType[] {Build, Vis}, new int[] {12, 4}));
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.leafSilverwood), new GristSet(new GristType[] {Build, Mercury}, new int[] {1, 1}));
         GristRegistry.addGristConversion(new ItemStack(BlocksTC.leafGreatwood), new GristSet(new GristType[] {Build, Vis}, new int[] {1, 1}));
 

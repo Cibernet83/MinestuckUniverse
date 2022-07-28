@@ -38,8 +38,9 @@ public MSUChannelHandler() {
 @Override
 public void encodeInto(ChannelHandlerContext ctx, MSUPacket msg, ByteBuf target) throws Exception
         {
-        target.writeBytes(msg.data);
-        Debug.debug("Sending packet "+msg.toString()+" with size "+msg.data.writerIndex());
+            msg.data.resetReaderIndex();
+            target.writeBytes(msg.data);
+            Debug.debug("Sending packet "+msg.toString()+" with size "+msg.data.writerIndex());
         }
 
 @Override
@@ -115,7 +116,7 @@ private static class MSUPacketHandler extends SimpleChannelInboundHandler<MSUPac
     public static void sendToTracking(MSUPacket packet, Entity trackedEntity)
     {
         for (EntityPlayer trackingPlayer : ((WorldServer) trackedEntity.world).getEntityTracker().getTrackingPlayers(trackedEntity))
-            sendToPlayer(packet, trackingPlayer);
+            sendToPlayer(packet, trackingPlayer );
     }
 
     public static void sendToTrackingAndSelf(MSUPacket packet, Entity trackedEntity)

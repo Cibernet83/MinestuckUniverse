@@ -28,13 +28,13 @@ public class ConsortHatsData implements IConsortHatsData
 	int pickupDelay = 0;
 
 	public static final ArrayList<ItemStack> HAT_SPAWN_POOL = new ArrayList<ItemStack>()
-			{{
-				add(new ItemStack(MinestuckUniverseItems.crumplyHat));
-				add(new ItemStack(MinestuckUniverseItems.wizardHat));
-				add(new ItemStack(MinestuckUniverseItems.frogHat));
-				add(new ItemStack(Items.LEATHER_HELMET));
-				add(new ItemStack(Items.CHAINMAIL_HELMET));
-			}};
+	{{
+		add(new ItemStack(MinestuckUniverseItems.crumplyHat));
+		add(new ItemStack(MinestuckUniverseItems.wizardHat));
+		add(new ItemStack(MinestuckUniverseItems.frogHat));
+		add(new ItemStack(Items.LEATHER_HELMET));
+		add(new ItemStack(Items.CHAINMAIL_HELMET));
+	}};
 
 	@Override
 	public void setOwner(EntityLivingBase owner)
@@ -100,33 +100,33 @@ public class ConsortHatsData implements IConsortHatsData
 			EntityLivingBase entity = event.getEntityLiving();
 
 			if(cap.getPickupDelay() <= 0)
-			for (EntityItem entityitem : entity.world.getEntitiesWithinAABB(EntityItem.class, entity.getEntityBoundingBox().grow(1.0D, 0.0D, 1.0D)))
-			{
-				if (!entityitem.isDead && !entityitem.getItem().isEmpty() && !entityitem.cannotPickup())
+				for (EntityItem entityitem : entity.world.getEntitiesWithinAABB(EntityItem.class, entity.getEntityBoundingBox().grow(1.0D, 0.0D, 1.0D)))
 				{
-					ItemStack stack = entityitem.getItem();
-					if(EntityLiving.getSlotForItemStack(stack) == EntityEquipmentSlot.HEAD && !ItemStack.areItemStacksEqual(stack, cap.getHeadStack()))
+					if (!entityitem.isDead && !entityitem.getItem().isEmpty() && !entityitem.cannotPickup())
 					{
-						if(!cap.getHeadStack().isEmpty())
-							entity.world.spawnEntity(new EntityItem(entity.world, entity.posX, entity.posY+entity.height, entity.posZ, cap.getHeadStack()));
+						ItemStack stack = entityitem.getItem();
+						if(EntityLiving.getSlotForItemStack(stack) == EntityEquipmentSlot.HEAD && !ItemStack.areItemStacksEqual(stack, cap.getHeadStack()))
+						{
+							if(!cap.getHeadStack().isEmpty())
+								entity.world.spawnEntity(new EntityItem(entity.world, entity.posX, entity.posY+entity.height, entity.posZ, cap.getHeadStack()));
 
-						ItemStack pickedUp = stack.copy();
-						pickedUp.setCount(1);
-						cap.setHeadStack(pickedUp);
-						stack.shrink(1);
-						entity.onItemPickup(entityitem, 1);
-						entityitem.setDead();
+							ItemStack pickedUp = stack.copy();
+							pickedUp.setCount(1);
+							cap.setHeadStack(pickedUp);
+							stack.shrink(1);
+							entity.onItemPickup(entityitem, 1);
+							entityitem.setDead();
 
-						if(!stack.isEmpty())
-							entity.world.spawnEntity(new EntityItem(entity.world, entity.posX, entity.posY+entity.height, entity.posZ, stack));
+							if(!stack.isEmpty())
+								entity.world.spawnEntity(new EntityItem(entity.world, entity.posX, entity.posY+entity.height, entity.posZ, stack));
 
-						cap.setPickupDelay(200);
-						MSUChannelHandler.sendToTracking(MSUPacket.makePacket(MSUPacket.Type.UPDATE_HATS, entity), entity);
+							cap.setPickupDelay(200);
+							MSUChannelHandler.sendToTracking(MSUPacket.makePacket(MSUPacket.Type.UPDATE_HATS, entity), entity);
 
-						break;
+							break;
+						}
 					}
 				}
-			}
 
 			cap.shrinkPickupDelay();
 		}

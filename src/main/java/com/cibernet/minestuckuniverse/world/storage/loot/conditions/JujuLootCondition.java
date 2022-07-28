@@ -1,8 +1,10 @@
 package com.cibernet.minestuckuniverse.world.storage.loot.conditions;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.game.GameData;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
+import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
@@ -33,7 +35,8 @@ public class JujuLootCondition implements LootCondition
 	@Override
 	public boolean testCondition(Random rand, LootContext context)
 	{
-		if(!GameData.hasJujuSpawned(juju) && rand.nextFloat() <= chance)
+		if(!GameData.hasJujuSpawned(juju) && rand.nextFloat() <= this.chance * (context.getKillerPlayer() != null && context.getKillerPlayer().hasCapability(MSUCapabilities.GOD_TIER_DATA, null)
+				&& context.getKillerPlayer().getCapability(MSUCapabilities.GOD_TIER_DATA, null).isTechPassiveEnabled(MSUSkills.LIGHT_SKAIAN_INISHGT) ? 5: 1))
 		{
 			GameData.setJujuSpawned(juju, true);
 			return true;

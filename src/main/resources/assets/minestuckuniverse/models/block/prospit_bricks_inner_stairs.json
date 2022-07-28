@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "minestuckuniverse:blocks/prospit_bricks",
+        "top": "minestuckuniverse:blocks/prospit_bricks",
+        "side": "minestuckuniverse:blocks/prospit_bricks"
+    }
+}

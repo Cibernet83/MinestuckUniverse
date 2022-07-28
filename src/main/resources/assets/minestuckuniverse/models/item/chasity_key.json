@@ -1,0 +1,20 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minestuckuniverse:items/chasity_key_0",
+        "layer1": "minestuckuniverse:items/chasity_key_1",
+        "layer2": "minestuckuniverse:items/chasity_key_2"
+    },
+    "display": {
+        "thirdperson_righthand": {
+            "rotation": [ -90, -90, 55 ],
+            "translation": [ 0, 1.0, 0.5 ],
+            "scale": [ 0.5, 0.5, 0.5 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ -90, 90, -55 ],
+            "translation": [ 0, 1.0, 0.5 ],
+            "scale": [ 0.5, 0.5, 0.5 ]
+        }
+    }
+}

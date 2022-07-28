@@ -13,9 +13,15 @@ public class MSUEntities
 	{
 		registerEntity(EntityAcheron.class, "acheron");
 		registerEntity(EntityMSUThrowable.class, "throwable");
+		registerEntity(EntityMagicMissile.class, "magic_missile");
 		registerEntity(EntityMSUArrow.class, "arrow");
 		registerEntity(EntityUnrealAir.class, "unreal_air");
 		registerEntity(EntityRock.class, "rock");
+		registerEntity(EntityBubble.class, "bubble");
+		registerEntity(EntityCruxiteSlime.class, "cruxite_slime");
+		registerEntity(EntityLocatorEye.class, "denizen_eye");
+		registerEntity(EntityHopeGolem.class, "hope_golem");
+		registerEntity(EntityHeartDecoy.class, "decoy");
 	}
 	
 	

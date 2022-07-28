@@ -7,7 +7,24 @@
                 {
                     "type": "item",
                     "name": "minestuckuniverse:ticking_stopwatch",
-                    "weight": 1
+                    "weight": 2
+                },
+                {
+                    "type": "item",
+                    "name": "minestuckuniverse:skaian_scroll",
+                    "weight": 2,
+                    "conditions":
+                    [
+                        {
+                            "condition": "minestuckuniverse:skaian",
+                            "chance": 0.05
+                        }
+                    ],
+                    "functions": [
+                        {
+                            "function": "minestuckuniverse:set_random_skill"
+                        }
+                    ]
                 }
             ]
         }
