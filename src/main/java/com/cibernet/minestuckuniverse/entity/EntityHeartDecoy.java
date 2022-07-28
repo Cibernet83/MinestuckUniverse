@@ -202,7 +202,7 @@ public class EntityHeartDecoy extends EntityDecoy
 			if(decoy instanceof EntityHeartDecoy && decoy.getDataManager().get(EntityHeartDecoy.PPLAYER_UUID).contentEquals(event.player.getUniqueID().toString()))
 				((EntityHeartDecoy) decoy).returnToSender(null, 0);
 	}
-	*/
+	
 	
 	@SubscribeEvent
 	public static void onSpawnDecoy(EntityJoinWorldEvent event)
@@ -223,4 +223,6 @@ public class EntityHeartDecoy extends EntityDecoy
 			decoy.uuid = tag.getUniqueId("decoyUUID");
 		}
 	}
+	
+	*/
 }
