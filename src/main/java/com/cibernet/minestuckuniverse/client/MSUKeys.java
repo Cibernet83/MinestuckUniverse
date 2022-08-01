@@ -2,6 +2,7 @@ package com.cibernet.minestuckuniverse.client;
 
 import com.cibernet.minestuckuniverse.capabilities.MSUCapabilities;
 import com.cibernet.minestuckuniverse.capabilities.keyStates.SkillKeyStates;
+import com.cibernet.minestuckuniverse.events.handlers.EditModeEventHandler;
 import com.cibernet.minestuckuniverse.events.handlers.StrifeEventHandler;
 import com.cibernet.minestuckuniverse.gui.GuiStrifeSwitcher;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
@@ -53,7 +54,7 @@ public class MSUKeys
 	public static void onInput(InputEvent event)
 	{
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
-		if(player == null)
+		if(player == null || EditModeEventHandler.isInEditMode(player))
 			return;
 
 		if(player.hasCapability(MSUCapabilities.BADGE_EFFECTS, null) && player.getCapability(MSUCapabilities.BADGE_EFFECTS, null).isTimeStopped())

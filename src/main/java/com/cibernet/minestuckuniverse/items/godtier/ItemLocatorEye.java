@@ -46,8 +46,12 @@ public class ItemLocatorEye extends MSUItemBase
 
 		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("Dimension") && MinestuckDimensionHandler.isLandDimension(stack.getTagCompound().getInteger("Dimension")))
 		{
-			LandAspectRegistry.AspectCombination aspects = MinestuckDimensionHandler.getAspects(world.provider.getDimension());
-			ChunkProviderLands chunkProvider = (ChunkProviderLands)world.provider.createChunkGenerator();
+			World worldBound = world.getMinecraftServer().getWorld(stack.getTagCompound().getInteger("Dimension"));
+
+			LandAspectRegistry.AspectCombination aspects = MinestuckDimensionHandler.getAspects(worldBound.provider.getDimension());
+			ChunkProviderLands chunkProvider = (ChunkProviderLands) worldBound.provider.createChunkGenerator();
+
+
 			String aspect1 = I18n.format("land." + aspects.aspectTerrain.getNames()[chunkProvider.nameIndex1], new Object[0]);
 			String aspect2 = I18n.format("land." + aspects.aspectTitle.getNames()[chunkProvider.nameIndex2], new Object[0]);
 			tooltip.add(I18n.format("item.denizenEye.tooltip", I18n.format("land.format", aspect1, aspect2)));

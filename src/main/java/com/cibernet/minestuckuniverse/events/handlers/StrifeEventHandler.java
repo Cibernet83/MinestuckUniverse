@@ -434,6 +434,8 @@ public class StrifeEventHandler
 				if(!hasWeapon)
 					StrifePortfolioHandler.unassignSelected(player);
 				cap.setArmed(false);
+				MSUChannelHandler.sendToPlayer(MSUPacket.makePacket(MSUPacket.Type.UPDATE_STRIFE, player, UpdateStrifeDataPacket.UpdateType.INDEXES), player);
+
 			}
 		}
 		else
@@ -492,8 +494,10 @@ public class StrifeEventHandler
 				);
 				abstrata.add(null);
 
+				boolean hasJoker = abstrata.remove(MSUKindAbstrata.jokerkind);
+
 				EntityItem item = new EntityItem(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ,
-						ItemStrifeCard.injectStrifeSpecibus(new StrifeSpecibus(abstrata.get(source.world.rand.nextInt(abstrata.size()))), new ItemStack(MinestuckUniverseItems.strifeCard)));
+						ItemStrifeCard.injectStrifeSpecibus(new StrifeSpecibus(hasJoker && source.world.rand.nextFloat() < 0.01f ? MSUKindAbstrata.jokerkind : abstrata.get(source.world.rand.nextInt(abstrata.size()))), new ItemStack(MinestuckUniverseItems.strifeCard)));
 				item.setDefaultPickupDelay();
 				event.getDrops().add(item);
 				cap.setDroppedCards(cap.getDroppedCards()+1);

@@ -326,7 +326,7 @@ public class BadgeEventHandler
 				activateDoor(event.getWorld(), event.getPos());
 			else if(block instanceof BlockEndPortalFrame)
 				activateEndPortal(event.getWorld(), event.getPos(), state, event.getWorld().rand);
-			else if(block.equals(Blocks.OBSIDIAN) && event.getFace().equals(EnumFacing.UP) && event.getWorld().provider.getDimensionType().getId() > 0 && Blocks.PORTAL.trySpawnPortal(event.getWorld(), event.getPos().up()))
+			else if(block.equals(Blocks.OBSIDIAN) && event.getFace().equals(EnumFacing.UP) && Blocks.PORTAL.trySpawnPortal(event.getWorld(), event.getPos().up()))
 				world.playSound(event.getEntityPlayer(), pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, world.rand.nextFloat() * 0.4F + 0.8F);
 			else if(MinestuckUniverse.isLocksLoaded)
 			{

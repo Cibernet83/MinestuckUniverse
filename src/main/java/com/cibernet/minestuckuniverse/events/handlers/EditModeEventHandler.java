@@ -37,4 +37,9 @@ public class EditModeEventHandler
         if((Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.world.isRemote && ClientEditHandler.isActive()))
             event.setCanceled(true);
     }
+
+    public static boolean isInEditMode(EntityPlayer player)
+    {
+        return (player != null && ((player.world.isRemote ? ClientEditHandler.isActive() : ServerEditHandler.getData(player) != null)));
+    }
 }
