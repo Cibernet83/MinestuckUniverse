@@ -127,7 +127,7 @@ public class CommonEventHandler
 						attrInstance.removeModifier(attr.getValue().getID());
 						attrInstance.applyModifier(attr.getValue());
 					}
-					if(!attrInstance.hasModifier(attr.getValue()))
+					if(attr != null && attr.getValue() != null &&  attrInstance != null && !attrInstance.hasModifier(attr.getValue()))
 						attrInstance.applyModifier(attr.getValue());
 				}
 			}
