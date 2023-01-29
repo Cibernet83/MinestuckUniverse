@@ -160,11 +160,13 @@ public class MSUConsorts
 		if(event.getEntity() instanceof EntityConsort)
 		{
 			EntityConsort consort = (EntityConsort) event.getEntity();
-			if(consort.merchantType == EnumConsort.MerchantType.GENERAL && event.getWorld().rand.nextFloat() < .05f)
+
+			if(!consort.getEntityData().getBoolean("TechShopPass") && consort.merchantType == EnumConsort.MerchantType.GENERAL && event.getWorld().rand.nextFloat() < .065f)
 			{
 				consort.merchantType = MSUConsorts.SHOP_SKILLS;
 				consort.getCapability(MSUCapabilities.CONSORT_HATS_DATA, null).setHeadStack(new ItemStack(MinestuckUniverseItems.archmageHat));
 			}
+			consort.getEntityData().setBoolean("TechShopPass", true);
 		}
 	}
 }
