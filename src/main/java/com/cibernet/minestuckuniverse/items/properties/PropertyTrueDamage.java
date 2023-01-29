@@ -19,7 +19,7 @@ public class PropertyTrueDamage extends WeaponProperty implements IEnchantablePr
 	{
 		if(event.getSource().getImmediateSource() instanceof EntityLivingBase)
 		{
-			EntityLivingBase source = ((EntityLivingBase) event.getSource().getTrueSource());
+			EntityLivingBase source = ((EntityLivingBase) event.getSource().getImmediateSource());
 			ItemStack stack = source.getHeldItemMainhand();
 
 			if(stack.getItem() instanceof IPropertyWeapon && ((IPropertyWeapon) stack.getItem()).hasProperty(PropertyTrueDamage.class, stack))
