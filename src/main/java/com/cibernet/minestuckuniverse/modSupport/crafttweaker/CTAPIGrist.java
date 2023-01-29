@@ -6,6 +6,7 @@ import com.cibernet.minestuckuniverse.blocks.BlockGrist;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.mraof.minestuck.alchemy.GristHelper;
 import com.mraof.minestuck.alchemy.GristType;
+import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import net.minecraft.util.ResourceLocation;
@@ -64,6 +65,7 @@ public class CTAPIGrist
 
 			if(MinestuckUniverseBlocks.customGristBlocks.containsKey(key))
 				MinestuckUniverseBlocks.customGristBlocks.get(key).updateGristType(grist);
+			else CraftTweakerAPI.logWarning("The Custom Grist Type " + key + " appears to be missing from the config. Please add \"" + key + "\" to the \"general.crafttweaker.craftTweakerGristTypes\" list in config/MinestuckUniverse.cfg to prevent any issues.");
 
 			GristType.REGISTRY.register(grist);
 		}
