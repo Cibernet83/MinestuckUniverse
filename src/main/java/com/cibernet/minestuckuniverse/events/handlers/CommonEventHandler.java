@@ -4,7 +4,6 @@ import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
-import com.cibernet.minestuckuniverse.entity.EntityHeartDecoy;
 import com.cibernet.minestuckuniverse.items.IPropertyWeapon;
 import com.cibernet.minestuckuniverse.items.ItemGhost;
 import com.cibernet.minestuckuniverse.items.MSUItemBase;
@@ -19,21 +18,15 @@ import com.cibernet.minestuckuniverse.potions.MSUPotions;
 import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.AlchemyRecipes;
 import com.mraof.minestuck.alchemy.GristSet;
 import com.mraof.minestuck.alchemy.GristType;
-import com.mraof.minestuck.editmode.ServerEditHandler;
 import com.mraof.minestuck.entity.EntityDecoy;
 import com.mraof.minestuck.event.AlchemizeItemEvent;
 import com.mraof.minestuck.event.UnderlingSpoilsEvent;
 import com.mraof.minestuck.item.ICruxiteArtifact;
 import com.mraof.minestuck.item.ItemCaptcharoidCamera;
 import com.mraof.minestuck.item.MinestuckItems;
-import com.mraof.minestuck.item.block.ItemAlchemiter;
-import com.mraof.minestuck.item.block.ItemCruxtruder;
-import com.mraof.minestuck.item.block.ItemPunchDesignix;
-import com.mraof.minestuck.item.block.ItemTotemLathe;
 import com.mraof.minestuck.network.skaianet.SburbConnection;
 import com.mraof.minestuck.network.skaianet.SkaianetHandler;
 import com.mraof.minestuck.util.IdentifierHandler;
@@ -60,7 +53,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -502,12 +494,7 @@ public class CommonEventHandler
 			return;
 		EntityDecoy decoy = ((EntityDecoy) event.getEntity());
 		NBTTagCompound tag = decoy.getEntityData();
-		
-		System.out.println("name: " + decoy.username != null ? decoy.username : "null");
-		System.out.println("UUID: " + decoy.uuid != null ? decoy.uuid : "null");
-		System.out.println("nameTag: " + (tag.hasKey("decoyUsername") ? tag.getString("decoyUsername") : "null"));
-		System.out.println("name: " + (tag.hasKey("decoyUUID") ? tag.getUniqueId("decoyUUID") : "null"));
-		
+
 		if((decoy.username != null && !decoy.username.isEmpty()) && (decoy.uuid != null && !decoy.uuid.toString().isEmpty()))
 		{
 			tag.setString("decoyUsername", decoy.username);

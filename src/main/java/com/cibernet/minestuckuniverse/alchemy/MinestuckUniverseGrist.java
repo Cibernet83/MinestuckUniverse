@@ -1,6 +1,7 @@
 package com.cibernet.minestuckuniverse.alchemy;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
+import com.cibernet.minestuckuniverse.modSupport.crafttweaker.CraftTweakerSupport;
 import com.mraof.minestuck.CommonProxy;
 import com.mraof.minestuck.Minestuck;
 import static com.mraof.minestuck.alchemy.GristHelper.secondaryGristMap;
@@ -23,7 +24,7 @@ public class MinestuckUniverseGrist
     //Mod Checks
     public static final boolean includeMagicGrist = MinestuckUniverse.isThaumLoaded || MinestuckUniverse.isBotaniaLoaded;
     
-    public static ArrayList<GristType> gristList = new ArrayList<GristType>()
+    public static final ArrayList<GristType> gristList = new ArrayList<GristType>()
     {{
         add(GristType.Amber);
         add(GristType.Iodine);
@@ -47,15 +48,13 @@ public class MinestuckUniverseGrist
         add(GristType.Diamond);
         add(GristType.Sulfur);
     }};
-    
+
     //Magic Grist (Thaum, Botania, etc.)
     public static final GristType Vis = new GristType("vis", 0F, 5.0F, new ResourceLocation("minestuckuniverse", "vis"));
     public static final GristType Mana = new GristType("mana", 0F, 5.0F, new ResourceLocation("minestuckuniverse", "mana"));
 
-    //Arsenal Grist (for when it's not available)
-
-    //public static GristType Flourite = new GristType("flourite", 0.3F, new ResourceLocation("minestuckuniverse", "flourite")).setRegistryName("flourite");
-
+    //CraftTweaker Grist
+    public static final ArrayList<GristType> customGrist = new ArrayList<>();
 
     @SubscribeEvent
     public void registerGrist(RegistryEvent.Register<GristType> event)
