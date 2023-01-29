@@ -65,7 +65,9 @@ dependencies {
     compile files("libs/Baubles-${mc_version}-${baubles_version}-api.jar")
     deobfCompile name: "Botania+r1.10-363-deobf"
     deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}:api"
+    deobfCompile "CraftTweaker2:CraftTweaker2-API:4.1.6.457"
     
+    runtime name:   "CraftTweaker2-1.12-4.1.20.683-deobf"
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
     runtime name: "Minestuck-${mc_version}-${minestuck_version}-deobf"
     runtime name: "Thaumcraft-${mc_version}-${thaumcraft_version}-deobf"

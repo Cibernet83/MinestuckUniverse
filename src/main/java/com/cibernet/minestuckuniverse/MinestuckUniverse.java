@@ -51,8 +51,9 @@ public class MinestuckUniverse
     public static boolean isLocksLoaded;
     public static boolean isTrophySlotsLoaded;
     public static boolean isCyberwareLoaded;
+    public static boolean isCraftTweakerLoaded;
 
-    @EventHandler
+    @EventHandler()
     public void preInit(FMLPreInitializationEvent event)
     {
         MSUConfig.load(event.getSuggestedConfigurationFile(), event.getSide());
@@ -73,6 +74,7 @@ public class MinestuckUniverse
         isLocksLoaded = Loader.isModLoaded("locks");
         isTrophySlotsLoaded = Loader.isModLoaded("trophyslots");
         isCyberwareLoaded = Loader.isModLoaded("cyberware");
+        isCraftTweakerLoaded = Loader.isModLoaded("crafttweaker");
 
         proxy.preInit();
     }

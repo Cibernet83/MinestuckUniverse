@@ -4,7 +4,6 @@ import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
 import com.cibernet.minestuckuniverse.items.godtier.ItemGTArmor;
 import com.mraof.minestuck.Minestuck;
-import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.alchemy.GristType;
 import com.mraof.minestuck.util.EnumClass;
 import net.minecraft.block.Block;
@@ -20,13 +19,15 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import com.mraof.minestuck.util.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.*;
+import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.batteryBeamBlade;
+import static com.cibernet.minestuckuniverse.items.MinestuckUniverseItems.crockerFork;
 import static com.mraof.minestuck.item.MinestuckItems.*;
-import static com.mraof.minestuck.item.MinestuckItems.unbreakableKatana;
 
 public class MSUModelManager
 {
@@ -86,6 +87,9 @@ public class MSUModelManager
             register(candy, GristType.REGISTRY.getID(MinestuckUniverseGrist.Vis) + 1, "vis_nerds");
         if(MinestuckUniverse.isBotaniaLoaded)
             register(candy, GristType.REGISTRY.getID(MinestuckUniverseGrist.Mana) + 1, "mana_gummy_drop");
+
+        for(GristType gristType : MinestuckUniverseGrist.customGrist)
+            register(candy, GristType.REGISTRY.getID(gristType) + 1, "grist_candy_"+gristType.getRegistryName().getResourcePath());
     }
 
     @SideOnly(Side.CLIENT)

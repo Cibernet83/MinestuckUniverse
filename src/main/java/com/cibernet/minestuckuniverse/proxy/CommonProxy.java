@@ -10,21 +10,18 @@ import com.cibernet.minestuckuniverse.capabilities.consortCosmetics.ConsortHatsD
 import com.cibernet.minestuckuniverse.captchalogue.MSUModi;
 import com.cibernet.minestuckuniverse.enchantments.MSUEnchantments;
 import com.cibernet.minestuckuniverse.entity.EntityBubble;
-import com.cibernet.minestuckuniverse.entity.EntityHeartDecoy;
 import com.cibernet.minestuckuniverse.entity.MSUEntities;
 import com.cibernet.minestuckuniverse.events.handlers.*;
 import com.cibernet.minestuckuniverse.gui.MSUGuiHandler;
 import com.cibernet.minestuckuniverse.items.MinestuckUniverseItems;
-import com.cibernet.minestuckuniverse.modSupport.BotaniaSupport;
-import com.cibernet.minestuckuniverse.modSupport.CarryOnSupport;
-import com.cibernet.minestuckuniverse.modSupport.MSUSplatcraftSupport;
-import com.cibernet.minestuckuniverse.modSupport.TrophySlotsSupport;
+import com.cibernet.minestuckuniverse.modSupport.*;
+import com.cibernet.minestuckuniverse.modSupport.crafttweaker.CTAPIGrist;
+import com.cibernet.minestuckuniverse.modSupport.crafttweaker.CraftTweakerSupport;
 import com.cibernet.minestuckuniverse.network.MSUChannelHandler;
 import com.cibernet.minestuckuniverse.recipes.MachineChasisRecipes;
 import com.cibernet.minestuckuniverse.skills.MSUSkills;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.doom.TechDoomDemise;
 import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartBond;
-import com.cibernet.minestuckuniverse.skills.abilitech.heroAspect.heart.TechHeartProject;
 import com.cibernet.minestuckuniverse.strife.KindAbstratus;
 import com.cibernet.minestuckuniverse.strife.MSUKindAbstrata;
 import com.cibernet.minestuckuniverse.tileentity.*;
@@ -35,6 +32,9 @@ import com.cibernet.minestuckuniverse.util.MSUUtils;
 import com.cibernet.minestuckuniverse.world.MSULandAspectRegistry;
 import com.cibernet.minestuckuniverse.world.gen.WorldGenHandler;
 import com.cibernet.minestuckuniverse.world.storage.loot.MSULoot;
+import com.mraof.minestuck.item.ItemMinestuckCandy;
+import com.mraof.minestuck.item.MinestuckItems;
+import crafttweaker.IAction;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -50,6 +50,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(TechDoomDemise.class);
     	
         MinecraftForge.EVENT_BUS.register(new MinestuckUniverseGrist());
+
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseBlocks.class);
         MinecraftForge.EVENT_BUS.register(MinestuckUniverseItems.class);
         MinecraftForge.EVENT_BUS.register(BackwardsCompatHandler.class);
@@ -93,6 +94,12 @@ public class CommonProxy
 
     public void init()
     {
+        if(MinestuckUniverse.isCraftTweakerLoaded)
+        {
+            CraftTweakerSupport.applyRecipes();
+            ((ItemMinestuckCandy) MinestuckItems.candy).updateCandy();
+        }
+
         MSUBannerPatterns.init();
 
         MinecraftForge.EVENT_BUS.register(MSUSkills.class);

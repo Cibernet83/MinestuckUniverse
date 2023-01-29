@@ -32,6 +32,7 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 	protected final ArrayList<MSUToolClass> toolClasses = new ArrayList<>();
 	protected final ArrayList<Class<? extends Item>> itemClasses = new ArrayList<>();
 	protected final ArrayList<Item> toolItems = new ArrayList<>();
+	protected final ArrayList<Item> itemBlacklist = new ArrayList<>();
 	protected final ArrayList<String> keywords = new ArrayList<>();
 
 	protected IAbstratusConditional conditional;
@@ -103,7 +104,10 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 	{
 		for(Item i : items)
 			if(i != null && !this.toolItems.contains(i))
+			{
 				this.toolItems.add(i);
+				itemBlacklist.remove(i);
+			}
 		return this;
 	}
 
@@ -123,6 +127,14 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 		return toolItems;
 	}
 
+	public ArrayList<Item> getItemBlacklist() {
+		return itemBlacklist;
+	}
+
+	public ArrayList<String> getKeywords() {
+		return keywords;
+	}
+
 	public ArrayList<MSUToolClass> getToolClasses() {
 		return toolClasses;
 	}
@@ -130,6 +142,9 @@ public class KindAbstratus extends IForgeRegistryEntry.Impl<KindAbstratus> imple
 	public boolean isStackCompatible(ItemStack stack)
 	{
 		if(stack.isEmpty())
+			return false;
+
+		if(itemBlacklist.contains(stack.getItem()))
 			return false;
 
 		Item item = stack.getItem();

@@ -96,7 +96,7 @@ public class ClientProxy extends CommonProxy
         super.postInit();
     }
 
-    protected static void registerRenderers()
+    private static void registerRenderers()
     {
         Minecraft mc = Minecraft.getMinecraft();
 
