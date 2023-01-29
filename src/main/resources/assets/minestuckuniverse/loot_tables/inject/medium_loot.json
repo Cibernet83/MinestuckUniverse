@@ -8,6 +8,10 @@
                     "type": "item",
                     "name": "minestuckuniverse:ticking_stopwatch",
                     "weight": 2
+                },{
+                    "type": "item",
+                    "name": "minestuckuniverse:denizen_tome",
+                    "weight": 2
                 },
                 {
                     "type": "item",

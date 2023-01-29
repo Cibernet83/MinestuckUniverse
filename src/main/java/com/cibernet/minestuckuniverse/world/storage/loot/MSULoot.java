@@ -52,6 +52,7 @@ public class MSULoot
 			LootPool inject = event.getLootTableManager().getLootTableFromLocation(new ResourceLocation(MinestuckUniverse.MODID, "inject/medium_loot")).getPool("items");
 			LootPool pool = event.getTable().getPool("misc");
 			pool.addEntry(inject.getEntry("minestuckuniverse:skaian_scroll"));
+			pool.addEntry(inject.getEntry("minestuckuniverse:denizen_tome"));
 		}
 	}
 }
