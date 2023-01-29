@@ -496,7 +496,7 @@ item.gtShirt.hiddenExtras.lord=Coat-less
 
 item.godTierResetCharm.name=Charm of God Tier Descension
 item.denizenEye.name=Eye of the Denizen
-item.denizenEye.tooltip=This eye is bound to the %s
+item.denizenEye.tooltip=A magical eye that flies to the land's Quest Bed
 item.sashKit.name=Kiddie Camper Handysash Sewing Kit
 item.sashKit.tooltip=This handy sewing kit lets you manage your god tier badges without needing to meditate, allowing you to toggle them on/off on the go!
 item.tomeOfTheAncients.0.name=Sealed Tome

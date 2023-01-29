@@ -9,6 +9,7 @@ import com.mraof.minestuck.network.skaianet.SburbHandler;
 import com.mraof.minestuck.world.MinestuckDimensionHandler;
 import com.mraof.minestuck.world.lands.LandAspectRegistry;
 import com.mraof.minestuck.world.lands.gen.ChunkProviderLands;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -34,7 +35,7 @@ public class ItemLocatorEye extends MSUItemBase
 	public ItemLocatorEye(String unlocName, String name)
 	{
 		super(name, unlocName);
-		setMaxStackSize(16);
+		setMaxStackSize(1);
 		setCreativeTab(TabMinestuckUniverse.godTier);
 	}
 
@@ -44,9 +45,10 @@ public class ItemLocatorEye extends MSUItemBase
 	{
 		super.addInformation(stack, world, tooltip, flagIn);
 
+		/*
 		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("Dimension") && MinestuckDimensionHandler.isLandDimension(stack.getTagCompound().getInteger("Dimension")))
 		{
-			World worldBound = world.getMinecraftServer().getWorld(stack.getTagCompound().getInteger("Dimension"));
+			World worldBound = Minecraft.getMinecraft().getIntegratedServer().getWorld(stack.getTagCompound().getInteger("Dimension"));
 
 			LandAspectRegistry.AspectCombination aspects = MinestuckDimensionHandler.getAspects(worldBound.provider.getDimension());
 			ChunkProviderLands chunkProvider = (ChunkProviderLands) worldBound.provider.createChunkGenerator();
@@ -56,6 +58,7 @@ public class ItemLocatorEye extends MSUItemBase
 			String aspect2 = I18n.format("land." + aspects.aspectTitle.getNames()[chunkProvider.nameIndex2], new Object[0]);
 			tooltip.add(I18n.format("item.denizenEye.tooltip", I18n.format("land.format", aspect1, aspect2)));
 		}
+		*/
 	}
 
 	@Override
@@ -90,7 +93,7 @@ public class ItemLocatorEye extends MSUItemBase
 		{
 			BlockPos blockpos = StructureQuestBed.getQuestBedPos(worldIn);
 
-			if (blockpos != null && stack.hasTagCompound() && stack.getTagCompound().getInteger("Dimension") == worldIn.provider.getDimension())
+			if (blockpos != null && stack.hasTagCompound()/* && stack.getTagCompound().getInteger("Dimension") == worldIn.provider.getDimension()*/)
 			{
 				float chance = 0.95f;
 
