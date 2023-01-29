@@ -2,6 +2,8 @@ package com.cibernet.minestuckuniverse.modSupport.crafttweaker;
 
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
+import com.cibernet.minestuckuniverse.blocks.BlockGrist;
+import com.cibernet.minestuckuniverse.blocks.MinestuckUniverseBlocks;
 import com.mraof.minestuck.alchemy.GristHelper;
 import com.mraof.minestuck.alchemy.GristType;
 import crafttweaker.IAction;
@@ -59,6 +61,9 @@ public class CTAPIGrist
 			grist.setRegistryName(new ResourceLocation(MinestuckUniverse.MODID, key));
 			MinestuckUniverseGrist.gristList.add(grist);
 			MinestuckUniverseGrist.customGrist.add(grist);
+
+			if(MinestuckUniverseBlocks.customGristBlocks.containsKey(key))
+				MinestuckUniverseBlocks.customGristBlocks.get(key).updateGristType(grist);
 
 			GristType.REGISTRY.register(grist);
 		}

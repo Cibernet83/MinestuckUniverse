@@ -27,6 +27,7 @@ public class MSUConfig
 	public static String[] strifeCardMobDropsWhitelist;
 	public static String[] IDAlchemyBlacklist;
 	public static String[] restrictedStrifeBypass;
+	public static String[] craftTweakerGristTypes = new String[0];
 
 	public static double zillystoneYields;
 	public static double gristDropsMultiplier;
@@ -179,6 +180,9 @@ public class MSUConfig
 			acceptablePower = config.get("God Tier", "cyberware.acceptablePower", 900, "Determines the minimum amount of power you need before replacing vital cyber organs. Recommended to be higher than 500 but less than addedPowerPerDeath.")
 					.setLanguageKey("config.minestuckuniverse.godtier.cyberware.acceptablePower").getInt();
 		}
+
+		if(MinestuckUniverse.isCraftTweakerLoaded)
+			craftTweakerGristTypes = config.get("General", "general.crafttweaker.craftTweakerGristTypes", new String[0], "An ordered list of strings that contains the ids for all Grist Types added by CraftTweaker in order to generate Grist Blocks and assign textures to Grist Candy. DO NOT mess with this config unless you know what you're doing.").setRequiresMcRestart(true).getStringList();
 	}
 
 	@SideOnly(Side.CLIENT)

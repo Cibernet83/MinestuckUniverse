@@ -621,6 +621,8 @@ public class MSUAlchemyRecipes
         if(MinestuckUniverse.isBotaniaLoaded)
             gristBlocks.add(gristBlockMana);
 
+        gristBlocks.addAll(customGristBlocks.values());
+
         CombinationRegistry.addCombination(new ItemStack(MinestuckItems.rawCruxite), new ItemStack(Items.EMERALD), MODE_OR, new ItemStack(MinestuckItems.boondollars));
 
         CombinationRegistry.addCombination(new ItemStack(Blocks.STONE), new ItemStack(Blocks.OBSIDIAN), MODE_OR, new ItemStack(MinestuckUniverseBlocks.hardStone));
@@ -705,6 +707,9 @@ public class MSUAlchemyRecipes
     {
         for(Block block : gristBlocks)
         {
+            if(((BlockGrist)block).type == null)
+                continue;
+
             GristRegistry.addGristConversion(new ItemStack(block), new GristSet(new GristType[] {((BlockGrist)block).type}, new int[] {((BlockGrist)block).value}));
             CombinationRegistry.addCombination(new ItemStack(block), new ItemStack(Items.SUGAR),MODE_OR, ((BlockGrist) block).type.getCandyItem());
             CombinationRegistry.addCombination(((BlockGrist) block).type.getCandyItem(), new ItemStack(Blocks.STONE), MODE_AND, new ItemStack(block));

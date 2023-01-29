@@ -1,7 +1,9 @@
 package com.cibernet.minestuckuniverse.util;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
+import com.cibernet.minestuckuniverse.blocks.BlockGrist;
 import com.cibernet.minestuckuniverse.items.godtier.ItemGTArmor;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.alchemy.GristType;
@@ -88,8 +90,11 @@ public class MSUModelManager
         if(MinestuckUniverse.isBotaniaLoaded)
             register(candy, GristType.REGISTRY.getID(MinestuckUniverseGrist.Mana) + 1, "mana_gummy_drop");
 
-        for(GristType gristType : MinestuckUniverseGrist.customGrist)
-            register(candy, GristType.REGISTRY.getID(gristType) + 1, "grist_candy_"+gristType.getRegistryName().getResourcePath());
+        int i = 1;
+        for(String gristType : MSUConfig.craftTweakerGristTypes)
+        {
+            register(candy, GristType.REGISTRY.getKeys().size() + (i++), "grist_candy_"+gristType);
+        }
     }
 
     @SideOnly(Side.CLIENT)

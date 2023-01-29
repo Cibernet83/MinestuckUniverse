@@ -1,5 +1,6 @@
 package com.cibernet.minestuckuniverse.blocks;
 
+import com.cibernet.minestuckuniverse.MSUConfig;
 import com.cibernet.minestuckuniverse.MinestuckUniverse;
 import com.cibernet.minestuckuniverse.TabMinestuckUniverse;
 import com.cibernet.minestuckuniverse.alchemy.MinestuckUniverseGrist;
@@ -32,6 +33,7 @@ import java.util.TreeMap;
 public class MinestuckUniverseBlocks
 {
 	public static final TreeMap<EnumDyeColor, BlockWoolTransportalizer> sleevedTransportalizers = new TreeMap<>();
+	public static final TreeMap<String, BlockGrist> customGristBlocks = new TreeMap<>();
 
 	//Base
 	public static Block dungeonDoor = new BlockDungeonDoor("dungeon_door", "dungeonDoor");
@@ -276,6 +278,13 @@ public class MinestuckUniverseBlocks
         
         if(MinestuckUniverse.isBotaniaLoaded)
 			registerBlock(registry, gristBlockMana);
+
+        for(String grist : MSUConfig.craftTweakerGristTypes)
+        {
+        	BlockGrist gb = new BlockGrist(grist);
+        	customGristBlocks.put(grist, gb);
+        	registerBlock(registry, gb);
+        }
 
 	    registerBlock(registry, glorb, null);
 	    registerBlock(registry, chloroball, null);

@@ -56,8 +56,6 @@ public class MinestuckUniverse
     @EventHandler()
     public void preInit(FMLPreInitializationEvent event)
     {
-        MSUConfig.load(event.getSuggestedConfigurationFile(), event.getSide());
-
         isThaumLoaded = Loader.isModLoaded("thaumcraft");
         isBotaniaLoaded = Loader.isModLoaded("botania");
         isSplatcraftLodaded = Loader.isModLoaded("splatcraft");
@@ -75,6 +73,8 @@ public class MinestuckUniverse
         isTrophySlotsLoaded = Loader.isModLoaded("trophyslots");
         isCyberwareLoaded = Loader.isModLoaded("cyberware");
         isCraftTweakerLoaded = Loader.isModLoaded("crafttweaker");
+
+        MSUConfig.load(event.getSuggestedConfigurationFile(), event.getSide());
 
         proxy.preInit();
     }
